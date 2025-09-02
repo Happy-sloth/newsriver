@@ -15,7 +15,10 @@ FEEDS_ALL = [ln.strip() for ln in (ROOT / "feeds.txt").read_text().splitlines()
              if ln.strip() and not ln.strip().startswith("#")]
 
 # ---------- Tunables ----------
-SMOKE = os.getenv("SMOKE", "0") == "1"     # CI quick-run mode
+# Default OFF; set SMOKE=1 in the workflow env to enable quick test runs
+SMOKE = os.getenv("SMOKE", "0").strip() == "1"
+
+CAP_ITEMS = 24 if SMOKE else 40            # total items kept
 FEED_LIMIT = 3 if SMOKE else None          # only first N feeds in smoke mode
 PER_FEED_ITEMS = 12 if SMOKE else 50       # fewer items per feed in smoke mode
 TIMEOUT = 8 if SMOKE else 20               # shorter timeout in smoke mode
@@ -126,9 +129,9 @@ def main():
                 "_ts": ts,  # internal for sorting
             })
 
-    # Strict newest-first and cap to 40
+    # Strict newest-first and cap
     items.sort(key=lambda x: x["_ts"], reverse=True)
-    items = items[:40]
+    items = items[:CAP_ITEMS]
     for it in items:
         it.pop("_ts", None)
 
@@ -141,7 +144,8 @@ def main():
             "feeds_fetched": fetched,
             "feeds_skipped": skipped,
             "smoke_mode": SMOKE,
-            "version": "step1-v1.1",
+            "cap_items": CAP_ITEMS,
+            "version": "step1-v1.2",
         }
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2))
