@@ -1,7 +1,12 @@
 name: Build headlines.json
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      smoke:
+        description: 'Use SMOKE mode (fast test)'
+        type: boolean
+        default: true
   schedule:
     - cron: "*/15 * * * *"   # every 15 minutes
 
@@ -11,8 +16,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SMOKE: "0"   # <-- force NON-SMOKE
 
     steps:
       - name: Checkout
@@ -30,7 +33,19 @@ jobs:
         run: |
           python -V
           python -m pip install --upgrade pip wheel setuptools
-          pip install feedparser
+          pip install feedparser pyyaml
+
+      # Set SMOKE=1 only when the run was manually dispatched AND the checkbox is true.
+      # Scheduled runs will use SMOKE=0 (full run).
+      - name: Configure SMOKE env
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.smoke }}" == "true" ]]; then
+            echo "SMOKE=1" >> "$GITHUB_ENV"
+            echo "Running in SMOKE mode"
+          else
+            echo "SMOKE=0" >> "$GITHUB_ENV"
+            echo "Running in FULL mode"
+          fi
 
       - name: Build headlines.json
         run: python build_headlines.py
