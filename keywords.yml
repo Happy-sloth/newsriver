@@ -1,0 +1,197 @@
+# ===== Region detection (Canada-first) =====
+# Used to give Canada items extra weight even if the source isn't Canadian.
+canada_terms:
+  - Canada
+  - Canadian
+  - Ottawa
+  - Toronto
+  - Montréal
+  - Montreal
+  - Laval
+  - Quebec
+  - Québec
+  - Ontario
+  - Alberta
+  - Saskatchewan
+  - Manitoba
+  - British Columbia
+  - B.C.
+  - Nova Scotia
+  - New Brunswick
+  - Newfoundland
+  - PEI
+  - Prince Edward Island
+  - Vancouver
+  - Victoria
+  - Kelowna
+  - Calgary
+  - Edmonton
+  - Winnipeg
+  - Halifax
+  - St. John’s
+  - Hamilton
+  - Kitchener
+  - Waterloo
+  - Mississauga
+  - Brampton
+  - Ottawa-Gatineau
+
+# ===== Disaster & major incident detection =====
+# Highest boosts go to aviation mass-casualty and environmental catastrophes.
+disaster_plane:
+  - plane crash
+  - crashed plane
+  - aircraft down
+  - airliner
+  - mid-air
+  - emergency landing
+  - mayday
+  - aviation disaster
+  - downed jet
+  - runway overrun
+
+disaster_env:
+  - wildfire
+  - forest fire
+  - toxic spill
+  - chemical spill
+  - oil spill
+  - dam breach
+  - dam failure
+  - flood surge
+  - flash flood
+  - tailings pond
+  - pipeline rupture
+  - smog alert
+
+disaster_major:
+  - building collapse
+  - mine collapse
+  - earthquake
+  - aftershock
+  - landslide
+  - avalanche
+  - stampede
+  - mass casualty
+  - disaster zone
+  - state of emergency
+
+# ===== Regulator / law change detection =====
+# Triggers a policy boost; also removes crypto penalty when applicable.
+regulator_terms:
+  - SEC
+  - CFTC
+  - OSC
+  - CSA
+  - IIROC
+  - FCA
+  - ESMA
+  - EU Parliament
+  - Treasury
+  - Finance Canada
+  - Bank of Canada
+  - Supreme Court
+  - court ruling
+  - court order
+  - approval
+  - ban
+  - rule
+  - regulation
+  - guidance
+  - lawsuit
+  - settlement
+  - charges
+  - indictment
+  - enforcement
+
+# ===== Macro market shock detection =====
+# Helps identify market-wide headlines (used with S&P/TSX % triggers).
+market_terms:
+  - S&P
+  - SPX
+  - TSX
+  - TSX Composite
+  - stocks
+  - markets
+  - selloff
+  - sell-off
+  - plunge
+  - slump
+  - volatility
+  - circuit breaker
+
+# ===== Crypto topic detection (default de-prioritize) =====
+# Exceptions (ATH, >10% drop, exchange outage/hack/bankruptcy, regulator action) handled separately.
+crypto_terms:
+  - bitcoin
+  - btc
+  - ethereum
+  - eth
+  - ripple
+  - xrp
+  - coinbase
+  - binance
+  - kraken
+  - ftx
+  - tether
+  - usdt
+  - stablecoin
+  - defi
+  - token
+  - altcoin
+  - exchange
+  - wallet
+  - airdrop
+  - rug pull
+  - hack
+  - breach
+  - exploit
+  - insolvent
+  - bankruptcy
+  - liquidation
+  - delist
+  - halving
+  - ETF
+
+# ===== Crypto exception cues =====
+# If these appear with the right context, we lift the default crypto penalty and add a boost.
+crypto_exceptions:
+  bitcoin_ath:
+    - all-time high
+    - ATH
+    - record high
+    - record price
+  coin_down_10:
+    - tumbles
+    - plunges
+    - drops 10%
+    - down 10%
+    - selloff
+    - liquidation cascade
+  exchange_outage:
+    - outage
+    - halted withdrawals
+    - withdrawals halted
+    - downtime
+    - trading halted
+    - bankrupt
+    - bankruptcy
+    - insolvent
+    - insolvency
+    - restructuring
+    - Chapter 11
+    - hack
+    - breach
+    - exploit
+  regulator_action:
+    - approval
+    - denies
+    - charges
+    - lawsuit
+    - settlement
+    - enforcement
+    - rule
+    - regulation
+    - ban
+    - guidance
+    - ETF approval
