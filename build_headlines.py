@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-# Fast, noisy builder with SMOKE mode. Newest-first + cap 40. No scoring yet.
+# MYPYBITE NewsRiver — Step 1 (newest-first + cap 40) with SMOKE mode + _debug
+# - Robust fetch (headers, retries, timeouts)
+# - Dedup by URL
+# - Sorted by published time desc
+# - Writes _debug with smoke_mode so you can verify test runs
 
 import json, time, hashlib, pathlib, urllib.request, ssl, os
 from datetime import datetime, timezone
@@ -7,14 +11,15 @@ import feedparser
 
 ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / "headlines.json"
-FEEDS_ALL = [ln.strip() for ln in (ROOT / "feeds.txt").read_text().splitlines() if ln.strip() and not ln.strip().startswith("#")]
+FEEDS_ALL = [ln.strip() for ln in (ROOT / "feeds.txt").read_text().splitlines()
+             if ln.strip() and not ln.strip().startswith("#")]
 
-# --- Tunables ---
-SMOKE = os.getenv("SMOKE", "0") == "1"          # set to 1 in CI for fast runs
-FEED_LIMIT = 3 if SMOKE else None               # only first N feeds in smoke
-PER_FEED_ITEMS = 12 if SMOKE else 50            # fewer per feed in smoke
-TIMEOUT = 8 if SMOKE else 20                    # shorter timeout in smoke
-RETRIES = 1 if SMOKE else 3                     # fewer retries in smoke
+# ---------- Tunables ----------
+SMOKE = os.getenv("SMOKE", "0") == "1"     # CI quick-run mode
+FEED_LIMIT = 3 if SMOKE else None          # only first N feeds in smoke mode
+PER_FEED_ITEMS = 12 if SMOKE else 50       # fewer items per feed in smoke mode
+TIMEOUT = 8 if SMOKE else 20               # shorter timeout in smoke mode
+RETRIES = 1 if SMOKE else 3                # fewer retries in smoke mode
 
 UA = "MyPyBITE-NewsRiver/1.0 (+https://mypybite.com)"
 HEADERS = {
@@ -22,20 +27,23 @@ HEADERS = {
     "Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
 }
 
+# ---------- Helpers ----------
 def to_ts(entry):
+    """Best-effort UTC timestamp from feed entry."""
     for k in ("published_parsed", "updated_parsed"):
         v = entry.get(k)
         if v:
             try:
-                return int(time.mktime(v))
+                return int(time.mktime(v))  # struct_time -> epoch seconds
             except Exception:
                 pass
     return None
 
-def iso_utc(ts):
+def iso_utc(ts: int) -> str:
     return datetime.fromtimestamp(ts, tz=timezone.utc).isoformat()
 
 def source_of(feed, entry):
+    """Prefer feed title; fallback to friendly domain name."""
     t = (getattr(feed, "feed", {}) or {}).get("title") or ""
     if t:
         return t
@@ -55,7 +63,8 @@ def source_of(feed, entry):
             return name
     return "News"
 
-def fetch_feed(url, retries=RETRIES, timeout=TIMEOUT):
+def fetch_feed(url: str, retries: int = RETRIES, timeout: int = TIMEOUT):
+    """Fetch bytes with headers, then parse. Retries with small backoff."""
     ctx = ssl.create_default_context()
     last_err = None
     for attempt in range(1, retries + 1):
@@ -67,7 +76,7 @@ def fetch_feed(url, retries=RETRIES, timeout=TIMEOUT):
         except Exception as e:
             last_err = e
             time.sleep(0.75 * attempt)
-    # last try directly through feedparser with headers
+    # Final try letting feedparser fetch with headers (some CDNs prefer this)
     try:
         return feedparser.parse(url, request_headers=HEADERS)
     except Exception:
@@ -75,6 +84,7 @@ def fetch_feed(url, retries=RETRIES, timeout=TIMEOUT):
     print(f"[warn] skipping feed (errors): {url} :: {last_err}")
     return None
 
+# ---------- Main ----------
 def main():
     feeds = FEEDS_ALL[:FEED_LIMIT] if FEED_LIMIT else FEEDS_ALL
     total = len(feeds)
@@ -100,6 +110,8 @@ def main():
             link  = (e.get("link") or "").strip()
             if not title or not link:
                 continue
+
+            # Dedup by URL
             key = hashlib.sha1(link.encode("utf-8")).hexdigest()
             if key in seen:
                 continue
@@ -111,10 +123,10 @@ def main():
                 "url": link,
                 "source": source_of(feed, e),
                 "published_utc": iso_utc(ts),
-                "_ts": ts,
+                "_ts": ts,  # internal for sorting
             })
 
-    # Strict newest-first and cap 40
+    # Strict newest-first and cap to 40
     items.sort(key=lambda x: x["_ts"], reverse=True)
     items = items[:40]
     for it in items:
@@ -129,6 +141,7 @@ def main():
             "feeds_fetched": fetched,
             "feeds_skipped": skipped,
             "smoke_mode": SMOKE,
+            "version": "step1-v1.1",
         }
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2))
