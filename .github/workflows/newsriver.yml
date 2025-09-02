@@ -11,7 +11,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    env:
+      SMOKE: "0"   # <-- force NON-SMOKE
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,10 +32,7 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install feedparser
 
-      # SMOKE mode = faster test runs (fewer feeds, shorter timeouts)
-      - name: Build headlines.json (SMOKE mode)
-        env:
-          SMOKE: "1"
+      - name: Build headlines.json
         run: python build_headlines.py
 
       - name: Commit changes
