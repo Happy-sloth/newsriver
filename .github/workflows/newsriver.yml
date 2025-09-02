@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -21,7 +24,10 @@ jobs:
           python-version: "3.11"
 
       - name: Install deps
-        run: pip install feedparser
+        run: |
+          python -V
+          python -m pip install --upgrade pip wheel setuptools
+          pip install feedparser
 
       - name: Build headlines.json
         run: python build_headlines.py
@@ -33,6 +39,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add -A
             git commit -m "ci: refresh headlines.json"
+            git pull --rebase --autostash || true
             git push
           else
             echo "No changes to commit."
