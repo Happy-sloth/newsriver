@@ -1,20 +1,27 @@
 #!/usr/bin/env python3
-# Robust newest-first builder with retries & headers. No scoring yet.
+# Fast, noisy builder with SMOKE mode. Newest-first + cap 40. No scoring yet.
 
-import json, time, hashlib, pathlib, urllib.request, urllib.error, ssl
+import json, time, hashlib, pathlib, urllib.request, ssl, os
 from datetime import datetime, timezone
 import feedparser
 
 ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / "headlines.json"
-FEEDS = [ln.strip() for ln in (ROOT / "feeds.txt").read_text().splitlines()]
+FEEDS_ALL = [ln.strip() for ln in (ROOT / "feeds.txt").read_text().splitlines() if ln.strip() and not ln.strip().startswith("#")]
+
+# --- Tunables ---
+SMOKE = os.getenv("SMOKE", "0") == "1"          # set to 1 in CI for fast runs
+FEED_LIMIT = 3 if SMOKE else None               # only first N feeds in smoke
+PER_FEED_ITEMS = 12 if SMOKE else 50            # fewer per feed in smoke
+TIMEOUT = 8 if SMOKE else 20                    # shorter timeout in smoke
+RETRIES = 1 if SMOKE else 3                     # fewer retries in smoke
+
 UA = "MyPyBITE-NewsRiver/1.0 (+https://mypybite.com)"
 HEADERS = {
     "User-Agent": UA,
     "Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
 }
 
-# --- helpers -----------------------------------------------------------------
 def to_ts(entry):
     for k in ("published_parsed", "updated_parsed"):
         v = entry.get(k)
@@ -48,10 +55,9 @@ def source_of(feed, entry):
             return name
     return "News"
 
-def fetch_feed(url, retries=3, timeout=20):
-    """Fetch bytes with headers + timeout, then let feedparser parse bytes."""
-    last_err = None
+def fetch_feed(url, retries=RETRIES, timeout=TIMEOUT):
     ctx = ssl.create_default_context()
+    last_err = None
     for attempt in range(1, retries + 1):
         try:
             req = urllib.request.Request(url, headers=HEADERS)
@@ -60,32 +66,38 @@ def fetch_feed(url, retries=3, timeout=20):
             return feedparser.parse(data)
         except Exception as e:
             last_err = e
-            # gentle backoff
-            time.sleep(1.25 * attempt)
-    # Give feedparser one last chance directly (some CDNs behave differently)
+            time.sleep(0.75 * attempt)
+    # last try directly through feedparser with headers
     try:
         return feedparser.parse(url, request_headers=HEADERS)
     except Exception:
         pass
-    print(f"[warn] skipping feed (errors): {url}\n  -> {last_err}")
+    print(f"[warn] skipping feed (errors): {url} :: {last_err}")
     return None
 
-# --- main --------------------------------------------------------------------
 def main():
+    feeds = FEEDS_ALL[:FEED_LIMIT] if FEED_LIMIT else FEEDS_ALL
+    total = len(feeds)
+    if total == 0:
+        raise SystemExit("No feeds in feeds.txt")
+
     seen = set()
     items = []
+    fetched = 0
+    skipped = 0
 
-    for raw in FEEDS:
-        u = raw.strip()
-        if not u or u.startswith("#"):
-            continue
+    for i, u in enumerate(feeds, 1):
+        print(f"[{i}/{total}] fetching: {u}")
         feed = fetch_feed(u)
         if not feed or not getattr(feed, "entries", None):
+            print(f"[{i}/{total}] -> no entries (skipped)")
+            skipped += 1
             continue
 
-        for e in feed.entries[:50]:
+        fetched += 1
+        for e in feed.entries[:PER_FEED_ITEMS]:
             title = (e.get("title") or "").strip()
-            link = (e.get("link") or "").strip()
+            link  = (e.get("link") or "").strip()
             if not title or not link:
                 continue
             key = hashlib.sha1(link.encode("utf-8")).hexdigest()
@@ -99,13 +111,11 @@ def main():
                 "url": link,
                 "source": source_of(feed, e),
                 "published_utc": iso_utc(ts),
-                "_ts": ts,  # internal for sorting
+                "_ts": ts,
             })
 
-    # Strict newest-first
+    # Strict newest-first and cap 40
     items.sort(key=lambda x: x["_ts"], reverse=True)
-
-    # Cap to 40 and clean temp field
     items = items[:40]
     for it in items:
         it.pop("_ts", None)
@@ -114,9 +124,15 @@ def main():
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "count": len(items),
         "items": items,
+        "_debug": {
+            "feeds_total": total,
+            "feeds_fetched": fetched,
+            "feeds_skipped": skipped,
+            "smoke_mode": SMOKE,
+        }
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2))
-    print(f"Wrote {out['count']} items at {out['generated_utc']}")
+    print(f"[done] wrote {out['count']} items (fetched {fetched}/{total} feeds) at {out['generated_utc']}")
 
 if __name__ == "__main__":
     main()
