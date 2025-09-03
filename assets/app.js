@@ -1,19 +1,16 @@
-// Minimal client for NewsRiver
-// - fetches headlines.json (no-cache, cache-busted)
-// - renders cards newest-first (with stable, monotonic ordering via first-seen sequence)
-// - de-dupes items (canonical_id/canonical_url > cluster_id > normalized title; prefers non-aggregators)
-// - adds "Last updated" chip (safe fallback if .toolbar not present)
-// - supports category + region filters
-// - auto-refreshes every 5 minutes (tweak REFRESH_MS as needed)
+// assets/app.js
+// NewsRiver client (fetch -> fuzzy-dedupe -> stable order -> render)
+// - Fuzzy de-dupe based on token signature (collapses Google News vs originals,
+//   and most cross-outlet near-duplicates like the Lisbon derailment).
+// - Stable "first-seen" ordering so cards don't jump around between refreshes.
+// - Category + region filters, "Last updated" chip, and 5-min auto-refresh.
 
 "use strict";
 
-// ---- Configurable JSON endpoint (works on GitHub Pages and Zoho embeds) ----
+// ---- Configurable JSON endpoint ----
 if (!window.NEWSRIVER_JSON_URL) {
   window.NEWSRIVER_JSON_URL = "https://mypybite.github.io/newsriver/headlines.json";
 }
-// (If you prefer to set it from the HTML instead, add BEFORE this script:
-//   <script>window.NEWSRIVER_JSON_URL="https://mypybite.github.io/newsriver/headlines.json";</script>
 window.NEWSRIVER_JSON_URL = window.NEWSRIVER_JSON_URL || null;
 
 // IDs / constants
@@ -28,7 +25,7 @@ let activeCategory = "all";  // "all" | "Sports" | "General" | ...
 let activeRegion = null;     // null = any | "Canada" | "US" | "World"
 let lastStamp = null;
 
-// ---------- Step 1: stable, monotonic ordering (first-seen sequence) ----------
+// ---------- Stable, monotonic ordering (first-seen sequence) ----------
 const SEQ_STORAGE_KEY = "nr_seq_v1";
 
 function loadSeqState() {
@@ -51,31 +48,56 @@ function saveSeqState(state) {
   } catch {}
 }
 
-// ---------- Dedupe helpers ----------
+// ---------- Fuzzy de-dupe helpers ----------
+const STOPWORDS = new Set([
+  // common
+  "the","a","an","and","or","but","of","for","with","without","in","on","at","to","from","by","as","into","over","under","than","about",
+  "after","before","due","will","still","just","not","is","are","was","were","be","being","been","it","its","this","that","these","those",
+  // newsy fluff
+  "live","update","breaking","video","photos","report","reports","says","say","said",
+  // sports glue
+  "vs","vs.","game","games","preview","recap","season","start","starts","starting","lineup",
+  // casualty words (so 'dead' vs 'killed' don't split clusters)
+  "dead","killed","kills","kill","dies","die","injured","injures","injury",
+  // city noise we often see (kept short & conservative)
+  "los","angeles","new","york","la"
+]);
 
-// Strip " - Site" tails, normalize punctuation/spacing, lowercase.
-function normalizeTitle(t) {
-  return (t || "")
-    .replace(/\s+[-–—]\s+[^|]+$/u, "")       // drop trailing " - Source"
-    .toLowerCase()
-    .replace(/[\u2010-\u2015]/g, "-")        // unify dashes
-    .replace(/[^\p{L}\p{N}]+/gu, " ")        // remove punctuation
-    .trim()
-    .replace(/\s+/g, " ");
+function stripSourceTail(title) {
+  // Drop trailing " - Source" (aggregators append this)
+  return (title || "").replace(/\s+[-–—]\s+[^|]+$/u, "");
 }
 
-// Prefer non-aggregator sources when times are tied.
+function tokenize(text) {
+  return (text.toLowerCase().match(/[a-z0-9]+/g) || []);
+}
+
+function fuzzyTitleKey(title) {
+  const base = stripSourceTail(title);
+  const toks = tokenize(base).filter(w => w.length > 1 && !STOPWORDS.has(w));
+  if (!toks.length) {
+    // fallback: at least return something stable
+    return "fk:" + (tokenize(base).join("|").slice(0, 200) || "empty");
+  }
+  // Use UNIQUE sorted tokens so small wording/order changes still collide.
+  const uniq = Array.from(new Set(toks)).sort();
+  // Cap to avoid noise; 10 tokens is a good balance.
+  const sig = uniq.slice(0, 10).join("|");
+  return "fk:" + sig;
+}
+
 function isAggregator(it) {
   const src = `${it?.source || ""} ${it?.url || ""}`.toLowerCase();
-  return /news\.google|google news|news\.yahoo|apple\.news/.test(src);
+  return /news\.google|google news|news\.yahoo|apple\.news|rss\.feeds/.test(src);
 }
 
-// Dedupe identity priority: canonical_id > canonical_url > cluster_id > normalized title.
+// We use a fuzzy signature as the identity so dupes share one slot.
+// (We still consider any provided cluster_id/canonical_id as hints if needed.)
 function dedupeKey(it) {
-  if (it?.canonical_id) return `u:${it.canonical_id}`;
-  if (it?.canonical_url) return `u:${it.canonical_url}`;
-  if (it?.cluster_id)    return `c:${it.cluster_id}`;
-  return `t:${normalizeTitle(it?.title || "")}`;
+  // Prefer an explicit topic key if you add one in the future, else fuzzy title.
+  // If you want to be extra strict, you could combine multiple hints like:
+  // `${fuzzyTitleKey(it.title)}|${(it.canonical_url||"").replace(/^https?:\/\//,"").split("?")[0]}`
+  return fuzzyTitleKey(it?.title || "");
 }
 
 // Keep only the newest item per key; if tie, prefer non-aggregator.
@@ -94,13 +116,14 @@ function dedupeItems(items) {
     if (tNew > tOld) {
       byKey.set(key, it);
     } else if (tNew === tOld) {
+      // tie-breaker: non-aggregator wins
       if (isAggregator(prev) && !isAggregator(it)) byKey.set(key, it);
     }
   }
   return Array.from(byKey.values());
 }
 
-// Use the dedupe identity for seq, so dupes don’t create multiple slots.
+// Use the de-dupe identity for seq, so dupes don’t create multiple slots.
 function getItemId(it) {
   return dedupeKey(it);
 }
@@ -129,7 +152,7 @@ function assignStableSeq(items) {
   return items;
 }
 
-// ---------- helpers ----------
+// ---------- small DOM helpers ----------
 function $(sel, root = document) { return root.querySelector(sel); }
 function $all(sel, root = document) { return [...root.querySelectorAll(sel)]; }
 
@@ -287,17 +310,16 @@ async function loadJson() {
   return await resp.json();
 }
 
-// ---------- normalize(): de-dupe + stable ordering + sort ----------
 function normalize(data) {
   if (!data || !Array.isArray(data.items)) return { items: [] };
 
-  // A) remove duplicates
+  // Step A: remove duplicates first (fuzzy)
   const deduped = dedupeItems(data.items.slice());
 
-  // B) assign stable first-seen sequence using dedupe identity
+  // Step B: assign stable first-seen sequence using the dedupe identity
   assignStableSeq(deduped);
 
-  // C) sort by first-seen sequence (desc), then by published time (desc)
+  // Step C: sort by first-seen sequence (desc), tiebreaker by published time
   deduped.sort((a, b) => {
     const d = (b.__seq || 0) - (a.__seq || 0);
     if (d !== 0) return d;
