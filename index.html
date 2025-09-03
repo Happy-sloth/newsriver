@@ -37,7 +37,7 @@
 
   <!-- Results -->
   <main id="grid" class="grid" aria-live="polite">
-    <!-- Cards are injected here by assets/app.js -->
+    <!-- Cards are injected here -->
   </main>
 
   <!-- Debug/links -->
@@ -54,7 +54,192 @@
     </p>
   </noscript>
 
-  <!-- App logic (fetches headlines.json, renders cards, adds “Last updated” chip) -->
-  <script src="assets/app.js" defer></script>
+  <!-- Step 1: Data loader (fetch, render, filters, last-updated) -->
+  <script>
+  (function(){
+    const GRID = document.getElementById('grid');
+    const FILTERS = document.getElementById('filters');
+    const TOOLBAR = document.querySelector('.toolbar');
+
+    // Create & insert the "Last updated" chip on the right
+    const lastChip = document.createElement('div');
+    lastChip.id = 'last-updated';
+    lastChip.className = 'chip';
+    lastChip.setAttribute('aria-live', 'polite');
+    lastChip.textContent = 'Last updated: …';
+    TOOLBAR.appendChild(lastChip);
+
+    // Active filters (single category; single region)
+    let activeCategory = 'all';
+    let activeRegion = null;
+
+    // Utilities
+    const isValidDate = (v) => !!v && !Number.isNaN(Date.parse(v));
+    const fmtET = (iso) => {
+      try {
+        const d = new Date(iso);
+        return new Intl.DateTimeFormat('en-CA', {
+          year:'numeric', month:'short', day:'2-digit',
+          hour:'2-digit', minute:'2-digit', hour12:false,
+          timeZone:'America/Toronto'
+        }).format(d) + ' ET';
+      } catch { return iso; }
+    };
+
+    const clearGrid = () => { GRID.innerHTML = ''; };
+
+    function makeCard(item){
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.dataset.category = item.category || '';
+      card.dataset.region = item.region || '';
+
+      const link = document.createElement('a');
+      link.className = 'card-link';
+      link.href = item.url;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.setAttribute('aria-label', item.title || 'Open headline');
+
+      const h2 = document.createElement('h2');
+      h2.className = 'headline';
+      h2.textContent = item.title || '(untitled)';
+
+      link.appendChild(h2);
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+
+      const src = document.createElement('span');
+      src.className = 'source';
+      src.textContent = item.source || '';
+
+      const cat = document.createElement('span');
+      cat.className = 'tag';
+      cat.textContent = item.category || '';
+
+      const reg = document.createElement('span');
+      reg.className = 'tag';
+      reg.textContent = item.region || '';
+
+      // meta: Source • Category • Region
+      meta.appendChild(src);
+      if (item.category){ meta.appendChild(document.createTextNode(' \u2022 ')); meta.appendChild(cat); }
+      if (item.region){ meta.appendChild(document.createTextNode(' \u2022 ')); meta.appendChild(reg); }
+
+      card.appendChild(link);
+      card.appendChild(meta);
+      return card;
+    }
+
+    function render(items){
+      clearGrid();
+      if (!items || items.length === 0){
+        const p = document.createElement('p');
+        p.className = 'empty';
+        p.textContent = 'No headlines match your filters.';
+        GRID.appendChild(p);
+        return;
+      }
+      const frag = document.createDocumentFragment();
+      items.forEach(it => frag.appendChild(makeCard(it)));
+      GRID.appendChild(frag);
+    }
+
+    function applyFilters(all){
+      const filtered = all.filter(it =>
+        (activeCategory === 'all' || (it.category || '') === activeCategory) &&
+        (!activeRegion || (it.region || '') === activeRegion)
+      );
+      render(filtered);
+    }
+
+    function setLastUpdated(isoMaybe){
+      if (isValidDate(isoMaybe)) {
+        lastChip.textContent = 'Last updated: ' + fmtET(isoMaybe);
+      } else {
+        lastChip.textContent = 'Last updated: just now';
+      }
+    }
+
+    // Click handling for filters (single-select per group)
+    FILTERS.addEventListener('click', (e) => {
+      const btn = e.target.closest('button.chip');
+      if (!btn) return;
+
+      // Category group
+      if (btn.hasAttribute('data-filter')){
+        // Reset all category chips
+        FILTERS.querySelectorAll('[data-filter]').forEach(b => {
+          b.classList.remove('chip-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('chip-active');
+        btn.setAttribute('aria-pressed', 'true');
+        activeCategory = btn.getAttribute('data-filter') || 'all';
+        applyFilters(window.__NR_ALL_ITEMS__ || []);
+      }
+
+      // Region group (toggle single-select)
+      if (btn.hasAttribute('data-region')){
+        const region = btn.getAttribute('data-region') || null;
+        if (activeRegion === region){
+          // turn off
+          activeRegion = null;
+          btn.classList.remove('chip-active');
+          btn.setAttribute('aria-pressed', 'false');
+        } else {
+          // turn on for the clicked one & off for others
+          FILTERS.querySelectorAll('[data-region]').forEach(b => {
+            b.classList.remove('chip-active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          activeRegion = region;
+          btn.classList.add('chip-active');
+          btn.setAttribute('aria-pressed', 'true');
+        }
+        applyFilters(window.__NR_ALL_ITEMS__ || []);
+      }
+    });
+
+    // Fetch & initialize
+    fetch('headlines.json', { cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(data => {
+        const all = Array.isArray(data.items) ? data.items.slice() : [];
+
+        // Sort newest-first by published_utc (fallback: leave as-is)
+        all.sort((a,b) => {
+          const ta = Date.parse(a.published_utc || 0) || 0;
+          const tb = Date.parse(b.published_utc || 0) || 0;
+          return tb - ta;
+        });
+
+        // Save for re-filtering
+        window.__NR_ALL_ITEMS__ = all;
+
+        // Set "Last updated" using generated_utc if present, else newest item time
+        const lastIso = data.generated_utc && isValidDate(data.generated_utc)
+          ? data.generated_utc
+          : (all.length ? all.find(it => isValidDate(it.published_utc))?.published_utc : null);
+        setLastUpdated(lastIso);
+
+        // Initial render with default filters
+        applyFilters(all);
+      })
+      .catch(err => {
+        console.error('Headlines load failed:', err);
+        setLastUpdated(null);
+        clearGrid();
+        const p = document.createElement('p');
+        p.className = 'error';
+        p.textContent = 'Could not load headlines. Try opening headlines.json directly or refresh.';
+        GRID.appendChild(p);
+      });
+  })();
+  </script>
 </body>
 </html>
