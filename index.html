@@ -54,9 +54,19 @@
     </p>
   </noscript>
 
-  <!-- Step 1: Data loader (fetch, render, filters, last-updated) -->
+  <!-- Optional: point to your live JSON hosted on GitHub Pages -->
+  <script>
+    // If you serve index.html from somewhere else, keep this so the app reads the JSON from GitHub Pages.
+    // You can remove or change this if your headlines.json is local.
+    window.NEWSRIVER_JSON_URL = window.NEWSRIVER_JSON_URL || "https://mypybite.github.io/newsriver/headlines.json";
+  </script>
+
+  <!-- Data loader (fetch, dedupe, stable-ordering, filters, last-updated, auto-refresh) -->
   <script>
   (function(){
+    "use strict";
+
+    // ---------- DOM refs ----------
     const GRID = document.getElementById('grid');
     const FILTERS = document.getElementById('filters');
     const TOOLBAR = document.querySelector('.toolbar');
@@ -73,7 +83,12 @@
     let activeCategory = 'all';
     let activeRegion = null;
 
-    // Utilities
+    // ---------- Config ----------
+    const JSON_URL = (window.NEWSRIVER_JSON_URL || 'headlines.json');
+    const REFRESH_MS = 5 * 60 * 1000; // 5 minutes
+    let lastStamp = null; // remember last generated_utc
+
+    // ---------- Utilities ----------
     const isValidDate = (v) => !!v && !Number.isNaN(Date.parse(v));
     const fmtET = (iso) => {
       try {
@@ -85,9 +100,103 @@
         }).format(d) + ' ET';
       } catch { return iso; }
     };
-
     const clearGrid = () => { GRID.innerHTML = ''; };
 
+    // ---------- De-dupe helpers ----------
+    // Strip " - Site" tails, normalize punctuation/spacing, lowercase.
+    // This collapses Google News vs original-source duplicates.
+    function normalizeTitle(t) {
+      return (t || "")
+        .replace(/\s+[-–—]\s+[^|]+$/u, "")       // drop trailing " - Source"
+        .toLowerCase()
+        .replace(/[\u2010-\u2015]/g, "-")        // unify dashes
+        .replace(/[^\p{L}\p{N}]+/gu, " ")        // remove punctuation
+        .trim()
+        .replace(/\s+/g, " ");
+    }
+
+    // Use cluster_id when present (from enrichment), else normalized title.
+    function dedupeKey(it) {
+      if (it && it.cluster_id) return `c:${it.cluster_id}`;
+      return `t:${normalizeTitle(it?.title || "")}`;
+    }
+
+    // Prefer non-aggregator sources when times are tied.
+    function isAggregator(it) {
+      const src = `${it?.source || ""} ${it?.url || ""}`.toLowerCase();
+      return /news\.google|google news|yahoo\.com\/news|apple\.news/.test(src);
+    }
+
+    // Keep only the newest item per key; if tie, prefer non-aggregator.
+    function dedupeItems(items) {
+      const byKey = new Map();
+      for (const it of items) {
+        const key = dedupeKey(it);
+        const prev = byKey.get(key);
+        if (!prev) {
+          byKey.set(key, it);
+          continue;
+        }
+        const tNew = Date.parse(it.published_utc || it.published || 0) || 0;
+        const tOld = Date.parse(prev.published_utc || prev.published || 0) || 0;
+
+        if (tNew > tOld) {
+          byKey.set(key, it);
+        } else if (tNew === tOld) {
+          // tie-breaker: non-aggregator wins
+          if (isAggregator(prev) && !isAggregator(it)) byKey.set(key, it);
+        }
+      }
+      return Array.from(byKey.values());
+    }
+
+    // ---------- Stable, monotonic ordering (first-seen sequence) ----------
+    const SEQ_STORAGE_KEY = "nr_seq_v1";
+
+    function loadSeqState() {
+      try {
+        const raw = localStorage.getItem(SEQ_STORAGE_KEY);
+        if (!raw) return { counter: 0, map: {} };
+        const parsed = JSON.parse(raw);
+        return {
+          counter: Number(parsed?.counter || 0),
+          map: parsed?.map && typeof parsed.map === "object" ? parsed.map : {}
+        };
+      } catch { return { counter: 0, map: {} }; }
+    }
+
+    function saveSeqState(state) {
+      try { localStorage.setItem(SEQ_STORAGE_KEY, JSON.stringify(state)); } catch {}
+    }
+
+    // Use the dedupe identity for seq, so dupes don’t create multiple slots.
+    function getItemId(it) { return dedupeKey(it); }
+
+    /**
+     * Assign a monotonic first-seen sequence to each item.
+     * - Existing items keep original seq.
+     * - New items get ++counter so they float above older ones.
+     * Mutates items to attach `__seq`.
+     */
+    function assignStableSeq(items) {
+      const state = loadSeqState();
+      let touched = false;
+
+      for (const it of items) {
+        const id = getItemId(it);
+        if (state.map[id] == null) {
+          state.counter += 1;
+          state.map[id] = state.counter;
+          touched = true;
+        }
+        it.__seq = state.map[id];
+      }
+
+      if (touched) saveSeqState(state);
+      return items;
+    }
+
+    // ---------- Render ----------
     function makeCard(item){
       const card = document.createElement('article');
       card.className = 'card';
@@ -162,7 +271,91 @@
       }
     }
 
-    // Click handling for filters (single-select per group)
+    // ---------- Normalize incoming data (dedupe + stable order) ----------
+    function normalizeData(data){
+      if (!data || !Array.isArray(data.items)) return { items: [] };
+
+      // A) de-dupe first (prefer originals over aggregators)
+      const items = dedupeItems(data.items.slice());
+
+      // B) assign first-seen sequence using dedupe identity
+      assignStableSeq(items);
+
+      // C) sort by sequence desc (newest first), tiebreak by published time
+      items.sort((a, b) => {
+        const d = (b.__seq || 0) - (a.__seq || 0);
+        if (d !== 0) return d;
+        const tb = Date.parse(b.published_utc || b.published || 0) || 0;
+        const ta = Date.parse(a.published_utc || a.published || 0) || 0;
+        return tb - ta;
+      });
+
+      return { ...data, items };
+    }
+
+    // ---------- Fetch helpers ----------
+    async function loadJson() {
+      const url = `${JSON_URL}?t=${Date.now()}`; // cache-buster
+      const resp = await fetch(url, { cache: 'no-store' });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      return await resp.json();
+    }
+
+    async function bootstrap() {
+      try {
+        const data = await loadJson();
+        const normalized = normalizeData(data);
+
+        // Save for re-filtering via the toolbar
+        window.__NR_ALL_ITEMS__ = normalized.items;
+
+        // Set “Last updated” using generated_utc (preferred) or newest item time
+        const lastIso = data.generated_utc && isValidDate(data.generated_utc)
+          ? data.generated_utc
+          : (normalized.items.find(it => isValidDate(it.published_utc))?.published_utc || null);
+
+        setLastUpdated(lastIso);
+        lastStamp = data.generated_utc || null;
+
+        // Initial render
+        applyFilters(normalized.items);
+      } catch (err) {
+        console.error('Headlines load failed:', err);
+        setLastUpdated(null);
+        clearGrid();
+        const p = document.createElement('p');
+        p.className = 'error';
+        p.textContent = 'Could not load headlines. Try opening headlines.json directly or refresh.';
+        GRID.appendChild(p);
+      }
+    }
+
+    function autoRefresh() {
+      setInterval(async () => {
+        try {
+          const data = await loadJson();
+          if (!data) return;
+
+          // Only re-render if feed timestamp changed
+          const stamp = data.generated_utc || null;
+          if (stamp && stamp !== lastStamp) {
+            const normalized = normalizeData(data);
+            window.__NR_ALL_ITEMS__ = normalized.items;
+            setLastUpdated(stamp);
+            lastStamp = stamp;
+            applyFilters(normalized.items);
+
+            // quick pulse on the chip for visual feedback (if you have CSS for .pulse)
+            lastChip.classList.add('pulse');
+            setTimeout(() => lastChip.classList.remove('pulse'), 900);
+          }
+        } catch (e) {
+          console.warn('Auto-refresh failed:', e.message);
+        }
+      }, REFRESH_MS);
+    }
+
+    // ---------- Filter click handling (single-select per group) ----------
     FILTERS.addEventListener('click', (e) => {
       const btn = e.target.closest('button.chip');
       if (!btn) return;
@@ -202,43 +395,9 @@
       }
     });
 
-    // Fetch & initialize
-    fetch('headlines.json', { cache: 'no-store' })
-      .then(r => {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      })
-      .then(data => {
-        const all = Array.isArray(data.items) ? data.items.slice() : [];
-
-        // Sort newest-first by published_utc (fallback: leave as-is)
-        all.sort((a,b) => {
-          const ta = Date.parse(a.published_utc || 0) || 0;
-          const tb = Date.parse(b.published_utc || 0) || 0;
-          return tb - ta;
-        });
-
-        // Save for re-filtering
-        window.__NR_ALL_ITEMS__ = all;
-
-        // Set "Last updated" using generated_utc if present, else newest item time
-        const lastIso = data.generated_utc && isValidDate(data.generated_utc)
-          ? data.generated_utc
-          : (all.length ? all.find(it => isValidDate(it.published_utc))?.published_utc : null);
-        setLastUpdated(lastIso);
-
-        // Initial render with default filters
-        applyFilters(all);
-      })
-      .catch(err => {
-        console.error('Headlines load failed:', err);
-        setLastUpdated(null);
-        clearGrid();
-        const p = document.createElement('p');
-        p.className = 'error';
-        p.textContent = 'Could not load headlines. Try opening headlines.json directly or refresh.';
-        GRID.appendChild(p);
-      });
+    // ---------- Go ----------
+    bootstrap();
+    autoRefresh();
   })();
   </script>
 </body>
