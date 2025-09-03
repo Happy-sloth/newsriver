@@ -1,6 +1,6 @@
 // Minimal client for NewsRiver
 // - fetches headlines.json (no-cache, cache-busted)
-// - renders cards newest-first
+// - renders cards newest-first (with stable, monotonic ordering via first-seen sequence)
 // - adds "Last updated" chip (safe fallback if .toolbar not present)
 // - supports category + region filters
 // - auto-refreshes every 5 minutes (tweak REFRESH_MS as needed)
@@ -27,6 +27,61 @@ let rawData = null;
 let activeCategory = "all";  // "all" | "Sports" | "General" | ...
 let activeRegion = null;     // null = any | "Canada" | "US" | "World"
 let lastStamp = null;
+
+// ---------- Step 1: stable, monotonic ordering (first-seen sequence) ----------
+const SEQ_STORAGE_KEY = "nr_seq_v1";
+
+function loadSeqState() {
+  try {
+    const raw = localStorage.getItem(SEQ_STORAGE_KEY);
+    if (!raw) return { counter: 0, map: {} };
+    const parsed = JSON.parse(raw);
+    return {
+      counter: Number(parsed?.counter || 0),
+      map: parsed?.map && typeof parsed.map === "object" ? parsed.map : {}
+    };
+  } catch {
+    return { counter: 0, map: {} };
+  }
+}
+
+function saveSeqState(state) {
+  try {
+    localStorage.setItem(SEQ_STORAGE_KEY, JSON.stringify(state));
+  } catch {}
+}
+
+// Use URL as identity; fall back to title+source composite.
+function getItemId(it) {
+  if (it?.url) return it.url;
+  const t = (it?.title || "").trim();
+  const s = (it?.source || "").trim();
+  return `${t}|||${s}`;
+}
+
+/**
+ * Assign a monotonic first-seen sequence to each item.
+ * - Existing items keep original seq.
+ * - New items get ++counter so they float above older ones.
+ * Mutates items to attach `__seq`.
+ */
+function assignStableSeq(items) {
+  const state = loadSeqState();
+  let touched = false;
+
+  for (const it of items) {
+    const id = getItemId(it);
+    if (state.map[id] == null) {
+      state.counter += 1;
+      state.map[id] = state.counter;
+      touched = true;
+    }
+    it.__seq = state.map[id];
+  }
+
+  if (touched) saveSeqState(state);
+  return items;
+}
 
 // ---------- helpers ----------
 function $(sel, root = document) { return root.querySelector(sel); }
@@ -189,9 +244,21 @@ async function loadJson() {
 
 function normalize(data) {
   if (!data || !Array.isArray(data.items)) return { items: [] };
-  const items = [...data.items].sort(
-    (a, b) => new Date(b.published_utc) - new Date(a.published_utc)
-  );
+
+  // Step 1: assign stable first-seen sequence before sorting
+  const items = data.items.slice();
+  assignStableSeq(items);
+
+  // Sort primarily by descending sequence (newest first-seen on top),
+  // with a minor tiebreaker by published time (newer first).
+  items.sort((a, b) => {
+    const d = (b.__seq || 0) - (a.__seq || 0);
+    if (d !== 0) return d;
+    const tb = Date.parse(b.published_utc || b.published || 0) || 0;
+    const ta = Date.parse(a.published_utc || a.published || 0) || 0;
+    return tb - ta;
+  });
+
   return { ...data, items };
 }
 
