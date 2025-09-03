@@ -1,20 +1,30 @@
 // Minimal client for NewsRiver
-// - fetches headlines.json (no-cache)
+// - fetches headlines.json (no-cache, cache-busted)
 // - renders cards newest-first
-// - adds "Last updated" chip
+// - adds "Last updated" chip (safe fallback if .toolbar not present)
 // - supports category + region filters
-// - auto-refreshes every 5 minutes (can change REFRESH_MS)
+// - auto-refreshes every 5 minutes (tweak REFRESH_MS as needed)
 
+"use strict";
+
+// ---- Configurable JSON endpoint (works on GitHub Pages and Zoho embeds) ----
+// To override from an external page (e.g., Zoho), add BEFORE this script:
+//   <script>window.NEWSRIVER_JSON_URL="https://mypybite.github.io/newsriver/headlines.json";</script>
+window.NEWSRIVER_JSON_URL = window.NEWSRIVER_JSON_URL || null;
+
+// IDs / constants
 const GRID_ID = "grid";
 const FILTERS_ID = "filters";
 const LAST_UPDATED_ID = "last-updated";
-const JSON_URL = "headlines.json";
+const JSON_URL = window.NEWSRIVER_JSON_URL || "headlines.json";
 const REFRESH_MS = 5 * 60 * 1000; // 5 minutes
 
 let rawData = null;
-let activeCategory = "all";  // "all" | "Sports" | "General" | anything else if you add later
+let activeCategory = "all";  // "all" | "Sports" | "General" | ...
 let activeRegion = null;     // null = any | "Canada" | "US" | "World"
+let lastStamp = null;
 
+// ---------- helpers ----------
 function $(sel, root = document) { return root.querySelector(sel); }
 function $all(sel, root = document) { return [...root.querySelectorAll(sel)]; }
 
@@ -42,6 +52,15 @@ function fmtRelative(isoString) {
   return isoString;
 }
 
+function escapeHtml(s) {
+  return (s || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 function makeCard(item) {
   const card = document.createElement("article");
   card.className = "card";
@@ -65,15 +84,6 @@ function makeCard(item) {
   return card;
 }
 
-function escapeHtml(s) {
-  return (s || "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
-
 function applyFilters(items) {
   return items.filter(it => {
     const cat = (it.category || "General");
@@ -85,7 +95,7 @@ function applyFilters(items) {
 }
 
 function render() {
-  const grid = $( `#${GRID_ID}` );
+  const grid = $(`#${GRID_ID}`);
   grid.innerHTML = "";
 
   if (!rawData || !Array.isArray(rawData.items)) {
@@ -108,8 +118,9 @@ function setActiveChip(groupSelector, valueToActivate, attrName) {
   // attrName is 'data-filter' (category) or 'data-region'
   const chips = $all(`${groupSelector} .chip[${attrName}]`);
   for (const chip of chips) {
-    const isActive = chip.getAttribute(attrName) === valueToActivate ||
-                     (valueToActivate === null && !chip.hasAttribute(attrName)); // not used here
+    const isActive =
+      chip.getAttribute(attrName) === valueToActivate ||
+      (valueToActivate === null && !chip.hasAttribute(attrName));
     chip.classList.toggle("chip-active", isActive);
     chip.setAttribute("aria-pressed", String(isActive));
   }
@@ -117,6 +128,7 @@ function setActiveChip(groupSelector, valueToActivate, attrName) {
 
 function bindFilters() {
   const filtersEl = $(`#${FILTERS_ID}`);
+  if (!filtersEl) return;
   filtersEl.addEventListener("click", (e) => {
     const btn = e.target.closest(".chip");
     if (!btn) return;
@@ -127,9 +139,8 @@ function bindFilters() {
       render();
     } else if (btn.hasAttribute("data-region")) {
       activeRegion = btn.getAttribute("data-region");
-      // Make only one region chip active at a time; clicking the same chip again clears it
+      // toggle behavior: clicking active region clears it
       if ($(`.chip.chip-active[data-region="${activeRegion}"]`)) {
-        // toggle off
         activeRegion = null;
         $all(`#${FILTERS_ID} .chip[data-region]`).forEach(c => {
           c.classList.remove("chip-active");
@@ -153,7 +164,13 @@ function showLastUpdated(iso) {
     chip = document.createElement("div");
     chip.id = LAST_UPDATED_ID;
     chip.className = "chip";
-    $(".toolbar").appendChild(chip);
+    const host =
+      document.querySelector(".toolbar") ||
+      document.querySelector(".news-toolbar") ||
+      document.querySelector(".news-header") ||
+      document.getElementById("news-panel") ||
+      document.body;
+    host.appendChild(chip);
   }
   chip.textContent = `Last updated: ${fmtRelative(iso)}`;
   chip.title = new Date(iso).toLocaleString();
@@ -163,12 +180,25 @@ async function loadJson() {
   const url = `${JSON_URL}?t=${Date.now()}`; // cache-buster
   const resp = await fetch(url, { cache: "no-store" });
   if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-  const data = await resp.json();
-  return data;
+  return await resp.json();
 }
 
-let lastStamp = null;
+function normalize(data) {
+  if (!data || !Array.isArray(data.items)) return { items: [] };
+  const items = [...data.items].sort(
+    (a, b) => new Date(b.published_utc) - new Date(a.published_utc)
+  );
+  return { ...data, items };
+}
 
+function flashUpdated() {
+  const chip = $(`#${LAST_UPDATED_ID}`);
+  if (!chip) return;
+  chip.classList.add("pulse");
+  setTimeout(() => chip.classList.remove("pulse"), 1200);
+}
+
+// ---------- bootstrap + refresh ----------
 async function bootstrap() {
   try {
     const data = await loadJson();
@@ -180,27 +210,16 @@ async function bootstrap() {
     }
   } catch (err) {
     console.error("Failed to load headlines.json", err);
-    $( `#${GRID_ID}` ).innerHTML = `
+    $(`#${GRID_ID}`).innerHTML = `
       <p class="empty">Couldn’t load headlines. <a href="${JSON_URL}" target="_blank" rel="noopener">Check JSON</a>.</p>
     `;
   }
-}
-
-function normalize(data) {
-  // Keep structure flexible across Step 1/2/3
-  if (!data || !Array.isArray(data.items)) return { items: [] };
-  // Ensure newest first just in case
-  const items = [...data.items].sort((a, b) => {
-    return new Date(b.published_utc) - new Date(a.published_utc);
-  });
-  return { ...data, items };
 }
 
 function autoRefresh() {
   setInterval(async () => {
     try {
       const data = await loadJson();
-      // Only re-render if the generated timestamp changed
       if (data.generated_utc && data.generated_utc !== lastStamp) {
         rawData = normalize(data);
         render();
@@ -209,17 +228,9 @@ function autoRefresh() {
         flashUpdated();
       }
     } catch (e) {
-      // Silently ignore transient fetch failures
       console.warn("Auto-refresh failed:", e.message);
     }
   }, REFRESH_MS);
-}
-
-function flashUpdated() {
-  const chip = $(`#${LAST_UPDATED_ID}`);
-  if (!chip) return;
-  chip.classList.add("pulse");
-  setTimeout(() => chip.classList.remove("pulse"), 1200);
 }
 
 // Init
