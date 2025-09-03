@@ -1,8 +1,8 @@
 // assets/app.js
-// NewsRiver client (fetch -> fuzzy-dedupe -> stable order -> render)
-// - Fuzzy de-dupe based on token signature (collapses Google News vs originals,
-//   and most cross-outlet near-duplicates like the Lisbon derailment).
-// - Stable "first-seen" ordering so cards don't jump around between refreshes.
+// NewsRiver client (fetch -> strong de-dupe -> stable order -> render)
+// - Strong de-dupe order: cluster_id -> canonical_id -> normalized canonical_url -> fuzzy title
+// - Tie-breaks: newer -> non-aggregator -> non-paywalled
+// - Stable "first-seen" ordering so cards don't jump around between refreshes
 // - Category + region filters, "Last updated" chip, and 5-min auto-refresh.
 
 "use strict";
@@ -48,18 +48,21 @@ function saveSeqState(state) {
   } catch {}
 }
 
-// ---------- Fuzzy de-dupe helpers ----------
+// ---------- De-dupe helpers ----------
+
+// Consider these “aggregators” (we prefer originals over these)
+function isAggregator(it) {
+  const src = `${it?.source || ""} ${it?.url || ""}`.toLowerCase();
+  return /news\.google|google news|news\.yahoo|apple\.news|feedburner|rss\./.test(src);
+}
+
+// Common stopwords to make the fuzzy key robust to fluff
 const STOPWORDS = new Set([
-  // common
   "the","a","an","and","or","but","of","for","with","without","in","on","at","to","from","by","as","into","over","under","than","about",
   "after","before","due","will","still","just","not","is","are","was","were","be","being","been","it","its","this","that","these","those",
-  // newsy fluff
   "live","update","breaking","video","photos","report","reports","says","say","said",
-  // sports glue
   "vs","vs.","game","games","preview","recap","season","start","starts","starting","lineup",
-  // casualty words (so 'dead' vs 'killed' don't split clusters)
   "dead","killed","kills","kill","dies","die","injured","injures","injury",
-  // city noise we often see (kept short & conservative)
   "los","angeles","new","york","la"
 ]);
 
@@ -76,31 +79,59 @@ function fuzzyTitleKey(title) {
   const base = stripSourceTail(title);
   const toks = tokenize(base).filter(w => w.length > 1 && !STOPWORDS.has(w));
   if (!toks.length) {
-    // fallback: at least return something stable
-    return "fk:" + (tokenize(base).join("|").slice(0, 200) || "empty");
+    return "fk:" + (tokenize(base).join("|").slice(0, 160) || "empty");
   }
-  // Use UNIQUE sorted tokens so small wording/order changes still collide.
   const uniq = Array.from(new Set(toks)).sort();
-  // Cap to avoid noise; 10 tokens is a good balance.
-  const sig = uniq.slice(0, 10).join("|");
+  const sig = uniq.slice(0, 12).join("|");
   return "fk:" + sig;
 }
 
-function isAggregator(it) {
-  const src = `${it?.source || ""} ${it?.url || ""}`.toLowerCase();
-  return /news\.google|google news|news\.yahoo|apple\.news|rss\.feeds/.test(src);
+// Normalize a URL into host + path only (no scheme, query, hash; remove mobile subdomains)
+function hostPath(u) {
+  try {
+    const url = new URL(u);
+    let host = url.host.toLowerCase();
+    if (host.startsWith("m.") && host.indexOf(".") > 1) host = host.slice(2);
+    if (host.startsWith("mobile.") && host.indexOf(".") > 6) host = host.slice(7);
+    let path = url.pathname || "/";
+    if (path !== "/" && path.endsWith("/")) path = path.slice(0, -1);
+    return host + path;
+  } catch {
+    return (u || "").replace(/^https?:\/\//, "").split("?")[0].split("#")[0];
+  }
 }
 
-// We use a fuzzy signature as the identity so dupes share one slot.
-// (We still consider any provided cluster_id/canonical_id as hints if needed.)
+// Strongest identity we can build for an item
 function dedupeKey(it) {
-  // Prefer an explicit topic key if you add one in the future, else fuzzy title.
-  // If you want to be extra strict, you could combine multiple hints like:
-  // `${fuzzyTitleKey(it.title)}|${(it.canonical_url||"").replace(/^https?:\/\//,"").split("?")[0]}`
+  // 1) explicit cluster/topic id from enrichment (best)
+  if (it && it.cluster_id) return `c:${it.cluster_id}`;
+  // 2) canonical_id if provided by enrichment
+  if (it && it.canonical_id) return `i:${it.canonical_id}`;
+  // 3) normalized canonical_url (host+path)
+  if (it && it.canonical_url) return `u:${hostPath(it.canonical_url)}`;
+  // 4) fallback: normalized original url (host+path)
+  if (it && it.url) return `u:${hostPath(it.url)}`;
+  // 5) last resort: fuzzy title signature
   return fuzzyTitleKey(it?.title || "");
 }
 
-// Keep only the newest item per key; if tie, prefer non-aggregator.
+// Choose the better of two items that hashed to the same key
+function chooseBetter(a, b) {
+  const ta = Date.parse(a.published_utc || a.published || 0) || 0;
+  const tb = Date.parse(b.published_utc || b.published || 0) || 0;
+  if (tb !== ta) return tb > ta ? b : a; // newer wins
+
+  const aggA = isAggregator(a), aggB = isAggregator(b);
+  if (aggA !== aggB) return aggA ? b : a; // non-aggregator wins
+
+  const pwA = !!a.paywall, pwB = !!b.paywall;
+  if (pwA !== pwB) return pwA ? b : a;     // non-paywalled wins
+
+  // Otherwise keep 'a' (stable)
+  return a;
+}
+
+// Remove duplicates by key
 function dedupeItems(items) {
   const byKey = new Map();
   for (const it of items) {
@@ -108,16 +139,8 @@ function dedupeItems(items) {
     const prev = byKey.get(key);
     if (!prev) {
       byKey.set(key, it);
-      continue;
-    }
-    const tNew = Date.parse(it.published_utc || it.published || 0) || 0;
-    const tOld = Date.parse(prev.published_utc || prev.published || 0) || 0;
-
-    if (tNew > tOld) {
-      byKey.set(key, it);
-    } else if (tNew === tOld) {
-      // tie-breaker: non-aggregator wins
-      if (isAggregator(prev) && !isAggregator(it)) byKey.set(key, it);
+    } else {
+      byKey.set(key, chooseBetter(prev, it));
     }
   }
   return Array.from(byKey.values());
@@ -194,9 +217,10 @@ function makeCard(item) {
   card.className = "card";
   const category = item.category || "General";
   const region = item.region || "World";
+  const href = item.canonical_url || item.url;
 
   card.innerHTML = `
-    <a class="card-link" href="${item.url}" target="_blank" rel="noopener">
+    <a class="card-link" href="${href}" target="_blank" rel="noopener">
       <h3 class="card-title">${escapeHtml(item.title)}</h3>
       <div class="card-meta">
         <span class="badge source">${escapeHtml(item.source || "News")}</span>
@@ -313,10 +337,10 @@ async function loadJson() {
 function normalize(data) {
   if (!data || !Array.isArray(data.items)) return { items: [] };
 
-  // Step A: remove duplicates first (fuzzy)
+  // Step A: remove duplicates (strong)
   const deduped = dedupeItems(data.items.slice());
 
-  // Step B: assign stable first-seen sequence using the dedupe identity
+  // Step B: assign stable first-seen sequence using the de-dupe identity
   assignStableSeq(deduped);
 
   // Step C: sort by first-seen sequence (desc), tiebreaker by published time
