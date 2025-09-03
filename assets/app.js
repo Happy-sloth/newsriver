@@ -1,6 +1,7 @@
 // Minimal client for NewsRiver
 // - fetches headlines.json (no-cache, cache-busted)
 // - renders cards newest-first (with stable, monotonic ordering via first-seen sequence)
+// - de-dupes items (cluster_id or normalized title fallback; prefers non-aggregators)
 // - adds "Last updated" chip (safe fallback if .toolbar not present)
 // - supports category + region filters
 // - auto-refreshes every 5 minutes (tweak REFRESH_MS as needed)
@@ -51,12 +52,58 @@ function saveSeqState(state) {
   } catch {}
 }
 
-// Use URL as identity; fall back to title+source composite.
+// ---------- Dedupe helpers ----------
+
+// Strip " - Site" tails, normalize punctuation/spacing, lowercase.
+// This collapses Google News vs original-source duplicates.
+function normalizeTitle(t) {
+  return (t || "")
+    .replace(/\s+[-–—]\s+[^|]+$/u, "")       // drop trailing " - Source"
+    .toLowerCase()
+    .replace(/[\u2010-\u2015]/g, "-")        // unify dashes
+    .replace(/[^\p{L}\p{N}]+/gu, " ")        // remove punctuation
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+// Use cluster_id when present (from enrichment), else normalized title.
+function dedupeKey(it) {
+  if (it && it.cluster_id) return `c:${it.cluster_id}`;
+  return `t:${normalizeTitle(it?.title || "")}`;
+}
+
+// Prefer non-aggregator sources when times are tied.
+function isAggregator(it) {
+  const src = `${it?.source || ""} ${it?.url || ""}`.toLowerCase();
+  return /news\.google|google news|yahoo\.com\/news|apple\.news/.test(src);
+}
+
+// Keep only the newest item per key; if tie, prefer non-aggregator.
+function dedupeItems(items) {
+  const byKey = new Map();
+  for (const it of items) {
+    const key = dedupeKey(it);
+    const prev = byKey.get(key);
+    if (!prev) {
+      byKey.set(key, it);
+      continue;
+    }
+    const tNew = Date.parse(it.published_utc || it.published || 0) || 0;
+    const tOld = Date.parse(prev.published_utc || prev.published || 0) || 0;
+
+    if (tNew > tOld) {
+      byKey.set(key, it);
+    } else if (tNew === tOld) {
+      // tie-breaker: non-aggregator wins
+      if (isAggregator(prev) && !isAggregator(it)) byKey.set(key, it);
+    }
+  }
+  return Array.from(byKey.values());
+}
+
+// Use the dedupe identity for seq, so dupes don’t create multiple slots.
 function getItemId(it) {
-  if (it?.url) return it.url;
-  const t = (it?.title || "").trim();
-  const s = (it?.source || "").trim();
-  return `${t}|||${s}`;
+  return dedupeKey(it);
 }
 
 /**
@@ -245,13 +292,14 @@ async function loadJson() {
 function normalize(data) {
   if (!data || !Array.isArray(data.items)) return { items: [] };
 
-  // Step 1: assign stable first-seen sequence before sorting
-  const items = data.items.slice();
-  assignStableSeq(items);
+  // Step A: remove duplicates first
+  const deduped = dedupeItems(data.items.slice());
 
-  // Sort primarily by descending sequence (newest first-seen on top),
-  // with a minor tiebreaker by published time (newer first).
-  items.sort((a, b) => {
+  // Step B: assign stable first-seen sequence using the dedupe identity
+  assignStableSeq(deduped);
+
+  // Step C: sort by first-seen sequence (desc), tiebreaker by published time
+  deduped.sort((a, b) => {
     const d = (b.__seq || 0) - (a.__seq || 0);
     if (d !== 0) return d;
     const tb = Date.parse(b.published_utc || b.published || 0) || 0;
@@ -259,7 +307,7 @@ function normalize(data) {
     return tb - ta;
   });
 
-  return { ...data, items };
+  return { ...data, items: deduped };
 }
 
 function flashUpdated() {
