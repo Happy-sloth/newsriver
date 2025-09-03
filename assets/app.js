@@ -8,7 +8,11 @@
 "use strict";
 
 // ---- Configurable JSON endpoint (works on GitHub Pages and Zoho embeds) ----
-// To override from an external page (e.g., Zoho), add BEFORE this script:
+// If the page hasn't set this already, default to your GitHub Pages JSON:
+if (!window.NEWSRIVER_JSON_URL) {
+  window.NEWSRIVER_JSON_URL = "https://mypybite.github.io/newsriver/headlines.json";
+}
+// (If you prefer to set it from the HTML instead, add BEFORE this script:
 //   <script>window.NEWSRIVER_JSON_URL="https://mypybite.github.io/newsriver/headlines.json";</script>
 window.NEWSRIVER_JSON_URL = window.NEWSRIVER_JSON_URL || null;
 
