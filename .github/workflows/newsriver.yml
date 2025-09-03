@@ -1,4 +1,4 @@
-name: NewsRiver: build headlines.json
+name: Build headlines.json
 
 on:
   workflow_dispatch: {}
@@ -8,30 +8,20 @@ on:
 permissions:
   contents: write
 
-# Prevent two runs from editing headlines.json at the same time
+# prevent two overlapping runs from fighting over headlines.json
 concurrency:
-  group: newsriver-headlines
-  cancel-in-progress: true
+  group: headlines-json
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: true
           fetch-depth: 0
-
-      # Start from the latest remote to avoid rebase/merge conflicts
-      - name: Sync to remote main
-        run: |
-          git fetch origin
-          git checkout main || git checkout -b main
-          git reset --hard origin/main
-          git status -sb
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -46,18 +36,18 @@ jobs:
 
       - name: Build headlines.json
         env:
-          # Leave empty for normal mode. To test fast, set SMOKE to "1".
-          SMOKE: ""
+          SMOKE: "0"   # keep prod mode by default
         run: python build_headlines.py
 
-      - name: Commit & push (no rebase)
+      - name: Commit changes (rebase-safe)
         run: |
-          if git diff --quiet; then
-            echo "No changes to commit."
-          else
+          if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add -A
             git commit -m "ci: refresh headlines.json"
-            git push origin HEAD:main
+            git pull --rebase --autostash || git rebase --abort || true
+            git push
+          else
+            echo "No changes to commit."
           fi
