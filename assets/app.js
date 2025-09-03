@@ -1,120 +1,228 @@
-(async function () {
-  const els = {
-    list: document.getElementById('list'),
-    empty: document.getElementById('empty'),
-    errors: document.getElementById('errors'),
-    statusGenerated: document.getElementById('status-generated'),
-    statusCount: document.getElementById('status-count'),
-    statusFetch: document.getElementById('status-fetch'),
-    rawLink: document.getElementById('raw-link'),
-  };
+// Minimal client for NewsRiver
+// - fetches headlines.json (no-cache)
+// - renders cards newest-first
+// - adds "Last updated" chip
+// - supports category + region filters
+// - auto-refreshes every 5 minutes (can change REFRESH_MS)
 
-  // Always point the “raw JSON” link at the current file (works on Pages)
-  els.rawLink.href = 'headlines.json';
+const GRID_ID = "grid";
+const FILTERS_ID = "filters";
+const LAST_UPDATED_ID = "last-updated";
+const JSON_URL = "headlines.json";
+const REFRESH_MS = 5 * 60 * 1000; // 5 minutes
 
-  const url = `headlines.json?v=${Date.now()}`; // simple cache-buster
+let rawData = null;
+let activeCategory = "all";  // "all" | "Sports" | "General" | anything else if you add later
+let activeRegion = null;     // null = any | "Canada" | "US" | "World"
+
+function $(sel, root = document) { return root.querySelector(sel); }
+function $all(sel, root = document) { return [...root.querySelectorAll(sel)]; }
+
+function fmtRelative(isoString) {
   try {
-    const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-
-    // Header/status
-    const gen = data.generated_utc || '';
-    els.statusGenerated.textContent = gen
-      ? `Last updated: ${formatLocal(gen)} (local)`
-      : 'Last updated: —';
-    if (gen) {
-      els.statusGenerated.title = `UTC: ${gen}`;
+    const d = new Date(isoString);
+    const diffMs = d - new Date();
+    const abs = Math.abs(diffMs);
+    const UNITS = [
+      ["year", 365*24*3600*1000],
+      ["month", 30*24*3600*1000],
+      ["day", 24*3600*1000],
+      ["hour", 3600*1000],
+      ["minute", 60*1000],
+      ["second", 1000],
+    ];
+    const rtf = new Intl.RelativeTimeFormat(undefined, { numeric: "auto" });
+    for (const [unit, ms] of UNITS) {
+      if (abs >= ms || unit === "second") {
+        const value = Math.round(diffMs / ms);
+        return rtf.format(value, unit);
+      }
     }
-    const items = Array.isArray(data.items) ? data.items : [];
-    els.statusCount.textContent = `Items: ${items.length}`;
-    els.statusFetch.textContent = 'Fetch: ok';
+  } catch {}
+  return isoString;
+}
 
-    // Render list
-    if (items.length === 0) {
-      els.empty.style.display = '';
-      return;
+function makeCard(item) {
+  const card = document.createElement("article");
+  card.className = "card";
+  const category = item.category || "General";
+  const region = item.region || "World";
+
+  card.innerHTML = `
+    <a class="card-link" href="${item.url}" target="_blank" rel="noopener">
+      <h3 class="card-title">${escapeHtml(item.title)}</h3>
+      <div class="card-meta">
+        <span class="badge source">${escapeHtml(item.source || "News")}</span>
+        <span class="dot">•</span>
+        <time datetime="${item.published_utc}">${fmtRelative(item.published_utc)}</time>
+      </div>
+      <div class="card-tags">
+        <span class="tag">${escapeHtml(category)}</span>
+        <span class="tag subtle">${escapeHtml(region)}</span>
+      </div>
+    </a>
+  `;
+  return card;
+}
+
+function escapeHtml(s) {
+  return (s || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function applyFilters(items) {
+  return items.filter(it => {
+    const cat = (it.category || "General");
+    const reg = (it.region || "World");
+    const catOk = activeCategory === "all" ? true : cat === activeCategory;
+    const regOk = activeRegion ? reg === activeRegion : true;
+    return catOk && regOk;
+  });
+}
+
+function render() {
+  const grid = $( `#${GRID_ID}` );
+  grid.innerHTML = "";
+
+  if (!rawData || !Array.isArray(rawData.items)) {
+    grid.innerHTML = `<p class="empty">No headlines yet.</p>`;
+    return;
+  }
+
+  const items = applyFilters(rawData.items);
+  if (items.length === 0) {
+    grid.innerHTML = `<p class="empty">No headlines match the current filters.</p>`;
+    return;
+  }
+
+  const frag = document.createDocumentFragment();
+  for (const it of items) frag.appendChild(makeCard(it));
+  grid.appendChild(frag);
+}
+
+function setActiveChip(groupSelector, valueToActivate, attrName) {
+  // attrName is 'data-filter' (category) or 'data-region'
+  const chips = $all(`${groupSelector} .chip[${attrName}]`);
+  for (const chip of chips) {
+    const isActive = chip.getAttribute(attrName) === valueToActivate ||
+                     (valueToActivate === null && !chip.hasAttribute(attrName)); // not used here
+    chip.classList.toggle("chip-active", isActive);
+    chip.setAttribute("aria-pressed", String(isActive));
+  }
+}
+
+function bindFilters() {
+  const filtersEl = $(`#${FILTERS_ID}`);
+  filtersEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+
+    if (btn.hasAttribute("data-filter")) {
+      activeCategory = btn.getAttribute("data-filter");
+      setActiveChip(`#${FILTERS_ID}`, activeCategory, "data-filter");
+      render();
+    } else if (btn.hasAttribute("data-region")) {
+      activeRegion = btn.getAttribute("data-region");
+      // Make only one region chip active at a time; clicking the same chip again clears it
+      if ($(`.chip.chip-active[data-region="${activeRegion}"]`)) {
+        // toggle off
+        activeRegion = null;
+        $all(`#${FILTERS_ID} .chip[data-region]`).forEach(c => {
+          c.classList.remove("chip-active");
+          c.setAttribute("aria-pressed", "false");
+        });
+      } else {
+        $all(`#${FILTERS_ID} .chip[data-region]`).forEach(c => {
+          const on = c.getAttribute("data-region") === activeRegion;
+          c.classList.toggle("chip-active", on);
+          c.setAttribute("aria-pressed", String(on));
+        });
+      }
+      render();
     }
-    const frag = document.createDocumentFragment();
-    for (const it of items) {
-      const title = (it.title || '').trim();
-      const url = (it.url || '').trim();
-      const source = it.source || 'News';
-      const iso = it.published_utc || '';
-      const when = iso ? formatRelative(iso) : '';
+  });
+}
 
-      const region = it.region || null;
-      const category = it.category || null;
-      const score = typeof it.score === 'number' ? it.score : null;
+function showLastUpdated(iso) {
+  let chip = $(`#${LAST_UPDATED_ID}`);
+  if (!chip) {
+    chip = document.createElement("div");
+    chip.id = LAST_UPDATED_ID;
+    chip.className = "chip";
+    $(".toolbar").appendChild(chip);
+  }
+  chip.textContent = `Last updated: ${fmtRelative(iso)}`;
+  chip.title = new Date(iso).toLocaleString();
+}
 
-      const card = document.createElement('article');
-      card.className = 'item';
+async function loadJson() {
+  const url = `${JSON_URL}?t=${Date.now()}`; // cache-buster
+  const resp = await fetch(url, { cache: "no-store" });
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  const data = await resp.json();
+  return data;
+}
 
-      const h3 = document.createElement('h3');
-      const a = document.createElement('a');
-      a.href = url || '#';
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.textContent = title || '(untitled)';
-      h3.appendChild(a);
+let lastStamp = null;
 
-      const meta = document.createElement('div');
-      meta.className = 'meta';
-      meta.innerHTML = [
-        source ? `<span>${escapeHtml(source)}</span>` : '',
-        when ? `<span>${escapeHtml(when)}</span>` : '',
-        region ? `<span class="badge">${escapeHtml(region)}</span>` : '',
-        category ? `<span class="badge">${escapeHtml(category)}</span>` : '',
-        score !== null ? `<span class="badge">score ${score.toFixed(2)}</span>` : '',
-      ].filter(Boolean).join('');
-
-      card.appendChild(h3);
-      card.appendChild(meta);
-      frag.appendChild(card);
+async function bootstrap() {
+  try {
+    const data = await loadJson();
+    rawData = normalize(data);
+    render();
+    if (rawData.generated_utc) {
+      showLastUpdated(rawData.generated_utc);
+      lastStamp = rawData.generated_utc;
     }
-    els.list.appendChild(frag);
   } catch (err) {
-    console.error(err);
-    els.statusFetch.textContent = 'Fetch: error';
-    showError(`Could not load headlines.json (${String(err).replace(/^Error:\s*/, '')}).`);
+    console.error("Failed to load headlines.json", err);
+    $( `#${GRID_ID}` ).innerHTML = `
+      <p class="empty">Couldn’t load headlines. <a href="${JSON_URL}" target="_blank" rel="noopener">Check JSON</a>.</p>
+    `;
   }
+}
 
-  function showError(msg) {
-    const div = document.createElement('div');
-    div.className = 'error';
-    div.textContent = msg;
-    els.errors.appendChild(div);
-  }
+function normalize(data) {
+  // Keep structure flexible across Step 1/2/3
+  if (!data || !Array.isArray(data.items)) return { items: [] };
+  // Ensure newest first just in case
+  const items = [...data.items].sort((a, b) => {
+    return new Date(b.published_utc) - new Date(a.published_utc);
+  });
+  return { ...data, items };
+}
 
-  function formatLocal(isoStr) {
+function autoRefresh() {
+  setInterval(async () => {
     try {
-      const d = new Date(isoStr);
-      // e.g., “Sep 2, 10:14 PM”
-      return d.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
-    } catch { return isoStr; }
-  }
+      const data = await loadJson();
+      // Only re-render if the generated timestamp changed
+      if (data.generated_utc && data.generated_utc !== lastStamp) {
+        rawData = normalize(data);
+        render();
+        showLastUpdated(data.generated_utc);
+        lastStamp = data.generated_utc;
+        flashUpdated();
+      }
+    } catch (e) {
+      // Silently ignore transient fetch failures
+      console.warn("Auto-refresh failed:", e.message);
+    }
+  }, REFRESH_MS);
+}
 
-  function formatRelative(isoStr) {
-    try {
-      const d = new Date(isoStr);
-      const now = new Date();
-      const sec = Math.floor((now - d) / 1000);
-      if (sec < 60) return 'just now';
-      const mins = Math.floor(sec / 60);
-      if (mins < 60) return `${mins}m ago`;
-      const hrs = Math.floor(mins / 60);
-      if (hrs < 24) return `${hrs}h ago`;
-      const days = Math.floor(hrs / 24);
-      return `${days}d ago`;
-    } catch { return isoStr; }
-  }
+function flashUpdated() {
+  const chip = $(`#${LAST_UPDATED_ID}`);
+  if (!chip) return;
+  chip.classList.add("pulse");
+  setTimeout(() => chip.classList.remove("pulse"), 1200);
+}
 
-  function escapeHtml(s) {
-    return String(s)
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&#39;');
-  }
-})();
+// Init
+bindFilters();
+bootstrap();
+autoRefresh();
