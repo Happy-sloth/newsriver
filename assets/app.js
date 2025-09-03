@@ -1,7 +1,7 @@
 // Minimal client for NewsRiver
 // - fetches headlines.json (no-cache, cache-busted)
 // - renders cards newest-first (with stable, monotonic ordering via first-seen sequence)
-// - de-dupes items (cluster_id or normalized title fallback; prefers non-aggregators)
+// - de-dupes items (canonical_id/canonical_url > cluster_id > normalized title; prefers non-aggregators)
 // - adds "Last updated" chip (safe fallback if .toolbar not present)
 // - supports category + region filters
 // - auto-refreshes every 5 minutes (tweak REFRESH_MS as needed)
@@ -9,7 +9,6 @@
 "use strict";
 
 // ---- Configurable JSON endpoint (works on GitHub Pages and Zoho embeds) ----
-// If the page hasn't set this already, default to your GitHub Pages JSON:
 if (!window.NEWSRIVER_JSON_URL) {
   window.NEWSRIVER_JSON_URL = "https://mypybite.github.io/newsriver/headlines.json";
 }
@@ -55,7 +54,6 @@ function saveSeqState(state) {
 // ---------- Dedupe helpers ----------
 
 // Strip " - Site" tails, normalize punctuation/spacing, lowercase.
-// This collapses Google News vs original-source duplicates.
 function normalizeTitle(t) {
   return (t || "")
     .replace(/\s+[-–—]\s+[^|]+$/u, "")       // drop trailing " - Source"
@@ -66,16 +64,18 @@ function normalizeTitle(t) {
     .replace(/\s+/g, " ");
 }
 
-// Use cluster_id when present (from enrichment), else normalized title.
-function dedupeKey(it) {
-  if (it && it.cluster_id) return `c:${it.cluster_id}`;
-  return `t:${normalizeTitle(it?.title || "")}`;
-}
-
 // Prefer non-aggregator sources when times are tied.
 function isAggregator(it) {
   const src = `${it?.source || ""} ${it?.url || ""}`.toLowerCase();
-  return /news\.google|google news|yahoo\.com\/news|apple\.news/.test(src);
+  return /news\.google|google news|news\.yahoo|apple\.news/.test(src);
+}
+
+// Dedupe identity priority: canonical_id > canonical_url > cluster_id > normalized title.
+function dedupeKey(it) {
+  if (it?.canonical_id) return `u:${it.canonical_id}`;
+  if (it?.canonical_url) return `u:${it.canonical_url}`;
+  if (it?.cluster_id)    return `c:${it.cluster_id}`;
+  return `t:${normalizeTitle(it?.title || "")}`;
 }
 
 // Keep only the newest item per key; if tie, prefer non-aggregator.
@@ -94,7 +94,6 @@ function dedupeItems(items) {
     if (tNew > tOld) {
       byKey.set(key, it);
     } else if (tNew === tOld) {
-      // tie-breaker: non-aggregator wins
       if (isAggregator(prev) && !isAggregator(it)) byKey.set(key, it);
     }
   }
@@ -221,7 +220,6 @@ function render() {
 }
 
 function setActiveChip(groupSelector, valueToActivate, attrName) {
-  // attrName is 'data-filter' (category) or 'data-region'
   const chips = $all(`${groupSelector} .chip[${attrName}]`);
   for (const chip of chips) {
     const isActive =
@@ -289,16 +287,17 @@ async function loadJson() {
   return await resp.json();
 }
 
+// ---------- normalize(): de-dupe + stable ordering + sort ----------
 function normalize(data) {
   if (!data || !Array.isArray(data.items)) return { items: [] };
 
-  // Step A: remove duplicates first
+  // A) remove duplicates
   const deduped = dedupeItems(data.items.slice());
 
-  // Step B: assign stable first-seen sequence using the dedupe identity
+  // B) assign stable first-seen sequence using dedupe identity
   assignStableSeq(deduped);
 
-  // Step C: sort by first-seen sequence (desc), tiebreaker by published time
+  // C) sort by first-seen sequence (desc), then by published time (desc)
   deduped.sort((a, b) => {
     const d = (b.__seq || 0) - (a.__seq || 0);
     if (d !== 0) return d;
