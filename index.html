@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <title>MYPYBITE NewsRiver</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #151822;
+      --muted: #8a90a2;
+      --text: #e7ecf3;
+      --link: #b6d0ff;
+      --accent: #62d0ff;
+      --good: #7cd992;
+      --bad: #ff8a8a;
+      --ring: #263042;
+    }
+    * { box-sizing: border-box }
+    html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      position: sticky; top: 0; z-index: 5;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(15,17,21,0.85), rgba(15,17,21,0.55));
+      border-bottom: 1px solid var(--ring);
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 14px 16px; }
+    .title { font-weight: 700; letter-spacing: .2px; }
+    .status { color: var(--muted); font-size: 13px; margin-top: 2px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .chip { background: var(--card); border: 1px solid var(--ring); border-radius: 999px; padding: 3px 10px; }
+    main .wrap { padding-top: 18px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      background: var(--card);
+      border: 1px solid var(--ring);
+      border-radius: 14px;
+      padding: 12px 14px;
+      transition: transform .04s ease;
+    }
+    .item:hover { transform: translateY(-1px); }
+    .item h3 { margin: 0 0 6px 0; font-size: 16px; line-height: 1.35; }
+    .meta { color: var(--muted); font-size: 12.5px; display:flex; gap:10px; flex-wrap: wrap; }
+    .badge { border:1px solid var(--ring); border-radius: 6px; padding: 1px 6px; background: rgba(98,208,255,0.06); }
+    .error {
+      background: #2a1820; border: 1px solid #6b1f39; color: #ffd7e1;
+      border-radius: 12px; padding: 12px; margin: 10px 0;
+    }
+    .empty { color: var(--muted); padding: 24px 0; }
+    footer { color: var(--muted); font-size: 12.5px; padding: 22px 16px 40px; text-align:center; }
+    code.small { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">MYPYBITE NewsRiver</div>
+      <div class="status">
+        <span id="status-generated" class="chip">Last updated: …</span>
+        <span id="status-count" class="chip">Items: …</span>
+        <span id="status-fetch" class="chip">Fetching…</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div id="errors"></div>
+      <div id="list" class="list"></div>
+      <div id="empty" class="empty" style="display:none;">No headlines found.</div>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      Data source: <code class="small">headlines.json</code>.
+      <a id="raw-link" href="headlines.json" target="_blank" rel="noopener">View raw JSON</a>
+    </div>
+  </footer>
+
+  <script defer src="assets/app.js"></script>
+</body>
+</html>
