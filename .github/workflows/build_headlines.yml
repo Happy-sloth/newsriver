@@ -1,22 +1,26 @@
 name: Build headlines.json
 
 on:
+  workflow_dispatch: {}          # run manually from Actions tab
   push:
-    branches: [ main ]
+    branches: [ main ]           # also rebuild when these change
     paths:
       - 'feeds.txt'
-      - 'scripts/fetch_headlines.py'
+      - 'scripts/**'
       - '.github/workflows/build_headlines.yml'
-  schedule:
-    - cron: '*/15 * * * *'   # run every 15 minutes
-  workflow_dispatch: {}       # allow manual runs from the Actions tab
+
+permissions:
+  contents: write                # allow commit back to repo
+
+concurrency:
+  group: build-headlines
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write   # allow committing headlines.json back to the repo
-
+    env:
+      PYTHONUNBUFFERED: "1"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,26 +30,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install deps
         run: |
           python -m pip install --upgrade pip
           pip install feedparser requests
 
       - name: Build headlines.json from feeds.txt
         run: |
-          python scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
-          echo "---- Preview ----"
-          python - <<'PY'
-          import json
-          d = json.load(open('headlines.json','r',encoding='utf-8'))
-          print("items:", d.get("count"), "generated:", d.get("generated_utc"))
-          for it in d.get("items", [])[:5]:
-              print("-", it.get("title","")[:120])
-          PY
+          python scripts/fetch_headlines.py feeds.txt --out headlines.json
 
-      - name: Commit headlines.json if changed
+      - name: Commit updated headlines.json (if changed)
         run: |
-          if [[ -n "$(git status --porcelain headlines.json)" ]]; then
+          if ! git diff --quiet -- headlines.json; then
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add headlines.json
