@@ -31,8 +31,10 @@ import requests    # type: ignore
 # ---------------- Config ----------------
 MAX_PER_FEED = 20         # cap per feed (keeps noise down)
 MAX_TOTAL    = 300        # overall cap before dedupe/sort (final file will likely be smaller)
-HTTP_TIMEOUT = 12         # seconds
-USER_AGENT   = "NewsRiverBot/1.0 (+https://mypybite.github.io/newsriver/)"
+
+# Strict connect/read timeouts so a single slow feed can't stall the job
+TIMEOUT      = (5, 8)     # (connect, read) seconds
+HEADERS      = {"User-Agent": "NewsRiverBot/1.0 (+https://mypybite.github.io/newsriver/)"}
 
 TRACKING_PARAMS = {
     # common trackers
@@ -97,6 +99,9 @@ def canonicalize_url(url: str) -> str:
             netloc = netloc[2:]
         elif netloc.startswith("mobile.") and "." in netloc[7:]:
             netloc = netloc[7:]
+        # optionally trim www. for stability
+        if netloc.startswith("www.") and len(netloc) > 4:
+            netloc = netloc[4:]
         path = u.path or "/"
         # drop fragment; rebuild query without tracking params
         query_pairs = [(k, v) for (k, v) in parse_qsl(u.query, keep_blank_values=True)
@@ -117,7 +122,11 @@ def canonical_id(url: str) -> str:
 PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
 def strip_source_tail(title: str) -> str:
-    return (title or "").replace("\u2013", "-").replace("\u2014", "-").split(" | ")[0].split(" - ")[0]
+    # drop " | Source" or " - Source" tail bits
+    t = (title or "").replace("\u2013", "-").replace("\u2014", "-")
+    t = t.split(" | ")[0]
+    t = t.split(" - ")[0]
+    return t
 
 def fuzzy_title_key(title: str) -> str:
     base = strip_source_tail(title).lower()
@@ -165,7 +174,7 @@ def parse_feeds_txt(path: str) -> List[FeedSpec]:
 # ---------------- fetch & transform ----------------
 def http_get(url: str) -> bytes | None:
     try:
-        resp = requests.get(url, timeout=HTTP_TIMEOUT, headers={"User-Agent": USER_AGENT})
+        resp = requests.get(url, timeout=TIMEOUT, headers=HEADERS)
         if resp.ok:
             return resp.content
     except Exception:
@@ -174,9 +183,7 @@ def http_get(url: str) -> bytes | None:
 
 def to_iso_from_struct(t) -> str | None:
     try:
-        # treat struct_time as UTC if tzinfo is not embedded (common in RSS)
-        epoch = time.mktime(t)  # local; safer: assume t is UTC with calendar.timegm
-        # Use calendar.timegm to avoid local-time skew:
+        # treat struct_time as UTC (common in RSS)
         import calendar
         epoch = calendar.timegm(t)
         return datetime.fromtimestamp(epoch, tz=timezone.utc).isoformat()
@@ -189,14 +196,12 @@ def pick_published(entry) -> str | None:
             iso = to_iso_from_struct(getattr(entry, key))
             if iso:
                 return iso
-    # fallback to text values
+    # fallback to text values (as last resort, use "now" so we don't drop the item)
     for key in ("published","updated","created","date","issued"):
         val = entry.get(key)
         if val:
             try:
-                # feedparser doesn't parse tz here; last resort
-                dt = datetime.fromtimestamp(time.time(), tz=timezone.utc)  # now
-                return dt.isoformat()
+                return datetime.now(timezone.utc).isoformat()
             except Exception:
                 pass
     return None
@@ -212,36 +217,54 @@ def host_of(url: str) -> str:
 def build(feeds_file: str, out_path: str) -> dict:
     specs = parse_feeds_txt(feeds_file)
     collected = []
-    for spec in specs:
-        blob = http_get(spec.url)
-        if not blob:
-            continue
-        parsed = feedparser.parse(blob)
-        feed_title = (parsed.feed.get("title") or host_of(spec.url) or "").strip()
-        entries = parsed.entries[:MAX_PER_FEED]
-        for e in entries:
-            title = (e.get("title") or "").strip()
-            link  = (e.get("link") or "").strip()
-            if not title or not link:
+
+    print(f"Found {len(specs)} feeds in {feeds_file}", flush=True)
+
+    for i, spec in enumerate(specs, start=1):
+        host = host_of(spec.url) or spec.url
+        print(f"→ [{i}/{len(specs)}] Fetch {host}", flush=True)
+        try:
+            blob = http_get(spec.url)
+            if not blob:
+                print(f"  ✗ {host}: no response (timeout or HTTP error)", flush=True)
                 continue
-            can_url = canonicalize_url(link)
-            item = {
-                "title": title,
-                "url":   can_url or link,
-                "source": feed_title or host_of(link),
-                "published_utc": pick_published(e) or datetime.now(timezone.utc).isoformat(),
-                "category": spec.tag.category,
-                "region":   spec.tag.region,
-                # enrich for client-side dedupe
-                "canonical_url": can_url or link,
-                "canonical_id":  canonical_id(can_url or link),
-                "cluster_id":    fuzzy_title_key(title),
-            }
-            collected.append(item)
+
+            parsed = feedparser.parse(blob)
+            feed_title = (parsed.feed.get("title") or host).strip()
+            entries = parsed.entries[:MAX_PER_FEED]
+
+            added_here = 0
+            for e in entries:
+                title = (e.get("title") or "").strip()
+                link  = (e.get("link") or "").strip()
+                if not title or not link:
+                    continue
+                can_url = canonicalize_url(link)
+                item = {
+                    "title": title,
+                    "url":   can_url or link,
+                    "source": feed_title or host_of(link),
+                    "published_utc": pick_published(e) or datetime.now(timezone.utc).isoformat(),
+                    "category": spec.tag.category,
+                    "region":   spec.tag.region,
+                    # enrich for client-side dedupe
+                    "canonical_url": can_url or link,
+                    "canonical_id":  canonical_id(can_url or link),
+                    "cluster_id":    fuzzy_title_key(title),
+                }
+                collected.append(item)
+                added_here += 1
+                if len(collected) >= MAX_TOTAL:
+                    break
+
+            print(f"  ✓ {host}: {added_here} items", flush=True)
             if len(collected) >= MAX_TOTAL:
+                print("Reached MAX_TOTAL, stopping early.", flush=True)
                 break
-        if len(collected) >= MAX_TOTAL:
-            break
+
+        except Exception as ex:
+            print(f"  ✗ {host}: {ex}", flush=True)
+            continue
 
     # De-dupe newest-per-key; tie-break: prefer non-aggregator
     by_key = {}
@@ -271,12 +294,14 @@ def build(feeds_file: str, out_path: str) -> dict:
         "_debug": {
             "feeds_total": len(specs),
             "cap_items": MAX_TOTAL,
-            "version": "fetch-v1.0"
+            "version": "fetch-v1.1-timeouts-logs"
         }
     }
     # write
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
+
+    print(f"Wrote {out_path} with {out['count']} items at {out['generated_utc']}", flush=True)
     return out
 
 def _ts(iso: str) -> int:
@@ -291,7 +316,6 @@ def main():
     ap.add_argument("--out", default="headlines.json", help="Output JSON file")
     args = ap.parse_args()
     out = build(args.feeds_file, args.out)
-    print(f"Wrote {args.out} with {out['count']} items at {out['generated_utc']}")
 
 if __name__ == "__main__":
     main()
