@@ -1,0 +1,56 @@
+name: Build headlines.json
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'feeds.txt'
+      - 'scripts/fetch_headlines.py'
+      - '.github/workflows/build_headlines.yml'
+  schedule:
+    - cron: '*/15 * * * *'   # run every 15 minutes
+  workflow_dispatch: {}       # allow manual runs from the Actions tab
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # allow committing headlines.json back to the repo
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install feedparser requests
+
+      - name: Build headlines.json from feeds.txt
+        run: |
+          python scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
+          echo "---- Preview ----"
+          python - <<'PY'
+          import json
+          d = json.load(open('headlines.json','r',encoding='utf-8'))
+          print("items:", d.get("count"), "generated:", d.get("generated_utc"))
+          for it in d.get("items", [])[:5]:
+              print("-", it.get("title","")[:120])
+          PY
+
+      - name: Commit headlines.json if changed
+        run: |
+          if [[ -n "$(git status --porcelain headlines.json)" ]]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add headlines.json
+            git commit -m "CI: build headlines.json from feeds.txt"
+            git push
+          else
+            echo "No changes to headlines.json"
+          fi
