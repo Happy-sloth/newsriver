@@ -1,26 +1,21 @@
 name: Build headlines.json
 
 on:
-  workflow_dispatch: {}          # run manually from Actions tab
   push:
-    branches: [ main ]           # also rebuild when these change
+    branches: [ main ]
     paths:
       - 'feeds.txt'
       - 'scripts/**'
       - '.github/workflows/build_headlines.yml'
-
-permissions:
-  contents: write                # allow commit back to repo
-
-concurrency:
-  group: build-headlines
-  cancel-in-progress: false
+  workflow_dispatch: {}  # allow manual runs from Actions
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 8   # hard cap so the job can’t hang forever
     env:
-      PYTHONUNBUFFERED: "1"
+      PYTHONUNBUFFERED: "1"  # stream Python prints promptly
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,23 +25,35 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install feedparser requests
 
-      - name: Build headlines.json from feeds.txt
+      - name: Build headlines.json
         run: |
-          python scripts/fetch_headlines.py feeds.txt --out headlines.json
+          python scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
 
-      - name: Commit updated headlines.json (if changed)
+      - name: Show summary
+        run: |
+          python - <<'PY'
+          import json
+          d = json.load(open('headlines.json','r',encoding='utf-8'))
+          print("generated_utc:", d.get("generated_utc"))
+          print("items:", d.get("count"), "from", len(d.get("_debug",{}).get("feeds_total",[])) if isinstance(d.get("_debug",{}).get("feeds_total",None), list) else d.get("_debug",{}).get("feeds_total"))
+          print("first 3 titles:")
+          for it in d.get("items",[])[:3]:
+              print(" -", it.get("title","")[:120])
+          PY
+
+      - name: Commit headlines.json (if changed)
         run: |
           if ! git diff --quiet -- headlines.json; then
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add headlines.json
-            git commit -m "CI: build headlines.json from feeds.txt"
+            git commit -m "build: refresh headlines.json"
             git push
           else
-            echo "No changes to headlines.json"
+            echo "No changes to headlines.json."
           fi
