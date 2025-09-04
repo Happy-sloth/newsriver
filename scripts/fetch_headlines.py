@@ -4,10 +4,10 @@
 # Build headlines.json from feeds.txt
 # - Reads feeds.txt (grouped with "# --- Section ---" headers)
 # - Fetches RSS/Atom feeds
-# - Normalizes & aggressively de-duplicates:
-#     1) fuzzy title hash
-#     2) near-duplicate pass (Jaccard on title tokens)
-# - Demotes aggregators/press wires; small per-domain caps
+# - Normalizes & de-duplicates:
+#     * fuzzy title hash (collapses obvious dupes)
+#     * near-duplicate similarity (Jaccard + containment on tokens)
+#     * per-source cap (e.g., only 1 item per source)
 # - Tags items with {category, region} inferred from section header
 # - Sorts newest-first and writes headlines.json
 #
@@ -19,78 +19,57 @@ import calendar
 import hashlib
 import json
 import re
-import sys
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import List, Tuple
+from typing import List
 from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
 
 import feedparser  # type: ignore
 import requests    # type: ignore
 
+# ---------------- Config ----------------
+MAX_PER_FEED = 20          # cap per feed (keeps noise down)
+MAX_TOTAL    = 300         # cap before de-dupe/sort (final will be smaller)
+HTTP_TIMEOUT = 12          # seconds
+USER_AGENT   = "NewsRiverBot/1.0 (+https://mypybite.github.io/newsriver/)"
 
-# ---------------- Tunables ----------------
-MAX_PER_FEED = 14          # cap per feed before global caps
-MAX_TOTAL    = 320         # overall cap before de-dupe/sort
-HTTP_TIMEOUT = 12
-USER_AGENT   = "NewsRiverBot/1.1 (+https://mypybite.github.io/newsriver/)"
-
-# Per-host caps to prevent any one domain flooding the river
-PER_HOST_MAX = {
-    "toronto.citynews.ca": 8,
-    "financialpost.com": 6,  # you kept only housing, but this guards future adds
+# Strong duplicate control:
+CAP_PER_SOURCE_DEFAULT = 1     # <= change to 2 later if you want more variety
+CAP_PER_SOURCE_OVERRIDES = {
+  # Example:
+  # "cbc news": 3,
+  # "reuters": 3,
 }
 
-# Prefer these domains when breaking ties (primary/original/regulators)
-PREFERRED_DOMAINS = {
-    "cbc.ca","globalnews.ca","ctvnews.ca","blogto.com","toronto.citynews.ca",
-    "nhl.com","mlbtraderumors.com",
-    "bankofcanada.ca","federalreserve.gov","bls.gov","statcan.gc.ca",
-    "sec.gov","cftc.gov","marketwatch.com",
-    "coindesk.com","cointelegraph.com",
-}
+# Near-duplicate thresholds (title tokens):
+JACCARD_THRESHOLD     = 0.72   # share ~72% of unique tokens
+CONTAINMENT_THRESHOLD = 0.88   # smaller set is 88% contained in the other
 
-# Press-wire domains & path hints (these often duplicate across outlets)
-PRESS_WIRE_DOMAINS = {
-    "globenewswire.com","newswire.ca","prnewswire.com","businesswire.com","accesswire.com"
-}
-PRESS_WIRE_PATH_HINTS = ("/globe-newswire", "/globenewswire", "/business-wire", "/newswire/")
-
-# Tracking params to strip
 TRACKING_PARAMS = {
-    # common trackers
     "utm_source","utm_medium","utm_campaign","utm_term","utm_content",
-    "utm_name","utm_id","utm_reader","utm_cid",
-    "fbclid","gclid","mc_cid","mc_eid","cmpid","s_kwcid","sscid",
-    "ito","ref","smid","sref","partner","ICID","ns_campaign",
-    "ns_mchannel","ns_source","ns_linkname","share_type","mbid",
-    # misc
-    "oc","ved","ei","spm","rb_clickid","igsh","feature","source"
+    "utm_name","utm_id","utm_reader","utm_cid","fbclid","gclid","mc_cid",
+    "mc_eid","cmpid","s_kwcid","sscid","ito","ref","smid","sref","partner",
+    "ICID","ns_campaign","ns_mchannel","ns_source","ns_linkname","share_type",
+    "mbid"
 }
 
 AGGREGATOR_HINT = re.compile(r"(news\.google|news\.yahoo|apple\.news|feedproxy|flipboard)\b", re.I)
 
-# stopwords for title-token signatures
 TITLE_STOPWORDS = {
-    # glue
-    "the","a","an","and","or","but","of","for","with","without","in","on","at",
-    "to","from","by","as","into","over","under","than","about","after","before",
-    "due","will","still","just","not","is","are","was","were","be","being","been",
-    "it","its","this","that","these","those",
-    # newsy fluff
-    "live","update","updates","breaking","video","photos","report","reports","says","say","said",
-    # sports glue
-    "vs","vs.","game","games","preview","recap","season","start","starts","starting","lineup",
-    # casualty words (avoid splitting by wording choice)
-    "dead","killed","kills","kill","dies","die","injured","injures","injury",
-    # frequent city tokens
-    "los","angeles","new","york","la"
+  "the","a","an","and","or","but","of","for","with","without","in","on","at",
+  "to","from","by","as","into","over","under","than","about","after","before",
+  "due","will","still","just","not","is","are","was","were","be","being","been",
+  "it","its","this","that","these","those","live","update","updates","breaking",
+  "video","photos","report","reports","says","say","said","vs","vs.","game",
+  "games","preview","recap","season","start","starts","starting","lineup",
+  "dead","killed","kills","kill","dies","die","injured","injures","injury",
+  "los","angeles","new","york","la"
 }
+
 PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
-
-# ---------------- Section → tag ----------------
+# ------------- helpers: category/region from section header -------------
 @dataclass
 class Tag:
     category: str
@@ -98,22 +77,19 @@ class Tag:
 
 def infer_tag(section_header: str) -> Tag:
     s = section_header.upper()
-    if "TORONTO LOCAL" in s:                 return Tag("Local", "Canada")
-    if "BUSINESS" in s or "MARKET" in s or "CRYPTO" in s:
-                                             return Tag("Business", "World")
-    if "MUSIC" in s or "CULTURE" in s:       return Tag("Culture", "World")
-    if "YOUTH" in s or "POP" in s:           return Tag("Youth", "World")
-    if "HOUSING" in s or "REAL ESTATE" in s: return Tag("Real Estate", "Canada")
-    if "ENERGY" in s or "RESOURCES" in s:    return Tag("Energy", "Canada")
-    if "TECH" in s:                           return Tag("Tech", "Canada")
-    if "WEATHER" in s or "EMERGENCY" in s:    return Tag("Weather", "Canada")
-    if "TRANSIT" in s or "CITY SERVICE" in s: return Tag("Transit", "Canada")
-    if "COURTS" in s or "CRIME" in s or "PUBLIC SAFETY" in s:
-                                             return Tag("Public Safety", "Canada")
+    if "TORONTO LOCAL" in s:                return Tag("Local", "Canada")
+    if "BUSINESS" in s or "MARKET" in s or "CRYPTO" in s:  return Tag("Business", "World")
+    if "MUSIC" in s or "CULTURE" in s:      return Tag("Culture", "World")
+    if "YOUTH" in s or "POP" in s:          return Tag("Youth", "World")
+    if "HOUSING" in s or "REAL ESTATE" in s:return Tag("Real Estate", "Canada")
+    if "ENERGY" in s or "RESOURCES" in s:   return Tag("Energy", "Canada")
+    if "TECH" in s:                         return Tag("Tech", "Canada")
+    if "WEATHER" in s or "EMERGENCY" in s:  return Tag("Weather", "Canada")
+    if "TRANSIT" in s or "CITY SERVICE" in s:return Tag("Transit", "Canada")
+    if "COURTS" in s or "CRIME" in s or "PUBLIC SAFETY" in s: return Tag("Public Safety", "Canada")
     return Tag("General", "World")
 
-
-# ---------------- URL & identity ----------------
+# ---------------- URL canonicalization & keys ----------------
 def canonicalize_url(url: str) -> str:
     if not url:
         return ""
@@ -121,24 +97,16 @@ def canonicalize_url(url: str) -> str:
         u = urlparse(url)
         scheme = "https" if u.scheme else "https"
         netloc = (u.netloc or "").lower()
-
-        # strip common mobile subdomains
         if netloc.startswith("m.") and "." in netloc[2:]:
             netloc = netloc[2:]
         elif netloc.startswith("mobile.") and "." in netloc[7:]:
             netloc = netloc[7:]
-
         path = u.path or "/"
-
-        # drop fragment; rebuild query without tracking params
         query_pairs = [(k, v) for (k, v) in parse_qsl(u.query, keep_blank_values=True)
                        if k not in TRACKING_PARAMS]
         query = urlencode(query_pairs, doseq=True)
-
-        # trim trailing slash (except root)
         if path != "/" and path.endswith("/"):
             path = path[:-1]
-
         return urlunparse((scheme, netloc, path, "", query, ""))
     except Exception:
         return url
@@ -148,57 +116,27 @@ def canonical_id(url: str) -> str:
     h = hashlib.sha1(base.encode("utf-8")).hexdigest()[:16]
     return f"u:{h}"
 
+def strip_source_tail(title: str) -> str:
+    return (title or "").replace("\u2013", "-").replace("\u2014", "-").split(" | ")[0].split(" - ")[0]
+
+def fuzzy_title_key(title: str) -> str:
+    base = strip_source_tail(title).lower()
+    base = PUNCT_RE.sub(" ", base)
+    toks = [t for t in base.split() if len(t) > 1 and t not in TITLE_STOPWORDS]
+    if not toks:
+        toks = base.split()
+    sig = "|".join(sorted(set(toks))[:10])
+    h = hashlib.sha1(sig.encode("utf-8")).hexdigest()[:12]
+    return f"t:{h}"
+
+def looks_aggregator(source: str, link: str) -> bool:
+    return bool(AGGREGATOR_HINT.search(f"{source} {link}"))
+
 def host_of(url: str) -> str:
     try:
         return (urlparse(url).netloc or "").lower()
     except Exception:
         return ""
-
-
-# ---------------- Title signatures ----------------
-def strip_source_tail(title: str) -> str:
-    # drop ' - Site' / ' | Site' suffixes
-    return (title or "").replace("\u2013", "-").replace("\u2014", "-").split(" | ")[0].split(" - ")[0]
-
-def title_tokens(title: str) -> list[str]:
-    base = strip_source_tail(title).lower()
-    base = PUNCT_RE.sub(" ", base)
-    toks = [t for t in base.split() if len(t) > 1 and t not in TITLE_STOPWORDS]
-    return toks or base.split()
-
-def fuzzy_title_key(title: str) -> str:
-    toks = title_tokens(title)
-    uniq = sorted(set(toks))
-    sig = "|".join(uniq[:10])
-    h = hashlib.sha1(sig.encode("utf-8")).hexdigest()[:12]
-    return f"t:{h}"
-
-def jaccard(a: set[str], b: set[str]) -> float:
-    if not a or not b:
-        return 0.0
-    inter = len(a & b)
-    if inter == 0:
-        return 0.0
-    union = len(a | b)
-    return inter / union
-
-
-# ---------------- Aggregator / wire heuristics ----------------
-def is_press_wire(url: str) -> bool:
-    h = host_of(url)
-    if h in PRESS_WIRE_DOMAINS:
-        return True
-    p = urlparse(url).path or ""
-    return any(hint in p for hint in PRESS_WIRE_PATH_HINTS)
-
-def looks_aggregator(source: str, link: str) -> bool:
-    blob = f"{source} {link}"
-    if AGGREGATOR_HINT.search(blob):
-        return True
-    if is_press_wire(link):
-        return True
-    return False
-
 
 # ---------------- feeds.txt parsing ----------------
 @dataclass
@@ -206,8 +144,8 @@ class FeedSpec:
     url: str
     tag: Tag
 
-def parse_feeds_txt(path: str) -> list[FeedSpec]:
-    feeds: list[FeedSpec] = []
+def parse_feeds_txt(path: str) -> List[FeedSpec]:
+    feeds: List[FeedSpec] = []
     current_tag = Tag("General", "World")
     with open(path, "r", encoding="utf-8") as f:
         for raw in f:
@@ -215,14 +153,13 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
             if not line:
                 continue
             if line.startswith("#"):
-                header = re.sub(r"^#\s*-*\s*(.*?)\s*-*\s*$", r"\1", line)
-                current_tag = infer_tag(header)
+                header = re.sub(r"^#\s*-+\s*|\s*-+\s*$", "", line.lstrip("#")).strip()
+                current_tag = infer_tag(header or "General")
                 continue
             feeds.append(FeedSpec(url=line, tag=current_tag))
     return feeds
 
-
-# ---------------- HTTP & date helpers ----------------
+# ---------------- HTTP + time helpers ----------------
 def http_get(url: str) -> bytes | None:
     try:
         resp = requests.get(url, timeout=HTTP_TIMEOUT, headers={"User-Agent": USER_AGENT})
@@ -241,14 +178,13 @@ def to_iso_from_struct(t) -> str | None:
 
 def pick_published(entry) -> str | None:
     for key in ("published_parsed","updated_parsed","created_parsed"):
-        if getattr(entry, key, None):
-            iso = to_iso_from_struct(getattr(entry, key))
-            if iso:
-                return iso
+        v = getattr(entry, key, None)
+        if v:
+            iso = to_iso_from_struct(v)
+            if iso: return iso
     for key in ("published","updated","created","date","issued"):
-        val = entry.get(key)
-        if val:
-            # fall back to "now" (feeds lacking parsed dates)
+        if entry.get(key):
+            # fall back to "now" if only a raw string is present
             return datetime.now(timezone.utc).isoformat()
     return None
 
@@ -258,13 +194,61 @@ def _ts(iso: str) -> int:
     except Exception:
         return 0
 
+# ---------------- similarity dedupe ----------------
+def title_tokens(s: str) -> set[str]:
+    s = strip_source_tail(s or "").lower()
+    s = PUNCT_RE.sub(" ", s)
+    toks = [t for t in s.split() if len(t) > 1 and t not in TITLE_STOPWORDS]
+    return set(toks) if toks else set(s.split())
 
-# ---------------- Build ----------------
+def is_near_duplicate(a_title: str, b_title: str) -> bool:
+    A = title_tokens(a_title)
+    B = title_tokens(b_title)
+    if not A or not B:
+        return False
+    inter = len(A & B)
+    uni   = len(A | B)
+    j = inter / uni if uni else 0.0
+    c = inter / min(len(A), len(B))
+    return j >= JACCARD_THRESHOLD or c >= CONTAINMENT_THRESHOLD
+
+def sort_preference_key(item: dict) -> tuple:
+    # Prefer originals over aggregators; then newest first
+    agg = 1 if looks_aggregator(item.get("source",""), item.get("url","")) else 0
+    return (agg, -_ts(item.get("published_utc","0")))
+
+def prune_near_duplicates(items: list[dict]) -> list[dict]:
+    # Sort by preference so the first kept is the best candidate
+    items_sorted = sorted(items, key=sort_preference_key)
+    kept: list[dict] = []
+    for it in items_sorted:
+        dup = False
+        for k in kept:
+            if is_near_duplicate(it.get("title",""), k.get("title","")):
+                dup = True
+                break
+        if not dup:
+            kept.append(it)
+    return kept
+
+# ---------------- per-source cap ----------------
+def apply_per_source_cap(items: list[dict]) -> list[dict]:
+    out = []
+    counts: dict[str,int] = {}
+    for it in items:
+        src_norm = (it.get("source","") or "").strip().lower()
+        cap = CAP_PER_SOURCE_OVERRIDES.get(src_norm, CAP_PER_SOURCE_DEFAULT)
+        n = counts.get(src_norm, 0)
+        if n >= cap:
+            continue
+        counts[src_norm] = n + 1
+        out.append(it)
+    return out
+
+# ---------------- main build ----------------
 def build(feeds_file: str, out_path: str) -> dict:
     specs = parse_feeds_txt(feeds_file)
-
     collected: list[dict] = []
-    per_host_counts: dict[str,int] = {}
 
     for spec in specs:
         blob = http_get(spec.url)
@@ -273,114 +257,72 @@ def build(feeds_file: str, out_path: str) -> dict:
         parsed = feedparser.parse(blob)
         feed_title = (parsed.feed.get("title") or host_of(spec.url) or "").strip()
         entries = parsed.entries[:MAX_PER_FEED]
-
         for e in entries:
             title = (e.get("title") or "").strip()
             link  = (e.get("link") or "").strip()
             if not title or not link:
                 continue
-
             can_url = canonicalize_url(link)
-            h = host_of(can_url or link)
-            # per-host cap
-            cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
-            if per_host_counts.get(h, 0) >= cap:
-                continue
-
             item = {
                 "title": title,
                 "url":   can_url or link,
-                "source": (parsed.feed.get("title") or h or "").strip(),
+                "source": feed_title or host_of(link),
                 "published_utc": pick_published(e) or datetime.now(timezone.utc).isoformat(),
                 "category": spec.tag.category,
                 "region":   spec.tag.region,
-                # enrich
                 "canonical_url": can_url or link,
                 "canonical_id":  canonical_id(can_url or link),
                 "cluster_id":    fuzzy_title_key(title),
             }
             collected.append(item)
-            per_host_counts[h] = per_host_counts.get(h, 0) + 1
-
             if len(collected) >= MAX_TOTAL:
                 break
         if len(collected) >= MAX_TOTAL:
             break
 
-    # Pass 1: collapse exact fuzzy clusters (keep newest; prefer non-aggregator)
-    first_pass: dict[str,dict] = {}
+    # 1) Collapse by fuzzy title key (keep newest; prefer non-aggregator on ties)
+    keyed: dict[str,dict] = {}
     for it in collected:
         key = it["cluster_id"]
-        prev = first_pass.get(key)
+        prev = keyed.get(key)
         if not prev:
-            first_pass[key] = it
+            keyed[key] = it
             continue
-        t_new, t_old = _ts(it["published_utc"]), _ts(prev["published_utc"])
+        t_new = _ts(it["published_utc"])
+        t_old = _ts(prev["published_utc"])
         if t_new > t_old:
-            first_pass[key] = it
+            keyed[key] = it
         elif t_new == t_old:
             if looks_aggregator(prev.get("source",""), prev.get("url","")) and not looks_aggregator(it.get("source",""), it.get("url","")):
-                first_pass[key] = it
+                keyed[key] = it
 
-    items = list(first_pass.values())
+    items = list(keyed.values())
 
-    # Pass 2: near-duplicate collapse using Jaccard on title tokens
-    survivors: list[dict] = []
-    token_cache: list[Tuple[set[str], dict]] = []
-    THRESH = 0.82
+    # 2) Extra pass: near-duplicate similarity across remaining titles
+    items = prune_near_duplicates(items)
 
-    def is_better(a: dict, b: dict) -> bool:
-        """Return True if a is preferred over b."""
-        ta, tb = _ts(a["published_utc"]), _ts(b["published_utc"])
-        if ta != tb:
-            return ta > tb
-        a_aggr = looks_aggregator(a.get("source",""), a.get("url",""))
-        b_aggr = looks_aggregator(b.get("source",""), b.get("url",""))
-        if a_aggr != b_aggr:
-            return not a_aggr
-        ha, hb = host_of(a["url"]), host_of(b["url"])
-        if (ha in PREFERRED_DOMAINS) != (hb in PREFERRED_DOMAINS):
-            return ha in PREFERRED_DOMAINS
-        # last resort: shorter URL path wins
-        return len(a["url"]) < len(b["url"])
+    # 3) Enforce per-source cap (e.g., only 1 per source)
+    items = apply_per_source_cap(items)
 
-    for it in items:
-        toks = set(title_tokens(it["title"]))
-        merged = False
-        for toks_other, rep in token_cache:
-            if jaccard(toks, toks_other) >= THRESH:
-                # same story cluster → keep the better one
-                if is_better(it, rep):
-                    survivors.remove(rep)
-                    survivors.append(it)
-                    token_cache.remove((toks_other, rep))
-                    token_cache.append((toks, it))
-                merged = True
-                break
-        if not merged:
-            survivors.append(it)
-            token_cache.append((toks, it))
-
-    # Final sort newest-first
-    survivors.sort(key=lambda x: _ts(x["published_utc"]), reverse=True)
+    # 4) Sort newest-first for the river
+    items.sort(key=lambda x: _ts(x["published_utc"]), reverse=True)
 
     out = {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
-        "count": len(survivors),
-        "items": survivors,
+        "count": len(items),
+        "items": items,
         "_debug": {
             "feeds_total": len(specs),
             "cap_items": MAX_TOTAL,
-            "collected": len(collected),
-            "dedup_pass1": len(items),
-            "dedup_final": len(survivors),
-            "version": "fetch-v1.2-ndup"
+            "cap_per_source_default": CAP_PER_SOURCE_DEFAULT,
+            "jaccard_threshold": JACCARD_THRESHOLD,
+            "containment_threshold": CONTAINMENT_THRESHOLD,
+            "version": "fetch-v1.2-dedupe++"
         }
     }
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
     return out
-
 
 def main():
     ap = argparse.ArgumentParser(description="Build headlines.json from feeds.txt")
@@ -389,8 +331,6 @@ def main():
     args = ap.parse_args()
     out = build(args.feeds_file, args.out)
     print(f"Wrote {args.out} with {out['count']} items at {out['generated_utc']}")
-    dbg = out.get("_debug", {})
-    print("Debug:", dbg)
 
 if __name__ == "__main__":
     main()
