@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 8   # hard cap so the job can’t hang forever
+    timeout-minutes: 8   # safety cap so jobs don't hang
     env:
       PYTHONUNBUFFERED: "1"  # stream Python prints promptly
 
@@ -38,12 +38,14 @@ jobs:
         run: |
           python - <<'PY'
           import json
-          d = json.load(open('headlines.json','r',encoding='utf-8'))
+          with open('headlines.json','r',encoding='utf-8') as f:
+              d = json.load(f)
           print("generated_utc:", d.get("generated_utc"))
-          print("items:", d.get("count"), "from", len(d.get("_debug",{}).get("feeds_total",[])) if isinstance(d.get("_debug",{}).get("feeds_total",None), list) else d.get("_debug",{}).get("feeds_total"))
+          print("items:", d.get("count"))
+          print("feeds_total:", d.get("_debug",{}).get("feeds_total"))
           print("first 3 titles:")
           for it in d.get("items",[])[:3]:
-              print(" -", it.get("title","")[:120])
+              print(" -", it.get("title","")[:140])
           PY
 
       - name: Commit headlines.json (if changed)
