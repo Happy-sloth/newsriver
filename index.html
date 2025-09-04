@@ -61,7 +61,7 @@
     window.NEWSRIVER_JSON_URL = window.NEWSRIVER_JSON_URL || "https://mypybite.github.io/newsriver/headlines.json";
   </script>
 
-  <!-- Data loader (fetch, dedupe, stable-ordering, filters, last-updated, auto-refresh) -->
+  <!-- Data loader (fetch, strong de-dupe, per-source cap, stable order, filters, last-updated, auto-refresh) -->
   <script>
   (function(){
     "use strict";
@@ -88,6 +88,16 @@
     const REFRESH_MS = 5 * 60 * 1000; // 5 minutes
     let lastStamp = null; // remember last generated_utc
 
+    // Per-source caps (default = 1 per source)
+    const CAP_PER_SOURCE_DEFAULT = 1;
+    const CAP_OVERRIDES = {
+      // Example bumps (edit as you like):
+      "cbc.ca": 2,
+      "globalnews.ca": 2,
+      "reuters.com": 2,
+      "financialpost.com": 2
+    };
+
     // ---------- Utilities ----------
     const isValidDate = (v) => !!v && !Number.isNaN(Date.parse(v));
     const fmtET = (iso) => {
@@ -102,9 +112,19 @@
     };
     const clearGrid = () => { GRID.innerHTML = ''; };
 
+    // ---------- URL & source helpers ----------
+    function hostOf(url) {
+      try {
+        const u = new URL(url, location.href);
+        return (u.hostname || "").replace(/^www\./i,"").toLowerCase();
+      } catch { return ""; }
+    }
+    function sourceKey(it) {
+      // Prefer domain; fall back to source label lowercased
+      return hostOf(it?.canonical_url || it?.url || "") || String(it?.source||"").toLowerCase();
+    }
+
     // ---------- De-dupe helpers ----------
-    // Strip " - Site" tails, normalize punctuation/spacing, lowercase.
-    // This collapses Google News vs original-source duplicates.
     function normalizeTitle(t) {
       return (t || "")
         .replace(/\s+[-–—]\s+[^|]+$/u, "")       // drop trailing " - Source"
@@ -114,19 +134,16 @@
         .trim()
         .replace(/\s+/g, " ");
     }
-
-    // Use cluster_id when present (from enrichment), else normalized title.
+    // Strong key: fuzzy title signature + domain (so “same headline” from same site collapses)
     function dedupeKey(it) {
-      if (it && it.cluster_id) return `c:${it.cluster_id}`;
-      return `t:${normalizeTitle(it?.title || "")}`;
+      const t = normalizeTitle(it?.title || "");
+      const h = hostOf(it?.canonical_url || it?.url || "");
+      return `k:${t}|${h}`;
     }
-
-    // Prefer non-aggregator sources when times are tied.
     function isAggregator(it) {
       const src = `${it?.source || ""} ${it?.url || ""}`.toLowerCase();
-      return /news\.google|google news|yahoo\.com\/news|apple\.news/.test(src);
+      return /news\.google|google news|yahoo\.com\/news|apple\.news|flipboard|feedproxy/.test(src);
     }
-
     // Keep only the newest item per key; if tie, prefer non-aggregator.
     function dedupeItems(items) {
       const byKey = new Map();
@@ -143,7 +160,6 @@
         if (tNew > tOld) {
           byKey.set(key, it);
         } else if (tNew === tOld) {
-          // tie-breaker: non-aggregator wins
           if (isAggregator(prev) && !isAggregator(it)) byKey.set(key, it);
         }
       }
@@ -152,7 +168,6 @@
 
     // ---------- Stable, monotonic ordering (first-seen sequence) ----------
     const SEQ_STORAGE_KEY = "nr_seq_v1";
-
     function loadSeqState() {
       try {
         const raw = localStorage.getItem(SEQ_STORAGE_KEY);
@@ -164,24 +179,13 @@
         };
       } catch { return { counter: 0, map: {} }; }
     }
-
     function saveSeqState(state) {
       try { localStorage.setItem(SEQ_STORAGE_KEY, JSON.stringify(state)); } catch {}
     }
-
-    // Use the dedupe identity for seq, so dupes don’t create multiple slots.
     function getItemId(it) { return dedupeKey(it); }
-
-    /**
-     * Assign a monotonic first-seen sequence to each item.
-     * - Existing items keep original seq.
-     * - New items get ++counter so they float above older ones.
-     * Mutates items to attach `__seq`.
-     */
     function assignStableSeq(items) {
       const state = loadSeqState();
       let touched = false;
-
       for (const it of items) {
         const id = getItemId(it);
         if (state.map[id] == null) {
@@ -191,9 +195,24 @@
         }
         it.__seq = state.map[id];
       }
-
       if (touched) saveSeqState(state);
       return items;
+    }
+
+    // ---------- Per-source cap (variety guard) ----------
+    function applySourceCap(sortedItems) {
+      const counts = Object.create(null);
+      const out = [];
+      for (const it of sortedItems) {
+        const key = sourceKey(it);
+        const limit = CAP_OVERRIDES[key] ?? CAP_PER_SOURCE_DEFAULT;
+        const n = counts[key] || 0;
+        if (n < limit) {
+          out.push(it);
+          counts[key] = n + 1;
+        }
+      }
+      return out;
     }
 
     // ---------- Render ----------
@@ -231,7 +250,6 @@
       reg.className = 'tag';
       reg.textContent = item.region || '';
 
-      // meta: Source • Category • Region
       meta.appendChild(src);
       if (item.category){ meta.appendChild(document.createTextNode(' \u2022 ')); meta.appendChild(cat); }
       if (item.region){ meta.appendChild(document.createTextNode(' \u2022 ')); meta.appendChild(reg); }
@@ -271,17 +289,17 @@
       }
     }
 
-    // ---------- Normalize incoming data (dedupe + stable order) ----------
+    // ---------- Normalize incoming data (strong de-dupe + stable order + per-source cap) ----------
     function normalizeData(data){
       if (!data || !Array.isArray(data.items)) return { items: [] };
 
-      // A) de-dupe first (prefer originals over aggregators)
-      const items = dedupeItems(data.items.slice());
+      // A) strong de-dupe (title sig + domain; prefer originals over aggregators)
+      let items = dedupeItems(data.items.slice());
 
-      // B) assign first-seen sequence using dedupe identity
+      // B) stable first-seen order
       assignStableSeq(items);
 
-      // C) sort by sequence desc (newest first), tiebreak by published time
+      // C) sort by first-seen desc; tie-break by published time
       items.sort((a, b) => {
         const d = (b.__seq || 0) - (a.__seq || 0);
         if (d !== 0) return d;
@@ -289,6 +307,9 @@
         const ta = Date.parse(a.published_utc || a.published || 0) || 0;
         return tb - ta;
       });
+
+      // D) cap per source to keep variety (default 1 unless overridden)
+      items = applySourceCap(items);
 
       return { ...data, items };
     }
@@ -336,7 +357,6 @@
           const data = await loadJson();
           if (!data) return;
 
-          // Only re-render if feed timestamp changed
           const stamp = data.generated_utc || null;
           if (stamp && stamp !== lastStamp) {
             const normalized = normalizeData(data);
@@ -345,7 +365,6 @@
             lastStamp = stamp;
             applyFilters(normalized.items);
 
-            // quick pulse on the chip for visual feedback (if you have CSS for .pulse)
             lastChip.classList.add('pulse');
             setTimeout(() => lastChip.classList.remove('pulse'), 900);
           }
@@ -362,7 +381,6 @@
 
       // Category group
       if (btn.hasAttribute('data-filter')){
-        // Reset all category chips
         FILTERS.querySelectorAll('[data-filter]').forEach(b => {
           b.classList.remove('chip-active');
           b.setAttribute('aria-pressed', 'false');
@@ -377,12 +395,10 @@
       if (btn.hasAttribute('data-region')){
         const region = btn.getAttribute('data-region') || null;
         if (activeRegion === region){
-          // turn off
           activeRegion = null;
           btn.classList.remove('chip-active');
           btn.setAttribute('aria-pressed', 'false');
         } else {
-          // turn on for the clicked one & off for others
           FILTERS.querySelectorAll('[data-region]').forEach(b => {
             b.classList.remove('chip-active');
             b.setAttribute('aria-pressed', 'false');
