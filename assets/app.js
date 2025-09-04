@@ -7,17 +7,15 @@
 
 "use strict";
 
-// ---- Configurable JSON endpoint ----
-if (!window.NEWSRIVER_JSON_URL) {
-  window.NEWSRIVER_JSON_URL = "https://mypybite.github.io/newsriver/headlines.json";
-}
-window.NEWSRIVER_JSON_URL = window.NEWSRIVER_JSON_URL || null;
+// ---- Configurable JSON endpoint (Zoho hard override) ----
+// If you need to change the feed later, update the URL below.
+window.NEWSRIVER_JSON_URL = "https://mypybite.github.io/newsriver/headlines.json";
 
 // IDs / constants
 const GRID_ID = "grid";
 const FILTERS_ID = "filters";
 const LAST_UPDATED_ID = "last-updated";
-const JSON_URL = window.NEWSRIVER_JSON_URL || "headlines.json";
+const JSON_URL = window.NEWSRIVER_JSON_URL; // no fallback, we want the live feed
 const REFRESH_MS = 5 * 60 * 1000; // 5 minutes
 
 let rawData = null;
