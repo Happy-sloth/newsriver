@@ -32,30 +32,30 @@ jobs:
         with:
           python-version: '3.11'
 
+      # Gate: bypass for push/manual; use time windows only for cron
       - name: Gate (bypass for push/manual; time windows for cron)
         id: gate
-        shell: bash
         run: |
-          # Bypass the gate unless this is the cron schedule event
+          # Bypass unless this is the cron schedule event
           if [ "${GITHUB_EVENT_NAME}" != "schedule" ]; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
             echo "skip_reason=bypass for ${GITHUB_EVENT_NAME}" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Toronto local time
+          # Toronto local time, minutes since midnight
           H=$(TZ=America/Toronto date +%H)
           M=$(TZ=America/Toronto date +%M)
           m=$((10#$H*60 + 10#$M))
+          nowstr=$(TZ=America/Toronto date +%H:%M)
 
           run=false
           reason="outside all windows"
-          nowstr=$(TZ=America/Toronto date +%H:%M)
 
           check_window () {
-            local name=$1 start=$2 end=$3 step=$4 anchor=$5
+            name=$1; start=$2; end=$3; step=$4; anchor=$5
             if [ $m -ge $start ] && [ $m -lt $end ]; then
-              local delta=$(( (m - anchor) % step ))
+              delta=$(( (m - anchor) % step ))
               if [ $delta -eq 0 ]; then
                 run=true
                 reason="$name window match @ $nowstr"
@@ -77,11 +77,10 @@ jobs:
 
           if [ "$run" = true ]; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
           else
             echo "should_run=false" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
           fi
+          echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
 
       - name: Install dependencies
         if: steps.gate.outputs.should_run == 'true'
@@ -96,16 +95,21 @@ jobs:
 
       - name: Show summary
         if: steps.gate.outputs.should_run == 'true'
-        shell: bash
         run: |
-          python -c "import json; d=json.load(open('headlines.json','r',encoding='utf-8')); dbg=d.get('_debug',{}); \
-print('generated_utc:', d.get('generated_utc')); \
-print('items:', d.get('count')); \
-print('feeds_total:', dbg.get('feeds_total')); \
-print('weights_loaded:', dbg.get('weights_loaded')); \
-print('weights_keys:', ', '.join(dbg.get('weights_keys', [])) or '(none)'); \
-print('first 3 titles:'); \
-[print(' -', it.get('title','')[:140]) for it in d.get('items',[])[:3]]"
+          python - <<'PY'
+          import json
+          with open('headlines.json','r',encoding='utf-8') as f:
+              d = json.load(f)
+          dbg = d.get("_debug", {})
+          print("generated_utc:", d.get("generated_utc"))
+          print("items:", d.get("count"))
+          print("feeds_total:", dbg.get("feeds_total"))
+          print("weights_loaded:", dbg.get("weights_loaded"))
+          print("weights_keys:", ", ".join(dbg.get("weights_keys", [])) or "(none)")
+          print("first 3 titles:")
+          for it in d.get("items",[])[:3]:
+              print(" -", it.get("title","")[:140])
+          PY
 
       - name: Commit headlines.json (if changed)
         if: steps.gate.outputs.should_run == 'true'
