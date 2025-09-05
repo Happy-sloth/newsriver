@@ -2,15 +2,16 @@ name: Build headlines.json
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
     paths:
       - 'feeds.txt'
       - 'scripts/**'
-      - 'config/**'                     # weights/config changes
+      - 'config/**'
       - '.github/workflows/build_headlines.yml'
   schedule:
-    - cron: '* * * * *'                 # every minute; gate decides
-  workflow_dispatch: {}
+    - cron: '* * * * *'   # every minute; gate decides
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -31,19 +32,19 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Gate (bypass for push/manual; apply windows for cron)
+      - name: Gate
         id: gate
         shell: bash
         run: |
           # Bypass the time windows for push/manual runs
-          if [ "${GITHUB_EVENT_NAME}" != "schedule" ]; then
+          if [ "$GITHUB_EVENT_NAME" != "schedule" ]; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=bypass for ${GITHUB_EVENT_NAME}" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=bypass for $GITHUB_EVENT_NAME" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           # For scheduled (cron) runs, apply structured windows in America/Toronto
-          PY_OUT="$(python - <<'PY'
+          cat > gate.py <<'EOF'
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -78,8 +79,9 @@ for name, start, end, step, anchor in windows:
 
 print("RUN" if should else "SKIP")
 print(reason)
-PY
-)"
+EOF
+
+          PY_OUT="$(python gate.py)"
           decision="$(echo "$PY_OUT" | head -n1)"
           reason="$(echo "$PY_OUT" | tail -n +2 | tr -d '\r')"
 
