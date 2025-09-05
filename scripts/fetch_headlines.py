@@ -114,7 +114,6 @@ def infer_tag(section_header: str) -> Tag:
     if "TORONTO LOCAL" in s:                 return Tag("Local", "Canada")
     if "BUSINESS" in s or "MARKET" in s or "CRYPTO" in s:
                                              return Tag("Business", "World")
-    if "SPORT" in s:                         return Tag("Sports", "World")  # NEW: tag Sports sections
     if "MUSIC" in s or "CULTURE" in s:       return Tag("Culture", "World")
     if "YOUTH" in s or "POP" in s:           return Tag("Youth", "World")
     if "HOUSING" in s or "REAL ESTATE" in s: return Tag("Real Estate", "Canada")
@@ -212,7 +211,6 @@ class FeedSpec:
     tag: Tag
 
 def parse_feeds_txt(path: str) -> list[FeedSpec]:
-    """Parse feeds.txt, tolerating headers like '# --- Section --- #' (trailing '#')."""
     feeds: list[FeedSpec] = []
     current_tag = Tag("General", "World")
     with open(path, "r", encoding="utf-8") as f:
@@ -221,8 +219,7 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
             if not line:
                 continue
             if line.startswith("#"):
-                # Allow '# --- Section ---' as well as '# --- Section --- #' (tolerate trailing '#')
-                header = re.sub(r"^#\s*-*\s*(.*?)\s*-*\s*#*\s*$", r"\1", line)
+                header = re.sub(r"^#\s*-*\s*(.*?)\s*-*\s*$", r"\1", line)
                 current_tag = infer_tag(header)
                 continue
             feeds.append(FeedSpec(url=line, tag=current_tag))
@@ -708,6 +705,16 @@ def build(feeds_file: str, out_path: str) -> dict:
             effects["glitch"] = True
             effects["reasons"].append(f"score≥{glitch_min}")
 
+        # >>> NEW: provide a style string + top-level mirrors for the UI <<<
+        style = "lightsaber" if effects["lightsaber"] else ("glitch" if effects["glitch"] else "")
+        if style:
+            effects["style"] = style
+        if effects["lightsaber"]:
+            it["lightsaber"] = True
+        if effects["glitch"]:
+            it["glitch"] = True
+        # <<< END NEW >>>
+
         if effects["lightsaber"]:
             score_dbg["effects_lightsaber"] += 1
         elif effects["glitch"]:
@@ -747,7 +754,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.4-score",
+            "version": "fetch-v1.4.1-score-fxstyle",
             # weights status
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
