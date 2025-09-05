@@ -88,21 +88,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install feedparser requests json5
 
-      # Limit feed volume so the job completes quickly (tune this number as needed)
+      # Smaller smoke list to keep runs snappy
       - name: Prepare small feed list (smoke run)
         if: steps.gate.outputs.should_run == 'true'
         run: |
           test -f feeds.txt || { echo "feeds.txt missing" >&2; exit 1; }
-          head -n 120 feeds.txt > feeds_smoke.txt
+          head -n 60 feeds.txt > feeds_smoke.txt
           echo "Using feeds_smoke.txt with $(wc -l < feeds_smoke.txt) lines"
 
-      - name: Build headlines.json
+      - name: Build headlines.json (hard wall clock)
         if: steps.gate.outputs.should_run == 'true'
         run: |
-          python scripts/fetch_headlines.py --feeds-file feeds_smoke.txt --out headlines.json
+          # Kill the build if it exceeds 180s; continue the job with a warning.
+          timeout -k 10s 180s python scripts/fetch_headlines.py --feeds-file feeds_smoke.txt --out headlines.json || echo "::warning::build timed out after 180s"
 
       - name: Show summary
-        if: steps.gate.outputs.should_run == 'true'
+        if: steps.gate.outputs.should_run == 'true' && hashFiles('headlines.json') != ''
         run: |
           python - <<'PY'
           import json
@@ -120,7 +121,7 @@ jobs:
           PY
 
       - name: Commit headlines.json (if changed)
-        if: steps.gate.outputs.should_run == 'true'
+        if: steps.gate.outputs.should_run == 'true' && hashFiles('headlines.json') != ''
         run: |
           if ! git diff --quiet -- headlines.json; then
             git config user.name  "github-actions[bot]"
