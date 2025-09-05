@@ -7,17 +7,21 @@ on:
       - 'feeds.txt'
       - 'scripts/**'
       - '.github/workflows/build_headlines.yml'
-  # Run every minute, then a guard step decides whether to proceed
+  # Run every minute; a guard step decides whether to proceed
   schedule:
     - cron: '* * * * *'
-  workflow_dispatch: {}  # manual run button
+  workflow_dispatch: {}
+
+# allow the commit step to push back to the repo
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 8   # safety cap so jobs don't hang
+    timeout-minutes: 8
     env:
-      PYTHONUNBUFFERED: "1"  # stream Python prints promptly
+      PYTHONUNBUFFERED: "1"
 
     steps:
       - name: Checkout
@@ -28,7 +32,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Guard: honor structured schedule (America/Toronto)
+      - name: "Guard: honor structured schedule (America/Toronto)"
         id: gate
         shell: bash
         run: |
