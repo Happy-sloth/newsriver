@@ -1,32 +1,31 @@
-name: Build headlines.json
+name: Build headlines.json (full nightly)
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'feeds.txt'
-      - 'requirements.txt'
-      - 'scripts/**'
-      - 'config/**'
-      - '.github/workflows/build_headlines.yml'
   schedule:
-    - cron: '* * * * *'   # every minute; gate below decides actual runs
+    # Runs daily at 04:12 ET (08:12 UTC during Standard Time; adjust as needed)
+    - cron: '12 8 * * *'
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
-# Avoid overlapping runs if multiple triggers fire
 concurrency:
-  group: build-headlines
+  group: build-headlines-full
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     env:
       PYTHONUNBUFFERED: "1"
+      # Server-side knobs for the fetcher (safe defaults)
+      MPB_MAX_PER_FEED: "14"
+      MPB_MAX_TOTAL: "320"
+      MPB_HTTP_TIMEOUT: "12"
+      MPB_SLOW_FEED_WARN: "3.5"
+      MPB_GLOBAL_BUDGET: "210"
+      MPB_UA: "NewsRiverBot/1.3 (+https://mypybite.github.io/newsriver/)"
 
     steps:
       - name: Checkout
@@ -38,93 +37,19 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      # Gate: bypass for push/manual; use time windows only for cron
-      - name: Gate (bypass for push/manual; time windows for cron)
-        id: gate
-        run: |
-          # Bypass unless this is the cron schedule event
-          if [ "${GITHUB_EVENT_NAME}" != "schedule" ]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=bypass for ${GITHUB_EVENT_NAME}" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          # Toronto local time, minutes since midnight
-          H=$(TZ=America/Toronto date +%H)
-          M=$(TZ=America/Toronto date +%M)
-          m=$((10#$H*60 + 10#$M))
-          nowstr=$(TZ=America/Toronto date +%H:%M)
-
-          run=false
-          reason="outside all windows"
-
-          check_window () {
-            name=$1; start=$2; end=$3; step=$4; anchor=$5
-            if [ $m -ge $start ] && [ $m -lt $end ]; then
-              delta=$(( (m - anchor) % step ))
-              if [ $delta -eq 0 ]; then
-                run=true
-                reason="$name window match @ $nowstr"
-              else
-                reason="$name window but not a step @ $nowstr"
-              fi
-            fi
-          }
-
-          # Windows (minutes since midnight)
-          # 00:00–03:59 every 8m
-          check_window "overnight" 0 240 8 0
-          # 04:00–07:30 every 45m
-          if [ "$run" = false ]; then check_window "early" 240 450 45 240; fi
-          # 08:15–18:00 every 22m
-          if [ "$run" = false ]; then check_window "day" 495 1080 22 495; fi
-          # 18:22–24:00 every 55m
-          if [ "$run" = false ]; then check_window "evening" 1102 1440 55 1102; fi
-
-          if [ "$run" = true ]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-          fi
-          echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
-
       - name: Install dependencies
-        if: steps.gate.outputs.should_run == 'true'
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install feedparser requests json5
 
-      # Build a small, robust smoke list for cron runs only
-      - name: Prepare small feed list (cron smoke run)
-        if: steps.gate.outputs.should_run == 'true' && github.event_name == 'schedule'
+      - name: Build headlines.json (FULL)
         run: |
           test -f feeds.txt || { echo "feeds.txt missing" >&2; exit 1; }
-          awk '/^https?:/ {print}' feeds.txt | head -n 60 > feeds_smoke.txt
-          echo "Using feeds_smoke.txt with $(wc -l < feeds_smoke.txt) URLs"
-
-      - name: Choose feed list (cron uses smoke; push/manual use full)
-        if: steps.gate.outputs.should_run == 'true'
-        run: |
-          if [ "${GITHUB_EVENT_NAME}" = "schedule" ]; then
-            echo "FEEDS_FILE=feeds_smoke.txt" >> "$GITHUB_ENV"
-          else
-            echo "FEEDS_FILE=feeds.txt" >> "$GITHUB_ENV"
-          fi
-
-      - name: Build headlines.json (hard wall clock)
-        if: steps.gate.outputs.should_run == 'true'
-        env:
-          # knobs your script reads
-          MPB_HTTP_TIMEOUT: "10"
-          MPB_SLOW_FEED_WARN: "3.5"
-          MPB_GLOBAL_BUDGET: "210"
-        run: |
-          timeout -k 10s 240s python scripts/fetch_headlines.py \
-            --feeds-file "$FEEDS_FILE" --out headlines.json \
-            || echo "::warning::build timed out after 240s"
+          # Hard wall clock; don’t fail the whole job if it hits the wall.
+          timeout -k 10s 300s python scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json || echo "::warning::full build hit timeout"
 
       - name: Show summary
-        if: steps.gate.outputs.should_run == 'true' && hashFiles('headlines.json') != ''
+        if: hashFiles('headlines.json') != ''
         run: |
           python - <<'PY'
           import json
@@ -133,35 +58,21 @@ jobs:
           dbg = d.get("_debug", {})
           print("generated_utc:", d.get("generated_utc"))
           print("items:", d.get("count"))
-          print("feeds_total:", dbg.get("feeds_total"))
           print("weights_loaded:", dbg.get("weights_loaded"))
           print("weights_keys:", ", ".join(dbg.get("weights_keys", [])) or "(none)")
-          print("first 3 titles:")
           for it in d.get("items",[])[:3]:
               print(" -", it.get("title","")[:140])
           PY
 
       - name: Commit headlines.json (if changed)
-        if: steps.gate.outputs.should_run == 'true' && hashFiles('headlines.json') != ''
+        if: hashFiles('headlines.json') != ''
         run: |
           if ! git diff --quiet -- headlines.json; then
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add headlines.json
-            git commit -m "build: refresh headlines.json"
+            git commit -m "build(full): nightly refresh headlines.json"
             git push
           else
             echo "No changes to headlines.json."
           fi
-
-      - name: Upload headlines.json (artifact)
-        if: steps.gate.outputs.should_run == 'true' && hashFiles('headlines.json') != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: headlines.json
-          path: headlines.json
-
-      - name: Skip note
-        if: steps.gate.outputs.should_run != 'true'
-        run: |
-          echo "Skipped by schedule guard: ${{ steps.gate.outputs.skip_reason }}"
