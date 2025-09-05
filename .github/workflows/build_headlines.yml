@@ -2,15 +2,15 @@ name: Build headlines.json
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - 'feeds.txt'
+      - 'requirements.txt'
       - 'scripts/**'
       - 'config/**'
       - '.github/workflows/build_headlines.yml'
   schedule:
-    - cron: '* * * * *'   # every minute; gate below decides
+    - cron: '* * * * *'   # every minute; gate below decides actual runs
   workflow_dispatch: {}
 
 permissions:
@@ -36,7 +36,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'   # enable pip cache
+          cache: 'pip'
 
       # Gate: bypass for push/manual; use time windows only for cron
       - name: Gate (bypass for push/manual; time windows for cron)
@@ -92,21 +92,36 @@ jobs:
         if: steps.gate.outputs.should_run == 'true'
         run: |
           python -m pip install --upgrade pip
-          pip install feedparser requests json5
+          pip install -r requirements.txt
 
-      # Smaller smoke list to keep runs snappy
-      - name: Prepare small feed list (smoke run)
-        if: steps.gate.outputs.should_run == 'true'
+      # Build a small, robust smoke list for cron runs only
+      - name: Prepare small feed list (cron smoke run)
+        if: steps.gate.outputs.should_run == 'true' && github.event_name == 'schedule'
         run: |
           test -f feeds.txt || { echo "feeds.txt missing" >&2; exit 1; }
-          head -n 60 feeds.txt > feeds_smoke.txt
-          echo "Using feeds_smoke.txt with $(wc -l < feeds_smoke.txt) lines"
+          awk '/^https?:/ {print}' feeds.txt | head -n 60 > feeds_smoke.txt
+          echo "Using feeds_smoke.txt with $(wc -l < feeds_smoke.txt) URLs"
+
+      - name: Choose feed list (cron uses smoke; push/manual use full)
+        if: steps.gate.outputs.should_run == 'true'
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = "schedule" ]; then
+            echo "FEEDS_FILE=feeds_smoke.txt" >> "$GITHUB_ENV"
+          else
+            echo "FEEDS_FILE=feeds.txt" >> "$GITHUB_ENV"
+          fi
 
       - name: Build headlines.json (hard wall clock)
         if: steps.gate.outputs.should_run == 'true'
+        env:
+          # knobs your script reads
+          MPB_HTTP_TIMEOUT: "10"
+          MPB_SLOW_FEED_WARN: "3.5"
+          MPB_GLOBAL_BUDGET: "210"
         run: |
-          # Kill the build if it exceeds 240s; continue the job with a warning.
-          timeout -k 10s 240s python scripts/fetch_headlines.py --feeds-file feeds_smoke.txt --out headlines.json || echo "::warning::build timed out after 240s"
+          timeout -k 10s 240s python scripts/fetch_headlines.py \
+            --feeds-file "$FEEDS_FILE" --out headlines.json \
+            || echo "::warning::build timed out after 240s"
 
       - name: Show summary
         if: steps.gate.outputs.should_run == 'true' && hashFiles('headlines.json') != ''
@@ -138,6 +153,13 @@ jobs:
           else
             echo "No changes to headlines.json."
           fi
+
+      - name: Upload headlines.json (artifact)
+        if: steps.gate.outputs.should_run == 'true' && hashFiles('headlines.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: headlines.json
+          path: headlines.json
 
       - name: Skip note
         if: steps.gate.outputs.should_run != 'true'
