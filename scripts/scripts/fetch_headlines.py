@@ -5,18 +5,24 @@
 # - Reads feeds.txt (grouped with "# --- Section ---" headers)
 # - Optionally reads feeds_local.txt (one site URL per line) and
 #   auto-discovers RSS/Atom feeds from those sites
-# - Fetches RSS/Atom feeds
+# - Fetches RSS/Atom feeds (shared requests.Session, slow-feed logging, time budget)
 # - Normalizes & aggressively de-duplicates:
 #     1) fuzzy title hash
 #     2) near-duplicate pass (Jaccard on title tokens)
 # - Demotes aggregators/press wires; small per-domain caps
 # - Tags items with {category, region} inferred from section header
 #   (locals discovered from feeds_local.txt are tagged Local/Canada)
-# - Sorts newest-first and writes headlines.json
+# - Loads config/weights.json5 and applies a server-side score per item
+#     • score components: recency, age penalties, category nudges,
+#       source penalties/bonuses, public_safety, markets, regional bonus
+#     • emits effects hints for the front-end: effects.style ∈ {"lightsaber","glitch"}
+# - Sorts newest-first (then by score) and writes headlines.json
 #
 # Requires: feedparser, requests
+# Optional: json5 (for config/weights.json5; falls back to json if missing)
 
 from __future__ import annotations
+
 import argparse
 import calendar
 import hashlib
@@ -33,12 +39,25 @@ from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode, urljoin
 import feedparser  # type: ignore
 import requests    # type: ignore
 
+# -------- Optional JSON5 weights (for knobs) --------
+try:
+    import json5  # type: ignore
+except Exception:
+    json5 = None  # ok locally; CI can install json5
+
 
 # ---------------- Tunables ----------------
-MAX_PER_FEED = 14          # cap per feed before global caps
-MAX_TOTAL    = 320         # overall cap before de-dupe/sort
-HTTP_TIMEOUT = 12
-USER_AGENT   = "NewsRiverBot/1.2 (+https://mypybite.github.io/newsriver/)"
+MAX_PER_FEED      = int(os.getenv("MPB_MAX_PER_FEED", "14"))   # cap per feed before global caps
+MAX_TOTAL         = int(os.getenv("MPB_MAX_TOTAL", "320"))     # overall cap before de-dupe/sort
+
+HTTP_TIMEOUT_S    = float(os.getenv("MPB_HTTP_TIMEOUT", "12"))
+SLOW_FEED_WARN_S  = float(os.getenv("MPB_SLOW_FEED_WARN", "3.5"))
+GLOBAL_BUDGET_S   = float(os.getenv("MPB_GLOBAL_BUDGET", "210"))
+
+USER_AGENT        = os.getenv(
+    "MPB_UA",
+    "NewsRiverBot/1.3 (+https://mypybite.github.io/newsriver/)"
+)
 
 # Per-host caps to prevent any one domain flooding the river
 PER_HOST_MAX = {
@@ -231,7 +250,8 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
             if not line:
                 continue
             if line.startswith("#"):
-                header = re.sub(r"^#\s*-*\s*(.*?)\s*-*\s*$", r"\1", line)
+                # tolerate '# --- Section ---' and extra trailing '#'
+                header = re.sub(r"^#\s*-*\s*(.*?)\s*-*\s*#*\s*$", r"\1", line)
                 current_tag = infer_tag(header)
                 continue
             feeds.append(FeedSpec(url=line, tag=current_tag))
@@ -280,48 +300,19 @@ def _looks_like_feed_bytes(b: bytes) -> bool:
     except Exception:
         return False
 
-def discover_feed_urls(site_url: str) -> list[str]:
-    """Given a site URL, try to discover RSS/Atom feed URLs."""
-    found: list[str] = []
-    seen: set[str] = set()
-
-    # 1) Parse HTML for <link rel="alternate" ...>
-    html_bytes = http_get(site_url)
-    if html_bytes:
-        html = ""
-        try:
-            html = html_bytes.decode("utf-8", "ignore")
-        except Exception:
-            html = ""
-        for u in _discover_via_html(html, site_url):
-            cu = canonicalize_url(u)
-            if cu not in seen:
-                seen.add(cu)
-                found.append(cu)
-            if len(found) >= FEED_DISCOVERY_MAX_PER_SITE:
-                return found
-
-    # 2) Try common feed paths
-    for suffix in FEED_DISCOVERY_PATHS:
-        cand = canonicalize_url(urljoin(site_url, suffix))
-        if cand in seen:
-            continue
-        blob = http_get(cand)
-        if not blob:
-            continue
-        if _looks_like_feed_bytes(blob):
-            seen.add(cand)
-            found.append(cand)
-            if len(found) >= FEED_DISCOVERY_MAX_PER_SITE:
-                break
-
-    return found
-
 
 # ---------------- HTTP & date helpers ----------------
-def http_get(url: str) -> bytes | None:
+def _new_session() -> requests.Session:
+    s = requests.Session()
+    s.headers.update({"User-Agent": USER_AGENT})
+    adapter = requests.adapters.HTTPAdapter(pool_connections=16, pool_maxsize=32)
+    s.mount("http://", adapter)
+    s.mount("https://", adapter)
+    return s
+
+def http_get(session: requests.Session, url: str) -> bytes | None:
     try:
-        resp = requests.get(url, timeout=HTTP_TIMEOUT, headers={"User-Agent": USER_AGENT})
+        resp = session.get(url, timeout=HTTP_TIMEOUT_S)
         if resp.ok:
             return resp.content
     except Exception:
@@ -354,18 +345,149 @@ def _ts(iso: str) -> int:
     except Exception:
         return 0
 
+def hours_since(iso: str, now_ts: float) -> float:
+    t = _ts(iso)
+    if t == 0:
+        return 1e9
+    return max(0.0, (now_ts - t) / 3600.0)
+
+
+# ---------------- Weights loader (json5) ----------------
+def load_weights(path: str = "config/weights.json5") -> tuple[dict, dict]:
+    """Load JSON5 weights; return (weights, debug_meta)."""
+    dbg = {
+        "weights_loaded": False,
+        "weights_keys": [],
+        "weights_error": "",
+        "path": path,
+    }
+    data: dict = {}
+    if not os.path.exists(path):
+        dbg["weights_error"] = "missing"
+        return data, dbg
+    try:
+        if json5 is None:
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)  # best-effort fallback
+        else:
+            with open(path, "r", encoding="utf-8") as f:
+                data = json5.load(f)
+        dbg["weights_loaded"] = True
+        dbg["weights_keys"] = sorted(list(data.keys()))
+    except Exception as e:
+        dbg["weights_error"] = f"{type(e).__name__}: {e}"
+    return data, dbg
+
+def W(d: dict, path: str, default):
+    """Traverse nested dict by 'a.b.c' with a default."""
+    cur = d
+    for p in path.split("."):
+        if not isinstance(cur, dict) or p not in cur:
+            return default
+        cur = cur[p]
+    return cur
+
+
+# ---------------- Public-safety parsing ----------------
+WORD_NUM = {
+    "one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10,
+    "eleven":11,"twelve":12,"thirteen":13,"fourteen":14,"fifteen":15,"sixteen":16,"seventeen":17,
+    "eighteen":18,"nineteen":19,"twenty":20
+}
+RE_DEATH = re.compile(r"\b((?:\d+|one|two|three|four|five|six|seven|eight|nine|ten))\s+(?:people\s+)?(?:dead|killed|deaths?)\b", re.I)
+RE_INJ   = re.compile(r"\b((?:\d+|one|two|three|four|five|six|seven|eight|nine|ten))\s+(?:people\s+)?(?:injured|hurt)\b", re.I)
+RE_FATAL_CUE = re.compile(r"\b(dead|killed|homicide|murder|fatal|deadly)\b", re.I)
+
+def word_or_int_to_int(s: str) -> int:
+    s = s.lower()
+    if s.isdigit():
+        return int(s)
+    return WORD_NUM.get(s, 0)
+
+def parse_casualties(title: str) -> tuple[int,int,bool]:
+    deaths = 0
+    injured = 0
+    for m in RE_DEATH.finditer(title):
+        deaths += word_or_int_to_int(m.group(1))
+    for m in RE_INJ.finditer(title):
+        injured += word_or_int_to_int(m.group(1))
+    has_fatal_cue = bool(RE_FATAL_CUE.search(title))
+    return deaths, injured, has_fatal_cue
+
+
+# ---------------- Market parsing from headline text ----------------
+RE_PCT = r"([+-]?\d+(?:\.\d+)?)\s?%"
+
+RE_BTC  = re.compile(r"\b(Bitcoin|BTC)\b.*?" + RE_PCT, re.I)
+RE_IDX  = re.compile(r"\b(S&P|Nasdaq|Dow|TSX|TSXV)\b.*?" + RE_PCT, re.I)
+RE_NIK  = re.compile(r"\b(Nikkei(?:\s*225)?)\b.*?" + RE_PCT, re.I)
+
+# Stock move like: AEO +12% | TICKER jumps 10% | Company (AEO) up 11%
+RE_TICK_PCT = re.compile(r"\b([A-Z]{2,5})\b[^%]{0,40}" + RE_PCT)
+
+def first_pct(m):
+    try:
+        return abs(float(m.group(2)))
+    except Exception:
+        return None
+
+
+# ---------------- Discovery helpers (session) ----------------
+def discover_feed_urls(session: requests.Session, site_url: str) -> list[str]:
+    """Given a site URL, try to discover RSS/Atom feed URLs."""
+    found: list[str] = []
+    seen: set[str] = set()
+
+    # 1) Parse HTML for <link rel="alternate" ...>
+    html_bytes = http_get(session, site_url)
+    if html_bytes:
+        html = ""
+        try:
+            html = html_bytes.decode("utf-8", "ignore")
+        except Exception:
+            html = ""
+        for u in _discover_via_html(html, site_url):
+            cu = canonicalize_url(u)
+            if cu not in seen:
+                seen.add(cu)
+                found.append(cu)
+            if len(found) >= FEED_DISCOVERY_MAX_PER_SITE:
+                return found
+
+    # 2) Try common feed paths
+    for suffix in FEED_DISCOVERY_PATHS:
+        cand = canonicalize_url(urljoin(site_url, suffix))
+        if cand in seen:
+            continue
+        blob = http_get(session, cand)
+        if not blob:
+            continue
+        if _looks_like_feed_bytes(blob):
+            seen.add(cand)
+            found.append(cand)
+            if len(found) >= FEED_DISCOVERY_MAX_PER_SITE:
+                break
+
+    return found
+
 
 # ---------------- Build ----------------
 def build(feeds_file: str, out_path: str, feeds_local_file: str | None = FEEDS_LOCAL_DEFAULT) -> dict:
+    start = time.time()
+    weights, weights_debug = load_weights()
+
     # 1) sectioned feeds
     specs = parse_feeds_txt(feeds_file)
 
     # 2) local seeds → discover feed URLs → tag Local/Canada
+    session = _new_session()
     local_sites = parse_local_sites(feeds_local_file) if feeds_local_file else []
     discovered: list[str] = []
     for site in local_sites:
+        if time.time() - start > GLOBAL_BUDGET_S:
+            break
         try:
-            for f in discover_feed_urls(site):
+            for f in discover_feed_urls(session, site):
                 discovered.append(f)
         except Exception:
             continue
@@ -385,11 +507,62 @@ def build(feeds_file: str, out_path: str, feeds_local_file: str | None = FEEDS_L
     collected: list[dict] = []
     per_host_counts: dict[str,int] = {}
 
-    for spec in specs:
-        blob = http_get(spec.url)
-        if not blob:
+    # debug collectors
+    slow_domains: dict[str, int] = {}
+    feed_times: list[tuple[str, float, int]] = []
+    timeouts: list[str] = []
+    errors: list[str] = []
+    caps_hit: list[str] = []
+
+    # scoring debug counters
+    score_dbg = {
+        "effects_lightsaber": 0,
+        "effects_glitch": 0,
+        "ps_fatal_hits": 0,
+        "ps_injury_hits": 0,
+        "market_btc_hits": 0,
+        "market_index_hits": 0,
+        "market_nikkei_hits": 0,
+        "market_single_hits": 0,
+        "agg_penalties": 0,
+        "press_penalties": 0,
+        "preferred_bonus": 0,
+    }
+
+    print(f"[fetch] feeds={len(specs)} max_per_feed={MAX_PER_FEED} global_cap={MAX_TOTAL}")
+
+    for idx, spec in enumerate(specs, 1):
+        if time.time() - start > GLOBAL_BUDGET_S:
+            print(f"[budget] global time budget {GLOBAL_BUDGET_S:.0f}s exceeded at feed {idx}/{len(specs)}")
+            break
+
+        t0 = time.time()
+        blob = http_get(session, spec.url)
+        dt = time.time() - t0
+
+        h_feed = host_of(spec.url) or "(unknown)"
+        kept_from_feed = 0
+
+        if blob is None:
+            if dt >= HTTP_TIMEOUT_S:
+                timeouts.append(h_feed)
+                print(f"[timeout] {h_feed} ({spec.url}) ~{dt:.1f}s")
+            else:
+                errors.append(h_feed)
+                print(f"[error]   {h_feed} ({spec.url}) ~{dt:.1f}s (no content)")
             continue
-        parsed = feedparser.parse(blob)
+
+        if dt > SLOW_FEED_WARN_S:
+            slow_domains[h_feed] = slow_domains.get(h_feed, 0) + 1
+            print(f"[slow]    {h_feed} took {dt:.2f}s")
+
+        try:
+            parsed = feedparser.parse(blob)
+        except Exception as e:
+            errors.append(h_feed)
+            print(f"[parse]   error {h_feed}: {e}")
+            continue
+
         entries = parsed.entries[:MAX_PER_FEED]
 
         for e in entries:
@@ -403,6 +576,8 @@ def build(feeds_file: str, out_path: str, feeds_local_file: str | None = FEEDS_L
             # per-host cap
             cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
             if per_host_counts.get(h, 0) >= cap:
+                if h and h not in caps_hit:
+                    caps_hit.append(h)
                 continue
 
             item = {
@@ -419,11 +594,19 @@ def build(feeds_file: str, out_path: str, feeds_local_file: str | None = FEEDS_L
             }
             collected.append(item)
             per_host_counts[h] = per_host_counts.get(h, 0) + 1
+            kept_from_feed += 1
 
             if len(collected) >= MAX_TOTAL:
+                print("[cap] global MAX_TOTAL reached")
                 break
+
+        feed_times.append((h_feed, dt, kept_from_feed))
         if len(collected) >= MAX_TOTAL:
             break
+
+        if (idx % 20) == 0:
+            elapsed = time.time() - start
+            print(f"[progress] {idx}/{len(specs)} feeds, items={len(collected)}, elapsed={elapsed:.1f}s")
 
     # Pass 1: collapse exact fuzzy clusters (keep newest; prefer non-aggregator)
     first_pass: dict[str,dict] = {}
@@ -479,8 +662,215 @@ def build(feeds_file: str, out_path: str, feeds_local_file: str | None = FEEDS_L
             survivors.append(it)
             token_cache.append((toks, it))
 
-    # Final sort newest-first
-    survivors.sort(key=lambda x: _ts(x["published_utc"]), reverse=True)
+    # Cluster lineage (rank within each cluster by time among survivors)
+    cluster_groups: dict[str, list[dict]] = {}
+    for it in survivors:
+        cluster_groups.setdefault(it["cluster_id"], []).append(it)
+    for cid, arr in cluster_groups.items():
+        arr.sort(key=lambda x: _ts(x["published_utc"]))
+        for i, it in enumerate(arr):
+            it["cluster_rank"] = i + 1
+            it["cluster_latest"] = (i == len(arr) - 1)
+
+    # --------- Scoring ---------
+    now_ts = time.time()
+
+    # quick helpers from weights
+    half_life_h = float(W(weights, "recency.half_life_hours", 6.0))
+    age_pen_24  = float(W(weights, "recency.age_penalty_after_24h", -0.6))
+    age_pen_36  = float(W(weights, "recency.age_penalty_after_36h", -0.4))
+    superseded_pen = float(W(weights, "recency.superseded_cluster_penalty", -0.9))
+    cat_table   = dict(W(weights, "categories", {}))
+    agg_pen     = float(W(weights, "sources.aggregator_penalty", -0.5))
+    wire_pen    = float(W(weights, "sources.press_wire_penalty", -0.4))
+    pref_bonus  = float(W(weights, "sources.preferred_domains_bonus", 0.25))
+
+    # public safety weights
+    ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
+    ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
+    ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
+    ps_per_inj   = float(W(weights, "public_safety.per_injured_points", 0.02))
+    ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
+    ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
+    ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
+
+    # markets
+    btc_thr   = float(W(weights, "markets.btc_abs_move_threshold_pct", 7.0))
+    btc_pts   = float(W(weights, "markets.btc_points", 1.6))
+    idx_thr   = float(W(weights, "markets.index_abs_move_threshold_pct", 1.0))
+    idx_pts   = float(W(weights, "markets.index_points", 1.0))
+    nik_thr   = float(W(weights, "markets.nikkei_abs_move_threshold_pct", 1.0))
+    nik_pts   = float(W(weights, "markets.nikkei_points", 0.7))
+    stk_thr   = float(W(weights, "markets.single_stock_abs_move_threshold_pct", 10.0))
+    stk_pts   = float(W(weights, "markets.single_stock_points", 1.2))
+
+    # effects thresholds
+    ls_min    = float(W(weights, "effects.lightsaber_min_score", 2.5))
+    also_body = int(W(weights, "effects.lightsaber_also_if.body_count_ge", 5))
+    also_btc  = float(W(weights, "effects.lightsaber_also_if.btc_abs_move_ge_pct", 8.0))
+    also_stk  = float(W(weights, "effects.lightsaber_also_if.single_stock_abs_move_ge_pct", 15.0))
+    glitch_min= float(W(weights, "effects.glitch_min_score", 1.8))
+
+    # regional
+    reg_country_match = float(W(weights, "regional.weights.country_match", 1.2))
+    reg_max_bonus     = float(W(weights, "regional.max_bonus", 2.4))
+
+    def violent_kw_hit(title: str) -> bool:
+        t = title.lower()
+        return any(kw in t for kw in ps_kw_list)
+
+    def apply_scoring(it: dict) -> None:
+        title = it.get("title","")
+        url   = it.get("url","")
+        host  = host_of(url)
+        category = it.get("category","General")
+        published = it.get("published_utc","")
+
+        comps = {}
+        total = 0.0
+
+        # Recency decay
+        age_h = hours_since(published, now_ts)
+        decay = 0.0
+        if half_life_h > 0:
+            decay = 1.0 * (0.5 ** (age_h / half_life_h))
+        comps["recency"] = round(decay, 4)
+        total += decay
+
+        # Age penalties
+        age_pen = 0.0
+        if age_h > 24: age_pen += age_pen_24
+        if age_h > 36: age_pen += age_pen_36
+        if not it.get("cluster_latest", True):
+            age_pen += superseded_pen
+        if age_pen:
+            comps["age_penalty"] = round(age_pen, 4)
+            total += age_pen
+
+        # Category nudge
+        cat_bonus = float(cat_table.get(category, 0.0))
+        if cat_bonus:
+            comps["category"] = round(cat_bonus, 4)
+            total += cat_bonus
+
+        # Sources
+        if looks_aggregator(it.get("source",""), url):
+            comps["aggregator_penalty"] = agg_pen
+            total += agg_pen
+            score_dbg["agg_penalties"] += 1
+        if is_press_wire(url):
+            comps["press_wire_penalty"] = wire_pen
+            total += wire_pen
+            score_dbg["press_penalties"] += 1
+        if host in PREFERRED_DOMAINS:
+            comps["preferred_domain"] = pref_bonus
+            total += pref_bonus
+            score_dbg["preferred_bonus"] += 1
+
+        # Public safety severity
+        deaths, injured, has_fatal_cue = parse_casualties(title)
+        ps_score = 0.0
+        if has_fatal_cue or deaths > 0:
+            ps_score += ps_has_fatal
+            score_dbg["ps_fatal_hits"] += 1
+        if deaths > 0:
+            ps_score += min(ps_max_death, ps_per_death * deaths)
+        if injured > 0:
+            ps_score += min(ps_max_inj, ps_per_inj * injured)
+            score_dbg["ps_injury_hits"] += 1
+        if violent_kw_hit(title):
+            ps_score += ps_kw_bonus
+        if ps_score:
+            comps["public_safety"] = round(ps_score, 4)
+            total += ps_score
+
+        # Markets (headline-derived)
+        m = RE_BTC.search(title)
+        btc_move = None
+        if m:
+            v = first_pct(m)
+            if v is not None:
+                btc_move = v
+                if v >= btc_thr:
+                    comps["btc_trigger"] = btc_pts
+                    total += btc_pts
+                    score_dbg["market_btc_hits"] += 1
+
+        m = RE_IDX.search(title)
+        if m:
+            v = first_pct(m)
+            if v is not None and v >= idx_thr:
+                comps["index_trigger"] = idx_pts
+                total += idx_pts
+                score_dbg["market_index_hits"] += 1
+
+        m = RE_NIK.search(title)
+        if m:
+            v = first_pct(m)
+            if v is not None and v >= nik_thr:
+                comps["nikkei_trigger"] = nik_pts
+                total += nik_pts
+                score_dbg["market_nikkei_hits"] += 1
+
+        m = RE_TICK_PCT.search(title)
+        single_move = None
+        if m:
+            try:
+                single_move = abs(float(m.group(2)))
+            except Exception:
+                single_move = None
+        if single_move is not None and single_move >= stk_thr:
+            comps["single_stock_trigger"] = stk_pts
+            total += stk_pts
+            score_dbg["market_single_hits"] += 1
+
+        # Regional bias (coarse)
+        reg_bonus = 0.0
+        if it.get("region") == "Canada":
+            reg_bonus += reg_country_match
+        if reg_bonus:
+            reg_bonus = min(reg_bonus, reg_max_bonus)
+            comps["regional"] = round(reg_bonus, 4)
+            total += reg_bonus
+
+        # Effects (lightsaber/glitch) — emit for front-end
+        style = ""
+        reasons: list[str] = []
+        if total >= ls_min:
+            style = "lightsaber"
+            reasons.append(f"score≥{ls_min}")
+        if deaths >= also_body:
+            style = "lightsaber"
+            reasons.append(f"body_count≥{also_body}")
+        if (btc_move or 0) >= also_btc:
+            style = "lightsaber"
+            reasons.append(f"btc_move≥{also_btc}%")
+        if (single_move or 0) >= also_stk:
+            style = "lightsaber"
+            reasons.append(f"single_stock_move≥{also_stk}%")
+        if not style and total >= glitch_min:
+            style = "glitch"
+            reasons.append(f"score≥{glitch_min}")
+
+        if style == "lightsaber":
+            score_dbg["effects_lightsaber"] += 1
+        elif style == "glitch":
+            score_dbg["effects_glitch"] += 1
+
+        it["score"] = round(total, 4)
+        it["score_components"] = comps
+        it["effects"] = {"style": style, "reasons": reasons}
+        # Compatibility with older front-ends that look for top-level flags:
+        it["lightsaber"] = (style == "lightsaber")
+        it["glitch"]     = (style == "glitch")
+
+    for it in survivors:
+        apply_scoring(it)
+
+    # Final sort: newest-first, then by score for stable "freshness with gravity"
+    survivors.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
+
+    elapsed_total = time.time() - start
 
     out = {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
@@ -495,16 +885,36 @@ def build(feeds_file: str, out_path: str, feeds_local_file: str | None = FEEDS_L
             "collected": len(collected),
             "dedup_pass1": len(items),
             "dedup_final": len(survivors),
-            "version": "fetch-v1.3-local-discovery"
+            "slow_domains": sorted(list(slow_domains.keys())),
+            "timeouts": sorted(set(timeouts)),
+            "errors": sorted(set(errors)),
+            "caps_hit": sorted(caps_hit),
+            "feed_times_sample": sorted(
+                [{"host": h, "sec": round(sec, 3), "kept": kept} for (h, sec, kept) in feed_times[:12]],
+                key=lambda x: -x["sec"]
+            ),
+            "elapsed_sec": round(elapsed_total, 2),
+            "http_timeout_sec": HTTP_TIMEOUT_S,
+            "slow_feed_warn_sec": SLOW_FEED_WARN_S,
+            "global_budget_sec": GLOBAL_BUDGET_S,
+            "version": "fetch-v1.4-score+discovery",
+            # weights status
+            "weights_loaded": weights_debug.get("weights_loaded", False),
+            "weights_keys": weights_debug.get("weights_keys", []),
+            "weights_error": weights_debug.get("weights_error", None),
+            "weights_path":  weights_debug.get("path", None),
+            # scoring stats
+            "score_stats": score_dbg,
         }
     }
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
+    print(f"[done] wrote {out_path} items={out['count']} elapsed={elapsed_total:.1f}s")
     return out
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Build headlines.json from feeds.txt (+ optional feeds_local.txt)")
+    ap = argparse.ArgumentParser(description="Build headlines.json from feeds.txt (+ optional feeds_local.txt) with scoring/effects")
     ap.add_argument("--feeds-file", default="feeds.txt", help="Path to feeds.txt")
     ap.add_argument("--feeds-local-file", default=FEEDS_LOCAL_DEFAULT, help="Optional path to feeds_local.txt (site seeds)")
     ap.add_argument("--out", default="headlines.json", help="Output JSON file")
@@ -512,7 +922,14 @@ def main():
     out = build(args.feeds_file, args.out, args.feeds_local_file)
     print(f"Wrote {args.out} with {out['count']} items at {out['generated_utc']}")
     dbg = out.get("_debug", {})
-    print("Debug:", dbg)
+    print("Debug:", {
+        k: dbg.get(k)
+        for k in [
+            "feeds_total_all","collected","dedup_pass1","dedup_final",
+            "elapsed_sec","slow_domains","timeouts","errors",
+            "weights_loaded","weights_keys","weights_error","weights_path","score_stats"
+        ]
+    })
 
 if __name__ == "__main__":
     main()
