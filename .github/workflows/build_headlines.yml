@@ -16,6 +16,11 @@ on:
 permissions:
   contents: write
 
+# Avoid overlapping runs if multiple triggers fire
+concurrency:
+  group: build-headlines
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,6 +36,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'   # enable pip cache
 
       # Gate: bypass for push/manual; use time windows only for cron
       - name: Gate (bypass for push/manual; time windows for cron)
@@ -99,8 +105,8 @@ jobs:
       - name: Build headlines.json (hard wall clock)
         if: steps.gate.outputs.should_run == 'true'
         run: |
-          # Kill the build if it exceeds 180s; continue the job with a warning.
-          timeout -k 10s 180s python scripts/fetch_headlines.py --feeds-file feeds_smoke.txt --out headlines.json || echo "::warning::build timed out after 180s"
+          # Kill the build if it exceeds 240s; continue the job with a warning.
+          timeout -k 10s 240s python scripts/fetch_headlines.py --feeds-file feeds_smoke.txt --out headlines.json || echo "::warning::build timed out after 240s"
 
       - name: Show summary
         if: steps.gate.outputs.should_run == 'true' && hashFiles('headlines.json') != ''
