@@ -11,7 +11,7 @@ on:
       - '.github/workflows/build_headlines.yml'
   schedule:
     - cron: '* * * * *'   # every minute; gate below decides
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 permissions:
   contents: write
@@ -96,21 +96,16 @@ jobs:
 
       - name: Show summary
         if: steps.gate.outputs.should_run == 'true'
+        shell: bash
         run: |
-          python - <<'PY'
-import json
-with open('headlines.json','r',encoding='utf-8') as f:
-    d = json.load(f)
-dbg = d.get("_debug", {})
-print("generated_utc:", d.get("generated_utc"))
-print("items:", d.get("count"))
-print("feeds_total:", dbg.get("feeds_total"))
-print("weights_loaded:", dbg.get("weights_loaded"))
-print("weights_keys:", ", ".join(dbg.get("weights_keys", [])) or "(none)")
-print("first 3 titles:")
-for it in d.get("items",[])[:3]:
-    print(" -", it.get("title","")[:140])
-PY
+          python -c "import json; d=json.load(open('headlines.json','r',encoding='utf-8')); dbg=d.get('_debug',{}); \
+print('generated_utc:', d.get('generated_utc')); \
+print('items:', d.get('count')); \
+print('feeds_total:', dbg.get('feeds_total')); \
+print('weights_loaded:', dbg.get('weights_loaded')); \
+print('weights_keys:', ', '.join(dbg.get('weights_keys', [])) or '(none)'); \
+print('first 3 titles:'); \
+[print(' -', it.get('title','')[:140]) for it in d.get('items',[])[:3]]"
 
       - name: Commit headlines.json (if changed)
         if: steps.gate.outputs.should_run == 'true'
