@@ -278,25 +278,32 @@ def hours_since(iso: str, now_ts: float) -> float:
 
 # ---------------- Weights loader (json5) ----------------
 def load_weights(path: str = "config/weights.json5") -> tuple[dict, dict]:
-    dbg = {"weights_loaded": False, "weights_keys": []}
+    """Load JSON5 weights; return (weights, debug_meta)."""
+    dbg = {
+        "weights_loaded": False,
+        "weights_keys": [],
+        "weights_error": "",
+        "path": path,
+    }
     data: dict = {}
     if not os.path.exists(path):
+        dbg["weights_error"] = "missing"
         return data, dbg
     try:
         if json5 is None:
             with open(path, "r", encoding="utf-8") as f:
-                data = json.load(f)
+                data = json.load(f)  # best-effort fallback
         else:
             with open(path, "r", encoding="utf-8") as f:
                 data = json5.load(f)
         dbg["weights_loaded"] = True
         dbg["weights_keys"] = sorted(list(data.keys()))
     except Exception as e:
-        dbg["weights_error"] = str(e)
+        dbg["weights_error"] = f"{type(e).__name__}: {e}"
     return data, dbg
 
-# Convenience getter with default path lookup
 def W(d: dict, path: str, default):
+    """Traverse nested dict by 'a.b.c' with a default."""
     cur = d
     for p in path.split("."):
         if not isinstance(cur, dict) or p not in cur:
@@ -574,7 +581,6 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         comps = {}
         total = 0.0
-        reasons = []
 
         # Recency decay
         age_h = hours_since(published, now_ts)
@@ -588,7 +594,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         age_pen = 0.0
         if age_h > 24: age_pen += age_pen_24
         if age_h > 36: age_pen += age_pen_36
-        # superseded penalty (rare after near-dup collapse; kept for future multi-versions)
         if not it.get("cluster_latest", True):
             age_pen += superseded_pen
         if age_pen:
@@ -633,7 +638,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             total += ps_score
 
         # Markets (headline-derived)
-        # BTC
         m = RE_BTC.search(title)
         btc_move = None
         if m:
@@ -644,7 +648,7 @@ def build(feeds_file: str, out_path: str) -> dict:
                     comps["btc_trigger"] = btc_pts
                     total += btc_pts
                     score_dbg["market_btc_hits"] += 1
-        # Indices
+
         m = RE_IDX.search(title)
         if m:
             v = first_pct(m)
@@ -652,7 +656,7 @@ def build(feeds_file: str, out_path: str) -> dict:
                 comps["index_trigger"] = idx_pts
                 total += idx_pts
                 score_dbg["market_index_hits"] += 1
-        # Nikkei
+
         m = RE_NIK.search(title)
         if m:
             v = first_pct(m)
@@ -660,7 +664,7 @@ def build(feeds_file: str, out_path: str) -> dict:
                 comps["nikkei_trigger"] = nik_pts
                 total += nik_pts
                 score_dbg["market_nikkei_hits"] += 1
-        # Single-stock generic
+
         m = RE_TICK_PCT.search(title)
         single_move = None
         if m:
@@ -673,13 +677,11 @@ def build(feeds_file: str, out_path: str) -> dict:
             total += stk_pts
             score_dbg["market_single_hits"] += 1
 
-        # Regional bias placeholder (server-side we only know "Canada"/"World")
+        # Regional bias placeholder (server-only knows "Canada"/"World")
         reg_bonus = 0.0
         if it.get("region") == "Canada":
             reg_bonus += float(W(weights, "regional.weights.country_match", 1.2))
-        # province/city need audience context → front-end
         if reg_bonus:
-            # cap with max_bonus, though we only add country here
             max_b = float(W(weights, "regional.max_bonus", 2.4))
             reg_bonus = min(reg_bonus, max_b)
             comps["regional"] = round(reg_bonus, 4)
@@ -747,6 +749,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
+            "weights_path":  weights_debug.get("path", None),
             # scoring stats
             "score_stats": score_dbg,
         }
@@ -771,7 +774,7 @@ def main():
             for k in [
                 "feeds_total","collected","dedup_pass1","dedup_final",
                 "elapsed_sec","slow_domains","timeouts","errors",
-                "weights_loaded","weights_keys","score_stats"
+                "weights_loaded","weights_keys","weights_error","weights_path","score_stats"
             ]
         }
     )
