@@ -32,19 +32,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Gate
+      - name: Gate (bypass for push/manual; windowed for schedule)
         id: gate
         shell: bash
         run: |
-          # Bypass the time windows for push/manual runs
-          if [ "$GITHUB_EVENT_NAME" != "schedule" ]; then
+          # Bypass the gate unless this is the cron schedule event
+          if [ "${GITHUB_EVENT_NAME}" != "schedule" ]; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=bypass for $GITHUB_EVENT_NAME" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=bypass for ${GITHUB_EVENT_NAME}" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # For scheduled (cron) runs, apply structured windows in America/Toronto
-          cat > gate.py <<'EOF'
+          OUT="$(python - <<'PY'
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -60,82 +59,6 @@ def mins(h, mi): return h*60 + mi
 # 08:15–17:59 every 22m (anchored at 08:15)
 # 18:22–23:59 every 55m (anchored at 18:22)
 windows = [
-  ("overnight", mins(0,0),   mins(4,0),   8,  mins(0,0)),
-  ("early",     mins(4,0),   mins(7,30), 45,  mins(4,0)),
-  ("day",       mins(8,15),  mins(18,0), 22,  mins(8,15)),
-  ("evening",   mins(18,22), mins(24,0), 55,  mins(18,22)),
-]
-
-should = False
-reason = "outside all windows"
-for name, start, end, step, anchor in windows:
-    if start <= m < end:
-        if ((m - anchor) % step) == 0:
-            should = True
-            reason = f"{name} window match @ {now.strftime('%H:%M')}"
-        else:
-            reason = f"{name} window but not a step @ {now.strftime('%H:%M')}"
-        break
-
-print("RUN" if should else "SKIP")
-print(reason)
-EOF
-
-          PY_OUT="$(python gate.py)"
-          decision="$(echo "$PY_OUT" | head -n1)"
-          reason="$(echo "$PY_OUT" | tail -n +2 | tr -d '\r')"
-
-          if [ "$decision" = "RUN" ]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
-          else
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Install dependencies
-        if: steps.gate.outputs.should_run == 'true'
-        run: |
-          python -m pip install --upgrade pip
-          pip install feedparser requests json5
-
-      - name: Build headlines.json
-        if: steps.gate.outputs.should_run == 'true'
-        run: |
-          python scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
-
-      - name: Show summary
-        if: steps.gate.outputs.should_run == 'true'
-        run: |
-          python - <<'PY'
-import json
-with open('headlines.json','r',encoding='utf-8') as f:
-    d = json.load(f)
-dbg = d.get("_debug", {})
-print("generated_utc:", d.get("generated_utc"))
-print("items:", d.get("count"))
-print("feeds_total:", dbg.get("feeds_total"))
-print("weights_loaded:", dbg.get("weights_loaded"))
-print("weights_keys:", ", ".join(dbg.get("weights_keys", [])) or "(none)")
-print("first 3 titles:")
-for it in d.get("items",[])[:3]:
-    print(" -", it.get("title","")[:140])
-PY
-
-      - name: Commit headlines.json (if changed)
-        if: steps.gate.outputs.should_run == 'true'
-        run: |
-          if ! git diff --quiet -- headlines.json; then
-            git config user.name  "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add headlines.json
-            git commit -m "build: refresh headlines.json"
-            git push
-          else
-            echo "No changes to headlines.json."
-          fi
-
-      - name: Skip note
-        if: steps.gate.outputs.should_run != 'true'
-        run: |
-          echo "Skipped by schedule guard: ${{ steps.gate.outputs.skip_reason }}"
+    ("overnight", mins(0,0),   mins(4,0),   8,  mins(0,0)),
+    ("early",     mins(4,0),   mins(7,30), 45,  mins(4,0)),
+    ("da
