@@ -1,1 +1,155 @@
+{
+  // weights.json5 — server-side scoring knobs for mypybite
+  // Version: v0.2 (fatalities-first + Canadian regional bias + market triggers)
+  // TZ for windows/special dates
+  timezone: "America/Toronto",
+
+  // -------- Recency & decay --------
+  recency: {
+    // Soft time-decay: exponential half-life; newer items fade slower
+    half_life_hours: 6,           // every 6h, "freshness" halves
+    max_age_hours: 72,            // drop items older than this (server may still filter)
+    // Extra penalties
+    age_penalty_after_24h: -0.6,  // once >24h old, apply this once
+    age_penalty_after_36h: -0.4,  // once >36h old, apply this once (stacks with 24h)
+    // If a newer item in the same cluster exists (same story, developed):
+    superseded_cluster_penalty: -0.9,
+  },
+
+  // -------- Reordering stability (prevents jarring reshuffles on hard reset) --------
+  reorder: {
+    protect_top_n: 8,            // top N “stick” unless a rival beats them by min_reorder_delta
+    min_reorder_delta: 1.25,     // need this many points advantage to leapfrog
+    grace_period_minutes: 3,     // after hard reload, freeze order for this long
+    rank_drift_tolerance: 0.5,   // tiny score wiggles inside this band do not reorder
+  },
+
+  // -------- Regional bias (Canada → Province → City) --------
+  regional: {
+    weights: {
+      country_match: 1.2,    // item.region == "Canada"
+      province_match: 0.8,   // detected province equals audience province
+      city_match: 0.6,       // detected city equals audience city
+      adjacent_province: 0.3 // optional adjacency (future)
+    },
+    // Cap how much regional bias can add in total:
+    max_bonus: 2.4
+  },
+
+  // -------- Category nudges (light-touch baselines) --------
+  categories: {
+    "Public Safety": 0.4,
+    "Local": 0.3,
+    "Business": 0.2,
+    "Energy": 0.2,
+    "Real Estate": 0.2,
+    "Tech": 0.15,
+    "Weather": 0.25,
+    "Transit": 0.15,
+    "Culture": 0.0,  // neutral; celebrity module will add later when we build it
+    "General": 0.0
+  },
+
+  // -------- Public-safety severity (If it bleeds, it leads) --------
+  public_safety: {
+    has_fatality_points: 1.0,     // base if any death mentioned
+    per_death_points: 0.10,       // +0.10 per body count
+    max_death_points: 2.0,        // cap from body count contribution
+    per_injured_points: 0.02,     // modest signal for injuries
+    max_injury_points: 0.6,
+
+    // Optional language cues (OR of these raises severity a touch)
+    violent_keywords_bonus: 0.2,
+    violent_keywords: [
+      "shooting","shot","stabbing","stabbed","homicide","murder",
+      "manslaughter","fatal crash","deadly crash","collision","mass casualty"
+    ]
+  },
+
+  // -------- Market triggers (intraday & overnight) --------
+  markets: {
+    // Bitcoin / crypto
+    btc_abs_move_threshold_pct: 7.0,   // absolute % (up or down)
+    btc_points: 1.6,
+
+    // Major U.S. indices (S&P 500, Nasdaq, Dow)
+    index_abs_move_threshold_pct: 1.0,
+    index_points: 1.0,
+
+    // Nikkei (overnight context)
+    nikkei_abs_move_threshold_pct: 1.0,
+    nikkei_points: 0.7,
+
+    // Single-stock outsized moves (e.g., AEO +10%)
+    single_stock_abs_move_threshold_pct: 10.0,
+    single_stock_points: 1.2,
+
+    // Time-of-day windows (ET)
+    time_windows: {
+      // During North American market hours, give business/markets a mild lift
+      markets_open: { start: "09:30", end: "16:00", points: 0.6 },
+      // Asia session glance (helps Nikkei/HK leads land before dawn ET)
+      asia_window:  { start: "01:20", end: "03:30", points: 0.5 },
+    },
+
+    // Special macro / calendar boosts (applied ±window_hours around the event time)
+    special_dates: [
+      // Canada
+      { key: "boc_rate_decision",     points: 1.6, window_hours: 30 },
+      { key: "cpi_ca_release",        points: 1.2, window_hours: 24 },
+      { key: "jobs_ca_release",       points: 1.1, window_hours: 24 },
+
+      // U.S.
+      { key: "fed_fomc_decision",     points: 1.5, window_hours: 30 },
+      { key: "cpi_us_release",        points: 1.2, window_hours: 24 },
+      { key: "jobs_us_nonfarm",       points: 1.1, window_hours: 24 },
+
+      // U.K./EU (often market-relevant to CAD via FX)
+      { key: "boe_rate_decision",     points: 1.0, window_hours: 24 },
+      { key: "ecb_rate_decision",     points: 1.0, window_hours: 24 },
+
+      // Energy supply signals
+      { key: "opec_meeting",          points: 0.8, window_hours: 48 },
+    ],
+  },
+
+  // -------- Aggregators / press wires --------
+  sources: {
+    aggregator_penalty: -0.5,  // demote Google News/Yahoo/Apple News/etc.
+    press_wire_penalty: -0.4,  // demote PRs unless nothing else exists
+    preferred_domains_bonus: 0.25, // small edge for primary/original sources
+  },
+
+  // -------- Dedupe knobs (should mirror front-end) --------
+  dedupe: {
+    // Jaccard on title tokens; anything ≥ this is “near-duplicate”
+    jaccard_threshold: 0.62,
+    // If two candidates collide, the newer & non-aggregator wins; these
+    // weights just add a nudge to that tie-break logic:
+    newer_bias_points: 0.3,
+    non_aggregator_bias_points: 0.3,
+  },
+
+  // -------- Display effects thresholds --------
+  effects: {
+    // “Light-saber red glow with glitch”
+    lightsaber_min_score: 2.5,
+    // Also trigger if any of these hard conditions are met:
+    lightsaber_also_if: {
+      body_count_ge: 5,             // 5+ deaths
+      btc_abs_move_ge_pct: 8.0,     // Bitcoin ±8% intraday
+      single_stock_abs_move_ge_pct: 15.0,
+    },
+
+    // Subtle glitch/ambient highlight for notable-but-not-top stories
+    glitch_min_score: 1.8,
+  },
+
+  // -------- Developing stories “static pill” --------
+  developing: {
+    max_manual_slots: 3,    // you can pin up to 3
+    pin_bonus_points: 2.0,  // pinned items float above neighbors
+    unpin_decay_minutes: 180 // optional: if left pinned this long, apply -0.5 thereafter
+  }
+}
 
