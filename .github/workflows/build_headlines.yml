@@ -88,10 +88,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install feedparser requests json5
 
+      # Limit feed volume so the job completes quickly (tune this number as needed)
+      - name: Prepare small feed list (smoke run)
+        if: steps.gate.outputs.should_run == 'true'
+        run: |
+          test -f feeds.txt || { echo "feeds.txt missing" >&2; exit 1; }
+          head -n 120 feeds.txt > feeds_smoke.txt
+          echo "Using feeds_smoke.txt with $(wc -l < feeds_smoke.txt) lines"
+
       - name: Build headlines.json
         if: steps.gate.outputs.should_run == 'true'
         run: |
-          python scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
+          python scripts/fetch_headlines.py --feeds-file feeds_smoke.txt --out headlines.json
 
       - name: Show summary
         if: steps.gate.outputs.should_run == 'true'
