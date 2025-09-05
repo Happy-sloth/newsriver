@@ -10,7 +10,7 @@ on:
       - 'config/**'
       - '.github/workflows/build_headlines.yml'
   schedule:
-    - cron: '* * * * *'   # every minute; gate decides
+    - cron: '* * * * *'   # every minute; gate below decides
   workflow_dispatch:
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Gate (bypass for push/manual; windowed for schedule)
+      - name: Gate (bypass for push/manual; time windows for cron)
         id: gate
         shell: bash
         run: |
@@ -43,22 +43,89 @@ jobs:
             exit 0
           fi
 
-          OUT="$(python - <<'PY'
-from datetime import datetime
-from zoneinfo import ZoneInfo
+          # Toronto local time
+          H=$(TZ=America/Toronto date +%H)
+          M=$(TZ=America/Toronto date +%M)
+          m=$((10#$H*60 + 10#$M))
 
-tz = ZoneInfo("America/Toronto")
-now = datetime.now(tz)
-m = now.hour * 60 + now.minute
+          run=false
+          reason="outside all windows"
+          nowstr=$(TZ=America/Toronto date +%H:%M)
 
-def mins(h, mi): return h*60 + mi
+          check_window () {
+            local name=$1 start=$2 end=$3 step=$4 anchor=$5
+            if [ $m -ge $start ] && [ $m -lt $end ]; then
+              local delta=$(( (m - anchor) % step ))
+              if [ $delta -eq 0 ]; then
+                run=true
+                reason="$name window match @ $nowstr"
+              else
+                reason="$name window but not a step @ $nowstr"
+              fi
+            fi
+          }
 
-# Windows (local Toronto time):
-# 00:00–03:59 every 8m
-# 04:00–07:30 every 45m (anchored at 04:00)
-# 08:15–17:59 every 22m (anchored at 08:15)
-# 18:22–23:59 every 55m (anchored at 18:22)
-windows = [
-    ("overnight", mins(0,0),   mins(4,0),   8,  mins(0,0)),
-    ("early",     mins(4,0),   mins(7,30), 45,  mins(4,0)),
-    ("da
+          # Windows (minutes since midnight)
+          # 00:00–03:59 every 8m
+          check_window "overnight" 0 240 8 0
+          # 04:00–07:30 every 45m
+          if [ "$run" = false ]; then check_window "early" 240 450 45 240; fi
+          # 08:15–18:00 every 22m
+          if [ "$run" = false ]; then check_window "day" 495 1080 22 495; fi
+          # 18:22–24:00 every 55m
+          if [ "$run" = false ]; then check_window "evening" 1102 1440 55 1102; fi
+
+          if [ "$run" = true ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        if: steps.gate.outputs.should_run == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install feedparser requests json5
+
+      - name: Build headlines.json
+        if: steps.gate.outputs.should_run == 'true'
+        run: |
+          python scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
+
+      - name: Show summary
+        if: steps.gate.outputs.should_run == 'true'
+        run: |
+          python - <<'PY'
+import json
+with open('headlines.json','r',encoding='utf-8') as f:
+    d = json.load(f)
+dbg = d.get("_debug", {})
+print("generated_utc:", d.get("generated_utc"))
+print("items:", d.get("count"))
+print("feeds_total:", dbg.get("feeds_total"))
+print("weights_loaded:", dbg.get("weights_loaded"))
+print("weights_keys:", ", ".join(dbg.get("weights_keys", [])) or "(none)")
+print("first 3 titles:")
+for it in d.get("items",[])[:3]:
+    print(" -", it.get("title","")[:140])
+PY
+
+      - name: Commit headlines.json (if changed)
+        if: steps.gate.outputs.should_run == 'true'
+        run: |
+          if ! git diff --quiet -- headlines.json; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add headlines.json
+            git commit -m "build: refresh headlines.json"
+            git push
+          else
+            echo "No changes to headlines.json."
+          fi
+
+      - name: Skip note
+        if: steps.gate.outputs.should_run != 'true'
+        run: |
+          echo "Skipped by schedule guard: ${{ steps.gate.outputs.skip_reason }}"
