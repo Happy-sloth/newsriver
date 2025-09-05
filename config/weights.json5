@@ -1,6 +1,6 @@
 {
   // weights.json5 — server-side scoring knobs for mypybite
-  // Version: v0.2 (fatalities-first + Canadian regional bias + market triggers)
+  // Version: v0.3 (fatalities-first + stronger Canadian bias + market triggers)
   // TZ for windows/special dates
   timezone: "America/Toronto",
 
@@ -27,42 +27,46 @@
   // -------- Regional bias (Canada → Province → City) --------
   regional: {
     weights: {
-      country_match: 1.2,    // item.region == "Canada"
-      province_match: 0.8,   // detected province equals audience province
-      city_match: 0.6,       // detected city equals audience city
-      adjacent_province: 0.3 // optional adjacency (future)
+      country_match: 1.2,    // item.region == "Canada"  (used by server today)
+      province_match: 0.8,   // reserved for future
+      city_match: 0.6,       // reserved for future
+      adjacent_province: 0.3 // reserved for future
     },
     // Cap how much regional bias can add in total:
     max_bonus: 2.4
   },
 
   // -------- Category nudges (light-touch baselines) --------
+  // (names must match server categories)
   categories: {
-    "Public Safety": 0.4,
-    "Local": 0.3,
+    "Public Safety": 0.9,
+    "Weather": 0.6,
+    "Transit": 0.4,
+    "Local": 0.5,
     "Business": 0.2,
     "Energy": 0.2,
-    "Real Estate": 0.2,
+    "Real Estate": 0.15,
     "Tech": 0.15,
-    "Weather": 0.25,
-    "Transit": 0.15,
-    "Culture": 0.0,  // neutral; celebrity module will add later when we build it
+    "Culture": 0.0,
+    "Youth": 0.0,
     "General": 0.0
   },
 
   // -------- Public-safety severity (If it bleeds, it leads) --------
   public_safety: {
     has_fatality_points: 1.0,     // base if any death mentioned
-    per_death_points: 0.10,       // +0.10 per body count
+    per_death_points: 0.12,       // slightly stronger than 0.10
     max_death_points: 2.0,        // cap from body count contribution
-    per_injured_points: 0.02,     // modest signal for injuries
+    per_injured_points: 0.03,     // slightly stronger than 0.02
     max_injury_points: 0.6,
 
     // Optional language cues (OR of these raises severity a touch)
     violent_keywords_bonus: 0.2,
     violent_keywords: [
       "shooting","shot","stabbing","stabbed","homicide","murder",
-      "manslaughter","fatal crash","deadly crash","collision","mass casualty"
+      "manslaughter","fatal crash","deadly crash","collision","mass casualty",
+      "kidnapping","amber alert","hostage","gunfire","mass shooting",
+      "assault","carjacking","drive-by","bomb threat","arson"
     ]
   },
 
@@ -72,7 +76,7 @@
     btc_abs_move_threshold_pct: 7.0,   // absolute % (up or down)
     btc_points: 1.6,
 
-    // Major U.S. indices (S&P 500, Nasdaq, Dow)
+    // Major U.S./CA indices (S&P 500, Nasdaq, Dow, TSX/TSXV handled by regex)
     index_abs_move_threshold_pct: 1.0,
     index_points: 1.0,
 
@@ -84,50 +88,44 @@
     single_stock_abs_move_threshold_pct: 10.0,
     single_stock_points: 1.2,
 
-    // Time-of-day windows (ET)
+    // Time-of-day windows (ET) — reserved (front-end already has time-window boosts)
     time_windows: {
-      // During North American market hours, give business/markets a mild lift
       markets_open: { start: "09:30", end: "16:00", points: 0.6 },
-      // Asia session glance (helps Nikkei/HK leads land before dawn ET)
       asia_window:  { start: "01:20", end: "03:30", points: 0.5 },
     },
 
-    // Special macro / calendar boosts (applied ±window_hours around the event time)
+    // Special macro / calendar boosts — reserved for future server use
     special_dates: [
-      // Canada
       { key: "boc_rate_decision",     points: 1.6, window_hours: 30 },
       { key: "cpi_ca_release",        points: 1.2, window_hours: 24 },
       { key: "jobs_ca_release",       points: 1.1, window_hours: 24 },
 
-      // U.S.
       { key: "fed_fomc_decision",     points: 1.5, window_hours: 30 },
       { key: "cpi_us_release",        points: 1.2, window_hours: 24 },
       { key: "jobs_us_nonfarm",       points: 1.1, window_hours: 24 },
 
-      // U.K./EU (often market-relevant to CAD via FX)
       { key: "boe_rate_decision",     points: 1.0, window_hours: 24 },
       { key: "ecb_rate_decision",     points: 1.0, window_hours: 24 },
 
-      // Energy supply signals
-      { key: "opec_meeting",          points: 0.8, window_hours: 48 },
-    ],
+      { key: "opec_meeting",          points: 0.8, window_hours: 48 }
+    ]
   },
 
   // -------- Aggregators / press wires --------
   sources: {
-    aggregator_penalty: -0.5,  // demote Google News/Yahoo/Apple News/etc.
-    press_wire_penalty: -0.4,  // demote PRs unless nothing else exists
-    preferred_domains_bonus: 0.25, // small edge for primary/original sources
+    aggregator_penalty: -0.6,     // stronger demotion for Google News/Yahoo/Apple News/etc.
+    press_wire_penalty: -0.5,     // stronger demotion for PR wires
+    preferred_domains_bonus: 0.25 // small edge for primary/original sources
   },
 
-  // -------- Dedupe knobs (should mirror front-end) --------
+  // -------- Dedupe knobs --------
   dedupe: {
     // Jaccard on title tokens; anything ≥ this is “near-duplicate”
     jaccard_threshold: 0.62,
     // If two candidates collide, the newer & non-aggregator wins; these
     // weights just add a nudge to that tie-break logic:
     newer_bias_points: 0.3,
-    non_aggregator_bias_points: 0.3,
+    non_aggregator_bias_points: 0.3
   },
 
   // -------- Display effects thresholds --------
@@ -138,18 +136,17 @@
     lightsaber_also_if: {
       body_count_ge: 5,             // 5+ deaths
       btc_abs_move_ge_pct: 8.0,     // Bitcoin ±8% intraday
-      single_stock_abs_move_ge_pct: 15.0,
+      single_stock_abs_move_ge_pct: 15.0
     },
 
     // Subtle glitch/ambient highlight for notable-but-not-top stories
-    glitch_min_score: 1.8,
+    glitch_min_score: 1.8
   },
 
   // -------- Developing stories “static pill” --------
   developing: {
     max_manual_slots: 3,    // you can pin up to 3
     pin_bonus_points: 2.0,  // pinned items float above neighbors
-    unpin_decay_minutes: 180 // optional: if left pinned this long, apply -0.5 thereafter
+    unpin_decay_minutes: 180 // if left pinned this long, apply -0.5 thereafter
   }
 }
-
