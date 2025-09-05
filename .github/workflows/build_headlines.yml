@@ -87,7 +87,7 @@ jobs:
         if: steps.gate.outputs.should_run == 'true'
         run: |
           python -m pip install --upgrade pip
-          pip install feedparser requests
+          pip install feedparser requests json5
 
       - name: Build headlines.json
         if: steps.gate.outputs.should_run == 'true'
@@ -101,9 +101,12 @@ jobs:
           import json
           with open('headlines.json','r',encoding='utf-8') as f:
               d = json.load(f)
+          dbg = d.get("_debug", {})
           print("generated_utc:", d.get("generated_utc"))
           print("items:", d.get("count"))
-          print("feeds_total:", d.get("_debug",{}).get("feeds_total"))
+          print("feeds_total:", dbg.get("feeds_total"))
+          print("weights_loaded:", dbg.get("weights_loaded"))
+          print("weights_keys:", ", ".join(dbg.get("weights_keys", [])) or "(none)")
           print("first 3 titles:")
           for it in d.get("items",[])[:3]:
               print(" -", it.get("title","")[:140])
