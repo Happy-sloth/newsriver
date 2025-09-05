@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # scripts/fetch_headlines.py
 #
-# Build headlines.json from feeds.txt
+# Build headlines.json from feeds.txt (+ optional feeds_local.txt site seeds)
 # - Reads feeds.txt (grouped with "# --- Section ---" headers)
+# - Optionally reads feeds_local.txt (one site URL per line) and
+#   auto-discovers RSS/Atom feeds from those sites
 # - Fetches RSS/Atom feeds
 # - Normalizes & aggressively de-duplicates:
 #     1) fuzzy title hash
 #     2) near-duplicate pass (Jaccard on title tokens)
 # - Demotes aggregators/press wires; small per-domain caps
 # - Tags items with {category, region} inferred from section header
+#   (locals discovered from feeds_local.txt are tagged Local/Canada)
 # - Sorts newest-first and writes headlines.json
 #
 # Requires: feedparser, requests
@@ -18,13 +21,14 @@ import argparse
 import calendar
 import hashlib
 import json
+import os
 import re
 import sys
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import List, Tuple
-from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
+from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode, urljoin
 
 import feedparser  # type: ignore
 import requests    # type: ignore
@@ -34,12 +38,12 @@ import requests    # type: ignore
 MAX_PER_FEED = 14          # cap per feed before global caps
 MAX_TOTAL    = 320         # overall cap before de-dupe/sort
 HTTP_TIMEOUT = 12
-USER_AGENT   = "NewsRiverBot/1.1 (+https://mypybite.github.io/newsriver/)"
+USER_AGENT   = "NewsRiverBot/1.2 (+https://mypybite.github.io/newsriver/)"
 
 # Per-host caps to prevent any one domain flooding the river
 PER_HOST_MAX = {
     "toronto.citynews.ca": 8,
-    "financialpost.com": 6,  # you kept only housing, but this guards future adds
+    "financialpost.com": 6,  # guard future adds
 }
 
 # Prefer these domains when breaking ties (primary/original/regulators)
@@ -51,7 +55,7 @@ PREFERRED_DOMAINS = {
     "coindesk.com","cointelegraph.com",
 }
 
-# Press-wire domains & path hints (these often duplicate across outlets)
+# Press-wire domains & path hints (often duplicate across outlets)
 PRESS_WIRE_DOMAINS = {
     "globenewswire.com","newswire.ca","prnewswire.com","businesswire.com","accesswire.com"
 }
@@ -89,6 +93,16 @@ TITLE_STOPWORDS = {
 }
 PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
+# --- Local feed discovery (for feeds_local.txt) ---
+FEEDS_LOCAL_DEFAULT = "feeds_local.txt"
+FEED_DISCOVERY_MAX_PER_SITE = 4  # be polite
+FEED_DISCOVERY_PATHS = [
+    "/feed/", "/rss", "/rss/", "/rss.xml", "/feed.xml", "/feeds",
+    "/category/news/feed/", "/news/feed/",
+    "/en/news/rss.aspx", "/rss.aspx", "/news/rss.aspx", "/city-hall/rss.aspx",
+    "/Modules/News/rss", "/Modules/News/Feed.aspx", "/modules/news/rss",
+]
+
 
 # ---------------- Section → tag ----------------
 @dataclass
@@ -105,9 +119,9 @@ def infer_tag(section_header: str) -> Tag:
     if "YOUTH" in s or "POP" in s:           return Tag("Youth", "World")
     if "HOUSING" in s or "REAL ESTATE" in s: return Tag("Real Estate", "Canada")
     if "ENERGY" in s or "RESOURCES" in s:    return Tag("Energy", "Canada")
-    if "TECH" in s:                           return Tag("Tech", "Canada")
-    if "WEATHER" in s or "EMERGENCY" in s:    return Tag("Weather", "Canada")
-    if "TRANSIT" in s or "CITY SERVICE" in s: return Tag("Transit", "Canada")
+    if "TECH" in s:                          return Tag("Tech", "Canada")
+    if "WEATHER" in s or "EMERGENCY" in s:   return Tag("Weather", "Canada")
+    if "TRANSIT" in s or "CITY SERVICE" in s:return Tag("Transit", "Canada")
     if "COURTS" in s or "CRIME" in s or "PUBLIC SAFETY" in s:
                                              return Tag("Public Safety", "Canada")
     return Tag("General", "World")
@@ -157,7 +171,7 @@ def host_of(url: str) -> str:
 
 # ---------------- Title signatures ----------------
 def strip_source_tail(title: str) -> str:
-    # drop ' - Site' / ' | Site' suffixes
+    # drop ' - Site' / ' | Site' suffixes; normalize mdash to hyphen
     return (title or "").replace("\u2013", "-").replace("\u2014", "-").split(" | ")[0].split(" - ")[0]
 
 def title_tokens(title: str) -> list[str]:
@@ -209,6 +223,8 @@ class FeedSpec:
 def parse_feeds_txt(path: str) -> list[FeedSpec]:
     feeds: list[FeedSpec] = []
     current_tag = Tag("General", "World")
+    if not os.path.exists(path):
+        return feeds
     with open(path, "r", encoding="utf-8") as f:
         for raw in f:
             line = raw.strip()
@@ -220,6 +236,86 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
                 continue
             feeds.append(FeedSpec(url=line, tag=current_tag))
     return feeds
+
+
+# ---------------- Local site seeds (feeds_local.txt) ----------------
+def parse_local_sites(path: str) -> list[str]:
+    """Return list of site/homepage URLs from feeds_local.txt (ignore comments/blank lines)."""
+    sites: list[str] = []
+    if not os.path.exists(path):
+        return sites
+    with open(path, "r", encoding="utf-8") as f:
+        for raw in f:
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            sites.append(line)
+    return sites
+
+LINK_TAG_RE = re.compile(r"<link\b[^>]*?>", re.I)
+HREF_RE     = re.compile(r'href=["\']([^"\']+)["\']', re.I)
+
+def _discover_via_html(html: str, base: str) -> list[str]:
+    """Find <link rel=alternate type=rss/atom ... href=...> from HTML."""
+    out: list[str] = []
+    for m in LINK_TAG_RE.finditer(html):
+        tag = m.group(0)
+        low = tag.lower()
+        if "rel=" not in low or "alternate" not in low:
+            continue
+        if ("rss" not in low) and ("atom" not in low) and ("xml" not in low):
+            continue
+        hrefm = HREF_RE.search(tag)
+        if not hrefm:
+            continue
+        href = hrefm.group(1)
+        out.append(urljoin(base, href))
+    return out
+
+def _looks_like_feed_bytes(b: bytes) -> bool:
+    try:
+        parsed = feedparser.parse(b)
+        # treat as feed if we have at least one entry OR a feed title
+        return bool(parsed.entries) or bool(parsed.feed and parsed.feed.get("title"))
+    except Exception:
+        return False
+
+def discover_feed_urls(site_url: str) -> list[str]:
+    """Given a site URL, try to discover RSS/Atom feed URLs."""
+    found: list[str] = []
+    seen: set[str] = set()
+
+    # 1) Parse HTML for <link rel="alternate" ...>
+    html_bytes = http_get(site_url)
+    if html_bytes:
+        html = ""
+        try:
+            html = html_bytes.decode("utf-8", "ignore")
+        except Exception:
+            html = ""
+        for u in _discover_via_html(html, site_url):
+            cu = canonicalize_url(u)
+            if cu not in seen:
+                seen.add(cu)
+                found.append(cu)
+            if len(found) >= FEED_DISCOVERY_MAX_PER_SITE:
+                return found
+
+    # 2) Try common feed paths
+    for suffix in FEED_DISCOVERY_PATHS:
+        cand = canonicalize_url(urljoin(site_url, suffix))
+        if cand in seen:
+            continue
+        blob = http_get(cand)
+        if not blob:
+            continue
+        if _looks_like_feed_bytes(blob):
+            seen.add(cand)
+            found.append(cand)
+            if len(found) >= FEED_DISCOVERY_MAX_PER_SITE:
+                break
+
+    return found
 
 
 # ---------------- HTTP & date helpers ----------------
@@ -260,8 +356,31 @@ def _ts(iso: str) -> int:
 
 
 # ---------------- Build ----------------
-def build(feeds_file: str, out_path: str) -> dict:
+def build(feeds_file: str, out_path: str, feeds_local_file: str | None = FEEDS_LOCAL_DEFAULT) -> dict:
+    # 1) sectioned feeds
     specs = parse_feeds_txt(feeds_file)
+
+    # 2) local seeds → discover feed URLs → tag Local/Canada
+    local_sites = parse_local_sites(feeds_local_file) if feeds_local_file else []
+    discovered: list[str] = []
+    for site in local_sites:
+        try:
+            for f in discover_feed_urls(site):
+                discovered.append(f)
+        except Exception:
+            continue
+
+    # de-dupe discovered + existing
+    known_urls = {canonicalize_url(s.url) for s in specs}
+    new_specs: list[FeedSpec] = []
+    for u in discovered:
+        cu = canonicalize_url(u)
+        if cu and cu not in known_urls:
+            new_specs.append(FeedSpec(url=cu, tag=Tag("Local", "Canada")))
+            known_urls.add(cu)
+
+    # combine
+    specs.extend(new_specs)
 
     collected: list[dict] = []
     per_host_counts: dict[str,int] = {}
@@ -271,7 +390,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         if not blob:
             continue
         parsed = feedparser.parse(blob)
-        feed_title = (parsed.feed.get("title") or host_of(spec.url) or "").strip()
         entries = parsed.entries[:MAX_PER_FEED]
 
         for e in entries:
@@ -369,12 +487,15 @@ def build(feeds_file: str, out_path: str) -> dict:
         "count": len(survivors),
         "items": survivors,
         "_debug": {
-            "feeds_total": len(specs),
+            "feeds_total_from_file": len(parse_feeds_txt(feeds_file)),
+            "local_seeds": len(local_sites),
+            "local_feeds_discovered": len(discovered),
+            "feeds_total_all": len(specs),
             "cap_items": MAX_TOTAL,
             "collected": len(collected),
             "dedup_pass1": len(items),
             "dedup_final": len(survivors),
-            "version": "fetch-v1.2-ndup"
+            "version": "fetch-v1.3-local-discovery"
         }
     }
     with open(out_path, "w", encoding="utf-8") as f:
@@ -383,11 +504,12 @@ def build(feeds_file: str, out_path: str) -> dict:
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Build headlines.json from feeds.txt")
+    ap = argparse.ArgumentParser(description="Build headlines.json from feeds.txt (+ optional feeds_local.txt)")
     ap.add_argument("--feeds-file", default="feeds.txt", help="Path to feeds.txt")
+    ap.add_argument("--feeds-local-file", default=FEEDS_LOCAL_DEFAULT, help="Optional path to feeds_local.txt (site seeds)")
     ap.add_argument("--out", default="headlines.json", help="Output JSON file")
     args = ap.parse_args()
-    out = build(args.feeds_file, args.out)
+    out = build(args.feeds_file, args.out, args.feeds_local_file)
     print(f"Wrote {args.out} with {out['count']} items at {out['generated_utc']}")
     dbg = out.get("_debug", {})
     print("Debug:", dbg)
