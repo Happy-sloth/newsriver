@@ -6,7 +6,7 @@ on:
     paths:
       - 'feeds.txt'
       - 'scripts/**'
-      - 'config/**'                     # <- add weights/config changes
+      - 'config/**'                     # weights/config changes
       - '.github/workflows/build_headlines.yml'
   # Run every minute; a guard step decides whether to proceed
   schedule:
@@ -37,57 +37,57 @@ jobs:
         id: gate
         shell: bash
         run: |
-          if [ "$GITHUB_EVENT_NAME" != "schedule" ]; then
-            echo "RUN"
-            echo "bypass: event=$GITHUB_EVENT_NAME"
-          else
-            result=$(python - <<'PY'
-            from datetime import datetime
-            from zoneinfo import ZoneInfo
-
-            tz = ZoneInfo("America/Toronto")
-            now = datetime.now(tz)
-            m = now.hour * 60 + now.minute
-
-            def mins(h, mi): return h*60 + mi
-
-            # Windows (local Toronto time):
-            # 00:00–03:59 every 8m
-            # 04:00–07:30 every 45m (anchored at 04:00)
-            # 08:15–17:59 every 22m (anchored at 08:15)
-            # 18:22–23:59 every 55m (anchored at 18:22)
-            windows = [
-              ("overnight", mins(0,0),   mins(4,0),   8,  mins(0,0)),
-              ("early",     mins(4,0),   mins(7,30), 45,  mins(4,0)),
-              ("day",       mins(8,15),  mins(18,0), 22,  mins(8,15)),
-              ("evening",   mins(18,22), mins(24,0), 55,  mins(18,22)),
-            ]
-
-            should = False
-            reason = "outside all windows"
-            for name, start, end, step, anchor in windows:
-                if start <= m < end:
-                    if ((m - anchor) % step) == 0:
-                        should = True
-                        reason = f"{name} window match @ {now.strftime('%H:%M')}"
-                    else:
-                        reason = f"{name} window but not a step @ {now.strftime('%H:%M')}"
-                    break
-
-            print("RUN" if should else "SKIP")
-            print(reason)
-            PY
-            )
-            echo "$result"
+          # For push and manual runs, bypass the cron gating completely.
+          if [ "${GITHUB_EVENT_NAME}" != "schedule" ]; then
+            echo "Decision: RUN | bypass: event=${GITHUB_EVENT_NAME}"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=bypassed guard on ${GITHUB_EVENT_NAME}" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
+          # For cron (schedule) runs, apply the structured time windows.
+          result=$(python - <<'PY'
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+tz = ZoneInfo("America/Toronto")
+now = datetime.now(tz)
+m = now.hour * 60 + now.minute
+
+def mins(h, mi): return h*60 + mi
+
+# Windows (local Toronto time):
+# 00:00–03:59 every 8m
+# 04:00–07:30 every 45m (anchored at 04:00)
+# 08:15–17:59 every 22m (anchored at 08:15)
+# 18:22–23:59 every 55m (anchored at 18:22)
+windows = [
+  ("overnight", mins(0,0),   mins(4,0),   8,  mins(0,0)),
+  ("early",     mins(4,0),   mins(7,30), 45,  mins(4,0)),
+  ("day",       mins(8,15),  mins(18,0), 22,  mins(8,15)),
+  ("evening",   mins(18,22), mins(24,0), 55,  mins(18,22)),
+]
+
+should = False
+reason = "outside all windows"
+for name, start, end, step, anchor in windows:
+    if start <= m < end:
+        if ((m - anchor) % step) == 0:
+            should = True
+            reason = f"{name} window match @ {now.strftime('%H:%M')}"
+        else:
+            reason = f"{name} window but not a step @ {now.strftime('%H:%M')}"
+        break
+
+print("RUN" if should else "SKIP")
+print(reason)
+PY
+          )
+
           decision=$(echo "$result" | head -n1)
-          [ -z "$decision" ] && decision="RUN"  # when bypassing, we printed RUN above
-
           reason=$(echo "$result" | tail -n+2)
-          [ -z "$reason" ] && reason="bypass or schedule gate passed"
-
           echo "Decision: $decision | $reason"
+
           if [ "$decision" = "RUN" ]; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
           else
@@ -110,19 +110,19 @@ jobs:
         if: steps.gate.outputs.should_run == 'true'
         run: |
           python - <<'PY'
-          import json
-          with open('headlines.json','r',encoding='utf-8') as f:
-              d = json.load(f)
-          dbg = d.get("_debug", {})
-          print("generated_utc:", d.get("generated_utc"))
-          print("items:", d.get("count"))
-          print("feeds_total:", dbg.get("feeds_total"))
-          print("weights_loaded:", dbg.get("weights_loaded"))
-          print("weights_keys:", ", ".join(dbg.get("weights_keys", [])) or "(none)")
-          print("first 3 titles:")
-          for it in d.get("items",[])[:3]:
-              print(" -", it.get("title","")[:140])
-          PY
+import json
+with open('headlines.json','r',encoding='utf-8') as f:
+    d = json.load(f)
+dbg = d.get("_debug", {})
+print("generated_utc:", d.get("generated_utc"))
+print("items:", d.get("count"))
+print("feeds_total:", dbg.get("feeds_total"))
+print("weights_loaded:", dbg.get("weights_loaded"))
+print("weights_keys:", ", ".join(dbg.get("weights_keys", [])) or "(none)")
+print("first 3 titles:")
+for it in d.get("items",[])[:3]:
+    print(" -", it.get("title","")[:140])
+PY
 
       - name: Commit headlines.json (if changed)
         if: steps.gate.outputs.should_run == 'true'
