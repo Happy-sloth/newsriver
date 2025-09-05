@@ -33,24 +33,26 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: "Guard: honor structured schedule (America/Toronto) and bypass on push/manual"
+      - name: Gate (bypass for push/manual; cron windows only)
         id: gate
         shell: bash
+        env:
+          TZ_NAME: America/Toronto
         run: |
           # For push and manual runs, bypass the cron gating completely.
           if [ "${GITHUB_EVENT_NAME}" != "schedule" ]; then
-            echo "Decision: RUN | bypass: event=${GITHUB_EVENT_NAME}"
             echo "should_run=true" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=bypassed guard on ${GITHUB_EVENT_NAME}" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=bypass for ${GITHUB_EVENT_NAME}" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           # For cron (schedule) runs, apply the structured time windows.
-          result=$(python - <<'PY'
+          python - "$TZ_NAME" <<'PY' >> "$GITHUB_OUTPUT"
+import sys
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-tz = ZoneInfo("America/Toronto")
+tz = ZoneInfo(sys.argv[1])
 now = datetime.now(tz)
 m = now.hour * 60 + now.minute
 
@@ -79,21 +81,9 @@ for name, start, end, step, anchor in windows:
             reason = f"{name} window but not a step @ {now.strftime('%H:%M')}"
         break
 
-print("RUN" if should else "SKIP")
-print(reason)
+print(f"should_run={'true' if should else 'false'}")
+print(f"skip_reason={reason}")
 PY
-          )
-
-          decision=$(echo "$result" | head -n1)
-          reason=$(echo "$result" | tail -n+2)
-          echo "Decision: $decision | $reason"
-
-          if [ "$decision" = "RUN" ]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=$reason" >> "$GITHUB_OUTPUT"
-          fi
 
       - name: Install dependencies
         if: steps.gate.outputs.should_run == 'true'
