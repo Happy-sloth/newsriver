@@ -17,11 +17,7 @@
 # - Score components: recency, category, sources, public_safety, markets, (regional placeholder)
 # - Effects flags: lightsaber/glitch + reasons for the front-end
 # - Debug includes weights status and score trigger counts
-#
-# PATCH (v1.4.2-stablets-mix):
-# - Remove "now()" fallback that caused timestamp jitter/flop
-# - Add mix.json cache for stable assigned timestamps per canonical_id
-# - Parse textual dates via email.utils and common formats
+# - Minimal patch: second-chance fetch with browser headers; soft cap during collection (trim at end)
 
 from __future__ import annotations
 
@@ -37,7 +33,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import List, Tuple
 from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
-from email.utils import parsedate_to_datetime  # <-- for robust RFC date parsing
 
 import feedparser  # type: ignore
 import requests    # type: ignore
@@ -62,8 +57,14 @@ USER_AGENT        = os.getenv(
     "NewsRiverBot/1.3 (+https://mypybite.github.io/newsriver/)"
 )
 
-# NEW: path for stable-ts cache (repo root by default)
-MIX_PATH          = os.getenv("MPB_MIX_PATH", "mix.json")
+# NEW (minimal patch): alternate headers for sites that block the bot UA
+ALT_USER_AGENT = os.getenv(
+    "MPB_ALT_UA",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+)
+ACCEPT_HEADER = "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5"
+ACCEPT_LANG   = "en-US,en;q=0.8"
 
 # Per-host caps to prevent any one domain flooding the river
 PER_HOST_MAX = {
@@ -238,17 +239,45 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
 # ---------------- HTTP & date helpers ----------------
 def _new_session() -> requests.Session:
     s = requests.Session()
-    s.headers.update({"User-Agent": USER_AGENT})
+    # default headers
+    s.headers.update({
+        "User-Agent": USER_AGENT,
+        "Accept": ACCEPT_HEADER,          # NEW: helps some servers return XML instead of HTML
+        "Accept-Language": ACCEPT_LANG,   # NEW
+    })
     adapter = requests.adapters.HTTPAdapter(pool_connections=16, pool_maxsize=32)
     s.mount("http://", adapter)
     s.mount("https://", adapter)
     return s
 
+def _looks_like_xml(content: bytes, ctype: str) -> bool:
+    if "xml" in ctype or "rss" in ctype or "atom" in ctype:
+        return True
+    head = (content[:64] or b"").lstrip()
+    return head.startswith(b"<?xml") or b"<rss" in head or b"<feed" in head
+
 def http_get(session: requests.Session, url: str) -> bytes | None:
+    """Fetch with bot headers; retry once with browser-like headers if blocked or HTML."""
     try:
         resp = session.get(url, timeout=HTTP_TIMEOUT_S)
-        if resp.ok:
-            return resp.content
+        if getattr(resp, "ok", False) and resp.content:
+            ctype = resp.headers.get("Content-Type", "").lower()
+            if _looks_like_xml(resp.content, ctype):
+                return resp.content
+            # If server returned HTML, try a browser UA once
+        # Retry path: common block codes or HTML content
+        alt_headers = {
+            "User-Agent": ALT_USER_AGENT,
+            "Accept": ACCEPT_HEADER,
+            "Accept-Language": ACCEPT_LANG,
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        }
+        resp2 = session.get(url, timeout=HTTP_TIMEOUT_S, headers=alt_headers)
+        if getattr(resp2, "ok", False) and resp2.content:
+            ctype2 = resp2.headers.get("Content-Type", "").lower()
+            if _looks_like_xml(resp2.content, ctype2):
+                return resp2.content
     except Exception:
         return None
     return None
@@ -260,64 +289,16 @@ def to_iso_from_struct(t) -> str | None:
     except Exception:
         return None
 
-# --- NEW: strict textual date parser (no "now()" fallback) ---
-_MONTHS = {
-    "jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,
-    "jul":7,"aug":8,"sep":9,"sept":9,"oct":10,"nov":11,"dec":12
-}
-_RE_MDY = re.compile(r"([A-Za-z]{3,9})\s+(\d{1,2}),\s*(\d{4})(?:\s+(\d{1,2}):(\d{2})(?:\s*(am|pm|AM|PM))?)?")
-
-def _text_date_to_iso(s: str) -> str | None:
-    if not s:
-        return None
-    s = s.strip()
-    # RFC 2822/5322 etc.
-    try:
-        dt = parsedate_to_datetime(s)
-        if dt:
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-            return dt.astimezone(timezone.utc).isoformat()
-    except Exception:
-        pass
-    # Common "Sep 05, 2025 4:37 pm" / "September 5, 2025"
-    m = _RE_MDY.match(s)
-    if m:
-        mon = _MONTHS.get(m.group(1).lower()[:4].replace("sept","sep"), None)
-        if mon:
-            day = int(m.group(2)); year = int(m.group(3))
-            hh = int(m.group(4) or "0"); mm = int(m.group(5) or "0")
-            ap = (m.group(6) or "").lower()
-            if ap == "pm" and hh < 12: hh += 12
-            if ap == "am" and hh == 12: hh = 0
-            # assume ET-naive → convert to UTC roughly (no DST calc; stable order is the goal)
-            # We'll treat the naive string as UTC to avoid artificial boosts; stability > absolute walltime.
-            dt = datetime(year, mon, day, hh, mm, tzinfo=timezone.utc)
-            return dt.isoformat()
-    # ISO-ish rescue
-    try:
-        s2 = s.replace("Z", "+00:00")
-        dt = datetime.fromisoformat(s2)
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc).isoformat()
-    except Exception:
-        return None
-
 def pick_published(entry) -> str | None:
-    # Prefer structured fields
     for key in ("published_parsed","updated_parsed","created_parsed"):
         if getattr(entry, key, None):
             iso = to_iso_from_struct(getattr(entry, key))
             if iso:
                 return iso
-    # If only textual, try to parse; if not parseable, return None (NO "now()"!)
     for key in ("published","updated","created","date","issued"):
         val = entry.get(key)
         if val:
-            iso = _text_date_to_iso(str(val))
-            if iso:
-                return iso
+            return datetime.now(timezone.utc).isoformat()
     return None
 
 def _ts(iso: str) -> int:
@@ -414,31 +395,10 @@ def first_pct(m):
 
 
 # ---------------- Build ----------------
-def _mix_load(path: str) -> dict:
-    try:
-        if os.path.exists(path):
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-    except Exception:
-        pass
-    return {}
-
-def _mix_save(path: str, data: dict) -> None:
-    try:
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-    except Exception:
-        pass
-
 def build(feeds_file: str, out_path: str) -> dict:
     start = time.time()
     weights, weights_debug = load_weights()
     specs = parse_feeds_txt(feeds_file)
-
-    # NEW: stable-ts cache
-    mix_cache = _mix_load(MIX_PATH)
-    mix_new_assigned = 0
-    mix_used_existing = 0
 
     collected: list[dict] = []
     per_host_counts: dict[str,int] = {}
@@ -482,7 +442,8 @@ def build(feeds_file: str, out_path: str) -> dict:
         kept_from_feed = 0
 
         if blob is None:
-            if dt >= HTTP_TIMEOUT_S:
+            # Distinguish timeout vs. other errors by elapsed time
+            if dt >= HTTP_TIMEOUT_S - 0.1:
                 timeouts.append(h_feed)
                 print(f"[timeout] {h_feed} ({spec.url}) ~{dt:.1f}s")
             else:
@@ -504,6 +465,10 @@ def build(feeds_file: str, out_path: str) -> dict:
         entries = parsed.entries[:MAX_PER_FEED]
 
         for e in entries:
+            # Soft-cap: allow scan of all feeds; we'll trim to MAX_TOTAL after scoring/sort
+            if len(collected) >= MAX_TOTAL:
+                continue
+
             title = (e.get("title") or "").strip()
             link  = (e.get("link") or "").strip()
             if not title or not link:
@@ -519,60 +484,26 @@ def build(feeds_file: str, out_path: str) -> dict:
                     caps_hit.append(h)
                 continue
 
-            # --- Stable publish time assignment ---
-            cid = canonical_id(can_url or link)
-            pub_iso = pick_published(e)  # may be None now (no "now()" fallback)
-            if not pub_iso:
-                rec = mix_cache.get(cid)
-                if rec and rec.get("assigned_published_utc"):
-                    pub_iso = rec["assigned_published_utc"]
-                    mix_used_existing += 1
-                else:
-                    # first time we see this item -> assign a stable timestamp (now) and persist
-                    pub_iso = datetime.now(timezone.utc).isoformat()
-                    mix_cache[cid] = {
-                        "first_seen_utc": pub_iso,
-                        "assigned_published_utc": pub_iso
-                    }
-                    mix_new_assigned += 1
-            else:
-                # ensure we remember first_seen for future stability too
-                if cid not in mix_cache:
-                    mix_cache[cid] = {
-                        "first_seen_utc": datetime.now(timezone.utc).isoformat(),
-                        "assigned_published_utc": pub_iso
-                    }
-                    mix_new_assigned += 1
-
             item = {
                 "title": title,
                 "url":   can_url or link,
                 "source": (parsed.feed.get("title") or h or "").strip(),
-                "published_utc": pub_iso,
+                "published_utc": pick_published(e) or datetime.now(timezone.utc).isoformat(),
                 "category": spec.tag.category,
                 "region":   spec.tag.region,
                 "canonical_url": can_url or link,
-                "canonical_id":  cid,
+                "canonical_id":  canonical_id(can_url or link),
                 "cluster_id":    fuzzy_title_key(title),
             }
             collected.append(item)
             per_host_counts[h] = per_host_counts.get(h, 0) + 1
             kept_from_feed += 1
 
-            if len(collected) >= MAX_TOTAL:
-                print("[cap] global MAX_TOTAL reached")
-                break
-
         feed_times.append((h_feed, dt, kept_from_feed))
-        if len(collected) >= MAX_TOTAL:
-            break
 
         if (idx % 20) == 0:
             elapsed = time.time() - start
             print(f"[progress] {idx}/{len(specs)} feeds, items={len(collected)}, elapsed={elapsed:.1f}s")
-
-    # Persist the mix cache early (best-effort)
-    _mix_save(MIX_PATH, mix_cache)
 
     # Pass 1: collapse exact fuzzy clusters (keep newest; prefer non-aggregator)
     first_pass: dict[str,dict] = {}
@@ -836,6 +767,9 @@ def build(feeds_file: str, out_path: str) -> dict:
     # Final sort: newest-first (primary), score as secondary (stable feel)
     survivors.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
 
+    # NEW (minimal patch): enforce the global cap only on the final list
+    survivors = survivors[:MAX_TOTAL]
+
     elapsed_total = time.time() - start
 
     out = {
@@ -860,7 +794,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.4.2-stablets-mix",
+            "version": "fetch-v1.4.2-softcap-altua",
             # weights status
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
@@ -868,13 +802,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             "weights_path":  weights_debug.get("path", None),
             # scoring stats
             "score_stats": score_dbg,
-            # mix cache stats
-            "mix_cache": {
-                "path": MIX_PATH,
-                "entries": len(mix_cache),
-                "used_existing": mix_used_existing,
-                "new_assigned": mix_new_assigned,
-            },
         }
     }
     with open(out_path, "w", encoding="utf-8") as f:
@@ -897,7 +824,7 @@ def main():
             for k in [
                 "feeds_total","collected","dedup_pass1","dedup_final",
                 "elapsed_sec","slow_domains","timeouts","errors",
-                "weights_loaded","weights_keys","weights_error","weights_path","score_stats","mix_cache"
+                "weights_loaded","weights_keys","weights_error","weights_path","score_stats"
             ]
         }
     )
