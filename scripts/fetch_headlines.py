@@ -18,6 +18,7 @@
 # - Effects flags: lightsaber/glitch + reasons for the front-end
 # - Debug includes weights status and score trigger counts
 # - Minimal patch: second-chance fetch with browser headers; soft cap during collection (trim at end)
+# - Nate Silver: special-case scraper + tiny "hours-ago" bonus
 
 from __future__ import annotations
 
@@ -30,7 +31,7 @@ import re
 import sys
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import List, Tuple
 from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
 
@@ -42,6 +43,12 @@ try:
     import json5  # type: ignore
 except Exception:
     json5 = None  # ok locally; CI installs json5
+
+# Optional BeautifulSoup for robust HTML parsing (graceful fallback to regex)
+try:
+    from bs4 import BeautifulSoup  # type: ignore
+except Exception:
+    BeautifulSoup = None
 
 
 # ---------------- Tunables ----------------
@@ -57,13 +64,13 @@ USER_AGENT        = os.getenv(
     "NewsRiverBot/1.3 (+https://mypybite.github.io/newsriver/)"
 )
 
-# NEW (minimal patch): alternate headers for sites that block the bot UA
+# Alternate headers for sites that dislike bot UAs
 ALT_USER_AGENT = os.getenv(
     "MPB_ALT_UA",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 )
-ACCEPT_HEADER = "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5"
+ACCEPT_HEADER = "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, text/html;q=0.7, */*;q=0.5"
 ACCEPT_LANG   = "en-US,en;q=0.8"
 
 # Per-host caps to prevent any one domain flooding the river
@@ -79,6 +86,7 @@ PREFERRED_DOMAINS = {
     "bankofcanada.ca","federalreserve.gov","bls.gov","statcan.gc.ca",
     "sec.gov","cftc.gov","marketwatch.com",
     "coindesk.com","cointelegraph.com",
+    "fivethirtyeight.com",  # small nudge on ties
 }
 
 # Press-wire domains & path hints (these often duplicate across outlets)
@@ -239,11 +247,10 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
 # ---------------- HTTP & date helpers ----------------
 def _new_session() -> requests.Session:
     s = requests.Session()
-    # default headers
     s.headers.update({
         "User-Agent": USER_AGENT,
-        "Accept": ACCEPT_HEADER,          # NEW: helps some servers return XML instead of HTML
-        "Accept-Language": ACCEPT_LANG,   # NEW
+        "Accept": ACCEPT_HEADER,
+        "Accept-Language": ACCEPT_LANG,
     })
     adapter = requests.adapters.HTTPAdapter(pool_connections=16, pool_maxsize=32)
     s.mount("http://", adapter)
@@ -259,13 +266,12 @@ def _looks_like_xml(content: bytes, ctype: str) -> bool:
 def http_get(session: requests.Session, url: str) -> bytes | None:
     """Fetch with bot headers; retry once with browser-like headers if blocked or HTML."""
     try:
-        resp = session.get(url, timeout=HTTP_TIMEOUT_S)
+        resp = session.get(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
         if getattr(resp, "ok", False) and resp.content:
             ctype = resp.headers.get("Content-Type", "").lower()
             if _looks_like_xml(resp.content, ctype):
                 return resp.content
-            # If server returned HTML, try a browser UA once
-        # Retry path: common block codes or HTML content
+        # Retry path: common block/HTML cases
         alt_headers = {
             "User-Agent": ALT_USER_AGENT,
             "Accept": ACCEPT_HEADER,
@@ -273,7 +279,7 @@ def http_get(session: requests.Session, url: str) -> bytes | None:
             "Cache-Control": "no-cache",
             "Pragma": "no-cache",
         }
-        resp2 = session.get(url, timeout=HTTP_TIMEOUT_S, headers=alt_headers)
+        resp2 = session.get(url, timeout=HTTP_TIMEOUT_S, headers=alt_headers, allow_redirects=True)
         if getattr(resp2, "ok", False) and resp2.content:
             ctype2 = resp2.headers.get("Content-Type", "").lower()
             if _looks_like_xml(resp2.content, ctype2):
@@ -394,6 +400,103 @@ def first_pct(m):
         return None
 
 
+# ---------------- Special-case: Nate Silver page scraper ----------------
+REL_AGO = re.compile(r"\b(\d+)\s*(minute|minutes|hour|hours|day|days)\s+ago\b", re.I)
+
+def _hours_from_rel(s: str) -> float | None:
+    m = REL_AGO.search(s or "")
+    if not m:
+        return None
+    n = int(m.group(1))
+    unit = m.group(2).lower()
+    if unit.startswith("minute"):
+        return n / 60.0
+    if unit.startswith("hour"):
+        return float(n)
+    if unit.startswith("day"):
+        return float(n) * 24.0
+    return None
+
+def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
+    """Extract story cards from Nate Silver's contributor page (fivethirtyeight.com/contributors/nate-silver)."""
+    items: list[dict] = []
+    text = html.decode("utf-8", errors="ignore")
+
+    if BeautifulSoup is not None:
+        soup = BeautifulSoup(text, "html.parser")
+        blocks = soup.find_all(["article", "div"], attrs={"class": re.compile(r"(card|post|river|article|story)", re.I)})
+        seen = set()
+        for blk in blocks:
+            a = blk.find("a", href=re.compile(r"https?://fivethirtyeight\.com/[^\"#]+", re.I))
+            if not a:
+                continue
+            href = a.get("href") or ""
+            if not href or "contributors/" in href:
+                continue
+            title = (a.get_text(" ", strip=True) or "").strip()
+            if not title or len(title) < 8 or href in seen:
+                continue
+            seen.add(href)
+
+            # Relative "X hours ago" hint if present
+            age_hint = None
+            tnode = blk.find("time")
+            if tnode:
+                age_hint = _hours_from_rel(tnode.get_text(" ", strip=True))
+            if age_hint is None:
+                age_hint = _hours_from_rel(blk.get_text(" ", strip=True))
+
+            pub_dt = datetime.now(timezone.utc) - timedelta(hours=age_hint) if age_hint is not None else datetime.now(timezone.utc)
+            can_url = canonicalize_url(href)
+            items.append({
+                "title": title,
+                "url": can_url,
+                "source": "FiveThirtyEight — Nate Silver",
+                "published_utc": pub_dt.isoformat(),
+                "category": spec.tag.category,
+                "region": spec.tag.region,
+                "canonical_url": can_url,
+                "canonical_id": canonical_id(can_url),
+                "cluster_id": fuzzy_title_key(title),
+                "age_hint_hours": age_hint if age_hint is not None else None,
+            })
+            if len(items) >= MAX_PER_FEED:
+                break
+        return items
+
+    # Fallback regex if BeautifulSoup is unavailable
+    seen = set()
+    for chunk in re.split(r"(?i)<article\b", text):
+        m = re.search(r'href="(https?://fivethirtyeight\.com/[^"]+)"[^>]*>([^<]{8,})</a>', chunk, flags=re.I)
+        if not m:
+            continue
+        href = m.group(1)
+        if "contributors/" in href:
+            continue
+        title = re.sub(r"\s+", " ", m.group(2)).strip()
+        if not title or href in seen:
+            continue
+        seen.add(href)
+        age_hint = _hours_from_rel(chunk)
+        pub_dt = datetime.now(timezone.utc) - timedelta(hours=age_hint) if age_hint is not None else datetime.now(timezone.utc)
+        can_url = canonicalize_url(href)
+        items.append({
+            "title": title,
+            "url": can_url,
+            "source": "FiveThirtyEight — Nate Silver",
+            "published_utc": pub_dt.isoformat(),
+            "category": spec.tag.category,
+            "region": spec.tag.region,
+            "canonical_url": can_url,
+            "canonical_id": canonical_id(can_url),
+            "cluster_id": fuzzy_title_key(title),
+            "age_hint_hours": age_hint if age_hint is not None else None,
+        })
+        if len(items) >= MAX_PER_FEED:
+            break
+    return items
+
+
 # ---------------- Build ----------------
 def build(feeds_file: str, out_path: str) -> dict:
     start = time.time()
@@ -442,7 +545,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         kept_from_feed = 0
 
         if blob is None:
-            # Distinguish timeout vs. other errors by elapsed time
             if dt >= HTTP_TIMEOUT_S - 0.1:
                 timeouts.append(h_feed)
                 print(f"[timeout] {h_feed} ({spec.url}) ~{dt:.1f}s")
@@ -455,22 +557,41 @@ def build(feeds_file: str, out_path: str) -> dict:
             slow_domains[h_feed] = slow_domains.get(h_feed, 0) + 1
             print(f"[slow]    {h_feed} took {dt:.2f}s")
 
+        # Try RSS/Atom first
+        parsed_ok = False
+        entries = []
         try:
             parsed = feedparser.parse(blob)
+            entries = parsed.entries[:MAX_PER_FEED]
+            parsed_ok = True
         except Exception as e:
             errors.append(h_feed)
             print(f"[parse]   error {h_feed}: {e}")
-            continue
 
-        entries = parsed.entries[:MAX_PER_FEED]
+        # Special-case HTML scraper for Nate Silver page if RSS empty
+        if (not entries) and ("fivethirtyeight.com/contributors/nate-silver" in spec.url):
+            try:
+                scraped = scrape_nate_silver(blob, spec)
+                for it in scraped:
+                    h = host_of(it["url"])
+                    cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
+                    if per_host_counts.get(h, 0) >= cap:
+                        if h and h not in caps_hit:
+                            caps_hit.append(h)
+                        continue
+                    collected.append(it)
+                    per_host_counts[h] = per_host_counts.get(h, 0) + 1
+                    kept_from_feed += 1
+                feed_times.append((h_feed, dt, kept_from_feed))
+                continue  # move to next feed
+            except Exception as e:
+                errors.append(h_feed)
+                print(f"[scrape]  error {h_feed}: {e}")
 
+        # Normal RSS path
         for e in entries:
-            # Soft-cap: allow scan of all feeds; we'll trim to MAX_TOTAL after scoring/sort
-            if len(collected) >= MAX_TOTAL:
-                continue
-
             title = (e.get("title") or "").strip()
-            link  = (e.get("link") or "").strip()
+            link  = (e.get("link")  or "").strip()
             if not title or not link:
                 continue
 
@@ -487,7 +608,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             item = {
                 "title": title,
                 "url":   can_url or link,
-                "source": (parsed.feed.get("title") or h or "").strip(),
+                "source": (parsed.feed.get("title") or h or "").strip() if parsed_ok else (h or "").strip(),
                 "published_utc": pick_published(e) or datetime.now(timezone.utc).isoformat(),
                 "category": spec.tag.category,
                 "region":   spec.tag.region,
@@ -604,6 +725,10 @@ def build(feeds_file: str, out_path: str) -> dict:
     also_btc  = float(W(weights, "effects.lightsaber_also_if.btc_abs_move_ge_pct", 8.0))
     also_stk  = float(W(weights, "effects.lightsaber_also_if.single_stock_abs_move_ge_pct", 15.0))
     glitch_min= float(W(weights, "effects.glitch_min_score", 1.8))
+
+    # Nate Silver hint config (slight bonus if page shows “X hours ago”)
+    nate_bonus           = float(W(weights, "reorder.nate_hours_hint_bonus", 0.25))
+    nate_bonus_max_hours = float(W(weights, "reorder.nate_hours_hint_max_hours", 6.0))
 
     def violent_kw_hit(title: str) -> bool:
         t = title.lower()
@@ -724,6 +849,12 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["regional"] = round(reg_bonus, 4)
             total += reg_bonus
 
+        # Nate "hours-ago" hint (small freshness boost)
+        ah = it.get("age_hint_hours", None)
+        if ah is not None and ah <= nate_bonus_max_hours:
+            comps["nate_hours_hint_bonus"] = nate_bonus
+            total += nate_bonus
+
         # Effects (lightsaber/glitch)
         effects = {"lightsaber": False, "glitch": False, "reasons": []}
         if total >= ls_min:
@@ -742,7 +873,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             effects["glitch"] = True
             effects["reasons"].append(f"score≥{glitch_min}")
 
-        # >>> NEW: provide a style string + top-level mirrors for the UI <<<
+        # Provide a style string + top-level mirrors for the UI
         style = "lightsaber" if effects["lightsaber"] else ("glitch" if effects["glitch"] else "")
         if style:
             effects["style"] = style
@@ -750,7 +881,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             it["lightsaber"] = True
         if effects["glitch"]:
             it["glitch"] = True
-        # <<< END NEW >>>
 
         if effects["lightsaber"]:
             score_dbg["effects_lightsaber"] += 1
@@ -767,7 +897,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     # Final sort: newest-first (primary), score as secondary (stable feel)
     survivors.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
 
-    # NEW (minimal patch): enforce the global cap only on the final list
+    # Enforce the global cap only on the final list
     survivors = survivors[:MAX_TOTAL]
 
     elapsed_total = time.time() - start
@@ -794,7 +924,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.4.2-softcap-altua",
+            "version": "fetch-v1.4.3-softcap-altua-nate",
             # weights status
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
