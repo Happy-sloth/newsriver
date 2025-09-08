@@ -1,36 +1,45 @@
-{
+{ 
   // weights.json5 — server-side scoring knobs for mypybite
-  // Version: v0.3 (fatalities-first + stronger Canadian bias + market triggers)
+  // Version: v0.4 (entertainment/human-interest boosts + trends assist + Canada bias)
   // TZ for windows/special dates
   timezone: "America/Toronto",
 
-  // -------- Recency & decay --------
+  // -------- Recency & decay (global defaults) --------
   recency: {
     // Soft time-decay: exponential half-life; newer items fade slower
-    half_life_hours: 6,           // every 6h, "freshness" halves
-    max_age_hours: 72,            // drop items older than this (server may still filter)
+    half_life_hours: 6,            // every 6h, "freshness" halves
+    max_age_hours: 72,             // drop items older than this (server may still filter)
     // Extra penalties
-    age_penalty_after_24h: -0.6,  // once >24h old, apply this once
-    age_penalty_after_36h: -0.4,  // once >36h old, apply this once (stacks with 24h)
+    age_penalty_after_24h: -0.6,   // once >24h old, apply this once
+    age_penalty_after_36h: -0.4,   // once >36h old, apply this once (stacks with 24h)
     // If a newer item in the same cluster exists (same story, developed):
     superseded_cluster_penalty: -0.9,
   },
 
+  // Per-category overrides (optional; if not implemented, safely ignore)
+  recency_overrides: {
+    categories: {
+      // Entertainment moves fast: surface briefly, expire sooner
+      "Culture": { half_life_hours: 4, max_age_hours: 48 },
+      "Youth":   { half_life_hours: 4, max_age_hours: 48 },
+    }
+  },
+
   // -------- Reordering stability (prevents jarring reshuffles on hard reset) --------
   reorder: {
-    protect_top_n: 8,            // top N “stick” unless a rival beats them by min_reorder_delta
-    min_reorder_delta: 1.25,     // need this many points advantage to leapfrog
-    grace_period_minutes: 3,     // after hard reload, freeze order for this long
-    rank_drift_tolerance: 0.5,   // tiny score wiggles inside this band do not reorder
+    protect_top_n: 8,             // top N “stick” unless a rival beats them by min_reorder_delta
+    min_reorder_delta: 1.25,      // need this many points advantage to leapfrog
+    grace_period_minutes: 3,      // after hard reload, freeze order for this long
+    rank_drift_tolerance: 0.5,    // tiny score wiggles inside this band do not reorder
   },
 
   // -------- Regional bias (Canada → Province → City) --------
   regional: {
     weights: {
-      country_match: 1.2,    // item.region == "Canada"  (used by server today)
-      province_match: 0.8,   // reserved for future
-      city_match: 0.6,       // reserved for future
-      adjacent_province: 0.3 // reserved for future
+      country_match: 1.2,     // item.region == "Canada"
+      province_match: 0.8,    // reserved for future
+      city_match: 0.6,        // reserved for future
+      adjacent_province: 0.3  // reserved for future
     },
     // Cap how much regional bias can add in total:
     max_bonus: 2.4
@@ -47,8 +56,8 @@
     "Energy": 0.2,
     "Real Estate": 0.15,
     "Tech": 0.15,
-    "Culture": 0.0,
-    "Youth": 0.0,
+    "Culture": 0.25,   // was 0.0
+    "Youth": 0.25,     // was 0.0
     "General": 0.0
   },
 
@@ -70,7 +79,7 @@
     ]
   },
 
-  // -------- Market triggers (intraday & overnight) --------
+  // -------- Markets (intraday & overnight) --------
   markets: {
     // Bitcoin / crypto
     btc_abs_move_threshold_pct: 7.0,   // absolute % (up or down)
@@ -111,11 +120,63 @@
     ]
   },
 
+  // -------- Entertainment / Human-interest boosts --------
+  entertainment: {
+    // Keywords that indicate releases / pop-culture events
+    release_keywords: [
+      "premiere","trailer","season","finale","episode","cast","casting",
+      "box office","album","single","ep","tracklist","tour","concert",
+      "festival","red carpet","press junket","teaser","first look","review",
+      "renewed","canceled","soundtrack","chart","debut"
+    ],
+    keyword_points_per_match: 0.35,    // +0.35 each match
+    keyword_points_cap: 0.8,           // cap from keywords
+
+    // Named-entity bonus when PERSON/WORK detected AND domain is a trade below
+    trade_entity_bonus: 0.3,
+    trade_entity_cap: 0.6,
+    trade_domains: [
+      "variety.com","hollywoodreporter.com","deadline.com","thewrap.com",
+      "rollingstone.com","people.com","billboard.com","ew.com","worldofreel.com",
+      "showbiz411.com","tmz.com"
+    ],
+
+    // Time-window nudges (ET) to float human-interest at the right times
+    time_windows: [
+      { key: "evening_pop", start: "18:30", end: "00:30", points: 0.5 },  // after work
+      { key: "weekend_pop", days: ["Fri","Sat","Sun"], start: "11:00", end: "23:00", points: 0.4 },
+      { key: "music_release", days: ["Thu","Fri","Sat"], start: "20:00", end: "14:00", points: 0.4 }, // Fri global drops
+      { key: "box_office", days: ["Sun","Mon"], start: "09:00", end: "12:00", points: 0.4 }
+    ]
+  },
+
+  // -------- Google Trends assist (short TTL, light touch) --------
+  trends: {
+    enabled: true,
+    provider: "google_trends",
+    geo: "CA",                     // focus on Canada; widen to "US" or "CA,US" if needed
+    top_n: 30,                     // keep top 30 rising tokens
+    fields_to_match: ["title","summary"],
+    // Map normalized trend (0..1) → bonus
+    match_bonus_min: 0.2,
+    match_bonus_max: 1.0,
+    half_life_hours: 12,           // decays quickly
+    ttl_hours: 24,
+    cap_total_points: 1.2          // overall cap per item from trends
+  },
+
   // -------- Aggregators / press wires --------
   sources: {
-    aggregator_penalty: -0.6,     // stronger demotion for Google News/Yahoo/Apple News/etc.
-    press_wire_penalty: -0.5,     // stronger demotion for PR wires
-    preferred_domains_bonus: 0.25 // small edge for primary/original sources
+    aggregator_penalty: -0.6,      // stronger demotion for Google News/Yahoo/Apple News/etc.
+    press_wire_penalty: -0.5,      // stronger demotion for PR wires
+    preferred_domains_bonus: 0.25  // small edge for primary/original sources
+  },
+
+  // (Optional) Source limits (if supported by server; otherwise ignore)
+  // Helps prevent any one domain from flooding the visible top ranks.
+  source_limits: {
+    top_caps: { top8: 1, top20: 2 }, // max per-domain in top 8/top 20
+    burst_control: { items: 6, window_minutes: 30, penalty: -0.7 } // throttle chatty feeds
   },
 
   // -------- Dedupe knobs --------
@@ -134,8 +195,8 @@
     lightsaber_min_score: 2.5,
     // Also trigger if any of these hard conditions are met:
     lightsaber_also_if: {
-      body_count_ge: 5,             // 5+ deaths
-      btc_abs_move_ge_pct: 8.0,     // Bitcoin ±8% intraday
+      body_count_ge: 5,              // 5+ deaths
+      btc_abs_move_ge_pct: 8.0,      // Bitcoin ±8% intraday
       single_stock_abs_move_ge_pct: 15.0
     },
 
@@ -145,8 +206,8 @@
 
   // -------- Developing stories “static pill” --------
   developing: {
-    max_manual_slots: 3,    // you can pin up to 3
-    pin_bonus_points: 2.0,  // pinned items float above neighbors
+    max_manual_slots: 3,     // you can pin up to 3
+    pin_bonus_points: 2.0,   // pinned items float above neighbors
     unpin_decay_minutes: 180 // if left pinned this long, apply -0.5 thereafter
   }
 }
