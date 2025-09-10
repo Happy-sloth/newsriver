@@ -152,9 +152,9 @@
       <div id="signupTitle">Get our best headlines by email</div>
       <button class="x" type="button" aria-label="Close" id="signupClose">×</button>
     </div>
-    <div class="sub">By Subscribing you gain insight into totally free trade secrets and technicals. As Well as constructive diatribes. Take the 7 seconds to provide your email and over time you will have helped grow the kind of community that will not shill you.</div>
+    <div class="sub">By Subscribing you gain insight into totally free trade secrets and technicals. As well as constructive diatribes. Take the 7 seconds to provide your email and over time you will have helped grow the kind of community that will not shill you.</div>
     <div class="row">
-      <a id="signupsayNOtogrift" class="btn primary" href="https://mypybite.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      <a id="signupGo" class="btn primary" href="https://mypybite.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
       <button id="signupDismiss" class="btn ghost" type="button">No thanks</button>
     </div>
   </div>
@@ -325,7 +325,7 @@
           continue;
         }
         const tNew = Date.parse(it.published_utc || it.published || 0) || 0;
-        const tOld = Date.parse(prev.published_utc || prev.published || 0) || 0;
+               const tOld = Date.parse(prev.published_utc || prev.published || 0) || 0;
 
         if (tNew > tOld) {
           byKey.set(key, it);
@@ -640,7 +640,7 @@
       setInterval(async () => {
         try {
           const data = await loadJson();
-        if (!data) return;
+          if (!data) return;
 
           const stamp = data.generated_utc || null;
           if (stamp && stamp !== lastStamp) {
@@ -740,19 +740,19 @@
       // Wire controls
       btnX.addEventListener('click', () => {
         const s = getState();
-        s.dismissed_until = now + days(30);
+        s.dismissed_until = now + days(14);   // 14-day cooldown on dismiss
         setState(s);
         hide();
       });
       btnNo.addEventListener('click', () => {
         const s = getState();
-        s.dismissed_until = now + days(30);
+        s.dismissed_until = now + days(14);   // 14-day cooldown on "No thanks"
         setState(s);
         hide();
       });
       linkYes.addEventListener('click', () => {
         const s = getState();
-        s.subscribed_until = now + days(60); // longer cooldown if they clicked subscribe
+        s.subscribed_until = now + days(60);  // longer cooldown if they clicked subscribe
         setState(s);
         hide();
       });
@@ -768,8 +768,8 @@
       const gate = Math.max(s.dismissed_until || 0, s.subscribed_until || 0);
       if (gate && now < gate) return;
 
-      // First paint: delay a bit, then show
-      setTimeout(show, 12000); // ~12s after load
+      // First paint: delay, then show (~7s)
+      setTimeout(show, 7000);
     })();
   </script>
 </body>
