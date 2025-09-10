@@ -98,9 +98,36 @@
       "financialpost.com": 2
     };
 
+    // Sports sites that may allow +1 cap in the evening window
+    const SPORTS_SITES = new Set([
+      "mlb.com",
+      "espn.com",
+      "sportsnet.ca",
+      "tsn.ca",
+      "theathletic.com",
+      "cbssports.com",
+      "bleacherreport.com",
+      "sports.yahoo.com"
+    ]);
+
     // ---------- Utilities ----------
     const TZ = 'America/Toronto';
-    const DEBUG_BOOSTS = new URLSearchParams(location.search).get('debug') === 'boosts';
+    const QS = new URLSearchParams(location.search);
+
+    // Dev/testing flags:
+    //   ?debug=boosts  -> show badges with minutes + reasons
+    //   ?noboost=1     -> disable boosts (recency only)
+    //   ?hr=17         -> simulate 17:00 (5pm) ET daypart
+    //   ?snark=1       -> apply display-only XRP/Ripple renames
+    const DEBUG_BOOSTS = QS.get('debug') === 'boosts';
+    const NO_BOOSTS = QS.has('noboost');
+    const HR_OVERRIDE = (()=>{
+      const v = QS.get('hr');
+      if (v == null) return null;
+      const n = Number(v);
+      return Number.isFinite(n) && n >= 0 && n <= 23 ? n : null;
+    })();
+    const SNARKY_RENAMES = QS.has('snark');
 
     // (debug) lightweight CSS for badges, injected only when needed
     if (DEBUG_BOOSTS) {
@@ -136,6 +163,7 @@
     const clearGrid = () => { GRID.innerHTML = ''; };
 
     function hourInTZ(){
+      if (HR_OVERRIDE != null) return HR_OVERRIDE;
       const p = new Intl.DateTimeFormat('en-CA',{ timeZone: TZ, hour: '2-digit', hour12: false })
         .formatToParts(new Date());
       const hh = Number(p.find(x=>x.type==='hour').value);
@@ -230,12 +258,22 @@
     }
 
     // ---------- Per-source cap (variety guard) ----------
-    function applySourceCap(sortedItems) {
+    function capForDomain(domain, hour){
+      let limit = CAP_OVERRIDES[domain] ?? CAP_PER_SOURCE_DEFAULT;
+      const evening = hour >= 15 && hour <= 23;
+      if (evening && SPORTS_SITES.has(domain)) {
+        // allow one extra slot for key sports outlets in the evening
+        limit = Math.max(limit, 2);
+      }
+      return limit;
+    }
+
+    function applySourceCap(sortedItems, hour) {
       const counts = Object.create(null);
       const out = [];
       for (const it of sortedItems) {
         const key = sourceKey(it);
-        const limit = CAP_OVERRIDES[key] ?? CAP_PER_SOURCE_DEFAULT;
+        const limit = capForDomain(key, hour);
         const n = counts[key] || 0;
         if (n < limit) {
           out.push(it);
@@ -243,6 +281,14 @@
         }
       }
       return out;
+    }
+
+    // ---------- Display-only title transforms (optional) ----------
+    function transformTitleForDisplay(t){
+      if (!SNARKY_RENAMES) return t || '';
+      return String(t || '')
+        .replace(/\bXRP\b/gi, 'Shitcoin')
+        .replace(/\bRipple\b/gi, 'Maker of shitcoins');
     }
 
     // ---------- Render ----------
@@ -261,7 +307,7 @@
 
       const h2 = document.createElement('h2');
       h2.className = 'headline';
-      h2.textContent = item.title || '(untitled)';
+      h2.textContent = transformTitleForDisplay(item.title || '(untitled)');
 
       link.appendChild(h2);
 
@@ -334,8 +380,8 @@
     // The “5% stronger” nudges are implemented as small additive time credits.
 
     const MINUTE = 60 * 1000;
-    const BUMP_5 = 12 * MINUTE;            // ~5% nudge unit
-    const BUMP_8 = 18 * MINUTE;            // slightly stronger
+    const BUMP_5  = 12 * MINUTE;           // ~5% nudge unit
+    const BUMP_8  = 18 * MINUTE;           // slightly stronger
     const BUMP_10 = 24 * MINUTE;           // stronger
     const WAR_BUMP = 60 * MINUTE;          // high-priority war/security
     const TIER1_BUMP = 6 * MINUTE;         // mild nudge for tier-1 sources
@@ -348,21 +394,24 @@
 
     // Business/markets (morning)
     const RE_CRYPTO = /\b(crypto|bitcoin|btc|ethereum|eth|halving|stablecoin|defi|satoshi)\b/i;
-    const RE_MEME = /\b(gamestop|gme|amc)\b/i;
-    const RE_TECH = /\b(nvda|nvidia|msft|microsoft|aapl|apple|amzn|amazon|googl?|google|alphabet|meta|facebook|tsla|tesla|ai|chip(?:s|makers)?|semiconductor)\b/i;
+    const RE_MEME   = /\b(gamestop|gme|amc)\b/i;
+    const RE_TECH   = /\b(nvda|nvidia|msft|microsoft|aapl|apple|amzn|amazon|googl?|google|alphabet|meta|facebook|tsla|tesla|ai|chip(?:s|makers)?|semiconductor)\b/i;
 
     // War/security (always-on) — must match a region + an event word
-    const RE_WAR_EVENT = /\b(war|attack|attacks|attacked|strike|air[-\s]?strike|missile|drone|invasion|mobilization|shell(?:ing)?|artillery|frontline|casualties?|dead|killed)\b/i;
+    const RE_WAR_EVENT  = /\b(war|attack|attacks|attacked|strike|air[-\s]?strike|missile|drone|invasion|mobilization|shell(?:ing)?|artillery|frontline|casualties?|dead|killed)\b/i;
     const RE_WAR_REGION = /\b(russia|ukraine|poland|serbia|croatia|bosnia|herzegovina|kosovo|montenegro|slovenia|macedonia|albania|hungary|slovakia|czech|austria|romania|bulgaria|balkan|central europe|canada|united states|u\.s\.|usa)\b/i;
 
     // Sports (afternoon/evening) — teams and athletes
-    const RE_SPORTS_TEAMS = /\b(toronto (blue\s?jays|maple\s?leafs|raptors)|new york yankees|boston red sox|detroit tigers|los angeles dodgers)\b/i;
+    const RE_SPORTS_TEAMS = /\b(toronto (blue\s?jays|jays|maple\s?leafs|leafs|raptors|raps)|new york yankees|yankees|boston red sox|red sox|detroit tigers|los angeles dodgers|dodgers)\b/i;
+    const RE_SPORTS_ABBR  = /\b(NYY|BOS|DET|LAD)\b/;
     const RE_SPORTS_ATHLETES = /\b(shohei ohtani|vladimir guerrero(?: jr\.?)?|george springer|bo bichette|max scherzer|alejandro kirk)\b/i;
     const RE_KIRK = /\balejandro kirk\b/i;
-    // “Final”/closure words or scorelines like 3-1 / 10–2
-    const RE_FINALS_CUE = /\b(final|wins?|defeats?|beats?|edges?|falls?|prevails?|clinches?|walk-off|walkoff)\b|(?:\b\d{1,2}\s?[–-]\s?\d{1,2}\b)/i;
+    // “Final”/closure words or scorelines like 3-1 / 10–2 / "final score"
+    const RE_FINALS_CUE = /\b(final(?: score)?|wins?|defeats?|beats?|edges?|falls?|prevails?|clinches?|walk-?off)\b|(?:\b\d{1,2}\s?[–-]\s?\d{1,2}\b)/i;
 
     function computeBoost(it, hour){
+      if (NO_BOOSTS) return { ms: 0, reasons: [] };
+
       const title = String(it?.title || '');
       const source = String(it?.source || '');
       let boost = 0;
@@ -384,6 +433,7 @@
       // Afternoon/Evening 15:00–23:30 → sports dopamine
       if (hour >= 15 && hour <= 23){
         if (RE_SPORTS_TEAMS.test(title))     { boost += BUMP_8; reasons.push('team'); }
+        if (RE_SPORTS_ABBR.test(title))      { boost += BUMP_5; reasons.push('abbr'); }
         if (RE_SPORTS_ATHLETES.test(title))  { boost += ATHLETE_BUMP; reasons.push('athlete'); }
         if (RE_KIRK.test(title))             { boost += KIRK_EXTRA; reasons.push('kirk+'); }
         if (RE_FINALS_CUE.test(title))       { boost += FINALS_BUMP; reasons.push('final'); }
@@ -431,8 +481,8 @@
       // C) score by recency + daypart/topic boosts
       scoringSort(items);
 
-      // D) cap per source to keep variety (default 1 unless overridden)
-      items = applySourceCap(items);
+      // D) cap per source to keep variety (default 1 unless overridden/relaxed by window)
+      items = applySourceCap(items, hourInTZ());
 
       return { ...data, items };
     }
