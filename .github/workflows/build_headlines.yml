@@ -30,6 +30,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install feedparser requests json5 beautifulsoup4
 
+      # NEW: make sure the Substack RSS feed is present in feeds.txt (no duplicate lines)
+      - name: Ensure Substack feed in feeds.txt
+        run: |
+          touch feeds.txt
+          if ! grep -q '^https://mypybite.substack.com/feed$' feeds.txt; then
+            echo 'https://mypybite.substack.com/feed' >> feeds.txt
+          fi
+          echo "Using feeds:"
+          cat feeds.txt
+
       - name: Build headlines.json
         env:
           NEWSRIVER_TIMEZONE: America/Toronto
