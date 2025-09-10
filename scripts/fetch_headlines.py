@@ -19,6 +19,10 @@
 # - Debug includes weights status and score trigger counts
 # - Minimal patch: second-chance fetch with browser headers; soft cap during collection (trim at end)
 # - Nate Silver: special-case scraper + tiny "hours-ago" bonus
+# - **MyPyBiTE Substack integration**:
+#     • Items from https://mypybite.substack.com are labeled "MyPyBiTE Substack"
+#     • Always tagged with effects.glitch = true and effects.decay_at = published + 24h
+#       (does not override a stronger "lightsaber" if present)
 
 from __future__ import annotations
 
@@ -120,6 +124,9 @@ TITLE_STOPWORDS = {
 }
 PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
+# --- MyPyBiTE Substack host ---
+MPB_SUBSTACK_HOST = "mypybite.substack.com"
+
 
 # ---------------- Section → tag ----------------
 @dataclass
@@ -162,7 +169,7 @@ def canonicalize_url(url: str) -> str:
         query = urlencode(query_pairs, doseq=True)
         if path != "/" and path.endswith("/"):
             path = path[:-1]
-        return urlunparse((scheme, netloc, path, "", query, ""))
+        return urlunparse((scheme, netloc, path, "", query, ""))  # drop fragment
     except Exception:
         return url
 
@@ -318,6 +325,20 @@ def hours_since(iso: str, now_ts: float) -> float:
     if t == 0:
         return 1e9
     return max(0.0, (now_ts - t) / 3600.0)
+
+def iso_add_hours(iso_s: str | None, hours: float) -> str:
+    """Return ISO-UTC string for iso_s + hours (default to now if iso invalid)."""
+    base = None
+    if iso_s:
+        try:
+            base = datetime.fromisoformat(iso_s.replace("Z","+00:00"))
+        except Exception:
+            base = None
+    if base is None:
+        base = datetime.now(timezone.utc)
+    if base.tzinfo is None:
+        base = base.replace(tzinfo=timezone.utc)
+    return (base + timedelta(hours=hours)).astimezone(timezone.utc).isoformat().replace("+00:00","Z")
 
 
 # ---------------- Weights loader (json5) ----------------
@@ -526,6 +547,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         "agg_penalties": 0,
         "press_penalties": 0,
         "preferred_bonus": 0,
+        "substack_tagged": 0,        # <—— NEW: count how many substack posts tagged
     }
 
     session = _new_session()
@@ -605,10 +627,15 @@ def build(feeds_file: str, out_path: str) -> dict:
                     caps_hit.append(h)
                 continue
 
+            # Source label: make Substack explicit
+            source_label = (parsed.feed.get("title") or h or "").strip() if parsed_ok else (h or "").strip()
+            if h == MPB_SUBSTACK_HOST:
+                source_label = "MyPyBiTE Substack"
+
             item = {
                 "title": title,
                 "url":   can_url or link,
-                "source": (parsed.feed.get("title") or h or "").strip() if parsed_ok else (h or "").strip(),
+                "source": source_label,
                 "published_utc": pick_published(e) or datetime.now(timezone.utc).isoformat(),
                 "category": spec.tag.category,
                 "region":   spec.tag.region,
@@ -873,6 +900,18 @@ def build(feeds_file: str, out_path: str) -> dict:
             effects["glitch"] = True
             effects["reasons"].append(f"score≥{glitch_min}")
 
+        # --- MyPyBiTE Substack: force glitch + 24h decay (without overriding lightsaber) ---
+        if host == MPB_SUBSTACK_HOST:
+            # Label source is already set at collection time; here we force glitch
+            effects["glitch"] = True
+            if not effects["lightsaber"]:
+                # Only set style to glitch if lightsaber not already true
+                effects["reasons"].append("substack")
+            # Provide 'style' & 'decay_at' for the front-end
+            dec_iso = iso_add_hours(it.get("published_utc"), 24.0)
+            effects["decay_at"] = dec_iso
+            score_dbg["substack_tagged"] += 1
+
         # Provide a style string + top-level mirrors for the UI
         style = "lightsaber" if effects["lightsaber"] else ("glitch" if effects["glitch"] else "")
         if style:
@@ -881,11 +920,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             it["lightsaber"] = True
         if effects["glitch"]:
             it["glitch"] = True
-
-        if effects["lightsaber"]:
-            score_dbg["effects_lightsaber"] += 1
-        elif effects["glitch"]:
-            score_dbg["effects_glitch"] += 1
 
         it["score"] = round(total, 4)
         it["score_components"] = comps
@@ -924,7 +958,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.4.3-softcap-altua-nate",
+            "version": "fetch-v1.4.4-substack-glitch-decay",
             # weights status
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
