@@ -99,18 +99,27 @@
     };
 
     // ---------- Utilities ----------
-    const isValidDate = (v) => !!v && !Number.isNaN(Date.parse(v));
+    const TZ = 'America/Toronto';
+
+    const isValidDate = (v) => !!v && !Number.isNaN(Date.parse(v)));
     const fmtET = (iso) => {
       try {
         const d = new Date(iso);
         return new Intl.DateTimeFormat('en-CA', {
           year:'numeric', month:'short', day:'2-digit',
           hour:'2-digit', minute:'2-digit', hour12:false,
-          timeZone:'America/Toronto'
+          timeZone: TZ
         }).format(d) + ' ET';
       } catch { return iso; }
     };
     const clearGrid = () => { GRID.innerHTML = ''; };
+
+    function hourInTZ(){
+      const p = new Intl.DateTimeFormat('en-CA',{ timeZone: TZ, hour: '2-digit', hour12: false })
+        .formatToParts(new Date());
+      const hh = Number(p.find(x=>x.type==='hour').value);
+      return Number.isFinite(hh) ? hh : new Date().getHours();
+    }
 
     // ---------- URL & source helpers ----------
     function hostOf(url) {
@@ -166,7 +175,7 @@
       return Array.from(byKey.values());
     }
 
-    // ---------- Stable, monotonic ordering (first-seen sequence) ----------
+    // ---------- Stable, monotonic “first seen” sequence ----------
     const SEQ_STORAGE_KEY = "nr_seq_v1";
     function loadSeqState() {
       try {
@@ -289,24 +298,102 @@
       }
     }
 
-    // ---------- Normalize incoming data (strong de-dupe + stable order + per-source cap) ----------
+    // ---------- Thematic + daypart scoring (adds “time credit” in minutes) ----------
+    // The “5% stronger” nudges are implemented as small additive time credits.
+    // Tweak here without touching the rendering pipeline.
+
+    const MINUTE = 60 * 1000;
+    const BUMP_5 = 12 * MINUTE;           // ~5% nudge unit
+    const BUMP_8 = 18 * MINUTE;           // slightly stronger
+    const BUMP_10 = 24 * MINUTE;          // stronger
+    const WAR_BUMP = 60 * MINUTE;         // high-priority war/security
+    const TIER1_BUMP = 6 * MINUTE;        // mild nudge for tier-1 sources
+    const FINALS_BUMP = 15 * MINUTE;      // end-of-game closure nudge
+    const ATHLETE_BUMP = 12 * MINUTE;     // named athlete nudge
+    const KIRK_EXTRA = 6 * MINUTE;        // Alejandro Kirk extra (on top of athlete)
+    const BOOST_CAP = 3 * 60 * MINUTE;    // avoid bulldozing
+
+    const RE_TIER1 = /\b(associated press|^ap$|reuters|bbc|bloomberg|financial times|wall street journal|washington post|the guardian|new york times|nyt)\b/i;
+
+    // Business/markets (morning)
+    const RE_CRYPTO = /\b(crypto|bitcoin|btc|ethereum|eth|halving|stablecoin|defi|satoshi)\b/i;
+    const RE_MEME = /\b(gamestop|gme|amc)\b/i;
+    const RE_TECH = /\b(nvda|nvidia|msft|microsoft|aapl|apple|amzn|amazon|googl?|google|alphabet|meta|facebook|tsla|tesla|ai|chip(?:s|makers)?|semiconductor)\b/i;
+
+    // War/security (always-on) — must match a region + an event word
+    const RE_WAR_EVENT = /\b(war|attack|attacks|attacked|strike|air[-\s]?strike|missile|drone|invasion|mobilization|shell(?:ing)?|artillery|frontline|casualties?|dead|killed)\b/i;
+    const RE_WAR_REGION = /\b(russia|ukraine|poland|serbia|croatia|bosnia|herzegovina|kosovo|montenegro|slovenia|macedonia|albania|hungary|slovakia|czech|austria|romania|bulgaria|balkan|central europe|canada|united states|u\.s\.|usa)\b/i;
+
+    // Sports (afternoon/evening) — teams and athletes
+    const RE_SPORTS_TEAMS = /\b(toronto (blue\s?jays|maple\s?leafs|raptors)|new york yankees|boston red sox|detroit tigers|los angeles dodgers)\b/i;
+    const RE_SPORTS_ATHLETES = /\b(shohei ohtani|vladimir guerrero(?: jr\.?)?|george springer|bo bichette|max scherzer|alejandro kirk)\b/i;
+    const RE_KIRK = /\balejandro kirk\b/i;
+    // “Final”/closure words or scorelines like 3-1 / 10–2
+    const RE_FINALS_CUE = /\b(final|wins?|defeats?|beats?|edges?|falls?|prevails?|clinches?|walk-off|walkoff)\b|(?:\b\d{1,2}\s?[–-]\s?\d{1,2}\b)/i;
+
+    function computeBoostMs(it, hour){
+      const title = String(it?.title || '');
+      const source = String(it?.source || '');
+      let boost = 0;
+
+      // Always-on: war & security (region + event)
+      if (RE_WAR_EVENT.test(title) && RE_WAR_REGION.test(title)) {
+        boost += WAR_BUMP; // big shove any time of day
+      }
+
+      // Dayparts (Toronto time)
+      // Morning 06:00–13:00 → business/markets
+      if (hour >= 6 && hour < 13){
+        if (RE_CRYPTO.test(title)) boost += BUMP_10 + BUMP_5; // crypto gets the biggest morning nudge
+        if (RE_MEME.test(title))   boost += BUMP_8;           // meme stocks strong
+        if (RE_TECH.test(title))   boost += BUMP_5;           // general tech tickers light+
+      }
+
+      // Afternoon/Evening 15:00–23:30 → sports dopamine
+      if (hour >= 15 && hour <= 23){
+        if (RE_SPORTS_TEAMS.test(title))   boost += BUMP_8;   // team match
+        if (RE_SPORTS_ATHLETES.test(title)) boost += ATHLETE_BUMP; // athlete mention
+        if (RE_KIRK.test(title))           boost += KIRK_EXTRA;    // extra extra for Kirk
+        if (RE_FINALS_CUE.test(title))     boost += FINALS_BUMP;   // end-of-game closure
+      }
+
+      // Mild tier-1 nudge (doesn't override content intent)
+      if (RE_TIER1.test(source)) boost += TIER1_BUMP;
+
+      // Clamp
+      if (boost > BOOST_CAP) boost = BOOST_CAP;
+      return boost;
+    }
+
+    function scoringSort(items){
+      const now = Date.now();
+      const hr = hourInTZ();
+
+      for (const it of items){
+        const pubMs = Date.parse(it.published_utc || it.published || 0) || 0;
+        const base = pubMs || (now - (it.__seq || 0)); // tiny fallback if no date
+        const bonus = computeBoostMs(it, hr);
+        // __seq used as ultra-small stabilizer inside ties
+        it.__score = base + bonus + ((it.__seq || 0) % 997); // tiny tie shaper
+      }
+
+      // Highest score first (recency + boosts)
+      items.sort((a,b) => (b.__score||0) - (a.__score||0));
+      return items;
+    }
+
+    // ---------- Normalize incoming data (de-dupe + seq + SCORE + per-source cap) ----------
     function normalizeData(data){
       if (!data || !Array.isArray(data.items)) return { items: [] };
 
       // A) strong de-dupe (title sig + domain; prefer originals over aggregators)
       let items = dedupeItems(data.items.slice());
 
-      // B) stable first-seen order
+      // B) stable first-seen id (for gentle tie shaping)
       assignStableSeq(items);
 
-      // C) sort by first-seen desc; tie-break by published time
-      items.sort((a, b) => {
-        const d = (b.__seq || 0) - (a.__seq || 0);
-        if (d !== 0) return d;
-        const tb = Date.parse(b.published_utc || b.published || 0) || 0;
-        const ta = Date.parse(a.published_utc || a.published || 0) || 0;
-        return tb - ta;
-      });
+      // C) score by recency + daypart/topic boosts
+      scoringSort(items);
 
       // D) cap per source to keep variety (default 1 unless overridden)
       items = applySourceCap(items);
