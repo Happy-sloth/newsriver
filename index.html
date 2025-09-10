@@ -8,12 +8,111 @@
   <!-- Styles -->
   <link rel="stylesheet" href="assets/styles.css" />
 
+  <!-- Substack CTA styles (small, self-contained) -->
+  <style>
+    /* Header CTA chip */
+    .cta-subscribe {
+      margin-left: .75rem;
+      text-decoration: none;
+    }
+
+    /* Prompt shell */
+    #signupPrompt {
+      position: fixed;
+      inset: auto 16px 16px auto;
+      max-width: 360px;
+      z-index: 9999;
+      display: none;             /* toggled by JS */
+      opacity: 0;                /* for fade-in */
+      transform: translateY(8px);/* for slide-in */
+      transition: opacity .25s ease, transform .25s ease;
+      border-radius: 14px;
+      border: 1px solid rgba(120,130,140,.35);
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.28);
+      backdrop-filter: saturate(1.05) blur(2px);
+    }
+    #signupPrompt.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #signupPrompt .hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 2px 0 6px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: .02em;
+    }
+    #signupPrompt .sub {
+      font-size: .88rem;
+      line-height: 1.35;
+      opacity: .9;
+      margin-bottom: .6rem;
+    }
+    #signupPrompt .row {
+      display: flex;
+      gap: 10px;
+      margin-top: .45rem;
+    }
+    #signupPrompt .btn {
+      appearance: none;
+      border-radius: 999px;
+      padding: .55rem .9rem;
+      font: 600 .9rem/1 system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    #signupPrompt .btn.primary {
+      background: #f1f5ff;
+      color: #0f172a;
+      border-color: rgba(30,60,90,.18);
+    }
+    #signupPrompt .btn.ghost {
+      background: transparent;
+      color: inherit;
+      border-color: rgba(120,130,140,.35);
+    }
+    #signupPrompt .x {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: 600 1rem/1 system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+      cursor: pointer;
+      opacity: .8;
+    }
+    #signupPrompt .x:focus { outline: 2px solid currentColor; outline-offset: 2px; }
+
+    /* Light / dark */
+    @media (prefers-color-scheme: dark) {
+      #signupPrompt { background: rgba(20,26,34,.92); color: #e6edf7; }
+    }
+    @media (prefers-color-scheme: light) {
+      #signupPrompt { background: rgba(246,249,255,.98); color: #0f172a; border-color: rgba(30,60,90,.18); }
+    }
+
+    /* Small screens: center at bottom */
+    @media (max-width: 480px){
+      #signupPrompt { inset: auto 12px 12px 12px; }
+    }
+  </style>
+
   <!-- Social/SEO (optional) -->
   <meta name="description" content="Curated, newest-first news river with lightweight scoring and filters." />
 </head>
 <body>
   <header class="header">
-    <h1 class="title">NewsRiver</h1>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;">
+      <h1 class="title">NewsRiver</h1>
+      <!-- Header Subscribe chip -->
+      <a class="chip cta-subscribe" href="https://mypybite.substack.com/subscribe" target="_blank" rel="noopener" aria-label="Subscribe on Substack">
+        Subscribe (FREE)
+      </a>
+    </div>
     <p class="subtitle">Newest-first headlines (auto-built from RSS)</p>
   </header>
 
@@ -46,6 +145,19 @@
     <span class="dot">•</span>
     <a href="https://github.com/MyPyBiTE/newsriver" target="_blank" rel="noopener">GitHub</a>
   </footer>
+
+  <!-- Substack signup prompt (dismissible) -->
+  <div id="signupPrompt" role="dialog" aria-modal="false" aria-labelledby="signupTitle">
+    <div class="hdr">
+      <div id="signupTitle">Get our best headlines by email</div>
+      <button class="x" type="button" aria-label="Close" id="signupClose">×</button>
+    </div>
+    <div class="sub">By Subscribing you gain insight into totally free trade secrets and technicals. As Well as constructive diatribes. Take the 7 seconds to provide your email and over time you will have helped grow the kind of community that will not shill you.</div>
+    <div class="row">
+      <a id="signupsayNOtogrift" class="btn primary" href="https://mypybite.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      <button id="signupDismiss" class="btn ghost" type="button">No thanks</button>
+    </div>
+  </div>
 
   <noscript>
     <p style="padding:1rem;max-width:800px;margin:1rem auto;background:#222;border-radius:12px;">
@@ -129,46 +241,6 @@
     })();
     const SNARKY_RENAMES = QS.has('snark');
 
-    // One-time glitch tracking
-    const GLITCH_SEEN_KEY = 'nr_glitch_seen_v1';
-    function loadGlitchSeen(){
-      try { return JSON.parse(localStorage.getItem(GLITCH_SEEN_KEY)) || {}; } catch { return {}; }
-    }
-    function saveGlitchSeen(map){
-      try { localStorage.setItem(GLITCH_SEEN_KEY, JSON.stringify(map)); } catch {}
-    }
-    const GLITCH_SEEN_MAP = loadGlitchSeen();
-
-    // Inject minimal CSS for glitch effect (kept here to avoid editing global CSS)
-    (function injectGlitchCSS(){
-      const style = document.createElement('style');
-      style.textContent = `
-        .headline.glitch {
-          position: relative;
-          animation: nr-glitch-shift 0.85s infinite linear;
-          text-shadow:
-            0 0 0 rgba(0,0,0,0),
-            0 0 0 rgba(0,0,0,0);
-        }
-        @keyframes nr-glitch-shift {
-          0%   { transform: translate(0,0);      filter: none; }
-          8%   { transform: translate(1px,-1px); filter: hue-rotate(5deg) saturate(1.2); }
-          16%  { transform: translate(-1px,1px); filter: hue-rotate(-5deg) saturate(1.1); }
-          24%  { transform: translate(2px,0);    filter: contrast(1.1); }
-          32%  { transform: translate(-2px,0);   filter: contrast(1); }
-          40%  { transform: translate(1px,1px);  filter: brightness(1.05); }
-          48%  { transform: translate(-1px,-1px);filter: none; }
-          56%  { transform: translate(0,0);      filter: contrast(1.05); }
-          64%  { transform: translate(1px,0);    filter: none; }
-          72%  { transform: translate(-1px,0);   filter: hue-rotate(3deg); }
-          80%  { transform: translate(0,1px);    filter: none; }
-          88%  { transform: translate(0,-1px);   filter: none; }
-          100% { transform: translate(0,0);      filter: none; }
-        }
-      `;
-      document.head.appendChild(style);
-    })();
-
     // (debug) lightweight CSS for badges, injected only when needed
     if (DEBUG_BOOSTS) {
       const style = document.createElement('style');
@@ -208,13 +280,6 @@
         .formatToParts(new Date());
       const hh = Number(p.find(x=>x.type==='hour').value);
       return Number.isFinite(hh) ? hh : new Date().getHours();
-    }
-
-    // Expiry / decay
-    function isExpired(it){
-      const d = it?.effects?.decay_at;
-      if (!d || !isValidDate(d)) return false;
-      return Date.now() >= Date.parse(d);
     }
 
     // ---------- URL & source helpers ----------
@@ -356,18 +421,6 @@
       h2.className = 'headline';
       h2.textContent = transformTitleForDisplay(item.title || '(untitled)');
 
-      // One-time 7s glitch if backend flagged (and not expired)
-      try {
-        const wantGlitch = !!(item?.effects?.glitch) && !isExpired(item);
-        const id = item?.canonical_id || dedupeKey(item);
-        if (wantGlitch && !GLITCH_SEEN_MAP[id]) {
-          h2.classList.add('glitch');
-          GLITCH_SEEN_MAP[id] = Date.now();
-          saveGlitchSeen(GLITCH_SEEN_MAP);
-          setTimeout(() => h2.classList.remove('glitch'), 7000);
-        }
-      } catch {}
-
       link.appendChild(h2);
 
       const meta = document.createElement('div');
@@ -420,14 +473,10 @@
     }
 
     function applyFilters(all){
-      const filtered = all
-        // Hide/omit any expired (decayed) items
-        .filter(it => !isExpired(it))
-        // Then apply user filters
-        .filter(it =>
-          (activeCategory === 'all' || (it.category || '') === activeCategory) &&
-          (!activeRegion || (it.region || '') === activeRegion)
-        );
+      const filtered = all.filter(it =>
+        (activeCategory === 'all' || (it.category || '') === activeCategory) &&
+        (!activeRegion || (it.region || '') === activeRegion)
+      );
       render(filtered);
     }
 
@@ -591,7 +640,7 @@
       setInterval(async () => {
         try {
           const data = await loadJson();
-          if (!data) return;
+        if (!data) return;
 
           const stamp = data.generated_utc || null;
           if (stamp && stamp !== lastStamp) {
@@ -651,6 +700,77 @@
     bootstrap();
     autoRefresh();
   })();
+  </script>
+
+  <!-- Substack signup prompt logic (one-time, dismissible) -->
+  <script>
+    (function(){
+      const el = document.getElementById('signupPrompt');
+      const btnX = document.getElementById('signupClose');
+      const btnNo = document.getElementById('signupDismiss');
+      const linkYes = document.getElementById('signupGo');
+      if (!el || !btnX || !btnNo || !linkYes) return;
+
+      const STORAGE_KEY = 'mpb_substack_prompt';
+      const NOCTA = new URLSearchParams(location.search).has('nocta'); // ?nocta=1 disables prompt (handy for screenshots)
+      const now = Date.now();
+
+      function getState(){
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
+      }
+      function setState(obj){
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch {}
+      }
+      function days(n){ return n*24*60*60*1000; }
+
+      function hide(){
+        el.classList.remove('show');
+        el.style.display = 'none';
+      }
+      function show(){
+        el.style.display = 'block';
+        requestAnimationFrame(()=> el.classList.add('show'));
+      }
+
+      // Open in new tab with return path (optional)
+      const base = 'https://mypybite.substack.com/subscribe';
+      const next = encodeURIComponent(location.href);
+      linkYes.href = `${base}?next=${next}`;
+
+      // Wire controls
+      btnX.addEventListener('click', () => {
+        const s = getState();
+        s.dismissed_until = now + days(30);
+        setState(s);
+        hide();
+      });
+      btnNo.addEventListener('click', () => {
+        const s = getState();
+        s.dismissed_until = now + days(30);
+        setState(s);
+        hide();
+      });
+      linkYes.addEventListener('click', () => {
+        const s = getState();
+        s.subscribed_until = now + days(60); // longer cooldown if they clicked subscribe
+        setState(s);
+        hide();
+      });
+
+      // Esc closes
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hide();
+      });
+
+      // Decide whether to show
+      if (NOCTA) return;
+      const s = getState();
+      const gate = Math.max(s.dismissed_until || 0, s.subscribed_until || 0);
+      if (gate && now < gate) return;
+
+      // First paint: delay a bit, then show
+      setTimeout(show, 12000); // ~12s after load
+    })();
   </script>
 </body>
 </html>
