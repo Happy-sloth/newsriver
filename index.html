@@ -100,8 +100,29 @@
 
     // ---------- Utilities ----------
     const TZ = 'America/Toronto';
+    const DEBUG_BOOSTS = new URLSearchParams(location.search).get('debug') === 'boosts';
 
-    const isValidDate = (v) => !!v && !Number.isNaN(Date.parse(v)));
+    // (debug) lightweight CSS for badges, injected only when needed
+    if (DEBUG_BOOSTS) {
+      const style = document.createElement('style');
+      style.textContent = `
+        .boost-badge{
+          display:inline-flex; align-items:center; gap:.35rem;
+          margin-top:.4rem; padding:.25rem .5rem; border-radius:999px;
+          font-size:.72rem; line-height:1; white-space:nowrap;
+          border:1px solid rgba(120,130,140,.45);
+          color:#cfe7ff; background:rgba(25,35,45,.55); backdrop-filter:saturate(1.1) blur(2px);
+        }
+        .boost-badge .mins{opacity:.9;font-weight:600}
+        .boost-badge .reasons{opacity:.85}
+        @media (prefers-color-scheme: light){
+          .boost-badge{ color:#16324f; background:rgba(220,235,255,.7); border-color:rgba(30,60,90,.2); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    const isValidDate = (v) => !!v && !Number.isNaN(Date.parse(v));
     const fmtET = (iso) => {
       try {
         const d = new Date(iso);
@@ -265,6 +286,17 @@
 
       card.appendChild(link);
       card.appendChild(meta);
+
+      // Debug: show boost reasons if enabled
+      if (DEBUG_BOOSTS) {
+        const dbg = document.createElement('div');
+        dbg.className = 'boost-badge';
+        const mins = Math.round((item.__boost_ms || 0) / 60000);
+        const reasons = (item.__boost_reasons || []).join(', ') || 'no boosts';
+        dbg.innerHTML = `<span class="mins">+${mins}m</span><span class="reasons">${reasons}</span>`;
+        card.appendChild(dbg);
+      }
+
       return card;
     }
 
@@ -300,18 +332,17 @@
 
     // ---------- Thematic + daypart scoring (adds “time credit” in minutes) ----------
     // The “5% stronger” nudges are implemented as small additive time credits.
-    // Tweak here without touching the rendering pipeline.
 
     const MINUTE = 60 * 1000;
-    const BUMP_5 = 12 * MINUTE;           // ~5% nudge unit
-    const BUMP_8 = 18 * MINUTE;           // slightly stronger
-    const BUMP_10 = 24 * MINUTE;          // stronger
-    const WAR_BUMP = 60 * MINUTE;         // high-priority war/security
-    const TIER1_BUMP = 6 * MINUTE;        // mild nudge for tier-1 sources
-    const FINALS_BUMP = 15 * MINUTE;      // end-of-game closure nudge
-    const ATHLETE_BUMP = 12 * MINUTE;     // named athlete nudge
-    const KIRK_EXTRA = 6 * MINUTE;        // Alejandro Kirk extra (on top of athlete)
-    const BOOST_CAP = 3 * 60 * MINUTE;    // avoid bulldozing
+    const BUMP_5 = 12 * MINUTE;            // ~5% nudge unit
+    const BUMP_8 = 18 * MINUTE;            // slightly stronger
+    const BUMP_10 = 24 * MINUTE;           // stronger
+    const WAR_BUMP = 60 * MINUTE;          // high-priority war/security
+    const TIER1_BUMP = 6 * MINUTE;         // mild nudge for tier-1 sources
+    const FINALS_BUMP = 15 * MINUTE;       // end-of-game closure nudge
+    const ATHLETE_BUMP = 12 * MINUTE;      // named athlete nudge
+    const KIRK_EXTRA = 6 * MINUTE;         // Alejandro Kirk extra (on top of athlete)
+    const BOOST_CAP = 3 * 60 * MINUTE;     // avoid bulldozing
 
     const RE_TIER1 = /\b(associated press|^ap$|reuters|bbc|bloomberg|financial times|wall street journal|washington post|the guardian|new york times|nyt)\b/i;
 
@@ -331,38 +362,40 @@
     // “Final”/closure words or scorelines like 3-1 / 10–2
     const RE_FINALS_CUE = /\b(final|wins?|defeats?|beats?|edges?|falls?|prevails?|clinches?|walk-off|walkoff)\b|(?:\b\d{1,2}\s?[–-]\s?\d{1,2}\b)/i;
 
-    function computeBoostMs(it, hour){
+    function computeBoost(it, hour){
       const title = String(it?.title || '');
       const source = String(it?.source || '');
       let boost = 0;
+      const reasons = [];
 
       // Always-on: war & security (region + event)
       if (RE_WAR_EVENT.test(title) && RE_WAR_REGION.test(title)) {
-        boost += WAR_BUMP; // big shove any time of day
+        boost += WAR_BUMP; reasons.push('war');
       }
 
       // Dayparts (Toronto time)
       // Morning 06:00–13:00 → business/markets
       if (hour >= 6 && hour < 13){
-        if (RE_CRYPTO.test(title)) boost += BUMP_10 + BUMP_5; // crypto gets the biggest morning nudge
-        if (RE_MEME.test(title))   boost += BUMP_8;           // meme stocks strong
-        if (RE_TECH.test(title))   boost += BUMP_5;           // general tech tickers light+
+        if (RE_CRYPTO.test(title)) { boost += (BUMP_10 + BUMP_5); reasons.push('crypto'); }
+        if (RE_MEME.test(title))   { boost += BUMP_8; reasons.push('meme'); }
+        if (RE_TECH.test(title))   { boost += BUMP_5; reasons.push('tech'); }
       }
 
       // Afternoon/Evening 15:00–23:30 → sports dopamine
       if (hour >= 15 && hour <= 23){
-        if (RE_SPORTS_TEAMS.test(title))   boost += BUMP_8;   // team match
-        if (RE_SPORTS_ATHLETES.test(title)) boost += ATHLETE_BUMP; // athlete mention
-        if (RE_KIRK.test(title))           boost += KIRK_EXTRA;    // extra extra for Kirk
-        if (RE_FINALS_CUE.test(title))     boost += FINALS_BUMP;   // end-of-game closure
+        if (RE_SPORTS_TEAMS.test(title))     { boost += BUMP_8; reasons.push('team'); }
+        if (RE_SPORTS_ATHLETES.test(title))  { boost += ATHLETE_BUMP; reasons.push('athlete'); }
+        if (RE_KIRK.test(title))             { boost += KIRK_EXTRA; reasons.push('kirk+'); }
+        if (RE_FINALS_CUE.test(title))       { boost += FINALS_BUMP; reasons.push('final'); }
       }
 
-      // Mild tier-1 nudge (doesn't override content intent)
-      if (RE_TIER1.test(source)) boost += TIER1_BUMP;
+      // Mild tier-1 nudge
+      if (RE_TIER1.test(source)) { boost += TIER1_BUMP; reasons.push('tier1'); }
 
       // Clamp
       if (boost > BOOST_CAP) boost = BOOST_CAP;
-      return boost;
+
+      return { ms: boost, reasons };
     }
 
     function scoringSort(items){
@@ -372,7 +405,10 @@
       for (const it of items){
         const pubMs = Date.parse(it.published_utc || it.published || 0) || 0;
         const base = pubMs || (now - (it.__seq || 0)); // tiny fallback if no date
-        const bonus = computeBoostMs(it, hr);
+        const { ms: bonus, reasons } = computeBoost(it, hr);
+        // expose for debug overlay
+        it.__boost_ms = bonus;
+        it.__boost_reasons = reasons;
         // __seq used as ultra-small stabilizer inside ties
         it.__score = base + bonus + ((it.__seq || 0) % 997); // tiny tie shaper
       }
