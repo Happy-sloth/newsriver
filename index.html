@@ -129,6 +129,46 @@
     })();
     const SNARKY_RENAMES = QS.has('snark');
 
+    // One-time glitch tracking
+    const GLITCH_SEEN_KEY = 'nr_glitch_seen_v1';
+    function loadGlitchSeen(){
+      try { return JSON.parse(localStorage.getItem(GLITCH_SEEN_KEY)) || {}; } catch { return {}; }
+    }
+    function saveGlitchSeen(map){
+      try { localStorage.setItem(GLITCH_SEEN_KEY, JSON.stringify(map)); } catch {}
+    }
+    const GLITCH_SEEN_MAP = loadGlitchSeen();
+
+    // Inject minimal CSS for glitch effect (kept here to avoid editing global CSS)
+    (function injectGlitchCSS(){
+      const style = document.createElement('style');
+      style.textContent = `
+        .headline.glitch {
+          position: relative;
+          animation: nr-glitch-shift 0.85s infinite linear;
+          text-shadow:
+            0 0 0 rgba(0,0,0,0),
+            0 0 0 rgba(0,0,0,0);
+        }
+        @keyframes nr-glitch-shift {
+          0%   { transform: translate(0,0);      filter: none; }
+          8%   { transform: translate(1px,-1px); filter: hue-rotate(5deg) saturate(1.2); }
+          16%  { transform: translate(-1px,1px); filter: hue-rotate(-5deg) saturate(1.1); }
+          24%  { transform: translate(2px,0);    filter: contrast(1.1); }
+          32%  { transform: translate(-2px,0);   filter: contrast(1); }
+          40%  { transform: translate(1px,1px);  filter: brightness(1.05); }
+          48%  { transform: translate(-1px,-1px);filter: none; }
+          56%  { transform: translate(0,0);      filter: contrast(1.05); }
+          64%  { transform: translate(1px,0);    filter: none; }
+          72%  { transform: translate(-1px,0);   filter: hue-rotate(3deg); }
+          80%  { transform: translate(0,1px);    filter: none; }
+          88%  { transform: translate(0,-1px);   filter: none; }
+          100% { transform: translate(0,0);      filter: none; }
+        }
+      `;
+      document.head.appendChild(style);
+    })();
+
     // (debug) lightweight CSS for badges, injected only when needed
     if (DEBUG_BOOSTS) {
       const style = document.createElement('style');
@@ -168,6 +208,13 @@
         .formatToParts(new Date());
       const hh = Number(p.find(x=>x.type==='hour').value);
       return Number.isFinite(hh) ? hh : new Date().getHours();
+    }
+
+    // Expiry / decay
+    function isExpired(it){
+      const d = it?.effects?.decay_at;
+      if (!d || !isValidDate(d)) return false;
+      return Date.now() >= Date.parse(d);
     }
 
     // ---------- URL & source helpers ----------
@@ -309,6 +356,18 @@
       h2.className = 'headline';
       h2.textContent = transformTitleForDisplay(item.title || '(untitled)');
 
+      // One-time 7s glitch if backend flagged (and not expired)
+      try {
+        const wantGlitch = !!(item?.effects?.glitch) && !isExpired(item);
+        const id = item?.canonical_id || dedupeKey(item);
+        if (wantGlitch && !GLITCH_SEEN_MAP[id]) {
+          h2.classList.add('glitch');
+          GLITCH_SEEN_MAP[id] = Date.now();
+          saveGlitchSeen(GLITCH_SEEN_MAP);
+          setTimeout(() => h2.classList.remove('glitch'), 7000);
+        }
+      } catch {}
+
       link.appendChild(h2);
 
       const meta = document.createElement('div');
@@ -361,10 +420,14 @@
     }
 
     function applyFilters(all){
-      const filtered = all.filter(it =>
-        (activeCategory === 'all' || (it.category || '') === activeCategory) &&
-        (!activeRegion || (it.region || '') === activeRegion)
-      );
+      const filtered = all
+        // Hide/omit any expired (decayed) items
+        .filter(it => !isExpired(it))
+        // Then apply user filters
+        .filter(it =>
+          (activeCategory === 'all' || (it.category || '') === activeCategory) &&
+          (!activeRegion || (it.region || '') === activeRegion)
+        );
       render(filtered);
     }
 
