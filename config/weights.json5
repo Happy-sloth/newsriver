@@ -1,52 +1,46 @@
 { 
   // weights.json5 — server-side scoring knobs for mypybite
-  // Version: v0.4 (entertainment/human-interest boosts + trends assist + Canada bias)
+  // Version: v0.5 (adds evening sports boost, team keywords, team badges, domain whitelist)
   // TZ for windows/special dates
   timezone: "America/Toronto",
 
   // -------- Recency & decay (global defaults) --------
   recency: {
-    // Soft time-decay: exponential half-life; newer items fade slower
-    half_life_hours: 6,            // every 6h, "freshness" halves
-    max_age_hours: 72,             // drop items older than this (server may still filter)
-    // Extra penalties
-    age_penalty_after_24h: -0.6,   // once >24h old, apply this once
-    age_penalty_after_36h: -0.4,   // once >36h old, apply this once (stacks with 24h)
-    // If a newer item in the same cluster exists (same story, developed):
+    half_life_hours: 6,
+    max_age_hours: 72,
+    age_penalty_after_24h: -0.6,
+    age_penalty_after_36h: -0.4,
     superseded_cluster_penalty: -0.9,
   },
 
-  // Per-category overrides (optional; if not implemented, safely ignore)
   recency_overrides: {
     categories: {
-      // Entertainment moves fast: surface briefly, expire sooner
       "Culture": { half_life_hours: 4, max_age_hours: 48 },
-      "Youth":   { half_life_hours: 4, max_age_hours: 48 },
+      "Youth":   { half_life_hours: 4, max_age_hours: 48 }
+      // (Sports uses global recency; time windows handled below)
     }
   },
 
-  // -------- Reordering stability (prevents jarring reshuffles on hard reset) --------
+  // -------- Reordering stability --------
   reorder: {
-    protect_top_n: 8,             // top N “stick” unless a rival beats them by min_reorder_delta
-    min_reorder_delta: 1.25,      // need this many points advantage to leapfrog
-    grace_period_minutes: 3,      // after hard reload, freeze order for this long
-    rank_drift_tolerance: 0.5,    // tiny score wiggles inside this band do not reorder
+    protect_top_n: 8,
+    min_reorder_delta: 1.25,
+    grace_period_minutes: 3,
+    rank_drift_tolerance: 0.5
   },
 
   // -------- Regional bias (Canada → Province → City) --------
   regional: {
     weights: {
-      country_match: 1.2,     // item.region == "Canada"
-      province_match: 0.8,    // reserved for future
-      city_match: 0.6,        // reserved for future
-      adjacent_province: 0.3  // reserved for future
+      country_match: 1.2,
+      province_match: 0.8,
+      city_match: 0.6,
+      adjacent_province: 0.3
     },
-    // Cap how much regional bias can add in total:
     max_bonus: 2.4
   },
 
-  // -------- Category nudges (light-touch baselines) --------
-  // (names must match server categories)
+  // -------- Category nudges --------
   categories: {
     "Public Safety": 0.9,
     "Weather": 0.6,
@@ -56,20 +50,19 @@
     "Energy": 0.2,
     "Real Estate": 0.15,
     "Tech": 0.15,
-    "Culture": 0.25,   // was 0.0
-    "Youth": 0.25,     // was 0.0
+    "Culture": 0.25,
+    "Youth": 0.25,
+    "Sports": 0.30,   // new: light baseline for sports
     "General": 0.0
   },
 
-  // -------- Public-safety severity (If it bleeds, it leads) --------
+  // -------- Public-safety severity --------
   public_safety: {
-    has_fatality_points: 1.0,     // base if any death mentioned
-    per_death_points: 0.12,       // slightly stronger than 0.10
-    max_death_points: 2.0,        // cap from body count contribution
-    per_injured_points: 0.03,     // slightly stronger than 0.02
+    has_fatality_points: 1.0,
+    per_death_points: 0.12,
+    max_death_points: 2.0,
+    per_injured_points: 0.03,
     max_injury_points: 0.6,
-
-    // Optional language cues (OR of these raises severity a touch)
     violent_keywords_bonus: 0.2,
     violent_keywords: [
       "shooting","shot","stabbing","stabbed","homicide","murder",
@@ -81,58 +74,41 @@
 
   // -------- Markets (intraday & overnight) --------
   markets: {
-    // Bitcoin / crypto
-    btc_abs_move_threshold_pct: 7.0,   // absolute % (up or down)
+    btc_abs_move_threshold_pct: 7.0,
     btc_points: 1.6,
-
-    // Major U.S./CA indices (S&P 500, Nasdaq, Dow, TSX/TSXV handled by regex)
     index_abs_move_threshold_pct: 1.0,
     index_points: 1.0,
-
-    // Nikkei (overnight context)
     nikkei_abs_move_threshold_pct: 1.0,
     nikkei_points: 0.7,
-
-    // Single-stock outsized moves (e.g., AEO +10%)
     single_stock_abs_move_threshold_pct: 10.0,
     single_stock_points: 1.2,
-
-    // Time-of-day windows (ET) — reserved (front-end already has time-window boosts)
     time_windows: {
       markets_open: { start: "09:30", end: "16:00", points: 0.6 },
-      asia_window:  { start: "01:20", end: "03:30", points: 0.5 },
+      asia_window:  { start: "01:20", end: "03:30", points: 0.5 }
     },
-
-    // Special macro / calendar boosts — reserved for future server use
     special_dates: [
-      { key: "boc_rate_decision",     points: 1.6, window_hours: 30 },
-      { key: "cpi_ca_release",        points: 1.2, window_hours: 24 },
-      { key: "jobs_ca_release",       points: 1.1, window_hours: 24 },
-
-      { key: "fed_fomc_decision",     points: 1.5, window_hours: 30 },
-      { key: "cpi_us_release",        points: 1.2, window_hours: 24 },
-      { key: "jobs_us_nonfarm",       points: 1.1, window_hours: 24 },
-
-      { key: "boe_rate_decision",     points: 1.0, window_hours: 24 },
-      { key: "ecb_rate_decision",     points: 1.0, window_hours: 24 },
-
-      { key: "opec_meeting",          points: 0.8, window_hours: 48 }
+      { key: "boc_rate_decision", points: 1.6, window_hours: 30 },
+      { key: "cpi_ca_release",    points: 1.2, window_hours: 24 },
+      { key: "jobs_ca_release",   points: 1.1, window_hours: 24 },
+      { key: "fed_fomc_decision", points: 1.5, window_hours: 30 },
+      { key: "cpi_us_release",    points: 1.2, window_hours: 24 },
+      { key: "jobs_us_nonfarm",   points: 1.1, window_hours: 24 },
+      { key: "boe_rate_decision", points: 1.0, window_hours: 24 },
+      { key: "ecb_rate_decision", points: 1.0, window_hours: 24 },
+      { key: "opec_meeting",      points: 0.8, window_hours: 48 }
     ]
   },
 
   // -------- Entertainment / Human-interest boosts --------
   entertainment: {
-    // Keywords that indicate releases / pop-culture events
     release_keywords: [
       "premiere","trailer","season","finale","episode","cast","casting",
       "box office","album","single","ep","tracklist","tour","concert",
       "festival","red carpet","press junket","teaser","first look","review",
       "renewed","canceled","soundtrack","chart","debut"
     ],
-    keyword_points_per_match: 0.35,    // +0.35 each match
-    keyword_points_cap: 0.8,           // cap from keywords
-
-    // Named-entity bonus when PERSON/WORK detected AND domain is a trade below
+    keyword_points_per_match: 0.35,
+    keyword_points_cap: 0.8,
     trade_entity_bonus: 0.3,
     trade_entity_cap: 0.6,
     trade_domains: [
@@ -140,74 +116,128 @@
       "rollingstone.com","people.com","billboard.com","ew.com","worldofreel.com",
       "showbiz411.com","tmz.com"
     ],
-
-    // Time-window nudges (ET) to float human-interest at the right times
     time_windows: [
-      { key: "evening_pop", start: "18:30", end: "00:30", points: 0.5 },  // after work
+      { key: "evening_pop", start: "18:30", end: "00:30", points: 0.5 },
       { key: "weekend_pop", days: ["Fri","Sat","Sun"], start: "11:00", end: "23:00", points: 0.4 },
-      { key: "music_release", days: ["Thu","Fri","Sat"], start: "20:00", end: "14:00", points: 0.4 }, // Fri global drops
+      { key: "music_release", days: ["Thu","Fri","Sat"], start: "20:00", end: "14:00", points: 0.4 },
       { key: "box_office", days: ["Sun","Mon"], start: "09:00", end: "12:00", points: 0.4 }
     ]
   },
 
-  // -------- Google Trends assist (short TTL, light touch) --------
+  // -------- Sports (NEW) --------
+  sports: {
+    // Apply to items categorized as Sports OR matching sports team keywords
+    time_windows: [
+      // Evening boost for all sports, not just playoffs (ET)
+      { key: "evening_sports", start: "18:00", end: "23:30", points: 1.0 }
+    ],
+
+    // Score pattern bump: e.g., "Blue Jays 4-2 Astros" or "Leafs 3–1"
+    score_regex: "\\b\\d{1,2}[\\-–]\\d{1,2}\\b",
+    score_regex_points: 0.5,
+
+    // Injury/transaction context
+    context_keywords: [
+      { token: "injured",  points: 0.4 },
+      { token: "IL",       points: 0.35 },
+      { token: "comeback", points: 0.35 }
+    ],
+    context_cap: 0.8,
+
+    // Team & star keyword weights (case-insensitive contains on title/summary)
+    team_keywords: [
+      { token: "Blue Jays",           points: 1.5 },
+      { token: "Maple Leafs",         points: 1.4 },
+      { token: "Leafs",               points: 1.2 },
+      { token: "Raptors",             points: 1.0 },
+      { token: "Yankees",             points: 0.9 },
+      { token: "Red Sox",             points: 0.9 },
+      { token: "Dodgers",             points: 0.9 },
+      { token: "Hoffman",             points: 0.7 },            // Jays reliever (e.g., Jordan Hoffman) — adjust if needed
+      { token: "Bichette",            points: 1.2 },
+      { token: "Alejandro Kirk",      points: 1.2 },
+      { token: "Vladimir Guerrero",   points: 1.3 },
+      { token: "Guerrero Jr",         points: 1.3 },
+      { token: "Vladdy",              points: 1.0 },
+      { token: "Shohei Ohtani",       points: 1.1 },
+      { token: "Ohtani",              points: 1.0 }
+    ],
+    team_keywords_cap: 2.5
+  },
+
+  // -------- Google Trends assist --------
   trends: {
     enabled: true,
     provider: "google_trends",
-    geo: "CA",                     // focus on Canada; widen to "US" or "CA,US" if needed
-    top_n: 30,                     // keep top 30 rising tokens
+    geo: "CA",
+    top_n: 30,
     fields_to_match: ["title","summary"],
-    // Map normalized trend (0..1) → bonus
     match_bonus_min: 0.2,
     match_bonus_max: 1.0,
-    half_life_hours: 12,           // decays quickly
+    half_life_hours: 12,
     ttl_hours: 24,
-    cap_total_points: 1.2          // overall cap per item from trends
+    cap_total_points: 1.2
   },
 
-  // -------- Aggregators / press wires --------
+  // -------- Aggregators / press wires & source handling --------
   sources: {
-    aggregator_penalty: -0.6,      // stronger demotion for Google News/Yahoo/Apple News/etc.
-    press_wire_penalty: -0.5,      // stronger demotion for PR wires
-    preferred_domains_bonus: 0.25  // small edge for primary/original sources
+    aggregator_penalty: -0.6,
+    press_wire_penalty: -0.5,
+    preferred_domains_bonus: 0.25,
+
+    // NEW: domains that bypass aggregator/wire penalties and demotions
+    whitelist_domains: [
+      "mlb.com",
+      "sportsnet.ca",
+      "tsn.ca"
+    ]
   },
 
-  // (Optional) Source limits (if supported by server; otherwise ignore)
-  // Helps prevent any one domain from flooding the visible top ranks.
+  // (Optional) Source limits
   source_limits: {
-    top_caps: { top8: 1, top20: 2 }, // max per-domain in top 8/top 20
-    burst_control: { items: 6, window_minutes: 30, penalty: -0.7 } // throttle chatty feeds
+    top_caps: { top8: 1, top20: 2 },
+    burst_control: { items: 6, window_minutes: 30, penalty: -0.7 },
+
+    // NEW: after 18:00 ET, slightly relax caps for whitelisted sports domains
+    evening_overrides: {
+      window: { start: "18:00", end: "23:30" },
+      per_domain: {
+        "mlb.com":       { top8: 2, top20: 4 },
+        "sportsnet.ca":  { top8: 2, top20: 4 },
+        "tsn.ca":        { top8: 2, top20: 4 }
+      }
+    }
   },
 
   // -------- Dedupe knobs --------
   dedupe: {
-    // Jaccard on title tokens; anything ≥ this is “near-duplicate”
     jaccard_threshold: 0.62,
-    // If two candidates collide, the newer & non-aggregator wins; these
-    // weights just add a nudge to that tie-break logic:
     newer_bias_points: 0.3,
     non_aggregator_bias_points: 0.3
   },
 
-  // -------- Display effects thresholds --------
+  // -------- Display effects thresholds & badges --------
   effects: {
-    // “Light-saber red glow with glitch”
     lightsaber_min_score: 2.5,
-    // Also trigger if any of these hard conditions are met:
     lightsaber_also_if: {
-      body_count_ge: 5,              // 5+ deaths
-      btc_abs_move_ge_pct: 8.0,      // Bitcoin ±8% intraday
+      body_count_ge: 5,
+      btc_abs_move_ge_pct: 8.0,
       single_stock_abs_move_ge_pct: 15.0
     },
+    glitch_min_score: 1.8,
 
-    // Subtle glitch/ambient highlight for notable-but-not-top stories
-    glitch_min_score: 1.8
+    // NEW: server-side flags to let the front-end prepend team emblems
+    // (Front-end should check item.effects.team_badge and render the icon.)
+    team_badge_rules: [
+      { when_title_contains: ["Blue Jays"],   badge: "bluejays" },
+      { when_title_contains: ["Maple Leafs","Leafs"], badge: "leafs" }
+    ]
   },
 
   // -------- Developing stories “static pill” --------
   developing: {
-    max_manual_slots: 3,     // you can pin up to 3
-    pin_bonus_points: 2.0,   // pinned items float above neighbors
-    unpin_decay_minutes: 180 // if left pinned this long, apply -0.5 thereafter
+    max_manual_slots: 3,
+    pin_bonus_points: 2.0,
+    unpin_decay_minutes: 180
   }
 }
