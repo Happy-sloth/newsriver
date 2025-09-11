@@ -157,3 +157,12 @@ https://www.levernews.com/rss/
 https://www.youtube.com/feeds/videos.xml?channel_id=UC98DCNPM9B3ZP4TiDANonIA
 https://majorityfm.libsyn.com/rss
 https://www.youtube.com/feeds/videos.xml?channel_id=UCkztf6gttP8D3vrusCrrp4g
+
+# --- Japan / NPB (English) ---
+# Japan Times — Sports (English). If this section feed errors in your parser, fallback to top stories:
+#   Primary (Sports): likely https://www.japantimes.co.jp/feed/sports/
+#   Fallback (All/Top): https://www.japantimes.co.jp/feed/topstories/
+https://www.japantimes.co.jp/feed/sports/
+https://english.kyodonews.net/rss/all.xml
+https://www.reddit.com/r/NPB/.rss
+https://japantoday.com/feed
