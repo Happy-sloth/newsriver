@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-09-13T09:38:28.196735+00:00",
+  "generated_utc": "2025-09-13T09:51:01.403279+00:00",
   "count": 320,
   "items": [
     {
       "title": "Dominion still has pending lawsuits against election deniers such as Rudy Giuliani and Sidney Powell",
       "url": "https://www.cnn.com/business/live-news/fox-news-dominion-trial-04-18-23/h_8d51e3ae2714edaa0dace837305d03b8",
       "source": "CNN.com - RSS Channel - HP Hero",
-      "published_utc": "2025-09-13T09:37:58.475569+00:00",
+      "published_utc": "2025-09-13T09:50:42.435843+00:00",
       "category": "General",
       "region": "World",
       "canonical_url": "https://www.cnn.com/business/live-news/fox-news-dominion-trial-04-18-23/h_8d51e3ae2714edaa0dace837305d03b8",
@@ -14,9 +14,59 @@
       "cluster_id": "t:94aaf9795642",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.999,
+      "score": 0.9994,
       "score_components": {
-        "recency": 0.999
+        "recency": 0.9994
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Current Conditions: Light Rain, 17.4°C",
+      "url": "https://weather.gc.ca/en/location/index.html?coords=43.655%2C-79.383",
+      "source": "Toronto - Weather - Environment Canada",
+      "published_utc": "2025-09-13T09:47:00+00:00",
+      "category": "Weather",
+      "region": "Canada",
+      "canonical_url": "https://weather.gc.ca/en/location/index.html?coords=43.655%2C-79.383",
+      "canonical_id": "u:d16cf2c223b0001d",
+      "cluster_id": "t:f91d8d98658d",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "lightsaber": true,
+      "score": 2.7923,
+      "score_components": {
+        "recency": 0.9923,
+        "category": 0.6,
+        "regional": 1.2
+      },
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      }
+    },
+    {
+      "title": "Nepal’s New Government Calls Elections. Its Critics Cry Foul.",
+      "url": "https://www.nytimes.com/2025/09/13/world/asia/nepal-government-politics-election-protest.html",
+      "source": "NYT > World News",
+      "published_utc": "2025-09-13T09:32:09+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.nytimes.com/2025/09/13/world/asia/nepal-government-politics-election-protest.html",
+      "canonical_id": "u:e02633ed5cda0506",
+      "cluster_id": "t:e2d22b9cbe41",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9643,
+      "score_components": {
+        "recency": 0.9643
       },
       "effects": {
         "lightsaber": false,
@@ -37,9 +87,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1839,
+      "score": 2.1604,
       "score_components": {
-        "recency": 0.9839,
+        "recency": 0.9604,
         "public_safety": 1.2
       },
       "effects": {
@@ -49,28 +99,6 @@
           "score≥1.8"
         ],
         "style": "glitch"
-      }
-    },
-    {
-      "title": "Brazilians react to Supreme Court ruling against former president Jair Bolsonaro",
-      "url": "https://www.africanews.com/2025/09/13/brazilians-react-to-supreme-court-ruling-against-former-president-jair-bolsonaro",
-      "source": "Africanews RSS",
-      "published_utc": "2025-09-13T09:26:28+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.africanews.com/2025/09/13/brazilians-react-to-supreme-court-ruling-against-former-president-jair-bolsonaro",
-      "canonical_id": "u:6a2450987405f4a5",
-      "cluster_id": "t:f3109c33f487",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.9772,
-      "score_components": {
-        "recency": 0.9772
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       }
     },
     {
@@ -85,9 +113,9 @@
       "cluster_id": "t:a10e085ce903",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9419,
+      "score": 0.9194,
       "score_components": {
-        "recency": 0.9419
+        "recency": 0.9194
       },
       "effects": {
         "lightsaber": false,
@@ -107,10 +135,121 @@
       "cluster_id": "t:cfb212dde544",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1902,
+      "score": 1.1678,
       "score_components": {
-        "recency": 0.9402,
+        "recency": 0.9178,
         "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Brazil Defies Trump’s Demands by Convicting Bolsonaro",
+      "url": "https://www.nytimes.com/2025/09/13/world/americas/brazil-trump-bolsonaro.html",
+      "source": "NYT > World News",
+      "published_utc": "2025-09-13T09:02:49+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.nytimes.com/2025/09/13/world/americas/brazil-trump-bolsonaro.html",
+      "canonical_id": "u:8953eef49335facc",
+      "cluster_id": "t:6ab1433468b0",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9114,
+      "score_components": {
+        "recency": 0.9114
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "‘You Burned This Country Down’: After Arsons, Nepal Reckons With Its Future",
+      "url": "https://www.nytimes.com/2025/09/13/world/asia/nepal-unrest-arson-burn-victims.html",
+      "source": "NYT > World News",
+      "published_utc": "2025-09-13T09:02:35+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.nytimes.com/2025/09/13/world/asia/nepal-unrest-arson-burn-victims.html",
+      "canonical_id": "u:714a8054a402de7a",
+      "cluster_id": "t:3c01069ad7ef",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.111,
+      "score_components": {
+        "recency": 0.911,
+        "public_safety": 0.2
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "As Sabotage in Europe Mounts, So Do Calls to Retaliate Against Russia",
+      "url": "https://www.nytimes.com/2025/09/13/world/europe/russia-hybrid-attack-nato-penalties.html",
+      "source": "NYT > World News",
+      "published_utc": "2025-09-13T09:02:34+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.nytimes.com/2025/09/13/world/europe/russia-hybrid-attack-nato-penalties.html",
+      "canonical_id": "u:430042b8c48a443e",
+      "cluster_id": "t:00d821b11327",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9109,
+      "score_components": {
+        "recency": 0.9109
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Trump Administration Questions Colombia’s Anti-Drug Efforts and Weighs Cutting Aid",
+      "url": "https://www.nytimes.com/2025/09/13/world/americas/trump-drug-war-cocaine-colombia.html",
+      "source": "NYT > World News",
+      "published_utc": "2025-09-13T09:02:05+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.nytimes.com/2025/09/13/world/americas/trump-drug-war-cocaine-colombia.html",
+      "canonical_id": "u:91e6ed11c39964e3",
+      "cluster_id": "t:4fd14c34c424",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9101,
+      "score_components": {
+        "recency": 0.9101
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "A Chaotic Showdown Over Election Integrity in India",
+      "url": "https://www.nytimes.com/2025/09/13/world/asia/india-voters-bihar.html",
+      "source": "NYT > World News",
+      "published_utc": "2025-09-13T09:01:00+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.nytimes.com/2025/09/13/world/asia/india-voters-bihar.html",
+      "canonical_id": "u:f7ea3b83b067b6db",
+      "cluster_id": "t:bdb0aa181d30",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9082,
+      "score_components": {
+        "recency": 0.9082
       },
       "effects": {
         "lightsaber": false,
@@ -130,9 +269,9 @@
       "cluster_id": "t:61106b947bf9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.93,
+      "score": 0.9078,
       "score_components": {
-        "recency": 0.93
+        "recency": 0.9078
       },
       "effects": {
         "lightsaber": false,
@@ -152,43 +291,15 @@
       "cluster_id": "t:4a3dc8363aa8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1292,
+      "score": 1.107,
       "score_components": {
-        "recency": 0.9292,
+        "recency": 0.907,
         "category": 0.2
       },
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      }
-    },
-    {
-      "title": "Current Conditions: Cloudy, 17.5°C",
-      "url": "https://weather.gc.ca/en/location/index.html?coords=43.655%2C-79.383",
-      "source": "Toronto - Weather - Environment Canada",
-      "published_utc": "2025-09-13T09:00:00+00:00",
-      "category": "Weather",
-      "region": "Canada",
-      "canonical_url": "https://weather.gc.ca/en/location/index.html?coords=43.655%2C-79.383",
-      "canonical_id": "u:d16cf2c223b0001d",
-      "cluster_id": "t:22fb038602a1",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "lightsaber": true,
-      "score": 2.7286,
-      "score_components": {
-        "recency": 0.9286,
-        "category": 0.6,
-        "regional": 1.2
-      },
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
       }
     },
     {
@@ -204,9 +315,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -232,9 +343,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -260,9 +371,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -288,9 +399,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -316,9 +427,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -344,9 +455,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -372,9 +483,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -400,9 +511,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -428,9 +539,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -456,9 +567,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -484,9 +595,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -512,9 +623,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7286,
+      "score": 2.7064,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.6,
         "regional": 1.2
       },
@@ -539,9 +650,9 @@
       "cluster_id": "t:42506d010157",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1786,
+      "score": 1.1564,
       "score_components": {
-        "recency": 0.9286,
+        "recency": 0.9064,
         "category": 0.25
       },
       "effects": {
@@ -562,9 +673,9 @@
       "cluster_id": "t:178e5c6222fb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9286,
+      "score": 0.9064,
       "score_components": {
-        "recency": 0.9286
+        "recency": 0.9064
       },
       "effects": {
         "lightsaber": false,
@@ -584,9 +695,9 @@
       "cluster_id": "t:2e04c218c944",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9286,
+      "score": 0.9064,
       "score_components": {
-        "recency": 0.9286
+        "recency": 0.9064
       },
       "effects": {
         "lightsaber": false,
@@ -606,9 +717,9 @@
       "cluster_id": "t:09e0d6c88eb6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9286,
+      "score": 0.9064,
       "score_components": {
-        "recency": 0.9286
+        "recency": 0.9064
       },
       "effects": {
         "lightsaber": false,
@@ -628,9 +739,9 @@
       "cluster_id": "t:32794ebfa3ec",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9286,
+      "score": 0.9064,
       "score_components": {
-        "recency": 0.9286
+        "recency": 0.9064
       },
       "effects": {
         "lightsaber": false,
@@ -650,9 +761,9 @@
       "cluster_id": "t:1e70ed687eae",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8654,
+      "score": 0.8448,
       "score_components": {
-        "recency": 0.8654
+        "recency": 0.8448
       },
       "effects": {
         "lightsaber": false,
@@ -672,9 +783,9 @@
       "cluster_id": "t:9f1745dc8340",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8444,
+      "score": 0.8243,
       "score_components": {
-        "recency": 0.8444
+        "recency": 0.8243
       },
       "effects": {
         "lightsaber": false,
@@ -694,9 +805,9 @@
       "cluster_id": "t:6204d537c4b0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8288,
+      "score": 0.809,
       "score_components": {
-        "recency": 0.8288
+        "recency": 0.809
       },
       "effects": {
         "lightsaber": false,
@@ -717,9 +828,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.9782,
+      "score": 2.9584,
       "score_components": {
-        "recency": 0.8282,
+        "recency": 0.8084,
         "category": 0.5,
         "preferred_domain": 0.25,
         "public_safety": 0.2,
@@ -746,9 +857,9 @@
       "cluster_id": "t:68765b3f9a6b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0777,
+      "score": 1.058,
       "score_components": {
-        "recency": 0.8277,
+        "recency": 0.808,
         "category": 0.25
       },
       "effects": {
@@ -769,9 +880,9 @@
       "cluster_id": "t:ff5539f1843d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8273,
+      "score": 0.8075,
       "score_components": {
-        "recency": 0.8273
+        "recency": 0.8075
       },
       "effects": {
         "lightsaber": false,
@@ -791,9 +902,9 @@
       "cluster_id": "t:6b17fa02aec2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8264,
+      "score": 0.8067,
       "score_components": {
-        "recency": 0.8264
+        "recency": 0.8067
       },
       "effects": {
         "lightsaber": false,
@@ -813,9 +924,9 @@
       "cluster_id": "t:3cfd189f765c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0709,
+      "score": 1.0513,
       "score_components": {
-        "recency": 0.8209,
+        "recency": 0.8013,
         "category": 0.25
       },
       "effects": {
@@ -836,9 +947,9 @@
       "cluster_id": "t:6a58838fda23",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8129,
+      "score": 0.7935,
       "score_components": {
-        "recency": 0.8129
+        "recency": 0.7935
       },
       "effects": {
         "lightsaber": false,
@@ -858,9 +969,9 @@
       "cluster_id": "t:5eaeba281db7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.256,
+      "score": 1.2367,
       "score_components": {
-        "recency": 0.806,
+        "recency": 0.7867,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -882,9 +993,9 @@
       "cluster_id": "t:22d5c8d6cd7d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8047,
+      "score": 0.7855,
       "score_components": {
-        "recency": 0.8047
+        "recency": 0.7855
       },
       "effects": {
         "lightsaber": false,
@@ -904,9 +1015,9 @@
       "cluster_id": "t:5067b8de0792",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7945,
+      "score": 0.7755,
       "score_components": {
-        "recency": 0.7945
+        "recency": 0.7755
       },
       "effects": {
         "lightsaber": false,
@@ -926,9 +1037,9 @@
       "cluster_id": "t:3fe1a8de8443",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7899,
+      "score": 0.7711,
       "score_components": {
-        "recency": 0.7899
+        "recency": 0.7711
       },
       "effects": {
         "lightsaber": false,
@@ -948,9 +1059,9 @@
       "cluster_id": "t:c099a86d3c37",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7836,
+      "score": 0.7649,
       "score_components": {
-        "recency": 0.7836
+        "recency": 0.7649
       },
       "effects": {
         "lightsaber": false,
@@ -970,9 +1081,9 @@
       "cluster_id": "t:8d42396c2aa9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7811,
+      "score": 0.7625,
       "score_components": {
-        "recency": 0.7811
+        "recency": 0.7625
       },
       "effects": {
         "lightsaber": false,
@@ -992,9 +1103,9 @@
       "cluster_id": "t:f2849ac536a1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7603,
+      "score": 0.7421,
       "score_components": {
-        "recency": 0.7603
+        "recency": 0.7421
       },
       "effects": {
         "lightsaber": false,
@@ -1014,9 +1125,31 @@
       "cluster_id": "t:c12b6a6464c5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7396,
+      "score": 0.722,
       "score_components": {
-        "recency": 0.7396
+        "recency": 0.722
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Man arrested for attempting to kill executive at company where he used to work in Tokyo",
+      "url": "https://japantoday.com/category/crime/man-arrested-for-attempting-to-kill-executive-at-company-where-he-used-to-work-in-tokyo",
+      "source": "Japan Today",
+      "published_utc": "2025-09-13T07:01:49+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/crime/man-arrested-for-attempting-to-kill-executive-at-company-where-he-used-to-work-in-tokyo",
+      "canonical_id": "u:68b13d9a92b2a03c",
+      "cluster_id": "t:5eab062fbace",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.722,
+      "score_components": {
+        "recency": 0.722
       },
       "effects": {
         "lightsaber": false,
@@ -1036,9 +1169,31 @@
       "cluster_id": "t:ecae3d1e8f4c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7391,
+      "score": 0.7215,
       "score_components": {
-        "recency": 0.7391
+        "recency": 0.7215
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Tokyo fans savor athletics worlds four years after Olympic lockout",
+      "url": "https://japantoday.com/category/sports/tokyo-fans-savour-athletics-worlds-four-years-after-olympic-lockout",
+      "source": "Japan Today",
+      "published_utc": "2025-09-13T07:00:03+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/sports/tokyo-fans-savour-athletics-worlds-four-years-after-olympic-lockout",
+      "canonical_id": "u:d36f367804749dee",
+      "cluster_id": "t:d87c163b4284",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.7195,
+      "score_components": {
+        "recency": 0.7195
       },
       "effects": {
         "lightsaber": false,
@@ -1058,9 +1213,9 @@
       "cluster_id": "t:008e39fdffef",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7319,
+      "score": 0.7144,
       "score_components": {
-        "recency": 0.7319
+        "recency": 0.7144
       },
       "effects": {
         "lightsaber": false,
@@ -1080,9 +1235,9 @@
       "cluster_id": "t:c4e1c6ca6668",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7318,
+      "score": 0.7143,
       "score_components": {
-        "recency": 0.7318
+        "recency": 0.7143
       },
       "effects": {
         "lightsaber": false,
@@ -1102,9 +1257,9 @@
       "cluster_id": "t:7cb7dae2ae00",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7313,
+      "score": 0.7138,
       "score_components": {
-        "recency": 0.7313
+        "recency": 0.7138
       },
       "effects": {
         "lightsaber": false,
@@ -1124,9 +1279,9 @@
       "cluster_id": "t:d17774b9021e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.726,
+      "score": 0.7086,
       "score_components": {
-        "recency": 0.726
+        "recency": 0.7086
       },
       "effects": {
         "lightsaber": false,
@@ -1146,9 +1301,9 @@
       "cluster_id": "t:f2a26e0d4ad5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7233,
+      "score": 0.706,
       "score_components": {
-        "recency": 0.7233
+        "recency": 0.706
       },
       "effects": {
         "lightsaber": false,
@@ -1168,9 +1323,9 @@
       "cluster_id": "t:2d19c3934ade",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7168,
+      "score": 0.6997,
       "score_components": {
-        "recency": 0.7168
+        "recency": 0.6997
       },
       "effects": {
         "lightsaber": false,
@@ -1190,9 +1345,9 @@
       "cluster_id": "t:990383aa9186",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7144,
+      "score": 0.6973,
       "score_components": {
-        "recency": 0.7144
+        "recency": 0.6973
       },
       "effects": {
         "lightsaber": false,
@@ -1212,9 +1367,9 @@
       "cluster_id": "t:f90b543b06b8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.698,
+      "score": 0.6813,
       "score_components": {
-        "recency": 0.698
+        "recency": 0.6813
       },
       "effects": {
         "lightsaber": false,
@@ -1234,9 +1389,9 @@
       "cluster_id": "t:699d8405a10b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6968,
+      "score": 0.6802,
       "score_components": {
-        "recency": 0.6968
+        "recency": 0.6802
       },
       "effects": {
         "lightsaber": false,
@@ -1256,9 +1411,9 @@
       "cluster_id": "t:6e6e9b6bdcc1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6927,
+      "score": 0.6762,
       "score_components": {
-        "recency": 0.6927
+        "recency": 0.6762
       },
       "effects": {
         "lightsaber": false,
@@ -1278,9 +1433,54 @@
       "cluster_id": "t:544437d4dc6b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6565,
+      "score": 0.6408,
       "score_components": {
-        "recency": 0.6565
+        "recency": 0.6408
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "UC Berkeley shares information on dozens of students, staff with Trump administration",
+      "url": "https://japantoday.com/category/world/uc-berkeley-shares-information-on-dozens-of-students-staff-with-trump-administration",
+      "source": "Japan Today",
+      "published_utc": "2025-09-13T05:54:37+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/uc-berkeley-shares-information-on-dozens-of-students-staff-with-trump-administration",
+      "canonical_id": "u:8f445ae369c83f94",
+      "cluster_id": "t:6d13cd8950ac",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.6343,
+      "score_components": {
+        "recency": 0.6343
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "50 reported dead in Gaza as Israel steps up attacks on main city",
+      "url": "https://japantoday.com/category/world/fifty-reported-dead-in-gaza-as-israel-steps-up-attacks-on-main-city",
+      "source": "Japan Today",
+      "published_utc": "2025-09-13T05:54:28+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/fifty-reported-dead-in-gaza-as-israel-steps-up-attacks-on-main-city",
+      "canonical_id": "u:23ec3831ad2a6b2c",
+      "cluster_id": "t:5d5e565b0b9e",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.6342,
+      "score_components": {
+        "recency": 0.6342,
+        "public_safety": 1.0
       },
       "effects": {
         "lightsaber": false,
@@ -1300,9 +1500,9 @@
       "cluster_id": "t:31ea91e24c80",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6447,
+      "score": 0.6293,
       "score_components": {
-        "recency": 0.6447
+        "recency": 0.6293
       },
       "effects": {
         "lightsaber": false,
@@ -1322,9 +1522,9 @@
       "cluster_id": "t:f2d8aa97d05b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6382,
+      "score": 0.623,
       "score_components": {
-        "recency": 0.6382
+        "recency": 0.623
       },
       "effects": {
         "lightsaber": false,
@@ -1344,9 +1544,9 @@
       "cluster_id": "t:ff216e217c4d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6341,
+      "score": 0.619,
       "score_components": {
-        "recency": 0.6341
+        "recency": 0.619
       },
       "effects": {
         "lightsaber": false,
@@ -1366,9 +1566,9 @@
       "cluster_id": "t:b3a0adf20d33",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0808,
+      "score": 1.0657,
       "score_components": {
-        "recency": 0.6308,
+        "recency": 0.6157,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -1390,9 +1590,9 @@
       "cluster_id": "t:2f753b9b510a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.621,
+      "score": 0.6062,
       "score_components": {
-        "recency": 0.621
+        "recency": 0.6062
       },
       "effects": {
         "lightsaber": false,
@@ -1412,9 +1612,9 @@
       "cluster_id": "t:70807c990157",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6174,
+      "score": 0.6027,
       "score_components": {
-        "recency": 0.6174
+        "recency": 0.6027
       },
       "effects": {
         "lightsaber": false,
@@ -1434,9 +1634,31 @@
       "cluster_id": "t:23ec57b289c6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6174,
+      "score": 0.6026,
       "score_components": {
-        "recency": 0.6174
+        "recency": 0.6026
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "M7.4 earthquake strikes near east coast of Russia’s Kamchatka region",
+      "url": "https://japantoday.com/category/world/a-powerful-7.4-magnitude-earthquake-strikes-near-the-east-coast-of-russia%E2%80%99s-kamchatka-region",
+      "source": "Japan Today",
+      "published_utc": "2025-09-13T05:20:17+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/a-powerful-7.4-magnitude-earthquake-strikes-near-the-east-coast-of-russia%E2%80%99s-kamchatka-region",
+      "canonical_id": "u:4e0c5033511d817b",
+      "cluster_id": "t:1beb1952b0e0",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.5938,
+      "score_components": {
+        "recency": 0.5938
       },
       "effects": {
         "lightsaber": false,
@@ -1456,9 +1678,9 @@
       "cluster_id": "t:5e097ffa5707",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.597,
+      "score": 0.5827,
       "score_components": {
-        "recency": 0.597
+        "recency": 0.5827
       },
       "effects": {
         "lightsaber": false,
@@ -1478,9 +1700,54 @@
       "cluster_id": "t:66227e9cde57",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5963,
+      "score": 0.5821,
       "score_components": {
-        "recency": 0.5963
+        "recency": 0.5821
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Fed Governor Lisa Cook claimed 2nd residence as 'vacation home,' undercutting Trump fraud claims",
+      "url": "https://japantoday.com/category/world/fed-governor-lisa-cook-claimed-2nd-residence-as-%27vacation-home-%27-undercutting-trump-fraud-claims",
+      "source": "Japan Today",
+      "published_utc": "2025-09-13T04:59:55+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/fed-governor-lisa-cook-claimed-2nd-residence-as-%27vacation-home-%27-undercutting-trump-fraud-claims",
+      "canonical_id": "u:13bbbeb9dbdcb730",
+      "cluster_id": "t:850af8b7c0c1",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.5709,
+      "score_components": {
+        "recency": 0.5709
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Suspect in Charlie Kirk murder captured after two-day manhunt",
+      "url": "https://japantoday.com/category/world/suspect-in-charlie-kirk-murder-captured-after-two-day-manhunt1",
+      "source": "Japan Today",
+      "published_utc": "2025-09-13T04:59:49+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/suspect-in-charlie-kirk-murder-captured-after-two-day-manhunt1",
+      "canonical_id": "u:2fd7dd16a447f04e",
+      "cluster_id": "t:4bc462ba31f7",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.7708,
+      "score_components": {
+        "recency": 0.5708,
+        "public_safety": 1.2
       },
       "effects": {
         "lightsaber": false,
@@ -1500,9 +1767,9 @@
       "cluster_id": "t:88707b3d59d8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5683,
+      "score": 0.5548,
       "score_components": {
-        "recency": 0.5683
+        "recency": 0.5548
       },
       "effects": {
         "lightsaber": false,
@@ -1522,9 +1789,9 @@
       "cluster_id": "t:bb181389b6f0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5566,
+      "score": 0.5433,
       "score_components": {
-        "recency": 0.5566
+        "recency": 0.5433
       },
       "effects": {
         "lightsaber": false,
@@ -1544,9 +1811,9 @@
       "cluster_id": "t:e6c81bed6274",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5542,
+      "score": 0.541,
       "score_components": {
-        "recency": 0.5542
+        "recency": 0.541
       },
       "effects": {
         "lightsaber": false,
@@ -1566,9 +1833,9 @@
       "cluster_id": "t:1bb35c9bdf82",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5364,
+      "score": 0.5236,
       "score_components": {
-        "recency": 0.5364
+        "recency": 0.5236
       },
       "effects": {
         "lightsaber": false,
@@ -1588,9 +1855,9 @@
       "cluster_id": "t:3f7faeac50e0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5224,
+      "score": 0.5099,
       "score_components": {
-        "recency": 0.5224
+        "recency": 0.5099
       },
       "effects": {
         "lightsaber": false,
@@ -1610,9 +1877,9 @@
       "cluster_id": "t:4efeb6912fc2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5223,
+      "score": 0.5098,
       "score_components": {
-        "recency": 0.5223
+        "recency": 0.5098
       },
       "effects": {
         "lightsaber": false,
@@ -1632,9 +1899,9 @@
       "cluster_id": "t:901ea34c853d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5221,
+      "score": 0.5096,
       "score_components": {
-        "recency": 0.5221
+        "recency": 0.5096
       },
       "effects": {
         "lightsaber": false,
@@ -1654,9 +1921,9 @@
       "cluster_id": "t:35746e2c0b6c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5201,
+      "score": 0.5077,
       "score_components": {
-        "recency": 0.5201
+        "recency": 0.5077
       },
       "effects": {
         "lightsaber": false,
@@ -1677,9 +1944,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4657,
+      "score": 2.4534,
       "score_components": {
-        "recency": 0.5157,
+        "recency": 0.5034,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -1705,9 +1972,31 @@
       "cluster_id": "t:e15df5d9016d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5125,
+      "score": 0.5003,
       "score_components": {
-        "recency": 0.5125
+        "recency": 0.5003
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Dunfee and Perez claim opening golds at World Athletics Championships",
+      "url": "https://japantoday.com/category/sports/dunfee-and-perez-claim-opening-world-golds-in-tokyo1",
+      "source": "Japan Today",
+      "published_utc": "2025-09-13T03:50:32+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/sports/dunfee-and-perez-claim-opening-world-golds-in-tokyo1",
+      "canonical_id": "u:555c1500bcd3f0e4",
+      "cluster_id": "t:67225667dae7",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.4995,
+      "score_components": {
+        "recency": 0.4995
       },
       "effects": {
         "lightsaber": false,
@@ -1727,9 +2016,9 @@
       "cluster_id": "t:f9e4c23f0534",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5103,
+      "score": 0.4981,
       "score_components": {
-        "recency": 0.5103
+        "recency": 0.4981
       },
       "effects": {
         "lightsaber": false,
@@ -1749,9 +2038,9 @@
       "cluster_id": "t:dd1bf2a63f2c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5095,
+      "score": 0.4974,
       "score_components": {
-        "recency": 0.5095
+        "recency": 0.4974
       },
       "effects": {
         "lightsaber": false,
@@ -1771,9 +2060,9 @@
       "cluster_id": "t:4105018ead16",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9556,
+      "score": 0.9436,
       "score_components": {
-        "recency": 0.5056,
+        "recency": 0.4936,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -1795,9 +2084,9 @@
       "cluster_id": "t:bc2fe9e4090c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4993,
+      "score": 0.4874,
       "score_components": {
-        "recency": 0.4993
+        "recency": 0.4874
       },
       "effects": {
         "lightsaber": false,
@@ -1817,9 +2106,9 @@
       "cluster_id": "t:212e5d6649db",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7481,
+      "score": 0.7362,
       "score_components": {
-        "recency": 0.4981,
+        "recency": 0.4862,
         "category": 0.25
       },
       "effects": {
@@ -1840,9 +2129,9 @@
       "cluster_id": "t:9ccc7b7ba135",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4955,
+      "score": 0.4837,
       "score_components": {
-        "recency": 0.4955
+        "recency": 0.4837
       },
       "effects": {
         "lightsaber": false,
@@ -1862,9 +2151,9 @@
       "cluster_id": "t:89a655ec5d5d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4919,
+      "score": 0.4802,
       "score_components": {
-        "recency": 0.4919
+        "recency": 0.4802
       },
       "effects": {
         "lightsaber": false,
@@ -1884,9 +2173,9 @@
       "cluster_id": "t:532a6b678320",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6907,
+      "score": 0.6789,
       "score_components": {
-        "recency": 0.4907,
+        "recency": 0.4789,
         "public_safety": 0.2
       },
       "effects": {
@@ -1907,9 +2196,9 @@
       "cluster_id": "t:56fa94a6481f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4893,
+      "score": 0.4776,
       "score_components": {
-        "recency": 0.4893
+        "recency": 0.4776
       },
       "effects": {
         "lightsaber": false,
@@ -1929,9 +2218,9 @@
       "cluster_id": "t:f8d53374920c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4886,
+      "score": 0.4769,
       "score_components": {
-        "recency": 0.4886
+        "recency": 0.4769
       },
       "effects": {
         "lightsaber": false,
@@ -1951,9 +2240,9 @@
       "cluster_id": "t:c35eeec1e11f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4872,
+      "score": 0.4756,
       "score_components": {
-        "recency": 0.4872
+        "recency": 0.4756
       },
       "effects": {
         "lightsaber": false,
@@ -1974,9 +2263,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4327,
+      "score": 2.4211,
       "score_components": {
-        "recency": 0.4827,
+        "recency": 0.4711,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -2002,9 +2291,9 @@
       "cluster_id": "t:398617ab919b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4798,
+      "score": 0.4684,
       "score_components": {
-        "recency": 0.4798
+        "recency": 0.4684
       },
       "effects": {
         "lightsaber": false,
@@ -2024,9 +2313,9 @@
       "cluster_id": "t:5afd77172a70",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4774,
+      "score": 0.466,
       "score_components": {
-        "recency": 0.4774
+        "recency": 0.466
       },
       "effects": {
         "lightsaber": false,
@@ -2046,9 +2335,9 @@
       "cluster_id": "t:5ba32c0f5c80",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7261,
+      "score": 0.7147,
       "score_components": {
-        "recency": 0.4761,
+        "recency": 0.4647,
         "category": 0.25
       },
       "effects": {
@@ -2069,9 +2358,9 @@
       "cluster_id": "t:7fdc76a71900",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4747,
+      "score": 0.4634,
       "score_components": {
-        "recency": 0.4747
+        "recency": 0.4634
       },
       "effects": {
         "lightsaber": false,
@@ -2091,9 +2380,9 @@
       "cluster_id": "t:125b677dff61",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4726,
+      "score": 0.4613,
       "score_components": {
-        "recency": 0.4726
+        "recency": 0.4613
       },
       "effects": {
         "lightsaber": false,
@@ -2113,9 +2402,9 @@
       "cluster_id": "t:1b5a761fe127",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4657,
+      "score": 0.4545,
       "score_components": {
-        "recency": 0.4657
+        "recency": 0.4545
       },
       "effects": {
         "lightsaber": false,
@@ -2135,9 +2424,9 @@
       "cluster_id": "t:de22aa67816c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4643,
+      "score": 0.4532,
       "score_components": {
-        "recency": 0.4643
+        "recency": 0.4532
       },
       "effects": {
         "lightsaber": false,
@@ -2157,9 +2446,9 @@
       "cluster_id": "t:49ac5e92a575",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4642,
+      "score": 0.4531,
       "score_components": {
-        "recency": 0.4642
+        "recency": 0.4531
       },
       "effects": {
         "lightsaber": false,
@@ -2179,9 +2468,9 @@
       "cluster_id": "t:3aa757aef65d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4625,
+      "score": 0.4515,
       "score_components": {
-        "recency": 0.4625
+        "recency": 0.4515
       },
       "effects": {
         "lightsaber": false,
@@ -2201,9 +2490,9 @@
       "cluster_id": "t:3c5ad3261cf4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4577,
+      "score": 0.4467,
       "score_components": {
-        "recency": 0.4577
+        "recency": 0.4467
       },
       "effects": {
         "lightsaber": false,
@@ -2223,9 +2512,9 @@
       "cluster_id": "t:9b507da488f9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.456,
+      "score": 1.4451,
       "score_components": {
-        "recency": 0.456,
+        "recency": 0.4451,
         "public_safety": 1.0
       },
       "effects": {
@@ -2246,9 +2535,9 @@
       "cluster_id": "t:5dcd01f0a5f3",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4542,
+      "score": 0.4433,
       "score_components": {
-        "recency": 0.4542
+        "recency": 0.4433
       },
       "effects": {
         "lightsaber": false,
@@ -2268,9 +2557,9 @@
       "cluster_id": "t:585f94973fb1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4501,
+      "score": 0.4394,
       "score_components": {
-        "recency": 0.4501
+        "recency": 0.4394
       },
       "effects": {
         "lightsaber": false,
@@ -2290,9 +2579,9 @@
       "cluster_id": "t:32bf57c5d0a6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4452,
+      "score": 0.4346,
       "score_components": {
-        "recency": 0.4452
+        "recency": 0.4346
       },
       "effects": {
         "lightsaber": false,
@@ -2312,9 +2601,9 @@
       "cluster_id": "t:37803225c6d6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4441,
+      "score": 0.4335,
       "score_components": {
-        "recency": 0.4441
+        "recency": 0.4335
       },
       "effects": {
         "lightsaber": false,
@@ -2334,9 +2623,9 @@
       "cluster_id": "t:74352901ce4b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4373,
+      "score": 0.4268,
       "score_components": {
-        "recency": 0.4373
+        "recency": 0.4268
       },
       "effects": {
         "lightsaber": false,
@@ -2356,9 +2645,9 @@
       "cluster_id": "t:bd6606907489",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4298,
+      "score": 0.4195,
       "score_components": {
-        "recency": 0.4298
+        "recency": 0.4195
       },
       "effects": {
         "lightsaber": false,
@@ -2378,9 +2667,9 @@
       "cluster_id": "t:6479931464ed",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4193,
+      "score": 0.4093,
       "score_components": {
-        "recency": 0.4193
+        "recency": 0.4093
       },
       "effects": {
         "lightsaber": false,
@@ -2401,9 +2690,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.3693,
+      "score": 2.3593,
       "score_components": {
-        "recency": 0.4193,
+        "recency": 0.4093,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -2429,9 +2718,9 @@
       "cluster_id": "t:420330891b87",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4163,
+      "score": 0.4064,
       "score_components": {
-        "recency": 0.4163
+        "recency": 0.4064
       },
       "effects": {
         "lightsaber": false,
@@ -2451,9 +2740,9 @@
       "cluster_id": "t:9555d5e8ff00",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.414,
+      "score": 0.4041,
       "score_components": {
-        "recency": 0.414
+        "recency": 0.4041
       },
       "effects": {
         "lightsaber": false,
@@ -2473,9 +2762,9 @@
       "cluster_id": "t:43f826053cf3",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4139,
+      "score": 0.4041,
       "score_components": {
-        "recency": 0.4139
+        "recency": 0.4041
       },
       "effects": {
         "lightsaber": false,
@@ -2496,9 +2785,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.3631,
+      "score": 2.3532,
       "score_components": {
-        "recency": 0.4131,
+        "recency": 0.4032,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -2524,9 +2813,9 @@
       "cluster_id": "t:7c3e7d9fe47a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4098,
+      "score": 0.4,
       "score_components": {
-        "recency": 0.4098
+        "recency": 0.4
       },
       "effects": {
         "lightsaber": false,
@@ -2546,9 +2835,9 @@
       "cluster_id": "t:766561f19077",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4091,
+      "score": 0.3993,
       "score_components": {
-        "recency": 0.4091
+        "recency": 0.3993
       },
       "effects": {
         "lightsaber": false,
@@ -2568,9 +2857,9 @@
       "cluster_id": "t:acd849e1526b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4075,
+      "score": 0.3978,
       "score_components": {
-        "recency": 0.4075
+        "recency": 0.3978
       },
       "effects": {
         "lightsaber": false,
@@ -2590,9 +2879,9 @@
       "cluster_id": "t:65f6c3e92c4d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.407,
+      "score": 0.3973,
       "score_components": {
-        "recency": 0.407
+        "recency": 0.3973
       },
       "effects": {
         "lightsaber": false,
@@ -2612,9 +2901,9 @@
       "cluster_id": "t:d01631d7b917",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4058,
+      "score": 0.3961,
       "score_components": {
-        "recency": 0.4058
+        "recency": 0.3961
       },
       "effects": {
         "lightsaber": false,
@@ -2634,9 +2923,9 @@
       "cluster_id": "t:2e266237c82e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4042,
+      "score": 0.3945,
       "score_components": {
-        "recency": 0.4042
+        "recency": 0.3945
       },
       "effects": {
         "lightsaber": false,
@@ -2657,9 +2946,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.5513,
+      "score": 2.5417,
       "score_components": {
-        "recency": 0.4013,
+        "recency": 0.3917,
         "category": 0.5,
         "preferred_domain": 0.25,
         "public_safety": 0.2,
@@ -2686,9 +2975,9 @@
       "cluster_id": "t:74ec1bc4bef7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3987,
+      "score": 0.3892,
       "score_components": {
-        "recency": 0.3987
+        "recency": 0.3892
       },
       "effects": {
         "lightsaber": false,
@@ -2708,9 +2997,9 @@
       "cluster_id": "t:904c77a030b9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.398,
+      "score": 0.3885,
       "score_components": {
-        "recency": 0.398
+        "recency": 0.3885
       },
       "effects": {
         "lightsaber": false,
@@ -2730,9 +3019,9 @@
       "cluster_id": "t:368ce58f1c07",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6472,
+      "score": 0.6378,
       "score_components": {
-        "recency": 0.3972,
+        "recency": 0.3878,
         "category": 0.25
       },
       "effects": {
@@ -2753,9 +3042,9 @@
       "cluster_id": "t:06b9744be0f4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6459,
+      "score": 0.6365,
       "score_components": {
-        "recency": 0.3959,
+        "recency": 0.3865,
         "category": 0.25
       },
       "effects": {
@@ -2776,9 +3065,9 @@
       "cluster_id": "t:1c87159e983d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3958,
+      "score": 0.3863,
       "score_components": {
-        "recency": 0.3958
+        "recency": 0.3863
       },
       "effects": {
         "lightsaber": false,
@@ -2798,9 +3087,9 @@
       "cluster_id": "t:dd258d25a56b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3925,
+      "score": 0.3831,
       "score_components": {
-        "recency": 0.3925
+        "recency": 0.3831
       },
       "effects": {
         "lightsaber": false,
@@ -2820,9 +3109,9 @@
       "cluster_id": "t:b62e85ff6f49",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3917,
+      "score": 0.3824,
       "score_components": {
-        "recency": 0.3917
+        "recency": 0.3824
       },
       "effects": {
         "lightsaber": false,
@@ -2842,9 +3131,9 @@
       "cluster_id": "t:f2c6b007be0a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3904,
+      "score": 0.3811,
       "score_components": {
-        "recency": 0.3904
+        "recency": 0.3811
       },
       "effects": {
         "lightsaber": false,
@@ -2864,9 +3153,9 @@
       "cluster_id": "t:1a12df93018f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3891,
+      "score": 0.3799,
       "score_components": {
-        "recency": 0.3891
+        "recency": 0.3799
       },
       "effects": {
         "lightsaber": false,
@@ -2886,9 +3175,9 @@
       "cluster_id": "t:ee963584d99b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3842,
+      "score": 0.375,
       "score_components": {
-        "recency": 0.3842
+        "recency": 0.375
       },
       "effects": {
         "lightsaber": false,
@@ -2908,9 +3197,9 @@
       "cluster_id": "t:eddaf9c7a078",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3818,
+      "score": 0.3726,
       "score_components": {
-        "recency": 0.3818
+        "recency": 0.3726
       },
       "effects": {
         "lightsaber": false,
@@ -2930,9 +3219,9 @@
       "cluster_id": "t:6cd7ed25f3a4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3809,
+      "score": 0.3718,
       "score_components": {
-        "recency": 0.3809
+        "recency": 0.3718
       },
       "effects": {
         "lightsaber": false,
@@ -2952,9 +3241,9 @@
       "cluster_id": "t:5a10ce328741",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3788,
+      "score": 0.3698,
       "score_components": {
-        "recency": 0.3788
+        "recency": 0.3698
       },
       "effects": {
         "lightsaber": false,
@@ -2974,9 +3263,9 @@
       "cluster_id": "t:67723a02e5c0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6243,
+      "score": 0.6153,
       "score_components": {
-        "recency": 0.3743,
+        "recency": 0.3653,
         "category": 0.25
       },
       "effects": {
@@ -2997,9 +3286,9 @@
       "cluster_id": "t:99ed107a8e68",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8239,
+      "score": 0.815,
       "score_components": {
-        "recency": 0.3739,
+        "recency": 0.365,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -3021,9 +3310,9 @@
       "cluster_id": "t:c896b69ac705",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3708,
+      "score": 0.3619,
       "score_components": {
-        "recency": 0.3708
+        "recency": 0.3619
       },
       "effects": {
         "lightsaber": false,
@@ -3043,9 +3332,9 @@
       "cluster_id": "t:5b786a9a2841",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3707,
+      "score": 0.3618,
       "score_components": {
-        "recency": 0.3707
+        "recency": 0.3618
       },
       "effects": {
         "lightsaber": false,
@@ -3065,9 +3354,9 @@
       "cluster_id": "t:ec3ec1e9da04",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3685,
+      "score": 0.3597,
       "score_components": {
-        "recency": 0.3685
+        "recency": 0.3597
       },
       "effects": {
         "lightsaber": false,
@@ -3087,9 +3376,9 @@
       "cluster_id": "t:5383c247486b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3678,
+      "score": 0.359,
       "score_components": {
-        "recency": 0.3678
+        "recency": 0.359
       },
       "effects": {
         "lightsaber": false,
@@ -3109,9 +3398,9 @@
       "cluster_id": "t:a5b7ee34d155",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3652,
+      "score": 0.3565,
       "score_components": {
-        "recency": 0.3652
+        "recency": 0.3565
       },
       "effects": {
         "lightsaber": false,
@@ -3131,9 +3420,9 @@
       "cluster_id": "t:647152f02ca0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3643,
+      "score": 0.3556,
       "score_components": {
-        "recency": 0.3643
+        "recency": 0.3556
       },
       "effects": {
         "lightsaber": false,
@@ -3153,9 +3442,9 @@
       "cluster_id": "t:21b04d40c0fe",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3625,
+      "score": 0.3538,
       "score_components": {
-        "recency": 0.3625
+        "recency": 0.3538
       },
       "effects": {
         "lightsaber": false,
@@ -3175,9 +3464,9 @@
       "cluster_id": "t:2e155b26bf40",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3617,
+      "score": 0.353,
       "score_components": {
-        "recency": 0.3617
+        "recency": 0.353
       },
       "effects": {
         "lightsaber": false,
@@ -3197,9 +3486,9 @@
       "cluster_id": "t:f590e8f6e85e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3615,
+      "score": 0.3529,
       "score_components": {
-        "recency": 0.3615
+        "recency": 0.3529
       },
       "effects": {
         "lightsaber": false,
@@ -3219,9 +3508,9 @@
       "cluster_id": "t:e6345e27d214",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5597,
+      "score": 1.5511,
       "score_components": {
-        "recency": 0.3597,
+        "recency": 0.3511,
         "public_safety": 1.2
       },
       "effects": {
@@ -3242,9 +3531,9 @@
       "cluster_id": "t:c4c31aa7bb5d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3586,
+      "score": 0.3501,
       "score_components": {
-        "recency": 0.3586
+        "recency": 0.3501
       },
       "effects": {
         "lightsaber": false,
@@ -3264,9 +3553,9 @@
       "cluster_id": "t:74c009dcf8d7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3584,
+      "score": 0.3499,
       "score_components": {
-        "recency": 0.3584
+        "recency": 0.3499
       },
       "effects": {
         "lightsaber": false,
@@ -3286,9 +3575,9 @@
       "cluster_id": "t:74999c46046f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3576,
+      "score": 0.349,
       "score_components": {
-        "recency": 0.3576
+        "recency": 0.349
       },
       "effects": {
         "lightsaber": false,
@@ -3308,9 +3597,9 @@
       "cluster_id": "t:9b34b72abf87",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3572,
+      "score": 0.3487,
       "score_components": {
-        "recency": 0.3572
+        "recency": 0.3487
       },
       "effects": {
         "lightsaber": false,
@@ -3330,9 +3619,9 @@
       "cluster_id": "t:677ece51c08d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3572,
+      "score": 0.3486,
       "score_components": {
-        "recency": 0.3572
+        "recency": 0.3486
       },
       "effects": {
         "lightsaber": false,
@@ -3352,9 +3641,9 @@
       "cluster_id": "t:b80950e072dd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.357,
+      "score": 0.3485,
       "score_components": {
-        "recency": 0.357
+        "recency": 0.3485
       },
       "effects": {
         "lightsaber": false,
@@ -3374,9 +3663,9 @@
       "cluster_id": "t:4c619bb42251",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3555,
+      "score": 0.347,
       "score_components": {
-        "recency": 0.3555
+        "recency": 0.347
       },
       "effects": {
         "lightsaber": false,
@@ -3396,9 +3685,9 @@
       "cluster_id": "t:cea62f518daf",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3555,
+      "score": 0.347,
       "score_components": {
-        "recency": 0.3555
+        "recency": 0.347
       },
       "effects": {
         "lightsaber": false,
@@ -3418,9 +3707,9 @@
       "cluster_id": "t:601e930e346a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3524,
+      "score": 0.344,
       "score_components": {
-        "recency": 0.3524
+        "recency": 0.344
       },
       "effects": {
         "lightsaber": false,
@@ -3440,9 +3729,9 @@
       "cluster_id": "t:70155c04b189",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6022,
+      "score": 0.5938,
       "score_components": {
-        "recency": 0.3522,
+        "recency": 0.3438,
         "category": 0.25
       },
       "effects": {
@@ -3463,9 +3752,9 @@
       "cluster_id": "t:57cd4e547ef0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6016,
+      "score": 0.5932,
       "score_components": {
-        "recency": 0.3516,
+        "recency": 0.3432,
         "category": 0.25
       },
       "effects": {
@@ -3486,9 +3775,9 @@
       "cluster_id": "t:2182ee66f301",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6006,
+      "score": 0.5923,
       "score_components": {
-        "recency": 0.3506,
+        "recency": 0.3423,
         "category": 0.25
       },
       "effects": {
@@ -3509,9 +3798,9 @@
       "cluster_id": "t:be12f4708d1b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3394,
+      "score": 0.3313,
       "score_components": {
-        "recency": 0.3394
+        "recency": 0.3313
       },
       "effects": {
         "lightsaber": false,
@@ -3531,9 +3820,9 @@
       "cluster_id": "t:10d9de493f7d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3379,
+      "score": 0.3299,
       "score_components": {
-        "recency": 0.3379
+        "recency": 0.3299
       },
       "effects": {
         "lightsaber": false,
@@ -3554,9 +3843,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.2867,
+      "score": 2.2786,
       "score_components": {
-        "recency": 0.3367,
+        "recency": 0.3286,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -3583,9 +3872,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.2864,
+      "score": 2.2783,
       "score_components": {
-        "recency": 0.3364,
+        "recency": 0.3283,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -3611,9 +3900,9 @@
       "cluster_id": "t:da2d4d21a71b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3359,
+      "score": 0.3279,
       "score_components": {
-        "recency": 0.3359
+        "recency": 0.3279
       },
       "effects": {
         "lightsaber": false,
@@ -3633,9 +3922,9 @@
       "cluster_id": "t:4e9991cd5358",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5851,
+      "score": 0.5771,
       "score_components": {
-        "recency": 0.3351,
+        "recency": 0.3271,
         "category": 0.25
       },
       "effects": {
@@ -3657,9 +3946,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.2851,
+      "score": 2.2771,
       "score_components": {
-        "recency": 0.3351,
+        "recency": 0.3271,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -3685,9 +3974,9 @@
       "cluster_id": "t:bf66f09e08e9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3336,
+      "score": 0.3257,
       "score_components": {
-        "recency": 0.3336
+        "recency": 0.3257
       },
       "effects": {
         "lightsaber": false,
@@ -3707,9 +3996,9 @@
       "cluster_id": "t:0a24b16b037e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.333,
+      "score": 0.325,
       "score_components": {
-        "recency": 0.333
+        "recency": 0.325
       },
       "effects": {
         "lightsaber": false,
@@ -3729,9 +4018,9 @@
       "cluster_id": "t:9733b5b96b85",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.332,
+      "score": 0.3241,
       "score_components": {
-        "recency": 0.332
+        "recency": 0.3241
       },
       "effects": {
         "lightsaber": false,
@@ -3751,9 +4040,9 @@
       "cluster_id": "t:1230c620d203",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3315,
+      "score": 0.3236,
       "score_components": {
-        "recency": 0.3315
+        "recency": 0.3236
       },
       "effects": {
         "lightsaber": false,
@@ -3773,9 +4062,9 @@
       "cluster_id": "t:f1c334dae4a5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.33,
+      "score": 0.3221,
       "score_components": {
-        "recency": 0.33
+        "recency": 0.3221
       },
       "effects": {
         "lightsaber": false,
@@ -3795,9 +4084,9 @@
       "cluster_id": "t:dbc32e63eefe",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3296,
+      "score": 0.3218,
       "score_components": {
-        "recency": 0.3296
+        "recency": 0.3218
       },
       "effects": {
         "lightsaber": false,
@@ -3817,9 +4106,9 @@
       "cluster_id": "t:73cd5d3574d4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3283,
+      "score": 0.3205,
       "score_components": {
-        "recency": 0.3283
+        "recency": 0.3205
       },
       "effects": {
         "lightsaber": false,
@@ -3839,9 +4128,9 @@
       "cluster_id": "t:bce71b5c7630",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3278,
+      "score": 0.32,
       "score_components": {
-        "recency": 0.3278
+        "recency": 0.32
       },
       "effects": {
         "lightsaber": false,
@@ -3861,9 +4150,9 @@
       "cluster_id": "t:0d20442be37d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5775,
+      "score": 0.5697,
       "score_components": {
-        "recency": 0.3275,
+        "recency": 0.3197,
         "category": 0.25
       },
       "effects": {
@@ -3884,9 +4173,9 @@
       "cluster_id": "t:7394799231df",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3263,
+      "score": 0.3185,
       "score_components": {
-        "recency": 0.3263
+        "recency": 0.3185
       },
       "effects": {
         "lightsaber": false,
@@ -3906,9 +4195,9 @@
       "cluster_id": "t:bca7441eb01d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5734,
+      "score": 0.5656,
       "score_components": {
-        "recency": 0.3234,
+        "recency": 0.3156,
         "category": 0.25
       },
       "effects": {
@@ -3929,9 +4218,9 @@
       "cluster_id": "t:a89bca4a22f7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3226,
+      "score": 0.3149,
       "score_components": {
-        "recency": 0.3226
+        "recency": 0.3149
       },
       "effects": {
         "lightsaber": false,
@@ -3951,9 +4240,9 @@
       "cluster_id": "t:338675c6986a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3226,
+      "score": 0.3149,
       "score_components": {
-        "recency": 0.3226
+        "recency": 0.3149
       },
       "effects": {
         "lightsaber": false,
@@ -3973,9 +4262,9 @@
       "cluster_id": "t:ce89ebcd8126",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3223,
+      "score": 0.3146,
       "score_components": {
-        "recency": 0.3223
+        "recency": 0.3146
       },
       "effects": {
         "lightsaber": false,
@@ -3995,9 +4284,9 @@
       "cluster_id": "t:20311ac05f98",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3217,
+      "score": 0.314,
       "score_components": {
-        "recency": 0.3217
+        "recency": 0.314
       },
       "effects": {
         "lightsaber": false,
@@ -4017,9 +4306,9 @@
       "cluster_id": "t:f980f87aa147",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3202,
+      "score": 0.3126,
       "score_components": {
-        "recency": 0.3202
+        "recency": 0.3126
       },
       "effects": {
         "lightsaber": false,
@@ -4039,9 +4328,9 @@
       "cluster_id": "t:87980b0d2b83",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5664,
+      "score": 0.5588,
       "score_components": {
-        "recency": 0.3164,
+        "recency": 0.3088,
         "category": 0.25
       },
       "effects": {
@@ -4062,9 +4351,9 @@
       "cluster_id": "t:e1878246e857",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3157,
+      "score": 0.3082,
       "score_components": {
-        "recency": 0.3157
+        "recency": 0.3082
       },
       "effects": {
         "lightsaber": false,
@@ -4084,9 +4373,9 @@
       "cluster_id": "t:665ea7e4784f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3114,
+      "score": 0.304,
       "score_components": {
-        "recency": 0.3114
+        "recency": 0.304
       },
       "effects": {
         "lightsaber": false,
@@ -4106,9 +4395,9 @@
       "cluster_id": "t:9d6ac3cf8cd7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3111,
+      "score": 0.3037,
       "score_components": {
-        "recency": 0.3111
+        "recency": 0.3037
       },
       "effects": {
         "lightsaber": false,
@@ -4128,9 +4417,9 @@
       "cluster_id": "t:d3ccf94aa0e3",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3104,
+      "score": 0.303,
       "score_components": {
-        "recency": 0.3104
+        "recency": 0.303
       },
       "effects": {
         "lightsaber": false,
@@ -4150,9 +4439,9 @@
       "cluster_id": "t:893e59240612",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3036,
+      "score": 0.2963,
       "score_components": {
-        "recency": 0.3036
+        "recency": 0.2963
       },
       "effects": {
         "lightsaber": false,
@@ -4172,9 +4461,9 @@
       "cluster_id": "t:11c9ace3bf18",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3012,
+      "score": 0.294,
       "score_components": {
-        "recency": 0.3012
+        "recency": 0.294
       },
       "effects": {
         "lightsaber": false,
@@ -4194,9 +4483,9 @@
       "cluster_id": "t:8fb09607c281",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5501,
+      "score": 0.543,
       "score_components": {
-        "recency": 0.3001,
+        "recency": 0.293,
         "category": 0.25
       },
       "effects": {
@@ -4217,9 +4506,9 @@
       "cluster_id": "t:1e7053053381",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2996,
+      "score": 0.2924,
       "score_components": {
-        "recency": 0.2996
+        "recency": 0.2924
       },
       "effects": {
         "lightsaber": false,
@@ -4239,9 +4528,9 @@
       "cluster_id": "t:67df47318ebd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2993,
+      "score": 0.2922,
       "score_components": {
-        "recency": 0.2993
+        "recency": 0.2922
       },
       "effects": {
         "lightsaber": false,
@@ -4261,9 +4550,9 @@
       "cluster_id": "t:db6be4b7df90",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5446,
+      "score": 0.5376,
       "score_components": {
-        "recency": 0.2946,
+        "recency": 0.2876,
         "category": 0.25
       },
       "effects": {
@@ -4285,9 +4574,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.2445,
+      "score": 2.2374,
       "score_components": {
-        "recency": 0.2945,
+        "recency": 0.2874,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -4313,9 +4602,9 @@
       "cluster_id": "t:6c9cdc35cf82",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2944,
+      "score": 0.2874,
       "score_components": {
-        "recency": 0.2944
+        "recency": 0.2874
       },
       "effects": {
         "lightsaber": false,
@@ -4335,9 +4624,9 @@
       "cluster_id": "t:f778ed381236",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5434,
+      "score": 0.5364,
       "score_components": {
-        "recency": 0.2934,
+        "recency": 0.2864,
         "category": 0.25
       },
       "effects": {
@@ -4358,9 +4647,9 @@
       "cluster_id": "t:eeec4fbc4f24",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5427,
+      "score": 0.5358,
       "score_components": {
-        "recency": 0.2927,
+        "recency": 0.2858,
         "category": 0.25
       },
       "effects": {
@@ -4381,9 +4670,9 @@
       "cluster_id": "t:1149b596c308",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5427,
+      "score": 0.5357,
       "score_components": {
-        "recency": 0.2927,
+        "recency": 0.2857,
         "category": 0.25
       },
       "effects": {
@@ -4404,9 +4693,9 @@
       "cluster_id": "t:9dbffa48502a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5426,
+      "score": 0.5356,
       "score_components": {
-        "recency": 0.2926,
+        "recency": 0.2856,
         "category": 0.25
       },
       "effects": {
@@ -4427,9 +4716,9 @@
       "cluster_id": "t:4e7984c74c64",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2925,
+      "score": 0.2856,
       "score_components": {
-        "recency": 0.2925
+        "recency": 0.2856
       },
       "effects": {
         "lightsaber": false,
@@ -4449,9 +4738,9 @@
       "cluster_id": "t:236cdb3d002a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2925,
+      "score": 0.2855,
       "score_components": {
-        "recency": 0.2925
+        "recency": 0.2855
       },
       "effects": {
         "lightsaber": false,
@@ -4471,9 +4760,9 @@
       "cluster_id": "t:a133596328d0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6925,
+      "score": 1.6855,
       "score_components": {
-        "recency": 0.2925,
+        "recency": 0.2855,
         "category": 0.2,
         "regional": 1.2
       },
@@ -4495,9 +4784,9 @@
       "cluster_id": "t:aec64c76a606",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2909,
+      "score": 0.2839,
       "score_components": {
-        "recency": 0.2909
+        "recency": 0.2839
       },
       "effects": {
         "lightsaber": false,
@@ -4517,9 +4806,9 @@
       "cluster_id": "t:0c3ed8fd7451",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2901,
+      "score": 0.2831,
       "score_components": {
-        "recency": 0.2901
+        "recency": 0.2831
       },
       "effects": {
         "lightsaber": false,
@@ -4539,9 +4828,9 @@
       "cluster_id": "t:fe8b4aba82d1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5362,
+      "score": 0.5293,
       "score_components": {
-        "recency": 0.2862,
+        "recency": 0.2793,
         "category": 0.25
       },
       "effects": {
@@ -4562,9 +4851,9 @@
       "cluster_id": "t:814726a78744",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2856,
+      "score": 0.2788,
       "score_components": {
-        "recency": 0.2856
+        "recency": 0.2788
       },
       "effects": {
         "lightsaber": false,
@@ -4584,9 +4873,9 @@
       "cluster_id": "t:be24e42df0f1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2855,
+      "score": 0.2787,
       "score_components": {
-        "recency": 0.2855
+        "recency": 0.2787
       },
       "effects": {
         "lightsaber": false,
@@ -4606,9 +4895,9 @@
       "cluster_id": "t:6f0c22173ac5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2853,
+      "score": 0.2785,
       "score_components": {
-        "recency": 0.2853
+        "recency": 0.2785
       },
       "effects": {
         "lightsaber": false,
@@ -4628,9 +4917,9 @@
       "cluster_id": "t:b5dfa95f49d8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5345,
+      "score": 0.5278,
       "score_components": {
-        "recency": 0.2845,
+        "recency": 0.2778,
         "category": 0.25
       },
       "effects": {
@@ -4651,9 +4940,9 @@
       "cluster_id": "t:18067eceb4e6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2845,
+      "score": 0.2777,
       "score_components": {
-        "recency": 0.2845
+        "recency": 0.2777
       },
       "effects": {
         "lightsaber": false,
@@ -4673,9 +4962,9 @@
       "cluster_id": "t:c4ab9dc94561",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5336,
+      "score": 0.5268,
       "score_components": {
-        "recency": 0.2836,
+        "recency": 0.2768,
         "category": 0.25
       },
       "effects": {
@@ -4696,9 +4985,9 @@
       "cluster_id": "t:d76a192be593",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6833,
+      "score": 1.6765,
       "score_components": {
-        "recency": 0.2833,
+        "recency": 0.2765,
         "category": 0.2,
         "regional": 1.2
       },
@@ -4720,9 +5009,9 @@
       "cluster_id": "t:0e6b6d5f0d2d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2823,
+      "score": 0.2755,
       "score_components": {
-        "recency": 0.2823
+        "recency": 0.2755
       },
       "effects": {
         "lightsaber": false,
@@ -4742,9 +5031,9 @@
       "cluster_id": "t:26d0b694df9c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2814,
+      "score": 0.2747,
       "score_components": {
-        "recency": 0.2814
+        "recency": 0.2747
       },
       "effects": {
         "lightsaber": false,
@@ -4764,9 +5053,9 @@
       "cluster_id": "t:3c79d4de5c6b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.281,
+      "score": 0.2743,
       "score_components": {
-        "recency": 0.281
+        "recency": 0.2743
       },
       "effects": {
         "lightsaber": false,
@@ -4786,9 +5075,9 @@
       "cluster_id": "t:decb656e3743",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2794,
+      "score": 0.2727,
       "score_components": {
-        "recency": 0.2794
+        "recency": 0.2727
       },
       "effects": {
         "lightsaber": false,
@@ -4808,9 +5097,9 @@
       "cluster_id": "t:47b732e80108",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2791,
+      "score": 0.2725,
       "score_components": {
-        "recency": 0.2791
+        "recency": 0.2725
       },
       "effects": {
         "lightsaber": false,
@@ -4830,9 +5119,9 @@
       "cluster_id": "t:952ccc198981",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5267,
+      "score": 0.52,
       "score_components": {
-        "recency": 0.2767,
+        "recency": 0.27,
         "category": 0.25
       },
       "effects": {
@@ -4853,9 +5142,9 @@
       "cluster_id": "t:29ca252b37e7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2767,
+      "score": 0.27,
       "score_components": {
-        "recency": 0.2767
+        "recency": 0.27
       },
       "effects": {
         "lightsaber": false,
@@ -4875,9 +5164,9 @@
       "cluster_id": "t:d78f948984fa",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2763,
+      "score": 0.2697,
       "score_components": {
-        "recency": 0.2763
+        "recency": 0.2697
       },
       "effects": {
         "lightsaber": false,
@@ -4897,9 +5186,9 @@
       "cluster_id": "t:f66c114bc545",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2744,
+      "score": 0.2678,
       "score_components": {
-        "recency": 0.2744
+        "recency": 0.2678
       },
       "effects": {
         "lightsaber": false,
@@ -4919,9 +5208,9 @@
       "cluster_id": "t:59302b6462aa",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2741,
+      "score": 0.2675,
       "score_components": {
-        "recency": 0.2741
+        "recency": 0.2675
       },
       "effects": {
         "lightsaber": false,
@@ -4941,9 +5230,9 @@
       "cluster_id": "t:4e83ff09e159",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2734,
+      "score": 0.2669,
       "score_components": {
-        "recency": 0.2734
+        "recency": 0.2669
       },
       "effects": {
         "lightsaber": false,
@@ -4963,9 +5252,9 @@
       "cluster_id": "t:42b8337276e6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.4712,
+      "score": 1.4647,
       "score_components": {
-        "recency": 0.2712,
+        "recency": 0.2647,
         "public_safety": 1.2
       },
       "effects": {
@@ -4986,9 +5275,9 @@
       "cluster_id": "t:c2a44b08f416",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.268,
+      "score": 0.2616,
       "score_components": {
-        "recency": 0.268
+        "recency": 0.2616
       },
       "effects": {
         "lightsaber": false,
@@ -5008,9 +5297,9 @@
       "cluster_id": "t:3bf7e9722e03",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5127,
+      "score": 0.5065,
       "score_components": {
-        "recency": 0.2627,
+        "recency": 0.2565,
         "category": 0.25
       },
       "effects": {
@@ -5031,9 +5320,9 @@
       "cluster_id": "t:9fa30ee8484d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4626,
+      "score": 0.4563,
       "score_components": {
-        "recency": 0.2626,
+        "recency": 0.2563,
         "category": 0.2
       },
       "effects": {
@@ -5054,9 +5343,9 @@
       "cluster_id": "t:80a2060414fe",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2612,
+      "score": 0.255,
       "score_components": {
-        "recency": 0.2612
+        "recency": 0.255
       },
       "effects": {
         "lightsaber": false,
@@ -5076,9 +5365,9 @@
       "cluster_id": "t:cbb9261bd2bb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4606,
+      "score": 0.4544,
       "score_components": {
-        "recency": 0.2606,
+        "recency": 0.2544,
         "category": 0.2
       },
       "effects": {
@@ -5099,9 +5388,9 @@
       "cluster_id": "t:097126d6c346",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7102,
+      "score": 0.704,
       "score_components": {
-        "recency": 0.2602,
+        "recency": 0.254,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -5123,9 +5412,9 @@
       "cluster_id": "t:20b2cef41967",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2596,
+      "score": 0.2534,
       "score_components": {
-        "recency": 0.2596
+        "recency": 0.2534
       },
       "effects": {
         "lightsaber": false,
@@ -5145,9 +5434,9 @@
       "cluster_id": "t:1619705038e9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2592,
+      "score": 0.253,
       "score_components": {
-        "recency": 0.2592
+        "recency": 0.253
       },
       "effects": {
         "lightsaber": false,
@@ -5167,9 +5456,9 @@
       "cluster_id": "t:018c0e7498b4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2591,
+      "score": 0.2529,
       "score_components": {
-        "recency": 0.2591
+        "recency": 0.2529
       },
       "effects": {
         "lightsaber": false,
@@ -5189,9 +5478,9 @@
       "cluster_id": "t:8453af21013a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2583,
+      "score": 0.2521,
       "score_components": {
-        "recency": 0.2583
+        "recency": 0.2521
       },
       "effects": {
         "lightsaber": false,
@@ -5211,9 +5500,9 @@
       "cluster_id": "t:48c23f6a7152",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2574,
+      "score": 0.2512,
       "score_components": {
-        "recency": 0.2574
+        "recency": 0.2512
       },
       "effects": {
         "lightsaber": false,
@@ -5233,9 +5522,9 @@
       "cluster_id": "t:fd9838c8f875",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.707,
+      "score": 0.7009,
       "score_components": {
-        "recency": 0.257,
+        "recency": 0.2509,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -5257,9 +5546,9 @@
       "cluster_id": "t:8596fcdcf1f9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5048,
+      "score": 0.4988,
       "score_components": {
-        "recency": 0.2548,
+        "recency": 0.2488,
         "category": 0.25
       },
       "effects": {
@@ -5280,9 +5569,9 @@
       "cluster_id": "t:74fd4f853e7e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2545,
+      "score": 0.2485,
       "score_components": {
-        "recency": 0.2545
+        "recency": 0.2485
       },
       "effects": {
         "lightsaber": false,
@@ -5302,9 +5591,9 @@
       "cluster_id": "t:e5cad2fb741f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2533,
+      "score": 0.2473,
       "score_components": {
-        "recency": 0.2533
+        "recency": 0.2473
       },
       "effects": {
         "lightsaber": false,
@@ -5324,31 +5613,9 @@
       "cluster_id": "t:21e20d6aa887",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2532,
+      "score": 0.2471,
       "score_components": {
-        "recency": 0.2532
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "NATO Steps Up Defenses After Russian Drones Violate Polish Airspace",
-      "url": "https://www.nytimes.com/2025/09/12/world/europe/nato-eastern-europe-drone-defenses.html",
-      "source": "NYT > World News",
-      "published_utc": "2025-09-12T21:44:08+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.nytimes.com/2025/09/12/world/europe/nato-eastern-europe-drone-defenses.html",
-      "canonical_id": "u:a1e95a80ee84625a",
-      "cluster_id": "t:f6368df031a7",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.2527,
-      "score_components": {
-        "recency": 0.2527
+        "recency": 0.2471
       },
       "effects": {
         "lightsaber": false,
@@ -5368,9 +5635,9 @@
       "cluster_id": "t:014628979bfe",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5025,
+      "score": 0.4965,
       "score_components": {
-        "recency": 0.2525,
+        "recency": 0.2465,
         "category": 0.25
       },
       "effects": {
@@ -5391,9 +5658,9 @@
       "cluster_id": "t:8c56ea837943",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5015,
+      "score": 0.4955,
       "score_components": {
-        "recency": 0.2515,
+        "recency": 0.2455,
         "category": 0.25
       },
       "effects": {
@@ -5414,9 +5681,9 @@
       "cluster_id": "t:69ee8761af52",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5008,
+      "score": 0.4948,
       "score_components": {
-        "recency": 0.2508,
+        "recency": 0.2448,
         "category": 0.25
       },
       "effects": {
@@ -5437,9 +5704,9 @@
       "cluster_id": "t:85e0d54df75f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2507,
+      "score": 0.2447,
       "score_components": {
-        "recency": 0.2507
+        "recency": 0.2447
       },
       "effects": {
         "lightsaber": false,
@@ -5459,9 +5726,9 @@
       "cluster_id": "t:09f30c1e79e7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2507,
+      "score": 0.2447,
       "score_components": {
-        "recency": 0.2507
+        "recency": 0.2447
       },
       "effects": {
         "lightsaber": false,
@@ -5481,9 +5748,9 @@
       "cluster_id": "t:2d0fb7b392e2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6001,
+      "score": 1.5942,
       "score_components": {
-        "recency": 0.2501,
+        "recency": 0.2442,
         "category": 0.15,
         "regional": 1.2
       },
@@ -5505,9 +5772,9 @@
       "cluster_id": "t:4dcfc9f0cacc",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5983,
+      "score": 1.5924,
       "score_components": {
-        "recency": 0.2483,
+        "recency": 0.2424,
         "category": 0.15,
         "regional": 1.2
       },
@@ -5529,9 +5796,9 @@
       "cluster_id": "t:80133be099b5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4979,
+      "score": 0.492,
       "score_components": {
-        "recency": 0.2479,
+        "recency": 0.242,
         "category": 0.25
       },
       "effects": {
@@ -5552,9 +5819,9 @@
       "cluster_id": "t:d257712fc376",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6974,
+      "score": 0.6915,
       "score_components": {
-        "recency": 0.2474,
+        "recency": 0.2415,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -5576,9 +5843,9 @@
       "cluster_id": "t:e7fc9c8fa865",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2469,
+      "score": 0.241,
       "score_components": {
-        "recency": 0.2469
+        "recency": 0.241
       },
       "effects": {
         "lightsaber": false,
@@ -5598,9 +5865,9 @@
       "cluster_id": "t:ccf688811a71",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.446,
+      "score": 0.4401,
       "score_components": {
-        "recency": 0.246,
+        "recency": 0.2401,
         "category": 0.2
       },
       "effects": {
@@ -5621,9 +5888,9 @@
       "cluster_id": "t:ad86331fdaee",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.446,
+      "score": 0.4401,
       "score_components": {
-        "recency": 0.246,
+        "recency": 0.2401,
         "category": 0.2
       },
       "effects": {
@@ -5644,9 +5911,9 @@
       "cluster_id": "t:6a3875803fae",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2455,
+      "score": 0.2397,
       "score_components": {
-        "recency": 0.2455
+        "recency": 0.2397
       },
       "effects": {
         "lightsaber": false,
@@ -5666,9 +5933,9 @@
       "cluster_id": "t:c95e117202d2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4455,
+      "score": 0.4396,
       "score_components": {
-        "recency": 0.2455,
+        "recency": 0.2396,
         "category": 0.2
       },
       "effects": {
@@ -5689,9 +5956,9 @@
       "cluster_id": "t:558035bb2f70",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2455,
+      "score": 0.2396,
       "score_components": {
-        "recency": 0.2455
+        "recency": 0.2396
       },
       "effects": {
         "lightsaber": false,
@@ -5711,9 +5978,9 @@
       "cluster_id": "t:3f4a6e9d17c5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2454,
+      "score": 0.2396,
       "score_components": {
-        "recency": 0.2454
+        "recency": 0.2396
       },
       "effects": {
         "lightsaber": false,
@@ -5733,9 +6000,9 @@
       "cluster_id": "t:2c0584607dca",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4952,
+      "score": 0.4893,
       "score_components": {
-        "recency": 0.2452,
+        "recency": 0.2393,
         "category": 0.25
       },
       "effects": {
@@ -5756,9 +6023,9 @@
       "cluster_id": "t:49d1bc9f9575",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2451,
+      "score": 0.2393,
       "score_components": {
-        "recency": 0.2451
+        "recency": 0.2393
       },
       "effects": {
         "lightsaber": false,
@@ -5778,9 +6045,9 @@
       "cluster_id": "t:980817bc1f7b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.445,
+      "score": 0.4392,
       "score_components": {
-        "recency": 0.245,
+        "recency": 0.2392,
         "category": 0.2
       },
       "effects": {
@@ -5801,9 +6068,9 @@
       "cluster_id": "t:184b7afde07e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2427,
+      "score": 0.2369,
       "score_components": {
-        "recency": 0.2427
+        "recency": 0.2369
       },
       "effects": {
         "lightsaber": false,
@@ -5823,9 +6090,9 @@
       "cluster_id": "t:14a880a672df",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.492,
+      "score": 0.4862,
       "score_components": {
-        "recency": 0.242,
+        "recency": 0.2362,
         "category": 0.25
       },
       "effects": {
@@ -5846,9 +6113,9 @@
       "cluster_id": "t:92b6b4190773",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.442,
+      "score": 0.4362,
       "score_components": {
-        "recency": 0.242,
+        "recency": 0.2362,
         "public_safety": 0.2
       },
       "effects": {
@@ -5869,9 +6136,9 @@
       "cluster_id": "t:143d1a0be691",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2417,
+      "score": 0.2359,
       "score_components": {
-        "recency": 0.2417
+        "recency": 0.2359
       },
       "effects": {
         "lightsaber": false,
@@ -5891,9 +6158,9 @@
       "cluster_id": "t:8e4dce1942b2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6406,
+      "score": 1.6348,
       "score_components": {
-        "recency": 0.2406,
+        "recency": 0.2348,
         "category": 0.2,
         "regional": 1.2
       },
@@ -5915,9 +6182,9 @@
       "cluster_id": "t:fc3dcafce944",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2396,
+      "score": 0.2339,
       "score_components": {
-        "recency": 0.2396
+        "recency": 0.2339
       },
       "effects": {
         "lightsaber": false,
@@ -5937,9 +6204,9 @@
       "cluster_id": "t:383619234421",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2395,
+      "score": 0.2338,
       "score_components": {
-        "recency": 0.2395
+        "recency": 0.2338
       },
       "effects": {
         "lightsaber": false,
@@ -5959,9 +6226,9 @@
       "cluster_id": "t:57e96c91cffa",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2388,
+      "score": 0.2331,
       "score_components": {
-        "recency": 0.2388
+        "recency": 0.2331
       },
       "effects": {
         "lightsaber": false,
@@ -5981,9 +6248,9 @@
       "cluster_id": "t:f0e81f4d6a11",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6884,
+      "score": 0.6827,
       "score_components": {
-        "recency": 0.2384,
+        "recency": 0.2327,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -6005,9 +6272,9 @@
       "cluster_id": "t:aa3b90643006",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2375,
+      "score": 0.2318,
       "score_components": {
-        "recency": 0.2375
+        "recency": 0.2318
       },
       "effects": {
         "lightsaber": false,
@@ -6027,9 +6294,9 @@
       "cluster_id": "t:c6656446d889",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2371,
+      "score": 0.2314,
       "score_components": {
-        "recency": 0.2371
+        "recency": 0.2314
       },
       "effects": {
         "lightsaber": false,
@@ -6049,9 +6316,9 @@
       "cluster_id": "t:78f9c719bd0f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4362,
+      "score": 0.4306,
       "score_components": {
-        "recency": 0.2362,
+        "recency": 0.2306,
         "public_safety": 0.2
       },
       "effects": {
@@ -6072,9 +6339,9 @@
       "cluster_id": "t:4fb55a758a23",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2358,
+      "score": 0.2301,
       "score_components": {
-        "recency": 0.2358
+        "recency": 0.2301
       },
       "effects": {
         "lightsaber": false,
@@ -6094,9 +6361,9 @@
       "cluster_id": "t:eb10f7f7841a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2348,
+      "score": 0.2292,
       "score_components": {
-        "recency": 0.2348
+        "recency": 0.2292
       },
       "effects": {
         "lightsaber": false,
@@ -6116,9 +6383,9 @@
       "cluster_id": "t:05d9c0763bfb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4841,
+      "score": 0.4785,
       "score_components": {
-        "recency": 0.2341,
+        "recency": 0.2285,
         "category": 0.25
       },
       "effects": {
@@ -6139,9 +6406,9 @@
       "cluster_id": "t:5bd1fe8a984b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4323,
+      "score": 0.4268,
       "score_components": {
-        "recency": 0.2323,
+        "recency": 0.2268,
         "public_safety": 0.2
       },
       "effects": {
@@ -6162,9 +6429,9 @@
       "cluster_id": "t:a139b7cf9d54",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6322,
+      "score": 1.6266,
       "score_components": {
-        "recency": 0.2322,
+        "recency": 0.2266,
         "category": 0.2,
         "regional": 1.2
       },
@@ -6186,10 +6453,32 @@
       "cluster_id": "t:e7d15f5e8c33",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4322,
+      "score": 0.4266,
       "score_components": {
-        "recency": 0.2322,
+        "recency": 0.2266,
         "category": 0.2
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Steven Spielberg celebrates 'awesome' 50th anniversary 'Jaws' exhibition at Academy Museum",
+      "url": "https://japantoday.com/category/entertainment/steven-spielberg-celebrates-%27awesome%27-50th-anniversary-%27jaws%27-exhibition-at-academy-museum",
+      "source": "Japan Today",
+      "published_utc": "2025-09-12T20:56:45+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/entertainment/steven-spielberg-celebrates-%27awesome%27-50th-anniversary-%27jaws%27-exhibition-at-academy-museum",
+      "canonical_id": "u:bbe1ffd78f292d6c",
+      "cluster_id": "t:2aebfcae0bf3",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.2252,
+      "score_components": {
+        "recency": 0.2252
       },
       "effects": {
         "lightsaber": false,
@@ -6209,9 +6498,31 @@
       "cluster_id": "t:9c3427a24f96",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2306,
+      "score": 0.2251,
       "score_components": {
-        "recency": 0.2306
+        "recency": 0.2251
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Boeing defense workers reject deal to end strike",
+      "url": "https://japantoday.com/category/business/boeing-defense-workers-reject-deal-to-end-strike",
+      "source": "Japan Today",
+      "published_utc": "2025-09-12T20:56:26+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/business/boeing-defense-workers-reject-deal-to-end-strike",
+      "canonical_id": "u:c7ce411a0a01a20d",
+      "cluster_id": "t:df9ddde5507c",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.2251,
+      "score_components": {
+        "recency": 0.2251
       },
       "effects": {
         "lightsaber": false,
@@ -6231,9 +6542,9 @@
       "cluster_id": "t:bce31ab0f669",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2305,
+      "score": 0.225,
       "score_components": {
-        "recency": 0.2305
+        "recency": 0.225
       },
       "effects": {
         "lightsaber": false,
@@ -6253,9 +6564,9 @@
       "cluster_id": "t:c0bed3cad5e6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4297,
+      "score": 0.4242,
       "score_components": {
-        "recency": 0.2297,
+        "recency": 0.2242,
         "category": 0.2
       },
       "effects": {
@@ -6276,10 +6587,100 @@
       "cluster_id": "t:9583748afa56",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4796,
+      "score": 0.4741,
       "score_components": {
-        "recency": 0.2296,
+        "recency": 0.2241,
         "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "ICE officer fatally shoots suspect after being dragged by car near Chicago, officials say",
+      "url": "https://japantoday.com/category/world/ice-officer-shoots-kills-suspect-who-dragged-officer-with-car-near-chicago-says-homeland-security",
+      "source": "Japan Today",
+      "published_utc": "2025-09-12T20:53:40+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/ice-officer-shoots-kills-suspect-who-dragged-officer-with-car-near-chicago-says-homeland-security",
+      "canonical_id": "u:2841fd4d5f756932",
+      "cluster_id": "t:c722a550c57e",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.2239,
+      "score_components": {
+        "recency": 0.2239
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Capsizing kills more than 100 people in Congo in the second deadly boat accident this week",
+      "url": "https://japantoday.com/category/world/capsizing-kills-more-than-100-people-in-congo-in-the-second-deadly-boat-accident-this-week",
+      "source": "Japan Today",
+      "published_utc": "2025-09-12T20:53:17+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/capsizing-kills-more-than-100-people-in-congo-in-the-second-deadly-boat-accident-this-week",
+      "canonical_id": "u:3b60d3cafc713ae9",
+      "cluster_id": "t:902750654cd1",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.2237,
+      "score_components": {
+        "recency": 0.2237,
+        "public_safety": 1.0
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "NATO to beef up defense of Europe's eastern flank after Poland shot down drones",
+      "url": "https://japantoday.com/category/world/nato-to-beef-up-defence-of-europe%27s-eastern-flank-after-poland-shot-down-drones2",
+      "source": "Japan Today",
+      "published_utc": "2025-09-12T20:53:09+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/nato-to-beef-up-defence-of-europe%27s-eastern-flank-after-poland-shot-down-drones2",
+      "canonical_id": "u:b71a91eaa28c73ec",
+      "cluster_id": "t:a322d6009623",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.4236,
+      "score_components": {
+        "recency": 0.2236,
+        "public_safety": 0.2
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "U.N. assembly votes overwhelmingly to back two-state solution to Israel-Palestinian conflict",
+      "url": "https://japantoday.com/category/world/un-assembly-votes-overwhelmingly-to-back-two-state-solution-to-israel-palestinian-conflict",
+      "source": "Japan Today",
+      "published_utc": "2025-09-12T20:52:55+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://japantoday.com/category/world/un-assembly-votes-overwhelmingly-to-back-two-state-solution-to-israel-palestinian-conflict",
+      "canonical_id": "u:af190a0ae8b70d97",
+      "cluster_id": "t:651d452006f2",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.2235,
+      "score_components": {
+        "recency": 0.2235
       },
       "effects": {
         "lightsaber": false,
@@ -6300,9 +6701,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1785,
+      "score": 2.1731,
       "score_components": {
-        "recency": 0.2285,
+        "recency": 0.2231,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -6328,9 +6729,9 @@
       "cluster_id": "t:44f2267e6320",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6785,
+      "score": 0.6731,
       "score_components": {
-        "recency": 0.2285,
+        "recency": 0.2231,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -6352,9 +6753,9 @@
       "cluster_id": "t:f99546712b10",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2262,
+      "score": 0.2208,
       "score_components": {
-        "recency": 0.2262
+        "recency": 0.2208
       },
       "effects": {
         "lightsaber": false,
@@ -6374,9 +6775,9 @@
       "cluster_id": "t:65f0703e52ba",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.426,
+      "score": 0.4206,
       "score_components": {
-        "recency": 0.226,
+        "recency": 0.2206,
         "category": 0.2
       },
       "effects": {
@@ -6397,9 +6798,9 @@
       "cluster_id": "t:b20a13a8fe64",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2246,
+      "score": 0.2192,
       "score_components": {
-        "recency": 0.2246
+        "recency": 0.2192
       },
       "effects": {
         "lightsaber": false,
@@ -6419,9 +6820,9 @@
       "cluster_id": "t:f7d5f622cd35",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2239,
+      "score": 0.2186,
       "score_components": {
-        "recency": 0.2239
+        "recency": 0.2186
       },
       "effects": {
         "lightsaber": false,
@@ -6441,9 +6842,9 @@
       "cluster_id": "t:c827f5f2a140",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4234,
+      "score": 0.418,
       "score_components": {
-        "recency": 0.2234,
+        "recency": 0.218,
         "category": 0.2
       },
       "effects": {
@@ -6464,9 +6865,9 @@
       "cluster_id": "t:4cd0c80455ae",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.423,
+      "score": 0.4176,
       "score_components": {
-        "recency": 0.223,
+        "recency": 0.2176,
         "category": 0.2
       },
       "effects": {
@@ -6487,9 +6888,9 @@
       "cluster_id": "t:3aff9d684d00",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5729,
+      "score": 1.5676,
       "score_components": {
-        "recency": 0.2229,
+        "recency": 0.2176,
         "category": 0.15,
         "regional": 1.2
       },
@@ -6511,9 +6912,9 @@
       "cluster_id": "t:efbeb92edf9a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2229,
+      "score": 0.2176,
       "score_components": {
-        "recency": 0.2229
+        "recency": 0.2176
       },
       "effects": {
         "lightsaber": false,
@@ -6533,9 +6934,9 @@
       "cluster_id": "t:4888e7ce8072",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2217,
+      "score": 0.2164,
       "score_components": {
-        "recency": 0.2217
+        "recency": 0.2164
       },
       "effects": {
         "lightsaber": false,
@@ -6555,9 +6956,9 @@
       "cluster_id": "t:e628b0bbc9ac",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4711,
+      "score": 0.4658,
       "score_components": {
-        "recency": 0.2211,
+        "recency": 0.2158,
         "category": 0.25
       },
       "effects": {
@@ -6578,9 +6979,9 @@
       "cluster_id": "t:e587b64b6d42",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.57,
+      "score": 1.5648,
       "score_components": {
-        "recency": 0.22,
+        "recency": 0.2148,
         "category": 0.15,
         "regional": 1.2
       },
@@ -6602,9 +7003,9 @@
       "cluster_id": "t:95cf05eb73c0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.469,
+      "score": 0.4637,
       "score_components": {
-        "recency": 0.219,
+        "recency": 0.2137,
         "category": 0.25
       },
       "effects": {
@@ -6625,9 +7026,9 @@
       "cluster_id": "t:a0451aa8003f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4684,
+      "score": 0.4632,
       "score_components": {
-        "recency": 0.2184,
+        "recency": 0.2132,
         "category": 0.25
       },
       "effects": {
@@ -6648,9 +7049,9 @@
       "cluster_id": "t:a28dc5dd1c0b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4675,
+      "score": 0.4623,
       "score_components": {
-        "recency": 0.2175,
+        "recency": 0.2123,
         "category": 0.25
       },
       "effects": {
@@ -6672,9 +7073,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1659,
+      "score": 2.1608,
       "score_components": {
-        "recency": 0.2159,
+        "recency": 0.2108,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -6700,9 +7101,9 @@
       "cluster_id": "t:abf8290e677c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6158,
+      "score": 0.6106,
       "score_components": {
-        "recency": 0.2158,
+        "recency": 0.2106,
         "category": 0.2,
         "public_safety": 0.2
       },
@@ -6724,9 +7125,9 @@
       "cluster_id": "t:4d685cd6758c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6152,
+      "score": 1.6101,
       "score_components": {
-        "recency": 0.2152,
+        "recency": 0.2101,
         "category": 0.2,
         "regional": 1.2
       },
@@ -6748,9 +7149,9 @@
       "cluster_id": "t:b0fdb1f7cf70",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2138,
+      "score": 0.2087,
       "score_components": {
-        "recency": 0.2138
+        "recency": 0.2087
       },
       "effects": {
         "lightsaber": false,
@@ -6770,9 +7171,9 @@
       "cluster_id": "t:0cb20f08363d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4635,
+      "score": 0.4584,
       "score_components": {
-        "recency": 0.2135,
+        "recency": 0.2084,
         "category": 0.25
       },
       "effects": {
@@ -6793,9 +7194,9 @@
       "cluster_id": "t:8dc09f72849e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6632,
+      "score": 0.6581,
       "score_components": {
-        "recency": 0.2132,
+        "recency": 0.2081,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -6817,9 +7218,9 @@
       "cluster_id": "t:ac14808da30d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2129,
+      "score": 0.2079,
       "score_components": {
-        "recency": 0.2129
+        "recency": 0.2079
       },
       "effects": {
         "lightsaber": false,
@@ -6839,9 +7240,9 @@
       "cluster_id": "t:98e3d8874969",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4129,
+      "score": 0.4078,
       "score_components": {
-        "recency": 0.2129,
+        "recency": 0.2078,
         "category": 0.2
       },
       "effects": {
@@ -6862,9 +7263,9 @@
       "cluster_id": "t:b44bd6b2073d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4613,
+      "score": 0.4563,
       "score_components": {
-        "recency": 0.2113,
+        "recency": 0.2063,
         "category": 0.25
       },
       "effects": {
@@ -6885,9 +7286,9 @@
       "cluster_id": "t:ab36625c0078",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4599,
+      "score": 0.4549,
       "score_components": {
-        "recency": 0.2099,
+        "recency": 0.2049,
         "category": 0.25
       },
       "effects": {
@@ -6908,422 +7309,10 @@
       "cluster_id": "t:d00445101a1a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4088,
+      "score": 0.4038,
       "score_components": {
-        "recency": 0.2088,
+        "recency": 0.2038,
         "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Luh Tyler – “Young Player” (Feat. Larry June)",
-      "url": "https://www.stereogum.com/2322842/luh-tyler-young-player-feat-larry-june/music",
-      "source": "Stereogum",
-      "published_utc": "2025-09-12T20:04:43+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://www.stereogum.com/2322842/luh-tyler-young-player-feat-larry-june/music",
-      "canonical_id": "u:29ac6f4af42c0525",
-      "cluster_id": "t:6035a5c8c812",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4587,
-      "score_components": {
-        "recency": 0.2087,
-        "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "I’m 67. My wife, 48, is financially illiterate. How do I teach her to manage our money? After all, I won’t be around forever.",
-      "url": "https://www.marketwatch.com/story/im-scared-for-her-my-wife-48-is-financially-illiterate-im-67-what-happens-when-i-die-0e9dbd09?mod=mw_rss_topstories",
-      "source": "MarketWatch.com - Top Stories",
-      "published_utc": "2025-09-12T20:03:00+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://www.marketwatch.com/story/im-scared-for-her-my-wife-48-is-financially-illiterate-im-67-what-happens-when-i-die-0e9dbd09?mod=mw_rss_topstories",
-      "canonical_id": "u:7f2972b034ff3db7",
-      "cluster_id": "t:a2a1c8fdb194",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.408,
-      "score_components": {
-        "recency": 0.208,
-        "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Crypto Biz: From memes to mandates, institutions recast crypto in 2025",
-      "url": "https://cointelegraph.com/news/2025-institutions-crypto-canton-gemini-ipo-ethena-tokenized-gold",
-      "source": "Cointelegraph.com News",
-      "published_utc": "2025-09-12T20:00:00+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://cointelegraph.com/news/2025-institutions-crypto-canton-gemini-ipo-ethena-tokenized-gold",
-      "canonical_id": "u:9bebbc44144ccc39",
-      "cluster_id": "t:5e0777a0b455",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.6568,
-      "score_components": {
-        "recency": 0.2068,
-        "category": 0.2,
-        "preferred_domain": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "BuzzFeed’s flagship YouTube channel is back with a “bold new programming slate”",
-      "url": "https://www.tubefilter.com/2025/09/12/buzzfeed-video-youtube-channel-relaunch-the-try-guys",
-      "source": "Tubefilter",
-      "published_utc": "2025-09-12T19:59:24+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://www.tubefilter.com/2025/09/12/buzzfeed-video-youtube-channel-relaunch-the-try-guys",
-      "canonical_id": "u:1a8956f58c662d63",
-      "cluster_id": "t:2af8aef5e6f8",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4566,
-      "score_components": {
-        "recency": 0.2066,
-        "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Polymarket Weighs $9B Valuation Amid User Surge and CFTC Approval: The Information",
-      "url": "https://www.coindesk.com/markets/2025/09/12/polymarket-weighs-usd9b-valuation-amid-user-surge-and-cftc-approval-the-information",
-      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
-      "published_utc": "2025-09-12T19:56:10+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://www.coindesk.com/markets/2025/09/12/polymarket-weighs-usd9b-valuation-amid-user-surge-and-cftc-approval-the-information",
-      "canonical_id": "u:64b1060fff4c1a5a",
-      "cluster_id": "t:baf5ba619732",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4053,
-      "score_components": {
-        "recency": 0.2053,
-        "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Beams America Presents Tadanori Yokoo and Daido Moriyama in LA",
-      "url": "https://hypebeast.com/2025/9/beams-american-tadanori-yokoo-daido-moriyama-legendary-contemporaries-of-japan",
-      "source": "Hypebeast",
-      "published_utc": "2025-09-12T19:52:09+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://hypebeast.com/2025/9/beams-american-tadanori-yokoo-daido-moriyama-legendary-contemporaries-of-japan",
-      "canonical_id": "u:85bb13e2f7719290",
-      "cluster_id": "t:8c9506e8e154",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4537,
-      "score_components": {
-        "recency": 0.2037,
-        "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Ignore the Maybach. Stick Around for the Coffee-Dyed Shirts",
-      "url": "https://www.highsnobiety.com/p/archie-brand-interview",
-      "source": "Highsnobiety",
-      "published_utc": "2025-09-12T19:49:52+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://www.highsnobiety.com/p/archie-brand-interview",
-      "canonical_id": "u:eca4f69823864f19",
-      "cluster_id": "t:486e2ceb29f5",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4528,
-      "score_components": {
-        "recency": 0.2028,
-        "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "\"Je Suis Charlie\"",
-      "url": "https://reason.com/volokh/2025/09/12/je-suis-charlie",
-      "source": "Reason.com",
-      "published_utc": "2025-09-12T19:49:22+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://reason.com/volokh/2025/09/12/je-suis-charlie",
-      "canonical_id": "u:5a18d61160c51214",
-      "cluster_id": "t:a0693de5f58e",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.2026,
-      "score_components": {
-        "recency": 0.2026
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Bitcoin, Ether Catch Friday Afternoon Bids, Rise to Three-Week Highs",
-      "url": "https://www.coindesk.com/markets/2025/09/12/bitcoin-ether-catch-friday-afternoon-bids-rise-to-three-week-highs",
-      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
-      "published_utc": "2025-09-12T19:48:02+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://www.coindesk.com/markets/2025/09/12/bitcoin-ether-catch-friday-afternoon-bids-rise-to-three-week-highs",
-      "canonical_id": "u:ebf0365e29fe4be6",
-      "cluster_id": "t:cfaf26ba1141",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4021,
-      "score_components": {
-        "recency": 0.2021,
-        "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Trump backs off Chicago National Guard threats",
-      "url": "https://www.axios.com/2025/09/12/trump-chicago-national-guard-pritzker-crime-memphis",
-      "source": "Axios",
-      "published_utc": "2025-09-12T19:46:51+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.axios.com/2025/09/12/trump-chicago-national-guard-pritzker-crime-memphis",
-      "canonical_id": "u:5e5d57df0187e31d",
-      "cluster_id": "t:c126ad3a925e",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.2017,
-      "score_components": {
-        "recency": 0.2017
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "The Standard for 'Vicious' Speech Trump Laid Out After Kirk's Murder Would Implicate Trump Himself",
-      "url": "https://reason.com/2025/09/12/the-standard-for-vicious-speech-trump-laid-out-after-kirks-murder-would-implicate-trump-himself",
-      "source": "Reason.com",
-      "published_utc": "2025-09-12T19:45:50+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://reason.com/2025/09/12/the-standard-for-vicious-speech-trump-laid-out-after-kirks-murder-would-implicate-trump-himself",
-      "canonical_id": "u:4919ef3cd801aba5",
-      "cluster_id": "t:7f101f2ab716",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.4013,
-      "score_components": {
-        "recency": 0.2013,
-        "public_safety": 1.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Boat capsizes in Congo, killing at least 86, most of them students",
-      "url": "https://www.africanews.com/2025/09/12/boat-capsizes-in-congo-killing-at-least-86-most-of-them-students",
-      "source": "Africanews RSS",
-      "published_utc": "2025-09-12T19:42:45+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.africanews.com/2025/09/12/boat-capsizes-in-congo-killing-at-least-86-most-of-them-students",
-      "canonical_id": "u:5f0744841e4514b4",
-      "cluster_id": "t:ceaf284e9738",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.2001,
-      "score_components": {
-        "recency": 0.2001
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Ottawa working with Alberta, oil companies on emissions cap: Minister",
-      "url": "https://boereport.com/2025/09/12/ottawa-working-with-alberta-oil-companies-on-emissions-cap-minister",
-      "source": "BOE Report",
-      "published_utc": "2025-09-12T19:38:25+00:00",
-      "category": "Energy",
-      "region": "Canada",
-      "canonical_url": "https://boereport.com/2025/09/12/ottawa-working-with-alberta-oil-companies-on-emissions-cap-minister",
-      "canonical_id": "u:b6234cb2a90d7abb",
-      "cluster_id": "t:7637461f03a3",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.5984,
-      "score_components": {
-        "recency": 0.1984,
-        "category": 0.2,
-        "regional": 1.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "U.S. Plan To Disarm Hezbollah Is a Diplomatic Dead End",
-      "url": "https://reason.com/2025/09/12/u-s-plan-to-disarm-hezbollah-is-a-diplomatic-dead-end",
-      "source": "Reason.com",
-      "published_utc": "2025-09-12T19:31:20+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://reason.com/2025/09/12/u-s-plan-to-disarm-hezbollah-is-a-diplomatic-dead-end",
-      "canonical_id": "u:3a302daf78b1f278",
-      "cluster_id": "t:6750d4e0ed1d",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.1957,
-      "score_components": {
-        "recency": 0.1957,
-        "public_safety": 1.0
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Watch Charly Bliss Debut New Song “Madrid” And Cover Yellowcard On NYC Concert Cruise",
-      "url": "https://www.stereogum.com/2322837/watch-charly-bliss-debut-new-song-madrid-and-cover-yellowcard-on-nyc-concert-cruise/news",
-      "source": "Stereogum",
-      "published_utc": "2025-09-12T19:30:42+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://www.stereogum.com/2322837/watch-charly-bliss-debut-new-song-madrid-and-cover-yellowcard-on-nyc-concert-cruise/news",
-      "canonical_id": "u:b7400245631cb945",
-      "cluster_id": "t:3b351a980cc8",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4455,
-      "score_components": {
-        "recency": 0.1955,
-        "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "WisdomTree introduces tokenized private credit fund as market crosses $16B",
-      "url": "https://cointelegraph.com/news/wisdomtree-tokenized-private-credit-fund",
-      "source": "Cointelegraph.com News",
-      "published_utc": "2025-09-12T19:30:29+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://cointelegraph.com/news/wisdomtree-tokenized-private-credit-fund",
-      "canonical_id": "u:9cc0bca3d90cae7a",
-      "cluster_id": "t:c9c93692ad8e",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.6454,
-      "score_components": {
-        "recency": 0.1954,
-        "category": 0.2,
-        "preferred_domain": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Short Circuit: An Inexhaustive Weekly Compendium of Rulings from the Federal Courts of Appeal",
-      "url": "https://reason.com/volokh/2025/09/12/short-circuit-an-inexhaustive-weekly-compendium-of-rulings-from-the-federal-courts-of-appeal-25",
-      "source": "Reason.com",
-      "published_utc": "2025-09-12T19:30:02+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://reason.com/volokh/2025/09/12/short-circuit-an-inexhaustive-weekly-compendium-of-rulings-from-the-federal-courts-of-appeal-25",
-      "canonical_id": "u:90aca5d6ea87fb59",
-      "cluster_id": "t:8bcffbb6f9b2",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.1952,
-      "score_components": {
-        "recency": 0.1952
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Blind Items Revealed #7",
-      "url": "https://www.crazydaysandnights.net/2025/09/blind-items-revealed-7_01669088120.html",
-      "source": "Crazy Days and Nights",
-      "published_utc": "2025-09-12T19:30:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.crazydaysandnights.net/2025/09/blind-items-revealed-7_01669088120.html",
-      "canonical_id": "u:3aa260a81d6020e0",
-      "cluster_id": "t:e9e5e842212c",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.1952,
-      "score_components": {
-        "recency": 0.1952
       },
       "effects": {
         "lightsaber": false,
@@ -7335,14 +7324,12 @@
   "_debug": {
     "feeds_total": 124,
     "cap_items": 320,
-    "collected": 903,
-    "dedup_pass1": 885,
+    "collected": 907,
+    "dedup_pass1": 889,
     "dedup_final": 320,
-    "slow_domains": [
-      "canadianbeats.ca"
-    ],
+    "slow_domains": [],
     "timeouts": [
-      "japantoday.com",
+      "canadianbeats.ca",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -7393,56 +7380,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.649,
+        "sec": 1.112,
         "kept": 8
       },
       {
         "host": "www.marketwatch.com",
-        "sec": 0.455,
+        "sec": 0.54,
         "kept": 10
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.307,
-        "kept": 14
-      },
-      {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.291,
-        "kept": 14
-      },
-      {
-        "host": "cointelegraph.com",
-        "sec": 0.125,
+        "sec": 0.277,
         "kept": 14
       },
       {
         "host": "www.coindesk.com",
-        "sec": 0.12,
+        "sec": 0.221,
+        "kept": 14
+      },
+      {
+        "host": "www.bankofcanada.ca",
+        "sec": 0.202,
+        "kept": 1
+      },
+      {
+        "host": "cointelegraph.com",
+        "sec": 0.164,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.113,
+        "sec": 0.08,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.079,
+        "kept": 14
+      },
+      {
+        "host": "www.sec.gov",
+        "sec": 0.069,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.088,
+        "sec": 0.059,
         "kept": 10
-      },
-      {
-        "host": "www.bankofcanada.ca",
-        "sec": 0.084,
-        "kept": 1
-      },
-      {
-        "host": "www.sec.gov",
-        "sec": 0.054,
-        "kept": 14
       }
     ],
-    "elapsed_sec": 181.49,
+    "elapsed_sec": 163.97,
     "http_timeout_sec": 10.0,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210.0,
@@ -7471,7 +7458,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 16,
+      "ps_fatal_hits": 19,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
