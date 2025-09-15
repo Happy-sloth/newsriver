@@ -7,15 +7,14 @@
       "name": "Scotiabank Arena",
       "city": "Toronto, ON",
       "tz": "America/Toronto",
-      "source": {
-        "type": "html",
-        "url": "OFFICIAL_EVENTS_URL_HERE"
-      },
+      "source": { "type": "html", "url": "https://www.scotiabankarena.com/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event-card, .event, li.event, .listing, .Card",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='ticket']"
       }
     },
@@ -24,12 +23,14 @@
       "name": "Massey Hall",
       "city": "Toronto, ON",
       "tz": "America/Toronto",
-      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "source": { "type": "html", "url": "https://masseyhall.com/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event-card, .events-list .event, .listing",
+        "title": ".event-card__title, .title, h3",
+        "date": ".event-card__date, .date, time[datetime]",
+        "time": ".event-card__time, .time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='ticket']"
       }
     },
@@ -38,12 +39,14 @@
       "name": "HISTORY",
       "city": "Toronto, ON",
       "tz": "America/Toronto",
-      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "source": { "type": "html", "url": "https://www.historytoronto.com/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event, .event-card, .listing",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='ticket']"
       }
     },
@@ -52,12 +55,14 @@
       "name": "The Danforth Music Hall",
       "city": "Toronto, ON",
       "tz": "America/Toronto",
-      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "source": { "type": "html", "url": "https://thedanforth.com/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event, .event-card, .listing",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='ticket']"
       }
     },
@@ -66,12 +71,14 @@
       "name": "Phoenix Concert Theatre",
       "city": "Toronto, ON",
       "tz": "America/Toronto",
-      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "source": { "type": "html", "url": "https://www.phoenixconcerttheatre.com/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event, .event-card, .listing",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='ticket']"
       }
     },
@@ -81,12 +88,14 @@
       "name": "Centre Bell",
       "city": "Montréal, QC",
       "tz": "America/Toronto",
-      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "source": { "type": "html", "url": "https://www.centrebell.ca/en/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event, .event-card, .listing, li.event",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='billet'], a[href*='ticket']"
       }
     },
@@ -95,12 +104,14 @@
       "name": "MTELUS",
       "city": "Montréal, QC",
       "tz": "America/Toronto",
-      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "source": { "type": "html", "url": "https://www.mtelus.com/en/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event, .event-card, .listing",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='billet'], a[href*='ticket']"
       }
     },
@@ -109,12 +120,14 @@
       "name": "Théâtre Beanfield (Corona)",
       "city": "Montréal, QC",
       "tz": "America/Toronto",
-      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "source": { "type": "html", "url": "https://theatrebeanfield.ca/en/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event, .event-card, .listing",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='billet'], a[href*='ticket']"
       }
     },
@@ -123,12 +136,14 @@
       "name": "Club Soda",
       "city": "Montréal, QC",
       "tz": "America/Toronto",
-      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "source": { "type": "html", "url": "https://clubsoda.ca/en/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event, .event-card, .listing, li.event",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='billet'], a[href*='ticket']"
       }
     },
@@ -137,15 +152,14 @@
       "name": "Théâtre Fairmount",
       "city": "Montréal, QC",
       "tz": "America/Toronto",
-      "source": {
-        "type": "ics-or-html",
-        "url": "OFFICIAL_EVENTS_OR_ICS_URL_HERE"
-      },
+      "source": { "type": "html", "url": "https://theatrefairmount.ca/en/events" },
       "selectors": {
-        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
-        "title": ".event-title-selector",
-        "date": ".event-date-selector",
-        "time": ".event-time-selector",
+        "item": ".event, .event-card, .listing",
+        "title": ".event-title, .title, h3",
+        "date": ".date, time[datetime]",
+        "time": ".time, time[datetime]",
+        "datetime": "time[datetime]",
+        "datetime_attr": "datetime",
         "tickets": "a[href*='billet'], a[href*='ticket']"
       }
     }
