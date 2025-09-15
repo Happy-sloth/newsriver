@@ -7,7 +7,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { DateTime } from "luxon";
 import * as ical from "node-ical";
-import cheerio from "cheerio";
+import { load as loadHTML } from "cheerio";
 
 /* ----------------- CLI ----------------- */
 const args = Object.fromEntries(
@@ -119,7 +119,7 @@ function parseLocalDateTime({ dateStr, timeStr, datetimeAttr, zone }) {
 
 async function parseHTML(url, venue, selectors) {
   const html = await fetchText(url);
-  const $ = cheerio.load(html);
+  const $ = loadHTML(html);
   const items = [];
 
   const itemSel = selectors.item;
@@ -204,7 +204,7 @@ async function main() {
         // try ICS; fall back to HTML
         try {
           const icsEvents = await parseICS(v.source.url, v);
-          if (icsEvents.length) collected.push(...icsEvents);
+          if (icsEvents.length) collected.push(...(icsEvents));
           else collected.push(...(await parseHTML(v.source.url, v, v.selectors || {})));
         } catch {
           collected.push(...(await parseHTML(v.source.url, v, v.selectors || {})));
