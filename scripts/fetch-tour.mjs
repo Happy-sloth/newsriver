@@ -45,15 +45,26 @@ function stableId({ slug, whenUtc, title }) {
   return sha1(`${slug}::${whenUtc?.toISO() ?? "na"}::${(title || "").trim().toLowerCase()}`).slice(0, 16);
 }
 
+/** Validate and normalize absolute URLs. Returns null if invalid. */
+function toAbsoluteUrl(u) {
+  if (!u || typeof u !== "string") return null;
+  const s = u.trim();
+  if (!s) return null;
+  try { return new URL(s).href; } catch { return null; }
+}
+
 async function fetchText(url) {
-  const res = await fetch(url, {
+  // Guard against bad URLs crashing undici/new URL
+  const safe = toAbsoluteUrl(url);
+  if (!safe) throw new Error(`Invalid URL: ${url ?? "(empty)"}`);
+  const res = await fetch(safe, {
     headers: {
       "user-agent": "mypyBITE-tour/0.1 (+contact: your@email)",
       "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
     },
     redirect: "follow"
   });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  if (!res.ok) throw new Error(`Fetch ${safe} → ${res.status} ${res.statusText}`);
   return await res.text();
 }
 
@@ -156,11 +167,11 @@ async function parseHTML(url, venue, selectors) {
       if (selectors.tickets) {
         const a = selectors.tickets === "." ? $(el) : $(el).find(selectors.tickets).first();
         const href = (a.attr?.("href") || "").trim();
-        if (href) tix = href.startsWith("/") ? new URL(href, url).href : href;
+        if (href) tix = href.startsWith("/") ? new URL(href, toAbsoluteUrl(url)).href : href;
       } else {
         const a = $(el).find("a[href*='ticket'],a[href*='tickets'],a[href*='billet']").first();
         const href = (a.attr?.("href") || "").trim();
-        if (href) tix = href.startsWith("/") ? new URL(href, url).href : href;
+        if (href) tix = href.startsWith("/") ? new URL(href, toAbsoluteUrl(url)).href : href;
       }
 
       const titleClean = (title || "").trim();
@@ -194,24 +205,29 @@ async function main() {
   const collected = [];
 
   for (const v of venues) {
+    // Validate the venue URL up front to prevent undici/new URL crashes
+    const srcUrl = toAbsoluteUrl(v?.source?.url);
+    if (!srcUrl) {
+      console.error(`[skip] ${v.slug}: invalid or empty source.url`);
+      continue;
+    }
+
     try {
       await sleep(250); // polite spacing
       if (v.source?.type === "ics") {
-        collected.push(...(await parseICS(v.source.url, v)));
+        collected.push(...(await parseICS(srcUrl, v)));
       } else if (v.source?.type === "html") {
-        collected.push(...(await parseHTML(v.source.url, v, v.selectors || {})));
+        collected.push(...(await parseHTML(srcUrl, v, v.selectors || {})));
       } else if (v.source?.type === "ics-or-html") {
-        // try ICS; fall back to HTML
         try {
-          const icsEvents = await parseICS(v.source.url, v);
-          if (icsEvents.length) collected.push(...(icsEvents));
-          else collected.push(...(await parseHTML(v.source.url, v, v.selectors || {})));
+          const icsEvents = await parseICS(srcUrl, v);
+          if (icsEvents.length) collected.push(...icsEvents);
+          else collected.push(...(await parseHTML(srcUrl, v, v.selectors || {})));
         } catch {
-          collected.push(...(await parseHTML(v.source.url, v, v.selectors || {})));
+          collected.push(...(await parseHTML(srcUrl, v, v.selectors || {})));
         }
       } else {
-        // default: HTML
-        collected.push(...(await parseHTML(v.source?.url, v, v.selectors || {})));
+        collected.push(...(await parseHTML(srcUrl, v, v.selectors || {})));
       }
       console.log(`[ok] ${v.slug}`);
     } catch (e) {
