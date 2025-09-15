@@ -1,0 +1,28 @@
+name: Build tour.json
+
+on:
+  schedule:
+    - cron: "15 */3 * * *"   # every 3 hours (UTC)
+  workflow_dispatch:          # lets you run it manually
+
+permissions:
+  contents: write             # allow the workflow to commit tour.json
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - run: npm ci
+      - run: npm run fetch:60d
+
+      - name: Commit tour.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(tour): refresh events"
+          file_pattern: tour.json
