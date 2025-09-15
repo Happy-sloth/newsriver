@@ -2,11 +2,11 @@ name: Build tour.json
 
 on:
   schedule:
-    - cron: "15 */3 * * *"   # every 3 hours (UTC)
-  workflow_dispatch:          # lets you run it manually
+    - cron: "15 */3 * * *"
+  workflow_dispatch:
 
 permissions:
-  contents: write             # allow the workflow to commit tour.json
+  contents: write
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 18
 
-      - run: npm ci
+      - run: npm install
       - run: npm run fetch:60d
 
       - name: Commit tour.json
