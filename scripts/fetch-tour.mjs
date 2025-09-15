@@ -10,12 +10,25 @@ import * as ical from "node-ical";
 import { load as loadHTML } from "cheerio";
 
 /* ----------------- CLI ----------------- */
-const args = Object.fromEntries(
-  process.argv.slice(2).map(s => {
-    const [k, v] = s.startsWith("--") ? s.slice(2).split("=") : [s, true];
-    return [k, v ?? true];
-  })
-);
+function parseArgs(argv) {
+  const out = {};
+  for (let i = 0; i < argv.length; i++) {
+    const tok = argv[i];
+    if (tok.startsWith("--")) {
+      if (tok.includes("=")) {
+        const [k, v] = tok.slice(2).split("=");
+        out[k] = v ?? true;
+      } else {
+        const k = tok.slice(2);
+        const next = argv[i + 1];
+        if (next && !next.startsWith("-")) { out[k] = next; i++; }
+        else { out[k] = true; }
+      }
+    }
+  }
+  return out;
+}
+const args = parseArgs(process.argv.slice(2));
 
 const MANIFEST_PATH = args.manifest || "venues.json";
 const OUT_PATH = args.out || "tour.json";               // write at repo root by default
