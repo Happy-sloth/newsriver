@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "default_window_days": 60,
+  "venues": [
+    {
+      "slug": "tor-scotiabank-arena",
+      "name": "Scotiabank Arena",
+      "city": "Toronto, ON",
+      "tz": "America/Toronto",
+      "source": {
+        "type": "html",
+        "url": "OFFICIAL_EVENTS_URL_HERE"
+      },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='ticket']"
+      }
+    },
+    {
+      "slug": "tor-massey-hall",
+      "name": "Massey Hall",
+      "city": "Toronto, ON",
+      "tz": "America/Toronto",
+      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='ticket']"
+      }
+    },
+    {
+      "slug": "tor-history",
+      "name": "HISTORY",
+      "city": "Toronto, ON",
+      "tz": "America/Toronto",
+      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='ticket']"
+      }
+    },
+    {
+      "slug": "tor-danforth-music-hall",
+      "name": "The Danforth Music Hall",
+      "city": "Toronto, ON",
+      "tz": "America/Toronto",
+      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='ticket']"
+      }
+    },
+    {
+      "slug": "tor-phoenix-concert-theatre",
+      "name": "Phoenix Concert Theatre",
+      "city": "Toronto, ON",
+      "tz": "America/Toronto",
+      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='ticket']"
+      }
+    },
+
+    {
+      "slug": "mtl-centre-bell",
+      "name": "Centre Bell",
+      "city": "Montréal, QC",
+      "tz": "America/Toronto",
+      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='billet'], a[href*='ticket']"
+      }
+    },
+    {
+      "slug": "mtl-mtelus",
+      "name": "MTELUS",
+      "city": "Montréal, QC",
+      "tz": "America/Toronto",
+      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='billet'], a[href*='ticket']"
+      }
+    },
+    {
+      "slug": "mtl-theatre-beanfield",
+      "name": "Théâtre Beanfield (Corona)",
+      "city": "Montréal, QC",
+      "tz": "America/Toronto",
+      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='billet'], a[href*='ticket']"
+      }
+    },
+    {
+      "slug": "mtl-club-soda",
+      "name": "Club Soda",
+      "city": "Montréal, QC",
+      "tz": "America/Toronto",
+      "source": { "type": "html", "url": "OFFICIAL_EVENTS_URL_HERE" },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='billet'], a[href*='ticket']"
+      }
+    },
+    {
+      "slug": "mtl-theatre-fairmount",
+      "name": "Théâtre Fairmount",
+      "city": "Montréal, QC",
+      "tz": "America/Toronto",
+      "source": {
+        "type": "ics-or-html",
+        "url": "OFFICIAL_EVENTS_OR_ICS_URL_HERE"
+      },
+      "selectors": {
+        "item": "CSS_SELECTOR_FOR_EVENT_CARD",
+        "title": ".event-title-selector",
+        "date": ".event-date-selector",
+        "time": ".event-time-selector",
+        "tickets": "a[href*='billet'], a[href*='ticket']"
+      }
+    }
+  ]
+}
