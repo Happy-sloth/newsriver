@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "scripts": {
     "fetch": "node scripts/fetch-tour.mjs",
-    "fetch:60d": "node scripts/fetch-tour.mjs --window 60 --out tour.json"
+    "fetch:60d": "node scripts/fetch-tour.mjs --window=60 --out=tour.json"
   },
   "dependencies": {
     "cheerio": "^1.0.0",
