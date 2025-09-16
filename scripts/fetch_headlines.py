@@ -11,18 +11,19 @@
 # - Tags items with {category, region} inferred from section header
 # - Sorts newest-first and writes headlines.json
 #
-# NEW (this edit):
+# NEW:
 # - Shared requests.Session + slow feed detector + global time budget
 # - Loads config/weights.json5 and applies a server-side score per item
-# - Score components: recency, category, sources, public_safety, markets, (regional placeholder)
+# - Score components: recency, category, sources, public_safety, markets, regional
 # - Effects flags: lightsaber/glitch + reasons for the front-end
-# - Debug includes weights status and score trigger counts
-# - Minimal patch: second-chance fetch with browser headers; soft cap during collection (trim at end)
-# - Nate Silver: special-case scraper + tiny "hours-ago" bonus
-# - **MyPyBiTE Substack integration**:
-#     • Items from https://mypybite.substack.com are labeled "MyPyBiTE Substack"
-#     • Always tagged with effects.glitch = true and effects.decay_at = published + 24h
-#       (does not override a stronger "lightsaber" if present)
+# - Substack integration: force glitch + 24h decay for mypybite Substack items
+# - Sports (Blue Jays) module:
+#     • Team & player keyword boosts
+#     • Win/Loss result detection boost
+#     • Evening window boost (18:30–22:30 America/Toronto)
+#     • Optional playoffs boost via env MPB_PLAYOFFS=1
+#     • Relax per-host caps for key sports domains during evening
+#     • Reduce over-deduping of fresh Jays game stories (4h)
 
 from __future__ import annotations
 
@@ -54,6 +55,11 @@ try:
 except Exception:
     BeautifulSoup = None
 
+# Timezone for daypart logic
+try:
+    from zoneinfo import ZoneInfo  # py>=3.9
+except Exception:
+    ZoneInfo = None  # fallback to UTC if unavailable
 
 # ---------------- Tunables ----------------
 MAX_PER_FEED      = int(os.getenv("MPB_MAX_PER_FEED", "14"))
@@ -93,6 +99,9 @@ PREFERRED_DOMAINS = {
     "fivethirtyeight.com",  # small nudge on ties
 }
 
+# Key sports domains to relax caps for in evening
+SPORTS_PRIOR_DOMAINS = {"mlb.com", "sportsnet.ca", "tsn.ca"}
+
 # Press-wire domains & path hints (these often duplicate across outlets)
 PRESS_WIRE_DOMAINS = {
     "globenewswire.com","newswire.ca","prnewswire.com","businesswire.com","accesswire.com"
@@ -127,6 +136,21 @@ PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 # --- MyPyBiTE Substack host ---
 MPB_SUBSTACK_HOST = "mypybite.substack.com"
 
+# --- Sports (Blue Jays) regexes ---
+RE_JAYS_TEAM = re.compile(r"\b(blue\s*jays|toronto\s*blue\s*jays|jays)\b", re.I)
+RE_JAYS_PLAYERS = re.compile(
+    r"\b("
+    r"vladimir(?:\s+guerrero(?:\s+jr\.?)?)|guerrero(?:\s+jr\.?)?|"
+    r"bichette|alejandro\s+kirk|kirk|"
+    r"chris\s+bassitt|bassitt|"
+    r"kevin\s+gausman|gausman|"
+    r"eric\s+lauer|lauer|"
+    r"trey\s+yesavage|yesavage"
+    r")\b",
+    re.I
+)
+RE_JAYS_WIN  = re.compile(r"\b(beat|edge|top|blank|shut\s*out|walk-?off|clinch|sweep|down|roll past)\b", re.I)
+RE_JAYS_LOSS = re.compile(r"\b(lose(?:s)?\s+to|fall(?:s)?\s+to|drop(?:s)?\s+to|blown\s+save|skid|defeat(?:ed)?\s+by)\b", re.I)
 
 # ---------------- Section → tag ----------------
 @dataclass
@@ -149,7 +173,6 @@ def infer_tag(section_header: str) -> Tag:
     if "COURTS" in s or "CRIME" in s or "PUBLIC SAFETY" in s:
                                              return Tag("Public Safety", "Canada")
     return Tag("General", "World")
-
 
 # ---------------- URL & identity ----------------
 def canonicalize_url(url: str) -> str:
@@ -184,7 +207,6 @@ def host_of(url: str) -> str:
     except Exception:
         return ""
 
-
 # ---------------- Title signatures ----------------
 def strip_source_tail(title: str) -> str:
     return (title or "").replace("\u2013", "-").replace("\u2014", "-").split(" | ")[0].split(" - ")[0]
@@ -211,7 +233,6 @@ def jaccard(a: set[str], b: set[str]) -> float:
     union = len(a | b)
     return inter / union
 
-
 # ---------------- Aggregator / wire heuristics ----------------
 def is_press_wire(url: str) -> bool:
     h = host_of(url)
@@ -227,7 +248,6 @@ def looks_aggregator(source: str, link: str) -> bool:
     if is_press_wire(link):
         return True
     return False
-
 
 # ---------------- feeds.txt parsing ----------------
 @dataclass
@@ -249,7 +269,6 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
                 continue
             feeds.append(FeedSpec(url=line, tag=current_tag))
     return feeds
-
 
 # ---------------- HTTP & date helpers ----------------
 def _new_session() -> requests.Session:
@@ -327,7 +346,6 @@ def hours_since(iso: str, now_ts: float) -> float:
     return max(0.0, (now_ts - t) / 3600.0)
 
 def iso_add_hours(iso_s: str | None, hours: float) -> str:
-    """Return ISO-UTC string for iso_s + hours (default to now if iso invalid)."""
     base = None
     if iso_s:
         try:
@@ -340,6 +358,13 @@ def iso_add_hours(iso_s: str | None, hours: float) -> str:
         base = base.replace(tzinfo=timezone.utc)
     return (base + timedelta(hours=hours)).astimezone(timezone.utc).isoformat().replace("+00:00","Z")
 
+def now_in_tz(tz_name: str) -> datetime:
+    if ZoneInfo is None:
+        return datetime.now(timezone.utc)
+    try:
+        return datetime.now(ZoneInfo(tz_name))
+    except Exception:
+        return datetime.now(timezone.utc)
 
 # ---------------- Weights loader (json5) ----------------
 def load_weights(path: str = "config/weights.json5") -> tuple[dict, dict]:
@@ -376,7 +401,6 @@ def W(d: dict, path: str, default):
         cur = cur[p]
     return cur
 
-
 # ---------------- Public-safety parsing ----------------
 WORD_NUM = {
     "one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10,
@@ -403,7 +427,6 @@ def parse_casualties(title: str) -> tuple[int,int,bool]:
     has_fatal_cue = bool(RE_FATAL_CUE.search(title))
     return deaths, injured, has_fatal_cue
 
-
 # ---------------- Market parsing from headline text ----------------
 RE_PCT = r"([+-]?\d+(?:\.\d+)?)\s?%"
 
@@ -419,7 +442,6 @@ def first_pct(m):
         return abs(float(m.group(2)))
     except Exception:
         return None
-
 
 # ---------------- Special-case: Nate Silver page scraper ----------------
 REL_AGO = re.compile(r"\b(\d+)\s*(minute|minutes|hour|hours|day|days)\s+ago\b", re.I)
@@ -517,7 +539,6 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
             break
     return items
 
-
 # ---------------- Build ----------------
 def build(feeds_file: str, out_path: str) -> dict:
     start = time.time()
@@ -547,10 +568,25 @@ def build(feeds_file: str, out_path: str) -> dict:
         "agg_penalties": 0,
         "press_penalties": 0,
         "preferred_bonus": 0,
-        "substack_tagged": 0,        # <—— NEW: count how many substack posts tagged
+        "substack_tagged": 0,
+        # sports
+        "sports_team_hits": 0,
+        "sports_player_hits": 0,
+        "sports_result_win_hits": 0,
+        "sports_result_loss_hits": 0,
+        "sports_evening_hits": 0,
+        "sports_playoff_hits": 0,
     }
 
     session = _new_session()
+
+    # Daypart context (America/Toronto) for cap relaxation and scoring
+    tz_name = os.getenv("NEWSRIVER_TIMEZONE", "America/Toronto")
+    now_et = now_in_tz(tz_name)
+    evening_start = now_et.replace(hour=18, minute=30, second=0, microsecond=0)
+    evening_end   = now_et.replace(hour=22, minute=30, second=0, microsecond=0)
+    in_evening = (evening_start <= now_et <= evening_end)
+    playoffs_on = os.getenv("MPB_PLAYOFFS", "0") == "1"
 
     print(f"[fetch] feeds={len(specs)} max_per_feed={MAX_PER_FEED} global_cap={MAX_TOTAL}")
 
@@ -597,6 +633,9 @@ def build(feeds_file: str, out_path: str) -> dict:
                 for it in scraped:
                     h = host_of(it["url"])
                     cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
+                    # Relax caps for key sports domains during evening
+                    if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10:
+                        cap = 10
                     if per_host_counts.get(h, 0) >= cap:
                         if h and h not in caps_hit:
                             caps_hit.append(h)
@@ -620,8 +659,10 @@ def build(feeds_file: str, out_path: str) -> dict:
             can_url = canonicalize_url(link)
             h = host_of(can_url or link)
 
-            # per-host cap
+            # per-host cap (relax for sports domains in evening window)
             cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
+            if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10:
+                cap = 10
             if per_host_counts.get(h, 0) >= cap:
                 if h and h not in caps_hit:
                     caps_hit.append(h)
@@ -670,10 +711,20 @@ def build(feeds_file: str, out_path: str) -> dict:
 
     items = list(first_pass.values())
 
+    # Helper: identify Jays game-y titles to temper dedupe for a few hours
+    def _is_jays_game_title(it: dict) -> bool:
+        t = it.get("title","")
+        if not t:
+            return False
+        team = bool(RE_JAYS_TEAM.search(t))
+        resultish = bool(RE_JAYS_WIN.search(t) or RE_JAYS_LOSS.search(t))
+        return team and resultish
+
     # Pass 2: near-duplicate collapse using Jaccard on title tokens
     survivors: list[dict] = []
     token_cache: list[Tuple[set[str], dict]] = []
     THRESH = 0.82
+    now_ts = time.time()
 
     def is_better(a: dict, b: dict) -> bool:
         ta, tb = _ts(a["published_utc"]), _ts(b["published_utc"])
@@ -692,6 +743,10 @@ def build(feeds_file: str, out_path: str) -> dict:
         toks = set(title_tokens(it["title"]))
         merged = False
         for toks_other, rep in token_cache:
+            # If both look like Jays game recaps and both are fresh (<4h), DON'T merge.
+            if _is_jays_game_title(it) and _is_jays_game_title(rep):
+                if hours_since(it["published_utc"], now_ts) < 4.0 or hours_since(rep["published_utc"], now_ts) < 4.0:
+                    continue
             if jaccard(toks, toks_other) >= THRESH:
                 if is_better(it, rep):
                     survivors.remove(rep)
@@ -715,8 +770,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             it["cluster_latest"] = (i == len(arr) - 1)
 
     # --------- Scoring ---------
-    now_ts = time.time()
-
     # quick helpers from weights
     half_life_h = float(W(weights, "recency.half_life_hours", 6.0))
     age_pen_24  = float(W(weights, "recency.age_penalty_after_24h", -0.6))
@@ -753,9 +806,19 @@ def build(feeds_file: str, out_path: str) -> dict:
     also_stk  = float(W(weights, "effects.lightsaber_also_if.single_stock_abs_move_ge_pct", 15.0))
     glitch_min= float(W(weights, "effects.glitch_min_score", 1.8))
 
-    # Nate Silver hint config (slight bonus if page shows “X hours ago”)
+    # Nate Silver hint config (slight freshness bonus)
     nate_bonus           = float(W(weights, "reorder.nate_hours_hint_bonus", 0.25))
     nate_bonus_max_hours = float(W(weights, "reorder.nate_hours_hint_max_hours", 6.0))
+
+    # Sports default weights (work even without weights.json5)
+    sp_team      = float(W(weights, "sports.team_match_points", 0.80))
+    sp_player    = float(W(weights, "sports.player_match_points", 0.35))
+    sp_win       = float(W(weights, "sports.result_win_points", 0.45))
+    sp_loss      = float(W(weights, "sports.result_loss_points", 0.25))
+    sp_evening   = float(W(weights, "sports.evening_window_points", 0.70))
+    sp_playoffs  = float(W(weights, "sports.playoff_mode_points", 0.40))
+
+    now_ts = time.time()  # for age math inside scoring
 
     def violent_kw_hit(title: str) -> bool:
         t = title.lower()
@@ -882,7 +945,46 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["nate_hours_hint_bonus"] = nate_bonus
             total += nate_bonus
 
-        # Effects (lightsaber/glitch)
+        # -------- Sports (Blue Jays) scoring --------
+        team_hit   = bool(RE_JAYS_TEAM.search(title))
+        player_hit = bool(RE_JAYS_PLAYERS.search(title))
+        win_hit    = bool(RE_JAYS_WIN.search(title))
+        loss_hit   = bool(RE_JAYS_LOSS.search(title))
+
+        if team_hit:
+            comps["sports.team_match"] = sp_team
+            total += sp_team
+            score_dbg["sports_team_hits"] += 1
+
+        if player_hit:
+            comps["sports.player_match"] = sp_player
+            total += sp_player
+            score_dbg["sports_player_hits"] += 1
+
+        if win_hit:
+            comps["sports.result_win"] = sp_win
+            total += sp_win
+            score_dbg["sports_result_win_hits"] += 1
+        elif loss_hit:
+            comps["sports.result_loss"] = sp_loss
+            total += sp_loss
+            score_dbg["sports_result_loss_hits"] += 1
+
+        # Evening window: 18:30–22:30 ET
+        if team_hit and (ah is None):  # apply based on clock, regardless of ah
+            # compute current ET each time to be safe if long runs; but approximate with now_et snapshot
+            if (now_et.hour, now_et.minute) >= (18,30) and (now_et.hour, now_et.minute) <= (22,30):
+                comps["sports.evening_window"] = sp_evening
+                total += sp_evening
+                score_dbg["sports_evening_hits"] += 1
+
+        # Playoff mode (env toggle)
+        if playoffs_on and team_hit and (win_hit or loss_hit):
+            comps["sports.playoff_mode"] = sp_playoffs
+            total += sp_playoffs
+            score_dbg["sports_playoff_hits"] += 1
+
+        # -------- Effects (lightsaber/glitch) --------
         effects = {"lightsaber": False, "glitch": False, "reasons": []}
         if total >= ls_min:
             effects["lightsaber"] = True
@@ -902,12 +1004,9 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         # --- MyPyBiTE Substack: force glitch + 24h decay (without overriding lightsaber) ---
         if host == MPB_SUBSTACK_HOST:
-            # Label source is already set at collection time; here we force glitch
             effects["glitch"] = True
             if not effects["lightsaber"]:
-                # Only set style to glitch if lightsaber not already true
                 effects["reasons"].append("substack")
-            # Provide 'style' & 'decay_at' for the front-end
             dec_iso = iso_add_hours(it.get("published_utc"), 24.0)
             effects["decay_at"] = dec_iso
             score_dbg["substack_tagged"] += 1
@@ -958,7 +1057,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.4.4-substack-glitch-decay",
+            "version": "fetch-v1.5.0-jays-evening-playoffs",
             # weights status
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
@@ -972,7 +1071,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         json.dump(out, f, ensure_ascii=False, indent=2)
     print(f"[done] wrote {out_path} items={out['count']} elapsed={elapsed_total:.1f}s")
     return out
-
 
 def main():
     ap = argparse.ArgumentParser(description="Build headlines.json from feeds.txt")
