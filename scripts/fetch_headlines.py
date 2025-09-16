@@ -158,12 +158,11 @@ RE_JAYS_WIN  = re.compile(r"\b(beat|edge|top|blank|shut\s*out|walk-?off|clinch|s
 RE_JAYS_LOSS = re.compile(r"\b(lose(?:s)?\s+to|fall(?:s)?\s+to|drop(?:s)?\s+to|blown\s+save|skid|defeat(?:ed)?\s+by)\b", re.I)
 
 # --- Hyperbole helpers (Politics/War/Business) ---
-# Light-touch verb upgrades; conservative to avoid misrepresenting facts.
 WEAK_TO_STRONG_POLITICS = [
     (re.compile(r"\bcriticiz(?:e|es|ed|ing)\b", re.I), "slams"),
     (re.compile(r"\bcondemn(?:s|ed|ing)?\b", re.I), "lashes"),
     (re.compile(r"\bdisput(?:e|es|ed|ing)\b", re.I), "defies"),
-    (re.compile(r"\bwarn(?:s|ed|ing)?\b", re.I), "warns"),  # keep literal
+    (re.compile(r"\bwarn(?:s|ed|ing)?\b", re.I), "warns"),
     (re.compile(r"\bcall(?:s|ed)? for\b", re.I), "demands"),
     (re.compile(r"\bpush(?:es|ed|ing)? for\b", re.I), "presses"),
 ]
@@ -587,14 +586,12 @@ def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str
 
     # 1) Sports – keep super conservative; only Jays with result/score cues.
     if RE_JAYS_TEAM.search(title):
-        # If there's already a strong verb or scoreline, build a crisp rewrite
         has_score = re.search(r"\b\d{1,2}\s*[–-]\s*\d{1,2}\b", title)
         win = bool(RE_JAYS_WIN.search(title))
         loss = bool(RE_JAYS_LOSS.search(title))
         if has_score or win or loss:
             subj = "Jays" if re.search(r"\b[Jj]ays\b", title) else "Toronto Blue Jays"
             verb = "edge" if win else ("fall to" if loss else "face")
-            # Try to pull opponent token (very light heuristic)
             opp = None
             m = re.search(r"\b(?:over|vs\.?|against|to)\s+([A-Z][A-Za-z.&\s-]{2,20})", title)
             if m:
@@ -612,7 +609,6 @@ def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str
 
     # 2) Business/Markets — stronger verbs when %/direction cues exist
     if cat == "Business" or re.search(r"\b(stock|stocks|markets?|index|indices|tsx|dow|nasdaq|s&p)\b", title, re.I):
-        # Use regex with signed % when available
         m_any = RE_IDX.search(title) or RE_TICK_PCT.search(title)
         sign_val = None
         if m_any:
@@ -633,12 +629,10 @@ def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str
             if pos: strong = "surge"
             elif neg: strong = "slump"
         if strong:
-            # Replace a weak verb if present, else prepend with market subject
             display = title
             display = re.sub(r"\b(rise|rises|up|gain|gains|advance|advances)\b", "surge", display, flags=re.I)
             display = re.sub(r"\b(fall|falls|down|drop|drops|slump|slumps)\b", "slide", display, flags=re.I)
             display = re.sub(r"\b(plunge|plunges)\b", "plunge", display, flags=re.I)
-            # if no verb changed, add a leading subject+verb if we can identify index
             if display == title:
                 subj = None
                 msub = re.search(r"\b(S&P|Nasdaq|Dow|TSX|TSXV|Nikkei)\b", title, re.I)
@@ -646,7 +640,6 @@ def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str
                     subj = msub.group(0)
                 display = f"{subj or 'Markets'} {strong} — {title}" if subj else f"{strong.capitalize()}: {title}"
             return strip_source_tail(display), None, ["markets_hype"]
-        # Layoffs: only upgrade the verb, never touch the number/company
         if LAYOFF_CUE.search(title) and JOBS_NUMBER.search(title):
             disp = re.sub(r"\b(lay\s*off|layoffs?|cuts?|slashes?)\b", "axes", title, flags=re.I)
             if disp != title:
@@ -655,20 +648,16 @@ def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str
 
     # 3) Politics/War — upgrade bland verbs; conflict intensifiers
     if cat in ("General", "Local", "Public Safety", "Tech", "Energy", "Transit", "Weather", "Culture", "Youth") or True:
-        # Ceasefire/truce collapses
         if CEASEFIRE_WEAK.search(title):
             disp = CEASEFIRE_WEAK.sub(lambda m: f"{m.group(1).capitalize()} collapses", title)
             return strip_source_tail(disp), None, ["ceasefire_hype"]
-        # Conflict cues → stronger verbs
         if CONFLICT_CUES.search(title):
             disp = title
             for pat, repl in WEAK_TO_STRONG_POLITICS:
                 disp = pat.sub(repl, disp)
-            # generic upgrade of “clashes flare” → “clashes erupt”
             disp = re.sub(r"\b(flares?|flares up)\b", "erupts", disp, flags=re.I)
             if disp != title:
                 return strip_source_tail(disp), None, ["conflict_hype"]
-        # Pure politics verb upgrades (don’t fabricate outcomes)
         changed = title
         for pat, repl in WEAK_TO_STRONG_POLITICS:
             changed = pat.sub(repl, changed)
@@ -837,7 +826,8 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         if (idx % 20) == 0:
             elapsed = time.time() - start
-            print(f"[progress] {idx}/{len(specs)} feeds, items={len(collected)}, elapsed={elapsed:.1f}s}")
+            # FIXED: removed stray closing brace
+            print(f"[progress] {idx}/{len(specs)} feeds, items={len(collected)}, elapsed={elapsed:.1f}s")
 
     # Pass 1: collapse exact fuzzy clusters (keep newest; prefer non-aggregator)
     first_pass: dict[str,dict] = {}
@@ -1169,7 +1159,6 @@ def build(feeds_file: str, out_path: str) -> dict:
                 elif r == "jobs_hype": score_dbg["hype_jobs"] += 1
                 elif r == "sports_hype": score_dbg["hype_sports"] += 1
                 elif r == "ceasefire_hype": score_dbg["hype_ceasefire"] += 1
-            # Make the reason visible in effects
             if "reasons" in effects:
                 effects["reasons"].extend(hype_reasons)
 
