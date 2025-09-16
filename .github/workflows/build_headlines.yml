@@ -23,6 +23,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Always start from the remote tip; avoid dirty-tree rebases later
+      - name: Reset to remote tip
+        shell: bash
+        run: |
+          set -euo pipefail
+          BRANCH="${{ github.ref_name }}"
+          if [ -z "${BRANCH}" ]; then BRANCH="main"; fi
+          git fetch origin "${BRANCH}"
+          # Ensure we're on the expected branch and hard-reset to remote
+          git checkout -B "${BRANCH}" "origin/${BRANCH}" || git checkout "${BRANCH}"
+          git reset --hard "origin/${BRANCH}"
+          git status --porcelain
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -37,7 +50,7 @@ jobs:
       - name: Ensure Substack feed in feeds.txt
         run: |
           touch feeds.txt
-          if ! grep -q '^https://mypybite.substack.com/feed$' feeds.txt; then
+          if ! grep -qx 'https://mypybite.substack.com/feed' feeds.txt; then
             echo 'https://mypybite.substack.com/feed' >> feeds.txt
           fi
           echo "Using feeds:"
@@ -54,7 +67,7 @@ jobs:
       - name: Validate JSON
         run: |
           python - <<'PY'
-          import json, sys
+          import json
           with open('headlines.json','r',encoding='utf-8') as f:
               json.load(f)
           print("headlines.json OK")
@@ -66,17 +79,11 @@ jobs:
           name: headlines.json
           path: headlines.json
 
-      # NEW: sync with latest remote tip to avoid non-fast-forward
-      - name: Sync with remote (rebase)
-        run: |
-          git fetch origin "${{ github.ref_name }}"
-          git pull --rebase origin "${{ github.ref_name }}"
-
-      # Commit & push safely
+      # Commit & push safely (only if changed)
       - name: Commit & push headlines.json
         uses: EndBug/add-and-commit@v9
         with:
-          add: headlines.json
+          add: "headlines.json"
           message: "chore: update headlines.json [skip ci]"
           default_author: github_actions
-          push: 'origin HEAD:${{ github.ref_name }}'
+          push: "origin HEAD:${{ github.ref_name }}"
