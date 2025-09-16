@@ -1,27 +1,26 @@
-{ 
-  // weights.json5 — server-side scoring knobs for mypybite
-  // Version: v0.5 (adds evening sports boost, team keywords, team badges, domain whitelist)
-  // TZ for windows/special dates
+{
+  // weights.json5 — server-side scoring knobs
+  // Version: v0.6 (sports-focused tuning for Blue Jays)
   timezone: "America/Toronto",
 
-  // -------- Recency & decay (global defaults) --------
+  // -------- Recency & decay --------
   recency: {
     half_life_hours: 6,
     max_age_hours: 72,
     age_penalty_after_24h: -0.6,
     age_penalty_after_36h: -0.4,
-    superseded_cluster_penalty: -0.9,
+    superseded_cluster_penalty: -0.9
   },
 
+  // Category-specific decay tweaks (sports uses global)
   recency_overrides: {
     categories: {
       "Culture": { half_life_hours: 4, max_age_hours: 48 },
       "Youth":   { half_life_hours: 4, max_age_hours: 48 }
-      // (Sports uses global recency; time windows handled below)
     }
   },
 
-  // -------- Reordering stability --------
+  // -------- Reordering stability (UI aids; safe to keep) --------
   reorder: {
     protect_top_n: 8,
     min_reorder_delta: 1.25,
@@ -29,7 +28,7 @@
     rank_drift_tolerance: 0.5
   },
 
-  // -------- Regional bias (Canada → Province → City) --------
+  // -------- Regional bias --------
   regional: {
     weights: {
       country_match: 1.2,
@@ -52,7 +51,7 @@
     "Tech": 0.15,
     "Culture": 0.25,
     "Youth": 0.25,
-    "Sports": 0.30,   // new: light baseline for sports
+    "Sports": 0.35,   // slight baseline bump so Sports isn't drowned by Business
     "General": 0.0
   },
 
@@ -72,7 +71,7 @@
     ]
   },
 
-  // -------- Markets (intraday & overnight) --------
+  // -------- Markets --------
   markets: {
     btc_abs_move_threshold_pct: 7.0,
     btc_points: 1.6,
@@ -85,21 +84,10 @@
     time_windows: {
       markets_open: { start: "09:30", end: "16:00", points: 0.6 },
       asia_window:  { start: "01:20", end: "03:30", points: 0.5 }
-    },
-    special_dates: [
-      { key: "boc_rate_decision", points: 1.6, window_hours: 30 },
-      { key: "cpi_ca_release",    points: 1.2, window_hours: 24 },
-      { key: "jobs_ca_release",   points: 1.1, window_hours: 24 },
-      { key: "fed_fomc_decision", points: 1.5, window_hours: 30 },
-      { key: "cpi_us_release",    points: 1.2, window_hours: 24 },
-      { key: "jobs_us_nonfarm",   points: 1.1, window_hours: 24 },
-      { key: "boe_rate_decision", points: 1.0, window_hours: 24 },
-      { key: "ecb_rate_decision", points: 1.0, window_hours: 24 },
-      { key: "opec_meeting",      points: 0.8, window_hours: 48 }
-    ]
+    }
   },
 
-  // -------- Entertainment / Human-interest boosts --------
+  // -------- Entertainment (kept as-is; doesn’t affect Jays) --------
   entertainment: {
     release_keywords: [
       "premiere","trailer","season","finale","episode","cast","casting",
@@ -124,48 +112,18 @@
     ]
   },
 
-  // -------- Sports (NEW) --------
+  // -------- SPORTS (keys used by your Python) --------
   sports: {
-    // Apply to items categorized as Sports OR matching sports team keywords
-    time_windows: [
-      // Evening boost for all sports, not just playoffs (ET)
-      { key: "evening_sports", start: "18:00", end: "23:30", points: 1.0 }
-    ],
-
-    // Score pattern bump: e.g., "Blue Jays 4-2 Astros" or "Leafs 3–1"
-    score_regex: "\\b\\d{1,2}[\\-–]\\d{1,2}\\b",
-    score_regex_points: 0.5,
-
-    // Injury/transaction context
-    context_keywords: [
-      { token: "injured",  points: 0.4 },
-      { token: "IL",       points: 0.35 },
-      { token: "comeback", points: 0.35 }
-    ],
-    context_cap: 0.8,
-
-    // Team & star keyword weights (case-insensitive contains on title/summary)
-    team_keywords: [
-      { token: "Blue Jays",           points: 1.5 },
-      { token: "Maple Leafs",         points: 1.4 },
-      { token: "Leafs",               points: 1.2 },
-      { token: "Raptors",             points: 1.0 },
-      { token: "Yankees",             points: 0.9 },
-      { token: "Red Sox",             points: 0.9 },
-      { token: "Dodgers",             points: 0.9 },
-      { token: "Hoffman",             points: 0.7 },            // Jays reliever (e.g., Jordan Hoffman) — adjust if needed
-      { token: "Bichette",            points: 1.2 },
-      { token: "Alejandro Kirk",      points: 1.2 },
-      { token: "Vladimir Guerrero",   points: 1.3 },
-      { token: "Guerrero Jr",         points: 1.3 },
-      { token: "Vladdy",              points: 1.0 },
-      { token: "Shohei Ohtani",       points: 1.1 },
-      { token: "Ohtani",              points: 1.0 }
-    ],
-    team_keywords_cap: 2.5
+    // These map 1:1 to the new scoring block in fetch_headlines.py
+    team_match_points:        1.00, // “Blue Jays”, “Toronto Blue Jays”, “Jays”
+    player_match_points:      0.50, // Guerrero, Bichette, Kirk, Bassitt, Gausman, Lauer, Yesavage
+    result_win_points:        0.70, // “beat”, “shut out”, “walk-off”, “clinch”, “sweep”, etc.
+    result_loss_points:       0.40, // “lose to”, “fall to”, “drop”, “blown save”, etc.
+    evening_window_points:    0.90, // stacks 18:30–22:30 ET (your code’s window)
+    playoff_mode_points:      0.60  // stacks when MPB_PLAYOFFS=1 and a result is detected
   },
 
-  // -------- Google Trends assist --------
+  // -------- Google Trends assist (optional) --------
   trends: {
     enabled: true,
     provider: "google_trends",
@@ -179,44 +137,24 @@
     cap_total_points: 1.2
   },
 
-  // -------- Aggregators / press wires & source handling --------
+  // -------- Sources handling --------
   sources: {
     aggregator_penalty: -0.6,
     press_wire_penalty: -0.5,
-    preferred_domains_bonus: 0.25,
-
-    // NEW: domains that bypass aggregator/wire penalties and demotions
-    whitelist_domains: [
-      "mlb.com",
-      "sportsnet.ca",
-      "tsn.ca"
-    ]
+    preferred_domains_bonus: 0.25
+    // Note: per-domain “preferred” is coded in Python (PREFERRED_DOMAINS).
+    // If you want mlb.com/sportsnet.ca to get that tie-breaker, we’ll add them
+    // to the Python constant (not a weights-only change).
   },
 
-  // (Optional) Source limits
-  source_limits: {
-    top_caps: { top8: 1, top20: 2 },
-    burst_control: { items: 6, window_minutes: 30, penalty: -0.7 },
-
-    // NEW: after 18:00 ET, slightly relax caps for whitelisted sports domains
-    evening_overrides: {
-      window: { start: "18:00", end: "23:30" },
-      per_domain: {
-        "mlb.com":       { top8: 2, top20: 4 },
-        "sportsnet.ca":  { top8: 2, top20: 4 },
-        "tsn.ca":        { top8: 2, top20: 4 }
-      }
-    }
-  },
-
-  // -------- Dedupe knobs --------
+  // -------- Dedupe knobs (UI feel) --------
   dedupe: {
-    jaccard_threshold: 0.62,
+    jaccard_threshold: 0.82,       // keep your Python default behavior consistent
     newer_bias_points: 0.3,
     non_aggregator_bias_points: 0.3
   },
 
-  // -------- Display effects thresholds & badges --------
+  // -------- Display effects thresholds --------
   effects: {
     lightsaber_min_score: 2.5,
     lightsaber_also_if: {
@@ -224,17 +162,10 @@
       btc_abs_move_ge_pct: 8.0,
       single_stock_abs_move_ge_pct: 15.0
     },
-    glitch_min_score: 1.8,
-
-    // NEW: server-side flags to let the front-end prepend team emblems
-    // (Front-end should check item.effects.team_badge and render the icon.)
-    team_badge_rules: [
-      { when_title_contains: ["Blue Jays"],   badge: "bluejays" },
-      { when_title_contains: ["Maple Leafs","Leafs"], badge: "leafs" }
-    ]
+    glitch_min_score: 1.8
   },
 
-  // -------- Developing stories “static pill” --------
+  // -------- Developing stories (optional UI) --------
   developing: {
     max_manual_slots: 3,
     pin_bonus_points: 2.0,
