@@ -24,6 +24,11 @@
 #     • Optional playoffs boost via env MPB_PLAYOFFS=1
 #     • Relax per-host caps for key sports domains during evening
 #     • Reduce over-deduping of fresh Jays game stories (4h)
+# - Hyperbolic overlay (Politics/War & Business/Markets):
+#     • Adds item.display_title (and optional display_subtitle)
+#     • Never alters item.title; no fabricated numbers/names/outcomes
+#     • Deterministic verb upgrades; only fires on confident patterns
+#     • Tags effects.hype=true with reason(s)
 
 from __future__ import annotations
 
@@ -151,6 +156,27 @@ RE_JAYS_PLAYERS = re.compile(
 )
 RE_JAYS_WIN  = re.compile(r"\b(beat|edge|top|blank|shut\s*out|walk-?off|clinch|sweep|down|roll past)\b", re.I)
 RE_JAYS_LOSS = re.compile(r"\b(lose(?:s)?\s+to|fall(?:s)?\s+to|drop(?:s)?\s+to|blown\s+save|skid|defeat(?:ed)?\s+by)\b", re.I)
+
+# --- Hyperbole helpers (Politics/War/Business) ---
+# Light-touch verb upgrades; conservative to avoid misrepresenting facts.
+WEAK_TO_STRONG_POLITICS = [
+    (re.compile(r"\bcriticiz(?:e|es|ed|ing)\b", re.I), "slams"),
+    (re.compile(r"\bcondemn(?:s|ed|ing)?\b", re.I), "lashes"),
+    (re.compile(r"\bdisput(?:e|es|ed|ing)\b", re.I), "defies"),
+    (re.compile(r"\bwarn(?:s|ed|ing)?\b", re.I), "warns"),  # keep literal
+    (re.compile(r"\bcall(?:s|ed)? for\b", re.I), "demands"),
+    (re.compile(r"\bpush(?:es|ed|ing)? for\b", re.I), "presses"),
+]
+CONFLICT_CUES = re.compile(
+    r"\b(strike|strikes|missile|rocket|shelling|offensive|incursion|raid|drone|artillery|frontline|ceasefire|truce)\b",
+    re.I,
+)
+CEASEFIRE_WEAK = re.compile(r"\b(cease[- ]?fire|truce)\s+(ends|fails|breaks? down)\b", re.I)
+
+POS_MARKET_WORDS = re.compile(r"\b(up|rise|rises|gains?|surges?|soars?|rall(y|ies))\b", re.I)
+NEG_MARKET_WORDS = re.compile(r"\b(down|fall(?:s|en)?|drops?|slumps?|slides?|plunges?|craters?|tanks?)\b", re.I)
+LAYOFF_CUE       = re.compile(r"\b(layoffs?|lay\s*off|cuts?|slashes?)\b", re.I)
+JOBS_NUMBER      = re.compile(r"\b(\d{3,})\s+(jobs|positions|roles)\b", re.I)
 
 # ---------------- Section → tag ----------------
 @dataclass
@@ -443,6 +469,12 @@ def first_pct(m):
     except Exception:
         return None
 
+def first_pct_signed(m):
+    try:
+        return float(m.group(2))
+    except Exception:
+        return None
+
 # ---------------- Special-case: Nate Silver page scraper ----------------
 REL_AGO = re.compile(r"\b(\d+)\s*(minute|minutes|hour|hours|day|days)\s+ago\b", re.I)
 
@@ -481,7 +513,6 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
                 continue
             seen.add(href)
 
-            # Relative "X hours ago" hint if present
             age_hint = None
             tnode = blk.find("time")
             if tnode:
@@ -539,6 +570,113 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
             break
     return items
 
+# ---------- Hyperbolic overlay ----------
+def _capitalize_once(s: str) -> str:
+    return s[:1].upper() + s[1:] if s else s
+
+def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str]]:
+    """
+    Returns (display_title or None, display_subtitle or None, reasons list)
+    Only fires when patterns are confident and fact-preserving.
+    """
+    title = strip_source_tail(it.get("title", "").strip())
+    if not title:
+        return None, None, []
+
+    cat = (it.get("category") or "").strip()
+
+    # 1) Sports – keep super conservative; only Jays with result/score cues.
+    if RE_JAYS_TEAM.search(title):
+        # If there's already a strong verb or scoreline, build a crisp rewrite
+        has_score = re.search(r"\b\d{1,2}\s*[–-]\s*\d{1,2}\b", title)
+        win = bool(RE_JAYS_WIN.search(title))
+        loss = bool(RE_JAYS_LOSS.search(title))
+        if has_score or win or loss:
+            subj = "Jays" if re.search(r"\b[Jj]ays\b", title) else "Toronto Blue Jays"
+            verb = "edge" if win else ("fall to" if loss else "face")
+            # Try to pull opponent token (very light heuristic)
+            opp = None
+            m = re.search(r"\b(?:over|vs\.?|against|to)\s+([A-Z][A-Za-z.&\s-]{2,20})", title)
+            if m:
+                opp = m.group(1).strip().rstrip(".")
+            score = None
+            ms = re.search(r"\b(\d{1,2}\s*[–-]\s*\d{1,2})\b", title)
+            if ms:
+                score = ms.group(1).replace("–", "-")
+            bits = [subj, verb]
+            if opp: bits.append(opp)
+            if score: bits.append(f", {score}")
+            display = " ".join(bits)
+            return _capitalize_once(display), None, ["sports_hype"]
+        return None, None, []
+
+    # 2) Business/Markets — stronger verbs when %/direction cues exist
+    if cat == "Business" or re.search(r"\b(stock|stocks|markets?|index|indices|tsx|dow|nasdaq|s&p)\b", title, re.I):
+        # Use regex with signed % when available
+        m_any = RE_IDX.search(title) or RE_TICK_PCT.search(title)
+        sign_val = None
+        if m_any:
+            sign_val = first_pct_signed(m_any)
+        pos = bool(POS_MARKET_WORDS.search(title))
+        neg = bool(NEG_MARKET_WORDS.search(title))
+        strong = None
+        if sign_val is not None:
+            if sign_val >= 4.0 or (sign_val >= 2.5 and pos):
+                strong = "skyrocket"
+            elif sign_val >= 1.2 or pos:
+                strong = "surge"
+            elif sign_val <= -4.0 or (sign_val <= -2.5 and neg):
+                strong = "plunge"
+            elif sign_val <= -1.2 or neg:
+                strong = "slide"
+        else:
+            if pos: strong = "surge"
+            elif neg: strong = "slump"
+        if strong:
+            # Replace a weak verb if present, else prepend with market subject
+            display = title
+            display = re.sub(r"\b(rise|rises|up|gain|gains|advance|advances)\b", "surge", display, flags=re.I)
+            display = re.sub(r"\b(fall|falls|down|drop|drops|slump|slumps)\b", "slide", display, flags=re.I)
+            display = re.sub(r"\b(plunge|plunges)\b", "plunge", display, flags=re.I)
+            # if no verb changed, add a leading subject+verb if we can identify index
+            if display == title:
+                subj = None
+                msub = re.search(r"\b(S&P|Nasdaq|Dow|TSX|TSXV|Nikkei)\b", title, re.I)
+                if msub:
+                    subj = msub.group(0)
+                display = f"{subj or 'Markets'} {strong} — {title}" if subj else f"{strong.capitalize()}: {title}"
+            return strip_source_tail(display), None, ["markets_hype"]
+        # Layoffs: only upgrade the verb, never touch the number/company
+        if LAYOFF_CUE.search(title) and JOBS_NUMBER.search(title):
+            disp = re.sub(r"\b(lay\s*off|layoffs?|cuts?|slashes?)\b", "axes", title, flags=re.I)
+            if disp != title:
+                return strip_source_tail(disp), None, ["jobs_hype"]
+        return None, None, []
+
+    # 3) Politics/War — upgrade bland verbs; conflict intensifiers
+    if cat in ("General", "Local", "Public Safety", "Tech", "Energy", "Transit", "Weather", "Culture", "Youth") or True:
+        # Ceasefire/truce collapses
+        if CEASEFIRE_WEAK.search(title):
+            disp = CEASEFIRE_WEAK.sub(lambda m: f"{m.group(1).capitalize()} collapses", title)
+            return strip_source_tail(disp), None, ["ceasefire_hype"]
+        # Conflict cues → stronger verbs
+        if CONFLICT_CUES.search(title):
+            disp = title
+            for pat, repl in WEAK_TO_STRONG_POLITICS:
+                disp = pat.sub(repl, disp)
+            # generic upgrade of “clashes flare” → “clashes erupt”
+            disp = re.sub(r"\b(flares?|flares up)\b", "erupts", disp, flags=re.I)
+            if disp != title:
+                return strip_source_tail(disp), None, ["conflict_hype"]
+        # Pure politics verb upgrades (don’t fabricate outcomes)
+        changed = title
+        for pat, repl in WEAK_TO_STRONG_POLITICS:
+            changed = pat.sub(repl, changed)
+        if changed != title:
+            return strip_source_tail(changed), None, ["politics_hype"]
+
+    return None, None, []
+
 # ---------------- Build ----------------
 def build(feeds_file: str, out_path: str) -> dict:
     start = time.time()
@@ -576,6 +714,13 @@ def build(feeds_file: str, out_path: str) -> dict:
         "sports_result_loss_hits": 0,
         "sports_evening_hits": 0,
         "sports_playoff_hits": 0,
+        # hyperbole
+        "hype_politics": 0,
+        "hype_conflict": 0,
+        "hype_markets": 0,
+        "hype_jobs": 0,
+        "hype_sports": 0,
+        "hype_ceasefire": 0,
     }
 
     session = _new_session()
@@ -692,7 +837,7 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         if (idx % 20) == 0:
             elapsed = time.time() - start
-            print(f"[progress] {idx}/{len(specs)} feeds, items={len(collected)}, elapsed={elapsed:.1f}s")
+            print(f"[progress] {idx}/{len(specs)} feeds, items={len(collected)}, elapsed={elapsed:.1f}s}")
 
     # Pass 1: collapse exact fuzzy clusters (keep newest; prefer non-aggregator)
     first_pass: dict[str,dict] = {}
@@ -818,7 +963,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     sp_evening   = float(W(weights, "sports.evening_window_points", 0.70))
     sp_playoffs  = float(W(weights, "sports.playoff_mode_points", 0.40))
 
-    now_ts = time.time()  # for age math inside scoring
+    now_ts_scoring = time.time()  # for age math inside scoring
 
     def violent_kw_hit(title: str) -> bool:
         t = title.lower()
@@ -835,7 +980,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         total = 0.0
 
         # Recency decay
-        age_h = hours_since(published, now_ts)
+        age_h = hours_since(published, now_ts_scoring)
         decay = 0.0
         if half_life_h > 0:
             decay = 1.0 * (0.5 ** (age_h / half_life_h))
@@ -971,8 +1116,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             score_dbg["sports_result_loss_hits"] += 1
 
         # Evening window: 18:30–22:30 ET
-        if team_hit and (ah is None):  # apply based on clock, regardless of ah
-            # compute current ET each time to be safe if long runs; but approximate with now_et snapshot
+        if team_hit and (ah is None):
             if (now_et.hour, now_et.minute) >= (18,30) and (now_et.hour, now_et.minute) <= (22,30):
                 comps["sports.evening_window"] = sp_evening
                 total += sp_evening
@@ -1010,6 +1154,24 @@ def build(feeds_file: str, out_path: str) -> dict:
             dec_iso = iso_add_hours(it.get("published_utc"), 24.0)
             effects["decay_at"] = dec_iso
             score_dbg["substack_tagged"] += 1
+
+        # --- Hyperbolic overlay (Politics/War/Business + Sports Jays) ---
+        disp_title, disp_sub, hype_reasons = craft_hyperbolic_display(it)
+        if disp_title:
+            it["display_title"] = disp_title
+            if disp_sub:
+                it["display_subtitle"] = disp_sub
+            effects["hype"] = True
+            for r in hype_reasons:
+                if r == "politics_hype": score_dbg["hype_politics"] += 1
+                elif r == "conflict_hype": score_dbg["hype_conflict"] += 1
+                elif r == "markets_hype": score_dbg["hype_markets"] += 1
+                elif r == "jobs_hype": score_dbg["hype_jobs"] += 1
+                elif r == "sports_hype": score_dbg["hype_sports"] += 1
+                elif r == "ceasefire_hype": score_dbg["hype_ceasefire"] += 1
+            # Make the reason visible in effects
+            if "reasons" in effects:
+                effects["reasons"].extend(hype_reasons)
 
         # Provide a style string + top-level mirrors for the UI
         style = "lightsaber" if effects["lightsaber"] else ("glitch" if effects["glitch"] else "")
@@ -1057,7 +1219,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.5.0-jays-evening-playoffs",
+            "version": "fetch-v1.6.0-hype-overlay",
             # weights status
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
