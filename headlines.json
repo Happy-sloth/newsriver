@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-09-21T04:18:20.714120+00:00",
+  "generated_utc": "2025-09-21T04:41:36.667362+00:00",
   "count": 320,
   "items": [
     {
       "title": "Dominion still has pending lawsuits against election deniers such as Rudy Giuliani and Sidney Powell",
       "url": "https://www.cnn.com/business/live-news/fox-news-dominion-trial-04-18-23/h_8d51e3ae2714edaa0dace837305d03b8",
       "source": "CNN.com - RSS Channel - HP Hero",
-      "published_utc": "2025-09-21T04:17:53.938384+00:00",
+      "published_utc": "2025-09-21T04:41:16.430325+00:00",
       "category": "General",
       "region": "World",
       "canonical_url": "https://www.cnn.com/business/live-news/fox-news-dominion-trial-04-18-23/h_8d51e3ae2714edaa0dace837305d03b8",
@@ -14,9 +14,80 @@
       "cluster_id": "t:94aaf9795642",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9991,
+      "score": 0.9993,
       "score_components": {
-        "recency": 0.9991
+        "recency": 0.9993
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Dodgers’ power surge fuels win over Giants",
+      "url": "https://www.dailynews.com/2025/09/20/dodgers-power-surge-fuels-win-over-giants",
+      "source": "Daily News",
+      "published_utc": "2025-09-21T04:33:52+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.dailynews.com/2025/09/20/dodgers-power-surge-fuels-win-over-giants",
+      "canonical_id": "u:4b9f4674996590d7",
+      "cluster_id": "t:94030a138907",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9852,
+      "score_components": {
+        "recency": 0.9852
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "2025 Blue Jays Postseason Watch: Bracket, tiebreakers and more",
+      "url": "https://www.mlb.com/bluejays/news/mlb-playoff-picture-and-bracket-2025",
+      "source": "Blue Jays News",
+      "published_utc": "2025-09-21T04:31:00+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.mlb.com/bluejays/news/mlb-playoff-picture-and-bracket-2025",
+      "canonical_id": "u:2159e0c2493881d9",
+      "cluster_id": "t:3c34a1e63fd0",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "glitch": true,
+      "score": 1.9798,
+      "score_components": {
+        "recency": 0.9798,
+        "sports.team_match": 1.0
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.8"
+        ],
+        "style": "glitch"
+      }
+    },
+    {
+      "title": "Bad Bunny Closes Historic Puerto Rico Residency With Marc Anthony, RaiNao, and More Guests",
+      "url": "https://www.rollingstone.com/music/music-latin/bad-bunny-closes-puerto-rico-residency-una-mas-show-1235431826",
+      "source": "Rolling Stone",
+      "published_utc": "2025-09-21T04:19:31+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.rollingstone.com/music/music-latin/bad-bunny-closes-puerto-rico-residency-una-mas-show-1235431826",
+      "canonical_id": "u:205ea7970d184f47",
+      "cluster_id": "t:435fedacddb4",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9584,
+      "score_components": {
+        "recency": 0.9584
       },
       "effects": {
         "lightsaber": false,
@@ -37,9 +108,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.3745,
+      "score": 2.331,
       "score_components": {
-        "recency": 0.9945,
+        "recency": 0.951,
         "public_safety": 1.38
       },
       "effects": {
@@ -49,6 +120,30 @@
           "score≥1.8"
         ],
         "style": "glitch"
+      }
+    },
+    {
+      "title": "Low-risk DeFi could do for Ethereum what search did for Google, Vitalik says",
+      "url": "https://cointelegraph.com/news/low-risk-defi-could-drive-ethereum-fees-while-keeping-values-intact",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-09-21T04:14:42+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://cointelegraph.com/news/low-risk-defi-could-drive-ethereum-fees-while-keeping-values-intact",
+      "canonical_id": "u:dfd577c01488c9c3",
+      "cluster_id": "t:15372ce9e8fe",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.3995,
+      "score_components": {
+        "recency": 0.9495,
+        "category": 0.2,
+        "preferred_domain": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
       }
     },
     {
@@ -63,9 +158,9 @@
       "cluster_id": "t:19dfa31c6b7e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9805,
+      "score": 0.9376,
       "score_components": {
-        "recency": 0.9805
+        "recency": 0.9376
       },
       "effects": {
         "lightsaber": false,
@@ -85,9 +180,9 @@
       "cluster_id": "t:f62ea8ff8bcc",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9729,
+      "score": 0.9303,
       "score_components": {
-        "recency": 0.9729
+        "recency": 0.9303
       },
       "effects": {
         "lightsaber": false,
@@ -107,9 +202,9 @@
       "cluster_id": "t:34e66bdd1c37",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2161,
+      "score": 1.1738,
       "score_components": {
-        "recency": 0.9661,
+        "recency": 0.9238,
         "category": 0.25
       },
       "effects": {
@@ -131,9 +226,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7653,
+      "score": 2.723,
       "score_components": {
-        "recency": 0.9653,
+        "recency": 0.923,
         "category": 0.6,
         "regional": 1.2
       },
@@ -158,9 +253,9 @@
       "cluster_id": "t:8c2e4980031e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9622,
+      "score": 0.9201,
       "score_components": {
-        "recency": 0.9622
+        "recency": 0.9201
       },
       "effects": {
         "lightsaber": false,
@@ -181,9 +276,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.911,
+      "score": 2.8689,
       "score_components": {
-        "recency": 0.961,
+        "recency": 0.9189,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -209,9 +304,9 @@
       "cluster_id": "t:884256e8e6b9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9582,
+      "score": 0.9163,
       "score_components": {
-        "recency": 0.9582
+        "recency": 0.9163
       },
       "effects": {
         "lightsaber": false,
@@ -232,9 +327,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1445,
+      "score": 2.1031,
       "score_components": {
-        "recency": 0.9445,
+        "recency": 0.9031,
         "public_safety": 1.2
       },
       "effects": {
@@ -258,9 +353,9 @@
       "cluster_id": "t:44f624dca28e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9406,
+      "score": 0.8994,
       "score_components": {
-        "recency": 0.9406
+        "recency": 0.8994
       },
       "effects": {
         "lightsaber": false,
@@ -280,9 +375,9 @@
       "cluster_id": "t:0d63df7a550f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9043,
+      "score": 0.8647,
       "score_components": {
-        "recency": 0.9043
+        "recency": 0.8647
       },
       "effects": {
         "lightsaber": false,
@@ -302,9 +397,9 @@
       "cluster_id": "t:7aff71187cf6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8967,
+      "score": 0.8574,
       "score_components": {
-        "recency": 0.8967
+        "recency": 0.8574
       },
       "effects": {
         "lightsaber": false,
@@ -324,9 +419,9 @@
       "cluster_id": "t:b33e19b33187",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8824,
+      "score": 0.8437,
       "score_components": {
-        "recency": 0.8824
+        "recency": 0.8437
       },
       "effects": {
         "lightsaber": false,
@@ -346,9 +441,9 @@
       "cluster_id": "t:788c69639147",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8804,
+      "score": 0.8419,
       "score_components": {
-        "recency": 0.8804
+        "recency": 0.8419
       },
       "effects": {
         "lightsaber": false,
@@ -368,9 +463,9 @@
       "cluster_id": "t:abb0bb0d92d0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8689,
+      "score": 0.8308,
       "score_components": {
-        "recency": 0.8689
+        "recency": 0.8308
       },
       "effects": {
         "lightsaber": false,
@@ -391,9 +486,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 3.0032,
+      "score": 2.9658,
       "score_components": {
-        "recency": 0.8532,
+        "recency": 0.8158,
         "category": 0.5,
         "preferred_domain": 0.25,
         "public_safety": 0.2,
@@ -420,9 +515,9 @@
       "cluster_id": "t:1cac07d75c50",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8505,
+      "score": 0.8132,
       "score_components": {
-        "recency": 0.8505
+        "recency": 0.8132
       },
       "effects": {
         "lightsaber": false,
@@ -444,9 +539,9 @@
       "cluster_latest": true,
       "display_title": "Jays fall to",
       "glitch": true,
-      "score": 2.2452,
+      "score": 2.2082,
       "score_components": {
-        "recency": 0.8452,
+        "recency": 0.8082,
         "sports.team_match": 1.0,
         "sports.result_loss": 0.4
       },
@@ -473,10 +568,32 @@
       "cluster_id": "t:a000ae79f8f9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0906,
+      "score": 1.0537,
       "score_components": {
-        "recency": 0.8406,
+        "recency": 0.8037,
         "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Cal Raleigh blasts 57th home run to pass Ken Griffey Jr. for Mariners single-season record",
+      "url": "https://nypost.com/2025/09/20/sports/cal-raleigh-blasts-57th-home-run-to-pass-ken-griffey-jr-for-mariners-single-season-record",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T02:45:36+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/cal-raleigh-blasts-57th-home-run-to-pass-ken-griffey-jr-for-mariners-single-season-record",
+      "canonical_id": "u:c3789a52d5182b18",
+      "cluster_id": "t:104e5256997b",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.7998,
+      "score_components": {
+        "recency": 0.7998
       },
       "effects": {
         "lightsaber": false,
@@ -496,9 +613,9 @@
       "cluster_id": "t:33bea54af5b7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.821,
+      "score": 0.785,
       "score_components": {
-        "recency": 0.821
+        "recency": 0.785
       },
       "effects": {
         "lightsaber": false,
@@ -518,9 +635,9 @@
       "cluster_id": "t:41552794530a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8209,
+      "score": 0.7849,
       "score_components": {
-        "recency": 0.8209
+        "recency": 0.7849
       },
       "effects": {
         "lightsaber": false,
@@ -540,9 +657,9 @@
       "cluster_id": "t:1048ed868333",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0691,
+      "score": 1.0332,
       "score_components": {
-        "recency": 0.8191,
+        "recency": 0.7832,
         "category": 0.25
       },
       "effects": {
@@ -563,9 +680,9 @@
       "cluster_id": "t:3e9930abeddb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8152,
+      "score": 0.7795,
       "score_components": {
-        "recency": 0.8152
+        "recency": 0.7795
       },
       "effects": {
         "lightsaber": false,
@@ -585,9 +702,31 @@
       "cluster_id": "t:bea8e41d11bb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8151,
+      "score": 0.7793,
       "score_components": {
-        "recency": 0.8151
+        "recency": 0.7793
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Jets desperately need Tyrod Taylor to help avoid yet another lost season",
+      "url": "https://nypost.com/2025/09/20/sports/jets-desperately-need-tyrod-taylor-to-help-avoid-yet-another-lost-season",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T02:32:07+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/jets-desperately-need-tyrod-taylor-to-help-avoid-yet-another-lost-season",
+      "canonical_id": "u:feac57c9a47449f5",
+      "cluster_id": "t:574aab85cfe6",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.7793,
+      "score_components": {
+        "recency": 0.7793
       },
       "effects": {
         "lightsaber": false,
@@ -607,9 +746,9 @@
       "cluster_id": "t:45505b9a2df0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8149,
+      "score": 0.7792,
       "score_components": {
-        "recency": 0.8149
+        "recency": 0.7792
       },
       "effects": {
         "lightsaber": false,
@@ -629,9 +768,9 @@
       "cluster_id": "t:692695320db0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8125,
+      "score": 0.7769,
       "score_components": {
-        "recency": 0.8125
+        "recency": 0.7769
       },
       "effects": {
         "lightsaber": false,
@@ -651,9 +790,53 @@
       "cluster_id": "t:13a02eac4a04",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8006,
+      "score": 0.7656,
       "score_components": {
-        "recency": 0.8006
+        "recency": 0.7656
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Giants have little chance against Chiefs if NFL-worst defense doesn’t wake up",
+      "url": "https://nypost.com/2025/09/20/sports/giants-have-little-chance-against-chiefs-if-defense-doesnt-wake-up",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T02:22:25+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/giants-have-little-chance-against-chiefs-if-defense-doesnt-wake-up",
+      "canonical_id": "u:107c584bc240de52",
+      "cluster_id": "t:c78082d8354a",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.7649,
+      "score_components": {
+        "recency": 0.7649
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Brady Cook will be Jets backup quarterback to Tyrod Taylor vs. Buccaneers",
+      "url": "https://nypost.com/2025/09/20/sports/brady-cook-will-be-jets-backup-quarterback-to-tyrod-taylor-vs-buccaneers",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T02:16:24+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/brady-cook-will-be-jets-backup-quarterback-to-tyrod-taylor-vs-buccaneers",
+      "canonical_id": "u:a7f885712b226692",
+      "cluster_id": "t:26515ff48f9a",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.7561,
+      "score_components": {
+        "recency": 0.7561
       },
       "effects": {
         "lightsaber": false,
@@ -674,9 +857,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.9369,
+      "score": 2.9024,
       "score_components": {
-        "recency": 0.7869,
+        "recency": 0.7524,
         "category": 0.5,
         "preferred_domain": 0.25,
         "public_safety": 0.2,
@@ -692,6 +875,28 @@
       }
     },
     {
+      "title": "Aaron Judge, Giancarlo Stanton homer as Yankees clip O’s to get closer in AL East race",
+      "url": "https://nypost.com/2025/09/20/sports/aaron-judge-giancarlo-stanton-homer-as-yankees-clip-os",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T02:12:52+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/aaron-judge-giancarlo-stanton-homer-as-yankees-clip-os",
+      "canonical_id": "u:0f81385fd82940ff",
+      "cluster_id": "t:67f1aaeef441",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.751,
+      "score_components": {
+        "recency": 0.751
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
       "title": "Mohanlal to Receive India’s Top Film Honor",
       "url": "https://variety.com/2025/film/news/mohanlal-india-top-film-honor-1236525464",
       "source": "Film",
@@ -703,9 +908,9 @@
       "cluster_id": "t:2da0539b28c5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.4825,
+      "score": 1.4482,
       "score_components": {
-        "recency": 0.7825,
+        "recency": 0.7482,
         "sports.result_win": 0.7
       },
       "effects": {
@@ -726,9 +931,9 @@
       "cluster_id": "t:44c27865b9b4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7817,
+      "score": 0.7475,
       "score_components": {
-        "recency": 0.7817
+        "recency": 0.7475
       },
       "effects": {
         "lightsaber": false,
@@ -748,9 +953,9 @@
       "cluster_id": "t:89a50dfd27e8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7733,
+      "score": 0.7394,
       "score_components": {
-        "recency": 0.7733
+        "recency": 0.7394
       },
       "effects": {
         "lightsaber": false,
@@ -770,9 +975,9 @@
       "cluster_id": "t:33e75eac79df",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7618,
+      "score": 0.7285,
       "score_components": {
-        "recency": 0.7618
+        "recency": 0.7285
       },
       "effects": {
         "lightsaber": false,
@@ -793,9 +998,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7043,
+      "score": 2.6713,
       "score_components": {
-        "recency": 0.7543,
+        "recency": 0.7213,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -821,9 +1026,9 @@
       "cluster_id": "t:7972a74122d2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9904,
+      "score": 0.958,
       "score_components": {
-        "recency": 0.7404,
+        "recency": 0.708,
         "category": 0.25
       },
       "effects": {
@@ -844,9 +1049,9 @@
       "cluster_id": "t:d5887ed8c2ad",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9876,
+      "score": 0.9553,
       "score_components": {
-        "recency": 0.7376,
+        "recency": 0.7053,
         "category": 0.25
       },
       "effects": {
@@ -868,9 +1073,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "'Home is now on fire': Jack Smith issues Trump warns in 'rare public appearance'",
-      "score": 0.7376,
+      "score": 0.7053,
       "score_components": {
-        "recency": 0.7376
+        "recency": 0.7053
       },
       "effects": {
         "lightsaber": false,
@@ -879,6 +1084,28 @@
           "politics_hype"
         ],
         "hype": true
+      }
+    },
+    {
+      "title": "All Out delivered exactly what AEW needed with surprise debut, star’s return and stunning title change",
+      "url": "https://nypost.com/2025/09/20/sports/aew-all-out-review-grade-beth-phoenix-debuts-jack-perry-returns",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T01:19:42+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/aew-all-out-review-grade-beth-phoenix-debuts-jack-perry-returns",
+      "canonical_id": "u:11c5e484555b84fb",
+      "cluster_id": "t:43090f2442a5",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.6779,
+      "score_components": {
+        "recency": 0.6779
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
       }
     },
     {
@@ -893,9 +1120,32 @@
       "cluster_id": "t:6d2f647a6e50",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7066,
+      "score": 0.6756,
       "score_components": {
-        "recency": 0.7066
+        "recency": 0.6756
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Breaking down Nets roster: Where every player stands before season",
+      "url": "https://nypost.com/2025/09/20/sports/breaking-down-nets-roster-where-every-player-stands-before-season",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T01:17:50+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/breaking-down-nets-roster-where-every-player-stands-before-season",
+      "canonical_id": "u:b9204963112950c1",
+      "cluster_id": "t:dd3d368901c6",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.3755,
+      "score_components": {
+        "recency": 0.6755,
+        "sports.result_win": 0.7
       },
       "effects": {
         "lightsaber": false,
@@ -915,9 +1165,31 @@
       "cluster_id": "t:9e4367d9f0f6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7054,
+      "score": 0.6745,
       "score_components": {
-        "recency": 0.7054
+        "recency": 0.6745
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Caitlin Clark mocks $200 fine over social media posts targeting referees",
+      "url": "https://nypost.com/2025/09/20/sports/caitlin-clark-mocks-200-fine-over-social-media-posts-targeting-referees",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T01:14:16+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/caitlin-clark-mocks-200-fine-over-social-media-posts-targeting-referees",
+      "canonical_id": "u:a4b373f540e615f1",
+      "cluster_id": "t:83ec5c7da1da",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.6708,
+      "score_components": {
+        "recency": 0.6708
       },
       "effects": {
         "lightsaber": false,
@@ -937,9 +1209,9 @@
       "cluster_id": "t:0593352cd632",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9479,
+      "score": 0.9174,
       "score_components": {
-        "recency": 0.6979,
+        "recency": 0.6674,
         "category": 0.25
       },
       "effects": {
@@ -960,9 +1232,9 @@
       "cluster_id": "t:4f65aad94764",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6927,
+      "score": 0.6623,
       "score_components": {
-        "recency": 0.6927
+        "recency": 0.6623
       },
       "effects": {
         "lightsaber": false,
@@ -982,9 +1254,9 @@
       "cluster_id": "t:bf0e37433df6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6833,
+      "score": 0.6534,
       "score_components": {
-        "recency": 0.6833
+        "recency": 0.6534
       },
       "effects": {
         "lightsaber": false,
@@ -1004,9 +1276,9 @@
       "cluster_id": "t:b8a2b51b1654",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6782,
+      "score": 0.6485,
       "score_components": {
-        "recency": 0.6782
+        "recency": 0.6485
       },
       "effects": {
         "lightsaber": false,
@@ -1027,9 +1299,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Surge: JAFF Market Partners with Cinepoint to Track Indonesia’s Box Office Surge as Local Films Outpace Hollywood (EXCLUSIVE)",
-      "score": 0.6765,
+      "score": 0.6468,
       "score_components": {
-        "recency": 0.6765
+        "recency": 0.6468
       },
       "effects": {
         "lightsaber": false,
@@ -1052,11 +1324,33 @@
       "cluster_id": "t:9cd37a03b7fd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.4263,
+      "score": 1.3967,
       "score_components": {
-        "recency": 0.6763,
+        "recency": 0.6467,
         "category": 0.25,
         "sports.player_match": 0.5
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Aziz Olajuwon, son of Hall of Famer Hakeem Olajuwon, commits to play at Stanford",
+      "url": "https://nypost.com/2025/09/20/sports/aziz-olajuwon-son-of-hakeem-olajuwon-commits-to-stanford",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T00:52:58+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/aziz-olajuwon-son-of-hakeem-olajuwon-commits-to-stanford",
+      "canonical_id": "u:7dfa8e35899330bc",
+      "cluster_id": "t:4c5a3a0076cc",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.6439,
+      "score_components": {
+        "recency": 0.6439
       },
       "effects": {
         "lightsaber": false,
@@ -1077,9 +1371,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.6233,
+      "score": 2.5938,
       "score_components": {
-        "recency": 0.6733,
+        "recency": 0.6438,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -1106,9 +1400,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 3.9374,
+      "score": 3.9082,
       "score_components": {
-        "recency": 0.6674,
+        "recency": 0.6382,
         "category": 0.5,
         "preferred_domain": 0.25,
         "public_safety": 1.32,
@@ -1135,9 +1429,9 @@
       "cluster_id": "t:5f13c9e2a7db",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.665,
+      "score": 0.6358,
       "score_components": {
-        "recency": 0.665
+        "recency": 0.6358
       },
       "effects": {
         "lightsaber": false,
@@ -1158,9 +1452,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.8642,
+      "score": 1.8351,
       "score_components": {
-        "recency": 0.6642,
+        "recency": 0.6351,
         "sports.player_match": 0.5,
         "sports.result_win": 0.7
       },
@@ -1185,9 +1479,9 @@
       "cluster_id": "t:011c571294f7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1056,
+      "score": 1.0768,
       "score_components": {
-        "recency": 0.6556,
+        "recency": 0.6268,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -1209,9 +1503,9 @@
       "cluster_id": "t:d72289750e5f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6551,
+      "score": 0.6264,
       "score_components": {
-        "recency": 0.6551
+        "recency": 0.6264
       },
       "effects": {
         "lightsaber": false,
@@ -1231,9 +1525,31 @@
       "cluster_id": "t:747f6ebf78de",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6531,
+      "score": 0.6245,
       "score_components": {
-        "recency": 0.6531
+        "recency": 0.6245
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Jordon Hudson chats with Bill Belichick on sideline before North Carolina’s ugly loss to UCF",
+      "url": "https://nypost.com/2025/09/20/sports/jordon-hudson-chats-with-bill-belichick-before-north-carolinas-loss-to-ucf",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T00:33:43+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/jordon-hudson-chats-with-bill-belichick-before-north-carolinas-loss-to-ucf",
+      "canonical_id": "u:d93ff0e07e1d18ac",
+      "cluster_id": "t:4e234b22093d",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.6205,
+      "score_components": {
+        "recency": 0.6205
       },
       "effects": {
         "lightsaber": false,
@@ -1253,9 +1569,9 @@
       "cluster_id": "t:47a06b4a4cb8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.145,
+      "score": 1.1167,
       "score_components": {
-        "recency": 0.645,
+        "recency": 0.6167,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -1276,9 +1592,32 @@
       "cluster_id": "t:b416f0a9ced1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6413,
+      "score": 0.6132,
       "score_components": {
-        "recency": 0.6413
+        "recency": 0.6132
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Breaking down Knicks roster: Where every player stands before season",
+      "url": "https://nypost.com/2025/09/20/sports/breaking-down-knicks-roster-where-every-player-stands-before-season",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T00:26:34+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/breaking-down-knicks-roster-where-every-player-stands-before-season",
+      "canonical_id": "u:c063bb692c3862b0",
+      "cluster_id": "t:01f6270575e7",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.312,
+      "score_components": {
+        "recency": 0.612,
+        "sports.result_win": 0.7
       },
       "effects": {
         "lightsaber": false,
@@ -1298,9 +1637,9 @@
       "cluster_id": "t:a8d495ef172c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6301,
+      "score": 0.6025,
       "score_components": {
-        "recency": 0.6301
+        "recency": 0.6025
       },
       "effects": {
         "lightsaber": false,
@@ -1320,9 +1659,9 @@
       "cluster_id": "t:c4526955be5e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6294,
+      "score": 0.6018,
       "score_components": {
-        "recency": 0.6294
+        "recency": 0.6018
       },
       "effects": {
         "lightsaber": false,
@@ -1342,9 +1681,9 @@
       "cluster_id": "t:3e653c579360",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6288,
+      "score": 0.6013,
       "score_components": {
-        "recency": 0.6288
+        "recency": 0.6013
       },
       "effects": {
         "lightsaber": false,
@@ -1364,9 +1703,9 @@
       "cluster_id": "t:bb0cc29a6a5c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6276,
+      "score": 0.6001,
       "score_components": {
-        "recency": 0.6276
+        "recency": 0.6001
       },
       "effects": {
         "lightsaber": false,
@@ -1386,9 +1725,9 @@
       "cluster_id": "t:a0ee0765bbda",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6255,
+      "score": 0.5981,
       "score_components": {
-        "recency": 0.6255
+        "recency": 0.5981
       },
       "effects": {
         "lightsaber": false,
@@ -1408,9 +1747,9 @@
       "cluster_id": "t:e676d8a4497f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1221,
+      "score": 1.0948,
       "score_components": {
-        "recency": 0.6221,
+        "recency": 0.5948,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -1431,9 +1770,9 @@
       "cluster_id": "t:9b797631a3d1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6213,
+      "score": 0.594,
       "score_components": {
-        "recency": 0.6213
+        "recency": 0.594
       },
       "effects": {
         "lightsaber": false,
@@ -1453,9 +1792,9 @@
       "cluster_id": "t:bfa43e15ea54",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6207,
+      "score": 0.5935,
       "score_components": {
-        "recency": 0.6207
+        "recency": 0.5935
       },
       "effects": {
         "lightsaber": false,
@@ -1475,9 +1814,9 @@
       "cluster_id": "t:5ee517d144b2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6192,
+      "score": 0.5921,
       "score_components": {
-        "recency": 0.6192
+        "recency": 0.5921
       },
       "effects": {
         "lightsaber": false,
@@ -1497,9 +1836,9 @@
       "cluster_id": "t:7be68733583a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6145,
+      "score": 0.5876,
       "score_components": {
-        "recency": 0.6145
+        "recency": 0.5876
       },
       "effects": {
         "lightsaber": false,
@@ -1519,10 +1858,54 @@
       "cluster_id": "t:407b3ef8307c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.3132,
+      "score": 1.2863,
       "score_components": {
-        "recency": 0.6132,
+        "recency": 0.5863,
         "sports.result_win": 0.7
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "FanDuel promo code: Bet $5, get $300 in bonus bets if your bet wins for Fresno State vs. Hawaii",
+      "url": "https://nypost.com/2025/09/20/betting/fanduel-promo-code-bet-5-get-300-in-bonus-bets-if-your-bet-wins-for-fresno-state-vs-hawaii",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-21T00:00:00+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/betting/fanduel-promo-code-bet-5-get-300-in-bonus-bets-if-your-bet-wins-for-fresno-state-vs-hawaii",
+      "canonical_id": "u:14d82132388467bb",
+      "cluster_id": "t:ac020b4860af",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.5815,
+      "score_components": {
+        "recency": 0.5815
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Yankees’ Giancarlo Stanton moves up the ladder with 450th career home run",
+      "url": "https://nypost.com/2025/09/20/sports/yankees-giancarlo-stanton-hits-450th-career-mlb-home-run",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-20T23:54:56+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/yankees-giancarlo-stanton-hits-450th-career-mlb-home-run",
+      "canonical_id": "u:32c22d134a858b2c",
+      "cluster_id": "t:a80976195b30",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.5758,
+      "score_components": {
+        "recency": 0.5758
       },
       "effects": {
         "lightsaber": false,
@@ -1542,9 +1925,9 @@
       "cluster_id": "t:c0716f2a07e2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6008,
+      "score": 0.5744,
       "score_components": {
-        "recency": 0.6008
+        "recency": 0.5744
       },
       "effects": {
         "lightsaber": false,
@@ -1565,9 +1948,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.5486,
+      "score": 2.5224,
       "score_components": {
-        "recency": 0.5986,
+        "recency": 0.5724,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -1593,9 +1976,9 @@
       "cluster_id": "t:b6886a2407b2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5958,
+      "score": 0.5697,
       "score_components": {
-        "recency": 0.5958
+        "recency": 0.5697
       },
       "effects": {
         "lightsaber": false,
@@ -1615,9 +1998,9 @@
       "cluster_id": "t:d13ffa590c9c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.593,
+      "score": 0.567,
       "score_components": {
-        "recency": 0.593
+        "recency": 0.567
       },
       "effects": {
         "lightsaber": false,
@@ -1626,21 +2009,20 @@
       }
     },
     {
-      "title": "2025 Blue Jays Postseason Watch: Bracket, tiebreakers and more",
-      "url": "https://www.mlb.com/bluejays/news/mlb-playoff-picture-and-bracket-2025",
-      "source": "Blue Jays News",
-      "published_utc": "2025-09-20T23:44:00+00:00",
+      "title": "Inside-the-park homer sinks Mets as late rally goes all for naught in wild loss in extras to Nationals",
+      "url": "https://nypost.com/2025/09/20/sports/inside-the-park-homer-sinks-mets-as-late-rally-goes-all-for-naught-vs-nationals",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-09-20T23:44:56+00:00",
       "category": "General",
       "region": "World",
-      "canonical_url": "https://www.mlb.com/bluejays/news/mlb-playoff-picture-and-bracket-2025",
-      "canonical_id": "u:2159e0c2493881d9",
-      "cluster_id": "t:3c34a1e63fd0",
+      "canonical_url": "https://nypost.com/2025/09/20/sports/inside-the-park-homer-sinks-mets-as-late-rally-goes-all-for-naught-vs-nationals",
+      "canonical_id": "u:1d28e11145949eb4",
+      "cluster_id": "t:fb93b9d80e00",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5897,
+      "score": 0.5648,
       "score_components": {
-        "recency": 0.5897,
-        "sports.team_match": 1.0
+        "recency": 0.5648
       },
       "effects": {
         "lightsaber": false,
@@ -1660,9 +2042,9 @@
       "cluster_id": "t:0116e26589ba",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5875,
+      "score": 0.5617,
       "score_components": {
-        "recency": 0.5875
+        "recency": 0.5617
       },
       "effects": {
         "lightsaber": false,
@@ -1682,9 +2064,9 @@
       "cluster_id": "t:cc7b4f16b95f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5853,
+      "score": 0.5597,
       "score_components": {
-        "recency": 0.5853
+        "recency": 0.5597
       },
       "effects": {
         "lightsaber": false,
@@ -1704,9 +2086,9 @@
       "cluster_id": "t:61654e2b6d2e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5822,
+      "score": 0.5567,
       "score_components": {
-        "recency": 0.5822
+        "recency": 0.5567
       },
       "effects": {
         "lightsaber": false,
@@ -1726,9 +2108,9 @@
       "cluster_id": "t:d584d56ae013",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5743,
+      "score": 0.5492,
       "score_components": {
-        "recency": 0.5743
+        "recency": 0.5492
       },
       "effects": {
         "lightsaber": false,
@@ -1748,9 +2130,9 @@
       "cluster_id": "t:74bbfad86c27",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.573,
+      "score": 0.5479,
       "score_components": {
-        "recency": 0.573
+        "recency": 0.5479
       },
       "effects": {
         "lightsaber": false,
@@ -1770,9 +2152,9 @@
       "cluster_id": "t:3b91a1495483",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.569,
+      "score": 0.5441,
       "score_components": {
-        "recency": 0.569
+        "recency": 0.5441
       },
       "effects": {
         "lightsaber": false,
@@ -1792,9 +2174,9 @@
       "cluster_id": "t:e144dc8ac525",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7641,
+      "score": 0.7394,
       "score_components": {
-        "recency": 0.5641,
+        "recency": 0.5394,
         "public_safety": 0.2
       },
       "effects": {
@@ -1815,9 +2197,9 @@
       "cluster_id": "t:7fb9569fc26d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5628,
+      "score": 0.5381,
       "score_components": {
-        "recency": 0.5628
+        "recency": 0.5381
       },
       "effects": {
         "lightsaber": false,
@@ -1837,9 +2219,9 @@
       "cluster_id": "t:729d724383e2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7626,
+      "score": 0.738,
       "score_components": {
-        "recency": 0.5626,
+        "recency": 0.538,
         "public_safety": 0.2
       },
       "effects": {
@@ -1860,9 +2242,9 @@
       "cluster_id": "t:fe838613beaa",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5573,
+      "score": 0.5329,
       "score_components": {
-        "recency": 0.5573
+        "recency": 0.5329
       },
       "effects": {
         "lightsaber": false,
@@ -1882,9 +2264,9 @@
       "cluster_id": "t:b8587c1fde05",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5554,
+      "score": 0.531,
       "score_components": {
-        "recency": 0.5554
+        "recency": 0.531
       },
       "effects": {
         "lightsaber": false,
@@ -1904,9 +2286,9 @@
       "cluster_id": "t:90fd359f5cf5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.554,
+      "score": 0.5297,
       "score_components": {
-        "recency": 0.554
+        "recency": 0.5297
       },
       "effects": {
         "lightsaber": false,
@@ -1926,9 +2308,9 @@
       "cluster_id": "t:e98e6aa3b593",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5534,
+      "score": 1.5291,
       "score_components": {
-        "recency": 0.5534,
+        "recency": 0.5291,
         "sports.team_match": 1.0
       },
       "effects": {
@@ -1949,9 +2331,9 @@
       "cluster_id": "t:bf9953673ed0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8014,
+      "score": 0.7773,
       "score_components": {
-        "recency": 0.5514,
+        "recency": 0.5273,
         "category": 0.25
       },
       "effects": {
@@ -1972,9 +2354,9 @@
       "cluster_id": "t:fa27b2153e71",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5478,
+      "score": 0.5238,
       "score_components": {
-        "recency": 0.5478
+        "recency": 0.5238
       },
       "effects": {
         "lightsaber": false,
@@ -1994,9 +2376,9 @@
       "cluster_id": "t:3845e5e74b54",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5449,
+      "score": 0.521,
       "score_components": {
-        "recency": 0.5449
+        "recency": 0.521
       },
       "effects": {
         "lightsaber": false,
@@ -2016,9 +2398,9 @@
       "cluster_id": "t:44ccae76108d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7944,
+      "score": 0.7705,
       "score_components": {
-        "recency": 0.5444,
+        "recency": 0.5205,
         "category": 0.25
       },
       "effects": {
@@ -2039,9 +2421,9 @@
       "cluster_id": "t:5d32b6ffb010",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5439,
+      "score": 0.52,
       "score_components": {
-        "recency": 0.5439
+        "recency": 0.52
       },
       "effects": {
         "lightsaber": false,
@@ -2061,9 +2443,9 @@
       "cluster_id": "t:5e355971e9bf",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7934,
+      "score": 0.7696,
       "score_components": {
-        "recency": 0.5434,
+        "recency": 0.5196,
         "category": 0.25
       },
       "effects": {
@@ -2084,9 +2466,9 @@
       "cluster_id": "t:8ada76746345",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5426,
+      "score": 0.5189,
       "score_components": {
-        "recency": 0.5426
+        "recency": 0.5189
       },
       "effects": {
         "lightsaber": false,
@@ -2106,9 +2488,9 @@
       "cluster_id": "t:3aa9ceec4f2c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7922,
+      "score": 0.7685,
       "score_components": {
-        "recency": 0.5422,
+        "recency": 0.5185,
         "category": 0.25
       },
       "effects": {
@@ -2129,9 +2511,9 @@
       "cluster_id": "t:1149b596c308",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7921,
+      "score": 0.7683,
       "score_components": {
-        "recency": 0.5421,
+        "recency": 0.5183,
         "category": 0.25
       },
       "effects": {
@@ -2153,9 +2535,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Surge: Kalshi Outpaces Polymarket in Prediction Market Volume Amid Surge in U.S. Trading",
-      "score": 0.742,
+      "score": 0.7182,
       "score_components": {
-        "recency": 0.542,
+        "recency": 0.5182,
         "category": 0.2
       },
       "effects": {
@@ -2179,9 +2561,9 @@
       "cluster_id": "t:9dbffa48502a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7919,
+      "score": 0.7682,
       "score_components": {
-        "recency": 0.5419,
+        "recency": 0.5182,
         "category": 0.25
       },
       "effects": {
@@ -2203,9 +2585,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.9418,
+      "score": 1.918,
       "score_components": {
-        "recency": 0.5418,
+        "recency": 0.518,
         "category": 0.2,
         "regional": 1.2
       },
@@ -2230,9 +2612,9 @@
       "cluster_id": "t:5fb55234b300",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5391,
+      "score": 0.5155,
       "score_components": {
-        "recency": 0.5391
+        "recency": 0.5155
       },
       "effects": {
         "lightsaber": false,
@@ -2253,9 +2635,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "GOP lawmaker Bacon slams ‘dumb’ new Hegseth Pentagon press rules",
-      "score": 0.5337,
+      "score": 0.5103,
       "score_components": {
-        "recency": 0.5337
+        "recency": 0.5103
       },
       "effects": {
         "lightsaber": false,
@@ -2279,9 +2661,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.0331,
+      "score": 2.0097,
       "score_components": {
-        "recency": 0.5331,
+        "recency": 0.5097,
         "sports.team_match": 1.0,
         "sports.player_match": 0.5
       },
@@ -2306,9 +2688,9 @@
       "cluster_id": "t:eb3a6fdebaa5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5328,
+      "score": 0.5094,
       "score_components": {
-        "recency": 0.5328
+        "recency": 0.5094
       },
       "effects": {
         "lightsaber": false,
@@ -2328,9 +2710,9 @@
       "cluster_id": "t:5f67a830b6d8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0318,
+      "score": 1.0085,
       "score_components": {
-        "recency": 0.5318,
+        "recency": 0.5085,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -2351,9 +2733,9 @@
       "cluster_id": "t:f853360e2b1c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7306,
+      "score": 0.7074,
       "score_components": {
-        "recency": 0.5306,
+        "recency": 0.5074,
         "public_safety": 0.2
       },
       "effects": {
@@ -2374,9 +2756,9 @@
       "cluster_id": "t:51cba6312845",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5268,
+      "score": 0.5037,
       "score_components": {
-        "recency": 0.5268
+        "recency": 0.5037
       },
       "effects": {
         "lightsaber": false,
@@ -2396,9 +2778,9 @@
       "cluster_id": "t:c9216686619d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5257,
+      "score": 0.5026,
       "score_components": {
-        "recency": 0.5257
+        "recency": 0.5026
       },
       "effects": {
         "lightsaber": false,
@@ -2418,33 +2800,10 @@
       "cluster_id": "t:c294950bba44",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0203,
+      "score": 0.9975,
       "score_components": {
-        "recency": 0.5203,
+        "recency": 0.4975,
         "sports.player_match": 0.5
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Nets superlatives, roster battles and top storylines to watch ahead of training camp",
-      "url": "https://nypost.com/2025/09/20/sports/nets-superlatives-roster-battles-and-top-storylines-to-watch",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T22:38:26+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/nets-superlatives-roster-battles-and-top-storylines-to-watch",
-      "canonical_id": "u:41e9b0b8ffc71054",
-      "cluster_id": "t:856d1a9731c6",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.2197,
-      "score_components": {
-        "recency": 0.5197,
-        "sports.result_win": 0.7
       },
       "effects": {
         "lightsaber": false,
@@ -2464,9 +2823,9 @@
       "cluster_id": "t:5a036d1a322b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0147,
+      "score": 0.9921,
       "score_components": {
-        "recency": 0.5147,
+        "recency": 0.4921,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -2487,9 +2846,9 @@
       "cluster_id": "t:a9b3e185cf31",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7645,
+      "score": 0.7419,
       "score_components": {
-        "recency": 0.5145,
+        "recency": 0.4919,
         "category": 0.25
       },
       "effects": {
@@ -2510,9 +2869,9 @@
       "cluster_id": "t:12929fd6a01a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5137,
+      "score": 0.4912,
       "score_components": {
-        "recency": 0.5137
+        "recency": 0.4912
       },
       "effects": {
         "lightsaber": false,
@@ -2532,9 +2891,9 @@
       "cluster_id": "t:1c7c927413fa",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5136,
+      "score": 0.4911,
       "score_components": {
-        "recency": 0.5136
+        "recency": 0.4911
       },
       "effects": {
         "lightsaber": false,
@@ -2554,9 +2913,9 @@
       "cluster_id": "t:004bed4ad4d0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5113,
+      "score": 0.4889,
       "score_components": {
-        "recency": 0.5113
+        "recency": 0.4889
       },
       "effects": {
         "lightsaber": false,
@@ -2577,9 +2936,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4539,
+      "score": 2.4319,
       "score_components": {
-        "recency": 0.5039,
+        "recency": 0.4819,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -2605,9 +2964,9 @@
       "cluster_id": "t:9b457f303b15",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4975,
+      "score": 0.4757,
       "score_components": {
-        "recency": 0.4975
+        "recency": 0.4757
       },
       "effects": {
         "lightsaber": false,
@@ -2627,9 +2986,9 @@
       "cluster_id": "t:ce120efa7aef",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9934,
+      "score": 0.9717,
       "score_components": {
-        "recency": 0.4934,
+        "recency": 0.4717,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -2650,9 +3009,9 @@
       "cluster_id": "t:4593c60e7caa",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4924,
+      "score": 0.4708,
       "score_components": {
-        "recency": 0.4924
+        "recency": 0.4708
       },
       "effects": {
         "lightsaber": false,
@@ -2672,9 +3031,9 @@
       "cluster_id": "t:32014ba7c2c4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4904,
+      "score": 0.4689,
       "score_components": {
-        "recency": 0.4904
+        "recency": 0.4689
       },
       "effects": {
         "lightsaber": false,
@@ -2694,33 +3053,11 @@
       "cluster_id": "t:097126d6c346",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9389,
+      "score": 0.9175,
       "score_components": {
-        "recency": 0.4889,
+        "recency": 0.4675,
         "category": 0.2,
         "preferred_domain": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Kyler Murray’s thoughtless pit bull picture puts NFL’s indecent garbage at the forefront",
-      "url": "https://nypost.com/2025/09/20/sports/kyler-murrays-pit-bill-picture-latest-example-of-nfls-indecent-garbage",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T22:04:43+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/kyler-murrays-pit-bill-picture-latest-example-of-nfls-indecent-garbage",
-      "canonical_id": "u:de22d83e9b045017",
-      "cluster_id": "t:ccf9e9be7ae5",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4871,
-      "score_components": {
-        "recency": 0.4871
       },
       "effects": {
         "lightsaber": false,
@@ -2740,9 +3077,9 @@
       "cluster_id": "t:69cda3013dd5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4853,
+      "score": 0.464,
       "score_components": {
-        "recency": 0.4853
+        "recency": 0.464
       },
       "effects": {
         "lightsaber": false,
@@ -2762,9 +3099,9 @@
       "cluster_id": "t:5d4238d8dfec",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.985,
+      "score": 0.9638,
       "score_components": {
-        "recency": 0.485,
+        "recency": 0.4638,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -2786,9 +3123,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.9844,
+      "score": 1.9631,
       "score_components": {
-        "recency": 0.4844,
+        "recency": 0.4631,
         "sports.team_match": 1.0,
         "sports.player_match": 0.5
       },
@@ -2813,32 +3150,9 @@
       "cluster_id": "t:893d6ce46691",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4795,
+      "score": 0.4584,
       "score_components": {
-        "recency": 0.4795
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Knicks superlatives, roster battles and top storylines to watch ahead of training camp",
-      "url": "https://nypost.com/2025/09/20/sports/knicks-superlatives-position-battles-and-top-storylines-to-watch",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T21:53:19+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/knicks-superlatives-position-battles-and-top-storylines-to-watch",
-      "canonical_id": "u:7dcee1ff30af48ff",
-      "cluster_id": "t:c58c98473262",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.1765,
-      "score_components": {
-        "recency": 0.4765,
-        "sports.result_win": 0.7
+        "recency": 0.4584
       },
       "effects": {
         "lightsaber": false,
@@ -2859,9 +3173,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Crypto ready for &#039;surge only&#039; mode once US TGA hits $850B target: Arthur Hayes",
-      "score": 0.9247,
+      "score": 0.9039,
       "score_components": {
-        "recency": 0.4747,
+        "recency": 0.4539,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -2886,9 +3200,9 @@
       "cluster_id": "t:b08aeb046318",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9741,
+      "score": 0.9533,
       "score_components": {
-        "recency": 0.4741,
+        "recency": 0.4533,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -2909,9 +3223,9 @@
       "cluster_id": "t:15f5f13f4027",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4687,
+      "score": 0.4481,
       "score_components": {
-        "recency": 0.4687
+        "recency": 0.4481
       },
       "effects": {
         "lightsaber": false,
@@ -2932,9 +3246,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.6166,
+      "score": 2.5961,
       "score_components": {
-        "recency": 0.4666,
+        "recency": 0.4461,
         "category": 0.5,
         "preferred_domain": 0.25,
         "public_safety": 0.2,
@@ -2962,9 +3276,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Trump allies slams Newsom over Noem tweet: ‘This reads like a threat’",
-      "score": 0.4665,
+      "score": 0.446,
       "score_components": {
-        "recency": 0.4665
+        "recency": 0.446
       },
       "effects": {
         "lightsaber": false,
@@ -2987,9 +3301,9 @@
       "cluster_id": "t:e2382e017a40",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4655,
+      "score": 0.4451,
       "score_components": {
-        "recency": 0.4655
+        "recency": 0.4451
       },
       "effects": {
         "lightsaber": false,
@@ -3009,9 +3323,9 @@
       "cluster_id": "t:eb3cde2ce90d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.4139,
+      "score": 1.3935,
       "score_components": {
-        "recency": 0.4639,
+        "recency": 0.4435,
         "category": 0.25,
         "sports.result_win": 0.7
       },
@@ -3033,9 +3347,9 @@
       "cluster_id": "t:7b0735db604c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4608,
+      "score": 0.4406,
       "score_components": {
-        "recency": 0.4608
+        "recency": 0.4406
       },
       "effects": {
         "lightsaber": false,
@@ -3055,9 +3369,9 @@
       "cluster_id": "t:73704135577a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7101,
+      "score": 0.69,
       "score_components": {
-        "recency": 0.4601,
+        "recency": 0.44,
         "category": 0.25
       },
       "effects": {
@@ -3078,9 +3392,9 @@
       "cluster_id": "t:91d2a26ac4cd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9581,
+      "score": 0.9381,
       "score_components": {
-        "recency": 0.4581,
+        "recency": 0.4381,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -3101,9 +3415,9 @@
       "cluster_id": "t:f6f398b5c8a8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4579,
+      "score": 0.4378,
       "score_components": {
-        "recency": 0.4579
+        "recency": 0.4378
       },
       "effects": {
         "lightsaber": false,
@@ -3123,9 +3437,9 @@
       "cluster_id": "t:f5748981aa29",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1515,
+      "score": 1.1317,
       "score_components": {
-        "recency": 0.4515,
+        "recency": 0.4317,
         "sports.result_win": 0.7
       },
       "effects": {
@@ -3146,9 +3460,9 @@
       "cluster_id": "t:ab9c668a12a0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6995,
+      "score": 0.6798,
       "score_components": {
-        "recency": 0.4495,
+        "recency": 0.4298,
         "category": 0.25
       },
       "effects": {
@@ -3169,31 +3483,9 @@
       "cluster_id": "t:b82af2185814",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4484,
+      "score": 0.4288,
       "score_components": {
-        "recency": 0.4484
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Scouts reveal Arch Manning’s NFL outlook as he battles slow Texas start",
-      "url": "https://nypost.com/2025/09/20/sports/scouts-reveal-arch-mannings-nfl-outlook-amid-slow-texas-start",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T21:21:39+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/scouts-reveal-arch-mannings-nfl-outlook-amid-slow-texas-start",
-      "canonical_id": "u:bd610bb15dfa20ff",
-      "cluster_id": "t:e7fbbaded200",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4483,
-      "score_components": {
-        "recency": 0.4483
+        "recency": 0.4288
       },
       "effects": {
         "lightsaber": false,
@@ -3213,9 +3505,9 @@
       "cluster_id": "t:a8051d17518b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4459,
+      "score": 0.4263,
       "score_components": {
-        "recency": 0.4459
+        "recency": 0.4263
       },
       "effects": {
         "lightsaber": false,
@@ -3235,31 +3527,9 @@
       "cluster_id": "t:4f08798b3d9d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4405,
+      "score": 0.4212,
       "score_components": {
-        "recency": 0.4405
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Comedy of errors haunt Mets in ugly inning against Nationals",
-      "url": "https://nypost.com/2025/09/20/sports/comedy-of-errors-haunt-mets-in-ugly-inning-against-nationals",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T21:08:52+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/comedy-of-errors-haunt-mets-in-ugly-inning-against-nationals",
-      "canonical_id": "u:758cca5a6e92f3af",
-      "cluster_id": "t:84f2d80a6337",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4374,
-      "score_components": {
-        "recency": 0.4374
+        "recency": 0.4212
       },
       "effects": {
         "lightsaber": false,
@@ -3279,9 +3549,9 @@
       "cluster_id": "t:9f8ddcefbe4a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6331,
+      "score": 0.6141,
       "score_components": {
-        "recency": 0.4331,
+        "recency": 0.4141,
         "public_safety": 0.2
       },
       "effects": {
@@ -3302,31 +3572,9 @@
       "cluster_id": "t:162286bd03de",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4317,
+      "score": 0.4128,
       "score_components": {
-        "recency": 0.4317
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Robert Redford hit a forever home run with iconic ‘Natural’ role",
-      "url": "https://nypost.com/2025/09/20/sports/robert-redford-hit-a-forever-home-run-with-iconic-natural-role",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T21:01:33+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/robert-redford-hit-a-forever-home-run-with-iconic-natural-role",
-      "canonical_id": "u:7dd571113d974a30",
-      "cluster_id": "t:05d77ce03c1d",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4313,
-      "score_components": {
-        "recency": 0.4313
+        "recency": 0.4128
       },
       "effects": {
         "lightsaber": false,
@@ -3347,9 +3595,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.13,
+      "score": 2.1112,
       "score_components": {
-        "recency": 0.43,
+        "recency": 0.4112,
         "public_safety": 1.2,
         "sports.player_match": 0.5
       },
@@ -3375,9 +3623,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.83,
+      "score": 1.8112,
       "score_components": {
-        "recency": 0.43,
+        "recency": 0.4112,
         "category": 0.2,
         "regional": 1.2
       },
@@ -3403,9 +3651,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Internet Computer Bets Big on AI as Crypto Markets Play Catch-surge",
-      "score": 0.63,
+      "score": 0.6112,
       "score_components": {
-        "recency": 0.43,
+        "recency": 0.4112,
         "category": 0.2
       },
       "effects": {
@@ -3415,28 +3663,6 @@
           "markets_hype"
         ],
         "hype": true
-      }
-    },
-    {
-      "title": "Giants vs. Dodgers prediction: MLB odds, player props, picks Saturday",
-      "url": "https://nypost.com/2025/09/20/betting/giants-vs-dodgers-prediction-mlb-odds-player-props-picks-saturday",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T21:00:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/betting/giants-vs-dodgers-prediction-mlb-odds-player-props-picks-saturday",
-      "canonical_id": "u:cad65b93e588e2af",
-      "cluster_id": "t:6432e2ae3f37",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.43,
-      "score_components": {
-        "recency": 0.43
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       }
     },
     {
@@ -3451,9 +3677,9 @@
       "cluster_id": "t:cfbaee3b3a1a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4295,
+      "score": 0.4107,
       "score_components": {
-        "recency": 0.4295
+        "recency": 0.4107
       },
       "effects": {
         "lightsaber": false,
@@ -3473,9 +3699,9 @@
       "cluster_id": "t:9d43acb5178d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.4291,
+      "score": 1.4103,
       "score_components": {
-        "recency": 0.4291,
+        "recency": 0.4103,
         "public_safety": 1.0
       },
       "effects": {
@@ -3496,9 +3722,9 @@
       "cluster_id": "t:1d5e8d8ec81f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4286,
+      "score": 0.4099,
       "score_components": {
-        "recency": 0.4286
+        "recency": 0.4099
       },
       "effects": {
         "lightsaber": false,
@@ -3518,9 +3744,9 @@
       "cluster_id": "t:87c1bcffa1b3",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4279,
+      "score": 0.4091,
       "score_components": {
-        "recency": 0.4279
+        "recency": 0.4091
       },
       "effects": {
         "lightsaber": false,
@@ -3540,31 +3766,9 @@
       "cluster_id": "t:b635ca095f38",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4274,
+      "score": 0.4087,
       "score_components": {
-        "recency": 0.4274
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Mike Brown enters Knicks camp with three key priorities in Finals-or-bust season",
-      "url": "https://nypost.com/2025/09/20/sports/the-top-priorities-mike-brown-faces-as-he-enters-knicks-camp",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T20:56:42+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/the-top-priorities-mike-brown-faces-as-he-enters-knicks-camp",
-      "canonical_id": "u:830986720be284a7",
-      "cluster_id": "t:329259c26529",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4273,
-      "score_components": {
-        "recency": 0.4273
+        "recency": 0.4087
       },
       "effects": {
         "lightsaber": false,
@@ -3584,31 +3788,9 @@
       "cluster_id": "t:7e7cdac35613",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4272,
+      "score": 0.4085,
       "score_components": {
-        "recency": 0.4272
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Newsom signs package of bills in Los Angeles to restrict immigration raids",
-      "url": "https://www.dailynews.com/2025/09/20/newsom-signs-package-of-bills-in-los-angeles-to-restrict-immigration-raids",
-      "source": "Daily News",
-      "published_utc": "2025-09-20T20:54:40+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.dailynews.com/2025/09/20/newsom-signs-package-of-bills-in-los-angeles-to-restrict-immigration-raids",
-      "canonical_id": "u:dfe27a280e128993",
-      "cluster_id": "t:e62eb5e34b45",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4256,
-      "score_components": {
-        "recency": 0.4256
+        "recency": 0.4085
       },
       "effects": {
         "lightsaber": false,
@@ -3628,9 +3810,9 @@
       "cluster_id": "t:5890741d240d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4239,
+      "score": 0.4053,
       "score_components": {
-        "recency": 0.4239
+        "recency": 0.4053
       },
       "effects": {
         "lightsaber": false,
@@ -3650,31 +3832,9 @@
       "cluster_id": "t:e8312feb7e93",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4236,
+      "score": 0.405,
       "score_components": {
-        "recency": 0.4236
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Giants owe a competitive home opener to their fans in the worst way",
-      "url": "https://nypost.com/2025/09/20/sports/giants-owe-a-competitive-home-opener-to-their-fans-in-the-worst-way",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T20:51:58+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/giants-owe-a-competitive-home-opener-to-their-fans-in-the-worst-way",
-      "canonical_id": "u:4c3728c0718c9408",
-      "cluster_id": "t:c7ab3fa2b613",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4234,
-      "score_components": {
-        "recency": 0.4234
+        "recency": 0.405
       },
       "effects": {
         "lightsaber": false,
@@ -3694,9 +3854,9 @@
       "cluster_id": "t:eefebf87d4f9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4229,
+      "score": 0.4044,
       "score_components": {
-        "recency": 0.4229
+        "recency": 0.4044
       },
       "effects": {
         "lightsaber": false,
@@ -3717,9 +3877,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Mark Ruffalo Says Disney’s Stock Will slide “Further” if ‘Jimmy Kimmel Live!’ Is Canceled: They Do “Not Want to Be the Ones That Broke America”",
-      "score": 0.4199,
+      "score": 0.4015,
       "score_components": {
-        "recency": 0.4199
+        "recency": 0.4015
       },
       "effects": {
         "lightsaber": false,
@@ -3742,9 +3902,9 @@
       "cluster_id": "t:ddb78a3bbe86",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4196,
+      "score": 0.4012,
       "score_components": {
-        "recency": 0.4196
+        "recency": 0.4012
       },
       "effects": {
         "lightsaber": false,
@@ -3764,9 +3924,9 @@
       "cluster_id": "t:a2f9d368e42d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4192,
+      "score": 0.4009,
       "score_components": {
-        "recency": 0.4192
+        "recency": 0.4009
       },
       "effects": {
         "lightsaber": false,
@@ -3786,31 +3946,9 @@
       "cluster_id": "t:af3b8b39aeda",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4173,
+      "score": 0.399,
       "score_components": {
-        "recency": 0.4173
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "The mindset behind Francisco Alvarez’s Mets return — and resurgence",
-      "url": "https://nypost.com/2025/09/20/sports/the-mindset-behind-francisco-alvarezs-mets-return",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T20:42:52+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/the-mindset-behind-francisco-alvarezs-mets-return",
-      "canonical_id": "u:168a22e310613c11",
-      "cluster_id": "t:c260d0ee419c",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.416,
-      "score_components": {
-        "recency": 0.416
+        "recency": 0.399
       },
       "effects": {
         "lightsaber": false,
@@ -3830,9 +3968,9 @@
       "cluster_id": "t:ca6d3aef2146",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6136,
+      "score": 0.5955,
       "score_components": {
-        "recency": 0.4136,
+        "recency": 0.3955,
         "public_safety": 0.2
       },
       "effects": {
@@ -3853,9 +3991,9 @@
       "cluster_id": "t:50941df0d822",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4108,
+      "score": 0.3928,
       "score_components": {
-        "recency": 0.4108
+        "recency": 0.3928
       },
       "effects": {
         "lightsaber": false,
@@ -3875,9 +4013,9 @@
       "cluster_id": "t:7a529eaec0e9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4086,
+      "score": 0.3907,
       "score_components": {
-        "recency": 0.4086
+        "recency": 0.3907
       },
       "effects": {
         "lightsaber": false,
@@ -3897,9 +4035,9 @@
       "cluster_id": "t:a0cc33257b59",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4085,
+      "score": 0.3907,
       "score_components": {
-        "recency": 0.4085
+        "recency": 0.3907
       },
       "effects": {
         "lightsaber": false,
@@ -3919,9 +4057,9 @@
       "cluster_id": "t:ff8639d70c2d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4079,
+      "score": 0.3901,
       "score_components": {
-        "recency": 0.4079
+        "recency": 0.3901
       },
       "effects": {
         "lightsaber": false,
@@ -3941,9 +4079,9 @@
       "cluster_id": "t:2f23a00363b4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4048,
+      "score": 0.3871,
       "score_components": {
-        "recency": 0.4048
+        "recency": 0.3871
       },
       "effects": {
         "lightsaber": false,
@@ -3963,9 +4101,9 @@
       "cluster_id": "t:1f5896dadf5c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3987,
+      "score": 0.3812,
       "score_components": {
-        "recency": 0.3987
+        "recency": 0.3812
       },
       "effects": {
         "lightsaber": false,
@@ -3985,9 +4123,9 @@
       "cluster_id": "t:0e5b53d2e679",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6485,
+      "score": 0.631,
       "score_components": {
-        "recency": 0.3985,
+        "recency": 0.381,
         "category": 0.25
       },
       "effects": {
@@ -4008,9 +4146,9 @@
       "cluster_id": "t:5bf6396e966c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5951,
+      "score": 0.5778,
       "score_components": {
-        "recency": 0.3951,
+        "recency": 0.3778,
         "category": 0.2
       },
       "effects": {
@@ -4031,9 +4169,9 @@
       "cluster_id": "t:094dcecdb09f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3933,
+      "score": 0.3761,
       "score_components": {
-        "recency": 0.3933
+        "recency": 0.3761
       },
       "effects": {
         "lightsaber": false,
@@ -4054,9 +4192,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Mark Ruffalo Warns Disney’s Stock Price Will slide “A Lot Further” If ABC Cancels ‘Jimmy Kimmel Live’",
-      "score": 0.6432,
+      "score": 0.626,
       "score_components": {
-        "recency": 0.3932,
+        "recency": 0.376,
         "category": 0.25
       },
       "effects": {
@@ -4080,9 +4218,9 @@
       "cluster_id": "t:8d00766b4663",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3927,
+      "score": 0.3755,
       "score_components": {
-        "recency": 0.3927
+        "recency": 0.3755
       },
       "effects": {
         "lightsaber": false,
@@ -4102,9 +4240,9 @@
       "cluster_id": "t:4f525af8ab17",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0912,
+      "score": 1.0741,
       "score_components": {
-        "recency": 0.3912,
+        "recency": 0.3741,
         "sports.result_win": 0.7
       },
       "effects": {
@@ -4125,9 +4263,9 @@
       "cluster_id": "t:0058630739c0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3887,
+      "score": 0.3717,
       "score_components": {
-        "recency": 0.3887
+        "recency": 0.3717
       },
       "effects": {
         "lightsaber": false,
@@ -4147,9 +4285,9 @@
       "cluster_id": "t:59adf3f1b8ef",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3873,
+      "score": 0.3704,
       "score_components": {
-        "recency": 0.3873
+        "recency": 0.3704
       },
       "effects": {
         "lightsaber": false,
@@ -4169,9 +4307,9 @@
       "cluster_id": "t:004e8adc2c3a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8371,
+      "score": 0.8201,
       "score_components": {
-        "recency": 0.3871,
+        "recency": 0.3701,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -4193,32 +4331,10 @@
       "cluster_id": "t:75f6762d7c83",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5846,
+      "score": 0.5677,
       "score_components": {
-        "recency": 0.3846,
+        "recency": 0.3677,
         "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "SMU, TCU honor 9-year-old Texas flash flood victim whose parents are alums of the schools",
-      "url": "https://nypost.com/2025/09/20/sports/smu-and-tcu-honor-9-year-old-texas-flash-flood-victim-whose-parents-are-alums-of-the-schools-2",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T20:01:44+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/smu-and-tcu-honor-9-year-old-texas-flash-flood-victim-whose-parents-are-alums-of-the-schools-2",
-      "canonical_id": "u:e1d3d738912cf89f",
-      "cluster_id": "t:9de78b6351f8",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.3844,
-      "score_components": {
-        "recency": 0.3844
       },
       "effects": {
         "lightsaber": false,
@@ -4238,9 +4354,9 @@
       "cluster_id": "t:65ea3d5c0897",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5838,
+      "score": 0.567,
       "score_components": {
-        "recency": 0.3838,
+        "recency": 0.367,
         "category": 0.2
       },
       "effects": {
@@ -4262,9 +4378,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1835,
+      "score": 2.1667,
       "score_components": {
-        "recency": 0.3835,
+        "recency": 0.3667,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4289,9 +4405,9 @@
       "cluster_id": "t:7bb2ba37eadf",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3822,
+      "score": 0.3654,
       "score_components": {
-        "recency": 0.3822
+        "recency": 0.3654
       },
       "effects": {
         "lightsaber": false,
@@ -4311,9 +4427,9 @@
       "cluster_id": "t:b4db8dbe2a9c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3819,
+      "score": 0.3651,
       "score_components": {
-        "recency": 0.3819
+        "recency": 0.3651
       },
       "effects": {
         "lightsaber": false,
@@ -4333,9 +4449,9 @@
       "cluster_id": "t:76190f321eeb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3801,
+      "score": 0.3634,
       "score_components": {
-        "recency": 0.3801
+        "recency": 0.3634
       },
       "effects": {
         "lightsaber": false,
@@ -4355,9 +4471,9 @@
       "cluster_id": "t:f89f7239bbff",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3798,
+      "score": 0.3632,
       "score_components": {
-        "recency": 0.3798
+        "recency": 0.3632
       },
       "effects": {
         "lightsaber": false,
@@ -4377,9 +4493,9 @@
       "cluster_id": "t:95874618e190",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8785,
+      "score": 0.8619,
       "score_components": {
-        "recency": 0.3785,
+        "recency": 0.3619,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -4400,32 +4516,10 @@
       "cluster_id": "t:7d8dec1ea545",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6281,
+      "score": 0.6115,
       "score_components": {
-        "recency": 0.3781,
+        "recency": 0.3615,
         "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "How Saquon Barkley views ex-Giants QB Daniel Jones’ career rebirth with Colts",
-      "url": "https://nypost.com/2025/09/20/sports/how-saquon-barkley-views-daniel-jones-rebirth-after-leaving-giants",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T19:48:58+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/how-saquon-barkley-views-daniel-jones-rebirth-after-leaving-giants",
-      "canonical_id": "u:b360e5a7c95a5787",
-      "cluster_id": "t:6817850d2562",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.375,
-      "score_components": {
-        "recency": 0.375
       },
       "effects": {
         "lightsaber": false,
@@ -4445,31 +4539,9 @@
       "cluster_id": "t:74f4b7b3fafe",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3733,
+      "score": 0.357,
       "score_components": {
-        "recency": 0.3733
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Paul Skenes warns 2025 is ‘wasted year’ for Pirates — if they don’t learn key lesson",
-      "url": "https://nypost.com/2025/09/20/sports/paul-skenes-warns-2025-is-wasted-year-for-pirates-if-they-dont-learn",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T19:41:14+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/paul-skenes-warns-2025-is-wasted-year-for-pirates-if-they-dont-learn",
-      "canonical_id": "u:9c1ab2be26b5fa36",
-      "cluster_id": "t:f209d96085e8",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.3695,
-      "score_components": {
-        "recency": 0.3695
+        "recency": 0.357
       },
       "effects": {
         "lightsaber": false,
@@ -4490,9 +4562,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4518,9 +4590,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4546,9 +4618,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4574,9 +4646,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4602,9 +4674,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4630,9 +4702,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4658,9 +4730,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4686,9 +4758,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4714,9 +4786,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4742,9 +4814,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4770,9 +4842,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4798,9 +4870,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1686,
+      "score": 2.1525,
       "score_components": {
-        "recency": 0.3686,
+        "recency": 0.3525,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4825,9 +4897,9 @@
       "cluster_id": "t:e927fbef64a1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3632,
+      "score": 0.3473,
       "score_components": {
-        "recency": 0.3632
+        "recency": 0.3473
       },
       "effects": {
         "lightsaber": false,
@@ -4847,9 +4919,9 @@
       "cluster_id": "t:341efea4ff78",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8623,
+      "score": 0.8465,
       "score_components": {
-        "recency": 0.3623,
+        "recency": 0.3465,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -4870,9 +4942,9 @@
       "cluster_id": "t:7a1b99054c4d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6118,
+      "score": 0.5959,
       "score_components": {
-        "recency": 0.3618,
+        "recency": 0.3459,
         "category": 0.25
       },
       "effects": {
@@ -4893,9 +4965,9 @@
       "cluster_id": "t:87e1c7b98a3f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3618,
+      "score": 0.3459,
       "score_components": {
-        "recency": 0.3618
+        "recency": 0.3459
       },
       "effects": {
         "lightsaber": false,
@@ -4915,31 +4987,9 @@
       "cluster_id": "t:dc8f064f6c9c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3617,
+      "score": 0.3458,
       "score_components": {
-        "recency": 0.3617
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "How to watch Washington vs. Washington State in the Apple Cup for free",
-      "url": "https://nypost.com/2025/09/20/sports/how-to-watch-washington-vs-washington-state-live-for-free",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-09-20T19:30:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/09/20/sports/how-to-watch-washington-vs-washington-state-live-for-free",
-      "canonical_id": "u:871386086a318851",
-      "cluster_id": "t:c6ef378ba05b",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.3616,
-      "score_components": {
-        "recency": 0.3616
+        "recency": 0.3458
       },
       "effects": {
         "lightsaber": false,
@@ -4960,9 +5010,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1594,
+      "score": 2.1437,
       "score_components": {
-        "recency": 0.3594,
+        "recency": 0.3437,
         "category": 0.6,
         "regional": 1.2
       },
@@ -4987,9 +5037,9 @@
       "cluster_id": "t:53375734cf28",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8543,
+      "score": 0.8388,
       "score_components": {
-        "recency": 0.3543,
+        "recency": 0.3388,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -5010,9 +5060,9 @@
       "cluster_id": "t:b8758ff54412",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6042,
+      "score": 0.5887,
       "score_components": {
-        "recency": 0.3542,
+        "recency": 0.3387,
         "category": 0.25
       },
       "effects": {
@@ -5033,9 +5083,9 @@
       "cluster_id": "t:99c2163d4cf7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6028,
+      "score": 0.5873,
       "score_components": {
-        "recency": 0.3528,
+        "recency": 0.3373,
         "category": 0.25
       },
       "effects": {
@@ -5056,9 +5106,9 @@
       "cluster_id": "t:7f45dc2c6435",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6008,
+      "score": 0.5855,
       "score_components": {
-        "recency": 0.3508,
+        "recency": 0.3355,
         "category": 0.25
       },
       "effects": {
@@ -5079,9 +5129,9 @@
       "cluster_id": "t:bb8a42e0264d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3498,
+      "score": 0.3344,
       "score_components": {
-        "recency": 0.3498
+        "recency": 0.3344
       },
       "effects": {
         "lightsaber": false,
@@ -5101,9 +5151,9 @@
       "cluster_id": "t:8a8b1183f227",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3474,
+      "score": 0.3322,
       "score_components": {
-        "recency": 0.3474
+        "recency": 0.3322
       },
       "effects": {
         "lightsaber": false,
@@ -5123,9 +5173,9 @@
       "cluster_id": "t:4ff5eaa3075e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3469,
+      "score": 0.3317,
       "score_components": {
-        "recency": 0.3469
+        "recency": 0.3317
       },
       "effects": {
         "lightsaber": false,
@@ -5145,9 +5195,9 @@
       "cluster_id": "t:5b097e167eee",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5959,
+      "score": 0.5808,
       "score_components": {
-        "recency": 0.3459,
+        "recency": 0.3308,
         "category": 0.25
       },
       "effects": {
@@ -5168,9 +5218,9 @@
       "cluster_id": "t:8b4d658baa6f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8435,
+      "score": 0.8284,
       "score_components": {
-        "recency": 0.3435,
+        "recency": 0.3284,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -5191,9 +5241,9 @@
       "cluster_id": "t:9b81b11963d1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0434,
+      "score": 1.0284,
       "score_components": {
-        "recency": 0.3434,
+        "recency": 0.3284,
         "sports.result_win": 0.7
       },
       "effects": {
@@ -5214,9 +5264,9 @@
       "cluster_id": "t:149005b02d8c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3419,
+      "score": 0.3269,
       "score_components": {
-        "recency": 0.3419
+        "recency": 0.3269
       },
       "effects": {
         "lightsaber": false,
@@ -5236,9 +5286,9 @@
       "cluster_id": "t:2dc109d01f6a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5414,
+      "score": 0.5264,
       "score_components": {
-        "recency": 0.3414,
+        "recency": 0.3264,
         "category": 0.2
       },
       "effects": {
@@ -5259,9 +5309,9 @@
       "cluster_id": "t:561d466dcd85",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6909,
+      "score": 1.676,
       "score_components": {
-        "recency": 0.3409,
+        "recency": 0.326,
         "category": 0.15,
         "regional": 1.2
       },
@@ -5283,9 +5333,9 @@
       "cluster_id": "t:84808180d72b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3407,
+      "score": 0.3258,
       "score_components": {
-        "recency": 0.3407
+        "recency": 0.3258
       },
       "effects": {
         "lightsaber": false,
@@ -5305,9 +5355,9 @@
       "cluster_id": "t:19a74a5e01f0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.338,
+      "score": 0.3232,
       "score_components": {
-        "recency": 0.338
+        "recency": 0.3232
       },
       "effects": {
         "lightsaber": false,
@@ -5327,9 +5377,9 @@
       "cluster_id": "t:08baa48d841a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5354,
+      "score": 0.5207,
       "score_components": {
-        "recency": 0.3354,
+        "recency": 0.3207,
         "category": 0.2
       },
       "effects": {
@@ -5350,9 +5400,9 @@
       "cluster_id": "t:7aaf9c24f607",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5303,
+      "score": 1.5158,
       "score_components": {
-        "recency": 0.3303,
+        "recency": 0.3158,
         "category": 0.2,
         "public_safety": 1.0
       },
@@ -5374,9 +5424,9 @@
       "cluster_id": "t:2d5e8212743e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8269,
+      "score": 0.8126,
       "score_components": {
-        "recency": 0.3269,
+        "recency": 0.3126,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -5397,9 +5447,9 @@
       "cluster_id": "t:e49e280f92f8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3259,
+      "score": 0.3117,
       "score_components": {
-        "recency": 0.3259
+        "recency": 0.3117
       },
       "effects": {
         "lightsaber": false,
@@ -5419,9 +5469,9 @@
       "cluster_id": "t:094bc698583e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3254,
+      "score": 0.3111,
       "score_components": {
-        "recency": 0.3254
+        "recency": 0.3111
       },
       "effects": {
         "lightsaber": false,
@@ -5441,9 +5491,9 @@
       "cluster_id": "t:729bfdb0b12e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3235,
+      "score": 0.3093,
       "score_components": {
-        "recency": 0.3235
+        "recency": 0.3093
       },
       "effects": {
         "lightsaber": false,
@@ -5463,9 +5513,32 @@
       "cluster_id": "t:03060c124a4d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3231,
+      "score": 0.309,
       "score_components": {
-        "recency": 0.3231
+        "recency": 0.309
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "KAWS Joins Forces With AllRightsReserved for World's First and Largest Water Parade",
+      "url": "https://hypebeast.com/2025/9/kaws-allrightsreserved-worlds-first-largest-water-parade-labubu-doraemon-mcdonalds-grimace-netflix-squid-game-snoopy-sesame-street-announcement",
+      "source": "Hypebeast",
+      "published_utc": "2025-09-20T18:27:15+00:00",
+      "category": "Culture",
+      "region": "World",
+      "canonical_url": "https://hypebeast.com/2025/9/kaws-allrightsreserved-worlds-first-largest-water-parade-labubu-doraemon-mcdonalds-grimace-netflix-squid-game-snoopy-sesame-street-announcement",
+      "canonical_id": "u:20e9ab6ef3826a22",
+      "cluster_id": "t:088013b31961",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.5564,
+      "score_components": {
+        "recency": 0.3064,
+        "category": 0.25
       },
       "effects": {
         "lightsaber": false,
@@ -5485,9 +5558,9 @@
       "cluster_id": "t:6e12ac7255bd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5197,
+      "score": 0.5057,
       "score_components": {
-        "recency": 0.3197,
+        "recency": 0.3057,
         "category": 0.2
       },
       "effects": {
@@ -5508,9 +5581,9 @@
       "cluster_id": "t:06ae8bc45ff7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3194,
+      "score": 0.3054,
       "score_components": {
-        "recency": 0.3194
+        "recency": 0.3054
       },
       "effects": {
         "lightsaber": false,
@@ -5530,9 +5603,9 @@
       "cluster_id": "t:fb092302359d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5166,
+      "score": 0.5027,
       "score_components": {
-        "recency": 0.3166,
+        "recency": 0.3027,
         "category": 0.2
       },
       "effects": {
@@ -5553,9 +5626,9 @@
       "cluster_id": "t:044f43ff24c1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5627,
+      "score": 0.549,
       "score_components": {
-        "recency": 0.3127,
+        "recency": 0.299,
         "category": 0.25
       },
       "effects": {
@@ -5576,9 +5649,9 @@
       "cluster_id": "t:0d4b95afc8db",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3097,
+      "score": 0.2961,
       "score_components": {
-        "recency": 0.3097
+        "recency": 0.2961
       },
       "effects": {
         "lightsaber": false,
@@ -5598,9 +5671,9 @@
       "cluster_id": "t:405c93a8fafb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3068,
+      "score": 0.2934,
       "score_components": {
-        "recency": 0.3068
+        "recency": 0.2934
       },
       "effects": {
         "lightsaber": false,
@@ -5620,9 +5693,9 @@
       "cluster_id": "t:4b9a7019924e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3056,
+      "score": 0.2922,
       "score_components": {
-        "recency": 0.3056
+        "recency": 0.2922
       },
       "effects": {
         "lightsaber": false,
@@ -5642,9 +5715,9 @@
       "cluster_id": "t:deb2e03db56d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.804,
+      "score": 0.7907,
       "score_components": {
-        "recency": 0.304,
+        "recency": 0.2907,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -5665,9 +5738,9 @@
       "cluster_id": "t:9266f4e1745b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.304,
+      "score": 0.2907,
       "score_components": {
-        "recency": 0.304
+        "recency": 0.2907
       },
       "effects": {
         "lightsaber": false,
@@ -5687,9 +5760,9 @@
       "cluster_id": "t:42b5826a91a6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5523,
+      "score": 0.5391,
       "score_components": {
-        "recency": 0.3023,
+        "recency": 0.2891,
         "category": 0.25
       },
       "effects": {
@@ -5710,9 +5783,9 @@
       "cluster_id": "t:5c1a51f708ff",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5522,
+      "score": 0.539,
       "score_components": {
-        "recency": 0.3022,
+        "recency": 0.289,
         "category": 0.25
       },
       "effects": {
@@ -5733,9 +5806,9 @@
       "cluster_id": "t:06b2b976a979",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5011,
+      "score": 0.4879,
       "score_components": {
-        "recency": 0.3011,
+        "recency": 0.2879,
         "category": 0.2
       },
       "effects": {
@@ -5756,9 +5829,9 @@
       "cluster_id": "t:adedf4cf26fc",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.551,
+      "score": 0.5378,
       "score_components": {
-        "recency": 0.301,
+        "recency": 0.2878,
         "category": 0.25
       },
       "effects": {
@@ -5779,9 +5852,9 @@
       "cluster_id": "t:8900af6736c4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5497,
+      "score": 0.5365,
       "score_components": {
-        "recency": 0.2997,
+        "recency": 0.2865,
         "category": 0.25
       },
       "effects": {
@@ -5802,9 +5875,9 @@
       "cluster_id": "t:cd937d5e7c91",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5484,
+      "score": 0.5354,
       "score_components": {
-        "recency": 0.2984,
+        "recency": 0.2854,
         "category": 0.25
       },
       "effects": {
@@ -5825,9 +5898,9 @@
       "cluster_id": "t:70bd00c4c7dc",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5472,
+      "score": 0.5342,
       "score_components": {
-        "recency": 0.2972,
+        "recency": 0.2842,
         "category": 0.25
       },
       "effects": {
@@ -5848,9 +5921,9 @@
       "cluster_id": "t:0ae307f81371",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2954,
+      "score": 0.2825,
       "score_components": {
-        "recency": 0.2954
+        "recency": 0.2825
       },
       "effects": {
         "lightsaber": false,
@@ -5870,9 +5943,9 @@
       "cluster_id": "t:c1b48814d181",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5451,
+      "score": 0.5321,
       "score_components": {
-        "recency": 0.2951,
+        "recency": 0.2821,
         "category": 0.25
       },
       "effects": {
@@ -5893,9 +5966,9 @@
       "cluster_id": "t:6b5bc9ce9e49",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2937,
+      "score": 0.2809,
       "score_components": {
-        "recency": 0.2937
+        "recency": 0.2809
       },
       "effects": {
         "lightsaber": false,
@@ -5915,9 +5988,9 @@
       "cluster_id": "t:4030c6286ad5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2936,
+      "score": 0.2807,
       "score_components": {
-        "recency": 0.2936
+        "recency": 0.2807
       },
       "effects": {
         "lightsaber": false,
@@ -5937,9 +6010,9 @@
       "cluster_id": "t:bdc333bb5008",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2926,
+      "score": 0.2798,
       "score_components": {
-        "recency": 0.2926
+        "recency": 0.2798
       },
       "effects": {
         "lightsaber": false,
@@ -5959,9 +6032,9 @@
       "cluster_id": "t:ae9afadbef70",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2908,
+      "score": 0.278,
       "score_components": {
-        "recency": 0.2908
+        "recency": 0.278
       },
       "effects": {
         "lightsaber": false,
@@ -5981,9 +6054,9 @@
       "cluster_id": "t:d8fcc76a1681",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5398,
+      "score": 0.5271,
       "score_components": {
-        "recency": 0.2898,
+        "recency": 0.2771,
         "category": 0.25
       },
       "effects": {
@@ -6004,9 +6077,9 @@
       "cluster_id": "t:af5c2e998467",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5386,
+      "score": 0.526,
       "score_components": {
-        "recency": 0.2886,
+        "recency": 0.276,
         "category": 0.25
       },
       "effects": {
@@ -6028,9 +6101,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Report: Nationals Ownership slams As “Inefficient” And “Directionless”",
-      "score": 0.2873,
+      "score": 0.2747,
       "score_components": {
-        "recency": 0.2873
+        "recency": 0.2747
       },
       "effects": {
         "lightsaber": false,
@@ -6053,9 +6126,9 @@
       "cluster_id": "t:ad4ba39e88e2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2831,
+      "score": 0.2707,
       "score_components": {
-        "recency": 0.2831
+        "recency": 0.2707
       },
       "effects": {
         "lightsaber": false,
@@ -6075,9 +6148,9 @@
       "cluster_id": "t:68008a691ab9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5321,
+      "score": 0.5197,
       "score_components": {
-        "recency": 0.2821,
+        "recency": 0.2697,
         "category": 0.25
       },
       "effects": {
@@ -6098,9 +6171,9 @@
       "cluster_id": "t:ada7dd2772de",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4783,
+      "score": 0.4661,
       "score_components": {
-        "recency": 0.2783,
+        "recency": 0.2661,
         "category": 0.2
       },
       "effects": {
@@ -6121,9 +6194,9 @@
       "cluster_id": "t:e74c3261bf0b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2781,
+      "score": 0.2659,
       "score_components": {
-        "recency": 0.2781
+        "recency": 0.2659
       },
       "effects": {
         "lightsaber": false,
@@ -6143,9 +6216,9 @@
       "cluster_id": "t:8a027e7619c5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2777,
+      "score": 0.2656,
       "score_components": {
-        "recency": 0.2777
+        "recency": 0.2656
       },
       "effects": {
         "lightsaber": false,
@@ -6165,9 +6238,9 @@
       "cluster_id": "t:e066a3e5a36f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7244,
+      "score": 0.7124,
       "score_components": {
-        "recency": 0.2744,
+        "recency": 0.2624,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -6189,9 +6262,9 @@
       "cluster_id": "t:ef8af981488e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5217,
+      "score": 1.5098,
       "score_components": {
-        "recency": 0.2717,
+        "recency": 0.2598,
         "category": 0.25,
         "public_safety": 1.0
       },
@@ -6213,9 +6286,9 @@
       "cluster_id": "t:aca3f654d90e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5216,
+      "score": 0.5097,
       "score_components": {
-        "recency": 0.2716,
+        "recency": 0.2597,
         "category": 0.25
       },
       "effects": {
@@ -6236,9 +6309,9 @@
       "cluster_id": "t:37df998e9765",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2713,
+      "score": 0.2594,
       "score_components": {
-        "recency": 0.2713
+        "recency": 0.2594
       },
       "effects": {
         "lightsaber": false,
@@ -6258,9 +6331,9 @@
       "cluster_id": "t:e155dc3ae04c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.27,
+      "score": 0.2582,
       "score_components": {
-        "recency": 0.27
+        "recency": 0.2582
       },
       "effects": {
         "lightsaber": false,
@@ -6280,9 +6353,9 @@
       "cluster_id": "t:6dc44b4d777e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4678,
+      "score": 0.456,
       "score_components": {
-        "recency": 0.2678,
+        "recency": 0.256,
         "category": 0.2
       },
       "effects": {
@@ -6303,9 +6376,9 @@
       "cluster_id": "t:a9d733061a77",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2659,
+      "score": 0.2543,
       "score_components": {
-        "recency": 0.2659
+        "recency": 0.2543
       },
       "effects": {
         "lightsaber": false,
@@ -6325,9 +6398,9 @@
       "cluster_id": "t:f885a19a4fe6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5133,
+      "score": 0.5017,
       "score_components": {
-        "recency": 0.2633,
+        "recency": 0.2517,
         "category": 0.25
       },
       "effects": {
@@ -6348,9 +6421,9 @@
       "cluster_id": "t:d010c51118ab",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2632,
+      "score": 0.2517,
       "score_components": {
-        "recency": 0.2632
+        "recency": 0.2517
       },
       "effects": {
         "lightsaber": false,
@@ -6370,9 +6443,9 @@
       "cluster_id": "t:e9e5e842212c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2632,
+      "score": 0.2516,
       "score_components": {
-        "recency": 0.2632
+        "recency": 0.2516
       },
       "effects": {
         "lightsaber": false,
@@ -6392,9 +6465,9 @@
       "cluster_id": "t:2630e7df1303",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.762,
+      "score": 0.7505,
       "score_components": {
-        "recency": 0.262,
+        "recency": 0.2505,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -6415,9 +6488,9 @@
       "cluster_id": "t:e96a7c9e5d48",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2606,
+      "score": 0.2492,
       "score_components": {
-        "recency": 0.2606
+        "recency": 0.2492
       },
       "effects": {
         "lightsaber": false,
@@ -6437,9 +6510,9 @@
       "cluster_id": "t:28a4dd787f68",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2565,
+      "score": 0.2453,
       "score_components": {
-        "recency": 0.2565
+        "recency": 0.2453
       },
       "effects": {
         "lightsaber": false,
@@ -6459,9 +6532,9 @@
       "cluster_id": "t:2dfa6ae4cda6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2437,
+      "score": 0.233,
       "score_components": {
-        "recency": 0.2437
+        "recency": 0.233
       },
       "effects": {
         "lightsaber": false,
@@ -6481,32 +6554,9 @@
       "cluster_id": "t:63cfcb3a07b0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2413,
+      "score": 0.2308,
       "score_components": {
-        "recency": 0.2413
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Is the Grateful Dead’s Vegetarian Cookbook Any Good? We Found Out",
-      "url": "https://www.rollingstone.com/music/music-features/grateful-dead-in-the-kitchen-cookbook-recipes-1235431627",
-      "source": "Rolling Stone",
-      "published_utc": "2025-09-20T16:00:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.rollingstone.com/music/music-features/grateful-dead-in-the-kitchen-cookbook-recipes-1235431627",
-      "canonical_id": "u:c4e36802e30c9d50",
-      "cluster_id": "t:11efbbb59670",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.2413,
-      "score_components": {
-        "recency": 0.2413,
-        "public_safety": 1.0
+        "recency": 0.2308
       },
       "effects": {
         "lightsaber": false,
@@ -6526,9 +6576,9 @@
       "cluster_id": "t:210ce204440f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7408,
+      "score": 0.7302,
       "score_components": {
-        "recency": 0.2408,
+        "recency": 0.2302,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -6549,9 +6599,9 @@
       "cluster_id": "t:82e02f088b50",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2382,
+      "score": 0.2278,
       "score_components": {
-        "recency": 0.2382
+        "recency": 0.2278
       },
       "effects": {
         "lightsaber": false,
@@ -6571,9 +6621,9 @@
       "cluster_id": "t:33ae00a93f75",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2362,
+      "score": 0.2259,
       "score_components": {
-        "recency": 0.2362
+        "recency": 0.2259
       },
       "effects": {
         "lightsaber": false,
@@ -6593,9 +6643,9 @@
       "cluster_id": "t:48ccf3e00c18",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7257,
+      "score": 0.7158,
       "score_components": {
-        "recency": 0.2257,
+        "recency": 0.2158,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -6617,9 +6667,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Nick Castellanos slams “Questionable” Communication With Rob Thomson",
-      "score": 0.2254,
+      "score": 0.2155,
       "score_components": {
-        "recency": 0.2254
+        "recency": 0.2155
       },
       "effects": {
         "lightsaber": false,
@@ -6642,9 +6692,9 @@
       "cluster_id": "t:bdc9a51aa26d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5698,
+      "score": 1.5602,
       "score_components": {
-        "recency": 0.2198,
+        "recency": 0.2102,
         "category": 0.15,
         "regional": 1.2
       },
@@ -6667,9 +6717,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Oscar Ouyang: ‘I didn’t get warns how tough the fashion industry is’",
-      "score": 0.4692,
+      "score": 0.4596,
       "score_components": {
-        "recency": 0.2192,
+        "recency": 0.2096,
         "category": 0.25
       },
       "effects": {
@@ -6693,9 +6743,9 @@
       "cluster_id": "t:c023228d2040",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.217,
+      "score": 0.2075,
       "score_components": {
-        "recency": 0.217
+        "recency": 0.2075
       },
       "effects": {
         "lightsaber": false,
@@ -6715,9 +6765,9 @@
       "cluster_id": "t:61119e28e037",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2134,
+      "score": 0.2041,
       "score_components": {
-        "recency": 0.2134
+        "recency": 0.2041
       },
       "effects": {
         "lightsaber": false,
@@ -6737,9 +6787,9 @@
       "cluster_id": "t:eea5ba7f893b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2133,
+      "score": 0.2039,
       "score_components": {
-        "recency": 0.2133
+        "recency": 0.2039
       },
       "effects": {
         "lightsaber": false,
@@ -6759,9 +6809,9 @@
       "cluster_id": "t:5d581598c9a1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2101,
+      "score": 0.2009,
       "score_components": {
-        "recency": 0.2101
+        "recency": 0.2009
       },
       "effects": {
         "lightsaber": false,
@@ -6783,9 +6833,9 @@
       "cluster_latest": true,
       "display_title": "Kevin Durant Recovers Bitcoin Bought at $650, Now surge Over 17,700%, After Nearly a Decade",
       "lightsaber": true,
-      "score": 2.0096,
+      "score": 2.0004,
       "score_components": {
-        "recency": 0.2096,
+        "recency": 0.2004,
         "category": 0.2,
         "btc_trigger": 1.6
       },
@@ -6812,9 +6862,9 @@
       "cluster_id": "t:1af846de598e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2075,
+      "score": 0.1985,
       "score_components": {
-        "recency": 0.2075
+        "recency": 0.1985
       },
       "effects": {
         "lightsaber": false,
@@ -6834,9 +6884,9 @@
       "cluster_id": "t:e30a826b1ff9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2073,
+      "score": 0.1982,
       "score_components": {
-        "recency": 0.2073
+        "recency": 0.1982
       },
       "effects": {
         "lightsaber": false,
@@ -6856,9 +6906,9 @@
       "cluster_id": "t:364911ef4240",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2067,
+      "score": 0.1976,
       "score_components": {
-        "recency": 0.2067
+        "recency": 0.1976
       },
       "effects": {
         "lightsaber": false,
@@ -6878,9 +6928,9 @@
       "cluster_id": "t:207526228775",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.205,
+      "score": 0.196,
       "score_components": {
-        "recency": 0.205
+        "recency": 0.196
       },
       "effects": {
         "lightsaber": false,
@@ -6900,9 +6950,9 @@
       "cluster_id": "t:44d5b2169c3f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.2034,
+      "score": 0.1945,
       "score_components": {
-        "recency": 0.2034
+        "recency": 0.1945
       },
       "effects": {
         "lightsaber": false,
@@ -6922,9 +6972,9 @@
       "cluster_id": "t:9c283b299e48",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5499,
+      "score": 1.5411,
       "score_components": {
-        "recency": 0.1999,
+        "recency": 0.1911,
         "category": 0.15,
         "regional": 1.2
       },
@@ -6946,9 +6996,9 @@
       "cluster_id": "t:7f0b54673291",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6996,
+      "score": 0.6909,
       "score_components": {
-        "recency": 0.1996,
+        "recency": 0.1909,
         "sports.player_match": 0.5
       },
       "effects": {
@@ -6970,9 +7020,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.8994,
+      "score": 1.8907,
       "score_components": {
-        "recency": 0.1994,
+        "recency": 0.1907,
         "public_safety": 1.2,
         "sports.player_match": 0.5
       },
@@ -6997,9 +7047,9 @@
       "cluster_id": "t:69ab1a4d8fec",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1956,
+      "score": 0.1871,
       "score_components": {
-        "recency": 0.1956
+        "recency": 0.1871
       },
       "effects": {
         "lightsaber": false,
@@ -7020,9 +7070,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Supreme Court of Canada sides with couple over defies portion of their backyard",
-      "score": 1.5455,
+      "score": 1.5369,
       "score_components": {
-        "recency": 0.1955,
+        "recency": 0.1869,
         "category": 0.15,
         "regional": 1.2
       },
@@ -7048,9 +7098,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.8944,
+      "score": 1.8859,
       "score_components": {
-        "recency": 0.1944,
+        "recency": 0.1859,
         "public_safety": 1.2,
         "sports.player_match": 0.5
       },
@@ -7075,9 +7125,9 @@
       "cluster_id": "t:3174779a9c19",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3937,
+      "score": 0.3852,
       "score_components": {
-        "recency": 0.1937,
+        "recency": 0.1852,
         "category": 0.2
       },
       "effects": {
@@ -7098,9 +7148,9 @@
       "cluster_id": "t:5898b2a1d4f0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3927,
+      "score": 0.3842,
       "score_components": {
-        "recency": 0.1927,
+        "recency": 0.1842,
         "category": 0.2
       },
       "effects": {
@@ -7121,9 +7171,9 @@
       "cluster_id": "t:094f7f1405a4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1925,
+      "score": 0.184,
       "score_components": {
-        "recency": 0.1925
+        "recency": 0.184
       },
       "effects": {
         "lightsaber": false,
@@ -7143,9 +7193,9 @@
       "cluster_id": "t:2218f60f02e7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1878,
+      "score": 0.1796,
       "score_components": {
-        "recency": 0.1878
+        "recency": 0.1796
       },
       "effects": {
         "lightsaber": false,
@@ -7165,9 +7215,9 @@
       "cluster_id": "t:1777c131a7cd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1826,
+      "score": 0.1746,
       "score_components": {
-        "recency": 0.1826
+        "recency": 0.1746
       },
       "effects": {
         "lightsaber": false,
@@ -7187,9 +7237,9 @@
       "cluster_id": "t:a9649d0b45e0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6308,
+      "score": 0.6229,
       "score_components": {
-        "recency": 0.1808,
+        "recency": 0.1729,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -7211,9 +7261,9 @@
       "cluster_id": "t:a3bdeb0f1c7f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.43,
+      "score": 0.4221,
       "score_components": {
-        "recency": 0.18,
+        "recency": 0.1721,
         "category": 0.25
       },
       "effects": {
@@ -7234,9 +7284,9 @@
       "cluster_id": "t:6aaed3e0adbe",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4246,
+      "score": 0.417,
       "score_components": {
-        "recency": 0.1746,
+        "recency": 0.167,
         "category": 0.25
       },
       "effects": {
@@ -7257,9 +7307,9 @@
       "cluster_id": "t:97e264582932",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1707,
+      "score": 0.1632,
       "score_components": {
-        "recency": 0.1707
+        "recency": 0.1632
       },
       "effects": {
         "lightsaber": false,
@@ -7279,9 +7329,9 @@
       "cluster_id": "t:4c1b8e15760f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6181,
+      "score": 0.6107,
       "score_components": {
-        "recency": 0.1681,
+        "recency": 0.1607,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -7303,9 +7353,9 @@
       "cluster_id": "t:bc205177ee10",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1588,
+      "score": 0.1518,
       "score_components": {
-        "recency": 0.1588
+        "recency": 0.1518
       },
       "effects": {
         "lightsaber": false,
@@ -7325,9 +7375,9 @@
       "cluster_id": "t:6ed4bbc9fc80",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1564,
+      "score": 0.1495,
       "score_components": {
-        "recency": 0.1564
+        "recency": 0.1495
       },
       "effects": {
         "lightsaber": false,
@@ -7347,9 +7397,9 @@
       "cluster_id": "t:a99a5a899675",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1521,
+      "score": 0.1454,
       "score_components": {
-        "recency": 0.1521
+        "recency": 0.1454
       },
       "effects": {
         "lightsaber": false,
@@ -7369,9 +7419,9 @@
       "cluster_id": "t:376017307e71",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.1476,
+      "score": 0.1412,
       "score_components": {
-        "recency": 0.1476
+        "recency": 0.1412
       },
       "effects": {
         "lightsaber": false,
@@ -7391,53 +7441,9 @@
       "cluster_id": "t:d86d88c08b5d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.147,
+      "score": 0.1406,
       "score_components": {
-        "recency": 0.147
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "The Forgotten History of Disabled Children under Nazism",
-      "url": "https://www.motherjones.com/politics/2025/09/the-forgotten-history-of-disabled-children-under-nazism",
-      "source": "Mother Jones",
-      "published_utc": "2025-09-20T11:30:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.motherjones.com/politics/2025/09/the-forgotten-history-of-disabled-children-under-nazism",
-      "canonical_id": "u:d966b35034ebc4f8",
-      "cluster_id": "t:8270824608c4",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.1435,
-      "score_components": {
-        "recency": 0.1435
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Report: Two-Thirds of Heat Deaths in Europe This Year Were the Result of Climate Change",
-      "url": "https://www.motherjones.com/politics/2025/09/global-warming-climate-change-fatalities-report",
-      "source": "Mother Jones",
-      "published_utc": "2025-09-20T11:30:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.motherjones.com/politics/2025/09/global-warming-climate-change-fatalities-report",
-      "canonical_id": "u:6ca4d961d68c5445",
-      "cluster_id": "t:3e8fc09581cf",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.1435,
-      "score_components": {
-        "recency": 0.1435
+        "recency": 0.1406
       },
       "effects": {
         "lightsaber": false,
@@ -7449,12 +7455,13 @@
   "_debug": {
     "feeds_total": 124,
     "cap_items": 320,
-    "collected": 891,
-    "dedup_pass1": 868,
+    "collected": 915,
+    "dedup_pass1": 891,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "canadianbeats.ca"
+    ],
     "timeouts": [
-      "canadianbeats.ca",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -7481,7 +7488,6 @@
       "www.fyimusicnews.ca",
       "www.japantimes.co.jp",
       "www.nhl.com",
-      "www.peelpolice.ca",
       "www.politico.com",
       "www.publicsafety.gc.ca",
       "www.thedailybeast.com",
@@ -7506,56 +7512,56 @@
     "feed_times_sample": [
       {
         "host": "www.marketwatch.com",
-        "sec": 0.506,
+        "sec": 0.441,
         "kept": 10
       },
       {
-        "host": "cointelegraph.com",
-        "sec": 0.348,
-        "kept": 14
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.259,
+        "sec": 0.3,
         "kept": 8
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.233,
+        "sec": 0.268,
         "kept": 14
       },
       {
         "host": "www.coindesk.com",
-        "sec": 0.167,
+        "sec": 0.217,
         "kept": 14
       },
       {
         "host": "www.bankofcanada.ca",
-        "sec": 0.155,
+        "sec": 0.195,
         "kept": 1
       },
       {
+        "host": "cointelegraph.com",
+        "sec": 0.18,
+        "kept": 14
+      },
+      {
         "host": "www.sec.gov",
-        "sec": 0.147,
+        "sec": 0.158,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.128,
+        "sec": 0.112,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.117,
+        "sec": 0.093,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.074,
+        "sec": 0.079,
         "kept": 10
       }
     ],
-    "elapsed_sec": 169.49,
+    "elapsed_sec": 102.31,
     "http_timeout_sec": 10.0,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210.0,
