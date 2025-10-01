@@ -1,6 +1,6 @@
 {
   // weights.json5 — server-side scoring knobs
-  // Version: v0.6 (sports-focused tuning for Blue Jays)
+  // Version: v0.6.1 (adds MLB finals & Nate hint keys used by fetch_headlines.py)
   timezone: "America/Toronto",
 
   // -------- Recency & decay --------
@@ -25,7 +25,11 @@
     protect_top_n: 8,
     min_reorder_delta: 1.25,
     grace_period_minutes: 3,
-    rank_drift_tolerance: 0.5
+    rank_drift_tolerance: 0.5,
+
+    // NEW: slight freshness nudge for Nate Silver contributor page scrape
+    nate_hours_hint_bonus: 0.25,
+    nate_hours_hint_max_hours: 6
   },
 
   // -------- Regional bias --------
@@ -114,13 +118,19 @@
 
   // -------- SPORTS (keys used by your Python) --------
   sports: {
-    // These map 1:1 to the new scoring block in fetch_headlines.py
+    // Jays-centric knobs (you had these already)
     team_match_points:        1.00, // “Blue Jays”, “Toronto Blue Jays”, “Jays”
     player_match_points:      0.50, // Guerrero, Bichette, Kirk, Bassitt, Gausman, Lauer, Yesavage
     result_win_points:        0.70, // “beat”, “shut out”, “walk-off”, “clinch”, “sweep”, etc.
     result_loss_points:       0.40, // “lose to”, “fall to”, “drop”, “blown save”, etc.
     evening_window_points:    0.90, // stacks 18:30–22:30 ET (your code’s window)
-    playoff_mode_points:      0.60  // stacks when MPB_PLAYOFFS=1 and a result is detected
+    playoff_mode_points:      0.60, // stacks when MPB_PLAYOFFS=1 and a result is detected
+
+    // NEW: MLB focus teams & finals (Red Sox, Yankees, Mariners, Dodgers, Phillies + Jays)
+    // These power the new regexes & scoring in fetch_headlines.py so finals/recaps float.
+    focus_team_points:        0.55, // any focus team mentioned (non-Jays get this too)
+    final_story_points:       0.75, // headline says Final/Postgame/Recap OR looks like a game-final
+    final_with_score_points:  0.45  // contains an explicit scoreline like “4-3”
   },
 
   // -------- Google Trends assist (optional) --------
@@ -142,9 +152,7 @@
     aggregator_penalty: -0.6,
     press_wire_penalty: -0.5,
     preferred_domains_bonus: 0.25
-    // Note: per-domain “preferred” is coded in Python (PREFERRED_DOMAINS).
-    // If you want mlb.com/sportsnet.ca to get that tie-breaker, we’ll add them
-    // to the Python constant (not a weights-only change).
+    // Note: specific preferred domains are defined in Python (PREFERRED_DOMAINS).
   },
 
   // -------- Dedupe knobs (UI feel) --------
