@@ -17,14 +17,15 @@
 # - Score components: recency, category, sources, public_safety, markets, regional
 # - Effects flags: lightsaber/glitch + reasons for the front-end
 # - Substack integration: force glitch + 24h decay for mypybite Substack items
-# - Sports (Blue Jays) module:
+# - Sports (Blue Jays + MLB focus teams) module:
 #     • Team & player keyword boosts
 #     • Win/Loss result detection boost
+#     • Final/recap/scoreline detection boost (Jays, Red Sox, Yankees, Mariners, Dodgers, Phillies)
 #     • Evening window boost (18:30–22:30 America/Toronto)
 #     • Optional playoffs boost via env MPB_PLAYOFFS=1
 #     • Relax per-host caps for key sports domains during evening
-#     • Reduce over-deduping of fresh Jays game stories (4h)
-# - Hyperbolic overlay (Politics/War & Business/Markets):
+#     • Reduce over-deduping of fresh game-final stories (4h)
+# - Hyperbolic overlay (Politics/War & Business/Markets & Sports finals):
 #     • Adds item.display_title (and optional display_subtitle)
 #     • Never alters item.title; no fabricated numbers/names/outcomes
 #     • Deterministic verb upgrades; only fires on confident patterns
@@ -92,20 +93,24 @@ ACCEPT_LANG   = "en-US,en;q=0.8"
 PER_HOST_MAX = {
     "toronto.citynews.ca": 8,
     "financialpost.com": 6,
+    # small nudges for focus sources
+    "cultmtl.com": 6,
 }
 
 # Prefer these domains when breaking ties (primary/original/regulators)
 PREFERRED_DOMAINS = {
     "cbc.ca","globalnews.ca","ctvnews.ca","blogto.com","toronto.citynews.ca",
-    "nhl.com","mlbtraderumors.com",
+    "nhl.com","mlbtraderumors.com","mlb.com","sportsnet.ca","tsn.ca",
+    "espn.com","theathletic.com",
     "bankofcanada.ca","federalreserve.gov","bls.gov","statcan.gc.ca",
     "sec.gov","cftc.gov","marketwatch.com",
     "coindesk.com","cointelegraph.com",
     "fivethirtyeight.com",  # small nudge on ties
+    "cultmtl.com",
 }
 
 # Key sports domains to relax caps for in evening
-SPORTS_PRIOR_DOMAINS = {"mlb.com", "sportsnet.ca", "tsn.ca"}
+SPORTS_PRIOR_DOMAINS = {"mlb.com", "sportsnet.ca", "tsn.ca", "espn.com", "theathletic.com", "cbssports.com"}
 
 # Press-wire domains & path hints (these often duplicate across outlets)
 PRESS_WIRE_DOMAINS = {
@@ -156,6 +161,21 @@ RE_JAYS_PLAYERS = re.compile(
 )
 RE_JAYS_WIN  = re.compile(r"\b(beat|edge|top|blank|shut\s*out|walk-?off|clinch|sweep|down|roll past)\b", re.I)
 RE_JAYS_LOSS = re.compile(r"\b(lose(?:s)?\s+to|fall(?:s)?\s+to|drop(?:s)?\s+to|blown\s+save|skid|defeat(?:ed)?\s+by)\b", re.I)
+
+# --- MLB focus teams (Red Sox, Yankees, Mariners, Dodgers, Phillies + Jays) ---
+RE_MLB_TEAMS = re.compile(
+    r"\b("
+    r"toronto\s*blue\s*jays|blue\s*jays|jays|"
+    r"boston\s*red\s*sox|red\s*sox|"
+    r"new\s*york\s*yankees|ny\s*yankees|yankees|"
+    r"seattle\s*mariners|mariners|"
+    r"los\s*angeles\s*dodgers|la\s*dodgers|dodgers|"
+    r"philadelphia\s*phillies|phillies"
+    r")\b",
+    re.I
+)
+RE_MLB_FINAL_WORD = re.compile(r"\b(final|finals|post\s*game|postgame|recap)\b", re.I)
+RE_SCORELINE = re.compile(r"\b\d{1,2}\s*[–-]\s*\d{1,2}\b")
 
 # --- Hyperbole helpers (Politics/War/Business) ---
 WEAK_TO_STRONG_POLITICS = [
@@ -584,9 +604,9 @@ def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str
 
     cat = (it.get("category") or "").strip()
 
-    # 1) Sports – keep super conservative; only Jays with result/score cues.
+    # 1) Sports – Jays explicit, plus MLB focus finals (safe patterns)
     if RE_JAYS_TEAM.search(title):
-        has_score = re.search(r"\b\d{1,2}\s*[–-]\s*\d{1,2}\b", title)
+        has_score = RE_SCORELINE.search(title)
         win = bool(RE_JAYS_WIN.search(title))
         loss = bool(RE_JAYS_LOSS.search(title))
         if has_score or win or loss:
@@ -597,15 +617,19 @@ def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str
             if m:
                 opp = m.group(1).strip().rstrip(".")
             score = None
-            ms = re.search(r"\b(\d{1,2}\s*[–-]\s*\d{1,2})\b", title)
+            ms = RE_SCORELINE.search(title)
             if ms:
-                score = ms.group(1).replace("–", "-")
+                score = ms.group(0).replace("–", "-")
             bits = [subj, verb]
             if opp: bits.append(opp)
             if score: bits.append(f", {score}")
             display = " ".join(bits)
             return _capitalize_once(display), None, ["sports_hype"]
         return None, None, []
+
+    # Non-Jays MLB focus finals: keep original (safe) but tag hype to light up UI
+    if RE_MLB_TEAMS.search(title) and (RE_SCORELINE.search(title) or RE_MLB_FINAL_WORD.search(title)):
+        return strip_source_tail(title), None, ["sports_hype"]
 
     # 2) Business/Markets — stronger verbs when %/direction cues exist
     if cat == "Business" or re.search(r"\b(stock|stocks|markets?|index|indices|tsx|dow|nasdaq|s&p)\b", title, re.I):
@@ -703,6 +727,9 @@ def build(feeds_file: str, out_path: str) -> dict:
         "sports_result_loss_hits": 0,
         "sports_evening_hits": 0,
         "sports_playoff_hits": 0,
+        "sports_focus_team_hits": 0,
+        "sports_final_hits": 0,
+        "sports_final_score_hits": 0,
         # hyperbole
         "hype_politics": 0,
         "hype_conflict": 0,
@@ -826,7 +853,6 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         if (idx % 20) == 0:
             elapsed = time.time() - start
-            # FIXED: removed stray closing brace
             print(f"[progress] {idx}/{len(specs)} feeds, items={len(collected)}, elapsed={elapsed:.1f}s")
 
     # Pass 1: collapse exact fuzzy clusters (keep newest; prefer non-aggregator)
@@ -846,14 +872,22 @@ def build(feeds_file: str, out_path: str) -> dict:
 
     items = list(first_pass.values())
 
-    # Helper: identify Jays game-y titles to temper dedupe for a few hours
+    # Helpers for dedupe tempering
     def _is_jays_game_title(it: dict) -> bool:
         t = it.get("title","")
         if not t:
             return False
         team = bool(RE_JAYS_TEAM.search(t))
-        resultish = bool(RE_JAYS_WIN.search(t) or RE_JAYS_LOSS.search(t))
+        resultish = bool(RE_JAYS_WIN.search(t) or RE_JAYS_LOSS.search(t) or RE_MLB_FINAL_WORD.search(t) or RE_SCORELINE.search(t))
         return team and resultish
+
+    def _is_focus_mlb_final(it: dict) -> bool:
+        t = it.get("title","")
+        if not t:
+            return False
+        team = bool(RE_MLB_TEAMS.search(t))
+        finalish = bool(RE_MLB_FINAL_WORD.search(t) or RE_SCORELINE.search(t) or RE_JAYS_WIN.search(t) or RE_JAYS_LOSS.search(t))
+        return team and finalish
 
     # Pass 2: near-duplicate collapse using Jaccard on title tokens
     survivors: list[dict] = []
@@ -878,8 +912,8 @@ def build(feeds_file: str, out_path: str) -> dict:
         toks = set(title_tokens(it["title"]))
         merged = False
         for toks_other, rep in token_cache:
-            # If both look like Jays game recaps and both are fresh (<4h), DON'T merge.
-            if _is_jays_game_title(it) and _is_jays_game_title(rep):
+            # If fresh Jays or focus MLB final stories (<4h), DON'T merge to keep multiple perspectives.
+            if (_is_jays_game_title(it) and _is_jays_game_title(rep)) or (_is_focus_mlb_final(it) and _is_focus_mlb_final(rep)):
                 if hours_since(it["published_utc"], now_ts) < 4.0 or hours_since(rep["published_utc"], now_ts) < 4.0:
                     continue
             if jaccard(toks, toks_other) >= THRESH:
@@ -946,12 +980,15 @@ def build(feeds_file: str, out_path: str) -> dict:
     nate_bonus_max_hours = float(W(weights, "reorder.nate_hours_hint_max_hours", 6.0))
 
     # Sports default weights (work even without weights.json5)
-    sp_team      = float(W(weights, "sports.team_match_points", 0.80))
-    sp_player    = float(W(weights, "sports.player_match_points", 0.35))
-    sp_win       = float(W(weights, "sports.result_win_points", 0.45))
-    sp_loss      = float(W(weights, "sports.result_loss_points", 0.25))
-    sp_evening   = float(W(weights, "sports.evening_window_points", 0.70))
-    sp_playoffs  = float(W(weights, "sports.playoff_mode_points", 0.40))
+    sp_team        = float(W(weights, "sports.team_match_points", 0.80))
+    sp_player      = float(W(weights, "sports.player_match_points", 0.35))
+    sp_win         = float(W(weights, "sports.result_win_points", 0.45))
+    sp_loss        = float(W(weights, "sports.result_loss_points", 0.25))
+    sp_evening     = float(W(weights, "sports.evening_window_points", 0.70))
+    sp_playoffs    = float(W(weights, "sports.playoff_mode_points", 0.40))
+    sp_focus_team  = float(W(weights, "sports.focus_team_points", 0.55))          # Red Sox / Yankees / Mariners / Dodgers / Phillies
+    sp_final_story = float(W(weights, "sports.final_story_points", 0.75))         # headlines that say Final/Postgame/Recap
+    sp_final_score = float(W(weights, "sports.final_with_score_points", 0.45))    # contains a scoreline like 4-3
 
     now_ts_scoring = time.time()  # for age math inside scoring
 
@@ -1080,16 +1117,26 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["nate_hours_hint_bonus"] = nate_bonus
             total += nate_bonus
 
-        # -------- Sports (Blue Jays) scoring --------
+        # -------- Sports (Blue Jays + MLB focus) scoring --------
         team_hit   = bool(RE_JAYS_TEAM.search(title))
         player_hit = bool(RE_JAYS_PLAYERS.search(title))
         win_hit    = bool(RE_JAYS_WIN.search(title))
         loss_hit   = bool(RE_JAYS_LOSS.search(title))
 
+        focus_team_hit = bool(RE_MLB_TEAMS.search(title))
+        final_hit      = bool(RE_MLB_FINAL_WORD.search(title) or RE_SCORELINE.search(title))
+        scoreline_hit  = bool(RE_SCORELINE.search(title))
+
         if team_hit:
             comps["sports.team_match"] = sp_team
             total += sp_team
             score_dbg["sports_team_hits"] += 1
+
+        # give non-Jays focus clubs their own nudge so they float too
+        if focus_team_hit and not team_hit:
+            comps["sports.focus_team"] = sp_focus_team
+            total += sp_focus_team
+            score_dbg["sports_focus_team_hits"] += 1
 
         if player_hit:
             comps["sports.player_match"] = sp_player
@@ -1105,15 +1152,25 @@ def build(feeds_file: str, out_path: str) -> dict:
             total += sp_loss
             score_dbg["sports_result_loss_hits"] += 1
 
-        # Evening window: 18:30–22:30 ET
-        if team_hit and (ah is None):
+        # Finals / Recaps / Scorelines (for any focus team)
+        if focus_team_hit and final_hit:
+            comps["sports.final_story"] = sp_final_story
+            total += sp_final_story
+            score_dbg["sports_final_hits"] += 1
+            if scoreline_hit:
+                comps["sports.final_with_score"] = sp_final_score
+                total += sp_final_score
+                score_dbg["sports_final_score_hits"] += 1
+
+        # Evening window: 18:30–22:30 ET (Jays or other focus teams)
+        if (team_hit or focus_team_hit) and (ah is None):
             if (now_et.hour, now_et.minute) >= (18,30) and (now_et.hour, now_et.minute) <= (22,30):
                 comps["sports.evening_window"] = sp_evening
                 total += sp_evening
                 score_dbg["sports_evening_hits"] += 1
 
         # Playoff mode (env toggle)
-        if playoffs_on and team_hit and (win_hit or loss_hit):
+        if playoffs_on and (team_hit or focus_team_hit) and (win_hit or loss_hit or final_hit):
             comps["sports.playoff_mode"] = sp_playoffs
             total += sp_playoffs
             score_dbg["sports_playoff_hits"] += 1
@@ -1145,7 +1202,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             effects["decay_at"] = dec_iso
             score_dbg["substack_tagged"] += 1
 
-        # --- Hyperbolic overlay (Politics/War/Business + Sports Jays) ---
+        # --- Hyperbolic overlay (Politics/War/Business + Sports Jays/finals) ---
         disp_title, disp_sub, hype_reasons = craft_hyperbolic_display(it)
         if disp_title:
             it["display_title"] = disp_title
@@ -1208,7 +1265,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.6.0-hype-overlay",
+            "version": "fetch-v1.7.0-mlb-finals+cultmtl",
             # weights status
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
