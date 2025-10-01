@@ -86,4 +86,5 @@ jobs:
           add: "headlines.json"
           message: "chore: update headlines.json [skip ci]"
           default_author: github_actions
-          push: "origin HEAD:${{ github.ref_name }}"
+          # Use force-with-lease to resolve non-fast-forward errors safely
+          push: "--force-with-lease origin HEAD:${{ github.ref_name }}"
