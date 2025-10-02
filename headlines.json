@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-02T13:03:11.509769+00:00",
+  "generated_utc": "2025-10-02T13:36:56.593697+00:00",
   "count": 320,
   "items": [
     {
       "title": "Dominion still has pending lawsuits against election deniers such as Rudy Giuliani and Sidney Powell",
       "url": "https://www.cnn.com/business/live-news/fox-news-dominion-trial-04-18-23/h_8d51e3ae2714edaa0dace837305d03b8",
       "source": "CNN.com - RSS Channel - HP Hero",
-      "published_utc": "2025-10-02T13:02:37.420434+00:00",
+      "published_utc": "2025-10-02T13:36:11.113411+00:00",
       "category": "General",
       "region": "World",
       "canonical_url": "https://www.cnn.com/business/live-news/fox-news-dominion-trial-04-18-23/h_8d51e3ae2714edaa0dace837305d03b8",
@@ -14,9 +14,964 @@
       "cluster_id": "t:94aaf9795642",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9989,
+      "score": 0.9985,
       "score_components": {
-        "recency": 0.9989
+        "recency": 0.9985
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Live Updates: 2 Killed in Car Ramming and Stabbing Outside U.K. Synagogue, Police Say",
+      "url": "https://www.nytimes.com/live/2025/10/02/world/manchester-synagogue-stabbing-uk",
+      "source": "NYT > World News",
+      "published_utc": "2025-10-02T13:32:05+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.nytimes.com/live/2025/10/02/world/manchester-synagogue-stabbing-uk",
+      "canonical_id": "u:270a06b95bf5c2d9",
+      "cluster_id": "t:9ec236910957",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "glitch": true,
+      "score": 2.4307,
+      "score_components": {
+        "recency": 0.9907,
+        "public_safety": 1.44
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.8"
+        ],
+        "style": "glitch"
+      }
+    },
+    {
+      "title": "Spend your Bitcoin, don’t just hoard it",
+      "url": "https://cointelegraph.com/news/spend-your-bitcoin-don-t-just-hoard-it",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-10-02T13:30:00+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://cointelegraph.com/news/spend-your-bitcoin-don-t-just-hoard-it",
+      "canonical_id": "u:b9e24f5e7035a09c",
+      "cluster_id": "t:4d0322764153",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.4367,
+      "score_components": {
+        "recency": 0.9867,
+        "category": 0.2,
+        "preferred_domain": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Why America has lost faith in college and what to do about it",
+      "url": "https://thehill.com/opinion/education/5531260-college-value-data-outcomes",
+      "source": "The Hill News",
+      "published_utc": "2025-10-02T13:30:00+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://thehill.com/opinion/education/5531260-college-value-data-outcomes",
+      "canonical_id": "u:0aea5720a1deb9f0",
+      "cluster_id": "t:66d95ea62775",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9867,
+      "score_components": {
+        "recency": 0.9867
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Can Dwayne ‘The Rock’ Johnson Pull Off a Serious Pivot with ‘The Smashing Machine’?",
+      "url": "https://decider.com/2025/10/02/can-dwayne-the-rock-johnson-pull-off-a-serious-pivot-with-the-smashing-machine",
+      "source": "New York Post",
+      "published_utc": "2025-10-02T13:30:00+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://decider.com/2025/10/02/can-dwayne-the-rock-johnson-pull-off-a-serious-pivot-with-the-smashing-machine",
+      "canonical_id": "u:c18cd17a51a36b41",
+      "cluster_id": "t:d0d8530edaab",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9867,
+      "score_components": {
+        "recency": 0.9867
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "How a federal government shutdown works",
+      "url": "https://www.dailynews.com/2025/10/02/how-a-federal-government-shutdown-works",
+      "source": "Daily News",
+      "published_utc": "2025-10-02T13:29:39+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.dailynews.com/2025/10/02/how-a-federal-government-shutdown-works",
+      "canonical_id": "u:baca4aff2cfdf081",
+      "cluster_id": "t:3e5e5491d85b",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9861,
+      "score_components": {
+        "recency": 0.9861
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Robyn Previews New Album & Yung Lean Remix At Acne Studios’ Paris Fashion Week Show",
+      "url": "https://www.stereogum.com/2324979/robyn-previews-new-album-yung-lean-remix-at-acne-studios-paris-fashion-week-show/news",
+      "source": "Stereogum",
+      "published_utc": "2025-10-02T13:29:33+00:00",
+      "category": "Culture",
+      "region": "World",
+      "canonical_url": "https://www.stereogum.com/2324979/robyn-previews-new-album-yung-lean-remix-at-acne-studios-paris-fashion-week-show/news",
+      "canonical_id": "u:343b887ee91e9e5f",
+      "cluster_id": "t:0fe28350cee8",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.2359,
+      "score_components": {
+        "recency": 0.9859,
+        "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Diddy Receives More Support From 'Victim 3' Ahead of Mogul's Sentencing",
+      "url": "https://www.tmz.com/2025/10/02/diddy-gets-support-from-gina-victim-3",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-02T13:27:50+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.tmz.com/2025/10/02/diddy-gets-support-from-gina-victim-3",
+      "canonical_id": "u:9cec6767acb5af3e",
+      "cluster_id": "t:75581e390dd8",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9826,
+      "score_components": {
+        "recency": 0.9826
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "'How does this help?' CNN host puts GOP lawmaker on the spot over 'flat out racist' post",
+      "url": "https://www.rawstory.com/trump-racist-meme-flat-out",
+      "source": "Raw Story",
+      "published_utc": "2025-10-02T13:27:00+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.rawstory.com/trump-racist-meme-flat-out",
+      "canonical_id": "u:7f1e703cd9b930b9",
+      "cluster_id": "t:2fb71d1c57b8",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.981,
+      "score_components": {
+        "recency": 0.981
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "GOP Senators Warn ‘Aggressive’ Shutdown Cuts Will ‘Squander’ Party’s ‘Moral High Ground’",
+      "url": "https://www.mediaite.com/media/news/gop-senators-warn-aggressive-shutdown-cuts-will-squander-partys-moral-high-ground",
+      "source": "Mediaite",
+      "published_utc": "2025-10-02T13:26:36+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.mediaite.com/media/news/gop-senators-warn-aggressive-shutdown-cuts-will-squander-partys-moral-high-ground",
+      "canonical_id": "u:94df3ad5cb0a30da",
+      "cluster_id": "t:31c69e1789bf",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "display_title": "GOP Senators warns ‘Aggressive’ Shutdown Cuts Will ‘Squander’ Party’s ‘Moral High Ground’",
+      "score": 0.9803,
+      "score_components": {
+        "recency": 0.9803
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": [
+          "politics_hype"
+        ],
+        "hype": true
+      }
+    },
+    {
+      "title": "Cruz posts video of Democrats wearing sombreros, cartoon mustaches",
+      "url": "https://thehill.com/homenews/senate/5534584-ted-cruz-trump-inspired-ai-video-democrats-shutdown",
+      "source": "The Hill News",
+      "published_utc": "2025-10-02T13:24:46+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://thehill.com/homenews/senate/5534584-ted-cruz-trump-inspired-ai-video-democrats-shutdown",
+      "canonical_id": "u:28c8d49cad05cf88",
+      "cluster_id": "t:bd9ae8d9a4b7",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9768,
+      "score_components": {
+        "recency": 0.9768
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Sun-Faded Hiking Gear That Goes Way Beyond the Trail",
+      "url": "https://www.highsnobiety.com/p/roa-and-wander",
+      "source": "Highsnobiety",
+      "published_utc": "2025-10-02T13:24:45+00:00",
+      "category": "Culture",
+      "region": "World",
+      "canonical_url": "https://www.highsnobiety.com/p/roa-and-wander",
+      "canonical_id": "u:1a878b90042a436e",
+      "cluster_id": "t:d7cc028169f9",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.2268,
+      "score_components": {
+        "recency": 0.9768,
+        "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "ESPN And Fox One Bundle Officially Launches, Reuniting Former Venu Sports Teammates",
+      "url": "https://deadline.com/2025/10/espn-fox-one-streaming-bundle-1236567942",
+      "source": "Deadline",
+      "published_utc": "2025-10-02T13:24:31+00:00",
+      "category": "Culture",
+      "region": "World",
+      "canonical_url": "https://deadline.com/2025/10/espn-fox-one-streaming-bundle-1236567942",
+      "canonical_id": "u:8d7a1f9c22dfede3",
+      "cluster_id": "t:bf31c646f139",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.2264,
+      "score_components": {
+        "recency": 0.9764,
+        "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "The Opener: Wild Cards, Rockies, Managerial Vacancies",
+      "url": "https://www.mlbtraderumors.com/2025/10/the-opener-wild-cards-rockies-managerial-vacancies.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-02T13:24:24+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.mlbtraderumors.com/2025/10/the-opener-wild-cards-rockies-managerial-vacancies.html",
+      "canonical_id": "u:166bb10b38e4ecb3",
+      "cluster_id": "t:c3f7ecef1797",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9761,
+      "score_components": {
+        "recency": 0.9761
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Cracks are forming in the AI capex boom, warns Morgan Stanley. What to buy and sell.",
+      "url": "https://www.marketwatch.com/story/cracks-are-forming-in-the-ai-capex-boom-warns-morgan-stanley-what-to-buy-and-sell-a9f23771?mod=mw_rss_topstories",
+      "source": "MarketWatch.com - Top Stories",
+      "published_utc": "2025-10-02T13:20:00+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://www.marketwatch.com/story/cracks-are-forming-in-the-ai-capex-boom-warns-morgan-stanley-what-to-buy-and-sell-a9f23771?mod=mw_rss_topstories",
+      "canonical_id": "u:6c94be4eaa50926c",
+      "cluster_id": "t:da6ed610a3bc",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.1679,
+      "score_components": {
+        "recency": 0.9679,
+        "category": 0.2
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Morocco reels in aftermath of violent clashes between protesters and police",
+      "url": "https://www.africanews.com/2025/10/02/morocco-reels-in-aftermath-of-violent-clashes-between-protesters-and-police",
+      "source": "Africanews RSS",
+      "published_utc": "2025-10-02T13:19:29+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.africanews.com/2025/10/02/morocco-reels-in-aftermath-of-violent-clashes-between-protesters-and-police",
+      "canonical_id": "u:740c70b59a8be19a",
+      "cluster_id": "t:cff185fecda7",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9669,
+      "score_components": {
+        "recency": 0.9669
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Everybody in Washington hates a shutdown until it becomes a useful tool",
+      "url": "https://www.dailynews.com/2025/10/02/us-government-shutdown-hypocrisy",
+      "source": "Daily News",
+      "published_utc": "2025-10-02T13:19:25+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.dailynews.com/2025/10/02/us-government-shutdown-hypocrisy",
+      "canonical_id": "u:d685b72991b5c9af",
+      "cluster_id": "t:b1853ce019ed",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9668,
+      "score_components": {
+        "recency": 0.9668
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Dolomite, Nnormal, and More Join Vibram’s Global Footwear Initiative",
+      "url": "https://hypebeast.com/2025/10/vibram-repair-if-you-care-dolomite-nnormal-dainese-tecnica-initiative-info",
+      "source": "Hypebeast",
+      "published_utc": "2025-10-02T13:18:01+00:00",
+      "category": "Culture",
+      "region": "World",
+      "canonical_url": "https://hypebeast.com/2025/10/vibram-repair-if-you-care-dolomite-nnormal-dainese-tecnica-initiative-info",
+      "canonical_id": "u:83047f2679f1968f",
+      "cluster_id": "t:e1bda654f0e2",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.2142,
+      "score_components": {
+        "recency": 0.9642,
+        "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Gold bars, cash and drugs seized as Halton police charge woman in human trafficking case",
+      "url": "https://toronto.citynews.ca/2025/10/02/halton-police-woman-arrested-human-trafficking",
+      "source": "CityNews Toronto",
+      "published_utc": "2025-10-02T13:17:32+00:00",
+      "category": "Local",
+      "region": "Canada",
+      "canonical_url": "https://toronto.citynews.ca/2025/10/02/halton-police-woman-arrested-human-trafficking",
+      "canonical_id": "u:20bbbd63f00f557a",
+      "cluster_id": "t:8babfa8e3cea",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "lightsaber": true,
+      "score": 2.9133,
+      "score_components": {
+        "recency": 0.9633,
+        "category": 0.5,
+        "preferred_domain": 0.25,
+        "regional": 1.2
+      },
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      }
+    },
+    {
+      "title": "Are your kids always saying ‘6-7?’ Here’s what it means",
+      "url": "https://thehill.com/homenews/education/5524990-6-7-slang-teens-using",
+      "source": "The Hill News",
+      "published_utc": "2025-10-02T13:17:15+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://thehill.com/homenews/education/5524990-6-7-slang-teens-using",
+      "canonical_id": "u:fc6cbf6ffc76fcd7",
+      "cluster_id": "t:2ac6126af3c0",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9628,
+      "score_components": {
+        "recency": 0.9628
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "As Buffett nears retirement, he’s making his biggest purchase in years",
+      "url": "https://www.marketwatch.com/story/as-buffett-nears-retirement-hes-making-his-biggest-purchase-in-years-ef2cc42c?mod=mw_rss_topstories",
+      "source": "MarketWatch.com - Top Stories",
+      "published_utc": "2025-10-02T13:16:00+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://www.marketwatch.com/story/as-buffett-nears-retirement-hes-making-his-biggest-purchase-in-years-ef2cc42c?mod=mw_rss_topstories",
+      "canonical_id": "u:3485d745a7156617",
+      "cluster_id": "t:42c356f4d73f",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.1605,
+      "score_components": {
+        "recency": 0.9605,
+        "category": 0.2
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Bitcoin on TV: How shows like South Park influence crypto",
+      "url": "https://cointelegraph.com/news/bitcoin-shows-south-park-influence-crypto",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-10-02T13:15:51+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://cointelegraph.com/news/bitcoin-shows-south-park-influence-crypto",
+      "canonical_id": "u:9e0d7de2e8edafac",
+      "cluster_id": "t:b3b6283e0450",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.4102,
+      "score_components": {
+        "recency": 0.9602,
+        "category": 0.2,
+        "preferred_domain": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Mariah Carey Reacts On ‘WWHL’ To Ex Nick Cannon Insuring His Balls For $10 Million: “Lord, Help Me”",
+      "url": "https://decider.com/2025/10/02/mariah-carey-nick-cannon-insures-balls-10-million-wwhl",
+      "source": "New York Post",
+      "published_utc": "2025-10-02T13:14:17+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://decider.com/2025/10/02/mariah-carey-nick-cannon-insures-balls-10-million-wwhl",
+      "canonical_id": "u:133b445e1bd0f833",
+      "cluster_id": "t:ee7f68c9995d",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9573,
+      "score_components": {
+        "recency": 0.9573
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Melania Trump plugs memecoin amid $10M team selling allegations",
+      "url": "https://cointelegraph.com/news/melania-trump-plugs-memecoin-amid-10m-team-selling-allegations",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-10-02T13:13:57+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://cointelegraph.com/news/melania-trump-plugs-memecoin-amid-10m-team-selling-allegations",
+      "canonical_id": "u:6f3808f9eb3eabc8",
+      "cluster_id": "t:7c2eef03a927",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.4067,
+      "score_components": {
+        "recency": 0.9567,
+        "category": 0.2,
+        "preferred_domain": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "'The Dems have gone stone cold crazy!' Trump rampages against his hometown enemy",
+      "url": "https://www.rawstory.com/zohran-mamdani-2674147393",
+      "source": "Raw Story",
+      "published_utc": "2025-10-02T13:13:08+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.rawstory.com/zohran-mamdani-2674147393",
+      "canonical_id": "u:9600b76fc59f4a28",
+      "cluster_id": "t:0e0d58789647",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9552,
+      "score_components": {
+        "recency": 0.9552
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Africa’s freshwater fish under threat as stocks decline",
+      "url": "https://www.africanews.com/2025/10/02/africas-freshwater-fish-under-threat-as-stocks-decline",
+      "source": "Africanews RSS",
+      "published_utc": "2025-10-02T13:11:42+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.africanews.com/2025/10/02/africas-freshwater-fish-under-threat-as-stocks-decline",
+      "canonical_id": "u:675a349bcf39a916",
+      "cluster_id": "t:ad2c0af6afeb",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9526,
+      "score_components": {
+        "recency": 0.9526
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "‘A Foggy Tale’ Leads Golden Horse Awards Nominations With 11 Nods",
+      "url": "https://variety.com/2025/film/awards/a-foggy-tale-golden-horse-awards-nominations-2025-1236537082",
+      "source": "Film",
+      "published_utc": "2025-10-02T13:10:53+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://variety.com/2025/film/awards/a-foggy-tale-golden-horse-awards-nominations-2025-1236537082",
+      "canonical_id": "u:2935da975c65e1a8",
+      "cluster_id": "t:68c61b5fe892",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9511,
+      "score_components": {
+        "recency": 0.9511
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "MSNBC’s Jen Psaki Flat-Out Asks If Trump Orders To Military Need To Be ‘Questioned’",
+      "url": "https://www.mediaite.com/media/tv/msnbcs-jen-psaki-flat-out-asks-if-trump-orders-to-military-need-to-be-questioned",
+      "source": "Mediaite",
+      "published_utc": "2025-10-02T13:10:37+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.mediaite.com/media/tv/msnbcs-jen-psaki-flat-out-asks-if-trump-orders-to-military-need-to-be-questioned",
+      "canonical_id": "u:fc7e2f4545d36570",
+      "cluster_id": "t:1a34f9fba9c5",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9506,
+      "score_components": {
+        "recency": 0.9506
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Blue Ant Media to Buy Documentary Streaming Service MagellanTV for $12 Million",
+      "url": "https://www.hollywoodreporter.com/business/business-news/blue-ant-media-magellantv-1236391746",
+      "source": "The Hollywood Reporter",
+      "published_utc": "2025-10-02T13:09:46+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.hollywoodreporter.com/business/business-news/blue-ant-media-magellantv-1236391746",
+      "canonical_id": "u:cf487bc7aab855fd",
+      "cluster_id": "t:018c5150e7ae",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.949,
+      "score_components": {
+        "recency": 0.949
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Dwayne Johnson disses 44 years of ‘Donkey Kong’ history",
+      "url": "https://www.nme.com/news/gaming-news/dwayne-johnson-disses-44-years-of-donkey-kong-history-3896858",
+      "source": "NME",
+      "published_utc": "2025-10-02T13:09:37+00:00",
+      "category": "Culture",
+      "region": "World",
+      "canonical_url": "https://www.nme.com/news/gaming-news/dwayne-johnson-disses-44-years-of-donkey-kong-history-3896858",
+      "canonical_id": "u:08d9eede80bc4f73",
+      "cluster_id": "t:39a8f052d201",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.1987,
+      "score_components": {
+        "recency": 0.9487,
+        "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Biden’s Secretary of State Takes Credit for Trump’s Gaza Peace Plan: ‘Essentially the Plan We Developed’",
+      "url": "https://www.mediaite.com/media/podcasts/bidens-secretary-of-state-takes-credit-for-trumps-gaza-peace-plan-essentially-the-plan-we-developed",
+      "source": "Mediaite",
+      "published_utc": "2025-10-02T13:08:46+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.mediaite.com/media/podcasts/bidens-secretary-of-state-takes-credit-for-trumps-gaza-peace-plan-essentially-the-plan-we-developed",
+      "canonical_id": "u:73853eb6e6dfee9a",
+      "cluster_id": "t:ee94ac3dba64",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9472,
+      "score_components": {
+        "recency": 0.9472
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "49ers vs. Rams prediction, odds: ‘Thursday Night Football’ picks, best bets for NFL Week 5",
+      "url": "https://nypost.com/2025/10/02/betting/49ers-vs-rams-prediction-odds-thursday-night-football-picks-best-bets-for-nfl-week-5",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-10-02T13:08:26+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/10/02/betting/49ers-vs-rams-prediction-odds-thursday-night-football-picks-best-bets-for-nfl-week-5",
+      "canonical_id": "u:5e90f4e174a2cbb2",
+      "cluster_id": "t:1415448a166c",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9466,
+      "score_components": {
+        "recency": 0.9466
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Trump, Vought to meet over planned federal cuts, firings amid shutdown",
+      "url": "https://thehill.com/homenews/administration/5534562-trump-government-shutdown-cuts",
+      "source": "The Hill News",
+      "published_utc": "2025-10-02T13:08:15+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://thehill.com/homenews/administration/5534562-trump-government-shutdown-cuts",
+      "canonical_id": "u:a6c08ea6f680c1b6",
+      "cluster_id": "t:914d7299e5ab",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9463,
+      "score_components": {
+        "recency": 0.9463
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "HUD secretary ‘not worried at all’ about violating law with website blaming shutdown on Democrats",
+      "url": "https://thehill.com/homenews/administration/5534577-turner-defends-hud-banner",
+      "source": "The Hill News",
+      "published_utc": "2025-10-02T13:07:11+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://thehill.com/homenews/administration/5534577-turner-defends-hud-banner",
+      "canonical_id": "u:19a26e35970bb649",
+      "cluster_id": "t:03a0269c89d7",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9443,
+      "score_components": {
+        "recency": 0.9443
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Six countries encourage peaceful dialogue in Madagascar crisis",
+      "url": "https://www.africanews.com/2025/10/02/six-countries-encourage-peaceful-dialogue-in-madagascar-crisis",
+      "source": "Africanews RSS",
+      "published_utc": "2025-10-02T13:06:25+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.africanews.com/2025/10/02/six-countries-encourage-peaceful-dialogue-in-madagascar-crisis",
+      "canonical_id": "u:672e19ef511a6520",
+      "cluster_id": "t:2ec07be376aa",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9429,
+      "score_components": {
+        "recency": 0.9429
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "'It's a very real concern': Epstein survivor fearful of impending Supreme Court decision",
+      "url": "https://www.rawstory.com/jeffrey-epstein-2674147443",
+      "source": "Raw Story",
+      "published_utc": "2025-10-02T13:06:10+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.rawstory.com/jeffrey-epstein-2674147443",
+      "canonical_id": "u:75c4f0093b107ca6",
+      "cluster_id": "t:aaf0b0749fe9",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9425,
+      "score_components": {
+        "recency": 0.9425
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Italian-Greek Star Fotinì Peluso on Leading Upcoming Series ‘The Great Chimera’ as Trailer Is Unveiled: ‘It Was Very Important to Make Contact With My Homeland’ (EXCLUSIVE)",
+      "url": "https://variety.com/2025/tv/global/fotini-peluso-greek-series-great-chimera-trailer-1236535964",
+      "source": "Variety",
+      "published_utc": "2025-10-02T13:05:37+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://variety.com/2025/tv/global/fotini-peluso-greek-series-great-chimera-trailer-1236535964",
+      "canonical_id": "u:2fee522fbce64bcb",
+      "cluster_id": "t:b6566e124a60",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9415,
+      "score_components": {
+        "recency": 0.9415
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Tilly Norwood Is “an AI Tool, Not a Performer” Says U.K. Acting Union Equity: “We Are Concerned About Where That Work Has Come From”",
+      "url": "https://www.hollywoodreporter.com/movies/movie-news/tilly-norwood-ai-actress-uk-union-equity-sag-aftra-debate-1236391739",
+      "source": "The Hollywood Reporter",
+      "published_utc": "2025-10-02T13:05:20+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.hollywoodreporter.com/movies/movie-news/tilly-norwood-ai-actress-uk-union-equity-sag-aftra-debate-1236391739",
+      "canonical_id": "u:f507a2604699f7f5",
+      "cluster_id": "t:f58092ca648f",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.941,
+      "score_components": {
+        "recency": 0.941
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Niger River boat accident kills at least 26 people in Nigeria",
+      "url": "https://www.africanews.com/2025/10/02/niger-river-boat-accident-kills-at-least-26-people-in-nigeria",
+      "source": "Africanews RSS",
+      "published_utc": "2025-10-02T13:03:46+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.africanews.com/2025/10/02/niger-river-boat-accident-kills-at-least-26-people-in-nigeria",
+      "canonical_id": "u:ae466c96dc5d183e",
+      "cluster_id": "t:21cf24bb13ef",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9381,
+      "score_components": {
+        "recency": 0.9381
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "DUKE: Virginia’s Transgender School Debacle Could Hand Republicans A Miracle",
+      "url": "https://dailycaller.com/2025/10/02/duke-virginia-winsome-sears-abigail-spanberger-gubernatorial-race-transgender-school",
+      "source": "The Daily Caller",
+      "published_utc": "2025-10-02T13:02:18+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://dailycaller.com/2025/10/02/duke-virginia-winsome-sears-abigail-spanberger-gubernatorial-race-transgender-school",
+      "canonical_id": "u:7e091b3b37bb10a6",
+      "cluster_id": "t:b98af14f2bff",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9355,
+      "score_components": {
+        "recency": 0.9355
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Empress Of – “Blasting Through The Speakers”",
+      "url": "https://www.stereogum.com/2324966/empress-of-blasting-through-the-speakers/music",
+      "source": "Stereogum",
+      "published_utc": "2025-10-02T13:02:15+00:00",
+      "category": "Culture",
+      "region": "World",
+      "canonical_url": "https://www.stereogum.com/2324966/empress-of-blasting-through-the-speakers/music",
+      "canonical_id": "u:c47a1204a8468c91",
+      "cluster_id": "t:ff28fd5efcc4",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.1854,
+      "score_components": {
+        "recency": 0.9354,
+        "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Beta Trip shares debut LP, Superette",
+      "url": "https://canadianbeats.ca/2025/10/02/beta-trip-shares-debut-lp-superette",
+      "source": "Canadian Beats Media",
+      "published_utc": "2025-10-02T13:02:05+00:00",
+      "category": "Culture",
+      "region": "World",
+      "canonical_url": "https://canadianbeats.ca/2025/10/02/beta-trip-shares-debut-lp-superette",
+      "canonical_id": "u:54b450ae555a5cd5",
+      "cluster_id": "t:54d09ce11984",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.1851,
+      "score_components": {
+        "recency": 0.9351,
+        "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "911 callers heard ‘somebody screaming’ before Rudi Johnson suicide",
+      "url": "https://nypost.com/2025/10/02/sports/911-callers-heard-somebody-screaming-before-rudi-johnson-suicide",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-10-02T13:01:42+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://nypost.com/2025/10/02/sports/911-callers-heard-somebody-screaming-before-rudi-johnson-suicide",
+      "canonical_id": "u:1bb7276a7029dfef",
+      "cluster_id": "t:40745de654a5",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9344,
+      "score_components": {
+        "recency": 0.9344
       },
       "effects": {
         "lightsaber": false,
@@ -36,9 +991,9 @@
       "cluster_id": "t:65db3af6aa60",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6957,
+      "score": 1.633,
       "score_components": {
-        "recency": 0.9957,
+        "recency": 0.933,
         "sports.result_win": 0.7
       },
       "effects": {
@@ -59,9 +1014,9 @@
       "cluster_id": "t:f3c83c33b063",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2452,
+      "score": 1.1825,
       "score_components": {
-        "recency": 0.9952,
+        "recency": 0.9325,
         "category": 0.25
       },
       "effects": {
@@ -82,9 +1037,9 @@
       "cluster_id": "t:a766cbaebdf9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9948,
+      "score": 0.9322,
       "score_components": {
-        "recency": 0.9948
+        "recency": 0.9322
       },
       "effects": {
         "lightsaber": false,
@@ -104,9 +1059,9 @@
       "cluster_id": "t:c58116ab4ef7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9941,
+      "score": 0.9316,
       "score_components": {
-        "recency": 0.9941
+        "recency": 0.9316
       },
       "effects": {
         "lightsaber": false,
@@ -127,9 +1082,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7939,
+      "score": 2.7313,
       "score_components": {
-        "recency": 0.9939,
+        "recency": 0.9313,
         "category": 0.6,
         "regional": 1.2
       },
@@ -155,9 +1110,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.3939,
+      "score": 2.3313,
       "score_components": {
-        "recency": 0.9939,
+        "recency": 0.9313,
         "category": 0.2,
         "regional": 1.2
       },
@@ -182,9 +1137,9 @@
       "cluster_id": "t:4dfb9b2253c7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2439,
+      "score": 1.1813,
       "score_components": {
-        "recency": 0.9939,
+        "recency": 0.9313,
         "category": 0.25
       },
       "effects": {
@@ -205,9 +1160,9 @@
       "cluster_id": "t:88df6b61aa91",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2439,
+      "score": 1.1813,
       "score_components": {
-        "recency": 0.9939,
+        "recency": 0.9313,
         "category": 0.25
       },
       "effects": {
@@ -228,10 +1183,55 @@
       "cluster_id": "t:7a7d9bdc84ba",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2439,
+      "score": 1.1813,
       "score_components": {
-        "recency": 0.9939,
+        "recency": 0.9313,
         "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "DoubleZero Mainnet Goes Live With Nearly 21% of Staked SOL on Board",
+      "url": "https://www.coindesk.com/tech/2025/10/01/doublezero-mainnet-goes-live-with-nearly-21-of-staked-sol-on-board",
+      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
+      "published_utc": "2025-10-02T13:00:00+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://www.coindesk.com/tech/2025/10/01/doublezero-mainnet-goes-live-with-nearly-21-of-staked-sol-on-board",
+      "canonical_id": "u:697f13c9dcd18ab6",
+      "cluster_id": "t:2c7830a50557",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.1313,
+      "score_components": {
+        "recency": 0.9313,
+        "category": 0.2
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Is Kamala Harris America’s worst politician?",
+      "url": "https://thehill.com/opinion/campaign/5531753-kamala-harris-book-campaign",
+      "source": "The Hill News",
+      "published_utc": "2025-10-02T13:00:00+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://thehill.com/opinion/campaign/5531753-kamala-harris-book-campaign",
+      "canonical_id": "u:8041072833f87b76",
+      "cluster_id": "t:f16c9cd082c7",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9313,
+      "score_components": {
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -251,9 +1251,9 @@
       "cluster_id": "t:d5457ecb68f0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -273,9 +1273,9 @@
       "cluster_id": "t:c1c202d3eca1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -295,9 +1295,9 @@
       "cluster_id": "t:4610c54118fb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -317,9 +1317,9 @@
       "cluster_id": "t:32c4ed67fedd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -339,9 +1339,9 @@
       "cluster_id": "t:6d8d9016ffee",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -361,9 +1361,9 @@
       "cluster_id": "t:4a21ba333442",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -383,9 +1383,9 @@
       "cluster_id": "t:ef8d7efa6c95",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -405,9 +1405,9 @@
       "cluster_id": "t:4b8e49ae3644",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
       },
       "effects": {
         "lightsaber": false,
@@ -427,9 +1427,55 @@
       "cluster_id": "t:de043946b118",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9939,
+      "score": 0.9313,
       "score_components": {
-        "recency": 0.9939
+        "recency": 0.9313
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "More Americans blame Trump, Republicans for shutdown than Democrats: Survey",
+      "url": "https://thehill.com/homenews/administration/5534532-poll-shutdown-trump-republicans-blame",
+      "source": "The Hill News",
+      "published_utc": "2025-10-02T12:59:41+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://thehill.com/homenews/administration/5534532-poll-shutdown-trump-republicans-blame",
+      "canonical_id": "u:a0b1a5683b02587c",
+      "cluster_id": "t:78ddb8a5fe0e",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9308,
+      "score_components": {
+        "recency": 0.9308
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Here’s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-10-02T12:59:11+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://cointelegraph.com/news/what-happened-in-crypto-today",
+      "canonical_id": "u:b431ea497743c593",
+      "cluster_id": "t:097126d6c346",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.3799,
+      "score_components": {
+        "recency": 0.9299,
+        "category": 0.2,
+        "preferred_domain": 0.25
       },
       "effects": {
         "lightsaber": false,
@@ -450,9 +1496,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.3885,
+      "score": 2.3263,
       "score_components": {
-        "recency": 0.9885,
+        "recency": 0.9263,
         "category": 0.2,
         "regional": 1.2
       },
@@ -463,29 +1509,6 @@
           "score≥1.8"
         ],
         "style": "glitch"
-      }
-    },
-    {
-      "title": "Beautiful Hiking Gear That Can Take a Beating",
-      "url": "https://www.highsnobiety.com/p/roa-and-wander",
-      "source": "Highsnobiety",
-      "published_utc": "2025-10-02T12:57:10+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://www.highsnobiety.com/p/roa-and-wander",
-      "canonical_id": "u:1a878b90042a436e",
-      "cluster_id": "t:02b50a090d43",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.2385,
-      "score_components": {
-        "recency": 0.9885,
-        "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       }
     },
     {
@@ -500,9 +1523,9 @@
       "cluster_id": "t:4549686e3797",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.5384,
+      "score": 1.4762,
       "score_components": {
-        "recency": 0.9884,
+        "recency": 0.9262,
         "sports.focus_team": 0.55
       },
       "effects": {
@@ -523,42 +1546,15 @@
       "cluster_id": "t:79c29937be80",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2376,
+      "score": 1.1755,
       "score_components": {
-        "recency": 0.9876,
+        "recency": 0.9255,
         "category": 0.25
       },
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      }
-    },
-    {
-      "title": "Live Updates: 2 Killed in Car Ramming and Stabbing Outside U.K. Synagogue, Police Say",
-      "url": "https://www.nytimes.com/live/2025/10/02/world/manchester-synagogue-stabbing-uk",
-      "source": "NYT > World News",
-      "published_utc": "2025-10-02T12:56:23+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.nytimes.com/live/2025/10/02/world/manchester-synagogue-stabbing-uk",
-      "canonical_id": "u:270a06b95bf5c2d9",
-      "cluster_id": "t:9ec236910957",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "glitch": true,
-      "score": 2.427,
-      "score_components": {
-        "recency": 0.987,
-        "public_safety": 1.44
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.8"
-        ],
-        "style": "glitch"
       }
     },
     {
@@ -573,9 +1569,9 @@
       "cluster_id": "t:48d5db3f96d0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2351,
+      "score": 1.1732,
       "score_components": {
-        "recency": 0.9851,
+        "recency": 0.9232,
         "category": 0.25
       },
       "effects": {
@@ -596,9 +1592,9 @@
       "cluster_id": "t:791797b173b7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.23,
+      "score": 1.1684,
       "score_components": {
-        "recency": 0.98,
+        "recency": 0.9184,
         "category": 0.25
       },
       "effects": {
@@ -619,9 +1615,9 @@
       "cluster_id": "t:f5d397ef025f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1787,
+      "score": 1.1171,
       "score_components": {
-        "recency": 0.9787,
+        "recency": 0.9171,
         "category": 0.2
       },
       "effects": {
@@ -642,10 +1638,79 @@
       "cluster_id": "t:942ade6e8f40",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2282,
+      "score": 1.1666,
       "score_components": {
-        "recency": 0.9782,
+        "recency": 0.9166,
         "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Bitcoin Could Reach $165K Based on Gold's Record Run: JPMorgan",
+      "url": "https://www.coindesk.com/markets/2025/10/02/bitcoin-could-reach-usd165k-based-on-gold-s-record-run-jpmorgan",
+      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
+      "published_utc": "2025-10-02T12:51:00+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://www.coindesk.com/markets/2025/10/02/bitcoin-could-reach-usd165k-based-on-gold-s-record-run-jpmorgan",
+      "canonical_id": "u:8142ab40f08e5c71",
+      "cluster_id": "t:79f481dcea28",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.1153,
+      "score_components": {
+        "recency": 0.9153,
+        "category": 0.2
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Coinbase-Backed Pilot Program Hands Out $12,000 in Crypto to Low-Income New Yorkers",
+      "url": "https://www.coindesk.com/policy/2025/10/02/coinbase-backed-pilot-program-hands-out-usd12-000-in-crypto-to-low-income-new-yorkers",
+      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
+      "published_utc": "2025-10-02T12:50:55+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://www.coindesk.com/policy/2025/10/02/coinbase-backed-pilot-program-hands-out-usd12-000-in-crypto-to-low-income-new-yorkers",
+      "canonical_id": "u:60530aefa678b990",
+      "cluster_id": "t:2f23a8d28bf0",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.1152,
+      "score_components": {
+        "recency": 0.9152,
+        "category": 0.2
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Abu Dhabi Bans Crypto Mining on Farms, Citing Energy Use",
+      "url": "https://www.coindesk.com/business/2025/10/02/abu-dhabi-bans-crypto-mining-on-farms-citing-energy-use",
+      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
+      "published_utc": "2025-10-02T12:50:48+00:00",
+      "category": "Business",
+      "region": "World",
+      "canonical_url": "https://www.coindesk.com/business/2025/10/02/abu-dhabi-bans-crypto-mining-on-farms-citing-energy-use",
+      "canonical_id": "u:75f36a56428f5c7c",
+      "cluster_id": "t:b61bb6899558",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 1.115,
+      "score_components": {
+        "recency": 0.915,
+        "category": 0.2
       },
       "effects": {
         "lightsaber": false,
@@ -665,9 +1730,9 @@
       "cluster_id": "t:f53a8122751f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9758,
+      "score": 0.9144,
       "score_components": {
-        "recency": 0.9758
+        "recency": 0.9144
       },
       "effects": {
         "lightsaber": false,
@@ -687,9 +1752,9 @@
       "cluster_id": "t:e2dc9a659281",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9743,
+      "score": 0.913,
       "score_components": {
-        "recency": 0.9743
+        "recency": 0.913
       },
       "effects": {
         "lightsaber": false,
@@ -709,9 +1774,9 @@
       "cluster_id": "t:34b0264f5ac4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2237,
+      "score": 1.1624,
       "score_components": {
-        "recency": 0.9737,
+        "recency": 0.9124,
         "category": 0.25
       },
       "effects": {
@@ -732,10 +1797,32 @@
       "cluster_id": "t:819990cd0f66",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2225,
+      "score": 1.1614,
       "score_components": {
-        "recency": 0.9725,
+        "recency": 0.9114,
         "category": 0.25
+      },
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      }
+    },
+    {
+      "title": "Elon Musk becomes first person ever worth $500 billion",
+      "url": "https://www.africanews.com/2025/10/02/elon-musk-becomes-first-person-ever-worth-500-billion",
+      "source": "Africanews RSS",
+      "published_utc": "2025-10-02T12:48:28+00:00",
+      "category": "General",
+      "region": "World",
+      "canonical_url": "https://www.africanews.com/2025/10/02/elon-musk-becomes-first-person-ever-worth-500-billion",
+      "canonical_id": "u:ebca5fdf5999af65",
+      "cluster_id": "t:e0ba1b8925c8",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "score": 0.9109,
+      "score_components": {
+        "recency": 0.9109
       },
       "effects": {
         "lightsaber": false,
@@ -755,9 +1842,9 @@
       "cluster_id": "t:2b60725a4a7e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9702,
+      "score": 0.9092,
       "score_components": {
-        "recency": 0.9702
+        "recency": 0.9092
       },
       "effects": {
         "lightsaber": false,
@@ -777,9 +1864,9 @@
       "cluster_id": "t:8016de54534c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9696,
+      "score": 0.9086,
       "score_components": {
-        "recency": 0.9696
+        "recency": 0.9086
       },
       "effects": {
         "lightsaber": false,
@@ -788,7 +1875,7 @@
       }
     },
     {
-      "title": "The Global Sumud Flotilla's mission has only just begun",
+      "title": "The Global Sumud Flotilla’s mission has only just begun",
       "url": "https://www.dazeddigital.com/life-culture/article/68811/1/the-global-sumud-flotilla-mission-has-only-just-begun",
       "source": "Dazed",
       "published_utc": "2025-10-02T12:46:00+00:00",
@@ -799,9 +1886,9 @@
       "cluster_id": "t:a49ad7754d0e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2174,
+      "score": 1.1566,
       "score_components": {
-        "recency": 0.9674,
+        "recency": 0.9066,
         "category": 0.25
       },
       "effects": {
@@ -822,9 +1909,9 @@
       "cluster_id": "t:f41e1a5503be",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9586,
+      "score": 0.8983,
       "score_components": {
-        "recency": 0.9586
+        "recency": 0.8983
       },
       "effects": {
         "lightsaber": false,
@@ -844,9 +1931,9 @@
       "cluster_id": "t:11a543200c87",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9586,
+      "score": 0.8983,
       "score_components": {
-        "recency": 0.9586
+        "recency": 0.8983
       },
       "effects": {
         "lightsaber": false,
@@ -866,32 +1953,10 @@
       "cluster_id": "t:e47de7b3377a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1582,
+      "score": 1.0979,
       "score_components": {
-        "recency": 0.9582,
+        "recency": 0.8979,
         "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Josh Duggar flashed ‘the creepiest smile’ when cousin Amy confronted him about molesting his sisters",
-      "url": "https://pagesix.com/2025/10/02/celebrity-news/josh-duggar-flashed-the-creepiest-smile-when-cousin-amy-confronted-him-about-molesting-his-sisters",
-      "source": "New York Post",
-      "published_utc": "2025-10-02T12:40:21+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://pagesix.com/2025/10/02/celebrity-news/josh-duggar-flashed-the-creepiest-smile-when-cousin-amy-confronted-him-about-molesting-his-sisters",
-      "canonical_id": "u:f1cb696e1672dfff",
-      "cluster_id": "t:c9b1f39c4fdc",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.957,
-      "score_components": {
-        "recency": 0.957
       },
       "effects": {
         "lightsaber": false,
@@ -911,9 +1976,9 @@
       "cluster_id": "t:5d4f982ea927",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1552,
+      "score": 1.0951,
       "score_components": {
-        "recency": 0.9552,
+        "recency": 0.8951,
         "public_safety": 0.2
       },
       "effects": {
@@ -934,9 +1999,9 @@
       "cluster_id": "t:a4d6e42b0873",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1545,
+      "score": 1.0944,
       "score_components": {
-        "recency": 0.9545,
+        "recency": 0.8944,
         "category": 0.2
       },
       "effects": {
@@ -957,31 +2022,9 @@
       "cluster_id": "t:c24d41f9b4d6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9516,
+      "score": 0.8918,
       "score_components": {
-        "recency": 0.9516
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Danica Patrick insists Bad Bunny ‘shouldn’t be allowed’ to headline Super Bowl 2026 halftime show",
-      "url": "https://pagesix.com/2025/10/02/celebrity-news/danica-patrick-insists-bad-bunny-shouldnt-be-allowed-to-headline-super-bowl-2026-halftime-show",
-      "source": "New York Post",
-      "published_utc": "2025-10-02T12:35:43+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://pagesix.com/2025/10/02/celebrity-news/danica-patrick-insists-bad-bunny-shouldnt-be-allowed-to-headline-super-bowl-2026-halftime-show",
-      "canonical_id": "u:395fefe4bab6411a",
-      "cluster_id": "t:25d5e7b3e67c",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.9485,
-      "score_components": {
-        "recency": 0.9485
+        "recency": 0.8918
       },
       "effects": {
         "lightsaber": false,
@@ -1002,9 +2045,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Surge: Crypto Markets Today: Bitcoin Breaks $119K as Altcoins Surge, Traders Eye Record Highs",
-      "score": 1.145,
+      "score": 1.0856,
       "score_components": {
-        "recency": 0.945,
+        "recency": 0.8856,
         "category": 0.2
       },
       "effects": {
@@ -1014,6 +2057,35 @@
           "markets_hype"
         ],
         "hype": true
+      }
+    },
+    {
+      "title": "Some details about Yom Kippur, the holiest day of the Jewish calendar",
+      "url": "https://toronto.citynews.ca/2025/10/02/some-details-about-yom-kippur-the-holiest-day-of-the-jewish-calendar",
+      "source": "CityNews Toronto",
+      "published_utc": "2025-10-02T12:33:41+00:00",
+      "category": "Local",
+      "region": "Canada",
+      "canonical_url": "https://toronto.citynews.ca/2025/10/02/some-details-about-yom-kippur-the-holiest-day-of-the-jewish-calendar",
+      "canonical_id": "u:51b46e529730d2fe",
+      "cluster_id": "t:84b88b619daf",
+      "cluster_rank": 1,
+      "cluster_latest": true,
+      "lightsaber": true,
+      "score": 2.8353,
+      "score_components": {
+        "recency": 0.8853,
+        "category": 0.5,
+        "preferred_domain": 0.25,
+        "regional": 1.2
+      },
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
       }
     },
     {
@@ -1028,9 +2100,9 @@
       "cluster_id": "t:a46223e3fc99",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9421,
+      "score": 0.8828,
       "score_components": {
-        "recency": 0.9421
+        "recency": 0.8828
       },
       "effects": {
         "lightsaber": false,
@@ -1051,9 +2123,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1381,
+      "score": 2.0791,
       "score_components": {
-        "recency": 0.9381,
+        "recency": 0.8791,
         "public_safety": 1.2
       },
       "effects": {
@@ -1077,9 +2149,9 @@
       "cluster_id": "t:e68099e189fd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9381,
+      "score": 0.8791,
       "score_components": {
-        "recency": 0.9381
+        "recency": 0.8791
       },
       "effects": {
         "lightsaber": false,
@@ -1099,9 +2171,9 @@
       "cluster_id": "t:ecf656790cc9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.4363,
+      "score": 1.3774,
       "score_components": {
-        "recency": 0.9363,
+        "recency": 0.8774,
         "category": 0.25,
         "preferred_domain": 0.25
       },
@@ -1124,9 +2196,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.3761,
+      "score": 2.3172,
       "score_components": {
-        "recency": 0.9361,
+        "recency": 0.8772,
         "public_safety": 1.44
       },
       "effects": {
@@ -1150,9 +2222,9 @@
       "cluster_id": "t:b665a7d1d415",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9354,
+      "score": 0.8766,
       "score_components": {
-        "recency": 0.9354
+        "recency": 0.8766
       },
       "effects": {
         "lightsaber": false,
@@ -1172,9 +2244,9 @@
       "cluster_id": "t:03f92660a2c9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9344,
+      "score": 0.8756,
       "score_components": {
-        "recency": 0.9344
+        "recency": 0.8756
       },
       "effects": {
         "lightsaber": false,
@@ -1194,9 +2266,9 @@
       "cluster_id": "t:bc01f0e0c049",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9339,
+      "score": 0.8752,
       "score_components": {
-        "recency": 0.9339
+        "recency": 0.8752
       },
       "effects": {
         "lightsaber": false,
@@ -1216,9 +2288,9 @@
       "cluster_id": "t:b9e71867632a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1814,
+      "score": 1.1228,
       "score_components": {
-        "recency": 0.9314,
+        "recency": 0.8728,
         "category": 0.25
       },
       "effects": {
@@ -1239,9 +2311,9 @@
       "cluster_id": "t:59ed1fdeb30b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1773,
+      "score": 1.119,
       "score_components": {
-        "recency": 0.9273,
+        "recency": 0.869,
         "category": 0.25
       },
       "effects": {
@@ -1262,9 +2334,9 @@
       "cluster_id": "t:b30c37153141",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9273,
+      "score": 0.869,
       "score_components": {
-        "recency": 0.9273
+        "recency": 0.869
       },
       "effects": {
         "lightsaber": false,
@@ -1285,9 +2357,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.9265,
+      "score": 1.8682,
       "score_components": {
-        "recency": 0.9265,
+        "recency": 0.8682,
         "sports.team_match": 1.0
       },
       "effects": {
@@ -1311,32 +2383,10 @@
       "cluster_id": "t:738d344dffd8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1755,
+      "score": 1.1173,
       "score_components": {
-        "recency": 0.9255,
+        "recency": 0.8673,
         "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "‘Honest’ Mariah Carey insists she still doesn’t know Jennifer Lopez in savage ‘WWHL’ diss",
-      "url": "https://pagesix.com/2025/10/02/entertainment/honest-mariah-carey-insists-she-still-doesnt-know-jennifer-lopez-in-savage-wwhl-diss",
-      "source": "New York Post",
-      "published_utc": "2025-10-02T12:22:47+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://pagesix.com/2025/10/02/entertainment/honest-mariah-carey-insists-she-still-doesnt-know-jennifer-lopez-in-savage-wwhl-diss",
-      "canonical_id": "u:49d204748b2f261f",
-      "cluster_id": "t:9075f1ba14b0",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.9251,
-      "score_components": {
-        "recency": 0.9251
       },
       "effects": {
         "lightsaber": false,
@@ -1356,9 +2406,9 @@
       "cluster_id": "t:a555520ffe20",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.4184,
+      "score": 1.3606,
       "score_components": {
-        "recency": 0.9184,
+        "recency": 0.8606,
         "category": 0.25,
         "preferred_domain": 0.25
       },
@@ -1381,9 +2431,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.8677,
+      "score": 2.8099,
       "score_components": {
-        "recency": 0.9177,
+        "recency": 0.8599,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -1409,9 +2459,9 @@
       "cluster_id": "t:d1b1f317c6bc",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1156,
+      "score": 1.058,
       "score_components": {
-        "recency": 0.9156,
+        "recency": 0.858,
         "category": 0.2
       },
       "effects": {
@@ -1432,9 +2482,9 @@
       "cluster_id": "t:00023fd12d0b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1147,
+      "score": 1.0571,
       "score_components": {
-        "recency": 0.9147,
+        "recency": 0.8571,
         "public_safety": 0.2
       },
       "effects": {
@@ -1455,9 +2505,9 @@
       "cluster_id": "t:4f0bcc446be3",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9135,
+      "score": 0.856,
       "score_components": {
-        "recency": 0.9135
+        "recency": 0.856
       },
       "effects": {
         "lightsaber": false,
@@ -1477,9 +2527,9 @@
       "cluster_id": "t:206584d8f379",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9068,
+      "score": 0.8498,
       "score_components": {
-        "recency": 0.9068
+        "recency": 0.8498
       },
       "effects": {
         "lightsaber": false,
@@ -1499,9 +2549,9 @@
       "cluster_id": "t:62955fa0a60c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1535,
+      "score": 1.0967,
       "score_components": {
-        "recency": 0.9035,
+        "recency": 0.8467,
         "category": 0.25
       },
       "effects": {
@@ -1522,9 +2572,9 @@
       "cluster_id": "t:76d73b533955",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9032,
+      "score": 0.8464,
       "score_components": {
-        "recency": 0.9032
+        "recency": 0.8464
       },
       "effects": {
         "lightsaber": false,
@@ -1544,9 +2594,9 @@
       "cluster_id": "t:26e2ff8f0f04",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1508,
+      "score": 1.0942,
       "score_components": {
-        "recency": 0.9008,
+        "recency": 0.8442,
         "category": 0.25
       },
       "effects": {
@@ -1567,9 +2617,9 @@
       "cluster_id": "t:2676795631bd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.898,
+      "score": 0.8415,
       "score_components": {
-        "recency": 0.898
+        "recency": 0.8415
       },
       "effects": {
         "lightsaber": false,
@@ -1589,9 +2639,9 @@
       "cluster_id": "t:77a28ed7e446",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8964,
+      "score": 0.84,
       "score_components": {
-        "recency": 0.8964
+        "recency": 0.84
       },
       "effects": {
         "lightsaber": false,
@@ -1612,9 +2662,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "‘Stablecoin duopoly ending’ as USDT, USDC dominance slide to 84%",
-      "score": 1.7441,
+      "score": 1.6878,
       "score_components": {
-        "recency": 0.8941,
+        "recency": 0.8378,
         "category": 0.2,
         "preferred_domain": 0.25,
         "sports.result_loss": 0.4
@@ -1640,9 +2690,9 @@
       "cluster_id": "t:d10bf4df4d6b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.893,
+      "score": 0.8368,
       "score_components": {
-        "recency": 0.893
+        "recency": 0.8368
       },
       "effects": {
         "lightsaber": false,
@@ -1663,9 +2713,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.3292,
+      "score": 2.2733,
       "score_components": {
-        "recency": 0.8892,
+        "recency": 0.8333,
         "public_safety": 1.44
       },
       "effects": {
@@ -1689,9 +2739,9 @@
       "cluster_id": "t:d8dbefbfcf9f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8879,
+      "score": 0.832,
       "score_components": {
-        "recency": 0.8879
+        "recency": 0.832
       },
       "effects": {
         "lightsaber": false,
@@ -1711,9 +2761,9 @@
       "cluster_id": "t:754f688f22a7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.3871,
+      "score": 1.3313,
       "score_components": {
-        "recency": 0.8871,
+        "recency": 0.8313,
         "category": 0.25,
         "preferred_domain": 0.25
       },
@@ -1735,9 +2785,9 @@
       "cluster_id": "t:faa50c51f706",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0869,
+      "score": 1.0311,
       "score_components": {
-        "recency": 0.8869,
+        "recency": 0.8311,
         "category": 0.2
       },
       "effects": {
@@ -1758,9 +2808,9 @@
       "cluster_id": "t:f55a09f933bc",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1367,
+      "score": 1.0809,
       "score_components": {
-        "recency": 0.8867,
+        "recency": 0.8309,
         "category": 0.25
       },
       "effects": {
@@ -1782,9 +2832,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.2362,
+      "score": 2.1805,
       "score_components": {
-        "recency": 0.8862,
+        "recency": 0.8305,
         "category": 0.15,
         "regional": 1.2
       },
@@ -1810,9 +2860,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.2357,
+      "score": 2.18,
       "score_components": {
-        "recency": 0.8857,
+        "recency": 0.83,
         "category": 0.15,
         "regional": 1.2
       },
@@ -1838,9 +2888,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.2854,
+      "score": 2.2297,
       "score_components": {
-        "recency": 0.8854,
+        "recency": 0.8297,
         "category": 0.2,
         "regional": 1.2
       },
@@ -1865,9 +2915,9 @@
       "cluster_id": "t:76635229c04c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1354,
+      "score": 1.0797,
       "score_components": {
-        "recency": 0.8854,
+        "recency": 0.8297,
         "category": 0.25
       },
       "effects": {
@@ -1888,9 +2938,9 @@
       "cluster_id": "t:288c91f2f763",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8854,
+      "score": 0.8297,
       "score_components": {
-        "recency": 0.8854
+        "recency": 0.8297
       },
       "effects": {
         "lightsaber": false,
@@ -1910,9 +2960,9 @@
       "cluster_id": "t:38bf1b474383",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1344,
+      "score": 1.0788,
       "score_components": {
-        "recency": 0.8844,
+        "recency": 0.8288,
         "category": 0.25
       },
       "effects": {
@@ -1933,9 +2983,9 @@
       "cluster_id": "t:6fd60824b71f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1289,
+      "score": 1.0736,
       "score_components": {
-        "recency": 0.8789,
+        "recency": 0.8236,
         "category": 0.25
       },
       "effects": {
@@ -1956,9 +3006,9 @@
       "cluster_id": "t:96645ccf69ae",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.123,
+      "score": 1.0681,
       "score_components": {
-        "recency": 0.873,
+        "recency": 0.8181,
         "category": 0.25
       },
       "effects": {
@@ -1979,9 +3029,9 @@
       "cluster_id": "t:1bd6350db31a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0719,
+      "score": 1.017,
       "score_components": {
-        "recency": 0.8719,
+        "recency": 0.817,
         "category": 0.2
       },
       "effects": {
@@ -1991,7 +3041,7 @@
       }
     },
     {
-      "title": "Elon Musk is richer now than John Rockefeller was — and it still might not be enough for his ambitions",
+      "title": "Elon Musk is richer now than John D. Rockefeller was — and it still might not be enough for his ambitions",
       "url": "https://www.marketwatch.com/story/elon-musk-is-richer-now-than-john-rockefeller-was-and-it-still-might-not-be-enough-for-his-ambitions-ed085ea6?mod=mw_rss_topstories",
       "source": "MarketWatch.com - Top Stories",
       "published_utc": "2025-10-02T11:51:00+00:00",
@@ -2002,9 +3052,9 @@
       "cluster_id": "t:68357e1ce4f5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0702,
+      "score": 1.0155,
       "score_components": {
-        "recency": 0.8702,
+        "recency": 0.8155,
         "category": 0.2
       },
       "effects": {
@@ -2025,9 +3075,9 @@
       "cluster_id": "t:4f992319da52",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8701,
+      "score": 0.8154,
       "score_components": {
-        "recency": 0.8701
+        "recency": 0.8154
       },
       "effects": {
         "lightsaber": false,
@@ -2047,9 +3097,9 @@
       "cluster_id": "t:04941baf2643",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8697,
+      "score": 0.815,
       "score_components": {
-        "recency": 0.8697
+        "recency": 0.815
       },
       "effects": {
         "lightsaber": false,
@@ -2069,9 +3119,9 @@
       "cluster_id": "t:b0ee9ac124cd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1184,
+      "score": 1.0638,
       "score_components": {
-        "recency": 0.8684,
+        "recency": 0.8138,
         "category": 0.25
       },
       "effects": {
@@ -2092,9 +3142,9 @@
       "cluster_id": "t:495fcaa2b814",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0656,
+      "score": 1.0111,
       "score_components": {
-        "recency": 0.8656,
+        "recency": 0.8111,
         "public_safety": 0.2
       },
       "effects": {
@@ -2115,9 +3165,9 @@
       "cluster_id": "t:28aeb88098ee",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.4102,
+      "score": 1.3561,
       "score_components": {
-        "recency": 0.8602,
+        "recency": 0.8061,
         "sports.focus_team": 0.55
       },
       "effects": {
@@ -2139,9 +3189,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.8077,
+      "score": 2.7537,
       "score_components": {
-        "recency": 0.8577,
+        "recency": 0.8037,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -2167,9 +3217,9 @@
       "cluster_id": "t:e65caeeb1f05",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.3066,
+      "score": 1.2527,
       "score_components": {
-        "recency": 0.8566,
+        "recency": 0.8027,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -2192,9 +3242,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.8065,
+      "score": 2.7526,
       "score_components": {
-        "recency": 0.8565,
+        "recency": 0.8026,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -2220,9 +3270,9 @@
       "cluster_id": "t:f8143282bea4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8551,
+      "score": 0.8013,
       "score_components": {
-        "recency": 0.8551
+        "recency": 0.8013
       },
       "effects": {
         "lightsaber": false,
@@ -2242,32 +3292,10 @@
       "cluster_id": "t:d51ca70b4c9a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.402,
+      "score": 1.3484,
       "score_components": {
-        "recency": 0.852,
+        "recency": 0.7984,
         "sports.focus_team": 0.55
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Israeli warships intercept Gaza aid flotilla with Greta Thunberg on board",
-      "url": "https://japantoday.com/category/world/israeli-warships-intercept-gaza-aid-flotilla-with-greta-onboard",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T11:37:39+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/world/israeli-warships-intercept-gaza-aid-flotilla-with-greta-onboard",
-      "canonical_id": "u:f3fd9ff5a92ffaed",
-      "cluster_id": "t:fafc0cfb78e2",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.8481,
-      "score_components": {
-        "recency": 0.8481
       },
       "effects": {
         "lightsaber": false,
@@ -2287,9 +3315,9 @@
       "cluster_id": "t:e15226f0ac20",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0981,
+      "score": 1.0448,
       "score_components": {
-        "recency": 0.8481,
+        "recency": 0.7948,
         "category": 0.25
       },
       "effects": {
@@ -2310,9 +3338,9 @@
       "cluster_id": "t:98aa3b0c7c46",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8442,
+      "score": 0.791,
       "score_components": {
-        "recency": 0.8442
+        "recency": 0.791
       },
       "effects": {
         "lightsaber": false,
@@ -2332,9 +3360,9 @@
       "cluster_id": "t:f2025d9656ec",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8402,
+      "score": 0.7874,
       "score_components": {
-        "recency": 0.8402
+        "recency": 0.7874
       },
       "effects": {
         "lightsaber": false,
@@ -2354,9 +3382,9 @@
       "cluster_id": "t:d43ab2a6498d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0893,
+      "score": 1.0365,
       "score_components": {
-        "recency": 0.8393,
+        "recency": 0.7865,
         "category": 0.25
       },
       "effects": {
@@ -2377,31 +3405,9 @@
       "cluster_id": "t:c0f45dfce992",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8366,
+      "score": 0.784,
       "score_components": {
-        "recency": 0.8366
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "What I learned from James Comey",
-      "url": "https://thehill.com/opinion/criminal-justice/5531141-what-i-learned-from-james-comey",
-      "source": "The Hill News",
-      "published_utc": "2025-10-02T11:30:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://thehill.com/opinion/criminal-justice/5531141-what-i-learned-from-james-comey",
-      "canonical_id": "u:b107e39516cb5e31",
-      "cluster_id": "t:542ef33270ca",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.8357,
-      "score_components": {
-        "recency": 0.8357
+        "recency": 0.784
       },
       "effects": {
         "lightsaber": false,
@@ -2421,9 +3427,9 @@
       "cluster_id": "t:a8775a60f0f9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8357,
+      "score": 0.7832,
       "score_components": {
-        "recency": 0.8357
+        "recency": 0.7832
       },
       "effects": {
         "lightsaber": false,
@@ -2443,9 +3449,9 @@
       "cluster_id": "t:d47fbfb4f89a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8357,
+      "score": 0.7832,
       "score_components": {
-        "recency": 0.8357
+        "recency": 0.7832
       },
       "effects": {
         "lightsaber": false,
@@ -2465,9 +3471,9 @@
       "cluster_id": "t:00019a60337d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8357,
+      "score": 0.7832,
       "score_components": {
-        "recency": 0.8357
+        "recency": 0.7832
       },
       "effects": {
         "lightsaber": false,
@@ -2487,9 +3493,9 @@
       "cluster_id": "t:c4b80f632533",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8357,
+      "score": 0.7832,
       "score_components": {
-        "recency": 0.8357
+        "recency": 0.7832
       },
       "effects": {
         "lightsaber": false,
@@ -2509,9 +3515,9 @@
       "cluster_id": "t:3e91786411f5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8355,
+      "score": 0.7829,
       "score_components": {
-        "recency": 0.8355
+        "recency": 0.7829
       },
       "effects": {
         "lightsaber": false,
@@ -2531,9 +3537,9 @@
       "cluster_id": "t:399b20a5c41e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0848,
+      "score": 1.0323,
       "score_components": {
-        "recency": 0.8348,
+        "recency": 0.7823,
         "category": 0.25
       },
       "effects": {
@@ -2554,9 +3560,9 @@
       "cluster_id": "t:0a36df6f26a4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8339,
+      "score": 0.7814,
       "score_components": {
-        "recency": 0.8339
+        "recency": 0.7814
       },
       "effects": {
         "lightsaber": false,
@@ -2576,9 +3582,9 @@
       "cluster_id": "t:78831175abdb",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0304,
+      "score": 0.9781,
       "score_components": {
-        "recency": 0.8304,
+        "recency": 0.7781,
         "category": 0.2
       },
       "effects": {
@@ -2588,7 +3594,7 @@
       }
     },
     {
-      "title": "Gérald Depardieu TV Investigation Heads To Court As Press Freedom Body Says Trial Sets Dangerous Precedent: “This Lawsuit Is Similar To A SLAPP”",
+      "title": "Gérard Depardieu TV Investigation Heads To Court As Press Freedom Body Says Trial Sets Dangerous Precedent: “This Lawsuit Is Similar To A SLAPP”",
       "url": "https://deadline.com/2025/10/gerald-depardieu-tv-investigation-public-downfall-in-dock-1236568389",
       "source": "Deadline",
       "published_utc": "2025-10-02T11:25:25+00:00",
@@ -2596,35 +3602,13 @@
       "region": "World",
       "canonical_url": "https://deadline.com/2025/10/gerald-depardieu-tv-investigation-public-downfall-in-dock-1236568389",
       "canonical_id": "u:fe6c05785f782296",
-      "cluster_id": "t:794f6d4c3c4e",
+      "cluster_id": "t:7a8f063a4f4d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0784,
+      "score": 1.0263,
       "score_components": {
-        "recency": 0.8284,
+        "recency": 0.7763,
         "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "White House amps up shutdown pressure on Democrats",
-      "url": "https://thehill.com/homenews/5534436-trump-threatens-federal-layoffs",
-      "source": "The Hill News",
-      "published_utc": "2025-10-02T11:24:24+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://thehill.com/homenews/5534436-trump-threatens-federal-layoffs",
-      "canonical_id": "u:4ecadc8649c8ea5f",
-      "cluster_id": "t:a3caf47b6b86",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.8268,
-      "score_components": {
-        "recency": 0.8268
       },
       "effects": {
         "lightsaber": false,
@@ -2644,9 +3628,9 @@
       "cluster_id": "t:8795821baa7f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.825,
+      "score": 0.7731,
       "score_components": {
-        "recency": 0.825
+        "recency": 0.7731
       },
       "effects": {
         "lightsaber": false,
@@ -2666,41 +3650,14 @@
       "cluster_id": "t:42f7c710e718",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8231,
+      "score": 0.7713,
       "score_components": {
-        "recency": 0.8231
+        "recency": 0.7713
       },
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      }
-    },
-    {
-      "title": "Listeria outbreak linked to prepared pasta meals results in 4 deaths",
-      "url": "https://thehill.com/policy/healthcare/5533955-listeria-outbreak-pasta-meals",
-      "source": "The Hill News",
-      "published_utc": "2025-10-02T11:22:02+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://thehill.com/policy/healthcare/5533955-listeria-outbreak-pasta-meals",
-      "canonical_id": "u:b0e09b1dcf2a25a8",
-      "cluster_id": "t:18ac87a152fd",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "glitch": true,
-      "score": 2.303,
-      "score_components": {
-        "recency": 0.823,
-        "public_safety": 1.48
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.8"
-        ],
-        "style": "glitch"
       }
     },
     {
@@ -2715,32 +3672,10 @@
       "cluster_id": "t:3a80eab9c682",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.073,
+      "score": 1.0212,
       "score_components": {
-        "recency": 0.823,
+        "recency": 0.7712,
         "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Africa’s freshwater fish under threat as stocks decline",
-      "url": "https://www.africanews.com/2025/10/02/africas-freshwater-fish-under-threat-as-stocks-decline",
-      "source": "Africanews RSS",
-      "published_utc": "2025-10-02T11:21:15+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.africanews.com/2025/10/02/africas-freshwater-fish-under-threat-as-stocks-decline",
-      "canonical_id": "u:675a349bcf39a916",
-      "cluster_id": "t:ad2c0af6afeb",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.8218,
-      "score_components": {
-        "recency": 0.8218
       },
       "effects": {
         "lightsaber": false,
@@ -2760,32 +3695,9 @@
       "cluster_id": "t:a58a75d2bcf6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8195,
+      "score": 0.7679,
       "score_components": {
-        "recency": 0.8195
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Cracks are forming in the AI capex boom, warns Morgan Stanley. What to buy and sell.",
-      "url": "https://www.marketwatch.com/story/cracks-are-forming-in-the-ai-capex-boom-warns-morgan-stanley-what-to-buy-and-sell-a9f23771?mod=mw_rss_topstories",
-      "source": "MarketWatch.com - Top Stories",
-      "published_utc": "2025-10-02T11:17:00+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://www.marketwatch.com/story/cracks-are-forming-in-the-ai-capex-boom-warns-morgan-stanley-what-to-buy-and-sell-a9f23771?mod=mw_rss_topstories",
-      "canonical_id": "u:6c94be4eaa50926c",
-      "cluster_id": "t:da6ed610a3bc",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.0151,
-      "score_components": {
-        "recency": 0.8151,
-        "category": 0.2
+        "recency": 0.7679
       },
       "effects": {
         "lightsaber": false,
@@ -2806,9 +3718,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.6134,
+      "score": 2.5623,
       "score_components": {
-        "recency": 0.8134,
+        "recency": 0.7623,
         "category": 0.2,
         "btc_trigger": 1.6
       },
@@ -2834,9 +3746,9 @@
       "cluster_id": "t:5f5e131bcba6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.362,
+      "score": 1.3109,
       "score_components": {
-        "recency": 0.812,
+        "recency": 0.7609,
         "sports.focus_team": 0.55
       },
       "effects": {
@@ -2857,9 +3769,9 @@
       "cluster_id": "t:d5be56e89938",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2563,
+      "score": 1.2056,
       "score_components": {
-        "recency": 0.8063,
+        "recency": 0.7556,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -2881,9 +3793,9 @@
       "cluster_id": "t:9a7c471ec561",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0562,
+      "score": 1.0054,
       "score_components": {
-        "recency": 0.8062,
+        "recency": 0.7554,
         "category": 0.25
       },
       "effects": {
@@ -2904,9 +3816,9 @@
       "cluster_id": "t:5c518b82e5da",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0523,
+      "score": 1.0019,
       "score_components": {
-        "recency": 0.8023,
+        "recency": 0.7519,
         "category": 0.25
       },
       "effects": {
@@ -2927,9 +3839,9 @@
       "cluster_id": "t:aa4d522f4b0b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0511,
+      "score": 1.0007,
       "score_components": {
-        "recency": 0.8011,
+        "recency": 0.7507,
         "category": 0.25
       },
       "effects": {
@@ -2950,9 +3862,9 @@
       "cluster_id": "t:f5723b653df8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0505,
+      "score": 1.0002,
       "score_components": {
-        "recency": 0.8005,
+        "recency": 0.7502,
         "category": 0.25
       },
       "effects": {
@@ -2973,9 +3885,9 @@
       "cluster_id": "t:db9b97adc573",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0486,
+      "score": 0.9983,
       "score_components": {
-        "recency": 0.7986,
+        "recency": 0.7483,
         "category": 0.25
       },
       "effects": {
@@ -2996,9 +3908,9 @@
       "cluster_id": "t:2fd4c87dec3a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7958,
+      "score": 0.7457,
       "score_components": {
-        "recency": 0.7958
+        "recency": 0.7457
       },
       "effects": {
         "lightsaber": false,
@@ -3018,9 +3930,9 @@
       "cluster_id": "t:0350783a5bb8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.794,
+      "score": 0.744,
       "score_components": {
-        "recency": 0.794
+        "recency": 0.744
       },
       "effects": {
         "lightsaber": false,
@@ -3040,9 +3952,9 @@
       "cluster_id": "t:1ade16be2fe9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0406,
+      "score": 0.9908,
       "score_components": {
-        "recency": 0.7906,
+        "recency": 0.7408,
         "category": 0.25
       },
       "effects": {
@@ -3063,9 +3975,9 @@
       "cluster_id": "t:6c250ba16f5c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7894,
+      "score": 0.7397,
       "score_components": {
-        "recency": 0.7894
+        "recency": 0.7397
       },
       "effects": {
         "lightsaber": false,
@@ -3086,9 +3998,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7392,
+      "score": 2.6895,
       "score_components": {
-        "recency": 0.7892,
+        "recency": 0.7395,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -3114,9 +4026,9 @@
       "cluster_id": "t:022fd5f35fc8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7891,
+      "score": 0.7395,
       "score_components": {
-        "recency": 0.7891
+        "recency": 0.7395
       },
       "effects": {
         "lightsaber": false,
@@ -3137,9 +4049,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.7391,
+      "score": 2.6894,
       "score_components": {
-        "recency": 0.7891,
+        "recency": 0.7394,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -3165,9 +4077,9 @@
       "cluster_id": "t:508a4151aade",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0389,
+      "score": 0.9893,
       "score_components": {
-        "recency": 0.7889,
+        "recency": 0.7393,
         "category": 0.25
       },
       "effects": {
@@ -3189,9 +4101,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1888,
+      "score": 2.1392,
       "score_components": {
-        "recency": 0.7888,
+        "recency": 0.7392,
         "category": 0.2,
         "regional": 1.2
       },
@@ -3217,9 +4129,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1888,
+      "score": 2.1392,
       "score_components": {
-        "recency": 0.7888,
+        "recency": 0.7392,
         "category": 0.2,
         "regional": 1.2
       },
@@ -3245,9 +4157,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1388,
+      "score": 2.0892,
       "score_components": {
-        "recency": 0.7888,
+        "recency": 0.7392,
         "category": 0.15,
         "regional": 1.2
       },
@@ -3273,9 +4185,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1388,
+      "score": 2.0892,
       "score_components": {
-        "recency": 0.7888,
+        "recency": 0.7392,
         "category": 0.15,
         "regional": 1.2
       },
@@ -3286,28 +4198,6 @@
           "score≥1.8"
         ],
         "style": "glitch"
-      }
-    },
-    {
-      "title": "Iran may be Hamas’s last lifeline",
-      "url": "https://thehill.com/opinion/national-security/5531209-iran-may-be-hamass-last-lifeline",
-      "source": "The Hill News",
-      "published_utc": "2025-10-02T11:00:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://thehill.com/opinion/national-security/5531209-iran-may-be-hamass-last-lifeline",
-      "canonical_id": "u:c163df50b044c1a5",
-      "cluster_id": "t:1bd8c1de149f",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.7888,
-      "score_components": {
-        "recency": 0.7888
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       }
     },
     {
@@ -3322,9 +4212,9 @@
       "cluster_id": "t:4c6f8901dd4e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7888,
+      "score": 0.7392,
       "score_components": {
-        "recency": 0.7888
+        "recency": 0.7392
       },
       "effects": {
         "lightsaber": false,
@@ -3344,9 +4234,9 @@
       "cluster_id": "t:914ec7e75128",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7888,
+      "score": 0.7392,
       "score_components": {
-        "recency": 0.7888
+        "recency": 0.7392
       },
       "effects": {
         "lightsaber": false,
@@ -3366,9 +4256,9 @@
       "cluster_id": "t:ca796ed972f8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0387,
+      "score": 0.989,
       "score_components": {
-        "recency": 0.7887,
+        "recency": 0.739,
         "category": 0.25
       },
       "effects": {
@@ -3389,41 +4279,15 @@
       "cluster_id": "t:974e87007fde",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9878,
+      "score": 0.9382,
       "score_components": {
-        "recency": 0.7878,
+        "recency": 0.7382,
         "public_safety": 0.2
       },
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      }
-    },
-    {
-      "title": "Michigan AG issues warning: Scammers could take advantage of shutdown",
-      "url": "https://thehill.com/homenews/state-watch/5534250-michigan-ag-warning-scammers-shutdown",
-      "source": "The Hill News",
-      "published_utc": "2025-10-02T10:58:33+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://thehill.com/homenews/state-watch/5534250-michigan-ag-warning-scammers-shutdown",
-      "canonical_id": "u:960878f0df3096ee",
-      "cluster_id": "t:bcc09017f20b",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "display_title": "Michigan AG issues warns: Scammers could take advantage of shutdown",
-      "score": 0.7866,
-      "score_components": {
-        "recency": 0.7866
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": [
-          "politics_hype"
-        ],
-        "hype": true
       }
     },
     {
@@ -3439,9 +4303,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.1843,
+      "score": 2.1349,
       "score_components": {
-        "recency": 0.7843,
+        "recency": 0.7349,
         "category": 0.2,
         "regional": 1.2
       },
@@ -3452,29 +4316,6 @@
           "score≥1.8"
         ],
         "style": "glitch"
-      }
-    },
-    {
-      "title": "Watch Luvcat team up with “coolest man in the country” John Cooper Clarke for eerie new single ‘He’s My Man (The Anniversary)’",
-      "url": "https://www.nme.com/news/music/watch-luvcat-team-up-with-coolest-man-in-the-country-john-cooper-clarke-for-eerie-new-single-hes-my-man-the-anniversary-3896720",
-      "source": "NME",
-      "published_utc": "2025-10-02T10:54:27+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://www.nme.com/news/music/watch-luvcat-team-up-with-coolest-man-in-the-country-john-cooper-clarke-for-eerie-new-single-hes-my-man-the-anniversary-3896720",
-      "canonical_id": "u:d788b37e16cb3795",
-      "cluster_id": "t:50dfa314669a",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.0305,
-      "score_components": {
-        "recency": 0.7805,
-        "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       }
     },
     {
@@ -3489,9 +4330,9 @@
       "cluster_id": "t:54c23dc4b170",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7761,
+      "score": 0.7273,
       "score_components": {
-        "recency": 0.7761
+        "recency": 0.7273
       },
       "effects": {
         "lightsaber": false,
@@ -3511,9 +4352,9 @@
       "cluster_id": "t:652e57606d0b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7733,
+      "score": 0.7247,
       "score_components": {
-        "recency": 0.7733
+        "recency": 0.7247
       },
       "effects": {
         "lightsaber": false,
@@ -3533,9 +4374,9 @@
       "cluster_id": "t:f76108fa5b43",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7664,
+      "score": 0.7182,
       "score_components": {
-        "recency": 0.7664
+        "recency": 0.7182
       },
       "effects": {
         "lightsaber": false,
@@ -3555,9 +4396,9 @@
       "cluster_id": "t:3605c6019092",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7655,
+      "score": 0.7173,
       "score_components": {
-        "recency": 0.7655
+        "recency": 0.7173
       },
       "effects": {
         "lightsaber": false,
@@ -3577,9 +4418,9 @@
       "cluster_id": "t:669e6473225a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0149,
+      "score": 0.9668,
       "score_components": {
-        "recency": 0.7649,
+        "recency": 0.7168,
         "category": 0.25
       },
       "effects": {
@@ -3600,9 +4441,9 @@
       "cluster_id": "t:bcae17b27066",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7615,
+      "score": 0.7136,
       "score_components": {
-        "recency": 0.7615
+        "recency": 0.7136
       },
       "effects": {
         "lightsaber": false,
@@ -3622,9 +4463,9 @@
       "cluster_id": "t:fff0d2a181f6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2095,
+      "score": 1.1617,
       "score_components": {
-        "recency": 0.7595,
+        "recency": 0.7117,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -3646,9 +4487,9 @@
       "cluster_id": "t:57f66419edae",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.759,
+      "score": 0.7113,
       "score_components": {
-        "recency": 0.759
+        "recency": 0.7113
       },
       "effects": {
         "lightsaber": false,
@@ -3668,9 +4509,9 @@
       "cluster_id": "t:e977bb140986",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.759,
+      "score": 0.7112,
       "score_components": {
-        "recency": 0.759
+        "recency": 0.7112
       },
       "effects": {
         "lightsaber": false,
@@ -3690,9 +4531,9 @@
       "cluster_id": "t:1296acb378a3",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.7061,
+      "score": 1.6585,
       "score_components": {
-        "recency": 0.7561,
+        "recency": 0.7085,
         "category": 0.25,
         "sports.result_win": 0.7
       },
@@ -3715,9 +4556,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.9948,
+      "score": 1.9473,
       "score_components": {
-        "recency": 0.7548,
+        "recency": 0.7073,
         "public_safety": 1.24
       },
       "effects": {
@@ -3741,31 +4582,9 @@
       "cluster_id": "t:c2f40b88a659",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7506,
+      "score": 0.7034,
       "score_components": {
-        "recency": 0.7506
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Tesla CEO Elon Musk becomes first person in history to reach a net worth of $500 billion",
-      "url": "https://www.africanews.com/2025/10/02/tesla-ceo-elon-musk-becomes-first-person-in-history-to-reach-a-net-worth-of-500-billion",
-      "source": "Africanews RSS",
-      "published_utc": "2025-10-02T10:33:19+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.africanews.com/2025/10/02/tesla-ceo-elon-musk-becomes-first-person-in-history-to-reach-a-net-worth-of-500-billion",
-      "canonical_id": "u:16a4a5523b911097",
-      "cluster_id": "t:4dca2d53b479",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.7493,
-      "score_components": {
-        "recency": 0.7493
+        "recency": 0.7034
       },
       "effects": {
         "lightsaber": false,
@@ -3786,9 +4605,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Madagascar’s President Rajoelina Dissolved His Government, but demands His Resignation Continue",
-      "score": 0.7492,
+      "score": 0.7021,
       "score_components": {
-        "recency": 0.7492
+        "recency": 0.7021
       },
       "effects": {
         "lightsaber": false,
@@ -3811,9 +4630,9 @@
       "cluster_id": "t:db46c5ebe33c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9489,
+      "score": 0.9018,
       "score_components": {
-        "recency": 0.7489,
+        "recency": 0.7018,
         "category": 0.2
       },
       "effects": {
@@ -3834,9 +4653,9 @@
       "cluster_id": "t:2ea9678db693",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7459,
+      "score": 0.699,
       "score_components": {
-        "recency": 0.7459
+        "recency": 0.699
       },
       "effects": {
         "lightsaber": false,
@@ -3856,9 +4675,9 @@
       "cluster_id": "t:abeab38b4333",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7457,
+      "score": 0.6987,
       "score_components": {
-        "recency": 0.7457
+        "recency": 0.6987
       },
       "effects": {
         "lightsaber": false,
@@ -3878,9 +4697,9 @@
       "cluster_id": "t:4918c5baf4a6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7455,
+      "score": 0.6985,
       "score_components": {
-        "recency": 0.7455
+        "recency": 0.6985
       },
       "effects": {
         "lightsaber": false,
@@ -3900,9 +4719,9 @@
       "cluster_id": "t:73db3f38839c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7453,
+      "score": 0.6984,
       "score_components": {
-        "recency": 0.7453
+        "recency": 0.6984
       },
       "effects": {
         "lightsaber": false,
@@ -3922,9 +4741,9 @@
       "cluster_id": "t:76df29432da2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7452,
+      "score": 0.6983,
       "score_components": {
-        "recency": 0.7452
+        "recency": 0.6983
       },
       "effects": {
         "lightsaber": false,
@@ -3944,9 +4763,9 @@
       "cluster_id": "t:b23f9d74f09f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.643,
+      "score": 1.5963,
       "score_components": {
-        "recency": 0.743,
+        "recency": 0.6963,
         "category": 0.2,
         "sports.result_win": 0.7
       },
@@ -3968,9 +4787,9 @@
       "cluster_id": "t:636da265581c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9832,
+      "score": 0.9371,
       "score_components": {
-        "recency": 0.7332,
+        "recency": 0.6871,
         "category": 0.25
       },
       "effects": {
@@ -3991,9 +4810,9 @@
       "cluster_id": "t:5daeb4d841b9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.2788,
+      "score": 1.2329,
       "score_components": {
-        "recency": 0.7288,
+        "recency": 0.6829,
         "sports.focus_team": 0.55
       },
       "effects": {
@@ -4015,9 +4834,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.674,
+      "score": 2.6284,
       "score_components": {
-        "recency": 0.724,
+        "recency": 0.6784,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -4043,9 +4862,9 @@
       "cluster_id": "t:085e0333c664",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7208,
+      "score": 0.6755,
       "score_components": {
-        "recency": 0.7208
+        "recency": 0.6755
       },
       "effects": {
         "lightsaber": false,
@@ -4065,9 +4884,9 @@
       "cluster_id": "t:c999a5ee145d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7206,
+      "score": 0.6753,
       "score_components": {
-        "recency": 0.7206
+        "recency": 0.6753
       },
       "effects": {
         "lightsaber": false,
@@ -4087,9 +4906,9 @@
       "cluster_id": "t:6f95fd2c2844",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7152,
+      "score": 0.6702,
       "score_components": {
-        "recency": 0.7152
+        "recency": 0.6702
       },
       "effects": {
         "lightsaber": false,
@@ -4109,9 +4928,9 @@
       "cluster_id": "t:5a4f3ee30ba2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.7146,
+      "score": 1.6696,
       "score_components": {
-        "recency": 0.7146,
+        "recency": 0.6696,
         "public_safety": 1.0
       },
       "effects": {
@@ -4132,9 +4951,9 @@
       "cluster_id": "t:db0617b07a2d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.1632,
+      "score": 1.1183,
       "score_components": {
-        "recency": 0.7132,
+        "recency": 0.6683,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -4156,9 +4975,9 @@
       "cluster_id": "t:017698568b1a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7111,
+      "score": 0.6663,
       "score_components": {
-        "recency": 0.7111
+        "recency": 0.6663
       },
       "effects": {
         "lightsaber": false,
@@ -4179,9 +4998,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.6605,
+      "score": 2.6158,
       "score_components": {
-        "recency": 0.7105,
+        "recency": 0.6658,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -4207,9 +5026,9 @@
       "cluster_id": "t:4f6b7780571b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9596,
+      "score": 0.9149,
       "score_components": {
-        "recency": 0.7096,
+        "recency": 0.6649,
         "category": 0.25
       },
       "effects": {
@@ -4230,9 +5049,9 @@
       "cluster_id": "t:6ac4f4a5064d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7058,
+      "score": 0.6614,
       "score_components": {
-        "recency": 0.7058
+        "recency": 0.6614
       },
       "effects": {
         "lightsaber": false,
@@ -4253,38 +5072,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.6547,
+      "score": 2.6104,
       "score_components": {
-        "recency": 0.7047,
-        "category": 0.5,
-        "preferred_domain": 0.25,
-        "regional": 1.2
-      },
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      }
-    },
-    {
-      "title": "UK police say 2 victims have died, 3 others are in serious condition after synagogue attack",
-      "url": "https://toronto.citynews.ca/2025/10/02/manchester-synagogue-stabbing-uk",
-      "source": "CityNews Toronto",
-      "published_utc": "2025-10-02T10:01:12+00:00",
-      "category": "Local",
-      "region": "Canada",
-      "canonical_url": "https://toronto.citynews.ca/2025/10/02/manchester-synagogue-stabbing-uk",
-      "canonical_id": "u:a0a44513bd2271c2",
-      "cluster_id": "t:febdfa439c99",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "lightsaber": true,
-      "score": 2.6544,
-      "score_components": {
-        "recency": 0.7044,
+        "recency": 0.6604,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -4311,9 +5101,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 2.6538,
+      "score": 2.6096,
       "score_components": {
-        "recency": 0.7038,
+        "recency": 0.6596,
         "category": 0.5,
         "preferred_domain": 0.25,
         "regional": 1.2
@@ -4339,9 +5129,9 @@
       "cluster_id": "t:bb2b3417847a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9528,
+      "score": 0.9086,
       "score_components": {
-        "recency": 0.7028,
+        "recency": 0.6586,
         "category": 0.25
       },
       "effects": {
@@ -4363,9 +5153,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.0528,
+      "score": 2.0086,
       "score_components": {
-        "recency": 0.7028,
+        "recency": 0.6586,
         "category": 0.15,
         "regional": 1.2
       },
@@ -4376,50 +5166,6 @@
           "score≥1.8"
         ],
         "style": "glitch"
-      }
-    },
-    {
-      "title": "How a shutdown will impact health agencies and Social Security",
-      "url": "https://thehill.com/policy/healthcare/5534072-hhs-shutdown-fda-medicare-social-security",
-      "source": "The Hill News",
-      "published_utc": "2025-10-02T10:00:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://thehill.com/policy/healthcare/5534072-hhs-shutdown-fda-medicare-social-security",
-      "canonical_id": "u:e590faadfbbf2172",
-      "cluster_id": "t:5919f9afffa2",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.7028,
-      "score_components": {
-        "recency": 0.7028
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "FAFSA forms, launched ahead of shutdown, could be in position for ‘record high’ season",
-      "url": "https://thehill.com/homenews/education/5531606-fafsa-forms-college-applications-government-shutdown",
-      "source": "The Hill News",
-      "published_utc": "2025-10-02T10:00:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://thehill.com/homenews/education/5531606-fafsa-forms-college-applications-government-shutdown",
-      "canonical_id": "u:24260609523ca4eb",
-      "cluster_id": "t:1e346bcbd0f2",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.7028,
-      "score_components": {
-        "recency": 0.7028
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       }
     },
     {
@@ -4434,9 +5180,9 @@
       "cluster_id": "t:68e53d8f7cce",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7028,
+      "score": 0.6586,
       "score_components": {
-        "recency": 0.7028
+        "recency": 0.6586
       },
       "effects": {
         "lightsaber": false,
@@ -4456,9 +5202,9 @@
       "cluster_id": "t:7b8e666fe808",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7026,
+      "score": 0.6584,
       "score_components": {
-        "recency": 0.7026
+        "recency": 0.6584
       },
       "effects": {
         "lightsaber": false,
@@ -4478,9 +5224,9 @@
       "cluster_id": "t:9d7ce4be12ee",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9015,
+      "score": 0.8573,
       "score_components": {
-        "recency": 0.7015,
+        "recency": 0.6573,
         "public_safety": 0.2
       },
       "effects": {
@@ -4501,9 +5247,9 @@
       "cluster_id": "t:326f52a70c63",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7012,
+      "score": 0.6571,
       "score_components": {
-        "recency": 0.7012
+        "recency": 0.6571
       },
       "effects": {
         "lightsaber": false,
@@ -4523,9 +5269,9 @@
       "cluster_id": "t:03781bc49daa",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9001,
+      "score": 0.856,
       "score_components": {
-        "recency": 0.7001,
+        "recency": 0.656,
         "category": 0.2
       },
       "effects": {
@@ -4546,44 +5292,15 @@
       "cluster_id": "t:f62ea9f40d0a",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8966,
+      "score": 0.8528,
       "score_components": {
-        "recency": 0.6966,
+        "recency": 0.6528,
         "category": 0.2
       },
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      }
-    },
-    {
-      "title": "‘It’s constant’: Scarborough resident frustrated by Kennedy GO Station noise and construction traffic",
-      "url": "https://toronto.citynews.ca/2025/10/02/kennedy-go-station-noise-construction-traffic-scarborough",
-      "source": "CityNews Toronto",
-      "published_utc": "2025-10-02T09:52:19+00:00",
-      "category": "Local",
-      "region": "Canada",
-      "canonical_url": "https://toronto.citynews.ca/2025/10/02/kennedy-go-station-noise-construction-traffic-scarborough",
-      "canonical_id": "u:38c97870cc69fd44",
-      "cluster_id": "t:c9c84c7388cf",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "lightsaber": true,
-      "score": 2.6425,
-      "score_components": {
-        "recency": 0.6925,
-        "category": 0.5,
-        "preferred_domain": 0.25,
-        "regional": 1.2
-      },
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
       }
     },
     {
@@ -4598,9 +5315,9 @@
       "cluster_id": "t:d1bf99b9ade6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8898,
+      "score": 0.8464,
       "score_components": {
-        "recency": 0.6898,
+        "recency": 0.6464,
         "public_safety": 0.2
       },
       "effects": {
@@ -4621,9 +5338,9 @@
       "cluster_id": "t:09eb24ef4a8c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9394,
+      "score": 0.896,
       "score_components": {
-        "recency": 0.6894,
+        "recency": 0.646,
         "category": 0.25
       },
       "effects": {
@@ -4644,9 +5361,9 @@
       "cluster_id": "t:22465221469f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6881,
+      "score": 0.6448,
       "score_components": {
-        "recency": 0.6881
+        "recency": 0.6448
       },
       "effects": {
         "lightsaber": false,
@@ -4667,9 +5384,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.0822,
+      "score": 2.0393,
       "score_components": {
-        "recency": 0.6822,
+        "recency": 0.6393,
         "category": 0.2,
         "regional": 1.2
       },
@@ -4694,9 +5411,9 @@
       "cluster_id": "t:209fa88456ba",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9256,
+      "score": 0.8831,
       "score_components": {
-        "recency": 0.6756,
+        "recency": 0.6331,
         "category": 0.25
       },
       "effects": {
@@ -4717,9 +5434,9 @@
       "cluster_id": "t:57a94e75a0f1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8747,
+      "score": 0.8322,
       "score_components": {
-        "recency": 0.6747,
+        "recency": 0.6322,
         "category": 0.2
       },
       "effects": {
@@ -4740,9 +5457,9 @@
       "cluster_id": "t:881fe1cb46e3",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9187,
+      "score": 0.8766,
       "score_components": {
-        "recency": 0.6687,
+        "recency": 0.6266,
         "category": 0.25
       },
       "effects": {
@@ -4763,54 +5480,9 @@
       "cluster_id": "t:556fa2c0860d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8672,
+      "score": 0.8252,
       "score_components": {
-        "recency": 0.6672,
-        "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "These forgotten Americans hold the key to Trump's downfall — and they'll use it soon",
-      "url": "https://www.rawstory.com/raw-investigates/donald-trump-2674144071",
-      "source": "Raw Story",
-      "published_utc": "2025-10-02T09:30:02+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.rawstory.com/raw-investigates/donald-trump-2674144071",
-      "canonical_id": "u:e034096d3cf3120d",
-      "cluster_id": "t:bf920a3aafcd",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.6634,
-      "score_components": {
-        "recency": 0.6634
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "‘I don’t wish to be petty’: My mom, 94, is leaving her $1 million estate to me, my brother and his daughter. Is that fair?",
-      "url": "https://www.marketwatch.com/story/i-dont-wish-to-be-petty-my-mom-94-is-leaving-her-1-million-estate-to-me-my-brother-and-his-daughter-is-that-fair-415aa987?mod=mw_rss_topstories",
-      "source": "MarketWatch.com - Top Stories",
-      "published_utc": "2025-10-02T09:30:00+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://www.marketwatch.com/story/i-dont-wish-to-be-petty-my-mom-94-is-leaving-her-1-million-estate-to-me-my-brother-and-his-daughter-is-that-fair-415aa987?mod=mw_rss_topstories",
-      "canonical_id": "u:17a2effe719988f5",
-      "cluster_id": "t:aede2a567537",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.8633,
-      "score_components": {
-        "recency": 0.6633,
+        "recency": 0.6252,
         "category": 0.2
       },
       "effects": {
@@ -4832,9 +5504,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Slump: Bitcoin Mining Hits Toughest Level Yet While Hashprice Slides",
-      "score": 0.8609,
+      "score": 0.8193,
       "score_components": {
-        "recency": 0.6609,
+        "recency": 0.6193,
         "category": 0.2
       },
       "effects": {
@@ -4858,9 +5530,9 @@
       "cluster_id": "t:16929d258b21",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6596,
+      "score": 0.6181,
       "score_components": {
-        "recency": 0.6596
+        "recency": 0.6181
       },
       "effects": {
         "lightsaber": false,
@@ -4880,9 +5552,9 @@
       "cluster_id": "t:8408bf8860c0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9077,
+      "score": 0.8663,
       "score_components": {
-        "recency": 0.6577,
+        "recency": 0.6163,
         "category": 0.25
       },
       "effects": {
@@ -4903,33 +5575,9 @@
       "cluster_id": "t:eaaa0523255c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6444,
+      "score": 0.6039,
       "score_components": {
-        "recency": 0.6444
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Eugenio Derbez On AI, Global Content & Breaking Down Barriers in Hollywood – Iberseries",
-      "url": "https://deadline.com/2025/10/eugenio-derbez-ai-streamers-hollywood-barriers-iberseries-1236568320",
-      "source": "Deadline",
-      "published_utc": "2025-10-02T09:12:43+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://deadline.com/2025/10/eugenio-derbez-ai-streamers-hollywood-barriers-iberseries-1236568320",
-      "canonical_id": "u:2626acd4ea5d0f07",
-      "cluster_id": "t:dbd3f923180a",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.5916,
-      "score_components": {
-        "recency": 0.6416,
-        "category": 0.25,
-        "sports.result_win": 0.7
+        "recency": 0.6039
       },
       "effects": {
         "lightsaber": false,
@@ -4949,9 +5597,9 @@
       "cluster_id": "t:29f362970831",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0883,
+      "score": 1.0481,
       "score_components": {
-        "recency": 0.6383,
+        "recency": 0.5981,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -4973,9 +5621,9 @@
       "cluster_id": "t:453d39b573b9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6346,
+      "score": 0.5947,
       "score_components": {
-        "recency": 0.6346
+        "recency": 0.5947
       },
       "effects": {
         "lightsaber": false,
@@ -4987,7 +5635,7 @@
       "title": "Many Palestinians Say Hamas Must Accept U.S. Cease-Fire Plan",
       "url": "https://www.nytimes.com/2025/10/02/world/middleeast/palestinian-voices-hamas-cease-fire.html",
       "source": "NYT > World News",
-      "published_utc": "2025-10-02T09:04:17+00:00",
+      "published_utc": "2025-10-02T09:04:18+00:00",
       "category": "General",
       "region": "World",
       "canonical_url": "https://www.nytimes.com/2025/10/02/world/middleeast/palestinian-voices-hamas-cease-fire.html",
@@ -4995,9 +5643,9 @@
       "cluster_id": "t:960275ea5ce7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6313,
+      "score": 0.5916,
       "score_components": {
-        "recency": 0.6313
+        "recency": 0.5916
       },
       "effects": {
         "lightsaber": false,
@@ -5017,9 +5665,9 @@
       "cluster_id": "t:78f902c0c5c5",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6284,
+      "score": 0.5888,
       "score_components": {
-        "recency": 0.6284
+        "recency": 0.5888
       },
       "effects": {
         "lightsaber": false,
@@ -5039,9 +5687,9 @@
       "cluster_id": "t:12ac72bb5bd8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6273,
+      "score": 0.5878,
       "score_components": {
-        "recency": 0.6273
+        "recency": 0.5878
       },
       "effects": {
         "lightsaber": false,
@@ -5061,9 +5709,9 @@
       "cluster_id": "t:7b9e5c958921",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6262,
+      "score": 0.5868,
       "score_components": {
-        "recency": 0.6262
+        "recency": 0.5868
       },
       "effects": {
         "lightsaber": false,
@@ -5084,9 +5732,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5112,9 +5760,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5140,9 +5788,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5168,9 +5816,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5196,9 +5844,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5224,9 +5872,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5252,9 +5900,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5280,9 +5928,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5308,9 +5956,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5336,9 +5984,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5364,9 +6012,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5392,9 +6040,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 2.4261,
+      "score": 2.3867,
       "score_components": {
-        "recency": 0.6261,
+        "recency": 0.5867,
         "category": 0.6,
         "regional": 1.2
       },
@@ -5419,9 +6067,9 @@
       "cluster_id": "t:7935ae668ec2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8704,
+      "score": 0.8313,
       "score_components": {
-        "recency": 0.6204,
+        "recency": 0.5813,
         "category": 0.25
       },
       "effects": {
@@ -5442,9 +6090,9 @@
       "cluster_id": "t:8d73588f1d1b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.069,
+      "score": 1.0301,
       "score_components": {
-        "recency": 0.619,
+        "recency": 0.5801,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -5466,9 +6114,9 @@
       "cluster_id": "t:1d1311075560",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6146,
+      "score": 0.5759,
       "score_components": {
-        "recency": 0.6146
+        "recency": 0.5759
       },
       "effects": {
         "lightsaber": false,
@@ -5488,9 +6136,9 @@
       "cluster_id": "t:252abb76510d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8485,
+      "score": 0.8109,
       "score_components": {
-        "recency": 0.5985,
+        "recency": 0.5609,
         "category": 0.25
       },
       "effects": {
@@ -5511,9 +6159,9 @@
       "cluster_id": "t:7f4da669ec70",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5962,
+      "score": 0.5587,
       "score_components": {
-        "recency": 0.5962
+        "recency": 0.5587
       },
       "effects": {
         "lightsaber": false,
@@ -5533,9 +6181,9 @@
       "cluster_id": "t:0035386973bd",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8452,
+      "score": 0.8078,
       "score_components": {
-        "recency": 0.5952,
+        "recency": 0.5578,
         "category": 0.25
       },
       "effects": {
@@ -5556,9 +6204,9 @@
       "cluster_id": "t:fc8f8a7508d9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5938,
+      "score": 0.5564,
       "score_components": {
-        "recency": 0.5938
+        "recency": 0.5564
       },
       "effects": {
         "lightsaber": false,
@@ -5579,9 +6227,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.9927,
+      "score": 1.9554,
       "score_components": {
-        "recency": 0.5927,
+        "recency": 0.5554,
         "category": 0.2,
         "regional": 1.2
       },
@@ -5607,9 +6255,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Axios Vibes: Grocery price pain rises, in warns sign for Trump and GOP",
-      "score": 0.5911,
+      "score": 0.5539,
       "score_components": {
-        "recency": 0.5911
+        "recency": 0.5539
       },
       "effects": {
         "lightsaber": false,
@@ -5632,9 +6280,9 @@
       "cluster_id": "t:b4535eebd597",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5813,
+      "score": 0.5447,
       "score_components": {
-        "recency": 0.5813
+        "recency": 0.5447
       },
       "effects": {
         "lightsaber": false,
@@ -5654,9 +6302,9 @@
       "cluster_id": "t:85ce67303e24",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0297,
+      "score": 0.9932,
       "score_components": {
-        "recency": 0.5797,
+        "recency": 0.5432,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -5678,9 +6326,9 @@
       "cluster_id": "t:bc084176fa18",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5719,
+      "score": 0.5359,
       "score_components": {
-        "recency": 0.5719
+        "recency": 0.5359
       },
       "effects": {
         "lightsaber": false,
@@ -5701,9 +6349,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "lightsaber": true,
-      "score": 3.5718,
+      "score": 3.5358,
       "score_components": {
-        "recency": 0.5718,
+        "recency": 0.5358,
         "public_safety": 3.0
       },
       "effects": {
@@ -5729,9 +6377,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "display_title": "Plasma founder denies insider selling after XPL token plunge over 50%",
-      "score": 1.021,
+      "score": 0.9851,
       "score_components": {
-        "recency": 0.571,
+        "recency": 0.5351,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -5756,9 +6404,9 @@
       "cluster_id": "t:3711149cf14d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5613,
+      "score": 0.5259,
       "score_components": {
-        "recency": 0.5613
+        "recency": 0.5259
       },
       "effects": {
         "lightsaber": false,
@@ -5778,9 +6426,9 @@
       "cluster_id": "t:381d7c32ae6e",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5583,
+      "score": 0.5232,
       "score_components": {
-        "recency": 0.5583
+        "recency": 0.5232
       },
       "effects": {
         "lightsaber": false,
@@ -5800,9 +6448,9 @@
       "cluster_id": "t:7e318ac8dfaf",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0081,
+      "score": 0.973,
       "score_components": {
-        "recency": 0.5581,
+        "recency": 0.523,
         "category": 0.2,
         "preferred_domain": 0.25
       },
@@ -5825,9 +6473,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.9581,
+      "score": 1.923,
       "score_components": {
-        "recency": 0.5581,
+        "recency": 0.523,
         "category": 0.2,
         "regional": 1.2
       },
@@ -5852,9 +6500,9 @@
       "cluster_id": "t:1037baea51c7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.558,
+      "score": 0.5228,
       "score_components": {
-        "recency": 0.558
+        "recency": 0.5228
       },
       "effects": {
         "lightsaber": false,
@@ -5874,9 +6522,9 @@
       "cluster_id": "t:3921893830b0",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5579,
+      "score": 0.5228,
       "score_components": {
-        "recency": 0.5579
+        "recency": 0.5228
       },
       "effects": {
         "lightsaber": false,
@@ -5896,9 +6544,9 @@
       "cluster_id": "t:20d55055b140",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5579,
+      "score": 0.5228,
       "score_components": {
-        "recency": 0.5579
+        "recency": 0.5228
       },
       "effects": {
         "lightsaber": false,
@@ -5918,9 +6566,9 @@
       "cluster_id": "t:fdb3df541009",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8044,
+      "score": 0.7696,
       "score_components": {
-        "recency": 0.5544,
+        "recency": 0.5196,
         "category": 0.25
       },
       "effects": {
@@ -5941,32 +6589,10 @@
       "cluster_id": "t:46df00804dba",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8024,
+      "score": 0.7676,
       "score_components": {
-        "recency": 0.5524,
+        "recency": 0.5176,
         "category": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Juvenile hall workers need to get to work in Los Padrinos",
-      "url": "https://www.dailynews.com/2025/10/02/juvie-hall-workers-need-to-get-to-work",
-      "source": "Daily News",
-      "published_utc": "2025-10-02T07:50:16+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.dailynews.com/2025/10/02/juvie-hall-workers-need-to-get-to-work",
-      "canonical_id": "u:c22192d8cc8d8401",
-      "cluster_id": "t:e970b08155f5",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.5474,
-      "score_components": {
-        "recency": 0.5474
       },
       "effects": {
         "lightsaber": false,
@@ -5986,54 +6612,9 @@
       "cluster_id": "t:6076dc683ed1",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.542,
+      "score": 0.5079,
       "score_components": {
-        "recency": 0.542
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Two men, one woman die after apparently jumping into dam",
-      "url": "https://japantoday.com/category/national/two-men-one-woman-die-after-apparently-jumping-into-dam",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T07:35:43+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/national/two-men-one-woman-die-after-apparently-jumping-into-dam",
-      "canonical_id": "u:78e97af6a7f1a77a",
-      "cluster_id": "t:8f97813a0131",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.5323,
-      "score_components": {
-        "recency": 0.5323
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "51-year-old man arrested over murder of 33-year-old ex-girlfriend",
-      "url": "https://japantoday.com/category/crime/51-year-old-man-arrested-over-murder-of-33-year-old-ex-girlfriend",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T07:35:04+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/crime/51-year-old-man-arrested-over-murder-of-33-year-old-ex-girlfriend",
-      "canonical_id": "u:79a57edffae014bf",
-      "cluster_id": "t:bbd23110668e",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.7316,
-      "score_components": {
-        "recency": 0.5316,
-        "public_safety": 1.2
+        "recency": 0.5079
       },
       "effects": {
         "lightsaber": false,
@@ -6053,54 +6634,9 @@
       "cluster_id": "t:2884430017c4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5312,
+      "score": 0.4978,
       "score_components": {
-        "recency": 0.5312
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Japan's lead trade negotiator defends tariff deal with U.S.",
-      "url": "https://japantoday.com/category/politics/japan-lead-trade-negotiator-defends-tariff-deal-with-us",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T07:33:31+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/politics/japan-lead-trade-negotiator-defends-tariff-deal-with-us",
-      "canonical_id": "u:886d7861943c49a3",
-      "cluster_id": "t:e7b21338673b",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.5301,
-      "score_components": {
-        "recency": 0.5301
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "A 'prince,' a nationalist and a Beatlemaniac: Japan's top PM contenders",
-      "url": "https://japantoday.com/category/politics/prince-nationalist-beatlemaniac-japan%27s-top-pm-contenders",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T07:33:24+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/politics/prince-nationalist-beatlemaniac-japan%27s-top-pm-contenders",
-      "canonical_id": "u:d78dadd2b214e514",
-      "cluster_id": "t:aa99e429fc2f",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.2299,
-      "score_components": {
-        "recency": 0.5299,
-        "sports.result_win": 0.7
+        "recency": 0.4978
       },
       "effects": {
         "lightsaber": false,
@@ -6120,9 +6656,9 @@
       "cluster_id": "t:5c728f017320",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7782,
+      "score": 0.745,
       "score_components": {
-        "recency": 0.5282,
+        "recency": 0.495,
         "category": 0.25
       },
       "effects": {
@@ -6143,9 +6679,9 @@
       "cluster_id": "t:7fa86095ef31",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7771,
+      "score": 0.744,
       "score_components": {
-        "recency": 0.5271,
+        "recency": 0.494,
         "category": 0.25
       },
       "effects": {
@@ -6167,9 +6703,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.9265,
+      "score": 1.8934,
       "score_components": {
-        "recency": 0.5265,
+        "recency": 0.4934,
         "category": 0.2,
         "regional": 1.2
       },
@@ -6180,53 +6716,6 @@
           "score≥1.8"
         ],
         "style": "glitch"
-      }
-    },
-    {
-      "title": "Ether ETF inflows, explained: What they mean for traders",
-      "url": "https://cointelegraph.com/explained/ether-etf-inflows-explained-what-they-mean-for-traders",
-      "source": "Cointelegraph.com News",
-      "published_utc": "2025-10-02T07:25:00+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://cointelegraph.com/explained/ether-etf-inflows-explained-what-they-mean-for-traders",
-      "canonical_id": "u:17f614d3561f2adc",
-      "cluster_id": "t:24d069696b30",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.9714,
-      "score_components": {
-        "recency": 0.5214,
-        "category": 0.2,
-        "preferred_domain": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Two people killed as police fire on anti-government protesters in Morocco",
-      "url": "https://www.africanews.com/2025/10/02/two-people-killed-as-police-fire-on-anti-government-protesters-in-morocco",
-      "source": "Africanews RSS",
-      "published_utc": "2025-10-02T07:24:17+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.africanews.com/2025/10/02/two-people-killed-as-police-fire-on-anti-government-protesters-in-morocco",
-      "canonical_id": "u:7c207cf5841dd51c",
-      "cluster_id": "t:f168aca1920d",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.7607,
-      "score_components": {
-        "recency": 0.5207,
-        "public_safety": 1.24
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       }
     },
     {
@@ -6241,9 +6730,9 @@
       "cluster_id": "t:855e6a480026",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7627,
+      "score": 0.7304,
       "score_components": {
-        "recency": 0.5127,
+        "recency": 0.4804,
         "category": 0.25
       },
       "effects": {
@@ -6264,9 +6753,9 @@
       "cluster_id": "t:ff6edfd507c7",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.5069,
+      "score": 0.475,
       "score_components": {
-        "recency": 0.5069
+        "recency": 0.475
       },
       "effects": {
         "lightsaber": false,
@@ -6286,9 +6775,9 @@
       "cluster_id": "t:82df5cda067d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7563,
+      "score": 0.7245,
       "score_components": {
-        "recency": 0.5063,
+        "recency": 0.4745,
         "category": 0.25
       },
       "effects": {
@@ -6309,9 +6798,9 @@
       "cluster_id": "t:0b07d8c8606f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4988,
+      "score": 0.4674,
       "score_components": {
-        "recency": 0.4988
+        "recency": 0.4674
       },
       "effects": {
         "lightsaber": false,
@@ -6331,9 +6820,9 @@
       "cluster_id": "t:e9e7930424b2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6982,
+      "score": 0.6669,
       "score_components": {
-        "recency": 0.4982,
+        "recency": 0.4669,
         "public_safety": 0.2
       },
       "effects": {
@@ -6354,53 +6843,9 @@
       "cluster_id": "t:e9ce5f94d59c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4969,
+      "score": 0.4657,
       "score_components": {
-        "recency": 0.4969
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "EU leaders back 'drone wall' to repel Russia after airspace violations",
-      "url": "https://japantoday.com/category/world/eu-leaders-back-%27drone-wall%27-to-repel-russia-after-airspace-violations",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T06:54:31+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/world/eu-leaders-back-%27drone-wall%27-to-repel-russia-after-airspace-violations",
-      "canonical_id": "u:b7d78b484b5e7b18",
-      "cluster_id": "t:3adc1ee56969",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4917,
-      "score_components": {
-        "recency": 0.4917
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Trump jeopardizing U.S. role as scientific leader: Nobel officials",
-      "url": "https://japantoday.com/category/world/trump-jeopardising-us-role-as-scientific-leader-nobel-officials",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T06:54:26+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/world/trump-jeopardising-us-role-as-scientific-leader-nobel-officials",
-      "canonical_id": "u:cc05e97715935ec2",
-      "cluster_id": "t:f5e43ad30753",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4916,
-      "score_components": {
-        "recency": 0.4916
+        "recency": 0.4657
       },
       "effects": {
         "lightsaber": false,
@@ -6420,9 +6865,9 @@
       "cluster_id": "t:2cc80f677fa2",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4898,
+      "score": 0.459,
       "score_components": {
-        "recency": 0.4898
+        "recency": 0.459
       },
       "effects": {
         "lightsaber": false,
@@ -6442,9 +6887,9 @@
       "cluster_id": "t:7389483ea75c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.7318,
+      "score": 0.7015,
       "score_components": {
-        "recency": 0.4818,
+        "recency": 0.4515,
         "category": 0.25
       },
       "effects": {
@@ -6465,33 +6910,10 @@
       "cluster_id": "t:ca096e5bdf7f",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.0308,
+      "score": 1.0006,
       "score_components": {
-        "recency": 0.4808,
+        "recency": 0.4506,
         "sports.focus_team": 0.55
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Diesel Readies First Collaborative Capsule With Thug Club",
-      "url": "https://hypebeast.com/2025/10/diesel-thug-club-capsule-collection-release-info",
-      "source": "Hypebeast",
-      "published_utc": "2025-10-02T06:42:19+00:00",
-      "category": "Culture",
-      "region": "World",
-      "canonical_url": "https://hypebeast.com/2025/10/diesel-thug-club-capsule-collection-release-info",
-      "canonical_id": "u:8bbb45daa44f39e4",
-      "cluster_id": "t:a352dcf2efec",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.7303,
-      "score_components": {
-        "recency": 0.4803,
-        "category": 0.25
       },
       "effects": {
         "lightsaber": false,
@@ -6511,42 +6933,14 @@
       "cluster_id": "t:a6041a680233",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.469,
+      "score": 0.4395,
       "score_components": {
-        "recency": 0.469
+        "recency": 0.4395
       },
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      }
-    },
-    {
-      "title": "Crypto treasuries may soon start gobbling each other up: Coinbase",
-      "url": "https://cointelegraph.com/news/crypto-treasury-more-merger-acquisition-cycle-mature",
-      "source": "Cointelegraph.com News",
-      "published_utc": "2025-10-02T06:15:02+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://cointelegraph.com/news/crypto-treasury-more-merger-acquisition-cycle-mature",
-      "canonical_id": "u:9a7ab7af05ac86f6",
-      "cluster_id": "t:e4b2bc8f7aa2",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "display_title": "Crypto treasuries may soon start gobbling each other surge: Coinbase",
-      "score": 0.9057,
-      "score_components": {
-        "recency": 0.4557,
-        "category": 0.2,
-        "preferred_domain": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": [
-          "markets_hype"
-        ],
-        "hype": true
       }
     },
     {
@@ -6562,9 +6956,9 @@
       "cluster_rank": 1,
       "cluster_latest": true,
       "glitch": true,
-      "score": 1.848,
+      "score": 1.8198,
       "score_components": {
-        "recency": 0.448,
+        "recency": 0.4198,
         "category": 0.2,
         "regional": 1.2
       },
@@ -6575,30 +6969,6 @@
           "score≥1.8"
         ],
         "style": "glitch"
-      }
-    },
-    {
-      "title": "Crypto treasury ‘bubble’ fears overblown: TON Strategy CEO",
-      "url": "https://cointelegraph.com/news/digital-asset-treasuries-bubble-fear-overblown-ton-strategy-ceo",
-      "source": "Cointelegraph.com News",
-      "published_utc": "2025-10-02T06:01:52+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://cointelegraph.com/news/digital-asset-treasuries-bubble-fear-overblown-ton-strategy-ceo",
-      "canonical_id": "u:be68d0818c072b1d",
-      "cluster_id": "t:24564755609d",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.8943,
-      "score_components": {
-        "recency": 0.4443,
-        "category": 0.2,
-        "preferred_domain": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       }
     },
     {
@@ -6613,9 +6983,9 @@
       "cluster_id": "t:b70d32165115",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9907,
+      "score": 0.963,
       "score_components": {
-        "recency": 0.4407,
+        "recency": 0.413,
         "sports.focus_team": 0.55
       },
       "effects": {
@@ -6636,60 +7006,9 @@
       "cluster_id": "t:413256491859",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4346,
+      "score": 0.4073,
       "score_components": {
-        "recency": 0.4346
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Avalanche rises as treasury firm eyes $1B buy after SPAC deal",
-      "url": "https://cointelegraph.com/news/avalanche-rises-treasury-firm-eyes-1b-buy-after-spac-deal-next-year",
-      "source": "Cointelegraph.com News",
-      "published_utc": "2025-10-02T05:47:19+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://cointelegraph.com/news/avalanche-rises-treasury-firm-eyes-1b-buy-after-spac-deal-next-year",
-      "canonical_id": "u:11ebf845010e0fcc",
-      "cluster_id": "t:e283cb41603b",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "display_title": "Avalanche surge as treasury firm eyes $1B buy after SPAC deal",
-      "score": 0.882,
-      "score_components": {
-        "recency": 0.432,
-        "category": 0.2,
-        "preferred_domain": 0.25
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": [
-          "markets_hype"
-        ],
-        "hype": true
-      }
-    },
-    {
-      "title": "Dodgers’ Shohei Ohtani to make postseason pitching debut in NLDS opener",
-      "url": "https://www.dailynews.com/2025/10/01/dodgers-shohei-ohtani-to-make-postseason-pitching-debut-in-nlds-opener",
-      "source": "Daily News",
-      "published_utc": "2025-10-02T05:31:48+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.dailynews.com/2025/10/01/dodgers-shohei-ohtani-to-make-postseason-pitching-debut-in-nlds-opener",
-      "canonical_id": "u:f30c6ae6ed992b2b",
-      "cluster_id": "t:7916c2958d43",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.9693,
-      "score_components": {
-        "recency": 0.4193,
-        "sports.focus_team": 0.55
+        "recency": 0.4073
       },
       "effects": {
         "lightsaber": false,
@@ -6709,9 +7028,9 @@
       "cluster_id": "t:566cac88aca4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4179,
+      "score": 0.3916,
       "score_components": {
-        "recency": 0.4179
+        "recency": 0.3916
       },
       "effects": {
         "lightsaber": false,
@@ -6731,31 +7050,9 @@
       "cluster_id": "t:76489c97f1de",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.4133,
+      "score": 0.3873,
       "score_components": {
-        "recency": 0.4133
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Groundbreaking conservationist Jane Goodall dies aged 91",
-      "url": "https://www.africanews.com/2025/10/02/groundbreaking-conservationist-jane-goodall-dies-aged-91",
-      "source": "Africanews RSS",
-      "published_utc": "2025-10-02T05:17:39+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.africanews.com/2025/10/02/groundbreaking-conservationist-jane-goodall-dies-aged-91",
-      "canonical_id": "u:6e4ee69d024f9fde",
-      "cluster_id": "t:adcdc4876a8d",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4081,
-      "score_components": {
-        "recency": 0.4081
+        "recency": 0.3873
       },
       "effects": {
         "lightsaber": false,
@@ -6775,31 +7072,9 @@
       "cluster_id": "t:7c4ea35b3897",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.408,
+      "score": 0.3823,
       "score_components": {
-        "recency": 0.408
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Philippine quake death toll rises to 72",
-      "url": "https://japantoday.com/category/world/philippine-quake-death-toll-rises-to-72",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T05:11:17+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/world/philippine-quake-death-toll-rises-to-72",
-      "canonical_id": "u:25f179762e2bb3d9",
-      "cluster_id": "t:860dceb02d9e",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.4031,
-      "score_components": {
-        "recency": 0.4031
+        "recency": 0.3823
       },
       "effects": {
         "lightsaber": false,
@@ -6819,33 +7094,10 @@
       "cluster_id": "t:9feaf9910ce6",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.6018,
+      "score": 0.5765,
       "score_components": {
-        "recency": 0.4018,
+        "recency": 0.3765,
         "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Yankees, Guardians and Padres extend their seasons; Dodgers advance to face Phillies",
-      "url": "https://japantoday.com/category/sports/yankees-guardians-and-padres-extend-their-seasons-dodgers-advance-to-face-phillies",
-      "source": "Japan Today",
-      "published_utc": "2025-10-02T05:08:00+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://japantoday.com/category/sports/yankees-guardians-and-padres-extend-their-seasons-dodgers-advance-to-face-phillies",
-      "canonical_id": "u:3f91338af9d432d6",
-      "cluster_id": "t:8dfcd2196c1b",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.9505,
-      "score_components": {
-        "recency": 0.4005,
-        "sports.focus_team": 0.55
       },
       "effects": {
         "lightsaber": false,
@@ -6865,9 +7117,9 @@
       "cluster_id": "t:0a77075486c4",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3964,
+      "score": 0.3714,
       "score_components": {
-        "recency": 0.3964
+        "recency": 0.3714
       },
       "effects": {
         "lightsaber": false,
@@ -6887,9 +7139,9 @@
       "cluster_id": "t:72af559388bc",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3944,
+      "score": 0.3696,
       "score_components": {
-        "recency": 0.3944
+        "recency": 0.3696
       },
       "effects": {
         "lightsaber": false,
@@ -6909,9 +7161,9 @@
       "cluster_id": "t:cfe5339c395d",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3941,
+      "score": 0.3693,
       "score_components": {
-        "recency": 0.3941
+        "recency": 0.3693
       },
       "effects": {
         "lightsaber": false,
@@ -6931,9 +7183,9 @@
       "cluster_id": "t:1f895e8af978",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3933,
+      "score": 0.3685,
       "score_components": {
-        "recency": 0.3933
+        "recency": 0.3685
       },
       "effects": {
         "lightsaber": false,
@@ -6953,9 +7205,9 @@
       "cluster_id": "t:0b8f7b57795b",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.9426,
+      "score": 0.9179,
       "score_components": {
-        "recency": 0.3926,
+        "recency": 0.3679,
         "sports.focus_team": 0.55
       },
       "effects": {
@@ -6976,9 +7228,9 @@
       "cluster_id": "t:aa5222b8882c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3924,
+      "score": 0.3677,
       "score_components": {
-        "recency": 0.3924
+        "recency": 0.3677
       },
       "effects": {
         "lightsaber": false,
@@ -6998,9 +7250,9 @@
       "cluster_id": "t:f1c5d5a9c837",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 1.6409,
+      "score": 1.6163,
       "score_components": {
-        "recency": 0.3909,
+        "recency": 0.3663,
         "sports.focus_team": 0.55,
         "sports.result_win": 0.7
       },
@@ -7022,9 +7274,9 @@
       "cluster_id": "t:8915e0fcfa82",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3861,
+      "score": 0.3618,
       "score_components": {
-        "recency": 0.3861
+        "recency": 0.3618
       },
       "effects": {
         "lightsaber": false,
@@ -7044,9 +7296,9 @@
       "cluster_id": "t:2dce643cc5ff",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3813,
+      "score": 0.3573,
       "score_components": {
-        "recency": 0.3813
+        "recency": 0.3573
       },
       "effects": {
         "lightsaber": false,
@@ -7066,92 +7318,14 @@
       "cluster_id": "t:820c983240d8",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3752,
+      "score": 0.3516,
       "score_components": {
-        "recency": 0.3752
+        "recency": 0.3516
       },
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      }
-    },
-    {
-      "title": "Jazz Chisholm Jr. proves one thing again — he’s worth going by a different Yankees beat",
-      "url": "https://nypost.com/2025/10/02/sports/jazz-chisholm-jr-proves-hes-worth-going-by-different-yankees-beat",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-10-02T04:27:13+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/10/02/sports/jazz-chisholm-jr-proves-hes-worth-going-by-different-yankees-beat",
-      "canonical_id": "u:925b72646c6e9911",
-      "cluster_id": "t:0d1fa8792ea0",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.6203,
-      "score_components": {
-        "recency": 0.3703,
-        "sports.focus_team": 0.55,
-        "sports.result_win": 0.7
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "DOGE Pops 9% as SHIB Flows Confirm Memecoin Momentum",
-      "url": "https://www.coindesk.com/markets/2025/10/02/doge-pops-9-as-shib-flows-confirm-memecoin-momentum",
-      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
-      "published_utc": "2025-10-02T04:25:00+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://www.coindesk.com/markets/2025/10/02/doge-pops-9-as-shib-flows-confirm-memecoin-momentum",
-      "canonical_id": "u:216800305ef79d9a",
-      "cluster_id": "t:a697dd546a0d",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "display_title": "Skyrocket: DOGE Pops 9% as SHIB Flows Confirm Memecoin Momentum",
-      "score": 0.5687,
-      "score_components": {
-        "recency": 0.3687,
-        "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": [
-          "markets_hype"
-        ],
-        "hype": true
-      }
-    },
-    {
-      "title": "XRP Jumps 5% as SBI Lending Program and ETF Countdown Fuel Rally",
-      "url": "https://www.coindesk.com/markets/2025/10/02/xrp-jumps-5-as-sbi-lending-program-and-etf-countdown-fuel-rally",
-      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
-      "published_utc": "2025-10-02T04:18:06+00:00",
-      "category": "Business",
-      "region": "World",
-      "canonical_url": "https://www.coindesk.com/markets/2025/10/02/xrp-jumps-5-as-sbi-lending-program-and-etf-countdown-fuel-rally",
-      "canonical_id": "u:2f1ef4e67de94a2e",
-      "cluster_id": "t:dadfd6568b47",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "display_title": "Skyrocket: XRP Jumps 5% as SBI Lending Program and ETF Countdown Fuel Rally",
-      "score": 0.5639,
-      "score_components": {
-        "recency": 0.3639,
-        "category": 0.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": [
-          "markets_hype"
-        ],
-        "hype": true
       }
     },
     {
@@ -7166,9 +7340,9 @@
       "cluster_id": "t:eeda6963a12c",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3601,
+      "score": 0.3374,
       "score_components": {
-        "recency": 0.3601
+        "recency": 0.3374
       },
       "effects": {
         "lightsaber": false,
@@ -7188,9 +7362,9 @@
       "cluster_id": "t:263968846a89",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3576,
+      "score": 0.3351,
       "score_components": {
-        "recency": 0.3576
+        "recency": 0.3351
       },
       "effects": {
         "lightsaber": false,
@@ -7210,9 +7384,9 @@
       "cluster_id": "t:483fe9066afc",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3491,
+      "score": 0.3271,
       "score_components": {
-        "recency": 0.3491
+        "recency": 0.3271
       },
       "effects": {
         "lightsaber": false,
@@ -7232,9 +7406,9 @@
       "cluster_id": "t:c8776f6e4682",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3489,
+      "score": 0.327,
       "score_components": {
-        "recency": 0.3489
+        "recency": 0.327
       },
       "effects": {
         "lightsaber": false,
@@ -7254,9 +7428,9 @@
       "cluster_id": "t:2aa7a58e6c48",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3451,
+      "score": 0.3234,
       "score_components": {
-        "recency": 0.3451
+        "recency": 0.3234
       },
       "effects": {
         "lightsaber": false,
@@ -7276,32 +7450,9 @@
       "cluster_id": "t:ba614110ca50",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.8896,
+      "score": 0.8683,
       "score_components": {
-        "recency": 0.3396,
-        "sports.focus_team": 0.55
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "The Boone-Judge Yankees need to show they can finally win heavyweight playoff battle",
-      "url": "https://nypost.com/2025/10/01/sports/yankees-need-to-show-they-can-win-heavyweight-playoff-battle",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-10-02T03:41:38+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://nypost.com/2025/10/01/sports/yankees-need-to-show-they-can-win-heavyweight-playoff-battle",
-      "canonical_id": "u:3ae8efcdc286a16a",
-      "cluster_id": "t:b1ae7e9ada42",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.8892,
-      "score_components": {
-        "recency": 0.3392,
+        "recency": 0.3183,
         "sports.focus_team": 0.55
       },
       "effects": {
@@ -7322,9 +7473,9 @@
       "cluster_id": "t:5eb5846a7d83",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3374,
+      "score": 0.3161,
       "score_components": {
-        "recency": 0.3374
+        "recency": 0.3161
       },
       "effects": {
         "lightsaber": false,
@@ -7344,193 +7495,9 @@
       "cluster_id": "t:4481b6920ac9",
       "cluster_rank": 1,
       "cluster_latest": true,
-      "score": 0.3362,
+      "score": 0.315,
       "score_components": {
-        "recency": 0.3362
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "John Thune Shares What ‘Reasonable Democrats’ Are Telling Him About Shutdown",
-      "url": "https://dailycaller.com/2025/10/01/john-thune-reasonable-democrats",
-      "source": "The Daily Caller",
-      "published_utc": "2025-10-02T03:36:05+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://dailycaller.com/2025/10/01/john-thune-reasonable-democrats",
-      "canonical_id": "u:50274391b9c6a61b",
-      "cluster_id": "t:2e0ee12d32e9",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.3356,
-      "score_components": {
-        "recency": 0.3356
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Poll: Winsome Earle-Sears Surges Within Margin of Error Against Abigail Spanberger in Virginia Governor’s Race",
-      "url": "https://www.breitbart.com/politics/2025/10/01/poll-winsome-earle-sears-surges-margin-error-abigail-spanberger-virginia",
-      "source": "Breitbart News",
-      "published_utc": "2025-10-02T03:35:07+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.breitbart.com/politics/2025/10/01/poll-winsome-earle-sears-surges-margin-error-abigail-spanberger-virginia",
-      "canonical_id": "u:ae39ccc194014f3e",
-      "cluster_id": "t:317fa4b24b05",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.335,
-      "score_components": {
-        "recency": 0.335
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "‘Hero for the Planet’: Leonardo DiCaprio Writes Tribute to ‘Dear Friend’ Jane Goodall",
-      "url": "https://www.rollingstone.com/tv-movies/tv-movie-news/leonardo-dicaprio-jane-goodall-tribute-1235439510",
-      "source": "Rolling Stone",
-      "published_utc": "2025-10-02T03:22:21+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.rollingstone.com/tv-movies/tv-movie-news/leonardo-dicaprio-jane-goodall-tribute-1235439510",
-      "canonical_id": "u:3f35b3f4f425d5c6",
-      "cluster_id": "t:cb6bf61e35e0",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.3268,
-      "score_components": {
-        "recency": 0.3268
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "‘That game is 100 percent on me’: Jarren Duran blames himself for loss to Yankees",
-      "url": "https://www.boston.com/sports/boston-red-sox/2025/10/01/jarren-duran-red-sox-yankees-left-field-game-two-quotes",
-      "source": "Boston Red Sox: News, commentary, scores, schedule, and stats",
-      "published_utc": "2025-10-02T03:16:14+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.boston.com/sports/boston-red-sox/2025/10/01/jarren-duran-red-sox-yankees-left-field-game-two-quotes",
-      "canonical_id": "u:db860f4471ec164e",
-      "cluster_id": "t:890020a7168f",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.873,
-      "score_components": {
-        "recency": 0.323,
-        "sports.focus_team": 0.55
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "'I Love Life': Dennis Prager Speaks on Camera for First Time Since Paralysis; Talks God, Happiness, Charlie Kirk",
-      "url": "https://www.breitbart.com/politics/2025/10/01/dennis-prager-speaks-first-time-paralysis-god-happiness-charlie-kirk",
-      "source": "Breitbart News",
-      "published_utc": "2025-10-02T03:15:35+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.breitbart.com/politics/2025/10/01/dennis-prager-speaks-first-time-paralysis-god-happiness-charlie-kirk",
-      "canonical_id": "u:a9c77599669a105e",
-      "cluster_id": "t:fd69285520dc",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.8226,
-      "score_components": {
-        "recency": 0.3226,
-        "sports.player_match": 0.5
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "Binta Financial Wins 25th New Ventures BC Competition",
-      "url": "https://techcouver.com/2025/10/01/binta-financial-wins-25th-new-ventures-bc-competition",
-      "source": "Techcouver.com",
-      "published_utc": "2025-10-02T03:13:58+00:00",
-      "category": "Tech",
-      "region": "Canada",
-      "canonical_url": "https://techcouver.com/2025/10/01/binta-financial-wins-25th-new-ventures-bc-competition",
-      "canonical_id": "u:3ade8a4f06b8819a",
-      "cluster_id": "t:04918342d639",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 1.6716,
-      "score_components": {
-        "recency": 0.3216,
-        "category": 0.15,
-        "regional": 1.2
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      }
-    },
-    {
-      "title": "DHS Adviser Warns ICE Agents Will Target Bad Bunny’s Super Bowl Halftime Show: ‘We Will Deport You’",
-      "url": "https://www.thewrap.com/bad-bunny-super-bowl-show-ice-target-dhs-adviser-says",
-      "source": "TheWrap",
-      "published_utc": "2025-10-02T03:11:40+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://www.thewrap.com/bad-bunny-super-bowl-show-ice-target-dhs-adviser-says",
-      "canonical_id": "u:5d744f50695f4066",
-      "cluster_id": "t:d2d86a4f252d",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "display_title": "DHS Adviser warns ICE Agents Will Target Bad Bunny’s Super Bowl Halftime Show: ‘We Will Deport You’",
-      "score": 0.3202,
-      "score_components": {
-        "recency": 0.3202
-      },
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": [
-          "politics_hype"
-        ],
-        "hype": true
-      }
-    },
-    {
-      "title": "Alligator Caught In … Detroit?",
-      "url": "https://dailycaller.com/2025/10/01/alligator-caught-detroit-michigan-animals",
-      "source": "The Daily Caller",
-      "published_utc": "2025-10-02T03:05:59+00:00",
-      "category": "General",
-      "region": "World",
-      "canonical_url": "https://dailycaller.com/2025/10/01/alligator-caught-detroit-michigan-animals",
-      "canonical_id": "u:21eb4df25ad597f8",
-      "cluster_id": "t:b6d67d901861",
-      "cluster_rank": 1,
-      "cluster_latest": true,
-      "score": 0.3167,
-      "score_components": {
-        "recency": 0.3167
+        "recency": 0.315
       },
       "effects": {
         "lightsaber": false,
@@ -7542,16 +7509,16 @@
   "_debug": {
     "feeds_total": 124,
     "cap_items": 320,
-    "collected": 920,
-    "dedup_pass1": 904,
+    "collected": 902,
+    "dedup_pass1": 890,
     "dedup_final": 320,
     "slow_domains": [
-      "rollcall.com"
+      "thehill.com"
     ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
-      "www.cbc.ca",
-      "www150.statcan.gc.ca"
+      "www.cbc.ca"
     ],
     "errors": [
       "511on.ca",
@@ -7583,7 +7550,8 @@
       "www.ttc.ca",
       "www.washingtontimes.com",
       "www.worldofreel.com",
-      "www.yrp.ca"
+      "www.yrp.ca",
+      "www150.statcan.gc.ca"
     ],
     "caps_hit": [
       "cultmtl.com",
@@ -7599,57 +7567,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.marketwatch.com",
-        "sec": 0.314,
-        "kept": 10
-      },
-      {
         "host": "www.bankofcanada.ca",
-        "sec": 0.232,
+        "sec": 0.667,
         "kept": 1
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.207,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.149,
-        "kept": 14
+        "host": "toronto.citynews.ca",
+        "sec": 0.407,
+        "kept": 8
       },
       {
         "host": "www.coindesk.com",
-        "sec": 0.108,
+        "sec": 0.378,
         "kept": 14
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.107,
-        "kept": 14
+        "host": "www.marketwatch.com",
+        "sec": 0.368,
+        "kept": 10
       },
       {
-        "host": "cointelegraph.com",
-        "sec": 0.087,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.318,
         "kept": 14
       },
       {
         "host": "www.sec.gov",
-        "sec": 0.073,
+        "sec": 0.186,
         "kept": 14
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.047,
-        "kept": 8
+        "host": "www.mlb.com",
+        "sec": 0.153,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.127,
+        "kept": 14
+      },
+      {
+        "host": "cointelegraph.com",
+        "sec": 0.092,
+        "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.035,
+        "sec": 0.057,
         "kept": 10
       }
     ],
-    "elapsed_sec": 118.61,
+    "elapsed_sec": 111.81,
     "http_timeout_sec": 10.0,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210.0,
@@ -7677,7 +7645,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 15,
+      "ps_fatal_hits": 12,
       "ps_injury_hits": 0,
       "market_btc_hits": 1,
       "market_index_hits": 0,
@@ -7689,16 +7657,16 @@
       "substack_tagged": 0,
       "sports_team_hits": 9,
       "sports_player_hits": 7,
-      "sports_result_win_hits": 25,
+      "sports_result_win_hits": 22,
       "sports_result_loss_hits": 1,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 24,
+      "sports_focus_team_hits": 20,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 5,
       "hype_conflict": 0,
-      "hype_markets": 10,
+      "hype_markets": 5,
       "hype_jobs": 0,
       "hype_sports": 1,
       "hype_ceasefire": 0
