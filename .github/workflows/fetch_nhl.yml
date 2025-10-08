@@ -1,0 +1,51 @@
+name: Build NHL JSON
+
+on:
+  schedule:
+    # Heavier updates during North American evenings
+    - cron: "*/5 16-23 * * *"   # every 5m 16:00–23:59 UTC
+    - cron: "*/5 0-6 * * *"     # every 5m 00:00–06:59 UTC
+    # Light refresh daytime
+    - cron: "0 7-15 * * *"      # hourly 07:00–15:59 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate nhl.json
+        run: |
+          python - <<'PY'
+          import os, json, sys, subprocess
+          from pathlib import Path
+          # ensure scripts dir exists
+          Path("scripts").mkdir(exist_ok=True)
+          # write the fetcher if missing (safety); otherwise use repo version
+          fp = Path("scripts/fetch_nhl.py")
+          if not fp.exists():
+              print("scripts/fetch_nhl.py is missing in repo", file=sys.stderr)
+              sys.exit(1)
+          subprocess.check_call([sys.executable, str(fp)])
+          PY
+
+      - name: Commit if changed
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git status --porcelain | grep -q " nhl.json"; then
+            git add nhl.json
+            git commit -m "chore(nhl): refresh nhl.json [skip ci]"
+            git push
+          else
+            echo "No changes to nhl.json"
+          fi
