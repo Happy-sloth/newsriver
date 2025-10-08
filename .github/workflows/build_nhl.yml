@@ -1,0 +1,33 @@
+name: update_nhl
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"      # update every 5 minutes
+  workflow_dispatch:            # allow manual run
+  push:
+    paths:
+      - "scripts/fetch_nhl.py"  # rebuild if the script changes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch NHL -> nhl.json
+        run: |
+          python scripts/fetch_nhl.py
+
+      - name: Commit nhl.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update nhl.json [skip ci]"
+          file_pattern: nhl.json
