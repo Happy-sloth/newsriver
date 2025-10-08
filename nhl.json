@@ -1,1 +1,32 @@
-{"dates":[]}
+{
+  "dates": [
+    {
+      "date": "2025-10-08",
+      "games": [
+        {
+          "gamePk": 2023020001,
+          "gameDate": "2025-10-08T23:00:00Z",
+          "status": {
+            "abstractGameState": "Preview",
+            "detailedState": "Scheduled"
+          },
+          "teams": {
+            "away": {
+              "team": { "abbreviation": "TOR", "triCode": "TOR" },
+              "score": 0
+            },
+            "home": {
+              "team": { "abbreviation": "MTL", "triCode": "MTL" },
+              "score": 0
+            }
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": ""
+          }
+        }
+      ]
+    }
+  ]
+}
