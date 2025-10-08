@@ -1,0 +1,181 @@
+name: build_nhl
+
+on:
+  schedule:
+    - cron: '*/10 0-7 * * *'      # every 10 min overnight UTC
+    - cron: '*/10 16-23 * * *'    # every 10 min in NA evening UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nhl-json
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    env:
+      TZ: America/Toronto
+      NHL_JSON: nhl.json
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build nhl.json (merge now/today +/-1d and never overwrite with empty)
+        run: |
+          python - <<'PY'
+          import json, os, time, urllib.request, datetime as dt
+
+          OUT = os.environ.get("NHL_JSON","nhl.json")
+          UA  = "MyPyBITE-newsriver/1.0 (+github actions)"
+          TIMEOUT = 12
+
+          def get(url, tries=2):
+              last=None
+              for _ in range(tries):
+                  try:
+                      req=urllib.request.Request(url,headers={"User-Agent":UA})
+                      with urllib.request.urlopen(req,timeout=TIMEOUT) as r:
+                          return json.loads(r.read().decode("utf-8"))
+                  except Exception as e:
+                      last=e; time.sleep(1.2)
+              if last: raise last
+
+          def date_str(d): return d.strftime("%Y-%m-%d")
+
+          # Local Toronto date (handles EST/EDT correctly on runner)
+          now_local = dt.datetime.now(dt.timezone(dt.timedelta(0))).astimezone()
+          today = now_local.date()
+          yday  = today - dt.timedelta(days=1)
+          tmrw  = today + dt.timedelta(days=1)
+
+          # Normalize payloads into slim schedule shape
+          def norm_scoreboard(d):
+              games = list(d.get("games",[]) or [])
+              if not games and "gameWeek" in d:
+                  for day in d["gameWeek"]:
+                      games.extend(day.get("games",[]) or [])
+              out=[]
+              for g in games:
+                  gamePk = g.get("id") or g.get("gamePk")
+                  if not gamePk: continue
+                  away = g.get("awayTeam") or (g.get("teams") or {}).get("away") or {}
+                  home = g.get("homeTeam") or (g.get("teams") or {}).get("home") or {}
+                  ls   = g.get("linescore") or {}
+                  clk  = (g.get("clock") or {}).get("timeRemaining") or ls.get("currentPeriodTimeRemaining")
+                  per  = (g.get("periodDescriptor") or {}).get("number") or g.get("period") or ls.get("currentPeriod")
+                  out.append({
+                      "gamePk": gamePk,
+                      "gameDate": g.get("startTimeUTC") or g.get("gameDate"),
+                      "status": {"abstractGameState": (g.get("gameState") or g.get("gameStatus") or "")},
+                      "teams": {
+                          "away": {"team":{"abbreviation": (away.get("abbrev") or (away.get("team") or {}).get("abbreviation") or "AWAY")}, "score": away.get("score")},
+                          "home": {"team":{"abbreviation": (home.get("abbrev") or (home.get("team") or {}).get("abbreviation") or "HOME")}, "score": home.get("score")},
+                      },
+                      "linescore": {
+                          "currentPeriod": per,
+                          "currentPeriodTimeRemaining": clk
+                      }
+                  })
+              return out
+
+          def norm_stats(d):
+              out=[]
+              for day in d.get("dates",[]):
+                  for g in day.get("games",[]):
+                      ls  = g.get("linescore") or {}
+                      aw  = (g.get("teams") or {}).get("away") or {}
+                      ho  = (g.get("teams") or {}).get("home") or {}
+                      out.append({
+                          "gamePk": g.get("gamePk"),
+                          "gameDate": g.get("gameDate"),
+                          "status": {"abstractGameState": (g.get("status") or {}).get("abstractGameState","")},
+                          "teams": {
+                              "away": {"team":{"abbreviation": (aw.get("team") or {}).get("abbreviation","AWAY")}, "score": aw.get("score")},
+                              "home": {"team":{"abbreviation": (ho.get("team") or {}).get("abbreviation","HOME")}, "score": ho.get("score")},
+                          },
+                          "linescore": {
+                              "currentPeriod": ls.get("currentPeriod"),
+                              "currentPeriodTimeRemaining": ls.get("currentPeriodTimeRemaining")
+                          }
+                      })
+              return out
+
+          def read_prev():
+              try:
+                  with open(OUT,"r",encoding="utf-8") as f: 
+                      j=json.load(f); 
+                      return j.get("dates",[{}])[0].get("games",[])
+              except: 
+                  return []
+
+          # Fetch sources (best effort)
+          merged = {}
+
+          def add_many(arr):
+              for g in arr or []:
+                  k=g.get("gamePk")
+                  if not k: continue
+                  merged[k]=g
+
+          try:
+              add_many(norm_scoreboard(get("https://api-web.nhle.com/v1/scoreboard/now")))
+          except: pass
+
+          for d in (today,):
+              try:
+                  add_many(norm_scoreboard(get(f"https://api-web.nhle.com/v1/scoreboard/{date_str(d)}")))
+              except: pass
+
+          for d in (yday, today, tmrw):
+              try:
+                  add_many(norm_stats(get(f"https://statsapi.web.nhl.com/api/v1/schedule?date={date_str(d)}&expand=schedule.linescore,schedule.teams")))
+              except: pass
+
+          games = list(merged.values())
+          # If still empty, keep previous file as-is (never overwrite with empty)
+          if not games:
+              prev = read_prev()
+              if prev:
+                  print(f"Kept previous nhl.json with {len(prev)} games (sources empty)")
+                  # Do not touch file
+                  print("NO_WRITE")
+              else:
+                  # Write explicit empty once (bootstrap)
+                  payload={"dates":[]}
+                  with open(OUT,"w",encoding="utf-8") as f: json.dump(payload,f,separators=(",",":"))
+                  print("Wrote empty nhl.json (no previous to preserve)")
+          else:
+              # Wrap in schedule-like container
+              payload = {"dates":[{"games": sorted(games, key=lambda x: (x.get('gameDate') or '', x.get('gamePk') or 0)) }]}
+              with open(OUT,"w",encoding="utf-8") as f: json.dump(payload,f,separators=(",",":"))
+              print(f"Wrote nhl.json with {len(games)} games")
+          PY
+
+      - name: Commit & push if changed (and not noop)
+        run: |
+          # Skip commit if the script printed NO_WRITE (previous preserved)
+          if grep -q "NO_WRITE" <(cat <<'LOG'
+          $(cat -n $GITHUB_STEP_SUMMARY 2>/dev/null || true)
+          LOG
+          ); then
+            echo "Preserved previous file; no commit."
+            exit 0
+          fi
+
+          if [[ -n "$(git status --porcelain -- nhl.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add nhl.json
+            git commit -m "chore: update nhl.json [skip ci]"
+            git push
+          else
+            echo "No changes."
+          fi
