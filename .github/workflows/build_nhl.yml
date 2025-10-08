@@ -1,18 +1,26 @@
-name: update_nhl
+name: build_nhl
 
 on:
   schedule:
-    - cron: "*/5 * * * *"      # update every 5 minutes
-  workflow_dispatch:            # allow manual run
-  push:
-    paths:
-      - "scripts/fetch_nhl.py"  # rebuild if the script changes
+    # Every 10 minutes 00:00–07:59 UTC (7p–3:59a ET) — late window & finals
+    - cron: '*/10 0-7 * * *'
+    # Every 10 minutes 16:00–23:59 UTC (11a–7:59p ET) — game day window
+    - cron: '*/10 16-23 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nhl-json
+  cancel-in-progress: false
 
 jobs:
-  build:
+  fetch:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    env:
+      TZ: America/Toronto  # for “local” day checks
+      NHL_JSON: nhl.json
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,14 +28,94 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      - name: Fetch NHL -> nhl.json
+      - name: Build nhl.json (scoreboard + safe fallback)
         run: |
-          python scripts/fetch_nhl.py
+          python - <<'PY'
+          import os, json, time, urllib.request, datetime as dt, pathlib, sys
 
-      - name: Commit nhl.json
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: update nhl.json [skip ci]"
-          file_pattern: nhl.json
+          OUT = os.environ.get("NHL_JSON","nhl.json")
+          UA  = "MyPyBITE-newsriver/1.0"
+
+          def get(url, timeout=12):
+              req = urllib.request.Request(url, headers={"User-Agent": UA})
+              with urllib.request.urlopen(req, timeout=timeout) as r:
+                  return json.loads(r.read().decode("utf-8"))
+
+          def normalize_scoreboard(d):
+              games = d.get("games", [])
+              if not games and "gameWeek" in d:
+                  for day in d["gameWeek"]:
+                      games.extend(day.get("games", []))
+              out=[]
+              for g in games:
+                  gamePk = g.get("id") or g.get("gamePk")
+                  start  = g.get("startTimeUTC") or g.get("gameDate")
+                  away   = g.get("awayTeam") or g.get("teams",{}).get("away",{})
+                  home   = g.get("homeTeam") or g.get("teams",{}).get("home",{})
+                  out.append({
+                    "gamePk": gamePk,
+                    "gameDate": start,
+                    "status": {"abstractGameState": g.get("gameState") or g.get("gameStatus","")},
+                    "teams": {
+                      "away": {"team":{"abbreviation": (away.get("abbrev") or away.get("team",{}).get("abbreviation") or "AWAY")},
+                               "score": away.get("score")},
+                      "home": {"team":{"abbreviation": (home.get("abbrev") or home.get("team",{}).get("abbreviation") or "HOME")},
+                               "score": home.get("score")}
+                    },
+                    "linescore": {
+                      "currentPeriod": (g.get("periodDescriptor",{}) or {}).get("number") or g.get("period"),
+                      "currentPeriodTimeRemaining": (g.get("clock",{}) or {}).get("timeRemaining")
+                    }
+                  })
+              return {"dates":[{"games":out}]} if out else {"dates":[]}
+
+          def normalize_stats(d):
+              dates = d.get("dates") or []
+              if not dates:
+                  return {"dates":[]}
+              gs = dates[0].get("games") or []
+              # Already in the shape we want; keep only minimal keys
+              slim=[]
+              for g in gs:
+                  ls  = g.get("linescore") or {}
+                  away= g.get("teams",{}).get("away",{})
+                  home= g.get("teams",{}).get("home",{})
+                  slim.append({
+                    "gamePk": g.get("gamePk"),
+                    "gameDate": g.get("gameDate"),
+                    "status": {"abstractGameState": (g.get("status") or {}).get("abstractGameState","")},
+                    "teams": {
+                      "away": {"team":{"abbreviation": (away.get("team",{}) or {}).get("abbreviation","AWAY")},
+                               "score": away.get("score")},
+                      "home": {"team":{"abbreviation": (home.get("team",{}) or {}).get("abbreviation","HOME")},
+                               "score": home.get("score")}
+                    },
+                    "linescore": {
+                      "currentPeriod": ls.get("currentPeriod"),
+                      "currentPeriodTimeRemaining": ls.get("currentPeriodTimeRemaining")
+                    }
+                  })
+              return {"dates":[{"games":slim}]}
+
+          def has_games(payload):
+              return bool(payload.get("dates") and payload["dates"][0].get("games"))
+
+          def read_prev(path):
+              try:
+                  with open(path,"r",encoding="utf-8") as f: return json.load(f)
+              except: return {"dates":[]}
+
+          def write_json(path, payload):
+              with open(path,"w",encoding="utf-8") as f:
+                  json.dump(payload, f, separators=(",",":"))
+
+          # --- build ---
+          prev = read_prev(OUT)
+
+          now_utc = dt.datetime.utcnow().replace(tzinfo=dt.timezone.utc)
+          # crude ET offset (no tz libs): DST heuristics via time.daylight
+          off = 4 if time.daylight and time.localtime().tm_isdst else 5
+          local = now_utc - dt.timedelta(hours=off)
+          local_date = f"{local.year:04d}-_
