@@ -1,90 +1,44 @@
-name: Build Headlines
+name: Build NHL JSON
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"  # every 15 minutes (UTC)
+    - cron: "*/30 * * * *"   # every 30 minutes (tighten/loosen as you like)
+  push:
+    branches: [ main ]
+    paths:
+      - "scripts/fetch_nhl.py"         # rebuild if the script changes
+      - ".github/workflows/build_nhl.yml"
 
 permissions:
-  contents: write  # required to commit headlines.json
-
-# Use the SAME group as tour.yml so they never push at the same time
-concurrency:
-  group: commit-to-main
-  cancel-in-progress: false
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout (full history)
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      # Always start from the remote tip; avoid dirty-tree rebases later
-      - name: Reset to remote tip
-        shell: bash
-        run: |
-          set -euo pipefail
-          BRANCH="${{ github.ref_name }}"
-          if [ -z "${BRANCH}" ]; then BRANCH="main"; fi
-          git fetch origin "${BRANCH}"
-          # Ensure we're on the expected branch and hard-reset to remote
-          git checkout -B "${BRANCH}" "origin/${BRANCH}" || git checkout "${BRANCH}"
-          git reset --hard "origin/${BRANCH}"
-          git status --porcelain
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install feedparser requests json5 beautifulsoup4
-
-      # Ensure Substack RSS is present (no duplicates)
-      - name: Ensure Substack feed in feeds.txt
-        run: |
-          touch feeds.txt
-          if ! grep -qx 'https://mypybite.substack.com/feed' feeds.txt; then
-            echo 'https://mypybite.substack.com/feed' >> feeds.txt
-          fi
-          echo "Using feeds:"
-          cat feeds.txt
-
-      - name: Build headlines.json
+      - name: Generate nhl.json (today + next 6 days)
         env:
-          NEWSRIVER_TIMEZONE: America/Toronto
+          NHL_RANGE_DAYS: "7"
         run: |
-          python scripts/fetch_headlines.py \
-            --feeds-file feeds.txt \
-            --out headlines.json
+          python3 scripts/fetch_nhl.py
 
-      - name: Validate JSON
+      - name: Commit & push if changed
         run: |
-          python - <<'PY'
-          import json
-          with open('headlines.json','r',encoding='utf-8') as f:
-              json.load(f)
-          print("headlines.json OK")
-          PY
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: headlines.json
-          path: headlines.json
-
-      # Commit & push safely (only if changed)
-      - name: Commit & push headlines.json
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "headlines.json"
-          message: "chore: update headlines.json [skip ci]"
-          default_author: github_actions
-          # Use force-with-lease to resolve non-fast-forward errors safely
-          push: "--force-with-lease origin HEAD:${{ github.ref_name }}"
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nhl.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(nhl): refresh nhl.json [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
