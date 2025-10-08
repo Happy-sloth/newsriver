@@ -3,53 +3,50 @@ name: Build NHL JSON
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *" # every 30 minutes, adjust as you like
+    - cron: "*/30 * * * *" # every 30 min
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Quick network sanity check
-        run: |
-          set -e
-          for i in 1 2 3; do
-            if curl -fsS --max-time 10 https://statsapi.web.nhl.com >/dev/null; then
-              echo "NHL stats host reachable"
-              exit 0
-            fi
-            echo "Retry $i: stats host not reachable, waiting…"
-            sleep 3
-          done
-          echo "Stats host still not reachable after retries" >&2
-          # Do not hard-fail; the script itself also has retries. Continue.
+      - name: Install deps (none needed)
+        run: python -V
 
-      - name: Build nhl.json (today in Toronto time)
+      # Non-fatal network probes to both hosts
+      - name: Network sanity check (both hosts)
+        continue-on-error: true
+        run: |
+          set -euxo pipefail
+          for host in statsapi.web.nhl.com api-web.nhle.com; do
+            echo "Probing https://$host/ ..."
+            (curl -fsS --max-time 10 "https://$host/" >/dev/null && echo "OK: $host") || echo "WARN: $host not reachable now"
+          done
+
+      - name: Build nhl.json for today (Toronto time)
         env:
-          # Optional overrides:
+          OUTFILE: nhl.json
+          # To test a specific date, uncomment:
           # SCHEDULE_DATE: "2025-10-08"
-          OUTFILE: "nhl.json"
-          NHL_API_HOST: "statsapi.web.nhl.com"
         run: |
           python3 scripts/fetch_nhl.py
 
       - name: Commit & push nhl.json
-        if: ${{ success() }}
         run: |
           set -e
-          git config user.name "github-actions"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add nhl.json
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "No changes."
           else
             git commit -m "Update nhl.json"
             git push
