@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Lightweight relay: fetch today's NHL schedule (with linescore + teams)
+# Lightweight relay: fetch NHL schedule (yesterday, today, tomorrow)
 # and write it as nhl.json at repo root for the front-end widget.
 
 import json, sys, datetime, urllib.request
@@ -11,18 +11,32 @@ def fetch(date_str: str):
         return json.loads(r.read().decode("utf-8"))
 
 def main():
-    # Use UTC "today" so the job is timezone-agnostic
-    today = datetime.datetime.utcnow().date().isoformat()
+    base = datetime.datetime.utcnow().date()
+    # Fetch yesterday, today, and tomorrow — ensures coverage across timezones
+    dates = [
+        (base - datetime.timedelta(days=1)).isoformat(),
+        base.isoformat(),
+        (base + datetime.timedelta(days=1)).isoformat()
+    ]
 
-    try:
-        data = fetch(today)
-    except Exception as e:
-        # Fail closed with an empty, valid structure so the site doesn’t break
-        data = {"dates": []}
+    all_games = {"dates": []}
+
+    for d in dates:
+        try:
+            data = fetch(d)
+            if data.get("dates"):
+                all_games["dates"].extend(data["dates"])
+        except Exception as e:
+            print(f"⚠️ NHL fetch failed for {d}: {e}", file=sys.stderr)
+            continue
+
+    # If still empty, output a valid empty structure so the front end doesn’t crash
+    if not all_games["dates"]:
+        all_games = {"dates": []}
 
     # Write to repo root for GitHub Pages: https://www.mypybite.com/newsriver/nhl.json
     with open("nhl.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
+        json.dump(all_games, f, ensure_ascii=False, separators=(",", ":"))
 
 if __name__ == "__main__":
     sys.exit(main())
