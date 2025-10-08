@@ -1,49 +1,56 @@
-name: build_nhl
+name: Build NHL JSON
 
 on:
-  push:
-    branches: [ main ]
-    paths-ignore:
-      - 'nhl.json'    # don't retrigger on nhl.json-only changes
   workflow_dispatch:
-
-permissions:
-  contents: write
-
-concurrency:
-  group: build_nhl-${{ github.ref }}
-  cancel-in-progress: false
+  schedule:
+    - cron: "*/30 * * * *" # every 30 minutes, adjust as you like
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          fetch-depth: 0
+          python-version: "3.12"
 
-      - name: Configure git
+      - name: Quick network sanity check
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          set -e
+          for i in 1 2 3; do
+            if curl -fsS --max-time 10 https://statsapi.web.nhl.com >/dev/null; then
+              echo "NHL stats host reachable"
+              exit 0
+            fi
+            echo "Retry $i: stats host not reachable, waiting…"
+            sleep 3
+          done
+          echo "Stats host still not reachable after retries" >&2
+          # Do not hard-fail; the script itself also has retries. Continue.
 
-      # 🔒 Belt-and-suspenders: even if some step touches nhl.json,
-      # restore it to the version from the checked-out commit.
-      - name: Guard — keep nhl.json unchanged
+      - name: Build nhl.json (today in Toronto time)
+        env:
+          # Optional overrides:
+          # SCHEDULE_DATE: "2025-10-08"
+          OUTFILE: "nhl.json"
+          NHL_API_HOST: "statsapi.web.nhl.com"
         run: |
-          if git ls-files --error-unmatch nhl.json >/dev/null 2>&1; then
-            git checkout -- nhl.json || true
-          fi
+          python3 scripts/fetch_nhl.py
 
-      # 👇 your other build steps (headlines, mix.json, etc.) would go here
-      # Make sure none of them writes to nhl.json.
-
-      - name: Commit changes (headlines etc.)
+      - name: Commit & push nhl.json
+        if: ${{ success() }}
         run: |
-          git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m "build: refresh artifacts [skip ci]"
+          set -e
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add nhl.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update nhl.json"
             git push
           fi
