@@ -1,51 +1,117 @@
-name: Build NHL JSON
-
+name: build_nhl
 on:
   schedule:
-    # Heavier updates during North American evenings
-    - cron: "*/5 16-23 * * *"   # every 5m 16:00–23:59 UTC
-    - cron: "*/5 0-6 * * *"     # every 5m 00:00–06:59 UTC
-    # Light refresh daytime
-    - cron: "0 7-15 * * *"      # hourly 07:00–15:59 UTC
-  workflow_dispatch:
-
+    # every 10 minutes from 11:00–02:59 Eastern (16–07 UTC)
+    - cron: "*/10 16-23 * * *"  # 11:00–18:59 ET
+    - cron: "*/10 0-7 * * *"    # 19:00–02:59 ET
+  workflow_dispatch: {}
 permissions:
   contents: write
 
 jobs:
-  build:
+  fetch:
     runs-on: ubuntu-latest
+    env:
+      TZ: America/Toronto   # or America/New_York
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+        with: { python-version: "3.11" }
+      - run: python - <<'PY'
+import os, json, time, urllib.request, datetime as dt
 
-      - name: Generate nhl.json
-        run: |
-          python - <<'PY'
-          import os, json, sys, subprocess
-          from pathlib import Path
-          # ensure scripts dir exists
-          Path("scripts").mkdir(exist_ok=True)
-          # write the fetcher if missing (safety); otherwise use repo version
-          fp = Path("scripts/fetch_nhl.py")
-          if not fp.exists():
-              print("scripts/fetch_nhl.py is missing in repo", file=sys.stderr)
-              sys.exit(1)
-          subprocess.check_call([sys.executable, str(fp)])
-          PY
+TZ = os.environ.get("TZ","America/Toronto")
+# 1) Determine “today” in target TZ (not UTC)
+now_utc = dt.datetime.utcnow().replace(tzinfo=dt.timezone.utc)
+# You can assume Eastern offset roughly; or install pytz/dateutil if you prefer.
+# Minimal approach: use NHL's "scoreboard/now" first, then fall back to a local-date string.
+def iso_date_local():
+    # use Eastern-ish local date approximation by subtracting 4/5 hours if you don't ship tz libs
+    off = 4 if time.gmtime().tm_isdst else 5
+    loc = now_utc - dt.timedelta(hours=off)
+    return f"{loc.year:04d}-{loc.month:02d}-{loc.day:02d}"
 
-      - name: Commit if changed
+def get(url, timeout=8):
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent":"mpb/1.0"}), timeout=timeout) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+def normalize_scoreboard(d):
+    # unify to {dates:[{games:[...] }]}
+    games = d.get("games", [])
+    if not games and "gameWeek" in d:
+        for day in d["gameWeek"]:
+            games.extend(day.get("games", []))
+    out=[]
+    for g in games:
+        # favor ids present in both feeds
+        gamePk = g.get("id") or g.get("gamePk")
+        start  = g.get("startTimeUTC") or g.get("gameDate")
+        away   = g.get("awayTeam") or g.get("teams",{}).get("away",{})
+        home   = g.get("homeTeam") or g.get("teams",{}).get("home",{})
+        out.append({
+            "gamePk": gamePk, "gameDate": start,
+            "status": {"abstractGameState": g.get("gameState") or g.get("gameStatus","")},
+            "teams": {
+              "away": {"team":{"abbreviation": (away.get("abbrev") or away.get("team",{}).get("abbreviation") or "AWAY")},
+                       "score": away.get("score")},
+              "home": {"team":{"abbreviation": (home.get("abbrev") or home.get("team",{}).get("abbreviation") or "HOME")},
+                       "score": home.get("score")}
+            },
+            "linescore": {
+              "currentPeriod": (g.get("periodDescriptor",{}) or {}).get("number") or g.get("period"),
+              "currentPeriodTimeRemaining": (g.get("clock",{}) or {}).get("timeRemaining")
+            }
+        })
+    return {"dates":[{"games":out}]} if out else {"dates":[]}
+
+root = os.getcwd()
+out_path = os.path.join(root, "nhl.json")
+prev = {"dates":[]}
+if os.path.exists(out_path):
+    try:
+        with open(out_path,"r",encoding="utf-8") as f: prev = json.load(f)
+    except: pass
+
+wip = {"dates":[]}
+
+# 2) Try scoreboard/now then scoreboard/<today>
+try:
+    wip = normalize_scoreboard(get("https://api-web.nhle.com/v1/scoreboard/now"))
+except Exception:
+    wip = {"dates":[]}
+
+if not wip["dates"]:
+    try:
+        d = get(f"https://api-web.nhle.com/v1/scoreboard/{iso_date_local()}")
+        wip = normalize_scoreboard(d)
+    except Exception:
+        wip = {"dates":[]}
+
+# 3) SAFEGUARD: if fetch is empty, keep previous file for a grace window instead of publishing emptiness
+def has_games(payload): return bool(payload.get("dates") and payload["dates"][0].get("games"))
+
+final = wip if has_games(wip) else prev   # keep last good state
+# Optional: if you want to hard-reset overnight, clear after 4am local:
+try:
+    off = 4 if time.gmtime().tm_isdst else 5
+    local_hour = (now_utc - dt.timedelta(hours=off)).hour
+    if local_hour >= 4 and not has_games(wip):
+        final = {"dates": []}  # mornings with no games will be empty again
+except: pass
+
+with open(out_path, "w", encoding="utf-8") as f:
+    json.dump(final, f, separators=(",",":"))
+
+print("Wrote nhl.json with", len(final.get("dates",[])) and len(final["dates"][0].get("games",[])), "games")
+PY
+      - name: Commit
         run: |
-          set -e
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git status --porcelain | grep -q " nhl.json"; then
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add nhl.json
-            git commit -m "chore(nhl): refresh nhl.json [skip ci]"
+            git commit -m "chore: update nhl.json [skip ci]"
             git push
           else
-            echo "No changes to nhl.json"
+            echo "No changes."
           fi
