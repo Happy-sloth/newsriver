@@ -1,117 +1,49 @@
 name: build_nhl
+
 on:
-  schedule:
-    - cron: '*/10 0-7 * * *'       # every 10m overnight UTC
-    - cron: '*/10 16-23 * * *'     # every 10m North America evenings
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'nhl.json'    # don't retrigger on nhl.json-only changes
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: nhl-json
+  group: build_nhl-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  fetch:
+  build:
     runs-on: ubuntu-latest
-    env:
-      OUT: nhl.json
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          python-version: '3.11'
+          fetch-depth: 0
 
-      - name: Build nhl.json (never overwrite with empty)
+      - name: Configure git
         run: |
-          set -euo pipefail
-          rm -f .nhl_wrote
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-          python - <<'PY'
-          import json, os, time, urllib.request, datetime as dt
+      # 🔒 Belt-and-suspenders: even if some step touches nhl.json,
+      # restore it to the version from the checked-out commit.
+      - name: Guard — keep nhl.json unchanged
+        run: |
+          if git ls-files --error-unmatch nhl.json >/dev/null 2>&1; then
+            git checkout -- nhl.json || true
+          fi
 
-          OUT = os.environ.get("OUT","nhl.json")
-          UA  = "MyPyBITE-newsriver/1.0 (+github actions)"
-          TIMEOUT = 12
+      # 👇 your other build steps (headlines, mix.json, etc.) would go here
+      # Make sure none of them writes to nhl.json.
 
-          def get(url, tries=2):
-              last=None
-              for _ in range(tries):
-                  try:
-                      req=urllib.request.Request(url,headers={"User-Agent":UA})
-                      with urllib.request.urlopen(req,timeout=TIMEOUT) as r:
-                          return json.loads(r.read().decode("utf-8"))
-                  except Exception as e:
-                      last=e; time.sleep(1.2)
-              if last: raise last
-
-          def ds(d): return d.strftime("%Y-%m-%d")
-
-          # local date on runner
-          now = dt.datetime.now().astimezone()
-          today = now.date()
-          yday  = today - dt.timedelta(days=1)
-          tmrw  = today + dt.timedelta(days=1)
-
-          def norm_scoreboard(d):
-              games = list(d.get("games",[]) or [])
-              if not games and "gameWeek" in d:
-                  for day in d["gameWeek"]:
-                      games.extend(day.get("games",[]) or [])
-              out=[]
-              for g in games:
-                  gamePk = g.get("id") or g.get("gamePk")
-                  if not gamePk: continue
-                  away = g.get("awayTeam") or (g.get("teams") or {}).get("away") or {}
-                  home = g.get("homeTeam") or (g.get("teams") or {}).get("home") or {}
-                  ls   = g.get("linescore") or {}
-                  clk  = (g.get("clock") or {}).get("timeRemaining") or ls.get("currentPeriodTimeRemaining")
-                  per  = (g.get("periodDescriptor") or {}).get("number") or g.get("period") or ls.get("currentPeriod")
-                  out.append({
-                      "gamePk": gamePk,
-                      "gameDate": g.get("startTimeUTC") or g.get("gameDate"),
-                      "status": {"abstractGameState": (g.get("gameState") or g.get("gameStatus") or "")},
-                      "teams": {
-                          "away": {"team":{"abbreviation": (away.get("abbrev") or (away.get("team") or {}).get("abbreviation") or "AWAY")}, "score": away.get("score")},
-                          "home": {"team":{"abbreviation": (home.get("abbrev") or (home.get("team") or {}).get("abbreviation") or "HOME")}, "score": home.get("score")},
-                      },
-                      "linescore": {
-                          "currentPeriod": per,
-                          "currentPeriodTimeRemaining": clk
-                      }
-                  })
-              return out
-
-          def norm_stats(d):
-              out=[]
-              for day in d.get("dates",[]):
-                  for g in day.get("games",[]):
-                      ls  = g.get("linescore") or {}
-                      aw  = (g.get("teams") or {}).get("away") or {}
-                      ho  = (g.get("teams") or {}).get("home") or {}
-                      out.append({
-                          "gamePk": g.get("gamePk"),
-                          "gameDate": g.get("gameDate"),
-                          "status": {"abstractGameState": (g.get("status") or {}).get("abstractGameState","")},
-                          "teams": {
-                              "away": {"team":{"abbreviation": (aw.get("team") or {}).get("abbreviation","AWAY")}, "score": aw.get("score")},
-                              "home": {"team":{"abbreviation": (ho.get("team") or {}).get("abbreviation","HOME")}, "score": ho.get("score")},
-                          },
-                          "linescore": {
-                              "currentPeriod": ls.get("currentPeriod"),
-                              "currentPeriodTimeRemaining": ls.get("currentPeriodTimeRemaining")
-                          }
-                      })
-              return out
-
-          merged = {}
-
-          def add_many(arr):
-              for g in arr or []:
-                  k=g.get("gamePk")
-                  if not k: continue
-                  merged[k]=g
-
-          # try
+      - name: Commit changes (headlines etc.)
+        run: |
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "build: refresh artifacts [skip ci]"
+            git push
+          fi
