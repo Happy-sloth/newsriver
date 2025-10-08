@@ -1,31 +1,25 @@
 #!/usr/bin/env python3
 """
-Fetch the official NHL schedule for a given day and write nhl.json
-in the flat shape your front-end expects.
+Build nhl.json from official NHL endpoints, resilient to DNS/host hiccups.
 
 Inputs (optional):
-  - ENV SCHEDULE_DATE: YYYY-MM-DD (defaults to "today" in America/Toronto)
-  - ENV OUTFILE: path to write (defaults to ./nhl.json)
-  - ENV NHL_API_HOST: override the NHL stats host (default: statsapi.web.nhl.com)
+  - SCHEDULE_DATE   (YYYY-MM-DD; default: "today" in America/Toronto)
+  - OUTFILE         (default: nhl.json)
 
-This script ONLY writes nhl.json — make sure no other script/workflow also writes it.
+This script:
+  1) Tries multiple NHL hosts (different CDNs / APIs).
+  2) Retries with backoff on DNS/HTTP errors.
+  3) Normalizes to your front-end’s compact shape.
 """
 
-import os, sys, json, datetime, time, socket
+import os, sys, json, time, socket, datetime
 import urllib.request, urllib.error
-
-# ---------- config ----------
-API_HOST = os.environ.get("NHL_API_HOST", "statsapi.web.nhl.com").strip() or "statsapi.web.nhl.com"
-API_BASE = f"https://{API_HOST}/api/v1/schedule"
-# Hydrate linescore so you get currentPeriod/clock when LIVE.
-QUERY = "?date={date}&hydrate=linescore,team,seriesSummary,series,game.seriesSummary,game.series"
 
 OUTFILE = os.environ.get("OUTFILE", "nhl.json")
 SCHEDULE_DATE = os.environ.get("SCHEDULE_DATE")  # YYYY-MM-DD or None
 
 
-# Pick "today" in America/Toronto if not provided
-def today_eastern():
+def today_eastern() -> str:
     try:
         from zoneinfo import ZoneInfo
         tz = ZoneInfo("America/Toronto")
@@ -37,134 +31,232 @@ def today_eastern():
 
 DATE_STR = SCHEDULE_DATE or today_eastern()
 
+# --- Candidate endpoints (different DNS/edges) ---
+# 1) statsapi.web.nhl.com classic v1 (dates[0].games)
+# 2) api-web.nhle.com modern web API (gameWeek[].games or dates[].games)
+# 3) If the above two both fail, we hard-fail.
+CANDIDATES = [
+    {
+        "name": "statsapi",
+        "url": lambda d: f"https://statsapi.web.nhl.com/api/v1/schedule?date={d}&hydrate=linescore,team",
+        "kind": "statsapi",
+    },
+    {
+        "name": "api-web",
+        "url": lambda d: f"https://api-web.nhle.com/v1/schedule/{d}",
+        "kind": "apiweb",
+    },
+]
 
-def fetch_json_with_retries(url: str, attempts: int = 6, first_delay: float = 0.8):
-    """
-    Robust fetch with exponential backoff.
-    Retries on URLError, HTTPError (>= 500), and socket.gaierror (DNS).
-    """
+
+def _req(url: str):
+    return urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "nhl-json-builder/2.0 (+github actions)",
+            "Accept": "application/json",
+        },
+    )
+
+
+def fetch_with_retries(url: str, attempts: int = 6, first_delay: float = 0.9):
     delay = first_delay
-    last_exc = None
+    last = None
     for i in range(1, attempts + 1):
         try:
-            req = urllib.request.Request(url, headers={
-                "User-Agent": "nhl-json-builder/1.1 (+github actions)",
-                "Accept": "application/json",
-            })
-            with urllib.request.urlopen(req, timeout=20) as resp:
-                if resp.status >= 500:
-                    raise urllib.error.HTTPError(url, resp.status, "Server error", resp.headers, None)
-                return json.loads(resp.read().decode("utf-8"))
-        except urllib.error.HTTPError as e:
-            # 4xx likely permanent for this request — only retry 429/5xx
-            if e.code == 429 or e.code >= 500:
-                last_exc = e
-            else:
-                raise
-        except (urllib.error.URLError, socket.gaierror) as e:
-            last_exc = e
+            with urllib.request.urlopen(_req(url), timeout=22) as r:
+                if r.status >= 500:
+                    raise urllib.error.HTTPError(url, r.status, "Server error", r.headers, None)
+                return json.loads(r.read().decode("utf-8"))
+        except (urllib.error.URLError, urllib.error.HTTPError, socket.gaierror) as e:
+            last = e
         except Exception as e:
-            last_exc = e
-
+            last = e
         if i < attempts:
             time.sleep(delay)
-            delay = min(delay * 1.8, 10.0)  # cap the backoff
+            delay = min(delay * 1.8, 10.0)
         else:
-            if isinstance(last_exc, Exception):
-                raise last_exc
-            else:
-                raise RuntimeError("Unknown fetch error")
+            raise last or RuntimeError("Unknown fetch error")
 
 
-def normalize_game(g):
+# ---------- Normalizers ----------
+def norm_from_statsapi(data: dict, date_str: str):
+    """statsapi.web.nhl.com shape: {'dates':[{'games':[...]}]}"""
+    dates = (data or {}).get("dates") or []
+    games = []
+    if dates and dates[0].get("games"):
+        for g in dates[0]["games"]:
+            status = g.get("status") or {}
+            ls = g.get("linescore") or {}
+            teams = g.get("teams") or {}
+            aw = teams.get("away") or {}
+            hm = teams.get("home") or {}
+            awt = aw.get("team") or {}
+            hmt = hm.get("team") or {}
+
+            def abbr(t):
+                return (t.get("abbreviation") or t.get("triCode") or (t.get("name", "")[:3].upper() if t.get("name") else "")).upper()
+
+            games.append(
+                {
+                    "gamePk": g.get("gamePk"),
+                    "gameDate": g.get("gameDate"),
+                    "status": {
+                        "abstractGameState": status.get("abstractGameState", "") or "",
+                        "detailedState": status.get("detailedState", "") or status.get("abstractGameState", "") or "",
+                    },
+                    "teams": {
+                        "away": {"team": {"abbreviation": abbr(awt), "triCode": abbr(awt)}, "score": aw.get("score", 0)},
+                        "home": {"team": {"abbreviation": abbr(hmt), "triCode": abbr(hmt)}, "score": hm.get("score", 0)},
+                    },
+                    "linescore": {
+                        "currentPeriod": ls.get("currentPeriod") or 0,
+                        "currentPeriodOrdinal": ls.get("currentPeriodOrdinal") or "",
+                        "currentPeriodTimeRemaining": ls.get("currentPeriodTimeRemaining") or "",
+                    },
+                }
+            )
+    return {"dates": [{"date": date_str, "games": games}]}
+
+
+def norm_from_apiweb(data, date_str: str):
     """
-    Map NHL Stats API game object -> your flattened shape.
-    Only the keys your front-end uses are included.
+    api-web.nhle.com/v1/schedule/{YYYY-MM-DD}
+    Observed shapes:
+      - {'gameWeek':[{'date': 'YYYY-MM-DD', 'games':[...]} , ...]}
+      - or sometimes {'dates':[{'date': '...', 'games':[...]}]}
+      - each game has keys like:
+          startTimeUTC, gameState, awayTeam:{abbrev}, homeTeam:{abbrev}, score or boxscore?
     """
-    # Status
-    status = g.get("status") or {}
-    abstract = status.get("abstractGameState", "") or ""
-    detailed = status.get("detailedState", "") or abstract or ""
+    # unify list of games for the requested date
+    games_raw = []
 
-    # Teams & scores
-    teams = g.get("teams") or {}
-    away_raw = teams.get("away") or {}
-    home_raw = teams.get("home") or {}
-    away_team = away_raw.get("team") or {}
-    home_team = home_raw.get("team") or {}
+    if isinstance(data, dict):
+        if "gameWeek" in data and isinstance(data["gameWeek"], list):
+            for day in data["gameWeek"]:
+                if (day or {}).get("date") == date_str and day.get("games"):
+                    games_raw.extend(day["games"])
+        if "dates" in data and isinstance(data["dates"], list):
+            for day in data["dates"]:
+                if (day or {}).get("date") == date_str and day.get("games"):
+                    games_raw.extend(day["games"])
+        # Some responses are just {'games':[...], 'date':'...'}
+        if not games_raw and "games" in data and isinstance(data["games"], list):
+            # If there is a top-level 'date', ensure match or accept if missing.
+            if (data.get("date") in (None, "", date_str)) or (data.get("date") == date_str):
+                games_raw.extend(data["games"])
 
-    def abbr(team):
-        return (
-            team.get("abbreviation")
-            or team.get("triCode")
-            or (team.get("name", "")[:3].upper() if team.get("name") else "")
+    games = []
+    for g in games_raw:
+        # Fields vary; be defensive.
+        # Times: startTimeUTC or gameDate
+        game_date = g.get("startTimeUTC") or g.get("gameDate") or ""
+        # State: gameState (e.g., "FUT", "LIVE", "FINAL") or status/detailedState
+        state = (g.get("gameState") or "").upper()
+        if not state and isinstance(g.get("status"), dict):
+            st = g["status"]
+            state = (st.get("detailedState") or st.get("abstractGameState") or "").upper()
+
+        def map_state(s: str):
+            s = (s or "").upper()
+            if any(x in s for x in ("IN_PROGRESS", "LIVE", "STARTED")):
+                return "Live"
+            if any(x in s for x in ("FINAL", "OFF")) or s == "FINAL":
+                return "Final"
+            if any(x in s for x in ("PRE", "FUT", "SCHEDULED")):
+                return "Preview"
+            return "Unknown"
+
+        # Teams
+        aw = g.get("awayTeam") or {}
+        hm = g.get("homeTeam") or {}
+        # Abbrev keys vary: "abbrev" or "abbreviation" or nested
+        def abbr(node):
+            return (
+                node.get("abbrev")
+                or node.get("abbreviation")
+                or (node.get("triCode") if isinstance(node.get("triCode"), str) else None)
+                or (node.get("name", "")[:3].upper() if node.get("name") else "")
+                or ""
+            ).upper()
+
+        aw_abbr = abbr(aw) or "AWY"
+        hm_abbr = abbr(hm) or "HOM"
+
+        # Scores: can be nested under "score" or boxscore
+        aw_score = (
+            (aw.get("score") if isinstance(aw.get("score"), int) else None)
+            or (g.get("awayTeamScore") if isinstance(g.get("awayTeamScore"), int) else None)
+            or 0
+        )
+        hm_score = (
+            (hm.get("score") if isinstance(hm.get("score"), int) else None)
+            or (g.get("homeTeamScore") if isinstance(g.get("homeTeamScore"), int) else None)
+            or 0
         )
 
-    away_abbr = (abbr(away_team) or "AWY").upper()
-    home_abbr = (abbr(home_team) or "HOM").upper()
+        # Period info (if live) — many api-web responses omit; keep empty
+        current_period = 0
+        current_period_ord = ""
+        time_remaining = ""
 
-    # Linescore (when LIVE/FINAL; empty strings for Preview)
-    ls = g.get("linescore") or {}
-    current_period = ls.get("currentPeriod") or 0
-    current_period_ord = ls.get("currentPeriodOrdinal") or ""
-    time_remaining = ls.get("currentPeriodTimeRemaining") or ""
+        games.append(
+            {
+                "gamePk": g.get("id") or g.get("gamePk"),  # api-web uses 'id'
+                "gameDate": game_date,
+                "status": {
+                    "abstractGameState": map_state(state),
+                    "detailedState": state or map_state(state),
+                },
+                "teams": {
+                    "away": {"team": {"abbreviation": aw_abbr, "triCode": aw_abbr}, "score": aw_score},
+                    "home": {"team": {"abbreviation": hm_abbr, "triCode": hm_abbr}, "score": hm_score},
+                },
+                "linescore": {
+                    "currentPeriod": current_period,
+                    "currentPeriodOrdinal": current_period_ord,
+                    "currentPeriodTimeRemaining": time_remaining,
+                },
+            }
+        )
 
-    return {
-        "gamePk": g.get("gamePk"),
-        "gameDate": g.get("gameDate"),  # UTC ISO8601
-        "status": {
-            "abstractGameState": abstract,
-            "detailedState": detailed,
-        },
-        "teams": {
-            "away": {
-                "team": {"abbreviation": away_abbr, "triCode": away_abbr},
-                "score": away_raw.get("score", 0),
-            },
-            "home": {
-                "team": {"abbreviation": home_abbr, "triCode": home_abbr},
-                "score": home_raw.get("score", 0),
-            },
-        },
-        "linescore": {
-            "currentPeriod": current_period,
-            "currentPeriodOrdinal": current_period_ord,
-            "currentPeriodTimeRemaining": time_remaining,
-        },
-    }
+    return {"dates": [{"date": date_str, "games": games}]}
 
 
 def build_payload(date_str: str):
-    # Small DNS warm-up: try resolving once so we fail fast with a clear message.
-    try:
-        socket.gethostbyname(API_HOST)
-    except Exception:
-        # We won’t abort here (retries may still succeed), but we log to stderr for visibility.
-        print(f"Warning: DNS resolve failed for {API_HOST}; will retry via HTTP.", file=sys.stderr)
+    errors = []
+    for cand in CANDIDATES:
+        url = cand["url"](date_str)
+        # DNS warm-up (non-fatal)
+        try:
+            host = urllib.request.urlparse(url).hostname
+            if host:
+                socket.gethostbyname(host)
+        except Exception as e:
+            print(f"Warning: DNS resolve failed for {host}; will still try HTTP. ({e})", file=sys.stderr)
 
-    url = API_BASE + QUERY.format(date=date_str)
-    data = fetch_json_with_retries(url)
-    dates = data.get("dates") or []
+        try:
+            data = fetch_with_retries(url)
+            if cand["kind"] == "statsapi":
+                return norm_from_statsapi(data, date_str)
+            else:
+                return norm_from_apiweb(data, date_str)
+        except Exception as e:
+            errors.append((cand["name"], str(e)))
+            continue
 
-    games = []
-    if dates and (dates[0].get("games")):
-        for g in dates[0]["games"]:
-            games.append(normalize_game(g))
-
-    return {"dates": [{"date": date_str, "games": games}]}
+    # If we reached here, all candidates failed
+    msgs = "; ".join([f"{name}: {msg}" for name, msg in errors])
+    raise RuntimeError(f"All NHL endpoints failed: {msgs}")
 
 
 def main():
     try:
         payload = build_payload(DATE_STR)
-    except urllib.error.HTTPError as e:
-        print(f"HTTP error fetching NHL schedule: {e}", file=sys.stderr)
-        sys.exit(1)
     except Exception as e:
         print(f"Error building NHL payload: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # Write compact, stable JSON (no trailing spaces)
     with open(OUTFILE, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, separators=(",", ": "))
 
