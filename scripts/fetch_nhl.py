@@ -1,105 +1,142 @@
 #!/usr/bin/env python3
-import json, sys, os, datetime, urllib.request, urllib.error
+"""
+Fetch the official NHL schedule for a given day and write nhl.json
+in the flat shape your front-end expects.
 
-# Output file at repo root (the GitHub Pages site points at this)
-OUT_PATH = os.path.join(os.path.dirname(__file__), "..", "nhl.json")
+Inputs (optional):
+  - ENV SCHEDULE_DATE: YYYY-MM-DD (defaults to "today" in America/Toronto)
+  - ENV OUTFILE: path to write (defaults to ./nhl.json)
 
-API_BASE = "https://statsapi.web.nhl.com/api/v1/schedule"
+This script ONLY writes nhl.json — make sure no other script/workflow also writes it.
+"""
 
-# How many days to include (today + N more)
-RANGE_DAYS = int(os.environ.get("NHL_RANGE_DAYS", "7"))  # 7 = today + 6
+import os, sys, json, datetime, urllib.request, urllib.error
 
-def fetch_json(url, timeout=10):
-    req = urllib.request.Request(url, headers={"User-Agent":"nhl-schedule-bot/1.0"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return json.load(resp)
+# ---------- config ----------
+API = "https://statsapi.web.nhl.com/api/v1/schedule"
+# We hydrate linescore so you get currentPeriod/clock when LIVE.
+QUERY = "?date={date}&hydrate=linescore,team,seriesSummary,series,game.seriesSummary,game.series"
 
-def coerce_game(game):
-    """Map NHL API game to your schema (gamePk, gameDate, status, teams, linescore)."""
-    # Base fields
-    gamePk   = game.get("gamePk")
-    gameDate = game.get("gameDate")  # UTC ISO8601
-    status   = game.get("status", {})
-    detailed = status.get("detailedState", "")
-    abstract = status.get("abstractGameState", "")
+OUTFILE = os.environ.get("OUTFILE", "nhl.json")
+SCHEDULE_DATE = os.environ.get("SCHEDULE_DATE")  # YYYY-MM-DD or None
 
-    # Teams (abbreviation/triCode are available on team objects)
-    teams = game.get("teams", {})
-    awayT = (teams.get("away", {}) or {})
-    homeT = (teams.get("home", {}) or {})
+# Pick "today" in America/Toronto if not provided
+def today_eastern():
+    # Use UTC now and shift to ET by using fixed offset (handles DST if system tz is UTC).
+    # Good enough for schedule write; your front-end formats times for viewers anyway.
+    from datetime import timezone, timedelta
+    # Eastern offset during summer is -4, winter is -5. We’ll infer from Toronto clock.
+    try:
+        import zoneinfo
+        tz = zoneinfo.ZoneInfo("America/Toronto")
+        d = datetime.datetime.now(tz)
+    except Exception:
+        # Fallback: UTC (safe)
+        d = datetime.datetime.utcnow()
+    return d.strftime("%Y-%m-%d")
 
-    def team_block(side):
-        t = (teams.get(side, {}) or {})
-        team = (t.get("team", {}) or {})
-        # NHL Stats API exposes team.abbreviation; triCode is common in other NHL feeds
-        return {
-            "team": {
-                "abbreviation": team.get("abbreviation") or "",
-                "triCode":     team.get("abbreviation") or ""
-            },
-            "score": t.get("score", 0)
-        }
+DATE_STR = SCHEDULE_DATE or today_eastern()
 
-    # Linescore-like hints (period/time are available only on live games via linescore hydrate,
-    # but schedule gives minimal info. We keep placeholders here.)
-    linescore = {
-        "currentPeriod": 0,
-        "currentPeriodOrdinal": "",
-        "currentPeriodTimeRemaining": ""
-    }
 
+def fetch_json(url: str):
+    req = urllib.request.Request(url, headers={"User-Agent": "nhl-json-builder/1.0"})
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def normalize_game(g):
+    """
+    Map NHL Stats API game object -> your flattened shape.
+    Only the keys your front-end uses are included.
+    """
+    # Status
+    abstract = (g.get("status", {}) or {}).get("abstractGameState", "") or ""
+    detailed = (g.get("status", {}) or {}).get("detailedState", "") or abstract or ""
+
+    # Teams & scores
+    away_raw = (g.get("teams", {}) or {}).get("away", {}) or {}
+    home_raw = (g.get("teams", {}) or {}).get("home", {}) or {}
+    away_team = (away_raw.get("team", {}) or {})
+    home_team = (home_raw.get("team", {}) or {})
+
+    def abbr(team):
+        # NHL Stats usually has "abbreviation"; triCode is often the same.
+        return (team.get("abbreviation")
+                or team.get("triCode")
+                or (team.get("name","")[:3].upper() if team.get("name") else ""))
+
+    away_abbr = abbr(away_team)
+    home_abbr = abbr(home_team)
+
+    # Linescore (when LIVE/FINAL; empty strings for Preview)
+    ls = g.get("linescore") or {}
+    current_period = ls.get("currentPeriod") or 0
+    current_period_ord = ls.get("currentPeriodOrdinal") or ""
+    time_remaining = ls.get("currentPeriodTimeRemaining") or ""
+
+    # Assemble
     return {
-        "gamePk": gamePk,
-        "gameDate": gameDate,
+        "gamePk": g.get("gamePk"),
+        "gameDate": g.get("gameDate"),  # UTC ISO8601
         "status": {
             "abstractGameState": abstract,
-            "detailedState": detailed
+            "detailedState": detailed,
         },
         "teams": {
-            "away": team_block("away"),
-            "home": team_block("home")
+            "away": {
+                "team": {"abbreviation": away_abbr, "triCode": away_abbr},
+                "score": away_raw.get("score", 0),
+            },
+            "home": {
+                "team": {"abbreviation": home_abbr, "triCode": home_abbr},
+                "score": home_raw.get("score", 0),
+            },
         },
-        "linescore": linescore
+        "linescore": {
+            "currentPeriod": current_period,
+            "currentPeriodOrdinal": current_period_ord,
+            "currentPeriodTimeRemaining": time_remaining,
+        },
     }
 
+
+def build_payload(date_str: str):
+    url = API + QUERY.format(date=date_str)
+    data = fetch_json(url)
+    dates = data.get("dates") or []
+
+    # If no games today (common off-days), keep the same outer shape with empty games.
+    games = []
+    if dates and (dates[0].get("games")):
+        for g in dates[0]["games"]:
+            games.append(normalize_game(g))
+
+    return {
+        "dates": [
+            {
+                "date": date_str,
+                "games": games,
+            }
+        ]
+    }
+
+
 def main():
-    today = datetime.date.today()
-    end   = today + datetime.timedelta(days=max(1, RANGE_DAYS - 1))
-
-    params = f"?startDate={today.isoformat()}&endDate={end.isoformat()}"
-    url    = API_BASE + params
-
     try:
-        data = fetch_json(url)
-    except urllib.error.URLError as e:
-        print(f"ERROR: Failed to fetch NHL schedule: {e}", file=sys.stderr)
+        payload = build_payload(DATE_STR)
+    except urllib.error.HTTPError as e:
+        print(f"HTTP error fetching NHL schedule: {e}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error building NHL payload: {e}", file=sys.stderr)
         sys.exit(1)
 
-    out_dates = []
-    for day in data.get("dates", []):
-        date_str = day.get("date")
-        games_in = day.get("games", [])
-        games_out = [coerce_game(g) for g in games_in]
-        # keep only real games (skip empty days)
-        if games_out:
-            out_dates.append({
-                "date": date_str,
-                "games": games_out
-            })
+    # Write compact, stable JSON (no trailing spaces)
+    with open(OUTFILE, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, separators=(",", ": "))
 
-    # If API returns nothing, keep old file to avoid blanking the site
-    if not out_dates:
-        print("WARN: NHL API returned no games for the window; leaving existing nhl.json unchanged.")
-        return
+    print(f"Wrote {OUTFILE} for date {DATE_STR} with {len(payload['dates'][0]['games'])} games.")
 
-    payload = { "dates": out_dates }
-
-    # Write pretty + stable
-    os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
-    with open(OUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, separators=(",",": "))
-
-    print(f"Wrote {OUT_PATH} with {sum(len(d['games']) for d in out_dates)} games across {len(out_dates)} day(s).")
 
 if __name__ == "__main__":
     main()
