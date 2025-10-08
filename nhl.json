@@ -1,1 +1,47 @@
-{"dates":[]}
+{
+  "dates": [
+    {
+      "date": "2025-10-07",
+      "games": [
+        {
+          "gamePk": 2025010001,
+          "gameDate": "2025-10-07T23:00:00Z",
+          "status": { "abstractGameState": "Preview", "detailedState": "Scheduled" },
+          "teams": {
+            "away": { "team": { "abbreviation": "TOR", "triCode": "TOR" }, "score": 0 },
+            "home": { "team": { "abbreviation": "MTL", "triCode": "MTL" }, "score": 0 }
+          },
+          "linescore": {}
+        },
+        {
+          "gamePk": 2025010002,
+          "gameDate": "2025-10-07T23:30:00Z",
+          "status": { "abstractGameState": "Live", "detailedState": "In Progress" },
+          "teams": {
+            "away": { "team": { "abbreviation": "VGK", "triCode": "VGK" }, "score": 2 },
+            "home": { "team": { "abbreviation": "SEA", "triCode": "SEA" }, "score": 1 }
+          },
+          "linescore": {
+            "currentPeriod": 2,
+            "currentPeriodOrdinal": "2nd",
+            "currentPeriodTimeRemaining": "12:34"
+          }
+        },
+        {
+          "gamePk": 2025010003,
+          "gameDate": "2025-10-07T01:00:00Z",
+          "status": { "abstractGameState": "Final", "detailedState": "Final" },
+          "teams": {
+            "away": { "team": { "abbreviation": "FLA", "triCode": "FLA" }, "score": 3 },
+            "home": { "team": { "abbreviation": "TBL", "triCode": "TBL" }, "score": 4 }
+          },
+          "linescore": {
+            "currentPeriod": 3,
+            "currentPeriodOrdinal": "3rd",
+            "currentPeriodTimeRemaining": "00:00"
+          }
+        }
+      ]
+    }
+  ]
+}
