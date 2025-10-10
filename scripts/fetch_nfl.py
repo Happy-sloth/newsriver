@@ -13,11 +13,11 @@ Output (truncated):
       "linescore": {
         "currentPeriod": 0,
         "currentPeriodOrdinal": "",
-        "currentPeriodTimeRemaining": None
+        "currentPeriodTimeRemaining": null
       },
       "teams": {
-        "away": {"team": {"abbreviation": "BUF"}, "score": None},
-        "home": {"team": {"abbreviation": "NYJ"}, "score": None}
+        "away": {"team": {"abbreviation": "BUF"}, "score": null},
+        "home": {"team": {"abbreviation": "NYJ"}, "score": null}
       }
     }, ...]
   }]
@@ -25,7 +25,9 @@ Output (truncated):
 """
 
 from __future__ import annotations
-import json, sys, datetime as dt
+import json
+import sys
+import datetime as dt
 
 try:
     import requests  # noqa
@@ -33,15 +35,28 @@ except Exception:
     print("This script requires 'requests'. In CI we install it automatically.", file=sys.stderr)
     raise
 
-ESPN_URL = "https://site.api.espn.com/apis/v2/sports/football/nfl/scoreboard"
+# ESPN has two NFL scoreboard routes. The first is preferred; the second is a
+# long-standing alternate that often stays up when the first is flaky.
+ESPN_URLS = [
+    "https://site.api.espn.com/apis/v2/sports/football/nfl/scoreboard",
+    "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+]
+
+HEADERS = {
+    "User-Agent": "MYPYBITE-newsriver/1.0 (+https://mypybite.github.io/newsriver/)",
+    "Accept": "application/json",
+}
+
 
 def today_yyyymmdd() -> str:
     # Use UTC "today" so the date param is stable for CI runners
     today = dt.datetime.utcnow().date()
     return today.strftime("%Y%m%d")
 
+
 def ord_label(n: int) -> str:
     return {1: "1st", 2: "2nd", 3: "3rd", 4: "4th"}.get(n, "OT" if n >= 5 else "")
+
 
 def map_state(espn_state: str) -> tuple[str, str]:
     """Map ESPN state to our Preview/Live/Final trio, return (abstract, detailed)."""
@@ -57,6 +72,7 @@ def map_state(espn_state: str) -> tuple[str, str]:
     # Scheduled / pregame / created / etc.
     return "Preview", "Scheduled"
 
+
 def normalize(espn: dict) -> dict:
     games_out = []
     for ev in espn.get("events", []):
@@ -64,11 +80,14 @@ def normalize(espn: dict) -> dict:
         gdate = ev.get("date")
 
         comp = (ev.get("competitions") or [{}])[0]
-        status = (ev.get("status") or {}).get("type", {})
+        status = (ev.get("status") or {}).get("type", {}) or {}
         abs_state, det_state = map_state(status.get("name") or status.get("state") or "")
 
         # period/clock
-        period = int(status.get("period") or 0)
+        try:
+            period = int(status.get("period") or 0)
+        except Exception:
+            period = 0
         display_clock = status.get("displayClock")
 
         # competitors
@@ -113,11 +132,37 @@ def normalize(espn: dict) -> dict:
     }
     return out
 
-def main() -> int:
+
+def fetch_scoreboard() -> dict:
+    """Fetch NFL scoreboard robustly.
+    Strategy: try both URLs without a 'dates' param (ESPN serves 'today').
+    If those fail, try again with 'dates=YYYYMMDD'. If all fail, return an empty payload.
+    """
+    # 1) Try both URLs without dates (most reliable for 'today')
+    for url in ESPN_URLS:
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=12)
+            if r.status_code == 200:
+                return r.json()
+        except Exception:
+            pass
+
+    # 2) Last-resort: try both with dates
     params = {"dates": today_yyyymmdd()}
-    r = requests.get(ESPN_URL, params=params, timeout=12)
-    r.raise_for_status()
-    data = r.json()
+    for url in ESPN_URLS:
+        try:
+            r = requests.get(url, headers=HEADERS, params=params, timeout=12)
+            if r.status_code == 200:
+                return r.json()
+        except Exception:
+            pass
+
+    # 3) Everything failed: return an empty structure ESPN-like enough to normalize
+    return {"events": []}
+
+
+def main() -> int:
+    data = fetch_scoreboard()
     payload = normalize(data)
 
     with open("nfl.json", "w", encoding="utf-8") as f:
@@ -125,6 +170,7 @@ def main() -> int:
 
     print(f"Wrote nfl.json with {len(payload['dates'][0]['games'])} games")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
