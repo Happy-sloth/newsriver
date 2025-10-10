@@ -13,11 +13,22 @@ OUT = Path("newsriver/nba.json")
 
 
 def map_state(status_desc: str) -> str:
+    """
+    Map ESPN status text to our card states: Preview | Live | Final
+    ESPN examples: 'Scheduled', 'Pre-Game', 'In Progress', 'Halftime', 'Final', 'Postponed'
+    """
     s = (status_desc or "").lower()
-    if "final" in s:
+    if "final" in s or "status_final" in s:
         return "Final"
-    if "in progress" in s or "live" in s or "status_in_progress" in s:
+    if (
+        "in progress" in s
+        or "live" in s
+        or "halftime" in s
+        or "overtime" in s
+        or "status_in_progress" in s
+    ):
         return "Live"
+    # Treat postponed / delayed / pre-game as Preview so the card shows the start time
     return "Preview"
 
 
@@ -32,6 +43,7 @@ def ord_period(n: int | None) -> str | None:
         return "3rd"
     if n == 4:
         return "4th"
+    # 5+ => OT for NBA
     return "OT"
 
 
@@ -51,15 +63,16 @@ def to_relay(data: dict) -> dict:
     games = []
     for ev in events:
         comp = (ev.get("competitions") or [{}])[0]
-        status_type = (ev.get("status") or {}).get("type") or {}
+        status = ev.get("status") or {}
+        status_type = status.get("type") or {}
         status_desc = status_type.get("description") or status_type.get("name") or ""
         abs_state = map_state(status_desc)
         det_state = abs_state
         start_iso = ev.get("date")
         game_id = ev.get("id") or comp.get("id")
 
-        # Period
-        period_num = ev.get("status", {}).get("period") or comp.get("status", {}).get("period")
+        # Period / quarter (ESPN may put it in event.status.period OR competitions[].status.period)
+        period_num = status.get("period") or (comp.get("status") or {}).get("period")
         current_q = None
         if abs_state == "Live":
             current_q = ord_period(period_num)
@@ -70,6 +83,7 @@ def to_relay(data: dict) -> dict:
         competitors = comp.get("competitors") or []
         c_away = next((c for c in competitors if c.get("homeAway") == "away"), None)
         c_home = next((c for c in competitors if c.get("homeAway") == "home"), None)
+        # Fallback ordering just in case
         if c_away is None and len(competitors) >= 2:
             c_away = competitors[1]
         if c_home is None and len(competitors) >= 1:
@@ -86,8 +100,9 @@ def to_relay(data: dict) -> dict:
                 "abstractGameState": abs_state,
             },
             "linescore": {
-                "currentPeriodOrdinal": current_q,   # cards also accept this key
-                "currentQuarter": current_q,         # and this one (keeps generic code happy)
+                # Generic cards read either of these:
+                "currentPeriodOrdinal": current_q,
+                "currentQuarter": current_q,
             },
             "teams": {
                 "away": {
@@ -114,8 +129,15 @@ def write_fallback():
 
 def main():
     try:
-        req = urllib.request.Request(SRC, headers={"Cache-Control": "no-cache"})
-        with urllib.request.urlopen(req, timeout=10) as resp:
+        req = urllib.request.Request(
+            SRC,
+            headers={
+                "Cache-Control": "no-cache",
+                # Add a UA to be polite and avoid sporadic 403s
+                "User-Agent": "newsriver-nba-fetch/1.0 (+https://github.com/your-org/your-repo)"
+            },
+        )
+        with urllib.request.urlopen(req, timeout=12) as resp:
             if resp.status != 200:
                 print(f"NBA fetch failed: HTTP {resp.status}", file=sys.stderr)
                 write_fallback()
