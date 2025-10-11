@@ -1,34 +1,43 @@
-why didn't you just say that? This is enrich_headlines.py can you amend whatever the hell you want in order to make sure its 100% what you recommend??? #!/usr/bin/env python3
+#!/usr/bin/env python3
 # scripts/enrich_headlines.py
 #
-# Step 2: Enrich headlines.json AND remove obvious duplicates.
+# Step 2: Enrich headlines and remove obvious duplicates.
 #
 # What this does:
-#   1) Adds fields to every item:
+#   1) Accepts either {"items":[...]} or a bare list [...]; outputs {"items":[...]}.
+#   2) Ensures each item has:
+#        - title, url (kept as-is if present)
+#        - published_utc (ISO string, UTC)  ← created if only other timestamp fields exist
+#        - source (falls back to domain if missing)
 #        - canonical_url  : cleaned URL (https, no trackers, no mobile subdomain)
 #        - canonical_id   : stable hash ID from canonical_url
 #        - cluster_id     : stable hash ID from normalized title
-#        - paywall        : bool (simple domain + source heuristic)
+#        - paywall        : bool (domain + source heuristic)
 #        - opinion        : bool (title/path heuristic)
-#        - is_aggregator  : bool (e.g., news.google.com)
-#        - trust_score    : float 0..1 (lightweight domain/source heuristic)
-#   2) De-duplicates:
+#        - is_aggregator  : bool (e.g., news.google.com / apple.news)
+#        - trust_score    : float 0..1 (simple domain/source heuristic)
+#   3) De-duplicates:
 #        - exact duplicates by canonical_url
 #        - near duplicates by cluster_id (e.g., Google News vs original source)
 #      Tie-breaker (best wins): non-aggregator > not paywalled > Canada region >
 #      higher trust_score > newer published_utc
+#   4) Drops known aggregator hosts early (optional, tunable).
+#   5) Sorts final items by published_utc DESC.
 #
 # Usage:
-#   python scripts/enrich_headlines.py headlines.json --inplace
-#   python scripts/enrich_headlines.py headlines.json --out headlines.enriched.json
+#   python3 scripts/enrich_headlines.py newsriver/raw_headlines.json --out newsriver/headlines.json
+#   python3 scripts/enrich_headlines.py newsriver/headlines.json --inplace
 #
 # Safe to run repeatedly.
+
+from __future__ import annotations
 
 import argparse
 import hashlib
 import json
 import re
 from datetime import datetime, timezone
+from typing import Any, Iterable, List
 from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
 
 # ---------------- settings you can tweak ----------------
@@ -51,7 +60,7 @@ PAYWALL_DOMAINS = {
 # Domains we treat as "aggregators" (prefer originals over these)
 AGGREGATOR_DOMAINS = {
     "news.google.com","news.yahoo.com","news.msn.com","flipboard.com",
-    "apple.news","apnews.com/hub"  # AP hub pages (not all apnews.com)
+    "apple.news"
 }
 
 # Opinion markers
@@ -79,27 +88,60 @@ TRUST_MAP = {
     "flipboard.com": 0.10, "apple.news": 0.10,
 }
 
+# Whether to drop aggregator hosts entirely before dedupe (keeps UI cleaner)
+DROP_AGGREGATORS_EARLY = True
+
 # ---------------- helpers ----------------
 
-def parse_when(value) -> float:
+def _as_list(root: Any) -> list[dict]:
+    if isinstance(root, list):
+        return root
+    if isinstance(root, dict):
+        for key in ("items", "articles", "data"):
+            v = root.get(key)
+            if isinstance(v, list):
+                return v
+    return []
+
+def parse_when(value: Any) -> float:
     """Return a POSIX timestamp (seconds) or 0 if missing/bad."""
     if not value:
         return 0.0
+    # try ISO + Z
     try:
-        # Accept common field aliases
         if isinstance(value, (int, float)):
-            return float(datetime.fromtimestamp(value).timestamp())
+            # assume seconds (if ms were passed they’ll be huge; still OK for ordering)
+            return float(value)
         return datetime.fromisoformat(str(value).replace("Z","+00:00")).timestamp()
     except Exception:
+        pass
+    # try RFC 1123-ish
+    for fmt in ("%a, %d %b %Y %H:%M:%S %Z", "%a, %d %b %Y %H:%M:%S %z"):
         try:
-            return datetime.strptime(str(value), "%a, %d %b %Y %H:%M:%S %Z").timestamp()
+            return datetime.strptime(str(value), fmt).timestamp()
         except Exception:
-            return 0.0
+            continue
+    return 0.0
+
+def ensure_published_utc(it: dict) -> str:
+    """Compute a normalized ISO UTC string in published_utc, if missing."""
+    # known aliases (loosely)
+    for k in ("published_utc","published_at","published","updated_at","pubDate","date","time","timestamp"):
+        v = it.get(k)
+        ts = parse_when(v)
+        if ts:
+            dt = datetime.fromtimestamp(ts, tz=timezone.utc)
+            iso = dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+            it["published_utc"] = iso
+            return iso
+    # fallback: now (last resort; avoids missing sort key)
+    iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    it["published_utc"] = iso
+    return iso
 
 def normalize_title_for_cluster(title: str) -> str:
     if not title:
         return ""
-    # Drop trailing " - Source" if present — aggregators often append this
     main = title.split(" - ")[0]
     main = main.lower()
     main = PUNCT_RE.sub(" ", main)
@@ -159,18 +201,17 @@ def is_aggregator(url: str, source: str | None = None) -> bool:
     if host in AGGREGATOR_DOMAINS:
         return True
     if source:
-        s = source.lower()
-        if "google news" in s or "yahoo news" in s or "msn" in s or "flipboard" in s:
+        s = str(source).lower()
+        if any(k in s for k in ("google news", "yahoo news", "msn", "flipboard", "apple news")):
             return True
     return False
 
 def looks_paywalled(url: str, source: str | None = None) -> bool:
     host = domain_of(url)
-    for d in PAYWALL_DOMAINS:
-        if host.endswith(d):
-            return True
+    if any(host.endswith(d) for d in PAYWALL_DOMAINS):
+        return True
     if source:
-        s = source.lower()
+        s = str(source).lower()
         if any(k in s for k in (
             "wall street journal","financial times","globe and mail",
             "bloomberg","new york times","economist","the logic",
@@ -191,20 +232,40 @@ def looks_opinion(url: str, title: str | None = None) -> bool:
 
 def trust_for(host: str, source: str | None = None) -> float:
     if host in TRUST_MAP:
-        return TRUST_MAP[host]
+        return float(TRUST_MAP[host])
     if source:
-        s = source.lower()
+        s = str(source).lower()
         for key, val in TRUST_MAP.items():
             if key in s:
-                return val
-    return TRUST_DEFAULT
+                return float(val)
+    return float(TRUST_DEFAULT)
+
+def coerce_source(it: dict) -> str:
+    """Ensure 'source' exists; if missing, use domain of URL."""
+    s = it.get("source") or it.get("publisher") or it.get("domain")
+    if isinstance(s, dict):
+        s = s.get("name") or s.get("domain")
+    s = (s or "").strip()
+    if not s:
+        host = domain_of(it.get("url",""))
+        s = host or ""
+    it["source"] = s
+    return s
 
 # ---------------- enrichment + dedupe ----------------
 
 def enrich_item(it: dict) -> dict:
-    url = it.get("url","")
-    title = it.get("title","")
-    source = it.get("source","")
+    url = it.get("url") or it.get("link") or it.get("href") or it.get("permalink") or ""
+    if not url:
+        return None  # unusable, skip later
+
+    # normalize timestamps first (also sets published_utc)
+    ensure_published_utc(it)
+
+    title = (it.get("title") or it.get("headline") or it.get("name") or it.get("text") or "").strip()
+    it["title"] = title
+
+    coerce_source(it)
 
     can_url = canonicalize_url(url)
     can_id  = canonical_id_from_url(url)
@@ -212,13 +273,14 @@ def enrich_item(it: dict) -> dict:
     host    = domain_of(can_url)
 
     it = dict(it)  # shallow copy
-    it["canonical_url"] = can_url
-    it["canonical_id"]  = can_id
-    it["cluster_id"]    = cl_id
-    it["paywall"]       = looks_paywalled(can_url, source)
-    it["opinion"]       = looks_opinion(can_url, title)
-    it["is_aggregator"] = is_aggregator(can_url, source)
-    it["trust_score"]   = trust_for(host, source)
+    it["url"]            = url
+    it["canonical_url"]  = can_url
+    it["canonical_id"]   = can_id
+    it["cluster_id"]     = cl_id
+    it["paywall"]        = looks_paywalled(can_url, it.get("source"))
+    it["opinion"]        = looks_opinion(can_url, title)
+    it["is_aggregator"]  = is_aggregator(can_url, it.get("source"))
+    it["trust_score"]    = trust_for(host, it.get("source"))
     return it
 
 def rank_key(it: dict):
@@ -230,7 +292,10 @@ def rank_key(it: dict):
     pay_penalty   = 1 if it.get("paywall") else 0
     region_bonus  = 0 if (it.get("region") == "Canada") else 1
     trust         = float(it.get("trust_score") or 0.0)
-    ts            = parse_when(it.get("published_utc") or it.get("published") or 0)
+    try:
+        ts = datetime.fromisoformat(str(it.get("published_utc")).replace("Z","+00:00")).timestamp()
+    except Exception:
+        ts = 0.0
     # We want: non-aggregator, not-paywall, Canada, higher trust, newer time
     return (
         agg_penalty,
@@ -252,9 +317,9 @@ def dedupe(items: list[dict]) -> tuple[list[dict], dict]:
     by_url: dict[str, dict] = {}
     removed_exact = 0
     for it in items:
-        cu = it.get("canonical_url") or it.get("url")
+        cu = it.get("canonical_url") or it.get("url") or it.get("canonical_id")
         if not cu:
-            cu = it.get("canonical_id")
+            continue
         prev = by_url.get(cu)
         if prev is None or rank_key(it) < rank_key(prev):
             by_url[cu] = it
@@ -286,36 +351,53 @@ def dedupe(items: list[dict]) -> tuple[list[dict], dict]:
 # ---------------- CLI ----------------
 
 def main():
-    ap = argparse.ArgumentParser(description="Enrich headlines.json with canonical IDs/flags and remove duplicates.")
-    ap.add_argument("input", help="Path to headlines.json")
+    ap = argparse.ArgumentParser(description="Enrich headlines with canonical IDs/flags and remove duplicates.")
+    ap.add_argument("input", help="Path to raw or enriched headlines JSON")
     ap.add_argument("--out", help="Output path (default: print to stdout)")
     ap.add_argument("--inplace", action="store_true", help="Write back to the same file")
+    ap.add_argument("--keep-aggregators", action="store_true",
+                    help="Do not drop aggregator hosts early (default: drop)")
     args = ap.parse_args()
 
     with open(args.input, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    items = data.get("items", [])
+    items_in = _as_list(data)
     # Enrich
-    enriched = [enrich_item(dict(it)) for it in items]
+    enriched: list[dict] = []
+    for raw in items_in:
+        it = enrich_item(dict(raw))
+        if not it:
+            continue
+        # Optional early drop of aggregators (still protected by dedupe rules later)
+        if DROP_AGGREGATORS_EARLY and not args.keep_aggregators and it.get("is_aggregator"):
+            continue
+        enriched.append(it)
+
     # Dedupe
     deduped, dbg = dedupe(enriched)
 
-    # Reassemble output
-    out = dict(data)
-    out["items"] = deduped
-    out["count"] = len(deduped)
-    out.setdefault("generated_utc", datetime.now(timezone.utc).isoformat())
+    # Sort newest first (what the ticker expects to maximize freshness)
+    def _ts(i: dict) -> float:
+        try:
+            return datetime.fromisoformat(str(i.get("published_utc")).replace("Z","+00:00")).timestamp()
+        except Exception:
+            return 0.0
+    deduped.sort(key=_ts, reverse=True)
 
-    # Merge debug
-    dbg_root = out.get("_debug") or {}
-    dbg_root.update({
+    # Reassemble output
+    out = {"items": deduped, "count": len(deduped)}
+    out.setdefault("generated_utc", datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
+
+    # Merge/attach debug
+    out["_debug"] = {
+        **(data.get("_debug") or {}),
         "dedup_exact": dbg["dedup_exact"],
         "dedup_cluster": dbg["dedup_cluster"],
         "clusters": dbg["clusters"],
-        "enricher": "step2a-v0.2"
-    })
-    out["_debug"] = dbg_root
+        "enricher": "step2a-v0.3",
+        "dropped_aggregators_early": bool(DROP_AGGREGATORS_EARLY and not args.keep_aggregators),
+    }
 
     # Write
     if args.inplace:
