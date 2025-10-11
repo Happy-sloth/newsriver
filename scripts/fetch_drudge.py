@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Builds newsriver/drudge.json from DrudgeReport (or mirrors/RSS).
+Builds newsriver/dredge_heds.json from DrudgeReport (or mirrors/RSS).
 - Fetches multiple sources (first that works)
 - Extracts top headlines & links
 - Applies a deterministic "hyperbolizer"
@@ -15,7 +15,9 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
-OUT_PATH = "newsriver/drudge.json"
+# WRITE HERE:
+OUT_PATH = "newsriver/dredge_heds.json"
+
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121 Safari/537.36"
 
 SOURCES = [
@@ -53,7 +55,7 @@ def is_probably_headline(text: str) -> bool:
 def fingerprint(s: str) -> str:
     return hashlib.md5((s or "").encode("utf-8")).hexdigest()[:10]
 
-# -------- hyperbolizer (unchanged core behavior) --------
+# -------- hyperbolizer --------
 INTENSIFIERS = [
     "SHOCKING", "WILD", "STUNNING", "SURGING", "EXPLOSIVE",
     "JAW-DROPPING", "BREAKNECK", "MASSIVE", "FEROCIOUS",
@@ -126,12 +128,11 @@ def classify_flags(title: str):
     is_breaking = bool(RE_BREAKING.search(text))
     is_landmark = bool(RE_CHAMPIONSHIP.search(text) or RE_LANDMARK_LEGAL.search(text))
     has_bitcoin = bool(RE_BTC.search(text))
-    # Suggest front-end effects (can be ignored if you prefer CSS-only)
     effects = []
     if is_breaking:
-        effects.append({"style": "breaker"})  # e.g., bleed red
+        effects.append({"style": "breaker"})  # bleed red
     if is_landmark:
-        effects.append({"style": "glow"})     # e.g., glow highlight
+        effects.append({"style": "glow"})     # glow
     return {
         "is_breaking": is_breaking,
         "is_landmark": is_landmark,
@@ -174,6 +175,10 @@ def fetch_headlines():
 def build_payload(items):
     dedup = {}
     out = []
+
+    updated_iso = datetime.now(timezone.utc).isoformat()
+    updated_ts = datetime.now(timezone.utc).timestamp() * 1000  # ms
+
     for text, url in items[: MAX_ITEMS * 3]:  # collect extras before dedupe
         key = (text.lower(), url.lower())
         if key in dedup:
@@ -182,8 +187,6 @@ def build_payload(items):
 
         hyped = hyperbolize(text)
         flags = classify_flags(text)
-
-        # Pre-rendered display string (hyped, with ₿ where applicable)
         display = with_bitcoin_symbol(hyped)
 
         out.append({
@@ -193,12 +196,14 @@ def build_payload(items):
             "url": url,
             "source": urlparse(url).netloc,
             "flags": flags,                     # {is_breaking,is_landmark,has_bitcoin,effects:[...]}
+            "ts": updated_iso                   # simple timestamp for ticker scoring
         })
         if len(out) >= MAX_ITEMS:
             break
 
     return {
-        "updated": datetime.now(timezone.utc).isoformat(),
+        "updated": updated_iso,
+        "updated_ms": int(updated_ts),
         "count": len(out),
         "items": out,
     }
