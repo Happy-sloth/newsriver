@@ -1,0 +1,33 @@
+{
+  "dates": [
+    {
+      "games": [
+        {
+          "gamePk": "401504210",
+          "gameDate": "2022-11-20T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TAT"
+              },
+              "score": 24
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WBB"
+              },
+              "score": 23
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
