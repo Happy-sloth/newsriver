@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 # scripts/fetch_mls.py
 # Builds newsriver/mls.json in the same relay shape your flipboard expects.
-# Source: ESPN soccer MLS scoreboard (usa.1)
+# Uses stdlib only.
 
 import json
 import sys
 import urllib.request
 from pathlib import Path
 
+# ESPN MLS scoreboard (league = usa.1)
 SRC = "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard"
 OUT = Path("newsriver/mls.json")
 
 
-def map_state(status_type: dict) -> str:
-    # ESPN soccer exposes several names/descriptions; normalize to Preview/Live/Final
-    name = (status_type.get("name") or status_type.get("description") or "").lower()
-    if "final" in name or "post" in name or name == "status_final":
+def map_state(status_desc: str) -> str:
+    s = (status_desc or "").lower()
+    if "final" in s or "post" in s:
         return "Final"
-    if "in progress" in name or "live" in name or name == "status_in_progress":
+    if "in progress" in s or "live" in s or "status_in_progress" in s:
         return "Live"
     return "Preview"
 
@@ -29,17 +29,15 @@ def ord_period(n: int | None) -> str | None:
         return "1st"
     if n == 2:
         return "2nd"
-    # Extra time / shootout appear as >2
-    return "OT"
+    if n >= 3:
+        return "ET"  # extra time / pens shown as ET for our card
+    return None
 
 
 def abbr(team_obj: dict) -> str:
-    # Prefer true abbreviation; fall back to shortDisplayName with spaces stripped
-    a = (team_obj or {}).get("abbreviation")
-    if a:
-        return a.upper()
-    sdn = (team_obj or {}).get("shortDisplayName") or (team_obj or {}).get("name") or "TEAM"
-    return "".join(sdn.split()).upper()[:6]
+    # ESPN soccer teams have shortDisplayName or abbreviation inconsistently.
+    t = (team_obj or {})
+    return (t.get("abbreviation") or t.get("shortDisplayName") or t.get("displayName") or "TEAM").upper()[:4]
 
 
 def to_int(v):
@@ -52,21 +50,24 @@ def to_int(v):
 def to_relay(data: dict) -> dict:
     events = data.get("events") or []
     games = []
-
     for ev in events:
         comp = (ev.get("competitions") or [{}])[0]
-        status = (ev.get("status") or {})
-        status_type = status.get("type") or {}
-        abs_state = map_state(status_type)
+        status_type = (ev.get("status") or {}).get("type") or {}
+        status_desc = status_type.get("description") or status_type.get("name") or ""
+        abs_state = map_state(status_desc)
         det_state = abs_state
         start_iso = ev.get("date")
         game_id = ev.get("id") or comp.get("id")
 
-        # Period / half (optional, for Live)
-        period_num = status.get("period") or (comp.get("status") or {}).get("period")
-        current_ord = ord_period(period_num) if abs_state == "Live" else ("Final" if abs_state == "Final" else None)
+        # Period
+        period_num = ev.get("status", {}).get("period") or comp.get("status", {}).get("period")
+        current_p = None
+        if abs_state == "Live":
+            current_p = ord_period(period_num)
+        elif abs_state == "Final":
+            current_p = "Final"
 
-        # Teams
+        # Teams (home/away)
         competitors = comp.get("competitors") or []
         c_away = next((c for c in competitors if c.get("homeAway") == "away"), None)
         c_home = next((c for c in competitors if c.get("homeAway") == "home"), None)
@@ -86,8 +87,8 @@ def to_relay(data: dict) -> dict:
                 "abstractGameState": abs_state,
             },
             "linescore": {
-                "currentPeriodOrdinal": current_ord,  # generic cards read this
-                "currentQuarter": current_ord,        # kept for shared code path
+                "currentPeriodOrdinal": current_p,   # generic card key
+                "currentQuarter": current_p,         # kept for compatibility
             },
             "teams": {
                 "away": {
