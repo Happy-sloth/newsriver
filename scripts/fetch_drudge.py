@@ -15,7 +15,7 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
-# WRITE HERE:
+# ====== CHANGED: write to dredge_heds.json exactly ======
 OUT_PATH = "newsriver/dredge_heds.json"
 
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121 Safari/537.36"
@@ -130,9 +130,9 @@ def classify_flags(title: str):
     has_bitcoin = bool(RE_BTC.search(text))
     effects = []
     if is_breaking:
-        effects.append({"style": "breaker"})  # bleed red
+        effects.append({"style": "breaker"})
     if is_landmark:
-        effects.append({"style": "glow"})     # glow
+        effects.append({"style": "glow"})
     return {
         "is_breaking": is_breaking,
         "is_landmark": is_landmark,
@@ -175,10 +175,6 @@ def fetch_headlines():
 def build_payload(items):
     dedup = {}
     out = []
-
-    updated_iso = datetime.now(timezone.utc).isoformat()
-    updated_ts = datetime.now(timezone.utc).timestamp() * 1000  # ms
-
     for text, url in items[: MAX_ITEMS * 3]:  # collect extras before dedupe
         key = (text.lower(), url.lower())
         if key in dedup:
@@ -190,20 +186,18 @@ def build_payload(items):
         display = with_bitcoin_symbol(hyped)
 
         out.append({
-            "title": text,                      # original
-            "hyped": hyped,                     # hyperbolized text
-            "display": display,                 # hyped + ₿ substitution
+            "title": text,          # original
+            "hyped": hyped,         # hyperbolized text
+            "display": display,     # hyped + ₿ substitution
             "url": url,
             "source": urlparse(url).netloc,
-            "flags": flags,                     # {is_breaking,is_landmark,has_bitcoin,effects:[...]}
-            "ts": updated_iso                   # simple timestamp for ticker scoring
+            "flags": flags,         # {is_breaking,is_landmark,has_bitcoin,effects:[...]}
         })
         if len(out) >= MAX_ITEMS:
             break
 
     return {
-        "updated": updated_iso,
-        "updated_ms": int(updated_ts),
+        "updated": datetime.now(timezone.utc).isoformat(),
         "count": len(out),
         "items": out,
     }
