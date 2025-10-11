@@ -15,7 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          # keep credentials so git push works
+          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v5
