@@ -11,6 +11,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CFL_API_KEY: ${{ secrets.CFL_API_KEY }}
+      # Optional: override if your CFL endpoint differs
+      # CFL_API_BASE: https://api.cfl.ca/v1/games
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
