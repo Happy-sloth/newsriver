@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+# scripts/fetch_ahl.py
+# Builds newsriver/ahl.json in the same relay shape your flipboard expects.
+# Stdlib only.
+
+import json
+import sys
+import urllib.request
+from pathlib import Path
+
+SRC = "https://site.api.espn.com/apis/site/v2/sports/hockey/ahl/scoreboard"
+OUT = Path("newsriver/ahl.json")
+
+
+def map_state(status_type: dict) -> str:
+    # ESPN: status -> { type: { state/name/description, completed }, description }
+    t = (status_type or {}).get("state") or (status_type or {}).get("name") or ""
+    s = (t or "").lower()
+    if "final" in s or "post" in s or "complete" in s or "status_final" in s:
+        return "Final"
+    if "in" in s or "live" in s or "status_in_progress" in s or "playing" in s:
+        return "Live"
+    return "Preview"
+
+
+def ord_period(n: int | None) -> str | None:
+    if not n:
+        return None
+    if n == 1:
+        return "1st"
+    if n == 2:
+        return "2nd"
+    if n == 3:
+        return "3rd"
+    return "OT"
+
+
+def abbr(team_obj: dict) -> str:
+    t = team_obj or {}
+    return (t.get("abbreviation") or t.get("shortDisplayName") or t.get("displayName") or "TEAM").upper()[:4]
+
+
+def to_int(v):
+    try:
+        return int(v) if v is not None else None
+    except Exception:
+        return None
+
+
+def to_relay(data: dict) -> dict:
+    events = data.get("events") or []
+    games = []
+    for ev in events:
+        comp = (ev.get("competitions") or [{}])[0]
+        status = ev.get("status") or {}
+        status_type = status.get("type") or comp.get("status", {}).get("type") or {}
+        abs_state = map_state(status_type)
+        det_state = abs_state
+        start_iso = ev.get("date")
+        game_id = ev.get("id") or comp.get("id")
+
+        # Period / linescore
+        period_num = status.get("period") or comp.get("status", {}).get("period")
+        current_ord = None
+        if abs_state == "Live":
+            current_ord = ord_period(period_num)
+        elif abs_state == "Final":
+            current_ord = "Final"
+
+        # Teams
+        competitors = comp.get("competitors") or []
+        c_away = next((c for c in competitors if c.get("homeAway") == "away"), None)
+        c_home = next((c for c in competitors if c.get("homeAway") == "home"), None)
+        if c_away is None and len(competitors) >= 2:
+            c_away = competitors[1]
+        if c_home is None and len(competitors) >= 1:
+            c_home = competitors[0]
+
+        away_team = (c_away or {}).get("team") or {}
+        home_team = (c_home or {}).get("team") or {}
+
+        game = {
+            "gamePk": game_id,
+            "gameDate": start_iso,
+            "status": {
+                "detailedState": det_state,
+                "abstractGameState": abs_state,
+            },
+            "linescore": {
+                "currentPeriodOrdinal": current_ord,  # your cards read either key
+                "currentQuarter": current_ord,
+            },
+            "teams": {
+                "away": {
+                    "team": {"abbreviation": abbr(away_team)},
+                    "score": to_int((c_away or {}).get("score")),
+                },
+                "home": {
+                    "team": {"abbreviation": abbr(home_team)},
+                    "score": to_int((c_home or {}).get("score")),
+                },
+            },
+        }
+        games.append(game)
+
+    return {"dates": [{"games": games}]}
+
+
+def write_fallback():
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    with OUT.open("w", encoding="utf-8") as f:
+        json.dump({"dates": [{"games": []}]}, f, indent=2)
+    print(f"Wrote fallback {OUT}", file=sys.stderr)
+
+
+def main():
+    try:
+        req = urllib.request.Request(SRC, headers={"Cache-Control": "no-cache"})
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            if resp.status != 200:
+                print(f"AHL fetch failed: HTTP {resp.status}", file=sys.stderr)
+                write_fallback()
+                return
+            data = json.load(resp)
+    except Exception as e:
+        print(f"AHL fetch error: {e}", file=sys.stderr)
+        write_fallback()
+        return
+
+    relay = to_relay(data)
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    with OUT.open("w", encoding="utf-8") as f:
+        json.dump(relay, f, indent=2)
+    print(f"Wrote {OUT}")
+
+
+if __name__ == "__main__":
+    main()
