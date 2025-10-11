@@ -2,7 +2,7 @@ name: Build Drudge Headlines
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # every 15 minutes
+    - cron: "*/15 * * * *"      # every 15 minutes
   workflow_dispatch:
 
 permissions:
@@ -11,6 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +28,7 @@ jobs:
           python -m pip install -U pip
           pip install requests beautifulsoup4
 
-      - name: Build headlines
+      - name: Build headlines JSON
         run: python scripts/fetch_drudge.py
 
       - name: Commit & push if changed
@@ -37,8 +38,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add newsriver/dredge_heds.json
             git commit -m "chore(newsriver): refresh dredge_heds.json"
-            git pull --rebase
             git push
           else
-            echo "No Drudge changes."
+            echo "No dredge_heds.json changes."
           fi
