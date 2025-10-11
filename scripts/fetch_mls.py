@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # scripts/fetch_mls.py
 # Builds newsriver/mls.json in the same relay shape your flipboard expects.
-# Uses ESPN's MLS scoreboard (league path: soccer/usa.1).
+# Source: ESPN soccer MLS scoreboard (usa.1)
 
 import json
 import sys
@@ -12,40 +12,34 @@ SRC = "https://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard"
 OUT = Path("newsriver/mls.json")
 
 
-def map_state(status_desc: str) -> str:
-    """
-    Map ESPN status to our card states: Preview | Live | Final
-    Soccer examples include: 'Scheduled', 'Pre-Game', 'First Half', 'Second Half',
-    'Halftime', 'Extra Time', 'Penalties', 'Final', 'Postponed', 'Delayed'.
-    """
-    s = (status_desc or "").lower()
-    if "final" in s or "status_final" in s:
+def map_state(status_type: dict) -> str:
+    # ESPN soccer exposes several names/descriptions; normalize to Preview/Live/Final
+    name = (status_type.get("name") or status_type.get("description") or "").lower()
+    if "final" in name or "post" in name or name == "status_final":
         return "Final"
-    if (
-        "first half" in s
-        or "second half" in s
-        or "halftime" in s
-        or "extra time" in s
-        or "penalties" in s
-        or "in progress" in s
-        or "live" in s
-        or "status_in_progress" in s
-    ):
+    if "in progress" in name or "live" in name or name == "status_in_progress":
         return "Live"
     return "Preview"
 
 
+def ord_period(n: int | None) -> str | None:
+    if not n:
+        return None
+    if n == 1:
+        return "1st"
+    if n == 2:
+        return "2nd"
+    # Extra time / shootout appear as >2
+    return "OT"
+
+
 def abbr(team_obj: dict) -> str:
-    # MLS abbreviations vary but ESPN provides a short name + abbreviation field.
-    # We prefer official abbreviation; fallback to shortDisplayName initials.
-    a = ((team_obj or {}).get("abbreviation") or "").strip().upper()
+    # Prefer true abbreviation; fall back to shortDisplayName with spaces stripped
+    a = (team_obj or {}).get("abbreviation")
     if a:
-        return a
-    short = ((team_obj or {}).get("shortDisplayName") or "").strip()
-    if not short:
-        return "TEAM"
-    # crude initials fallback
-    return "".join(w[0] for w in short.split() if w).upper()[:4] or "TEAM"
+        return a.upper()
+    sdn = (team_obj or {}).get("shortDisplayName") or (team_obj or {}).get("name") or "TEAM"
+    return "".join(sdn.split()).upper()[:6]
 
 
 def to_int(v):
@@ -58,33 +52,19 @@ def to_int(v):
 def to_relay(data: dict) -> dict:
     events = data.get("events") or []
     games = []
+
     for ev in events:
         comp = (ev.get("competitions") or [{}])[0]
-        status = ev.get("status") or {}
+        status = (ev.get("status") or {})
         status_type = status.get("type") or {}
-        status_desc = status_type.get("description") or status_type.get("name") or ""
-        abs_state = map_state(status_desc)
+        abs_state = map_state(status_type)
         det_state = abs_state
         start_iso = ev.get("date")
         game_id = ev.get("id") or comp.get("id")
 
-        # Soccer period label: we won't show "1st/2nd" in your generic card,
-        # but we keep a friendly marker that some cards may read as currentPeriodOrdinal.
-        period_label = None
-        sdl = (status_desc or "").lower()
-        if abs_state == "Live":
-            if "first half" in sdl:
-                period_label = "1st"
-            elif "second half" in sdl:
-                period_label = "2nd"
-            elif "extra time" in sdl:
-                period_label = "ET"
-            elif "penalties" in sdl:
-                period_label = "PENS"
-            else:
-                period_label = "LIVE"
-        elif abs_state == "Final":
-            period_label = "Final"
+        # Period / half (optional, for Live)
+        period_num = status.get("period") or (comp.get("status") or {}).get("period")
+        current_ord = ord_period(period_num) if abs_state == "Live" else ("Final" if abs_state == "Final" else None)
 
         # Teams
         competitors = comp.get("competitors") or []
@@ -106,9 +86,8 @@ def to_relay(data: dict) -> dict:
                 "abstractGameState": abs_state,
             },
             "linescore": {
-                # Generic cards can read either of these keys; we provide one label.
-                "currentPeriodOrdinal": period_label,
-                "currentQuarter": period_label,
+                "currentPeriodOrdinal": current_ord,  # generic cards read this
+                "currentQuarter": current_ord,        # kept for shared code path
             },
             "teams": {
                 "away": {
@@ -135,13 +114,7 @@ def write_fallback():
 
 def main():
     try:
-        req = urllib.request.Request(
-            SRC,
-            headers={
-                "Cache-Control": "no-cache",
-                "User-Agent": "newsriver-mls-fetch/1.0 (+https://github.com/your-org/your-repo)",
-            },
-        )
+        req = urllib.request.Request(SRC, headers={"Cache-Control": "no-cache"})
         with urllib.request.urlopen(req, timeout=12) as resp:
             if resp.status != 200:
                 print(f"MLS fetch failed: HTTP {resp.status}", file=sys.stderr)
