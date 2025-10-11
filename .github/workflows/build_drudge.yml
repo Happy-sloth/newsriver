@@ -1,0 +1,43 @@
+name: Build Drudge Headlines
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install deps
+        run: |
+          python -m pip install -U pip
+          pip install requests beautifulsoup4
+
+      - name: Build headlines
+        run: python scripts/fetch_drudge.py
+
+      - name: Commit & push if changed
+        run: |
+          if [ -n "$(git status --porcelain newsriver/headlines.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add newsriver/headlines.json
+            git commit -m "chore(newsriver): refresh headlines.json"
+            git push
+          else
+            echo "No headlines changes."
+          fi
