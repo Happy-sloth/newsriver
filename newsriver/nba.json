@@ -32,25 +32,25 @@
           "gamePk": "401812705",
           "gameDate": "2025-10-12T19:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "TOR"
               },
-              "score": 0
+              "score": 11
             },
             "home": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 0
+              "score": 13
             }
           }
         },
