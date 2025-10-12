@@ -58,25 +58,25 @@
           "gamePk": "401812706",
           "gameDate": "2025-10-12T22:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 0
+              "score": 7
             },
             "home": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 0
+              "score": 12
             }
           }
         },
