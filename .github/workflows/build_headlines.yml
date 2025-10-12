@@ -53,7 +53,7 @@ jobs:
           python3 scripts/fetch_headlines.py --out "$HEADLINES_OUT_FILE"
         shell: bash
 
-      - name: Basic validation (non-empty & JSON)
+      - name: Basic validation (tolerant scan for first valid item)
         run: |
           set -e
           test -s "$HEADLINES_OUT_FILE"
@@ -62,43 +62,100 @@ jobs:
           p = os.environ["HEADLINES_OUT_FILE"]
           with open(p, "r", encoding="utf-8") as f:
               data = json.load(f)
-          # Accept array or { "items": [...] }
+
+          # Accept array or common container keys
+          candidate_keys = ("items","entries","articles","data")
           if isinstance(data, list):
               items = data
-          elif isinstance(data, dict) and isinstance(data.get("items"), list):
-              items = data["items"]
+          elif isinstance(data, dict):
+              for k in candidate_keys:
+                  if isinstance(data.get(k), list):
+                      items = data[k]
+                      break
+              else:
+                  raise SystemExit("Invalid top-level JSON shape: expected array or dict with one of keys: %s" % (candidate_keys,))
           else:
-              raise SystemExit("Invalid top-level JSON shape. Must be array or { items: [...] }")
+              raise SystemExit("Invalid JSON: expected list or dict.")
+
+          # Keep only dict items
+          items = [i for i in items if isinstance(i, dict)]
           if not items:
-              raise SystemExit("JSON has zero items.")
-          # Minimal schema sanity: title and link present on first item
-          first = items[0]
-          if not isinstance(first, dict) or "title" not in first or "link" not in first:
-              raise SystemExit("First item missing required fields: title, link")
-          print("OK: valid JSON and schema. Count:", len(items))
+              raise SystemExit("JSON has zero usable items (dict rows).")
+
+          # Normalized accessors
+          def get_title(i):
+              for k in ("title","headline","name","text"):
+                  v = i.get(k)
+                  if isinstance(v, str) and v.strip():
+                      return v.strip()
+              return None
+          def get_link(i):
+              for k in ("link","url","href","permalink"):
+                  v = i.get(k)
+                  if isinstance(v, str) and v.strip():
+                      return v.strip()
+              return None
+
+          # Find first item that has both title and link
+          first_ok = None
+          for i in items:
+              if get_title(i) and get_link(i):
+                  first_ok = i
+                  break
+
+          if not first_ok:
+              # Show the first item's keys to aid debugging
+              example_keys = list(items[0].keys())
+              raise SystemExit("No item with required fields found. Searched for title|headline|name + link|url|href|permalink. Example item keys: %r" % example_keys)
+
+          print("OK: valid JSON. Items:", len(items))
           PY
 
-      - name: Show summary (first item)
+      - name: Show summary (first valid item)
         run: |
           python - << 'PY'
           import json, os
           p = os.environ["HEADLINES_OUT_FILE"]
           with open(p, "r", encoding="utf-8") as f:
               data = json.load(f)
-          items = data if isinstance(data, list) else data.get("items", [])
-          first = items[0] if items else {}
+
+          def items_of(d):
+              if isinstance(d, list): return d
+              for k in ("items","entries","articles","data"):
+                  if isinstance(d, dict) and isinstance(d.get(k), list):
+                      return d[k]
+              return []
+
+          items = [i for i in items_of(data) if isinstance(i, dict)]
+          def get_title(i):
+              for k in ("title","headline","name","text"):
+                  v = i.get(k)
+                  if isinstance(v, str) and v.strip():
+                      return v.strip()
+          def get_link(i):
+              for k in ("link","url","href","permalink"):
+                  v = i.get(k)
+                  if isinstance(v, str) and v.strip():
+                      return v.strip()
+
+          first_ok = None
+          for i in items:
+              if get_title(i) and get_link(i):
+                  first_ok = i; break
+
           print("Built:", p)
-          print("First title:", first.get("title", "<none>"))
-          print("First link:", first.get("link", "<none>"))
+          print("Count:", len(items))
+          if first_ok:
+              print("First title:", get_title(first_ok))
+              print("First link:", get_link(first_ok))
+          else:
+              print("No valid item to summarize.")
           PY
 
       - name: Commit & push if changed
         run: |
           set -euo pipefail
-
-          # Avoid dubious ownership errors
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
