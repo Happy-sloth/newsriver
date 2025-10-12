@@ -4,33 +4,6 @@
       "date": "2025-10-12",
       "games": [
         {
-          "gamePk": 401772859,
-          "gameDate": "2025-10-12T20:05Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TEN"
-              },
-              "score": 10
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LV"
-              },
-              "score": 20
-            }
-          }
-        },
-        {
           "gamePk": 401772752,
           "gameDate": "2025-10-12T20:25Z",
           "status": {
@@ -47,13 +20,13 @@
               "team": {
                 "abbreviation": "CIN"
               },
-              "score": 10
+              "score": 18
             },
             "home": {
               "team": {
                 "abbreviation": "GB"
               },
-              "score": 24
+              "score": 27
             }
           }
         },
@@ -297,6 +270,33 @@
                 "abbreviation": "BAL"
               },
               "score": 3
+            }
+          }
+        },
+        {
+          "gamePk": 401772859,
+          "gameDate": "2025-10-12T20:05Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TEN"
+              },
+              "score": 10
+            },
+            "home": {
+              "team": {
+                "abbreviation": "LV"
+              },
+              "score": 20
             }
           }
         },
