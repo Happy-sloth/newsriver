@@ -6,25 +6,25 @@
           "gamePk": "401812704",
           "gameDate": "2025-10-12T11:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "BKN"
               },
-              "score": 54
+              "score": 81
             },
             "home": {
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 54
+              "score": 88
             }
           }
         },
