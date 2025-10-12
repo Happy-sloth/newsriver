@@ -70,13 +70,13 @@
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 35
+              "score": 50
             },
             "home": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 42
+              "score": 58
             }
           }
         },
@@ -84,12 +84,12 @@
           "gamePk": "401812707",
           "gameDate": "2025-10-12T23:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
@@ -102,7 +102,7 @@
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 0
+              "score": 3
             }
           }
         },
@@ -110,25 +110,25 @@
           "gamePk": "401812708",
           "gameDate": "2025-10-12T23:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIL"
               },
-              "score": 0
+              "score": 3
             },
             "home": {
               "team": {
                 "abbreviation": "CHI"
               },
-              "score": 0
+              "score": 6
             }
           }
         },
