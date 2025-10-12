@@ -4,33 +4,6 @@
       "date": "2025-10-12",
       "games": [
         {
-          "gamePk": 401772940,
-          "gameDate": "2025-10-10T00:15Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 17
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NYG"
-              },
-              "score": 34
-            }
-          }
-        },
-        {
           "gamePk": 401772634,
           "gameDate": "2025-10-12T13:30Z",
           "status": {
@@ -351,6 +324,33 @@
                 "abbreviation": "KC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": 401772940,
+          "gameDate": "2025-10-10T00:15Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 17
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NYG"
+              },
+              "score": 34
             }
           }
         },
