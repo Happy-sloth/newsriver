@@ -1,144 +1,142 @@
 #!/usr/bin/env python3
-"""
-Builds newsriver/dredge_heds.json from DrudgeReport (or mirrors).
-- Tries multiple sources
-- Extracts top headlines & links
-- Hyperbolizes text (deterministic)
-- Flags: breaking / landmark / bitcoin (₿)
-- ALWAYS writes output file (even if empty), so the front-end never stalls
-"""
+# scripts/fetch_drudge.py
+# Scrape Drudge front page, normalize, and atomically write newsriver/dredge_heds.json
+# Compatible with your ticker and river (object with "items": [...]).
 
-import json, os, re, sys, hashlib
+import os, sys, json, re, tempfile, time
 from datetime import datetime, timezone
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
 
 import requests
 from bs4 import BeautifulSoup
 
-OUT_PATH = "newsriver/dredge_heds.json"   # <— requested filename
-UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121 Safari/537.36"
-TIMEOUT = 10
-MAX_ITEMS = 30
-BTC_SIGN = "\u20BF"  # ₿
+DRUDGE_URL = "https://drudgereport.com/"
+OUT_PATH   = os.path.join("newsriver", "dredge_heds.json")
 
-# Try a few sources (add your own relay if you have one, first in list)
-SOURCES = [
-    "https://www.drudgereport.com/",
-    "https://drudgereport.com/",
-]
+TIMEOUT_S  = 15
+MAX_ITEMS  = 40        # keep it modest and clean
+MIN_ITEMS  = 3         # require at least this many to replace the file
 
-def log(msg):
-    print(f"[fetch_drudge] {msg}", flush=True)
-
-# -------- utilities --------
-def get(url):
-    log(f"GET {url}")
-    return requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT)
-
-def normalize_url(href, base):
-    if not href: return None
-    href = href.strip()
-    if href.startswith(("javascript:", "#")): return None
-    return urljoin(base, href)
-
-def is_probably_headline(text: str) -> bool:
-    if not text: return False
-    t = text.strip()
-    if len(t) < 4: return False
-    if re.search(r"(advert|subscribe|privacy|about|terms|tip|app|share|contact)", t, re.I):
-        return False
-    return True
-
-def fingerprint(s: str) -> str:
-    return hashlib.md5((s or "").encode("utf-8")).hexdigest()[:10]
-
-# -------- hyperbolizer --------
-INTENSIFIERS = [
-    "SHOCKING", "WILD", "STUNNING", "SURGING", "EXPLOSIVE",
-    "JAW-DROPPING", "BREAKNECK", "MASSIVE", "FEROCIOUS",
-    "ABSOLUTE", "OFF-THE-CHARTS", "UNREAL"
-]
-VERB_SWAPS = {
-    r"\bsees\b": "ROCKETS",
-    r"\bhits\b": "SLAMS",
-    r"\bwarns\b": "BLARES",
-    r"\bsays\b": "DECLARES",
-    r"\breports?\b": "BOMBSHELLS",
-    r"\bfalls?\b": "PLUNGES",
-    r"\brises?\b": "SOARS",
-    r"\bspikes?\b": "ERUPTS",
-}
-NUMBER_WRAP = lambda n: f"**{n}**"
-
-def hyperbolize(title: str) -> str:
-    t = (title or "").strip()
-    words = t.split()
-    boosted = []
-    for w in words:
-        w_clean = re.sub(r"[^\w%$-]", "", w)
-        if re.fullmatch(r"\d[\d,\.]*", w_clean):
-            boosted.append(NUMBER_WRAP(w))
-        elif len(w_clean) >= 6 and w_clean.isalpha():
-            boosted.append(w.upper())
-        else:
-            boosted.append(w)
-    t = " ".join(boosted)
-    idx = int(fingerprint(title), 16) % len(INTENSIFIERS)
-    t = f"{INTENSIFIERS[idx]}: {t}"
-    for pattern, repl in VERB_SWAPS.items():
-        t = re.sub(pattern, repl, t, flags=re.I)
-    if not t.endswith(("!", "?", "…")):
-        t += "!"
-    if len(t) < 60 and t.count("!") < 2:
-        t += "!"
-    return re.sub(r"\s{2,}", " ", t)
-
-# -------- classification --------
-RE_BREAKING = re.compile(r"\b(breaking|developing|just in|urgent|alert)\b", re.I)
-RE_CHAMPIONSHIP = re.compile(
-    r"\b(championship|champion|clinches|clinched|wins|captures|claims|crown|title|cup|trophy|"
-    r"world series|stanley cup|super bowl|grey cup|nba finals?|grand slam|world cup)\b", re.I
+UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/124.0 Safari/537.36"
 )
-RE_LANDMARK_LEGAL = re.compile(
-    r"\b(landmark|supreme court|high court|appeals court|appeals panel|"
-    r"ruling|verdict|decision|opinion|overturns|overturned|upholds|strikes down|injunction)\b", re.I
+
+NAV_EXCLUDE = re.compile(
+    r"\b(archives?|columnists?|advertis(e|ing)|about|contact|tips|privacy|terms)\b",
+    re.I,
 )
-RE_BTC = re.compile(r"(?<!\w)\$?BTC\b|\bBitcoin\b", re.I)
 
-def classify_flags(title: str):
-    text = title or ""
-    is_breaking = bool(RE_BREAKING.search(text))
-    is_landmark = bool(RE_CHAMPIONSHIP.search(text) or RE_LANDMARK_LEGAL.search(text))
-    has_bitcoin = bool(RE_BTC.search(text))
-    effects = []
-    if is_breaking: effects.append({"style": "breaker"})
-    if is_landmark: effects.append({"style": "glow"})
-    return {
-        "is_breaking": is_breaking,
-        "is_landmark": is_landmark,
-        "has_bitcoin": has_bitcoin,
-        "effects": effects
-    }
+def utc_now_iso() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
-def with_bitcoin_symbol(s: str) -> str:
-    return RE_BTC.sub(BTC_SIGN, s or "")
+def normalize_url(u: str) -> str:
+    try:
+        p = urlparse(u)
+        if not p.scheme:
+            # Make relative links absolute to drudgereport.com
+            p = urlparse(requests.compat.urljoin(DRUDGE_URL, u))
+        # strip tracking params
+        keep = []
+        for k, v in parse_qsl(p.query, keep_blank_values=True):
+            if re.match(r"^(utm_|fbclid$|gclid$|mc_(cid|eid)$|ref$|scid$|cmpid$|source$)", k, re.I):
+                continue
+            keep.append((k, v))
+        q = urlencode(keep)
+        p = p._replace(query=q, fragment="")
+        # normalize hostname
+        netloc = p.netloc.lower()
+        scheme = p.scheme.lower() if p.scheme else "https"
+        return urlunparse((scheme, netloc, p.path, p.params, p.query, ""))
+    except Exception:
+        return u.strip()
 
-# -------- scraping --------
-def parse_drudge_links(html: str, base: str):
+def fetch_html(url: str) -> str:
+    r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT_S)
+    r.raise_for_status()
+    return r.text
+
+def extract_items(html: str):
     soup = BeautifulSoup(html, "html.parser")
-    links = []
-    for a in soup.find_all("a", href=True):
-        text = a.get_text(strip=True)
-        if not is_probably_headline(text):
-            continue
-        href = normalize_url(a["href"], base)
-        if not href:
-            continue
-        links.append((text, href))
-    return links
+    items = []
+    seen_urls = set()
 
-def fetch_headlines():
-    for src in SOURCES:
+    # Drudge is just a pile of anchors. We’ll pick decent-looking ones.
+    for a in soup.find_all("a"):
+        href = a.get("href") or ""
+        text = " ".join(a.stripped_strings) if a else ""
+        if not href or not text:
+            continue
+        if NAV_EXCLUDE.search(text):
+            continue
+        # ignore tiny/boilerplate bits
+        if len(text) < 15 or len(text) > 220:
+            continue
+
+        u = normalize_url(href)
+        if not u.startswith(("http://", "https://")):
+            continue
+        # simple dedupe
+        if u in seen_urls:
+            continue
+        seen_urls.add(u)
+
+        items.append({
+            "title": text,
+            "url": u,
+            "published_at": utc_now_iso(),   # Drudge has no timestamps; use scrape time
+            "source": "Drudge Report",
+        })
+        if len(items) >= MAX_ITEMS:
+            break
+
+    return items
+
+def atomic_write_json(path: str, data: dict):
+    dstdir = os.path.dirname(path) or "."
+    os.makedirs(dstdir, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(prefix=".drdg_", suffix=".json", dir=dstdir)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        os.replace(tmp, path)
+    except Exception:
+        # clean up tmp if replace failed
         try:
-       
-::contentReference[oaicite:0]{index=0}
+            os.unlink(tmp)
+        except Exception:
+            pass
+        raise
+
+def main() -> int:
+    try:
+        html = fetch_html(DRUDGE_URL)
+    except Exception as e:
+        print(f"[drudge] fetch failed: {e}", file=sys.stderr, flush=True)
+        # Do NOT clobber existing file on fetch failure
+        return 0
+
+    try:
+        items = extract_items(html)
+    except Exception as e:
+        print(f"[drudge] parse failed: {e}", file=sys.stderr, flush=True)
+        return 0
+
+    if len(items) < MIN_ITEMS:
+        print(f"[drudge] too few items ({len(items)}) — keeping previous file", flush=True)
+        return 0
+
+    payload = {"items": items}
+    try:
+        atomic_write_json(OUT_PATH, payload)
+    except Exception as e:
+        print(f"[drudge] write failed: {e}", file=sys.stderr, flush=True)
+        return 1
+
+    print(f"[drudge] wrote {len(items)} items → {OUT_PATH}", flush=True)
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
