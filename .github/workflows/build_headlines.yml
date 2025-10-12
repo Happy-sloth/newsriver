@@ -7,11 +7,10 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "scripts/fetch_headlines.py"          # rebuild if the headlines script changes
+      - "scripts/fetch_headlines.py"
       - "requirements.txt"
       - ".github/workflows/build_headlines.yml"
 
-# Avoid overlapping runs that might race on commits
 concurrency:
   group: build-headlines
   cancel-in-progress: true
@@ -23,11 +22,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      TZ: "America/Toronto"       # match front-end formatter
+      TZ: "America/Toronto"
       HEADLINES_OUT_DIR: "newsriver"
       HEADLINES_OUT_FILE: "newsriver/headlines.json"
-      # If your fetch script needs any API keys, expose them as repository secrets and reference here:
-      # SOME_API_KEY: ${{ secrets.SOME_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,38 +49,67 @@ jobs:
 
       - name: Generate headlines.json
         run: |
-          # Your script MUST write to $HEADLINES_OUT_FILE
-          # e.g., scripts/fetch_headlines.py should produce JSON array or { items: [...] }
+          set -e
           python3 scripts/fetch_headlines.py --out "$HEADLINES_OUT_FILE"
         shell: bash
 
       - name: Basic validation (non-empty & JSON)
         run: |
+          set -e
           test -s "$HEADLINES_OUT_FILE"
           python - << 'PY'
-          import json,sys,os
-          p=os.environ["HEADLINES_OUT_FILE"]
-          with open(p,"r",encoding="utf-8") as f:
-              json.load(f)
-          print("OK: valid JSON:", p)
+          import json, os, sys
+          p = os.environ["HEADLINES_OUT_FILE"]
+          with open(p, "r", encoding="utf-8") as f:
+              data = json.load(f)
+          # Accept array or { "items": [...] }
+          if isinstance(data, list):
+              items = data
+          elif isinstance(data, dict) and isinstance(data.get("items"), list):
+              items = data["items"]
+          else:
+              raise SystemExit("Invalid top-level JSON shape. Must be array or { items: [...] }")
+          if not items:
+              raise SystemExit("JSON has zero items.")
+          # Minimal schema sanity: title and link present on first item
+          first = items[0]
+          if not isinstance(first, dict) or "title" not in first or "link" not in first:
+              raise SystemExit("First item missing required fields: title, link")
+          print("OK: valid JSON and schema. Count:", len(items))
           PY
 
-      - name: Show summary
+      - name: Show summary (first item)
         run: |
-          echo "Built: $HEADLINES_OUT_FILE"
-          ls -lh "$HEADLINES_OUT_FILE"
-          head -c 512 "$HEADLINES_OUT_FILE" || true
+          python - << 'PY'
+          import json, os
+          p = os.environ["HEADLINES_OUT_FILE"]
+          with open(p, "r", encoding="utf-8") as f:
+              data = json.load(f)
+          items = data if isinstance(data, list) else data.get("items", [])
+          first = items[0] if items else {}
+          print("Built:", p)
+          print("First title:", first.get("title", "<none>"))
+          print("First link:", first.get("link", "<none>"))
+          PY
 
       - name: Commit & push if changed
         run: |
+          set -euo pipefail
+
+          # Avoid dubious ownership errors
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add "$HEADLINES_OUT_FILE"
-          if ! git diff --cached --quiet; then
-            git pull --rebase
+          # Rebase on latest and auto-stash any local edits made by prior steps
+          git pull --rebase --autostash
+
+          # Only commit if the output file actually changed
+          if ! git diff --quiet -- "$HEADLINES_OUT_FILE"; then
+            git add "$HEADLINES_OUT_FILE"
             git commit -m "chore(headlines): refresh headlines.json [skip ci]"
-            git push
+            git push || { echo "Push failed, retrying once..."; sleep 2; git push; }
           else
             echo "No changes to commit."
           fi
