@@ -1,14 +1,20 @@
-name: Build NHL JSON
+name: Build Headlines JSON
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"   # every 30 minutes (tighten/loosen as you like)
+    - cron: "*/12 * * * *"   # every 12 minutes (UTC)
   push:
     branches: [ main ]
     paths:
-      - "scripts/fetch_nhl.py"         # rebuild if the script changes
-      - ".github/workflows/build_nhl.yml"
+      - "scripts/fetch_headlines.py"          # rebuild if the headlines script changes
+      - "requirements.txt"
+      - ".github/workflows/build_headlines.yml"
+
+# Avoid overlapping runs that might race on commits
+concurrency:
+  group: build-headlines
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -16,28 +22,67 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TZ: "America/Toronto"       # match front-end formatter
+      HEADLINES_OUT_DIR: "newsriver"
+      HEADLINES_OUT_FILE: "newsriver/headlines.json"
+      # If your fetch script needs any API keys, expose them as repository secrets and reference here:
+      # SOME_API_KEY: ${{ secrets.SOME_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
-      - name: Generate nhl.json (today + next 6 days)
-        env:
-          NHL_RANGE_DAYS: "7"
+      - name: Install dependencies (if any)
         run: |
-          python3 scripts/fetch_nhl.py
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: Prepare output folder
+        run: |
+          mkdir -p "$HEADLINES_OUT_DIR"
+
+      - name: Generate headlines.json
+        run: |
+          # Your script MUST write to $HEADLINES_OUT_FILE
+          # e.g., scripts/fetch_headlines.py should produce JSON array or { items: [...] }
+          python3 scripts/fetch_headlines.py --out "$HEADLINES_OUT_FILE"
+        shell: bash
+
+      - name: Basic validation (non-empty & JSON)
+        run: |
+          test -s "$HEADLINES_OUT_FILE"
+          python - << 'PY'
+          import json,sys,os
+          p=os.environ["HEADLINES_OUT_FILE"]
+          with open(p,"r",encoding="utf-8") as f:
+              json.load(f)
+          print("OK: valid JSON:", p)
+          PY
+
+      - name: Show summary
+        run: |
+          echo "Built: $HEADLINES_OUT_FILE"
+          ls -lh "$HEADLINES_OUT_FILE"
+          head -c 512 "$HEADLINES_OUT_FILE" || true
 
       - name: Commit & push if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nhl.json
+
+          git add "$HEADLINES_OUT_FILE"
           if ! git diff --cached --quiet; then
-            git commit -m "chore(nhl): refresh nhl.json [skip ci]"
+            git pull --rebase
+            git commit -m "chore(headlines): refresh headlines.json [skip ci]"
             git push
           else
             echo "No changes to commit."
