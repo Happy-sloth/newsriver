@@ -1,3 +1,4 @@
+# .github/workflows/build-drudge.yml
 name: Build Drudge Headlines
 
 on:
@@ -28,6 +29,9 @@ jobs:
           python -m pip install -U pip
           pip install requests beautifulsoup4
 
+      - name: Ensure output directory exists
+        run: mkdir -p newsriver
+
       - name: Build headlines JSON
         run: python scripts/fetch_drudge.py
 
@@ -35,8 +39,10 @@ jobs:
         run: |
           echo "=== newsriver directory ==="
           ls -la newsriver || true
-          echo "=== dredge_heds.json (first 40 lines) ==="
-          sed -n '1,40p' newsriver/dredge_heds.json || true
+          echo "=== dredge_heds.json (first 60 lines) ==="
+          sed -n '1,60p' newsriver/dredge_heds.json || true
+          echo "=== File size (bytes) ==="
+          wc -c < newsriver/dredge_heds.json || true
 
       - name: Commit & push if changed
         run: |
