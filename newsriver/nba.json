@@ -6,25 +6,25 @@
           "gamePk": "401812711",
           "gameDate": "2025-10-13T22:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 68
+              "score": 70
             },
             "home": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 71
+              "score": 76
             }
           }
         },
@@ -44,13 +44,13 @@
               "team": {
                 "abbreviation": "SA"
               },
-              "score": 36
+              "score": 47
             },
             "home": {
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 32
+              "score": 40
             }
           }
         },
@@ -58,25 +58,25 @@
           "gamePk": "401812713",
           "gameDate": "2025-10-13T23:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 0
+              "score": 12
             },
             "home": {
               "team": {
                 "abbreviation": "NY"
               },
-              "score": 0
+              "score": 8
             }
           }
         },
