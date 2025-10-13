@@ -6,25 +6,25 @@
           "gamePk": "401812711",
           "gameDate": "2025-10-13T22:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 70
+              "score": 77
             },
             "home": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 76
+              "score": 83
             }
           }
         },
@@ -44,13 +44,13 @@
               "team": {
                 "abbreviation": "SA"
               },
-              "score": 47
+              "score": 58
             },
             "home": {
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 40
+              "score": 54
             }
           }
         },
@@ -70,13 +70,13 @@
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 12
+              "score": 28
             },
             "home": {
               "team": {
                 "abbreviation": "NY"
               },
-              "score": 8
+              "score": 19
             }
           }
         },
