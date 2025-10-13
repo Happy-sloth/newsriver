@@ -58,25 +58,25 @@
           "gamePk": "401812706",
           "gameDate": "2025-10-12T22:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 72
+              "score": 104
             },
             "home": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 84
+              "score": 120
             }
           }
         },
@@ -84,25 +84,25 @@
           "gamePk": "401812707",
           "gameDate": "2025-10-12T23:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "CLE"
               },
-              "score": 31
+              "score": 107
             },
             "home": {
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 48
+              "score": 138
             }
           }
         },
@@ -110,25 +110,25 @@
           "gamePk": "401812708",
           "gameDate": "2025-10-12T23:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIL"
               },
-              "score": 58
+              "score": 127
             },
             "home": {
               "team": {
                 "abbreviation": "CHI"
               },
-              "score": 52
+              "score": 121
             }
           }
         },
@@ -136,12 +136,12 @@
           "gamePk": "401812709",
           "gameDate": "2025-10-13T01:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
@@ -154,7 +154,7 @@
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 0
+              "score": 6
             }
           }
         },
@@ -162,25 +162,25 @@
           "gamePk": "401812710",
           "gameDate": "2025-10-13T01:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "GS"
               },
-              "score": 0
+              "score": 18
             },
             "home": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 0
+              "score": 20
             }
           }
         }
