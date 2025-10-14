@@ -14,11 +14,12 @@ jobs:
     timeout-minutes: 12
     env:
       MPB_MAX_PER_FEED: "14"
-      MPB_MAX_TOTAL: "69"            # <-- always publish 69 for the grid
+      MPB_MAX_TOTAL: "69"            # always publish 69 for the grid
       MPB_HTTP_TIMEOUT: "10"
       MPB_SLOW_FEED_WARN: "3.5"
       MPB_GLOBAL_BUDGET: "210"
       NEWSRIVER_TIMEZONE: "America/Toronto"
+      MPB_BREAKER_LIMIT: "3"         # new: up to 3 “breaking” items
 
     steps:
       - name: Checkout repo
