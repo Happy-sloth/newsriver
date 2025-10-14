@@ -20,7 +20,7 @@
 # - Sports (Blue Jays + MLB focus teams) module and hyperbolic overlay
 # - HTML scrapers:
 #     • FiveThirtyEight (Nate Silver contributor page)
-#     • CP24 homepage (https://www.cp24.com/)  ← NEW
+#     • CP24 homepage (https://www.cp24.com/) ← permissive version
 
 from __future__ import annotations
 
@@ -490,29 +490,33 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
         if len(items) >= MAX_PER_FEED: break
     return items
 
-# ---------------- CP24 homepage scraper (NEW) ----------------
+# ---------------- CP24 homepage scraper (permissive) ----------------
 def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
     """
-    Extract prominent homepage headlines from https://www.cp24.com/.
-    Strategy:
-      - Prefer semantic blocks (article, h1..h4, li) that contain anchors with news URLs.
-      - Keep unique canonical links; drop obvious non-articles (video-only, gallery-only) heuristically.
-      - Published time is set to now (homepage has no reliable per-card timestamp).
+    Extract homepage headlines from https://www.cp24.com/ (very permissive).
+    - Accept any anchor pointing to cp24.com or a site-rooted path.
+    - Keep the first MAX_PER_FEED unique items.
+    - Do NOT over-filter; some links are video pages and that’s OK.
     """
     base_host = "www.cp24.com"
     items: list[dict] = []
     text = html.decode("utf-8", errors="ignore")
 
     def make_item(href: str, title: str) -> dict | None:
-        url = href
-        if href.startswith("/"):
-            url = f"https://{base_host}{href}"
-        if not url.lower().startswith("http"):  # skip anchors, mailto, etc.
+        if not href or not title:
+            return None
+        url = href.strip()
+        if url.startswith("//"):
+            url = "https:" + url
+        if url.startswith("/"):
+            url = f"https://{base_host}{url}"
+        # Only keep cp24 links
+        if "cp24.com" not in url.lower():
+            return None
+        ttl = strip_source_tail(title).strip()
+        if len(ttl) < 6:
             return None
         can_url = canonicalize_url(url)
-        ttl = strip_source_tail(title).strip()
-        if not ttl or len(ttl) < 6:
-            return None
         return {
             "title": ttl,
             "url": can_url,
@@ -525,78 +529,41 @@ def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
             "cluster_id": fuzzy_title_key(ttl),
         }
 
-    seen_links = set()
+    seen = set()
 
+    # Try BeautifulSoup first
     if BeautifulSoup is not None:
-        soup = BeautifulSoup(text, "html.parser")
-
-        # Candidate anchors: within common headline containers
-        candidates = []
-        selectors = [
-            "h1 a", "h2 a", "h3 a", "h4 a",
-            "article a", ".headline a", ".story a", ".top-stories a",
-            "li a"
-        ]
-        for sel in selectors:
-            for a in soup.select(sel):
-                href = (a.get("href") or "").strip()
-                title = (a.get_text(" ", strip=True) or "").strip()
-                if not href or not title:
-                    continue
-                # Drop obvious junk
-                if "video" in href.lower() and "news" not in href.lower():
-                    continue
-                if "#video" in href.lower():
-                    continue
-                # Limit to cp24 site (absolute) or site-rooted links
-                if href.startswith("/") or "cp24.com" in href.lower():
-                    candidates.append((href, title))
-
-        # Preserve order while deduping by canonical URL
-        items_tmp: list[dict] = []
-        for href, title in candidates:
+        soup = BeautifulSoup(text, "htmlparser") if "htmlparser" in dir(BeautifulSoup) else BeautifulSoup(text, "html.parser")
+        anchors = soup.find_all("a", href=True)
+        for a in anchors:
+            href = (a.get("href") or "").strip()
+            if not href or href.startswith("#") or href.startswith("mailto:"):
+                continue
+            title = (a.get_text(" ", strip=True) or "").strip()
             it = make_item(href, title)
             if not it:
                 continue
-            if it["canonical_url"] in seen_links:
+            if it["canonical_url"] in seen:
                 continue
-            seen_links.add(it["canonical_url"])
-            items_tmp.append(it)
-            if len(items_tmp) >= (MAX_PER_FEED * 2):  # collect a bit extra then trim
-                break
-
-        # Light filter: keep only paths that look like story pages
-        # (e.g., contain a date or a section + slug)
-        def looks_story(u: str) -> bool:
-            p = urlparse(u).path.lower()
-            return bool(re.search(r"/(news|world|toronto|shows|weather)/", p)) or p.count("-") >= 2
-
-        for it in items_tmp:
-            if looks_story(it["canonical_url"]):
-                items.append(it)
+            seen.add(it["canonical_url"])
+            items.append(it)
             if len(items) >= MAX_PER_FEED:
                 break
-
-        # Fallback: if filter overshot, just take the first MAX_PER_FEED unique
-        if not items:
-            items = items_tmp[:MAX_PER_FEED]
-
         return items
 
-    # Regex fallback (very permissive)
-    for m in re.finditer(r'<a[^>]+href="([^"]+)"[^>]*>([^<]{6,120})</a>', text, flags=re.I):
-        href = m.group(1).strip()
-        title = re.sub(r"\s+", " ", m.group(2)).strip()
+    # Fallback regex (if BeautifulSoup unavailable)
+    for m in re.finditer(r'<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>', text, flags=re.I | re.S):
+        href = (m.group(1) or "").strip()
+        raw = re.sub(r"<[^>]+>", " ", m.group(2) or "")
+        title = re.sub(r"\s+", " ", raw).strip()
         if not href or not title:
-            continue
-        if "cp24.com" not in href and not href.startswith("/"):
             continue
         it = make_item(href, title)
         if not it:
             continue
-        if it["canonical_url"] in seen_links:
+        if it["canonical_url"] in seen:
             continue
-        seen_links.add(it["canonical_url"])
+        seen.add(it["canonical_url"])
         items.append(it)
         if len(items) >= MAX_PER_FEED:
             break
@@ -1149,7 +1116,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.8.0-mlb-finals+cultmtl+cp24",
+            "version": "fetch-v1.8.1-cp24-permissive",
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
