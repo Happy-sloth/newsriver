@@ -1,5 +1,30 @@
 {
-  "generated_utc": "1970-01-01T00:00:00Z",
-  "count": 0,
-  "items": []
+  "generated_utc": "2025-10-14T00:00:00Z",
+  "count": 3,
+  "items": [
+    {
+      "title": "Test A: Fresh sample story",
+      "url": "https://example.com/a",
+      "source": "Example Source",
+      "published_utc": "2025-10-14T12:15:00Z",
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Test B: Another sample",
+      "url": "https://example.com/b",
+      "source": "Example Source",
+      "published_utc": "2025-10-14T11:45:00Z",
+      "category": "Business",
+      "region": "World"
+    },
+    {
+      "title": "Test C: Third sample",
+      "url": "https://example.com/c",
+      "source": "Example Source",
+      "published_utc": "2025-10-14T11:30:00Z",
+      "category": "General",
+      "region": "Canada"
+    }
+  ]
 }
