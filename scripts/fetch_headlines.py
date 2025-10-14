@@ -925,4 +925,211 @@ def build(feeds_file: str, out_path: str) -> dict:
         deaths, injured, has_fatal_cue = parse_casualties(title)
         it["_ps_deaths"] = deaths                       # NEW: keep for breaker logic
         it["_ps_injured"] = injured                     # NEW
-        it["_ps_has]()
+        it["_ps_has_fatal"] = has_fatal_cue             # NEW
+
+        ps_score = 0.0
+        if has_fatal_cue or deaths > 0: ps_score += ps_has_fatal; score_dbg["ps_fatal_hits"] += 1
+        if deaths > 0:  ps_score += min(ps_max_death, ps_per_death * deaths)
+        if injured > 0: ps_score += min(ps_max_inj,   ps_per_inj   * injured); score_dbg["ps_injury_hits"] += 1
+        if violent_kw_hit(title): ps_score += ps_kw_bonus
+        if ps_score: comps["public_safety"] = round(ps_score, 4); total += ps_score
+
+        btc_move = None
+        m = RE_BTC.search(title)
+        if m:
+            v = first_pct(m)
+            if v is not None: btc_move = v
+            if v is not None and v >= btc_thr:
+                comps["btc_trigger"] = btc_pts; total += btc_pts; score_dbg["market_btc_hits"] += 1
+        it["_btc_move_abs"] = btc_move                  # NEW
+
+        m = RE_IDX.search(title)
+        if m:
+            v = first_pct(m)
+            if v is not None and v >= idx_thr:
+                comps["index_trigger"] = idx_pts; total += idx_pts; score_dbg["market_index_hits"] += 1
+
+        m = RE_NIK.search(title)
+        if m:
+            v = first_pct(m)
+            if v is not None and v >= nik_thr:
+                comps["nikkei_trigger"] = nik_pts; total += nik_pts; score_dbg["market_nikkei_hits"] += 1
+
+        single_move = None
+        m = RE_TICK_PCT.search(title)
+        if m:
+            try: single_move = abs(float(m.group(2)))
+            except Exception: single_move = None
+        if single_move is not None and single_move >= stk_thr:
+            comps["single_stock_trigger"] = stk_pts; total += stk_pts; score_dbg["market_single_hits"] += 1
+        it["_single_move_abs"] = single_move            # NEW
+
+        reg_bonus = 0.0
+        if it.get("region") == "Canada":
+            reg_bonus += float(W(weights, "regional.weights.country_match", 1.2))
+        if reg_bonus:
+            max_b = float(W(weights, "regional.max_bonus", 2.4))
+            reg_bonus = min(reg_bonus, max_b)
+            comps["regional"] = round(reg_bonus, 4); total += reg_bonus
+
+        ah = it.get("age_hint_hours", None)
+        if ah is not None and ah <= nate_bonus_max_hours:
+            comps["nate_hours_hint_bonus"] = nate_bonus; total += nate_bonus
+
+        team_hit   = bool(RE_JAYS_TEAM.search(title))
+        player_hit = bool(RE_JAYS_PLAYERS.search(title))
+        win_hit    = bool(RE_JAYS_WIN.search(title))
+        loss_hit   = bool(RE_JAYS_LOSS.search(title))
+
+        focus_team_hit = bool(RE_MLB_TEAMS.search(title))
+        final_hit      = bool(RE_MLB_FINAL_WORD.search(title) or RE_SCORELINE.search(title))
+        scoreline_hit  = bool(RE_SCORELINE.search(title))
+
+        if team_hit:
+            comps["sports.team_match"] = sp_team; total += sp_team; score_dbg["sports_team_hits"] += 1
+
+        if focus_team_hit and not team_hit:
+            comps["sports.focus_team"] = sp_focus_team; total += sp_focus_team; score_dbg["sports_focus_team_hits"] += 1
+
+        if player_hit:
+            comps["sports.player_match"] = sp_player; total += sp_player; score_dbg["sports_player_hits"] += 1
+
+        if win_hit:
+            comps["sports.result_win"] = sp_win; total += sp_win; score_dbg["sports_result_win_hits"] += 1
+        elif loss_hit:
+            comps["sports.result_loss"] = sp_loss; total += sp_loss; score_dbg["sports_result_loss_hits"] += 1
+
+        if focus_team_hit and final_hit:
+            comps["sports.final_story"] = sp_final_story; total += sp_final_story; score_dbg["sports_final_hits"] += 1
+            if scoreline_hit:
+                comps["sports.final_with_score"] = sp_final_score; total += sp_final_score; score_dbg["sports_final_score_hits"] += 1
+
+        if (team_hit or focus_team_hit) and (ah is None):
+            if (now_et.hour, now_et.minute) >= (18,30) and (now_et.hour, now_et.minute) <= (22,30):
+                comps["sports.evening_window"] = sp_evening; total += sp_evening; score_dbg["sports_evening_hits"] += 1
+
+        if playoffs_on and (team_hit or focus_team_hit) and (win_hit or loss_hit or final_hit):
+            comps["sports.playoff_mode"] = sp_playoffs; total += sp_playoffs; score_dbg["sports_playoff_hits"] += 1
+
+        effects = {"lightsaber": False, "glitch": False, "reasons": []}
+        if total >= ls_min:
+            effects["lightsaber"] = True; effects["reasons"].append(f"score≥{ls_min}")
+        if it["_ps_deaths"] >= also_body:
+            effects["lightsaber"] = True; effects["reasons"].append(f"body_count≥{also_body}")
+        if it["_btc_move_abs"] is not None and it["_btc_move_abs"] >= also_btc:
+            effects["lightsaber"] = True; effects["reasons"].append(f"btc_move≥{also_btc}%")
+        if it["_single_move_abs"] is not None and it["_single_move_abs"] >= also_stk:
+            effects["lightsaber"] = True; effects["reasons"].append(f"single_stock_move≥{also_stk}%")
+        if not effects["lightsaber"] and total >= glitch_min:
+            effects["glitch"] = True; effects["reasons"].append(f"score≥{glitch_min}")
+
+        if host == MPB_SUBSTACK_HOST:
+            effects["glitch"] = True
+            if not effects["lightsaber"]: effects["reasons"].append("substack")
+            dec_iso = iso_add_hours(it.get("published_utc"), 24.0)
+            effects["decay_at"] = dec_iso
+            score_dbg["substack_tagged"] += 1
+
+        # (Optional hyperbolic display – keep your original)
+        # disp_title, disp_sub, hype_reasons = craft_hyperbolic_display(it)
+        # if disp_title: ...
+        # -- to keep parity with your current output, you can leave it as-is or enable again --
+
+        style = "lightsaber" if effects["lightsaber"] else ("glitch" if effects["glitch"] else "")
+        if style: effects["style"] = style
+
+        it["score"] = round(total, 4)
+        it["score_components"] = comps
+        it["effects"] = effects
+
+    for it in survivors:
+        apply_scoring(it)
+
+    # ---- Sort by recency then score, trim to MAX_TOTAL ----
+    survivors.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
+    survivors = survivors[:MAX_TOTAL]
+
+    # ---- NEW: Select up to 3 BREAKING items for the ribbon ----
+    def breaker_score(it: dict) -> tuple:
+        title = it.get("title","")
+        score = float(it.get("score", 0.0))
+        age_h = hours_since(it.get("published_utc",""), time.time())
+        recency_boost = max(0.0, 24.0 - age_h) / 24.0  # 0..1
+        urgent = 1.0 if (RE_BREAKING.search(title) or CONFLICT_CUES.search(title)) else 0.0
+        safety = 1.0 if (it.get("_ps_deaths",0) > 0 or it.get("_ps_has_fatal")) else 0.0
+        markets = 1.0 if ((it.get("_btc_move_abs") or 0) >= 8.0 or (it.get("_single_move_abs") or 0) >= 15.0) else 0.0
+        saber = 1.0 if it.get("effects",{}).get("lightsaber") else 0.0
+        return (urgent + safety + markets + saber + recency_boost, score, _ts(it.get("published_utc","")))
+
+    survivors_sorted_for_break = sorted(survivors, key=breaker_score, reverse=True)
+    picks = 0
+    for it in survivors_sorted_for_break:
+        if picks >= BREAKER_LIMIT:
+            break
+        # Don’t put obvious press wires/aggregators in the ribbon
+        if looks_aggregator(it.get("source",""), it.get("url","")):
+            continue
+        # Mark as breaker (this is what your front-end checks)
+        it.setdefault("effects", {})
+        it["effects"]["style"] = "breaker"
+        picks += 1
+
+    elapsed_total = time.time() - start
+
+    out = {
+        "generated_utc": datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),  # CHANGED: ensure Z
+        "count": len(survivors),
+        "items": survivors,
+        "_debug": {
+            "feeds_total": len(specs),
+            "cap_items": MAX_TOTAL,
+            "collected": len(collected),
+            "dedup_pass1": len(items),
+            "dedup_final": len(survivors),
+            "slow_domains": sorted(list(slow_domains.keys())),
+            "timeouts": sorted(set(timeouts)),
+            "errors": sorted(set(errors)),
+            "caps_hit": sorted(caps_hit),
+            "feed_times_sample": sorted(
+                [{"host": h, "sec": round(sec, 3), "kept": kept} for (h, sec, kept) in feed_times[:10]],
+                key=lambda x: -x["sec"]
+            ),
+            "elapsed_sec": round(elapsed_total, 2),
+            "http_timeout_sec": HTTP_TIMEOUT_S,
+            "slow_feed_warn_sec": SLOW_FEED_WARN_S,
+            "global_budget_sec": GLOBAL_BUDGET_S,
+            "version": "fetch-v1.9.0-breakers",
+            "weights_loaded": weights_debug.get("weights_loaded", False),
+            "weights_keys": weights_debug.get("weights_keys", []),
+            "weights_error": weights_debug.get("weights_error", None),
+            "weights_path":  weights_debug.get("path", None),
+            "score_stats": score_dbg,
+        }
+    }
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=2)
+    print(f"[done] wrote {out_path} items={out['count']} elapsed={elapsed_total:.1f}s")
+    return out
+
+def main():
+    ap = argparse.ArgumentParser(description="Build headlines.json from feeds.txt")
+    ap.add_argument("--feeds-file", default="feeds.txt", help="Path to feeds.txt")
+    ap.add_argument("--out", default="headlines.json", help="Output JSON file")
+    args = ap.parse_args()
+    out = build(args.feeds_file, args.out)
+    dbg = out.get("_debug", {})
+    print(
+        "Debug:",
+        {
+            k: dbg.get(k)
+            for k in [
+                "feeds_total","collected","dedup_pass1","dedup_final",
+                "elapsed_sec","slow_domains","timeouts","errors",
+                "weights_loaded","weights_keys","weights_error","weights_path","score_stats"
+            ]
+        }
+    )
+
+if __name__ == "__main__":
+    main()
