@@ -3,7 +3,7 @@ name: Build & publish headlines.json
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/20 * * * *"  # every 20 minutes
+    - cron: "*/12 * * * *"  # every 12 minutes
 
 permissions:
   contents: write
