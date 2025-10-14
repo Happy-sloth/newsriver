@@ -39,6 +39,7 @@ from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
 
 import feedparser  # type: ignore
 import requests    # type: ignore
+from email.utils import parsedate_to_datetime  # ← NEW: robust RFC822 parsing
 
 try:
     import json5  # type: ignore
@@ -318,15 +319,56 @@ def to_iso_from_struct(t) -> str | None:
     except Exception:
         return None
 
+# ---------- NEW robust date parsing ----------
+def _to_iso_utc(dt) -> str | None:
+    try:
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        else:
+            dt = dt.astimezone(timezone.utc)
+        return dt.isoformat().replace("+00:00","Z")
+    except Exception:
+        return None
+
+def parse_any_dt_str(s: str) -> str | None:
+    if not s:
+        return None
+    # Try RFC822 first (very common in RSS)
+    try:
+        dt = parsedate_to_datetime(s)
+        if dt:
+            iso = _to_iso_utc(dt)
+            if iso:
+                return iso
+    except Exception:
+        pass
+    # Try ISO-8601-ish
+    try:
+        if s.endswith("Z"):
+            dt = datetime.fromisoformat(s.replace("Z","+00:00"))
+        else:
+            dt = datetime.fromisoformat(s)
+        iso = _to_iso_utc(dt)
+        if iso:
+            return iso
+    except Exception:
+        pass
+    return None
+
 def pick_published(entry) -> str | None:
     for key in ("published_parsed","updated_parsed","created_parsed"):
-        if getattr(entry, key, None):
-            iso = to_iso_from_struct(getattr(entry, key))
-            if iso: return iso
-    for key in ("published","updated","created","date","issued"):
+        t = getattr(entry, key, None)
+        if t:
+            iso = to_iso_from_struct(t)
+            if iso:
+                return iso
+    for key in ("published","updated","created","issued","date"):
         val = entry.get(key)
-        if val: return datetime.now(timezone.utc).isoformat()
-    return None
+        if isinstance(val, str):
+            iso = parse_any_dt_str(val.strip())
+            if iso:
+                return iso
+    return None  # do NOT fabricate "now" for undated items
 
 def _ts(iso: str) -> int:
     try: return int(datetime.fromisoformat(iso.replace("Z","+00:00")).timestamp())
@@ -748,7 +790,6 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         # Nate page
         if "fivethirtyeight.com/contributors/nate-silver" in spec.url:
-            # We may have HTML here (not RSS)
             try:
                 scraped = scrape_nate_silver(blob, spec)
                 if scraped:
@@ -786,17 +827,22 @@ def build(feeds_file: str, out_path: str) -> dict:
             cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
             if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
             if per_host_counts.get(h, 0) >= cap:
-                if h and h not in caps_hit: caps_hit.append(h); 
+                if h and h not in caps_hit: caps_hit.append(h)
                 continue
 
             source_label = (parsed.feed.get("title") or h or "").strip() if parsed_ok else (h or "").strip()
             if h == MPB_SUBSTACK_HOST: source_label = "MyPyBiTE Substack"
 
+            # NEW: require a valid published timestamp; skip if missing
+            pub = pick_published(e)
+            if not pub:
+                continue
+
             item = {
                 "title": title,
                 "url":   can_url or link,
                 "source": source_label,
-                "published_utc": pick_published(e) or datetime.now(timezone.utc).isoformat(),
+                "published_utc": pub,
                 "category": spec.tag.category,
                 "region":   spec.tag.region,
                 "canonical_url": can_url or link,
@@ -879,6 +925,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     cluster_groups: dict[str, list[dict]] = {}
     for it in survivors:
         cluster_groups.setdefault(it["cluster_id"], []).append(it)
+        # newest-last order in each cluster to mark latest
     for cid, arr in cluster_groups.items():
         arr.sort(key=lambda x: _ts(x["published_utc"]))
         for i, it in enumerate(arr):
