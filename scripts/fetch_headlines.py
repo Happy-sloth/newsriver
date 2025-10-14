@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # scripts/fetch_headlines.py
 #
-# Build headlines.json from feeds.txt
-# (full file)
+# Build headlines.json from feeds.txt with strict link verification,
+# 69h freshness window, market sanity checks, and an exact 69-item guarantee.
 
 from __future__ import annotations
 
@@ -12,11 +12,10 @@ import hashlib
 import json
 import os
 import re
-import sys
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone, timedelta
-from typing import List, Tuple
+from typing import List, Tuple, Iterable
 from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
 
 import feedparser  # type: ignore
@@ -41,7 +40,7 @@ except Exception:
 # ---------------- Tunables ----------------
 MAX_PER_FEED      = int(os.getenv("MPB_MAX_PER_FEED", "14"))
 MAX_TOTAL         = int(os.getenv("MPB_MAX_TOTAL", "320"))
-BREAKER_LIMIT     = int(os.getenv("MPB_BREAKER_LIMIT", "3"))  # NEW
+BREAKER_LIMIT     = int(os.getenv("MPB_BREAKER_LIMIT", "3"))
 
 HTTP_TIMEOUT_S    = float(os.getenv("MPB_HTTP_TIMEOUT", "10"))
 SLOW_FEED_WARN_S  = float(os.getenv("MPB_SLOW_FEED_WARN", "3.5"))
@@ -51,15 +50,22 @@ USER_AGENT        = os.getenv(
     "MPB_UA",
     "NewsRiverBot/1.3 (+https://mypybite.github.io/newsriver/)"
 )
-
 ALT_USER_AGENT = os.getenv(
     "MPB_ALT_UA",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 )
 ACCEPT_HEADER = "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, text/html;q=0.7, */*;q=0.5"
 ACCEPT_LANG   = "en-US,en;q=0.8"
 
+# Enforcers (configurable via env)
+VERIFY_LINKS                = os.getenv("MPB_VERIFY_LINKS", "1") == "1"
+REJECT_REDIRECT_TO_HOMEPAGE = os.getenv("MPB_REJECT_REDIRECT_TO_HOMEPAGE", "1") == "1"
+BLOCK_AGGREGATORS           = os.getenv("MPB_BLOCK_AGGREGATORS", "1") == "1"
+MIN_AGE_SEC                 = int(os.getenv("MPB_MIN_AGE_SEC", "60"))        # ≥ 1 minute old
+MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))    # ≤ 69 hours old
+REQUIRE_EXACT_COUNT         = int(os.getenv("MPB_REQUIRE_EXACT_COUNT", "69"))
+
+# Source hygiene limits
 PER_HOST_MAX = {
     "toronto.citynews.ca": 8,
     "financialpost.com": 6,
@@ -77,7 +83,12 @@ PREFERRED_DOMAINS = {
     "cultmtl.com",
 }
 
-SPORTS_PRIOR_DOMAINS = {"mlb.com", "sportsnet.ca", "tsn.ca", "espn.com", "theathletic.com", "cbssports.com"}
+# Market sanity: which domains can assert “records/milestones”
+MARKET_AUTH_DOMAINS = {
+    "wsj.com","ft.com","bloomberg.com","reuters.com","coindesk.com","marketwatch.com","cnbc.com","apnews.com"
+}
+
+SPORTS_PRIOR_DOMAINS = {"mlb.com","sportsnet.ca","tsn.ca","espn.com","theathletic.com","cbssports.com"}
 
 PRESS_WIRE_DOMAINS = {
     "globenewswire.com","newswire.ca","prnewswire.com","businesswire.com","accesswire.com"
@@ -109,15 +120,7 @@ PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
 MPB_SUBSTACK_HOST = "mypybite.substack.com"
 
-# === NEW: “69 always” controls ===
-TARGET_TOTAL      = int(os.getenv("MPB_TARGET_TOTAL", "69"))
-MIN_AGE_MINUTES   = int(os.getenv("MPB_MIN_AGE_MINUTES", "1"))     # don’t show items younger than this
-MAX_AGE_HOURS     = int(os.getenv("MPB_MAX_AGE_HOURS", "69"))      # main window upper bound
-WIDEN_MAX_HOURS   = int(os.getenv("MPB_WIDEN_MAX_HOURS", "72"))    # widened fallback
-VERIFY_MAX        = int(os.getenv("MPB_VERIFY_MAX", "200"))        # verification budget per run
-VERIFY_ALLOW_HTML = True                                           # we accept HTML pages if they look like full articles
-
-# --- Sports / markets patterns (unchanged) ---
+# --- Sports / markets patterns ---
 RE_JAYS_TEAM = re.compile(r"\b(blue\s*jays|toronto\s*blue\s*jays|jays)\b", re.I)
 RE_JAYS_PLAYERS = re.compile(
     r"\b("
@@ -169,22 +172,10 @@ RE_IDX  = re.compile(r"\b(S&P|Nasdaq|Dow|TSX|TSXV)\b.*?" + RE_PCT, re.I)
 RE_NIK  = re.compile(r"\b(Nikkei(?:\s*225)?)\b.*?" + RE_PCT, re.I)
 RE_TICK_PCT = re.compile(r"\b([A-Z]{2,5})\b[^%]{0,40}" + RE_PCT)
 
-# --- NEW: general “breaking” cue for ribbon selection
+# Breaking cue
 RE_BREAKING = re.compile(
     r"\b(breaking|developing|just in|alert|evacuate|earthquake|hurricane|wildfire|flood|tsunami|tornado|"
     r"missile|air[-\s]?strike|explosion|blast|drone|shooting|casualties?|dead|killed)\b", re.I
-)
-
-# --- NEW: very simple “soft 404 / placeholder” sniffers ---
-SOFT_404_HINTS = re.compile(
-    r"(page not found|404|content not available|article not found|moved|no longer available|"
-    r"preview only|subscribe to continue|sign in to read|access denied|temporarily unavailable)",
-    re.I
-)
-
-HTML_STORY_HINTS = re.compile(
-    r"(<article\b|<meta\s+property=['\"]og:article|itemtype=['\"][^'\"]*Article|class=['\"][^'\"]*(article|story|post)[^'\"]*)",
-    re.I
 )
 
 @dataclass
@@ -263,6 +254,8 @@ def is_press_wire(url: str) -> bool:
     return any(hint in p for hint in PRESS_WIRE_PATH_HINTS)
 
 def looks_aggregator(source: str, link: str) -> bool:
+    if not BLOCK_AGGREGATORS:
+        return False
     blob = f"{source} {link}"
     if AGGREGATOR_HINT.search(blob): return True
     if is_press_wire(link): return True
@@ -294,7 +287,7 @@ def _new_session() -> requests.Session:
         "Accept": ACCEPT_HEADER,
         "Accept-Language": ACCEPT_LANG,
     })
-    adapter = requests.adapters.HTTPAdapter(pool_connections=16, pool_maxsize=32)
+    adapter = requests.adapters.HTTPAdapter(pool_connections=24, pool_maxsize=48, max_retries=1)
     s.mount("http://", adapter)
     s.mount("https://", adapter)
     return s
@@ -310,6 +303,7 @@ def http_get(session: requests.Session, url: str) -> bytes | None:
         if getattr(resp, "ok", False) and resp.content:
             ctype = resp.headers.get("Content-Type", "").lower()
             if _looks_like_xml(resp.content, ctype): return resp.content
+        # fall back (HTML scrapers)
         alt_headers = {
             "User-Agent": ALT_USER_AGENT,
             "Accept": ACCEPT_HEADER,
@@ -321,7 +315,7 @@ def http_get(session: requests.Session, url: str) -> bytes | None:
         if getattr(resp2, "ok", False) and resp2.content:
             ctype2 = resp2.headers.get("Content-Type", "").lower()
             if _looks_like_xml(resp2.content, ctype2): return resp2.content
-        return resp2.content  # may be HTML for scrapers
+        return getattr(resp2, "content", None)
     except Exception:
         return None
 
@@ -378,7 +372,7 @@ def pick_published(entry) -> str | None:
             iso = parse_any_dt_str(val.strip())
             if iso:
                 return iso
-    return None  # do NOT fabricate now for undated items
+    return None
 
 def _ts(iso: str) -> int:
     try: return int(datetime.fromisoformat(iso.replace("Z","+00:00")).timestamp())
@@ -427,11 +421,9 @@ def W(d: dict, path: str, default):
     return cur
 
 # ---------------- Public-safety parsing ----------------
-WORD_NUM = {
-    "one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10,
-    "eleven":11,"twelve":12,"thirteen":13,"fourteen":14,"fifteen":15,"sixteen":16,"seventeen":17,
-    "eighteen":18,"nineteen":19,"twenty":20
-}
+WORD_NUM = {"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9,"ten":10,
+            "eleven":11,"twelve":12,"thirteen":13,"fourteen":14,"fifteen":15,"sixteen":16,"seventeen":17,
+            "eighteen":18,"nineteen":19,"twenty":20}
 RE_DEATH = re.compile(r"\b((?:\d+|one|two|three|four|five|six|seven|eight|nine|ten))\s+(?:people\s+)?(?:dead|killed|deaths?)\b", re.I)
 RE_INJ   = re.compile(r"\b((?:\d+|one|two|three|four|five|six|seven|eight|nine|ten))\s+(?:people\s+)?(?:injured|hurt)\b", re.I)
 RE_FATAL_CUE = re.compile(r"\b(dead|killed|homicide|murder|fatal|deadly)\b", re.I)
@@ -460,7 +452,7 @@ def first_pct_signed(m):
 # ---------------- Relative "ago" parsing ----------------
 REL_AGO = re.compile(r"\b(\d+)\s*(minute|minutes|hour|hours|day|days)\s+ago\b", re.I)
 def _hours_from_rel(s: str) -> float | None:
-    m = REL_AGO.search(s or ""); 
+    m = REL_AGO.search(s or "")
     if not m: return None
     n = int(m.group(1)); unit = m.group(2).lower()
     if unit.startswith("minute"): return n / 60.0
@@ -468,13 +460,12 @@ def _hours_from_rel(s: str) -> float | None:
     if unit.startswith("day"):    return float(n) * 24.0
     return None
 
-# ---------------- Nate Silver scraper ----------------
+# ---------------- HTML scrapers (Nate/CP24) ----------------
 def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
     items: list[dict] = []
     text = html.decode("utf-8", errors="ignore")
-
     if BeautifulSoup is not None:
-        soup = BeautifulSoup(text, "html.parser")  # CHANGED: always use html.parser
+        soup = BeautifulSoup(text, "html.parser")
         blocks = soup.find_all(["article", "div"], attrs={"class": re.compile(r"(card|post|river|article|story)", re.I)})
         seen = set()
         for blk in blocks:
@@ -508,7 +499,7 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
             if len(items) >= MAX_PER_FEED: break
         return items
 
-    # Fallback regex
+    # Fallback regex pass (coarse)
     seen = set()
     for chunk in re.split(r"(?i)<article\b", text):
         m = re.search(r'href="(https?://fivethirtyeight\.com/[^"]+)"[^>]*>([^<]{8,})</a>', chunk, flags=re.I)
@@ -536,7 +527,6 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
         if len(items) >= MAX_PER_FEED: break
     return items
 
-# ---------------- CP24 homepage scraper (permissive) ----------------
 def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
     base_host = "www.cp24.com"
     items: list[dict] = []
@@ -546,15 +536,11 @@ def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
         if not href or not title:
             return None
         url = href.strip()
-        if url.startswith("//"):
-            url = "https:" + url
-        if url.startswith("/"):
-            url = f"https://{base_host}{url}"
-        if "cp24.com" not in url.lower():
-            return None
+        if url.startswith("//"): url = "https:" + url
+        if url.startswith("/"):  url = f"https://{base_host}{url}"
+        if "cp24.com" not in url.lower(): return None
         ttl = strip_source_tail(title).strip()
-        if len(ttl) < 6:
-            return None
+        if len(ttl) < 6: return None
         can_url = canonicalize_url(url)
         return {
             "title": ttl,
@@ -569,24 +555,19 @@ def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
         }
 
     seen = set()
-
     if BeautifulSoup is not None:
-        soup = BeautifulSoup(text, "html.parser")  # CHANGED
+        soup = BeautifulSoup(text, "html.parser")
         anchors = soup.find_all("a", href=True)
         for a in anchors:
             href = (a.get("href") or "").strip()
-            if not href or href.startswith("#") or href.startswith("mailto:"):
-                continue
+            if not href or href.startswith("#") or href.startswith("mailto:"): continue
             title = (a.get_text(" ", strip=True) or "").strip()
             it = make_item(href, title)
-            if not it:
-                continue
-            if it["canonical_url"] in seen:
-                continue
+            if not it: continue
+            if it["canonical_url"] in seen: continue
             seen.add(it["canonical_url"])
             items.append(it)
-            if len(items) >= MAX_PER_FEED:
-                break
+            if len(items) >= MAX_PER_FEED: break
         return items
 
     # Fallback regex
@@ -594,84 +575,138 @@ def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
         href = (m.group(1) or "").strip()
         raw = re.sub(r"<[^>]+>", " ", m.group(2) or "")
         title = re.sub(r"\s+", " ", raw).strip()
-        if not href or not title:
-            continue
+        if not href or not title: continue
         it = make_item(href, title)
-        if not it:
-            continue
-        if it["canonical_url"] in seen:
-            continue
+        if not it: continue
+        if it["canonical_url"] in seen: continue
         seen.add(it["canonical_url"])
         items.append(it)
-        if len(items) >= MAX_PER_FEED:
-            break
+        if len(items) >= MAX_PER_FEED: break
     return items
 
-# ---------- Hyperbolic overlay (unchanged) ----------
-def _capitalize_once(s: str) -> str:
-    return s[:1].upper() + s[1:] if s else s
-
-def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str]]:
-    title = strip_source_tail(it.get("title", "").strip())
-    if not title: return None, None, []
-    cat = (it.get("category") or "").strip()
-    # (kept as-is; omitted for brevity)
-    return None, None, []
-
-# ---------- NEW: freshness + verification + backfill helpers ----------
-def is_within_window(iso_s: str, now_ts: float, min_age_min=MIN_AGE_MINUTES, max_age_h=MAX_AGE_HOURS) -> bool:
-    if not iso_s: return False
-    age_h = hours_since(iso_s, now_ts)
-    age_min = age_h * 60.0
-    return (age_min >= float(min_age_min)) and (age_h <= float(max_age_h))
-
-def _looks_like_full_article(html_bytes: bytes) -> bool:
-    if not html_bytes: return False
-    txt = html_bytes[:200000].decode("utf-8", errors="ignore")
-    if SOFT_404_HINTS.search(txt): return False
-    if not VERIFY_ALLOW_HTML: return True
-    return bool(HTML_STORY_HINTS.search(txt))
-
-def verify_and_canonicalize(session: requests.Session, url: str) -> tuple[bool, str]:
-    """Follow redirects; return (ok, final_url). Accept HTML pages that look like full articles."""
+# ---------- Link verification & market sanity ----------
+def is_homepage_like(url: str) -> bool:
     try:
-        # Prefer HEAD to be cheap
-        rh = session.head(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
-        # Some sites block HEAD; fall back to GET
-        if (not getattr(rh, "ok", False)) or int(getattr(rh, "status_code", 0)) >= 400 or str(rh.request.method).upper() != "HEAD":
-            rg = session.get(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
-            if not getattr(rg, "ok", False) or int(getattr(rg, "status_code", 0)) >= 400:
-                return False, url
-            ctype = rg.headers.get("Content-Type", "").lower()
-            if "html" in ctype:
-                if not _looks_like_full_article(rg.content):
-                    return False, rg.url
-            # xml/json are fine (some feeds link to XML redirectors or JSON story shells)
-            return True, rg.url
-        # HEAD ok -> consider ok; if HTML we can optionally do a tiny GET sniff if needed
-        final_url = rh.url
-        if "html" in rh.headers.get("Content-Type", "").lower():
-            try:
-                rg2 = session.get(final_url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
-                if getattr(rg2, "ok", False) and _looks_like_full_article(rg2.content):
-                    return True, rg2.url
-            except Exception:
-                pass
-        return True, final_url
+        u = urlparse(url)
+        if u.path in ("","/"): return True
+        # very short slugs or pure section hubs often smell like soft redirects
+        if len(u.path.strip("/")) <= 2 and (not u.query):
+            return True
+        return False
     except Exception:
-        return False, url
+        return False
 
-def load_previous_items(out_path: str) -> list[dict]:
+def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tuple[bool, str, int, str]:
+    """
+    Returns (ok, final_url, status_code, reason)
+    Rules:
+      - must end 2xx
+      - content-type must be text/html (or application/xhtml+xml)
+      - body length >= 2KB
+      - not redirect to homepage/section root (optional)
+    """
+    if not VERIFY_LINKS:
+        return True, url, 200, "verification disabled"
+
     try:
-        if not os.path.exists(out_path): return []
-        with open(out_path, "r", encoding="utf-8") as f:
-            data = json.load(f) or {}
-        arr = data.get("items", []) or []
-        return [x for x in arr if isinstance(x, dict)]
-    except Exception:
-        return []
+        # A single GET with redirects gives us final URL + body for size check
+        resp = session.get(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
+    except Exception as e:
+        debug_counts["link_verification_fail"] += 1
+        return False, url, 0, f"exception:{type(e).__name__}"
 
-# ---------------- Build ----------------
+    status = getattr(resp, "status_code", 0)
+    final_url = str(getattr(resp, "url", url) or url)
+
+    if status < 200 or status >= 300:
+        debug_counts["link_verification_fail"] += 1
+        return False, final_url, status, "non-2xx"
+
+    ctype = (resp.headers.get("Content-Type") or "").lower()
+    if ("text/html" not in ctype) and ("application/xhtml" not in ctype):
+        debug_counts["link_verification_fail"] += 1
+        return False, final_url, status, f"bad-ctype:{ctype}"
+
+    if REJECT_REDIRECT_TO_HOMEPAGE and is_homepage_like(final_url):
+        debug_counts["soft_404_drops"] += 1
+        return False, final_url, status, "homepage-like"
+
+    body = getattr(resp, "content", b"") or b""
+    if len(body) < 2048:  # tiny bodies = stub/soft 404
+        debug_counts["soft_404_drops"] += 1
+        return False, final_url, status, "body-too-small"
+
+    return True, final_url, status, "ok"
+
+def html_meta_times(html_bytes: bytes) -> tuple[datetime | None, datetime | None]:
+    if not BeautifulSoup:
+        return (None, None)
+    try:
+        soup = BeautifulSoup(html_bytes, "html.parser")
+        pub = None; upd = None
+        for tag in soup.find_all("meta"):
+            n = (tag.get("name") or tag.get("property") or "").lower()
+            if n in ("article:published_time","og:published_time","date") and tag.get("content"):
+                pub = _parse_dt_loose(tag.get("content"))
+            if n in ("article:modified_time","og:updated_time","modified_time") and tag.get("content"):
+                upd = _parse_dt_loose(tag.get("content"))
+        return pub, upd
+    except Exception:
+        return (None, None)
+
+def _parse_dt_loose(s: str | None) -> datetime | None:
+    if not s: return None
+    try:
+        if s.endswith("Z"): return datetime.fromisoformat(s.replace("Z","+00:00"))
+        return datetime.fromisoformat(s)
+    except Exception:
+        try:
+            d = parsedate_to_datetime(s)
+            return d
+        except Exception:
+            return None
+
+def is_same_day(a: datetime | None, b: datetime | None) -> bool:
+    if not a or not b: return False
+    return a.date() == b.date()
+
+def is_market_headline_sane(title: str, url: str, published_iso: str, session: requests.Session, debug_counts: dict) -> bool:
+    """Block stale milestone/record claims unless corroborated."""
+    t = title.lower()
+    milestone = bool(re.search(r"\b(all[-\s]?time high|record|hits?\s*(?:\d{2,3},?\d{3}|[1-9]\d?k))\b", t))
+    btc_round = bool(re.search(r"\bbitcoin|btc\b.*\b(20k|30k|40k|50k|60k|70k|80k|90k|100k)\b", t))
+    if not (milestone or btc_round):
+        return True  # not a risky claim
+
+    # must be very fresh
+    age_h = hours_since(published_iso, time.time())
+    if age_h > 12.0:
+        debug_counts["market_sanity_drops"] += 1
+        return False
+
+    # require authoritative domain OR matching same-day meta
+    h = host_of(url)
+    if any(h.endswith(d) for d in MARKET_AUTH_DOMAINS):
+        return True
+
+    # fetch page to read meta times
+    if not VERIFY_LINKS:
+        return False  # without a body we can't corroborate
+
+    try:
+        resp = session.get(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
+        body = getattr(resp, "content", b"") or b""
+        pub_meta, upd_meta = html_meta_times(body)
+        pub_iso = datetime.fromisoformat(published_iso.replace("Z","+00:00"))
+        if is_same_day(pub_meta, pub_iso) or is_same_day(upd_meta, pub_iso):
+            return True
+    except Exception:
+        pass
+
+    debug_counts["market_sanity_drops"] += 1
+    return False
+
+# ---------- Build ----------
 def build(feeds_file: str, out_path: str) -> dict:
     start = time.time()
     weights, weights_debug = load_weights()
@@ -714,6 +749,16 @@ def build(feeds_file: str, out_path: str) -> dict:
         "hype_jobs": 0,
         "hype_sports": 0,
         "hype_ceasefire": 0,
+    }
+
+    # new debug counters
+    debug_counts = {
+        "link_verification_fail": 0,
+        "soft_404_drops": 0,
+        "max_age_drops": 0,
+        "min_age_drops": 0,
+        "market_sanity_drops": 0,
+        "backfill_steps_used": 0
     }
 
     session = _new_session()
@@ -815,7 +860,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             if h == MPB_SUBSTACK_HOST: source_label = "MyPyBiTE Substack"
 
             pub = pick_published(e)
-            if not pub:
+            if not pub:  # drop undated; we enforce a max age window
                 continue
 
             item = {
@@ -834,12 +879,11 @@ def build(feeds_file: str, out_path: str) -> dict:
             kept_from_feed += 1
 
         feed_times.append((h_feed, dt, kept_from_feed))
-
         if (idx % 20) == 0:
             elapsed = time.time() - start
             print(f"[progress] {idx}/{len(specs)} feeds, items={len(collected)}, elapsed={elapsed:.1f}s")
 
-    # ---- Dedup pass 1: cluster newest/non-aggregator ----
+    # ---- Dedup pass 1: newest/non-aggregator per cluster ----
     first_pass: dict[str,dict] = {}
     for it in collected:
         key = it["cluster_id"]
@@ -852,7 +896,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         elif t_new == t_old:
             if looks_aggregator(prev.get("source",""), prev.get("url","")) and not looks_aggregator(it.get("source",""), it.get("url","")):
                 first_pass[key] = it
-
     items = list(first_pass.values())
 
     # ---- Dedup pass 2: near-duplicate by Jaccard ----
@@ -873,17 +916,15 @@ def build(feeds_file: str, out_path: str) -> dict:
 
     def _is_jays_game_title(it: dict) -> bool:
         t = it.get("title","")
-        if not t: return False
         team = bool(RE_JAYS_TEAM.search(t))
         resultish = bool(RE_JAYS_WIN.search(t) or RE_JAYS_LOSS.search(t) or RE_MLB_FINAL_WORD.search(t) or RE_SCORELINE.search(t))
-        return team and resultish
+        return bool(t) and team and resultish
 
     def _is_focus_mlb_final(it: dict) -> bool:
         t = it.get("title","")
-        if not t: return False
         team = bool(RE_MLB_TEAMS.search(t))
         finalish = bool(RE_MLB_FINAL_WORD.search(t) or RE_SCORELINE.search(t) or RE_JAYS_WIN.search(t) or RE_JAYS_LOSS.search(t))
-        return team and finalish
+        return bool(t) and team and finalish
 
     for it in items:
         toks = set(title_tokens(it["title"]))
@@ -902,6 +943,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             survivors.append(it)
             token_cache.append((toks, it))
 
+    # cluster metadata
     cluster_groups: dict[str, list[dict]] = {}
     for it in survivors:
         cluster_groups.setdefault(it["cluster_id"], []).append(it)
@@ -911,7 +953,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             it["cluster_rank"] = i + 1
             it["cluster_latest"] = (i == len(arr) - 1)
 
-    # --------- Scoring (unchanged except for storing a few debug fields) ---------
+    # --------- Scoring (unchanged core; kept your weights) ---------
     half_life_h = float(W(weights, "recency.half_life_hours", 6.0))
     age_pen_24  = float(W(weights, "recency.age_penalty_after_24h", -0.6))
     age_pen_36  = float(W(weights, "recency.age_penalty_after_36h", -0.4))
@@ -1054,27 +1096,21 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         if team_hit:
             comps["sports.team_match"] = sp_team; total += sp_team; score_dbg["sports_team_hits"] += 1
-
         if focus_team_hit and not team_hit:
             comps["sports.focus_team"] = sp_focus_team; total += sp_focus_team; score_dbg["sports_focus_team_hits"] += 1
-
         if player_hit:
             comps["sports.player_match"] = sp_player; total += sp_player; score_dbg["sports_player_hits"] += 1
-
         if win_hit:
             comps["sports.result_win"] = sp_win; total += sp_win; score_dbg["sports_result_win_hits"] += 1
         elif loss_hit:
             comps["sports.result_loss"] = sp_loss; total += sp_loss; score_dbg["sports_result_loss_hits"] += 1
-
         if focus_team_hit and final_hit:
             comps["sports.final_story"] = sp_final_story; total += sp_final_story; score_dbg["sports_final_hits"] += 1
             if scoreline_hit:
                 comps["sports.final_with_score"] = sp_final_score; total += sp_final_score; score_dbg["sports_final_score_hits"] += 1
-
         if (team_hit or focus_team_hit) and (ah is None):
             if (now_et.hour, now_et.minute) >= (18,30) and (now_et.hour, now_et.minute) <= (22,30):
                 comps["sports.evening_window"] = sp_evening; total += sp_evening; score_dbg["sports_evening_hits"] += 1
-
         if playoffs_on and (team_hit or focus_team_hit) and (win_hit or loss_hit or final_hit):
             comps["sports.playoff_mode"] = sp_playoffs; total += sp_playoffs; score_dbg["sports_playoff_hits"] += 1
 
@@ -1093,8 +1129,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         if host == MPB_SUBSTACK_HOST:
             effects["glitch"] = True
             if not effects["lightsaber"]: effects["reasons"].append("substack")
-            dec_iso = iso_add_hours(it.get("published_utc"), 24.0)
-            effects["decay_at"] = dec_iso
+            effects["decay_at"] = iso_add_hours(it.get("published_utc"), 24.0)
             score_dbg["substack_tagged"] += 1
 
         style = "lightsaber" if effects["lightsaber"] else ("glitch" if effects["glitch"] else "")
@@ -1107,147 +1142,131 @@ def build(feeds_file: str, out_path: str) -> dict:
     for it in survivors:
         apply_scoring(it)
 
-    # ---- Sort by recency then score, trim to MAX_TOTAL ----
+    # ---- Sort by recency then score, initial trim ----
     survivors.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
     survivors = survivors[:MAX_TOTAL]
 
-    # ======================= NEW FINALIZATION PIPELINE =========================
-    # 1) Enforce freshness window (1 minute .. 69 hours)
-    now_ts_final = time.time()
-    fresh = [it for it in survivors if is_within_window(it.get("published_utc",""), now_ts_final, MIN_AGE_MINUTES, MAX_AGE_HOURS)]
-
-    # 2) Verify links (follow redirects; drop 404/soft pages)
-    verified: list[dict] = []
-    seen_ids: set[str] = set()
-    verify_count = 0
-
-    def _maybe_add(it: dict, final_url: str) -> None:
-        it["url"] = canonicalize_url(final_url) or final_url
-        it["canonical_url"] = it["url"]
-        it["canonical_id"] = canonical_id(it["url"])
-        cid = it["canonical_id"]
-        if cid in seen_ids:
-            return
-        seen_ids.add(cid)
-        verified.append(it)
-
-    for it in fresh:
-        if verify_count >= VERIFY_MAX:
-            break
-        ok, final_url = verify_and_canonicalize(session, it.get("url",""))
-        verify_count += 1
-        if ok:
-            _maybe_add(it, final_url)
-
-    # 3) If still short, continue verifying remaining fresh items (within budget)
-    if len(verified) < TARGET_TOTAL:
-        for it in fresh[len(verified):]:
-            if verify_count >= VERIFY_MAX:
-                break
-            ok, final_url = verify_and_canonicalize(session, it.get("url",""))
-            verify_count += 1
-            if ok:
-                _maybe_add(it, final_url)
-
-    # 4) Backfill from previous headlines.json (still respecting freshness)
-    if len(verified) < TARGET_TOTAL:
-        prev_items = load_previous_items(out_path)
-        prev_items.sort(key=lambda x: _ts(x.get("published_utc","")), reverse=True)
-        for pit in prev_items:
-            if len(verified) >= TARGET_TOTAL:
-                break
-            if not is_within_window(pit.get("published_utc",""), now_ts_final, MIN_AGE_MINUTES, MAX_AGE_HOURS):
-                continue
-            cid = canonical_id(pit.get("canonical_url") or pit.get("url",""))
-            if cid in seen_ids:
-                continue
-            # Light verify for prev items (within remaining budget)
-            ok = True
-            final_url = pit.get("canonical_url") or pit.get("url","")
-            if verify_count < VERIFY_MAX:
-                ok, final_url = verify_and_canonicalize(session, final_url)
-                verify_count += 1
-            if ok:
-                pit["url"] = canonicalize_url(final_url) or final_url
-                pit["canonical_url"] = pit["url"]
-                pit["canonical_id"] = canonical_id(pit["url"])
-                if pit["canonical_id"] in seen_ids:
-                    continue
-                seen_ids.add(pit["canonical_id"])
-                verified.append(pit)
-
-    # 5) Widen to 72h only for remaining slots from current survivors
-    if len(verified) < TARGET_TOTAL:
-        widened = [it for it in survivors if is_within_window(it.get("published_utc",""), now_ts_final, MIN_AGE_MINUTES, WIDEN_MAX_HOURS)]
-        for it in widened:
-            if len(verified) >= TARGET_TOTAL:
-                break
-            cid = canonical_id(it.get("canonical_url") or it.get("url",""))
-            if cid in seen_ids:
-                continue
-            ok, final_url = (True, it.get("url",""))
-            if verify_count < VERIFY_MAX:
-                ok, final_url = verify_and_canonicalize(session, it.get("url",""))
-                verify_count += 1
-            if ok:
-                _maybe_add(it, final_url)
-
-    # 6) If STILL short, relax verification for preferred domains only (no extra HTTP)
-    if len(verified) < TARGET_TOTAL:
-        for it in fresh:
-            if len(verified) >= TARGET_TOTAL:
-                break
-            h = host_of(it.get("url",""))
-            if h not in PREFERRED_DOMAINS:
-                continue
-            cid = canonical_id(it.get("canonical_url") or it.get("url",""))
-            if cid in seen_ids:
-                continue
-            _maybe_add(it, it.get("url",""))
-
-    # Cap to exactly TARGET_TOTAL (and re-sort by recency then score)
-    verified.sort(key=lambda x: (_ts(x.get("published_utc","")), x.get("score", 0.0)), reverse=True)
-    final_items = verified[:TARGET_TOTAL]
-
-    # ---- BREAKER selection now runs on final_items ----
+    # ---- BREAKERS: tag up to 3 (layout stays in same grid on FE) ----
     def breaker_score(it: dict) -> tuple:
         title = it.get("title","")
         score = float(it.get("score", 0.0))
         age_h = hours_since(it.get("published_utc",""), time.time())
-        recency_boost = max(0.0, 24.0 - age_h) / 24.0  # 0..1
+        recency_boost = max(0.0, 24.0 - age_h) / 24.0
         urgent = 1.0 if (RE_BREAKING.search(title) or CONFLICT_CUES.search(title)) else 0.0
         safety = 1.0 if (it.get("_ps_deaths",0) > 0 or it.get("_ps_has_fatal")) else 0.0
         markets = 1.0 if ((it.get("_btc_move_abs") or 0) >= 8.0 or (it.get("_single_move_abs") or 0) >= 15.0) else 0.0
         saber = 1.0 if it.get("effects",{}).get("lightsaber") else 0.0
         return (urgent + safety + markets + saber + recency_boost, score, _ts(it.get("published_utc","")))
-
-    survivors_sorted_for_break = sorted(final_items, key=breaker_score, reverse=True)
-    picks = 0
-    for it in survivors_sorted_for_break:
-        if picks >= BREAKER_LIMIT:
-            break
-        if looks_aggregator(it.get("source",""), it.get("url","")):
+    for i, it in enumerate(sorted(survivors, key=breaker_score, reverse=True)):
+        if i >= BREAKER_LIMIT: break
+        if looks_aggregator(it.get("source",""), it.get("url","")):  # skip obvious wires/aggregators
             continue
         it.setdefault("effects", {})
         it["effects"]["style"] = "breaker"
-        picks += 1
+
+    # ---- Hard filters: time window + link verification + market sanity ----
+    def within_age_bounds(it: dict) -> bool:
+        age_h = hours_since(it.get("published_utc",""), time.time())
+        if age_h > MAX_AGE_HOURS:
+            debug_counts["max_age_drops"] += 1
+            return False
+        if age_h < (MIN_AGE_SEC / 3600.0):
+            debug_counts["min_age_drops"] += 1
+            return False
+        return True
+
+    verified: list[dict] = []
+    for it in survivors:
+        if not within_age_bounds(it):
+            continue
+        ok, final_url, status, reason = verify_link(session, it["url"], debug_counts)
+        if not ok:
+            continue
+        # Optional market sanity
+        if not is_market_headline_sane(it["title"], final_url, it["published_utc"], session, debug_counts):
+            continue
+        it["url"] = final_url
+        it["canonical_url"] = final_url
+        verified.append(it)
+
+    # ---- Backfill to EXACT 69 if needed ----
+    def backfill_exact(keep: list[dict], candidates: Iterable[dict]) -> list[dict]:
+        want = REQUIRE_EXACT_COUNT
+        if want <= 0: return keep
+        if len(keep) >= want: return keep[:want]
+
+        # Build a pool sorted by recency, relaxing caps and dedup threshold a bit
+        pool: list[dict] = []
+        seen_ids = {x["canonical_id"] for x in keep}
+        seen_urls = {x["canonical_url"] for x in keep}
+        # Lower Jaccard threshold for backfill
+        BF_THRESH = 0.78
+
+        def looks_distinct(a: dict, b: dict) -> bool:
+            return jaccard(set(title_tokens(a["title"])), set(title_tokens(b["title"]))) < BF_THRESH
+
+        # Pull more from candidates in recency order
+        for it in sorted(list(candidates), key=lambda x: _ts(x.get("published_utc","")), reverse=True):
+            if it["canonical_id"] in seen_ids or it["canonical_url"] in seen_urls:
+                continue
+            if not within_age_bounds(it):
+                continue
+            ok, final_url, status, reason = verify_link(session, it["url"], debug_counts)
+            if not ok:
+                continue
+            if not is_market_headline_sane(it["title"], final_url, it["published_utc"], session, debug_counts):
+                continue
+            # not an aggregator if BLOCK_AGGREGATORS on
+            if looks_aggregator(it.get("source",""), final_url):
+                continue
+            it["url"] = final_url
+            it["canonical_url"] = final_url
+
+            # ensure distinctness w.r.t current keep
+            distinct = True
+            for k in keep:
+                if not looks_distinct(it, k):
+                    distinct = False
+                    break
+            if distinct:
+                pool.append(it)
+            if len(pool) >= (want - len(keep)) * 2:
+                break  # enough options
+
+        # Fill
+        out = keep[:]
+        for it in pool:
+            out.append(it)
+            if len(out) >= want:
+                break
+        return out
+
+    final_candidates_source = [x for x in survivors if x not in verified] + items + collected
+    if REQUIRE_EXACT_COUNT > 0 and len(verified) < REQUIRE_EXACT_COUNT:
+        verified = backfill_exact(verified, final_candidates_source)
+        if len(verified) < REQUIRE_EXACT_COUNT:
+            debug_counts["backfill_steps_used"] = len(verified)  # record how far we got
+            # fail hard to avoid shipping partial silently
+            print(f"[finalize] could not reach {REQUIRE_EXACT_COUNT} verified items within {MAX_AGE_HOURS}h window.")
+        else:
+            debug_counts["backfill_steps_used"] = REQUIRE_EXACT_COUNT
+
+    # Final trim/order
+    verified.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
+    verified = verified[:REQUIRE_EXACT_COUNT or 69]
 
     elapsed_total = time.time() - start
 
     out = {
         "generated_utc": datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),
-        "count": len(final_items),
-        "items": final_items,
+        "count": len(verified),
+        "items": verified,
         "_debug": {
             "feeds_total": len(specs),
             "cap_items": MAX_TOTAL,
             "collected": len(collected),
             "dedup_pass1": len(items),
             "dedup_final": len(survivors),
-            "fresh_after_window": len(fresh),
-            "verified_final": len(final_items),
-            "verify_requests": verify_count,
-            "target_total": TARGET_TOTAL,
             "slow_domains": sorted(list(slow_domains.keys())),
             "timeouts": sorted(set(timeouts)),
             "errors": sorted(set(errors)),
@@ -1260,12 +1279,19 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.10.0-69guard",
+            "version": "fetch-v2.1.0-verify-69h-69exact",
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
             "weights_path":  weights_debug.get("path", None),
             "score_stats": score_dbg,
+            "sanity_stats": debug_counts,
+            "require_exact_count": REQUIRE_EXACT_COUNT,
+            "age_window_hours": MAX_AGE_HOURS,
+            "min_age_sec": MIN_AGE_SEC,
+            "verify_links": VERIFY_LINKS,
+            "reject_homepage_redirect": REJECT_REDIRECT_TO_HOMEPAGE,
+            "block_aggregators": BLOCK_AGGREGATORS,
         }
     }
     os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
@@ -1281,18 +1307,13 @@ def main():
     args = ap.parse_args()
     out = build(args.feeds_file, args.out)
     dbg = out.get("_debug", {})
-    print(
-        "Debug:",
-        {
-            k: dbg.get(k)
-            for k in [
-                "feeds_total","collected","dedup_pass1","dedup_final",
-                "fresh_after_window","verified_final","verify_requests","target_total",
-                "elapsed_sec","slow_domains","timeouts","errors",
-                "weights_loaded","weights_keys","weights_error","weights_path","score_stats"
-            ]
-        }
-    )
+    print("Debug:", {
+        k: dbg.get(k) for k in [
+            "feeds_total","collected","dedup_pass1","dedup_final","elapsed_sec",
+            "slow_domains","timeouts","errors","weights_loaded","weights_keys",
+            "weights_error","weights_path","score_stats","sanity_stats","require_exact_count"
+        ]
+    })
 
 if __name__ == "__main__":
     main()
