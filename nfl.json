@@ -4,11 +4,38 @@
       "date": "2025-10-14",
       "games": [
         {
-          "gamePk": 401772815,
-          "gameDate": "2025-10-13T23:15Z",
+          "gamePk": 401772717,
+          "gameDate": "2025-10-14T00:15Z",
           "status": {
             "abstractGameState": "Live",
             "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CHI"
+              },
+              "score": 22
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 24
+            }
+          }
+        },
+        {
+          "gamePk": 401772815,
+          "gameDate": "2025-10-13T23:15Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -26,34 +53,7 @@
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 21
-            }
-          }
-        },
-        {
-          "gamePk": 401772717,
-          "gameDate": "2025-10-14T00:15Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 13
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 7
+              "score": 24
             }
           }
         },
