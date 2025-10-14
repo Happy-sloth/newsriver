@@ -4,60 +4,6 @@
       "date": "2025-10-14",
       "games": [
         {
-          "gamePk": 401772815,
-          "gameDate": "2025-10-13T23:15Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BUF"
-              },
-              "score": 14
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 24
-            }
-          }
-        },
-        {
-          "gamePk": 401772717,
-          "gameDate": "2025-10-14T00:15Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 25
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 24
-            }
-          }
-        },
-        {
           "gamePk": 401772940,
           "gameDate": "2025-10-10T00:15Z",
           "status": {
@@ -405,6 +351,60 @@
                 "abbreviation": "KC"
               },
               "score": 30
+            }
+          }
+        },
+        {
+          "gamePk": 401772815,
+          "gameDate": "2025-10-13T23:15Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BUF"
+              },
+              "score": 14
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ATL"
+              },
+              "score": 24
+            }
+          }
+        },
+        {
+          "gamePk": 401772717,
+          "gameDate": "2025-10-14T00:15Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CHI"
+              },
+              "score": 25
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 24
             }
           }
         }
