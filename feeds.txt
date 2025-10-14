@@ -1,4 +1,4 @@
-# --- Toronto Local ---
+# --- Toronto Local (Core) ---
 https://www.cp24.com/
 https://www.cbc.ca/webfeed/rss/rss-canada-toronto
 https://globalnews.ca/toronto/feed/
@@ -13,7 +13,7 @@ https://www.mlbtraderumors.com/feed
 # --- Sports (Toronto Blue Jays — Official) ---
 https://www.mlb.com/bluejays/feeds/news/rss.xml
 
-# --- Business Crypto & Markets ---
+# --- Business / Crypto / Markets (Canada & US) ---
 https://www.federalreserve.gov/feeds/press_all.xml
 https://www.bls.gov/feeds/news_release.rss
 https://www150.statcan.gc.ca/n1/dai-quo/rss/td-dt-eng.rss
@@ -24,7 +24,18 @@ https://www.coindesk.com/arc/outboundfeeds/rss/
 https://cointelegraph.com/rss
 https://www.marketwatch.com/rss/topstories
 
-# --- MUSIC & CULTURE (11) ---
+# --- National / World (High-volume, stable permalinks) ---
+https://feeds.reuters.com/reuters/topNews
+https://feeds.reuters.com/reuters/worldNews
+https://feeds.reuters.com/Reuters/domesticNews
+https://feeds.reuters.com/reuters/businessNews
+http://feeds.bbci.co.uk/news/world/rss.xml
+https://www.theguardian.com/world/rss
+https://www.aljazeera.com/xml/rss/all.xml
+https://globalnews.ca/feed/
+https://www.ctvnews.ca/rss/ctvnews-ca-canada-public-rss-1.822289
+
+# --- MUSIC & CULTURE ---
 https://www.stereogum.com/feed/
 https://www.thefader.com/feed
 https://consequence.net/feed/
@@ -37,14 +48,14 @@ https://canadianbeats.ca/feed/
 https://www.fyimusicnews.ca/rss.xml
 https://cultmtl.com/feed/
 
-# --- YOUTH / POP CULTURE (5) ---
+# --- YOUTH / POP CULTURE ---
 https://deadline.com/feed/
 https://hypebeast.com/feed
 https://www.highsnobiety.com/feed/
 https://www.tubefilter.com/feed/
 https://www.dazeddigital.com/rss
 
-# --- HOUSING & REAL ESTATE (6) ---
+# --- HOUSING & REAL ESTATE ---
 https://storeys.com/feed/
 https://betterdwelling.com/feed/
 https://renx.ca/feed/
@@ -52,14 +63,14 @@ https://financialpost.com/category/real-estate/feed/
 https://www.canadianmortgagetrends.com/feed/
 https://urbantoronto.ca/rss
 
-# --- ENERGY & RESOURCES (5) ---
+# --- ENERGY & RESOURCES ---
 https://www.mining.com/feed/
 https://boereport.com/feed/
 https://energynow.ca/feed/
 https://oilprice.com/rss/main
 https://feeds.reuters.com/reuters/commoditiesNews
 
-# --- TECH & STARTUPS (CANADA) (6) ---
+# --- TECH & STARTUPS (Canada) ---
 https://betakit.com/feed/
 https://mobilesyrup.com/feed/
 https://www.itworldcanada.com/feed
@@ -67,21 +78,21 @@ https://techcouver.com/feed/
 https://news.communitech.ca/feed/
 https://www.cbc.ca/webfeed/rss/technology
 
-# --- WEATHER & EMERGENCY ALERTS (ON/TORONTO) (5) ---
+# --- WEATHER & EMERGENCY ALERTS (ON/Toronto) ---
 https://alert.weather.gc.ca/rss/cap/ON-latest.xml
 https://weather.gc.ca/rss/city/on-143_e.xml
 https://www.toronto.ca/news/feed/
 https://news.ontario.ca/en/rss
 https://www.publicsafety.gc.ca/nt-ns/rss/index-en.aspx
 
-# --- TRANSIT & CITY SERVICES (GTA) (5) ---
+# --- TRANSIT & CITY SERVICES (GTA) ---
 https://blog.metrolinx.com/feed/
 https://www.ttc.ca/rss/Service_Alerts.rss
 https://511on.ca/rss?lang=en
 https://www.toronto.ca/news/category/transportation/feed/
 https://www.toronto.ca/news/category/roads-traffic/feed/
 
-# --- COURTS, CRIME & PUBLIC SAFETY (OFFICIAL) (5) ---
+# --- COURTS, CRIME & PUBLIC SAFETY (Official) ---
 https://www.tps.ca/media-centre/news-releases/feed/
 https://www.peelpolice.ca/modules/news/rss.aspx
 https://www.yrp.ca/modules/news/rss.aspx
@@ -91,7 +102,7 @@ https://www.toronto.ca/news/category/public-safety/feed/
 # --- Stats & Forecasting ---
 https://fivethirtyeight.com/contributors/nate-silver/
 
-# === U.S. National / Politics ===
+# === U.S. National / Politics (capped in script) ===
 https://www.breitbart.com/feed/
 http://rss.cnn.com/rss/cnn_topstories.rss
 https://www.thedailybeast.com/feed/all
@@ -138,8 +149,7 @@ https://www.thewrap.com/feed/
 https://www.rollingstone.com/feed/
 https://people.com/feed/
 https://www.showbiz411.com/feed
-http://www.tmz.com/rss.xml
-http://feeds.feedburner.com/vfdotcomrss
+https://www.tmz.com/rss.xml
 https://www.worldofreel.com/feed/
 https://www.crazydaysandnights.net/feeds/posts/default?alt=rss
 
@@ -147,23 +157,7 @@ https://www.crazydaysandnights.net/feeds/posts/default?alt=rss
 https://nypost.com/feed/
 https://www.dailynews.com/feed/
 
-# === World / International ===
-https://rss.nytimes.com/services/xml/rss/nyt/World.xml
-https://www.africanews.com/feed/rss
-
-# === Substack / Independent / Podcasts ===
-https://www.benrothenberg.com/feed
-https://zeteo.com/feed/
-https://www.levernews.com/rss/
-https://www.youtube.com/feeds/videos.xml?channel_id=UC98DCNPM9B3ZP4TiDANonIA
-https://majorityfm.libsyn.com/rss
-https://www.youtube.com/feeds/videos.xml?channel_id=UCkztf6gttP8D3vrusCrrp4g
-
-# --- Japan / NPB (English) ---
-# Japan Times — Sports (English). If this section feed errors in your parser, fallback to top stories:
-#   Primary (Sports): likely https://www.japantimes.co.jp/feed/sports/
-#   Fallback (All/Top): https://www.japantimes.co.jp/feed/topstories/
+# === Japan / NPB (English) ===
 https://www.japantimes.co.jp/feed/sports/
 https://english.kyodonews.net/rss/all.xml
-https://www.reddit.com/r/NPB/.rss
 https://japantoday.com/feed
