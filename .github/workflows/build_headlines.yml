@@ -1,21 +1,9 @@
-name: Build Headlines JSON
+name: Build & publish headlines.json
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/12 * * * *"   # every 12 minutes (UTC)
-  push:
-    branches: [ main ]
-    paths:
-      - "scripts/fetch_headlines.py"
-      - "requirements.txt"
-      - "feeds.txt"                 # ← added so feed changes trigger a run
-      - "config/weights.json5"      # ← optional weights: trigger if edited
-      - ".github/workflows/build_headlines.yml"
-
-concurrency:
-  group: build-headlines
-  cancel-in-progress: true
+    - cron: "*/20 * * * *"  # every 20 minutes
 
 permissions:
   contents: write
@@ -23,152 +11,39 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     env:
-      TZ: "America/Toronto"
-      HEADLINES_OUT_DIR: "newsriver"
-      HEADLINES_OUT_FILE: "newsriver/headlines.json"
+      MPB_MAX_PER_FEED: "14"
+      MPB_MAX_TOTAL: "69"            # <-- always publish 69 for the grid
+      MPB_HTTP_TIMEOUT: "10"
+      MPB_SLOW_FEED_WARN: "3.5"
+      MPB_GLOBAL_BUDGET: "210"
+      NEWSRIVER_TIMEZONE: "America/Toronto"
+
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
 
-      - name: Install dependencies (if any)
+      - name: Install deps
         run: |
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
+          python -m pip install --upgrade pip
+          pip install feedparser requests beautifulsoup4 json5
 
-      - name: Prepare output folder
+      - name: Build headlines.json
         run: |
-          mkdir -p "$HEADLINES_OUT_DIR"
+          mkdir -p newsriver
+          python scripts/fetch_headlines.py --feeds-file feeds.txt --out newsriver/headlines.json
+          echo "-----"
+          jq -r '.generated_utc, .count' newsriver/headlines.json
 
-      - name: Generate headlines.json
-        run: |
-          set -e
-          python3 scripts/fetch_headlines.py --out "$HEADLINES_OUT_FILE"
-        shell: bash
-
-      - name: Basic validation (tolerant scan for first valid item)
-        run: |
-          set -e
-          test -s "$HEADLINES_OUT_FILE"
-          python - << 'PY'
-          import json, os, sys
-          p = os.environ["HEADLINES_OUT_FILE"]
-          with open(p, "r", encoding="utf-8") as f:
-              data = json.load(f)
-
-          # Accept array or common container keys
-          candidate_keys = ("items","entries","articles","data")
-          if isinstance(data, list):
-              items = data
-          elif isinstance(data, dict):
-              for k in candidate_keys:
-                  if isinstance(data.get(k), list):
-                      items = data[k]
-                      break
-              else:
-                  raise SystemExit("Invalid top-level JSON shape: expected array or dict with one of keys: %s" % (candidate_keys,))
-          else:
-              raise SystemExit("Invalid JSON: expected list or dict.")
-
-          # Keep only dict items
-          items = [i for i in items if isinstance(i, dict)]
-          if not items:
-              raise SystemExit("JSON has zero usable items (dict rows).")
-
-          # Normalized accessors
-          def get_title(i):
-              for k in ("title","headline","name","text"):
-                  v = i.get(k)
-                  if isinstance(v, str) and v.strip():
-                      return v.strip()
-              return None
-          def get_link(i):
-              for k in ("link","url","href","permalink"):
-                  v = i.get(k)
-                  if isinstance(v, str) and v.strip():
-                      return v.strip()
-              return None
-
-          # Find first item that has both title and link
-          first_ok = None
-          for i in items:
-              if get_title(i) and get_link(i):
-                  first_ok = i
-                  break
-
-          if not first_ok:
-              # Show the first item's keys to aid debugging
-              example_keys = list(items[0].keys())
-              raise SystemExit("No item with required fields found. Searched for title|headline|name + link|url|href|permalink. Example item keys: %r" % example_keys)
-
-          print("OK: valid JSON. Items:", len(items))
-          PY
-
-      - name: Show summary (first valid item)
-        run: |
-          python - << 'PY'
-          import json, os
-          p = os.environ["HEADLINES_OUT_FILE"]
-          with open(p, "r", encoding="utf-8") as f:
-              data = json.load(f)
-
-          def items_of(d):
-              if isinstance(d, list): return d
-              for k in ("items","entries","articles","data"):
-                  if isinstance(d, dict) and isinstance(d.get(k), list):
-                      return d[k]
-              return []
-
-          items = [i for i in items_of(data) if isinstance(i, dict)]
-          def get_title(i):
-              for k in ("title","headline","name","text"):
-                  v = i.get(k)
-                  if isinstance(v, str) and v.strip():
-                      return v.strip()
-          def get_link(i):
-              for k in ("link","url","href","permalink"):
-                  v = i.get(k)
-                  if isinstance(v, str) and v.strip():
-                      return v.strip()
-
-          first_ok = None
-          for i in items:
-              if get_title(i) and get_link(i):
-                  first_ok = i; break
-
-          print("Built:", p)
-          print("Count:", len(items))
-          if first_ok:
-              print("First title:", get_title(first_ok))
-              print("First link:", get_link(first_ok))
-          else:
-              print("No valid item to summarize.")
-          PY
-
-      - name: Commit & push if changed
-        run: |
-          set -euo pipefail
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # Rebase on latest and auto-stash any local edits made by prior steps
-          git pull --rebase --autostash
-
-          # Only commit if the output file actually changed
-          if ! git diff --quiet -- "$HEADLINES_OUT_FILE"; then
-            git add "$HEADLINES_OUT_FILE"
-            git commit -m "chore(headlines): refresh headlines.json [skip ci]"
-            git push || { echo "Push failed, retrying once..."; sleep 2; git push; }
-          else
-            echo "No changes to commit."
-          fi
+      - name: Commit if changed
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "newsriver/headlines.json"
+          message: "ci: update headlines.json"
+          default_author: github_actions
