@@ -1,29 +1,70 @@
 {
-  "generated_utc": "2025-10-14T00:00:00Z",
-  "count": 3,
+  "generated_utc": "2025-10-14T18:35:00Z",
+  "count": 8,
   "items": [
     {
-      "title": "Test A: Fresh sample story",
-      "url": "https://example.com/a",
-      "source": "Example Source",
-      "published_utc": "2025-10-14T12:15:00Z",
-      "category": "General",
-      "region": "World"
+      "title": "Israeli cabinet approves limited cease-fire framework",
+      "url": "https://www.reuters.com/world/middle-east/cease-fire-framework-2025-10-14/",
+      "source": "Reuters",
+      "published_utc": "2025-10-14T18:20:00Z",
+      "effects": { "style": "breaker" },
+      "category": "World",
+      "region": "Middle East"
     },
     {
-      "title": "Test B: Another sample",
-      "url": "https://example.com/b",
-      "source": "Example Source",
-      "published_utc": "2025-10-14T11:45:00Z",
+      "title": "Dow ▲ gains as bank earnings top views",
+      "url": "https://www.wsj.com/markets/us-stocks-2025-10-14",
+      "source": "Wall Street Journal",
+      "published_utc": "2025-10-14T18:05:00Z",
       "category": "Business",
+      "region": "US"
+    },
+    {
+      "title": "Canada unveils AI safety rules for federal use",
+      "url": "https://www.cbc.ca/news/politics/canada-ai-safety-rules-2025-10-14",
+      "source": "CBC",
+      "published_utc": "2025-10-14T17:42:00Z",
+      "category": "Technology",
+      "region": "Canada"
+    },
+    {
+      "title": "BTC pops above $70k amid ETF inflows",
+      "url": "https://www.bloomberg.com/crypto/markets/etf-inflows-bitcoin-2025-10-14",
+      "source": "Bloomberg",
+      "published_utc": "2025-10-14T17:30:00Z",
+      "category": "Markets",
       "region": "World"
     },
     {
-      "title": "Test C: Third sample",
-      "url": "https://example.com/c",
-      "source": "Example Source",
-      "published_utc": "2025-10-14T11:30:00Z",
-      "category": "General",
+      "title": "U.S. retail sales ▲ rise 0.7% in September",
+      "url": "https://www.nytimes.com/2025/10/14/business/economy/retail-sales.html",
+      "source": "NYT",
+      "published_utc": "2025-10-14T16:55:00Z",
+      "category": "Economy",
+      "region": "US"
+    },
+    {
+      "title": "NATO ministers meet as Ukraine air defense needs grow",
+      "url": "https://www.bbc.com/news/world-europe-67234567",
+      "source": "BBC",
+      "published_utc": "2025-10-14T16:20:00Z",
+      "category": "World",
+      "region": "Europe"
+    },
+    {
+      "title": "Apple introduces M4 Pro chips, ships next month",
+      "url": "https://www.theverge.com/2025/10/14/apple-m4-pro-chips",
+      "source": "The Verge",
+      "published_utc": "2025-10-14T16:00:00Z",
+      "category": "Tech",
+      "region": "US"
+    },
+    {
+      "title": "Toronto housing starts ▼ fall to 5-year low",
+      "url": "https://www.thestar.com/business/2025/10/14/toronto-housing-starts.html",
+      "source": "Toronto Star",
+      "published_utc": "2025-10-14T15:40:00Z",
+      "category": "Real Estate",
       "region": "Canada"
     }
   ]
