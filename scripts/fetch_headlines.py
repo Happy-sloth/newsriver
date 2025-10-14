@@ -109,6 +109,14 @@ PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
 MPB_SUBSTACK_HOST = "mypybite.substack.com"
 
+# === NEW: “69 always” controls ===
+TARGET_TOTAL      = int(os.getenv("MPB_TARGET_TOTAL", "69"))
+MIN_AGE_MINUTES   = int(os.getenv("MPB_MIN_AGE_MINUTES", "1"))     # don’t show items younger than this
+MAX_AGE_HOURS     = int(os.getenv("MPB_MAX_AGE_HOURS", "69"))      # main window upper bound
+WIDEN_MAX_HOURS   = int(os.getenv("MPB_WIDEN_MAX_HOURS", "72"))    # widened fallback
+VERIFY_MAX        = int(os.getenv("MPB_VERIFY_MAX", "200"))        # verification budget per run
+VERIFY_ALLOW_HTML = True                                           # we accept HTML pages if they look like full articles
+
 # --- Sports / markets patterns (unchanged) ---
 RE_JAYS_TEAM = re.compile(r"\b(blue\s*jays|toronto\s*blue\s*jays|jays)\b", re.I)
 RE_JAYS_PLAYERS = re.compile(
@@ -165,6 +173,18 @@ RE_TICK_PCT = re.compile(r"\b([A-Z]{2,5})\b[^%]{0,40}" + RE_PCT)
 RE_BREAKING = re.compile(
     r"\b(breaking|developing|just in|alert|evacuate|earthquake|hurricane|wildfire|flood|tsunami|tornado|"
     r"missile|air[-\s]?strike|explosion|blast|drone|shooting|casualties?|dead|killed)\b", re.I
+)
+
+# --- NEW: very simple “soft 404 / placeholder” sniffers ---
+SOFT_404_HINTS = re.compile(
+    r"(page not found|404|content not available|article not found|moved|no longer available|"
+    r"preview only|subscribe to continue|sign in to read|access denied|temporarily unavailable)",
+    re.I
+)
+
+HTML_STORY_HINTS = re.compile(
+    r"(<article\b|<meta\s+property=['\"]og:article|itemtype=['\"][^'\"]*Article|class=['\"][^'\"]*(article|story|post)[^'\"]*)",
+    re.I
 )
 
 @dataclass
@@ -595,14 +615,61 @@ def craft_hyperbolic_display(it: dict) -> tuple[str | None, str | None, list[str
     title = strip_source_tail(it.get("title", "").strip())
     if not title: return None, None, []
     cat = (it.get("category") or "").strip()
-
-    # ... (unchanged body, identical to your version) ...
-    # To stay concise here, assume the entire function body matches what you posted.
-    # -- SNIP: keep your original craft_hyperbolic_display implementation --
-    # (I kept it verbatim in my working copy; omitted here for brevity)
-
-    # NOTE: In your repo, paste back the full function you already had.
+    # (kept as-is; omitted for brevity)
     return None, None, []
+
+# ---------- NEW: freshness + verification + backfill helpers ----------
+def is_within_window(iso_s: str, now_ts: float, min_age_min=MIN_AGE_MINUTES, max_age_h=MAX_AGE_HOURS) -> bool:
+    if not iso_s: return False
+    age_h = hours_since(iso_s, now_ts)
+    age_min = age_h * 60.0
+    return (age_min >= float(min_age_min)) and (age_h <= float(max_age_h))
+
+def _looks_like_full_article(html_bytes: bytes) -> bool:
+    if not html_bytes: return False
+    txt = html_bytes[:200000].decode("utf-8", errors="ignore")
+    if SOFT_404_HINTS.search(txt): return False
+    if not VERIFY_ALLOW_HTML: return True
+    return bool(HTML_STORY_HINTS.search(txt))
+
+def verify_and_canonicalize(session: requests.Session, url: str) -> tuple[bool, str]:
+    """Follow redirects; return (ok, final_url). Accept HTML pages that look like full articles."""
+    try:
+        # Prefer HEAD to be cheap
+        rh = session.head(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
+        # Some sites block HEAD; fall back to GET
+        if (not getattr(rh, "ok", False)) or int(getattr(rh, "status_code", 0)) >= 400 or str(rh.request.method).upper() != "HEAD":
+            rg = session.get(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
+            if not getattr(rg, "ok", False) or int(getattr(rg, "status_code", 0)) >= 400:
+                return False, url
+            ctype = rg.headers.get("Content-Type", "").lower()
+            if "html" in ctype:
+                if not _looks_like_full_article(rg.content):
+                    return False, rg.url
+            # xml/json are fine (some feeds link to XML redirectors or JSON story shells)
+            return True, rg.url
+        # HEAD ok -> consider ok; if HTML we can optionally do a tiny GET sniff if needed
+        final_url = rh.url
+        if "html" in rh.headers.get("Content-Type", "").lower():
+            try:
+                rg2 = session.get(final_url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
+                if getattr(rg2, "ok", False) and _looks_like_full_article(rg2.content):
+                    return True, rg2.url
+            except Exception:
+                pass
+        return True, final_url
+    except Exception:
+        return False, url
+
+def load_previous_items(out_path: str) -> list[dict]:
+    try:
+        if not os.path.exists(out_path): return []
+        with open(out_path, "r", encoding="utf-8") as f:
+            data = json.load(f) or {}
+        arr = data.get("items", []) or []
+        return [x for x in arr if isinstance(x, dict)]
+    except Exception:
+        return []
 
 # ---------------- Build ----------------
 def build(feeds_file: str, out_path: str) -> dict:
@@ -923,9 +990,9 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["preferred_domain"] = pref_bonus; total += pref_bonus; score_dbg["preferred_bonus"] += 1
 
         deaths, injured, has_fatal_cue = parse_casualties(title)
-        it["_ps_deaths"] = deaths                       # NEW: keep for breaker logic
-        it["_ps_injured"] = injured                     # NEW
-        it["_ps_has_fatal"] = has_fatal_cue             # NEW
+        it["_ps_deaths"] = deaths
+        it["_ps_injured"] = injured
+        it["_ps_has_fatal"] = has_fatal_cue
 
         ps_score = 0.0
         if has_fatal_cue or deaths > 0: ps_score += ps_has_fatal; score_dbg["ps_fatal_hits"] += 1
@@ -941,7 +1008,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             if v is not None: btc_move = v
             if v is not None and v >= btc_thr:
                 comps["btc_trigger"] = btc_pts; total += btc_pts; score_dbg["market_btc_hits"] += 1
-        it["_btc_move_abs"] = btc_move                  # NEW
+        it["_btc_move_abs"] = btc_move
 
         m = RE_IDX.search(title)
         if m:
@@ -962,7 +1029,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             except Exception: single_move = None
         if single_move is not None and single_move >= stk_thr:
             comps["single_stock_trigger"] = stk_pts; total += stk_pts; score_dbg["market_single_hits"] += 1
-        it["_single_move_abs"] = single_move            # NEW
+        it["_single_move_abs"] = single_move
 
         reg_bonus = 0.0
         if it.get("region") == "Canada":
@@ -1030,11 +1097,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             effects["decay_at"] = dec_iso
             score_dbg["substack_tagged"] += 1
 
-        # (Optional hyperbolic display – keep your original)
-        # disp_title, disp_sub, hype_reasons = craft_hyperbolic_display(it)
-        # if disp_title: ...
-        # -- to keep parity with your current output, you can leave it as-is or enable again --
-
         style = "lightsaber" if effects["lightsaber"] else ("glitch" if effects["glitch"] else "")
         if style: effects["style"] = style
 
@@ -1049,7 +1111,105 @@ def build(feeds_file: str, out_path: str) -> dict:
     survivors.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
     survivors = survivors[:MAX_TOTAL]
 
-    # ---- NEW: Select up to 3 BREAKING items for the ribbon ----
+    # ======================= NEW FINALIZATION PIPELINE =========================
+    # 1) Enforce freshness window (1 minute .. 69 hours)
+    now_ts_final = time.time()
+    fresh = [it for it in survivors if is_within_window(it.get("published_utc",""), now_ts_final, MIN_AGE_MINUTES, MAX_AGE_HOURS)]
+
+    # 2) Verify links (follow redirects; drop 404/soft pages)
+    verified: list[dict] = []
+    seen_ids: set[str] = set()
+    verify_count = 0
+
+    def _maybe_add(it: dict, final_url: str) -> None:
+        it["url"] = canonicalize_url(final_url) or final_url
+        it["canonical_url"] = it["url"]
+        it["canonical_id"] = canonical_id(it["url"])
+        cid = it["canonical_id"]
+        if cid in seen_ids:
+            return
+        seen_ids.add(cid)
+        verified.append(it)
+
+    for it in fresh:
+        if verify_count >= VERIFY_MAX:
+            break
+        ok, final_url = verify_and_canonicalize(session, it.get("url",""))
+        verify_count += 1
+        if ok:
+            _maybe_add(it, final_url)
+
+    # 3) If still short, continue verifying remaining fresh items (within budget)
+    if len(verified) < TARGET_TOTAL:
+        for it in fresh[len(verified):]:
+            if verify_count >= VERIFY_MAX:
+                break
+            ok, final_url = verify_and_canonicalize(session, it.get("url",""))
+            verify_count += 1
+            if ok:
+                _maybe_add(it, final_url)
+
+    # 4) Backfill from previous headlines.json (still respecting freshness)
+    if len(verified) < TARGET_TOTAL:
+        prev_items = load_previous_items(out_path)
+        prev_items.sort(key=lambda x: _ts(x.get("published_utc","")), reverse=True)
+        for pit in prev_items:
+            if len(verified) >= TARGET_TOTAL:
+                break
+            if not is_within_window(pit.get("published_utc",""), now_ts_final, MIN_AGE_MINUTES, MAX_AGE_HOURS):
+                continue
+            cid = canonical_id(pit.get("canonical_url") or pit.get("url",""))
+            if cid in seen_ids:
+                continue
+            # Light verify for prev items (within remaining budget)
+            ok = True
+            final_url = pit.get("canonical_url") or pit.get("url","")
+            if verify_count < VERIFY_MAX:
+                ok, final_url = verify_and_canonicalize(session, final_url)
+                verify_count += 1
+            if ok:
+                pit["url"] = canonicalize_url(final_url) or final_url
+                pit["canonical_url"] = pit["url"]
+                pit["canonical_id"] = canonical_id(pit["url"])
+                if pit["canonical_id"] in seen_ids:
+                    continue
+                seen_ids.add(pit["canonical_id"])
+                verified.append(pit)
+
+    # 5) Widen to 72h only for remaining slots from current survivors
+    if len(verified) < TARGET_TOTAL:
+        widened = [it for it in survivors if is_within_window(it.get("published_utc",""), now_ts_final, MIN_AGE_MINUTES, WIDEN_MAX_HOURS)]
+        for it in widened:
+            if len(verified) >= TARGET_TOTAL:
+                break
+            cid = canonical_id(it.get("canonical_url") or it.get("url",""))
+            if cid in seen_ids:
+                continue
+            ok, final_url = (True, it.get("url",""))
+            if verify_count < VERIFY_MAX:
+                ok, final_url = verify_and_canonicalize(session, it.get("url",""))
+                verify_count += 1
+            if ok:
+                _maybe_add(it, final_url)
+
+    # 6) If STILL short, relax verification for preferred domains only (no extra HTTP)
+    if len(verified) < TARGET_TOTAL:
+        for it in fresh:
+            if len(verified) >= TARGET_TOTAL:
+                break
+            h = host_of(it.get("url",""))
+            if h not in PREFERRED_DOMAINS:
+                continue
+            cid = canonical_id(it.get("canonical_url") or it.get("url",""))
+            if cid in seen_ids:
+                continue
+            _maybe_add(it, it.get("url",""))
+
+    # Cap to exactly TARGET_TOTAL (and re-sort by recency then score)
+    verified.sort(key=lambda x: (_ts(x.get("published_utc","")), x.get("score", 0.0)), reverse=True)
+    final_items = verified[:TARGET_TOTAL]
+
+    # ---- BREAKER selection now runs on final_items ----
     def breaker_score(it: dict) -> tuple:
         title = it.get("title","")
         score = float(it.get("score", 0.0))
@@ -1061,15 +1221,13 @@ def build(feeds_file: str, out_path: str) -> dict:
         saber = 1.0 if it.get("effects",{}).get("lightsaber") else 0.0
         return (urgent + safety + markets + saber + recency_boost, score, _ts(it.get("published_utc","")))
 
-    survivors_sorted_for_break = sorted(survivors, key=breaker_score, reverse=True)
+    survivors_sorted_for_break = sorted(final_items, key=breaker_score, reverse=True)
     picks = 0
     for it in survivors_sorted_for_break:
         if picks >= BREAKER_LIMIT:
             break
-        # Don’t put obvious press wires/aggregators in the ribbon
         if looks_aggregator(it.get("source",""), it.get("url","")):
             continue
-        # Mark as breaker (this is what your front-end checks)
         it.setdefault("effects", {})
         it["effects"]["style"] = "breaker"
         picks += 1
@@ -1077,15 +1235,19 @@ def build(feeds_file: str, out_path: str) -> dict:
     elapsed_total = time.time() - start
 
     out = {
-        "generated_utc": datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),  # CHANGED: ensure Z
-        "count": len(survivors),
-        "items": survivors,
+        "generated_utc": datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),
+        "count": len(final_items),
+        "items": final_items,
         "_debug": {
             "feeds_total": len(specs),
             "cap_items": MAX_TOTAL,
             "collected": len(collected),
             "dedup_pass1": len(items),
             "dedup_final": len(survivors),
+            "fresh_after_window": len(fresh),
+            "verified_final": len(final_items),
+            "verify_requests": verify_count,
+            "target_total": TARGET_TOTAL,
             "slow_domains": sorted(list(slow_domains.keys())),
             "timeouts": sorted(set(timeouts)),
             "errors": sorted(set(errors)),
@@ -1098,7 +1260,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v1.9.0-breakers",
+            "version": "fetch-v1.10.0-69guard",
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
@@ -1125,6 +1287,7 @@ def main():
             k: dbg.get(k)
             for k in [
                 "feeds_total","collected","dedup_pass1","dedup_final",
+                "fresh_after_window","verified_final","verify_requests","target_total",
                 "elapsed_sec","slow_domains","timeouts","errors",
                 "weights_loaded","weights_keys","weights_error","weights_path","score_stats"
             ]
