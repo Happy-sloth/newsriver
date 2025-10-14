@@ -9,6 +9,8 @@ on:
     paths:
       - "scripts/fetch_headlines.py"
       - "requirements.txt"
+      - "feeds.txt"                 # ← added so feed changes trigger a run
+      - "config/weights.json5"      # ← optional weights: trigger if edited
       - ".github/workflows/build_headlines.yml"
 
 concurrency:
