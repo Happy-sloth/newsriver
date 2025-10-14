@@ -6,25 +6,25 @@
           "gamePk": "401812716",
           "gameDate": "2025-10-14T23:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 0
+              "score": 2
             },
             "home": {
               "team": {
                 "abbreviation": "CLE"
               },
-              "score": 0
+              "score": 6
             }
           }
         },
