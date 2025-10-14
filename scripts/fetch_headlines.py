@@ -178,6 +178,22 @@ RE_BREAKING = re.compile(
     r"missile|air[-\s]?strike|explosion|blast|drone|shooting|casualties?|dead|killed)\b", re.I
 )
 
+# --- Soft-404 / article detection (NEW) ---
+SOFT_404_PATTERNS = [
+    r"\b(page not found|sorry, we (couldn'?t|cannot) find|content (is )?unavailable)\b",
+    r"\b(does not exist|no longer available|moved permanently|has been removed)\b",
+    r"\b(404 error|error 404)\b",
+    r"\b(subscriber( |-)only|please log in to continue)\b",
+]
+ARTICLE_HINT_PATTERNS = [
+    r"<article\b",
+    r'itemtype="https?://schema\.org/Article"',
+    r'property="og:type"\s+content="article"',
+    r'property="og:title"\s+content="[^"]{10,}"',
+]
+MIN_BODY_BYTES = int(os.getenv("MPB_MIN_BODY_BYTES", "4096"))         # ≥ 4KB
+MIN_ARTICLE_WORDS = int(os.getenv("MPB_MIN_ARTICLE_WORDS", "120"))    # ≥ 120 words
+
 @dataclass
 class Tag:
     category: str
@@ -596,48 +612,6 @@ def is_homepage_like(url: str) -> bool:
     except Exception:
         return False
 
-def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tuple[bool, str, int, str]:
-    """
-    Returns (ok, final_url, status_code, reason)
-    Rules:
-      - must end 2xx
-      - content-type must be text/html (or application/xhtml+xml)
-      - body length >= 2KB
-      - not redirect to homepage/section root (optional)
-    """
-    if not VERIFY_LINKS:
-        return True, url, 200, "verification disabled"
-
-    try:
-        # A single GET with redirects gives us final URL + body for size check
-        resp = session.get(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
-    except Exception as e:
-        debug_counts["link_verification_fail"] += 1
-        return False, url, 0, f"exception:{type(e).__name__}"
-
-    status = getattr(resp, "status_code", 0)
-    final_url = str(getattr(resp, "url", url) or url)
-
-    if status < 200 or status >= 300:
-        debug_counts["link_verification_fail"] += 1
-        return False, final_url, status, "non-2xx"
-
-    ctype = (resp.headers.get("Content-Type") or "").lower()
-    if ("text/html" not in ctype) and ("application/xhtml" not in ctype):
-        debug_counts["link_verification_fail"] += 1
-        return False, final_url, status, f"bad-ctype:{ctype}"
-
-    if REJECT_REDIRECT_TO_HOMEPAGE and is_homepage_like(final_url):
-        debug_counts["soft_404_drops"] += 1
-        return False, final_url, status, "homepage-like"
-
-    body = getattr(resp, "content", b"") or b""
-    if len(body) < 2048:  # tiny bodies = stub/soft 404
-        debug_counts["soft_404_drops"] += 1
-        return False, final_url, status, "body-too-small"
-
-    return True, final_url, status, "ok"
-
 def html_meta_times(html_bytes: bytes) -> tuple[datetime | None, datetime | None]:
     if not BeautifulSoup:
         return (None, None)
@@ -705,6 +679,148 @@ def is_market_headline_sane(title: str, url: str, published_iso: str, session: r
 
     debug_counts["market_sanity_drops"] += 1
     return False
+
+def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tuple[bool, str, int, str]:
+    """
+    Returns (ok, final_url, status_code, reason)
+
+    Enforces:
+      - final status 2xx
+      - HTML/XHTML content-type
+      - body size >= MIN_BODY_BYTES
+      - not homepage-like
+      - no obvious soft-404 phrases
+      - canonical/og:url sanity (not pointing to root or different host)
+      - robots noindex not present
+      - article hints present and approximate word count >= MIN_ARTICLE_WORDS
+    """
+    if not VERIFY_LINKS:
+        return True, url, 200, "verification disabled"
+
+    try:
+        headers = {
+            "User-Agent": ALT_USER_AGENT,
+            "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": ACCEPT_LANG,
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        }
+        resp = session.get(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True, headers=headers)
+    except Exception as e:
+        debug_counts["link_verification_fail"] += 1
+        return False, url, 0, f"exception:{type(e).__name__}"
+
+    status = getattr(resp, "status_code", 0)
+    final_url = str(getattr(resp, "url", url) or url)
+    body = getattr(resp, "content", b"") or b""
+    ctype = (resp.headers.get("Content-Type") or "").lower()
+    robots = (resp.headers.get("X-Robots-Tag") or "").lower()
+
+    # 1) Basic HTTP checks
+    if status < 200 or status >= 300:
+        debug_counts["link_verification_fail"] += 1
+        return False, final_url, status, "non-2xx"
+    if ("text/html" not in ctype) and ("application/xhtml" not in ctype):
+        debug_counts["link_verification_fail"] += 1
+        return False, final_url, status, f"bad-ctype:{ctype}"
+    if len(body) < MIN_BODY_BYTES:
+        debug_counts["soft_404_drops"] += 1
+        return False, final_url, status, "body-too-small"
+
+    # 2) Homepage / section hub smell
+    if REJECT_REDIRECT_TO_HOMEPAGE and is_homepage_like(final_url):
+        debug_counts["soft_404_drops"] += 1
+        return False, final_url, status, "homepage-like"
+
+    # 3) Try to parse HTML and apply semantic checks
+    title_text = ""
+    og_url = ""
+    canonical = ""
+    og_type = ""
+    text_for_search = ""
+    word_count = 0
+
+    soft404_regex = re.compile("|".join(SOFT_404_PATTERNS), re.I)
+    hint_re = re.compile("|".join(ARTICLE_HINT_PATTERNS), re.I)
+
+    if BeautifulSoup:
+        try:
+            soup = BeautifulSoup(body, "html.parser")
+
+            # Title text
+            if soup.title and soup.title.string:
+                title_text = (soup.title.string or "").strip().lower()
+
+            # Canonical / og:url
+            can_tag = soup.find("link", rel=lambda v: v and "canonical" in v)
+            if can_tag and can_tag.get("href"):
+                canonical = can_tag.get("href").strip()
+            og_tag = soup.find("meta", property="og:url")
+            if og_tag and og_tag.get("content"):
+                og_url = og_tag.get("content").strip()
+            og_type_tag = soup.find("meta", property="og:type")
+            if og_type_tag and og_type_tag.get("content"):
+                og_type = (og_type_tag.get("content") or "").strip().lower()
+
+            # Robots noindex (header or meta)
+            meta_robots = soup.find("meta", attrs={"name": re.compile(r"robots", re.I)})
+            if ("noindex" in robots) or (meta_robots and "noindex" in (meta_robots.get("content") or "").lower()):
+                debug_counts["soft_404_drops"] += 1
+                return False, final_url, status, "robots-noindex"
+
+            # Remove non-content to estimate word count
+            for tag in soup(["script", "style", "noscript", "nav", "footer", "header", "form"]):
+                tag.decompose()
+            text_for_search = " ".join((soup.get_text(" ", strip=True) or "").split())
+            word_count = len(re.findall(r"\w+", text_for_search))
+
+            # Soft-404 text
+            if soft404_regex.search(text_for_search) or soft404_regex.search(title_text):
+                debug_counts["soft_404_drops"] += 1
+                return False, final_url, status, "soft-404-text"
+
+            # Canonical sanity
+            if canonical:
+                cu = urlparse(canonical)
+                if cu.netloc and cu.netloc != urlparse(final_url).netloc:
+                    debug_counts["soft_404_drops"] += 1
+                    return False, final_url, status, "canonical-cross-host"
+                if is_homepage_like(canonical):
+                    debug_counts["soft_404_drops"] += 1
+                    return False, final_url, status, "canonical-homepage"
+
+            # og:url sanity
+            if og_url:
+                ou = urlparse(og_url)
+                if ou.netloc and ou.netloc != urlparse(final_url).netloc:
+                    debug_counts["soft_404_drops"] += 1
+                    return False, final_url, status, "ogurl-cross-host"
+                if is_homepage_like(og_url):
+                    debug_counts["soft_404_drops"] += 1
+                    return False, final_url, status, "ogurl-homepage"
+
+            # Article hints and size
+            hints_ok = (og_type == "article") or bool(hint_re.search(str(body)))
+            if not hints_ok or word_count < MIN_ARTICLE_WORDS:
+                debug_counts["soft_404_drops"] += 1
+                return False, final_url, status, f"not-article-like:{word_count}w"
+
+        except Exception:
+            # If parsing fails, be conservative
+            if len(body) < max(MIN_BODY_BYTES * 2, 8192) or is_homepage_like(final_url):
+                debug_counts["soft_404_drops"] += 1
+                return False, final_url, status, "parse-fail-small-body"
+    else:
+        # No BeautifulSoup available: do minimal soft404 scan on raw body
+        try:
+            sample = (body[:120000] or b"").decode("utf-8", errors="ignore")
+            if soft404_regex.search(sample):
+                debug_counts["soft_404_drops"] += 1
+                return False, final_url, status, "soft-404-text(minimal)"
+        except Exception:
+            pass
+
+    return True, final_url, status, "ok"
 
 # ---------- Build ----------
 def build(feeds_file: str, out_path: str) -> dict:
@@ -1199,7 +1315,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         pool: list[dict] = []
         seen_ids = {x["canonical_id"] for x in keep}
         seen_urls = {x["canonical_url"] for x in keep}
-        # Lower Jaccard threshold for backfill
         BF_THRESH = 0.78
 
         def looks_distinct(a: dict, b: dict) -> bool:
@@ -1216,13 +1331,11 @@ def build(feeds_file: str, out_path: str) -> dict:
                 continue
             if not is_market_headline_sane(it["title"], final_url, it["published_utc"], session, debug_counts):
                 continue
-            # not an aggregator if BLOCK_AGGREGATORS on
             if looks_aggregator(it.get("source",""), final_url):
                 continue
             it["url"] = final_url
             it["canonical_url"] = final_url
 
-            # ensure distinctness w.r.t current keep
             distinct = True
             for k in keep:
                 if not looks_distinct(it, k):
@@ -1233,7 +1346,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             if len(pool) >= (want - len(keep)) * 2:
                 break  # enough options
 
-        # Fill
         out = keep[:]
         for it in pool:
             out.append(it)
@@ -1246,7 +1358,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         verified = backfill_exact(verified, final_candidates_source)
         if len(verified) < REQUIRE_EXACT_COUNT:
             debug_counts["backfill_steps_used"] = len(verified)  # record how far we got
-            # fail hard to avoid shipping partial silently
             print(f"[finalize] could not reach {REQUIRE_EXACT_COUNT} verified items within {MAX_AGE_HOURS}h window.")
         else:
             debug_counts["backfill_steps_used"] = REQUIRE_EXACT_COUNT
