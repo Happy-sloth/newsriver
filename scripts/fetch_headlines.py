@@ -3,6 +3,7 @@
 #
 # Build headlines.json from feeds.txt with strict link verification,
 # 69h freshness window, market sanity checks, and an exact 69-item guarantee.
+# PLUS: Safety-net fallback to guarantee at least one working headline.
 
 from __future__ import annotations
 
@@ -64,6 +65,22 @@ BLOCK_AGGREGATORS           = os.getenv("MPB_BLOCK_AGGREGATORS", "1") == "1"
 MIN_AGE_SEC                 = int(os.getenv("MPB_MIN_AGE_SEC", "60"))        # ≥ 1 minute old
 MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))    # ≤ 69 hours old
 REQUIRE_EXACT_COUNT         = int(os.getenv("MPB_REQUIRE_EXACT_COUNT", "69"))
+
+# ---------- SAFETY-NET FALLBACK (NEW) ----------
+# Comma-separated override via MPB_FALLBACK_FEEDS; defaults are solid, newsy, and fast.
+DEFAULT_FALLBACK_FEEDS = [
+    "https://www.reuters.com/world/us/rss",
+    "https://www.reuters.com/world/rss",
+    "https://www.cbc.ca/cmlink/rss-topstories",
+    "https://www.ctvnews.ca/rss/ctvnews-ca-top-stories-public-rss-1.822009",
+    "https://globalnews.ca/feed/"
+]
+FALLBACK_FEEDS = [
+    u.strip() for u in os.getenv("MPB_FALLBACK_FEEDS", ",".join(DEFAULT_FALLBACK_FEEDS)).split(",")
+    if u.strip()
+]
+FALLBACK_MAX_AGE_HOURS = float(os.getenv("MPB_FALLBACK_MAX_AGE_HOURS", "24"))  # must be fresh
+FALLBACK_MIN_ITEMS     = int(os.getenv("MPB_FALLBACK_MIN_ITEMS", "1"))         # inject exactly 1 when empty
 
 # Source hygiene limits
 PER_HOST_MAX = {
@@ -605,7 +622,6 @@ def is_homepage_like(url: str) -> bool:
     try:
         u = urlparse(url)
         if u.path in ("","/"): return True
-        # very short slugs or pure section hubs often smell like soft redirects
         if len(u.path.strip("/")) <= 2 and (not u.query):
             return True
         return False
@@ -652,20 +668,17 @@ def is_market_headline_sane(title: str, url: str, published_iso: str, session: r
     if not (milestone or btc_round):
         return True  # not a risky claim
 
-    # must be very fresh
     age_h = hours_since(published_iso, time.time())
     if age_h > 12.0:
         debug_counts["market_sanity_drops"] += 1
         return False
 
-    # require authoritative domain OR matching same-day meta
     h = host_of(url)
     if any(h.endswith(d) for d in MARKET_AUTH_DOMAINS):
         return True
 
-    # fetch page to read meta times
     if not VERIFY_LINKS:
-        return False  # without a body we can't corroborate
+        return False
 
     try:
         resp = session.get(url, timeout=HTTP_TIMEOUT_S, allow_redirects=True)
@@ -716,7 +729,6 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
     ctype = (resp.headers.get("Content-Type") or "").lower()
     robots = (resp.headers.get("X-Robots-Tag") or "").lower()
 
-    # 1) Basic HTTP checks
     if status < 200 or status >= 300:
         debug_counts["link_verification_fail"] += 1
         return False, final_url, status, "non-2xx"
@@ -727,12 +739,10 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
         debug_counts["soft_404_drops"] += 1
         return False, final_url, status, "body-too-small"
 
-    # 2) Homepage / section hub smell
     if REJECT_REDIRECT_TO_HOMEPAGE and is_homepage_like(final_url):
         debug_counts["soft_404_drops"] += 1
         return False, final_url, status, "homepage-like"
 
-    # 3) Try to parse HTML and apply semantic checks
     title_text = ""
     og_url = ""
     canonical = ""
@@ -747,11 +757,9 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
         try:
             soup = BeautifulSoup(body, "html.parser")
 
-            # Title text
             if soup.title and soup.title.string:
                 title_text = (soup.title.string or "").strip().lower()
 
-            # Canonical / og:url
             can_tag = soup.find("link", rel=lambda v: v and "canonical" in v)
             if can_tag and can_tag.get("href"):
                 canonical = can_tag.get("href").strip()
@@ -762,24 +770,20 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
             if og_type_tag and og_type_tag.get("content"):
                 og_type = (og_type_tag.get("content") or "").strip().lower()
 
-            # Robots noindex (header or meta)
             meta_robots = soup.find("meta", attrs={"name": re.compile(r"robots", re.I)})
             if ("noindex" in robots) or (meta_robots and "noindex" in (meta_robots.get("content") or "").lower()):
                 debug_counts["soft_404_drops"] += 1
                 return False, final_url, status, "robots-noindex"
 
-            # Remove non-content to estimate word count
             for tag in soup(["script", "style", "noscript", "nav", "footer", "header", "form"]):
                 tag.decompose()
             text_for_search = " ".join((soup.get_text(" ", strip=True) or "").split())
             word_count = len(re.findall(r"\w+", text_for_search))
 
-            # Soft-404 text
             if soft404_regex.search(text_for_search) or soft404_regex.search(title_text):
                 debug_counts["soft_404_drops"] += 1
                 return False, final_url, status, "soft-404-text"
 
-            # Canonical sanity
             if canonical:
                 cu = urlparse(canonical)
                 if cu.netloc and cu.netloc != urlparse(final_url).netloc:
@@ -789,7 +793,6 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
                     debug_counts["soft_404_drops"] += 1
                     return False, final_url, status, "canonical-homepage"
 
-            # og:url sanity
             if og_url:
                 ou = urlparse(og_url)
                 if ou.netloc and ou.netloc != urlparse(final_url).netloc:
@@ -799,19 +802,16 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
                     debug_counts["soft_404_drops"] += 1
                     return False, final_url, status, "ogurl-homepage"
 
-            # Article hints and size
             hints_ok = (og_type == "article") or bool(hint_re.search(str(body)))
             if not hints_ok or word_count < MIN_ARTICLE_WORDS:
                 debug_counts["soft_404_drops"] += 1
                 return False, final_url, status, f"not-article-like:{word_count}w"
 
         except Exception:
-            # If parsing fails, be conservative
             if len(body) < max(MIN_BODY_BYTES * 2, 8192) or is_homepage_like(final_url):
                 debug_counts["soft_404_drops"] += 1
                 return False, final_url, status, "parse-fail-small-body"
     else:
-        # No BeautifulSoup available: do minimal soft404 scan on raw body
         try:
             sample = (body[:120000] or b"").decode("utf-8", errors="ignore")
             if soft404_regex.search(sample):
@@ -821,6 +821,77 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
             pass
 
     return True, final_url, status, "ok"
+
+# ---------- SAFETY-NET HELPERS (NEW) ----------
+def _fallback_feeds_iter() -> list[str]:
+    # simple guard in case user empties the env var
+    return FALLBACK_FEEDS if FALLBACK_FEEDS else DEFAULT_FALLBACK_FEEDS
+
+def _fallback_pick_from_feed(session: requests.Session, feed_url: str, debug_counts: dict) -> dict | None:
+    """Try a single RSS feed and return first validated item or None."""
+    try:
+        blob = http_get(session, feed_url)
+        if not blob:
+            return None
+        parsed = feedparser.parse(blob)
+        entries = parsed.entries[:8]  # small scan
+    except Exception:
+        return None
+
+    for e in entries:
+        title = (e.get("title") or "").strip()
+        link  = (e.get("link")  or "").strip()
+        if not title or not link:
+            continue
+        pub = pick_published(e)
+        if not pub:
+            continue
+
+        # Age bounds: respect MIN_AGE_SEC and the *tighter* FALLBACK_MAX_AGE_HOURS for freshness
+        age_h = hours_since(pub, time.time())
+        if age_h < (MIN_AGE_SEC / 3600.0) or age_h > FALLBACK_MAX_AGE_HOURS:
+            continue
+
+        can_url = canonicalize_url(link)
+        # Minimal item shell
+        it = {
+            "title": title,
+            "url":   can_url or link,
+            "source": (parsed.feed.get("title") or host_of(can_url or link) or "").strip(),
+            "published_utc": pub,
+            "category": "General",
+            "region":   "World",
+            "canonical_url": can_url or link,
+            "canonical_id":  canonical_id(can_url or link),
+            "cluster_id":    fuzzy_title_key(title),
+            "score": 0.0,
+            "score_components": {},
+            "effects": {},
+        }
+
+        ok, final_url, status, reason = verify_link(session, it["url"], debug_counts)
+        if not ok:
+            continue
+        if not is_market_headline_sane(it["title"], final_url, it["published_utc"], session, debug_counts):
+            continue
+
+        it["url"] = final_url
+        it["canonical_url"] = final_url
+        return it
+
+    return None
+
+def _safety_net_one_headline(session: requests.Session, debug_counts: dict) -> tuple[dict | None, dict]:
+    """Try multiple trusted feeds and return exactly one verified headline if available."""
+    stats = {"used": False, "feed": None, "title": None}
+    for f in _fallback_feeds_iter():
+        it = _fallback_pick_from_feed(session, f, debug_counts)
+        if it:
+            stats["used"] = True
+            stats["feed"] = f
+            stats["title"] = it["title"]
+            return it, stats
+    return None, stats
 
 # ---------- Build ----------
 def build(feeds_file: str, out_path: str) -> dict:
@@ -1298,20 +1369,27 @@ def build(feeds_file: str, out_path: str) -> dict:
         ok, final_url, status, reason = verify_link(session, it["url"], debug_counts)
         if not ok:
             continue
-        # Optional market sanity
         if not is_market_headline_sane(it["title"], final_url, it["published_utc"], session, debug_counts):
             continue
         it["url"] = final_url
         it["canonical_url"] = final_url
         verified.append(it)
 
-    # ---- Backfill to EXACT 69 if needed ----
+    # ---- SAFETY-NET INJECTION: guarantee at least one working headline ----
+    fallback_stats = {"used": False, "feed": None, "title": None}
+    if FALLBACK_MIN_ITEMS > 0 and len(verified) < 1:
+        picked, stats = _safety_net_one_headline(session, debug_counts)
+        fallback_stats.update(stats)
+        if picked:
+            # Put it at the top; FE will still render its grid normally.
+            verified.insert(0, picked)
+
+    # ---- Backfill to EXACT 69 if needed (existing logic) ----
     def backfill_exact(keep: list[dict], candidates: Iterable[dict]) -> list[dict]:
         want = REQUIRE_EXACT_COUNT
         if want <= 0: return keep
         if len(keep) >= want: return keep[:want]
 
-        # Build a pool sorted by recency, relaxing caps and dedup threshold a bit
         pool: list[dict] = []
         seen_ids = {x["canonical_id"] for x in keep}
         seen_urls = {x["canonical_url"] for x in keep}
@@ -1320,7 +1398,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         def looks_distinct(a: dict, b: dict) -> bool:
             return jaccard(set(title_tokens(a["title"])), set(title_tokens(b["title"]))) < BF_THRESH
 
-        # Pull more from candidates in recency order
         for it in sorted(list(candidates), key=lambda x: _ts(x.get("published_utc","")), reverse=True):
             if it["canonical_id"] in seen_ids or it["canonical_url"] in seen_urls:
                 continue
@@ -1344,7 +1421,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             if distinct:
                 pool.append(it)
             if len(pool) >= (want - len(keep)) * 2:
-                break  # enough options
+                break
 
         out = keep[:]
         for it in pool:
@@ -1357,7 +1434,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     if REQUIRE_EXACT_COUNT > 0 and len(verified) < REQUIRE_EXACT_COUNT:
         verified = backfill_exact(verified, final_candidates_source)
         if len(verified) < REQUIRE_EXACT_COUNT:
-            debug_counts["backfill_steps_used"] = len(verified)  # record how far we got
+            debug_counts["backfill_steps_used"] = len(verified)
             print(f"[finalize] could not reach {REQUIRE_EXACT_COUNT} verified items within {MAX_AGE_HOURS}h window.")
         else:
             debug_counts["backfill_steps_used"] = REQUIRE_EXACT_COUNT
@@ -1390,7 +1467,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v2.1.0-verify-69h-69exact",
+            "version": "fetch-v2.2.0-fallback-1",
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
@@ -1403,6 +1480,15 @@ def build(feeds_file: str, out_path: str) -> dict:
             "verify_links": VERIFY_LINKS,
             "reject_homepage_redirect": REJECT_REDIRECT_TO_HOMEPAGE,
             "block_aggregators": BLOCK_AGGREGATORS,
+            # NEW: visibility into the safety-net usage
+            "fallback": {
+                "used": fallback_stats.get("used", False),
+                "feed": fallback_stats.get("feed"),
+                "title": fallback_stats.get("title"),
+                "feeds_considered": _fallback_feeds_iter(),
+                "max_age_hours": FALLBACK_MAX_AGE_HOURS,
+                "min_items": FALLBACK_MIN_ITEMS
+            }
         }
     }
     os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
@@ -1422,7 +1508,8 @@ def main():
         k: dbg.get(k) for k in [
             "feeds_total","collected","dedup_pass1","dedup_final","elapsed_sec",
             "slow_domains","timeouts","errors","weights_loaded","weights_keys",
-            "weights_error","weights_path","score_stats","sanity_stats","require_exact_count"
+            "weights_error","weights_path","score_stats","sanity_stats","require_exact_count",
+            "fallback"
         ]
     })
 
