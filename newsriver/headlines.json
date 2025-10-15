@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-15T11:32:27.102Z",
-  "count": 6,
+  "generated_utc": "2025-10-15T11:46:31.777Z",
+  "count": 8,
   "items": [
+    {
+      "title": "Andrea Kalas on Film Preservation Revolution, Scorsese’s Film Foundation and Restoring ‘The Godfather Part III’",
+      "url": "https://variety.com/2025/film/global/andrea-kalas-film-preservation-revolution-scorseses-foundation-1236553347",
+      "source": "Film",
+      "published_utc": "2025-10-15T11:37:56.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Dog the Bounty Hunter's Cop Son Reinstated After Fatal Car Crash",
       "url": "https://www.tmz.com/2025/10/15/dog-the-bounty-hunter-son-reinstated-police-after-fatal-car-crash",
@@ -23,6 +36,19 @@
       "url": "https://www.npr.org/sections/shots-health-news/2025/10/15/nx-s1-5534324/rural-health-care-doctors-disinformation",
       "source": "NPR Topics: Home Page Top Stories",
       "published_utc": "2025-10-15T11:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Oble Adds to Mipcom Slate Canneseries’ Flanders’ ‘How to Kill Your Sister,’ Spanish Comedy ‘Segunda Temporada’ From ‘Autodefensa’ Creators (EXCLUSIVE)",
+      "url": "https://variety.com/2025/tv/global/oble-segunda-temporada-how-to-kill-your-sister-1236553308",
+      "source": "Variety",
+      "published_utc": "2025-10-15T10:30:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -90,7 +116,9 @@
     "collected": 830,
     "dedup_pass1": 819,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.rawstory.com"
+    ],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -114,57 +142,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "toronto.citynews.ca",
+        "sec": 1.911,
+        "kept": 8
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.554,
+        "sec": 0.596,
         "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.434,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.274,
-        "kept": 14
-      },
-      {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.201,
+        "sec": 0.451,
         "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.194,
+        "sec": 0.446,
         "kept": 0
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.115,
-        "kept": 8
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.101,
-        "kept": 0
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.357,
+        "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.093,
+        "sec": 0.254,
+        "kept": 14
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.253,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.192,
+        "kept": 0
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.18,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.066,
+        "sec": 0.124,
         "kept": 10
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.06,
-        "kept": 14
       }
     ],
-    "elapsed_sec": 338.01,
+    "elapsed_sec": 287.81,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -202,7 +230,7 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 14,
+      "sports_team_hits": 13,
       "sports_player_hits": 16,
       "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
@@ -219,11 +247,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 36,
+      "link_verification_fail": 37,
       "soft_404_drops": 40,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 8,
+      "market_sanity_drops": 7,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
