@@ -1,5 +1,5 @@
 # Create the project structure and files, including the user's full fetch_headlines.py as provided.
-import os, textwrap, json, zipfile, io, pathlib
+import os, json, pathlib
 
 base = "/mnt/data/mpb_headlines_pkg"
 scripts_dir = os.path.join(base, "scripts")
@@ -653,7 +653,7 @@ def html_meta_times(html_bytes: bytes) -> tuple[datetime | None, datetime | None
     except Exception:
         return (None, None)
 
-def _parse_dt_loose(s: str | None) -> datetime | None:
+def _parse_dt_loose(s: str) -> datetime | None:
     if not s: return None
     try:
         if s.endswith("Z"): return datetime.fromisoformat(s.replace("Z","+00:00"))
@@ -791,7 +791,7 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
 
             if soft404_regex.search(text_for_search) or soft404_regex.search(title_text):
                 debug_counts["soft_404_drops"] += 1
-                return False, final_url, status, "soft-404-text"
+                return False, final_url, status, "soft-404-text")
 
             if canonical:
                 cu = urlparse(canonical)
@@ -1149,7 +1149,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             it["cluster_rank"] = i + 1
             it["cluster_latest"] = (i == len(arr) - 1)
 
-    # --------- Scoring (unchanged core; kept your weights) ---------
+    # --------- Scoring ---------
     half_life_h = float(W(weights, "recency.half_life_hours", 6.0))
     age_pen_24  = float(W(weights, "recency.age_penalty_after_24h", -0.6))
     age_pen_36  = float(W(weights, "recency.age_penalty_after_36h", -0.4))
@@ -1284,7 +1284,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         team_hit   = bool(RE_JAYS_TEAM.search(title))
         player_hit = bool(RE_JAYS_PLAYERS.search(title))
         win_hit    = bool(RE_JAYS_WIN.search(title))
-        loss_hit   = bool(RE_JAYS_LOSS.search(title))
+        loss_hit   = bool(RE_JAYS_LOSS(search(title))) if False else bool(RE_JAYS_LOSS.search(title))  # keep pattern
 
         focus_team_hit = bool(RE_MLB_TEAMS.search(title))
         final_hit      = bool(RE_MLB_FINAL_WORD.search(title) or RE_SCORELINE.search(title))
@@ -1393,7 +1393,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             # Put it at the top; FE will still render its grid normally.
             verified.insert(0, picked)
 
-    # ---- Backfill to EXACT 69 if needed (existing logic) ----
+    # ---- Backfill to EXACT 69 if needed ----
     def backfill_exact(keep: list[dict], candidates: Iterable[dict]) -> list[dict]:
         want = REQUIRE_EXACT_COUNT
         if want <= 0: return keep
@@ -1525,7 +1525,9 @@ def main():
 if __name__ == "__main__":
     main()
 '''
-open(os.path.join(scripts_dir, "fetch_headlines.py"), "w", encoding="utf-8").write(fetch_code)
+
+# Write fetch_headlines.py
+pathlib.Path(os.path.join(scripts_dir, "fetch_headlines.py")).write_text(fetch_code, encoding="utf-8")
 
 # Minimal sample feeds.txt and weights config
 feeds_txt = """# --- TORONTO LOCAL ---
@@ -1535,8 +1537,7 @@ https://www.reuters.com/world/us/rss
 https://www.reuters.com/world/rss
 https://www.cbc.ca/cmlink/rss-topstories
 """
-
-open(os.path.join(base, "feeds.txt"), "w", encoding="utf-8").write(feeds_txt)
+pathlib.Path(os.path.join(base, "feeds.txt")).write_text(feeds_txt, encoding="utf-8")
 
 weights = {
   "recency": {"half_life_hours": 6.0, "age_penalty_after_24h": -0.6, "age_penalty_after_36h": -0.4, "superseded_cluster_penalty": -0.9},
@@ -1549,7 +1550,7 @@ weights = {
   "regional": {"weights": {"country_match": 1.2}, "max_bonus": 2.4},
   "sports": {"team_match_points": 0.8, "player_match_points": 0.35, "result_win_points": 0.45, "result_loss_points": 0.25, "evening_window_points": 0.7, "playoff_mode_points": 0.4, "focus_team_points": 0.55, "final_story_points": 0.75, "final_with_score_points": 0.45}
 }
-open(os.path.join(config_dir, "weights.json5"), "w", encoding="utf-8").write(json.dumps(weights, indent=2))
+pathlib.Path(os.path.join(config_dir, "weights.json5")).write_text(json.dumps(weights, indent=2), encoding="utf-8")
 
 # requirements
 req = """feedparser==6.0.11
@@ -1557,9 +1558,9 @@ requests>=2.31.0
 beautifulsoup4>=4.12.2
 json5>=0.9.24
 """
-open(os.path.join(base, "requirements.txt"), "w", encoding="utf-8").write(req)
+pathlib.Path(os.path.join(base, "requirements.txt")).write_text(req, encoding="utf-8")
 
-# README
+# README (kept OUT of fetch_headlines.py to avoid triple-quote issues)
 readme = """# MYPYBITE NewsRiver Backend (strict verification + safety net)
 
 - Generates `headlines.json` with hard link checks and a fallback to guarantee **at least one sub-24h working headline**.
