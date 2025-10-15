@@ -1,7 +1,36 @@
 {
-  "generated_utc": "2025-10-15T13:58:49.640Z",
-  "count": 6,
+  "generated_utc": "2025-10-15T14:20:21.401Z",
+  "count": 8,
   "items": [
+    {
+      "title": "Another STM strike: Montreal bus drivers and metro operators warn of potential walkout",
+      "url": "https://cultmtl.com/2025/10/another-stm-strike-montreal-bus-drivers-metro-operators-warn-of-potential-walkout",
+      "source": "Cult MTL",
+      "published_utc": "2025-10-15T14:07:44.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "How Will U.S. Tariffs Reshape the Global Auto Industry?",
+      "url": "https://oilprice.com/Energy/Energy-General/How-Will-US-Tariffs-Reshape-the-Global-Auto-Industry.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-15T14:00:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
     {
       "title": "MLBTR Podcast: Murakami To Be Posted This Offseason, Managerial Vacancies, And More!",
       "url": "https://www.mlbtraderumors.com/2025/10/mlbtr-podcast-murakami-to-be-posted-this-offseason-managerial-vacancies-and-more.html",
@@ -29,10 +58,10 @@
       "region": "World"
     },
     {
-      "title": "Hulu’s ‘Murdaugh: Death in the Family’ Is an Engaging Tapestry of Privilege, Greed and Lies: TV Review",
-      "url": "https://variety.com/2025/tv/reviews/murdaugh-death-in-the-family-review-hulu-1236535286",
-      "source": "Variety",
-      "published_utc": "2025-10-15T13:45:00.000Z",
+      "title": "Netflix Combines VFX Businesses Under Unified ‘Eyeline’ Brand",
+      "url": "https://variety.com/2025/digital/news/netflix-eyeline-combined-scanline-vfx-operations-1236553456",
+      "source": "Film",
+      "published_utc": "2025-10-15T13:39:57.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -84,12 +113,10 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 848,
-    "dedup_pass1": 833,
+    "collected": 838,
+    "dedup_pass1": 823,
     "dedup_final": 320,
-    "slow_domains": [
-      "thehill.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -114,56 +141,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.533,
+        "sec": 0.576,
         "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.378,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.252,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.245,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.214,
+        "host": "www.nhl.com",
+        "sec": 0.428,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.195,
+        "sec": 0.419,
         "kept": 8
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.192,
+        "host": "www.bls.gov",
+        "sec": 0.414,
         "kept": 0
       },
       {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.385,
+        "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.322,
+        "kept": 14
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.139,
+        "sec": 0.24,
+        "kept": 14
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.216,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.101,
+        "sec": 0.196,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.055,
+        "sec": 0.142,
         "kept": 10
       }
     ],
-    "elapsed_sec": 266.42,
+    "elapsed_sec": 303.06,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -191,7 +218,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 12,
+      "ps_fatal_hits": 11,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -199,7 +226,7 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 49,
+      "preferred_bonus": 50,
       "substack_tagged": 0,
       "sports_team_hits": 12,
       "sports_player_hits": 13,
@@ -207,9 +234,9 @@
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 15,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_focus_team_hits": 14,
+      "sports_final_hits": 0,
+      "sports_final_score_hits": 0,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -218,11 +245,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 43,
-      "soft_404_drops": 33,
+      "link_verification_fail": 38,
+      "soft_404_drops": 27,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 5,
+      "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
