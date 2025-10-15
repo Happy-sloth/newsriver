@@ -1,7 +1,75 @@
 {
-  "generated_utc": "2025-10-15T11:16:51.144Z",
-  "count": 1,
+  "generated_utc": "2025-10-15T11:32:27.102Z",
+  "count": 6,
   "items": [
+    {
+      "title": "Dog the Bounty Hunter's Cop Son Reinstated After Fatal Car Crash",
+      "url": "https://www.tmz.com/2025/10/15/dog-the-bounty-hunter-son-reinstated-police-after-fatal-car-crash",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-15T11:25:10.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "In rural America, scarce doctors battle misinformation as they practice medicine",
+      "url": "https://www.npr.org/sections/shots-health-news/2025/10/15/nx-s1-5534324/rural-health-care-doctors-disinformation",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T11:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Natalie Portman Lights Up Lumière With Grace and Humor",
+      "url": "https://variety.com/2025/film/global/natalie-portman-lights-up-lumiere-grace-humor-1236553340",
+      "source": "Film",
+      "published_utc": "2025-10-15T10:28:24.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Israel keeps Gaza border crossing closed while reducing aid deliveries",
+      "url": "https://www.npr.org/2025/10/15/nx-s1-5574953/israel-gaza-border-crossing-aid",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T10:09:48.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Oscars: Saudi Arabia Picks Shahad Ameen’s ‘Hijra’ for International Feature Race",
+      "url": "https://variety.com/2025/global/global/saudi-arabia-shahad-ameen-hijra-ts-oscar-candidate-1236553294",
+      "source": "Variety",
+      "published_utc": "2025-10-15T10:04:18.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Episode Two: A Death in the Dark",
       "url": "https://theintercept.com/2025/10/15/collateral-damage-episode-two-death-dark",
@@ -19,11 +87,12 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 640,
-    "dedup_pass1": 635,
+    "collected": 830,
+    "dedup_pass1": 819,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -35,61 +104,67 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "toronto.citynews.ca"
+      "nypost.com",
+      "toronto.citynews.ca",
+      "variety.com",
+      "www.boston.com",
+      "www.marketwatch.com",
+      "www.npr.org",
+      "www.wsj.com"
     ],
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.506,
+        "sec": 0.554,
         "kept": 0
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.418,
-        "kept": 0
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.4,
+        "host": "www.cp24.com",
+        "sec": 0.434,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.395,
-        "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.324,
-        "kept": 8
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.311,
+        "sec": 0.274,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.258,
+        "sec": 0.201,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.194,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.115,
+        "kept": 8
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.101,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.147,
+        "sec": 0.093,
         "kept": 14
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.136,
-        "kept": 0
+        "host": "globalnews.ca",
+        "sec": 0.066,
+        "kept": 10
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.116,
-        "kept": 10
+        "host": "www.mlb.com",
+        "sec": 0.06,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 283.75,
+    "elapsed_sec": 338.01,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -117,7 +192,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 12,
+      "ps_fatal_hits": 15,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -125,17 +200,17 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 48,
+      "preferred_bonus": 50,
       "substack_tagged": 0,
       "sports_team_hits": 14,
-      "sports_player_hits": 12,
-      "sports_result_win_hits": 13,
+      "sports_player_hits": 16,
+      "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 4,
-      "sports_final_hits": 0,
-      "sports_final_score_hits": 0,
+      "sports_focus_team_hits": 19,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -144,11 +219,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 31,
-      "soft_404_drops": 32,
+      "link_verification_fail": 36,
+      "soft_404_drops": 40,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 9,
+      "market_sanity_drops": 8,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
