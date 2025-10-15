@@ -1,7 +1,101 @@
 {
-  "generated_utc": "2025-10-15T12:34:57.690Z",
-  "count": 4,
+  "generated_utc": "2025-10-15T13:13:50.821Z",
+  "count": 10,
   "items": [
+    {
+      "title": "Studiocanal Buys Dreamspark’s Buzzy Reality Format ‘Werewolves’ for Multiple Territories From Banijay Entertainment (EXCLUSIVE)",
+      "url": "https://variety.com/2025/tv/news/studiocanal-dreamspark-reality-format-werewolves-banijay-1236553375",
+      "source": "Variety",
+      "published_utc": "2025-10-15T13:04:12.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Lebanese Comic John Achkar’s Show at L’Olympia Hall in Paris Set for TV Special as Front Row Expands Into Comedy Content",
+      "url": "https://variety.com/2025/digital/global/lebanese-comic-john-achkars-olympia-paris-front-row-1236553364",
+      "source": "Variety",
+      "published_utc": "2025-10-15T13:00:08.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Ryan Reynolds Tracks Down a Real Human Named Tilly Norwood (Not the AI Actress) to Star in Ad for Mint Mobile’s Home Internet Service",
+      "url": "https://variety.com/2025/digital/news/ryan-reynolds-real-tilly-norwood-not-ai-actress-mint-mobile-1236552857",
+      "source": "Variety",
+      "published_utc": "2025-10-15T13:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "‘Monster High’ Launches Fortnite, Roblox Games as Mattel Unveils Big Plans for In-House Gaming Business (EXCLUSIVE)",
+      "url": "https://variety.com/2025/gaming/news/monster-high-roblox-fortnite-video-game-mattel-1236552894",
+      "source": "Variety",
+      "published_utc": "2025-10-15T13:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Dan Mangan in Ottawa, ON – Show Review",
+      "url": "https://canadianbeats.ca/2025/10/15/dan-mangan-in-ottawa-on-show-review",
+      "source": "Canadian Beats Media",
+      "published_utc": "2025-10-15T12:59:42.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Daniel Day-Lewis Says Method Acting Criticism Is From ‘People Who Have Little or No Understanding of What It Actually Involves’: ‘It’s Almost as if’ We’re in a ‘Cult’",
+      "url": "https://variety.com/2025/film/festivals/daniel-day-lewis-rejects-method-acting-critcism-cult-misconception-1236553268",
+      "source": "Film",
+      "published_utc": "2025-10-15T12:58:32.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "What to do today in Montreal",
+      "url": "https://cultmtl.com/2025/10/what-to-do-today-in-montreal-mtl-to-do-list-stone-and-bone-spectacular",
+      "source": "Cult MTL",
+      "published_utc": "2025-10-15T12:51:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "Study: We're losing the fight against drug-resistant infections faster we'd thought",
       "url": "https://www.npr.org/sections/goats-and-soda/2025/10/15/g-s1-93449/antibiotic-resistance-bacteria",
@@ -29,23 +123,10 @@
       "region": "World"
     },
     {
-      "title": "Andrea Kalas on Film Preservation Revolution, Scorsese’s Film Foundation and Restoring ‘The Godfather Part III’",
-      "url": "https://variety.com/2025/film/global/andrea-kalas-film-preservation-revolution-scorseses-foundation-1236553347",
-      "source": "Film",
-      "published_utc": "2025-10-15T11:37:56.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "In rural America, scarce doctors battle misinformation as they practice medicine",
-      "url": "https://www.npr.org/sections/shots-health-news/2025/10/15/nx-s1-5534324/rural-health-care-doctors-disinformation",
+      "title": "A Supreme Court ruling on voting rights could boost Republicans' redistricting efforts",
+      "url": "https://www.npr.org/2025/10/15/nx-s1-5567801/supreme-court-louisiana-redistricting-voting-rights-act",
       "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-15T11:00:00.000Z",
+      "published_utc": "2025-10-15T12:00:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -58,13 +139,16 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 772,
-    "dedup_pass1": 765,
+    "collected": 847,
+    "dedup_pass1": 834,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "aquariumdrunkard.com",
+      "thehill.com"
+    ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
-      "www.canadianmortgagetrends.com",
       "www.cbc.ca"
     ],
     "errors": [
@@ -75,6 +159,7 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
+      "nypost.com",
       "toronto.citynews.ca",
       "variety.com",
       "www.boston.com",
@@ -85,56 +170,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.559,
+        "sec": 0.428,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.374,
+        "sec": 0.385,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.268,
+        "sec": 0.317,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.258,
-        "kept": 0
-      },
-      {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.254,
+        "sec": 0.237,
         "kept": 0
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.182,
-        "kept": 8
+        "host": "www.bls.gov",
+        "sec": 0.198,
+        "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.13,
+        "sec": 0.147,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.123,
+        "sec": 0.145,
         "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.111,
-        "kept": 10
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.103,
+        "sec": 0.119,
         "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.11,
+        "kept": 8
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.055,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 299.5,
+    "elapsed_sec": 269.08,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -162,7 +247,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 10,
+      "ps_fatal_hits": 11,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -174,13 +259,13 @@
       "substack_tagged": 0,
       "sports_team_hits": 12,
       "sports_player_hits": 13,
-      "sports_result_win_hits": 14,
+      "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 16,
-      "sports_final_hits": 0,
-      "sports_final_score_hits": 0,
+      "sports_focus_team_hits": 18,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -189,11 +274,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 37,
-      "soft_404_drops": 34,
+      "link_verification_fail": 38,
+      "soft_404_drops": 37,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 7,
+      "market_sanity_drops": 5,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
