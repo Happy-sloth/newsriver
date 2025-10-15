@@ -14,37 +14,37 @@ jobs:
     timeout-minutes: 15
 
     env:
-      # ===== Collector caps (collect plenty, then filter hard) =====
+      # Collector caps (collect plenty, then filter hard)
       MPB_MAX_PER_FEED: "14"
       MPB_MAX_TOTAL: "320"
 
-      # ===== Time + budgets =====
+      # Time + budgets
       MPB_HTTP_TIMEOUT: "10"
       MPB_SLOW_FEED_WARN: "3.5"
       MPB_GLOBAL_BUDGET: "210"
       NEWSRIVER_TIMEZONE: "America/Toronto"
       MPB_BREAKER_LIMIT: "3"
 
-      # ===== Recency + exact publish count =====
+      # Recency + exact publish count
       MPB_MAX_AGE_HOURS: "69"
       MPB_MIN_AGE_SEC: "60"
       MPB_REQUIRE_EXACT_COUNT: "69"
 
-      # ===== Strict link verification + article heuristics (builder hints) =====
+      # Strict link verification + article heuristics
       MPB_VERIFY_LINKS: "1"
       MPB_REJECT_REDIRECT_TO_HOMEPAGE: "1"
       MPB_BLOCK_AGGREGATORS: "1"
       MPB_MIN_BODY_BYTES: "4096"
       MPB_MIN_ARTICLE_WORDS: "120"
 
-      # ===== Safety net =====
+      # Safety net
       MPB_FALLBACK_MIN_ITEMS: "1"
       MPB_FALLBACK_MAX_AGE_HOURS: "24"
 
-      # ===== Realistic UA =====
+      # Realistic UA
       MPB_ALT_UA: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
-      # ===== Cleaner thresholds (post-build) =====
+      # Cleaner thresholds (post-build)
       CLEAN_MAX_AGE_HOURS: "72"         # hard clamp for ≤72h
       CLEAN_MIN_BODY_BYTES: "4096"      # soft-404/empty guard
       CLEAN_MIN_WORDS: "120"            # not an article if below
@@ -87,6 +87,7 @@ jobs:
         run: python -m py_compile scripts/fetch_headlines.py
 
       - name: Build headlines.json
+        shell: bash
         run: |
           set -euo pipefail
           mkdir -p newsriver
@@ -96,217 +97,218 @@ jobs:
           echo "----- sample URLs"
           jq -r '.items[:10][] | [.published_utc, .source, .title, .url] | @tsv' newsriver/headlines.json || true
 
-      # ===== Post-build cleaner (kills 404/soft-404, non-articles, >72h) =====
+      # Post-build cleaner (kills 404/soft-404, non-articles, >72h)
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Write cleaner script
-        shell: bash
-        run: |
-          mkdir -p tools
-          cat > tools/validate-links.js <<'JS'
-// Post-build cleaner for newsriver/headlines.json
-// - keep only ≤72h items
-// - drop aggregators/home/section pages
-// - follow redirects; kill non-2xx
-// - detect soft-404/empty by body rules + keywords
-// - ensure "article-likeness" by URL and body (min words)
-// - preserve effects/category/region if present
-
-import fs from "node:fs";
-import fetch from "node-fetch";
-import pLimit from "p-limit";
-
-const DATA_PATH = "newsriver/headlines.json";
-
-const MAX_AGE_MS = Number(process.env.CLEAN_MAX_AGE_HOURS || "72") * 3600 * 1000;
-const MIN_BYTES  = Number(process.env.CLEAN_MIN_BODY_BYTES || "4096");
-const MIN_WORDS  = Number(process.env.CLEAN_MIN_WORDS || "120");
-const CONC       = Number(process.env.CLEAN_CONCURRENCY || "6");
-const TIMEOUT_MS = Number(process.env.CLEAN_TIMEOUT_MS || "12000");
-const UA = process.env.MPB_ALT_UA || "Mozilla/5.0 mypybite-cleaner";
-
-const AGGR = /(news\.google|news\.yahoo|apple\.news|bing\.com\/news|msn\.com\/en-|flipboard\.com|drudgereport\.com|newsnow\.co\.uk|feedly\.com)/i;
-const SECTION = /\/(news|world|business|markets|sports|technology|tech|culture|entertainment|opinion|politics|video|videos|live|frontpage|homepage|home|today)\/*$/i;
-const HOMEPAGE = /^\/?($|[#?])/;
-const SOFT_404_PAT = /(404|not\s+found|page\s+not\s+found|no\s+longer\s+available|removed|error\s+404)/i;
-
-function absoluteUrl(u) {
-  if (!u) return null;
-  if (/^\/\//.test(u)) return "https:" + u;
-  if (/^[a-z0-9.-]+\.[a-z]{2,}\b(\/|$)/i.test(u)) return "https://" + u;
-  if (/^https?:\/\//i.test(u)) return u;
-  return null;
-}
-
-function normalize(u) {
-  try {
-    const url = new URL(u);
-    url.hash = "";
-    const skip = /^(utm_|fbclid$|gclid$|mc_(cid|eid)$|ref$|cmpid$|source$|scid$)/i;
-    const kept = [...url.searchParams.entries()].filter(([k]) => !skip.test(k));
-    kept.sort(([a],[b]) => a.localeCompare(b));
-    url.search = "";
-    kept.forEach(([k,v]) => url.searchParams.append(k,v));
-    return url.toString().replace(/\/+$/,'');
-  } catch {
-    return u;
-  }
-}
-
-function isLikelyArticle(u) {
-  try {
-    const url = new URL(u);
-    const p = url.pathname;
-    if (!/^https?:\/\//i.test(u)) return false;
-    if (AGGR.test(u)) return false;
-    if (HOMEPAGE.test(p) || SECTION.test(p)) return false;
-    const segs = p.split("/").filter(Boolean);
-    if (segs.length <= 1 && !/\d{4}/.test(p)) return false;
-    if (!/[a-z]{3,}/i.test(decodeURIComponent(p))) return false;
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function within72h(tsIso) {
-  const ts = Date.parse(tsIso || "");
-  return Number.isFinite(ts) && (Date.now() - ts <= MAX_AGE_MS);
-}
-
-async function fetchWithFollow(url) {
-  const mk = (method) => ({
-    method,
-    redirect: "follow",
-    headers: { "user-agent": UA, "accept": "text/html,application/xhtml+xml" }
-  });
-
-  // some sites block HEAD
-  try {
-    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
-    const res = await fetch(url, { ...mk("HEAD"), signal: ctl.signal });
-    clearTimeout(t);
-    if (res.ok) return res;
-  } catch {}
-
-  const ctl2 = new AbortController(); const t2 = setTimeout(() => ctl2.abort(), TIMEOUT_MS);
-  try {
-    const res = await fetch(url, { ...mk("GET"), signal: ctl2.signal });
-    clearTimeout(t2);
-    return res;
-  } catch {
-    clearTimeout(t2);
-    return { ok:false, status:0, url };
-  }
-}
-
-function looksLikeArticleBody(html = "") {
-  if (!html || html.length < MIN_BYTES) return false;
-  if (SOFT_404_PAT.test(html)) return false;
-  const text = html
-    .replace(/<script[\s\S]*?<\/script>/gi," ")
-    .replace(/<style[\s\S]*?<\/style>/gi," ")
-    .replace(/<[^>]+>/g," ")
-    .replace(/\s+/g," ")
-    .trim();
-  const words = text.split(" ").filter(Boolean);
-  return words.length >= MIN_WORDS;
-}
-
-function loadJSON() {
-  const raw = JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
-  if (Array.isArray(raw)) return { kind:"array", items: raw, wrapper:null };
-  if (Array.isArray(raw?.items)) return { kind:"object", items: raw.items, wrapper: raw };
-  return { kind:"array", items:[], wrapper:null };
-}
-
-function saveJSON(kind, wrapper, items) {
-  if (kind === "object") {
-    const out = {
-      ...wrapper,
-      generated_utc: new Date().toISOString(),
-      count: items.length,
-      items
-    };
-    fs.writeFileSync(DATA_PATH, JSON.stringify(out, null, 2) + "\n","utf8");
-  } else {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\n","utf8");
-  }
-}
-
-(async function main(){
-  const { kind, wrapper, items } = loadJSON();
-
-  // Pre-filter by age & URL shape
-  const seen = new Set();
-  const base = items.map(it => {
-    const u = absoluteUrl(it?.canonical_url || it?.url) || absoluteUrl(it?.url);
-    if (!u) return null;
-    return {
-      ...it,
-      url: normalize(u),
-      published_utc: it?.published_utc || it?.published || it?.date || new Date().toISOString()
-    };
-  }).filter(Boolean)
-    .filter(it => within72h(it.published_utc))
-    .filter(it => isLikelyArticle(it.url))
-    .filter(it => { if (seen.has(it.url)) return false; seen.add(it.url); return true; });
-
-  const limit = pLimit(Number(process.env.CLEAN_CONCURRENCY || CONC));
-  const cleaned = await Promise.all(base.map(it => limit(async () => {
-    try {
-      const res = await fetchWithFollow(it.url);
-      if (!res.ok || res.status < 200 || res.status >= 300) return null;
-      const finalUrl = normalize(res.url || it.url);
-      if (!isLikelyArticle(finalUrl)) return null;
-
-      // GET body for soft-404/body checks (only if method was HEAD)
-      let body = "";
-      if (res.method === "HEAD" || !res.body) {
-        const res2 = await fetch(finalUrl, {
-          method: "GET",
-          redirect: "follow",
-          headers: { "user-agent": UA, "accept": "text/html,application/xhtml+xml" }
-        });
-        if (!res2.ok) return null;
-        body = await res2.text();
-      } else {
-        // some servers do return body on first GET
-        try { body = await res.text(); } catch {}
-      }
-
-      if (!looksLikeArticleBody(body)) return null;
-
-      const keep = {
-        title: String(it.title || "").trim(),
-        url: finalUrl,
-        source: it.source || "",
-        published_utc: new Date(it.published_utc).toISOString()
-      };
-      if (it.effects) keep.effects = it.effects;
-      if (it.category) keep.category = it.category;
-      if (it.region) keep.region = it.region;
-      return keep;
-    } catch {
-      return null;
-    }
-  })));
-
-  const out = cleaned.filter(Boolean);
-
-  saveJSON(kind, wrapper, out);
-  console.log(`Cleaner kept ${out.length} / ${items.length} items`);
-})().catch(e => { console.error(e); process.exit(1); });
-JS
-
       - name: Install Node deps for cleaner
         run: npm i node-fetch@3 p-limit@5
 
+      - name: Write cleaner script
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools
+          cat << 'EOF' > tools/validate-links.mjs
+          // Post-build cleaner for newsriver/headlines.json
+          // - keep only ≤72h items
+          // - drop aggregators/home/section pages
+          // - follow redirects; kill non-2xx
+          // - detect soft-404/empty by body rules + keywords
+          // - ensure "article-likeness" by URL and body (min words)
+          // - preserve effects/category/region if present
+
+          import fs from "node:fs";
+          import fetch from "node-fetch";
+          import pLimit from "p-limit";
+
+          const DATA_PATH = "newsriver/headlines.json";
+
+          const MAX_AGE_MS = Number(process.env.CLEAN_MAX_AGE_HOURS || "72") * 3600 * 1000;
+          const MIN_BYTES  = Number(process.env.CLEAN_MIN_BODY_BYTES || "4096");
+          const MIN_WORDS  = Number(process.env.CLEAN_MIN_WORDS || "120");
+          const CONC       = Number(process.env.CLEAN_CONCURRENCY || "6");
+          const TIMEOUT_MS = Number(process.env.CLEAN_TIMEOUT_MS || "12000");
+          const UA = process.env.MPB_ALT_UA || "Mozilla/5.0 mypybite-cleaner";
+
+          const AGGR = /(news\.google|news\.yahoo|apple\.news|bing\.com\/news|msn\.com\/en-|flipboard\.com|drudgereport\.com|newsnow\.co\.uk|feedly\.com)/i;
+          const SECTION = /\/(news|world|business|markets|sports|technology|tech|culture|entertainment|opinion|politics|video|videos|live|frontpage|homepage|home|today)\/*$/i;
+          const HOMEPAGE = /^\/?($|[#?])/;
+          const SOFT_404_PAT = /(404|not\s+found|page\s+not\s+found|no\s+longer\s+available|removed|error\s+404)/i;
+
+          function absoluteUrl(u) {
+            if (!u) return null;
+            if (/^\/\//.test(u)) return "https:" + u;
+            if (/^[a-z0-9.-]+\.[a-z]{2,}\b(\/|$)/i.test(u)) return "https://" + u;
+            if (/^https?:\/\//i.test(u)) return u;
+            return null;
+          }
+
+          function normalize(u) {
+            try {
+              const url = new URL(u);
+              url.hash = "";
+              const skip = /^(utm_|fbclid$|gclid$|mc_(cid|eid)$|ref$|cmpid$|source$|scid$)/i;
+              const kept = [...url.searchParams.entries()].filter(([k]) => !skip.test(k));
+              kept.sort(([a],[b]) => a.localeCompare(b));
+              url.search = "";
+              kept.forEach(([k,v]) => url.searchParams.append(k,v));
+              return url.toString().replace(/\/+$/,'');
+            } catch {
+              return u;
+            }
+          }
+
+          function isLikelyArticle(u) {
+            try {
+              const url = new URL(u);
+              const p = url.pathname;
+              if (!/^https?:\/\//i.test(u)) return false;
+              if (AGGR.test(u)) return false;
+              if (HOMEPAGE.test(p) || SECTION.test(p)) return false;
+              const segs = p.split("/").filter(Boolean);
+              if (segs.length <= 1 && !/\d{4}/.test(p)) return false;
+              if (!/[a-z]{3,}/i.test(decodeURIComponent(p))) return false;
+              return true;
+            } catch {
+              return false;
+            }
+          }
+
+          function within72h(tsIso) {
+            const ts = Date.parse(tsIso || "");
+            return Number.isFinite(ts) && (Date.now() - ts <= MAX_AGE_MS);
+          }
+
+          async function fetchWithFollow(url) {
+            const mk = (method) => ({
+              method,
+              redirect: "follow",
+              headers: { "user-agent": UA, "accept": "text/html,application/xhtml+xml" }
+            });
+
+            // some sites block HEAD
+            try {
+              const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
+              const res = await fetch(url, { ...mk("HEAD"), signal: ctl.signal });
+              clearTimeout(t);
+              if (res.ok) return res;
+            } catch {}
+
+            const ctl2 = new AbortController(); const t2 = setTimeout(() => ctl2.abort(), TIMEOUT_MS);
+            try {
+              const res = await fetch(url, { ...mk("GET"), signal: ctl2.signal });
+              clearTimeout(t2);
+              return res;
+            } catch {
+              clearTimeout(t2);
+              return { ok:false, status:0, url };
+            }
+          }
+
+          function looksLikeArticleBody(html = "") {
+            if (!html || html.length < MIN_BYTES) return false;
+            if (SOFT_404_PAT.test(html)) return false;
+            const text = html
+              .replace(/<script[\s\S]*?<\/script>/gi," ")
+              .replace(/<style[\s\S]*?<\/style>/gi," ")
+              .replace(/<[^>]+>/g," ")
+              .replace(/\s+/g," ")
+              .trim();
+            const words = text.split(" ").filter(Boolean);
+            return words.length >= MIN_WORDS;
+          }
+
+          function loadJSON() {
+            const raw = JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
+            if (Array.isArray(raw)) return { kind:"array", items: raw, wrapper:null };
+            if (Array.isArray(raw?.items)) return { kind:"object", items: raw.items, wrapper: raw };
+            return { kind:"array", items:[], wrapper:null };
+          }
+
+          function saveJSON(kind, wrapper, items) {
+            if (kind === "object") {
+              const out = {
+                ...wrapper,
+                generated_utc: new Date().toISOString(),
+                count: items.length,
+                items
+              };
+              fs.writeFileSync(DATA_PATH, JSON.stringify(out, null, 2) + "\n","utf8");
+            } else {
+              fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\n","utf8");
+            }
+          }
+
+          (async function main(){
+            const { kind, wrapper, items } = loadJSON();
+
+            // Pre-filter by age & URL shape
+            const seen = new Set();
+            const base = items.map(it => {
+              const u = absoluteUrl(it?.canonical_url || it?.url) || absoluteUrl(it?.url);
+              if (!u) return null;
+              return {
+                ...it,
+                url: normalize(u),
+                published_utc: it?.published_utc || it?.published || it?.date || new Date().toISOString()
+              };
+            }).filter(Boolean)
+              .filter(it => within72h(it.published_utc))
+              .filter(it => isLikelyArticle(it.url))
+              .filter(it => { if (seen.has(it.url)) return false; seen.add(it.url); return true; });
+
+            const limit = pLimit(Number(process.env.CLEAN_CONCURRENCY || CONC));
+            const cleaned = await Promise.all(base.map(it => limit(async () => {
+              try {
+                const res = await fetchWithFollow(it.url);
+                if (!res.ok || res.status < 200 || res.status >= 300) return null;
+                const finalUrl = normalize(res.url || it.url);
+                if (!isLikelyArticle(finalUrl)) return null;
+
+                // GET body for soft-404/body checks (if needed)
+                let body = "";
+                try {
+                  // Always do a GET body to be strict
+                  const res2 = await fetch(finalUrl, {
+                    method: "GET",
+                    redirect: "follow",
+                    headers: { "user-agent": UA, "accept": "text/html,application/xhtml+xml" }
+                  });
+                  if (!res2.ok) return null;
+                  body = await res2.text();
+                } catch {
+                  return null;
+                }
+
+                if (!looksLikeArticleBody(body)) return null;
+
+                const keep = {
+                  title: String(it.title || "").trim(),
+                  url: finalUrl,
+                  source: it.source || "",
+                  published_utc: new Date(it.published_utc).toISOString()
+                };
+                if (it.effects) keep.effects = it.effects;
+                if (it.category) keep.category = it.category;
+                if (it.region) keep.region = it.region;
+                return keep;
+              } catch {
+                return null;
+              }
+            })));
+
+            const out = cleaned.filter(Boolean);
+
+            saveJSON(kind, wrapper, out);
+            console.log(`Cleaner kept ${out.length} / ${items.length} items`);
+          })().catch(e => { console.error(e); process.exit(1); });
+          EOF
+
       - name: Run cleaner (rewrite headlines.json)
-        run: node tools/validate-links.js
+        run: node tools/validate-links.mjs
 
       - name: Post-clean probe (non-fatal log)
         shell: bash
@@ -326,7 +328,7 @@ JS
           name: headlines-and-cleaner
           path: |
             newsriver/headlines.json
-            tools/validate-links.js
+            tools/validate-links.mjs
 
       - name: Commit & push with rebase (handles non-fast-forward)
         shell: bash
