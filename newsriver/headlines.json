@@ -1,12 +1,80 @@
 {
-  "generated_utc": "2025-10-15T15:19:44.125Z",
-  "count": 7,
+  "generated_utc": "2025-10-15T15:37:05.321Z",
+  "count": 9,
   "items": [
+    {
+      "title": "Cenovus Boosts MEG Energy Stake Ahead of Crucial Takeover Vote",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Cenovus-Boosts-MEG-Energy-Stake-Ahead-of-Crucial-Takeover-Vote.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-15T15:30:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
+    {
+      "title": "Paramount Hires Josh Goldstine as Worldwide Marketing and Distribution President",
+      "url": "https://variety.com/2025/film/news/paramount-josh-goldstine-worldwide-marketing-distribution-president-1236553563",
+      "source": "Film",
+      "published_utc": "2025-10-15T15:30:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Ludacris Unveils New Movado Collab and Says Kevin Hart Forced Him to Step Up His Watch Game",
+      "url": "https://www.rollingstone.com/product-recommendations/lifestyle/ludacris-movado-watch-collaboration-campaign-buy-online-1235439062",
+      "source": "Rolling Stone",
+      "published_utc": "2025-10-15T15:30:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "How Epic ‘Wildwood’ Is Pushing Laika Into More Innovative Techniques and With Bigger Scope and Scale",
+      "url": "https://variety.com/2025/film/artists/laika-wildwood-innovative-techniques-bigger-scope-1236547703",
+      "source": "Film",
+      "published_utc": "2025-10-15T15:25:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "‘Sinners’ Production Designer Hannah Beachler on Weaving in Folklore, History and Sprituality Into Her Sets",
       "url": "https://variety.com/2025/artisans/festivals/sinners-production-design-folklore-history-sprituality-1236547060",
       "source": "Variety",
       "published_utc": "2025-10-15T15:15:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Taylor Swift's Teyana Taylor Gift Package Sparks Talk Of Travis Kelce Ex Shade",
+      "url": "https://www.tmz.com/2025/10/15/taylor-swift-teyana-taylor-gift-travis-kelce-ex-shade",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-15T15:14:25.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -53,61 +121,18 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Zach’s Picks of the Week – October 13 – 18, 2025",
-      "url": "https://canadianbeats.ca/2025/10/15/zachs-picks-of-the-week-october-13-18-2025",
-      "source": "Canadian Beats Media",
-      "published_utc": "2025-10-15T14:42:36.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Anthony Volpe Undergoes Shoulder Surgery",
-      "url": "https://www.mlbtraderumors.com/2025/10/anthony-volpe-undergoes-shoulder-surgery.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-15T14:38:53.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Hungary Slams EU’s Energy Policy",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/Hungary-Slams-EUs-Energy-Policy.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-15T14:30:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 845,
-    "dedup_pass1": 832,
+    "collected": 859,
+    "dedup_pass1": 846,
     "dedup_final": 320,
     "slow_domains": [
-      "thehill.com"
+      "hypebeast.com"
     ],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -129,57 +154,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "toronto.citynews.ca",
-        "sec": 1.454,
-        "kept": 8
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.512,
+        "host": "www.blogto.com",
+        "sec": 0.542,
         "kept": 0
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.404,
+        "host": "www.cp24.com",
+        "sec": 0.397,
+        "kept": 14
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.299,
+        "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.273,
         "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.308,
+        "sec": 0.212,
         "kept": 0
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.214,
-        "kept": 14
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.21,
-        "kept": 14
-      },
-      {
         "host": "www.nhl.com",
-        "sec": 0.208,
+        "sec": 0.16,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.128,
+        "sec": 0.147,
         "kept": 14
       },
       {
+        "host": "toronto.citynews.ca",
+        "sec": 0.142,
+        "kept": 8
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.112,
+        "sec": 0.121,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.085,
+        "sec": 0.113,
         "kept": 10
       }
     ],
-    "elapsed_sec": 312.98,
+    "elapsed_sec": 252.2,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -218,14 +243,14 @@
       "preferred_bonus": 50,
       "substack_tagged": 0,
       "sports_team_hits": 13,
-      "sports_player_hits": 11,
-      "sports_result_win_hits": 16,
+      "sports_player_hits": 10,
+      "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 12,
-      "sports_final_hits": 0,
-      "sports_final_score_hits": 0,
+      "sports_focus_team_hits": 13,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -234,11 +259,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 29,
+      "link_verification_fail": 43,
       "soft_404_drops": 38,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 2,
+      "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
