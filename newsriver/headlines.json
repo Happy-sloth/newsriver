@@ -1,25 +1,12 @@
 {
-  "generated_utc": "2025-10-15T19:45:13.959Z",
-  "count": 6,
+  "generated_utc": "2025-10-15T19:57:11.056Z",
+  "count": 3,
   "items": [
     {
       "title": "He Tweeted Charlie Kirk “Won’t Be Remembered as a Hero.” The State Dept. Revoked His Visa",
       "url": "https://theintercept.com/2025/10/15/state-department-charlie-kirk-visa-social-media-censorship",
       "source": "The Intercept",
       "published_utc": "2025-10-15T19:19:27.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "2K’s ‘Project Ethos’ Game to Move Forward as Studio 31st Union Sets Ben Brinkman as New Boss",
-      "url": "https://variety.com/2025/gaming/news/project-ethos-update-31st-union-ben-brinkman-1236553878",
-      "source": "Variety",
-      "published_utc": "2025-10-15T19:13:08.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -50,22 +37,6 @@
       "source": "Oilprice.com",
       "published_utc": "2025-10-15T19:00:00.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Energy",
-      "region": "Canada"
-    },
-    {
-      "title": "Blue Jays-Mariners ALCS Game 3 FAQ, lineups (8 ET, FS1)",
-      "url": "https://www.mlb.com/bluejays/news/blue-jays-vs-mariners-alcs-game-3-starting-lineups-pitching-matchup",
-      "source": "Blue Jays News",
-      "published_utc": "2025-10-15T18:48:00.000Z",
-      "effects": {
         "lightsaber": false,
         "glitch": true,
         "reasons": [
@@ -73,21 +44,8 @@
         ],
         "style": "glitch"
       },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Frost advisory issued for Montreal Thursday night",
-      "url": "https://cultmtl.com/2025/10/frost-advisory-issued-for-montreal",
-      "source": "Cult MTL",
-      "published_utc": "2025-10-15T18:48:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
+      "category": "Energy",
+      "region": "Canada"
     }
   ],
   "_debug": {
@@ -96,10 +54,7 @@
     "collected": 846,
     "dedup_pass1": 831,
     "dedup_final": 320,
-    "slow_domains": [
-      "thehill.com",
-      "theintercept.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -123,57 +78,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.blogto.com",
-        "sec": 0.511,
-        "kept": 0
-      },
-      {
         "host": "www.cp24.com",
-        "sec": 0.467,
+        "sec": 0.609,
         "kept": 14
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.442,
-        "kept": 10
+        "host": "www.blogto.com",
+        "sec": 0.479,
+        "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.324,
+        "sec": 0.277,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.309,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.262,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.189,
+        "sec": 0.274,
         "kept": 8
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.165,
+        "sec": 0.232,
         "kept": 14
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.087,
+        "host": "www.bls.gov",
+        "sec": 0.232,
         "kept": 0
       },
       {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.215,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.125,
+        "kept": 0
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.07,
+        "kept": 10
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.079,
+        "sec": 0.06,
         "kept": 14
       }
     ],
-    "elapsed_sec": 260.25,
+    "elapsed_sec": 309.88,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -201,7 +156,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 13,
+      "ps_fatal_hits": 12,
       "ps_injury_hits": 1,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -212,8 +167,8 @@
       "preferred_bonus": 49,
       "substack_tagged": 0,
       "sports_team_hits": 12,
-      "sports_player_hits": 9,
-      "sports_result_win_hits": 17,
+      "sports_player_hits": 8,
+      "sports_result_win_hits": 20,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -228,11 +183,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 41,
-      "soft_404_drops": 46,
+      "link_verification_fail": 40,
+      "soft_404_drops": 44,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 3,
+      "market_sanity_drops": 4,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
