@@ -1,25 +1,12 @@
 {
-  "generated_utc": "2025-10-15T23:16:29.855Z",
-  "count": 13,
+  "generated_utc": "2025-10-15T23:34:25.547Z",
+  "count": 10,
   "items": [
     {
       "title": "Sabrina Carpenter will select 20 lucky fans to join her on Short n’ Sweet TV show",
       "url": "https://www.dailynews.com/2025/10/15/sabrina-carpenter-will-select-20-lucky-fans-to-join-her-on-short-n-sweet-tv-show",
       "source": "Daily News",
       "published_utc": "2025-10-15T23:11:12.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Flag football: Newbury Park wins Marmonte League title; West Ranch and Hart fighting for Foothill League crown",
-      "url": "https://www.dailynews.com/2025/10/15/flag-football-newbury-park-wins-marmonte-league-title-west-ranch-and-hart-fighting-for-foothill-league-crown",
-      "source": "Daily News",
-      "published_utc": "2025-10-15T23:10:37.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -113,6 +100,19 @@
       "region": "World"
     },
     {
+      "title": "Nine Players Elect Free Agency",
+      "url": "https://www.mlbtraderumors.com/2025/10/nine-players-elect-free-agency-2.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-15T22:17:51.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
       "title": "Top 5 Branded Videos of the Week: Love is in the air",
       "url": "https://www.tubefilter.com/2025/10/15/top-5-youtube-branded-videos-mrbeast-salish-matter-daniel-labelle",
       "source": "Tubefilter",
@@ -143,45 +143,6 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "New Movies Out Now in Theaters: What to See This Week",
-      "url": "https://variety.com/feature/new-movie-releases-theaters-1235718020",
-      "source": "Film",
-      "published_utc": "2025-10-15T22:00:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "‘McBee Dynasty’ Renewed for Season 3 at Bravo, Set to Start Filming This Week as Patriarch Steve Is Sentenced for Fraud (EXCLUSIVE)",
-      "url": "https://variety.com/2025/tv/news/mcbee-dynasty-renewed-season-3-bravo-steven-mcbee-sentencing-1236551578",
-      "source": "Variety",
-      "published_utc": "2025-10-15T22:00:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Keep it PG-13: Instagram has new standards for teens",
-      "url": "https://www.tubefilter.com/2025/10/15/instagram-meta-pg-13-teen-safety-rating",
-      "source": "Tubefilter",
-      "published_utc": "2025-10-15T21:52:01.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
@@ -190,13 +151,12 @@
     "collected": 842,
     "dedup_pass1": 829,
     "dedup_final": 320,
-    "slow_domains": [
-      "thehill.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
-      "www.cbc.ca"
+      "www.cbc.ca",
+      "www.yrp.ca"
     ],
     "errors": [
       "alert.weather.gc.ca",
@@ -217,56 +177,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.48,
+        "sec": 0.425,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.358,
+        "sec": 0.322,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.356,
-        "kept": 0
-      },
-      {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.31,
+        "sec": 0.256,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.246,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.165,
+        "sec": 0.219,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.138,
+        "sec": 0.216,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.124,
-        "kept": 14
+        "host": "www.bls.gov",
+        "sec": 0.18,
+        "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.119,
+        "sec": 0.141,
         "kept": 14
       },
       {
+        "host": "www.nhl.com",
+        "sec": 0.099,
+        "kept": 0
+      },
+      {
         "host": "globalnews.ca",
-        "sec": 0.083,
+        "sec": 0.071,
         "kept": 10
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.056,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 230.98,
+    "elapsed_sec": 269.28,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -304,11 +264,11 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 14,
+      "sports_team_hits": 13,
       "sports_player_hits": 6,
       "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
-      "sports_evening_hits": 27,
+      "sports_evening_hits": 26,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 13,
       "sports_final_hits": 0,
@@ -321,10 +281,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 37,
-      "soft_404_drops": 34,
+      "link_verification_fail": 40,
+      "soft_404_drops": 33,
       "max_age_drops": 0,
-      "min_age_drops": 8,
+      "min_age_drops": 10,
       "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
