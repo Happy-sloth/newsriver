@@ -19,7 +19,12 @@ jobs:
       MPB_SLOW_FEED_WARN: "3.5"
       MPB_GLOBAL_BUDGET: "210"
       NEWSRIVER_TIMEZONE: "America/Toronto"
-      MPB_BREAKER_LIMIT: "3"         # new: up to 3 “breaking” items
+      MPB_BREAKER_LIMIT: "3"         # up to 3 “breaking” items
+      # Strict link verification + safety net:
+      MPB_VERIFY_LINKS: "1"
+      MPB_REJECT_REDIRECT_TO_HOMEPAGE: "1"
+      MPB_BLOCK_AGGREGATORS: "1"
+      MPB_FALLBACK_MIN_ITEMS: "1"
 
     steps:
       - name: Checkout repo
@@ -29,18 +34,43 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
-      - name: Install deps
+      - name: Install tools (jq)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Install Python deps
         run: |
           python -m pip install --upgrade pip
           pip install feedparser requests beautifulsoup4 json5
 
+      - name: Guardrail — strip embedded README block if present
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -n '^readme = """' scripts/fetch_headlines.py >/dev/null 2>&1; then
+            echo ">> Stripping embedded README block from scripts/fetch_headlines.py"
+            sed -i '/^readme = """/,$d' scripts/fetch_headlines.py
+          fi
+
+      - name: Syntax check
+        run: python -m py_compile scripts/fetch_headlines.py
+
       - name: Build headlines.json
         run: |
+          set -euo pipefail
           mkdir -p newsriver
           python scripts/fetch_headlines.py --feeds-file feeds.txt --out newsriver/headlines.json
           echo "-----"
           jq -r '.generated_utc, .count' newsriver/headlines.json
+
+      - name: Upload artifact (for debugging/inspection)
+        uses: actions/upload-artifact@v4
+        with:
+          name: headlines.json
+          path: newsriver/headlines.json
 
       - name: Commit if changed
         uses: EndBug/add-and-commit@v9
