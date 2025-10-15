@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-15T09:56:21.748Z",
-  "count": 12,
+  "generated_utc": "2025-10-15T10:20:05.977Z",
+  "count": 10,
   "items": [
     {
-      "title": "Ayushmann Khurrana, Rashmika Mandanna, Nawazuddin Siddiqui and Dinesh Vijan Talk ‘Thamma,’ Maddock’s Expanding Horror Comedy Universe (EXCLUSIVE)",
-      "url": "https://variety.com/2025/film/news/ayushmann-khurrana-rashmika-mandanna-nawazuddin-siddiqui-thamma-1236553295",
-      "source": "Film",
-      "published_utc": "2025-10-15T09:53:42.000Z",
+      "title": "Oscars: Saudi Arabia Picks Shahad Ameen’s ‘Hijra’ for International Feature Race",
+      "url": "https://variety.com/2025/global/global/saudi-arabia-shahad-ameen-hijra-ts-oscar-candidate-1236553294",
+      "source": "Variety",
+      "published_utc": "2025-10-15T10:04:18.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -16,10 +16,23 @@
       "region": "World"
     },
     {
-      "title": "Video of nuisance behavior at Kurasushi goes viral on social media",
-      "url": "https://japantoday.com/category/national/video-of-nuisance-behavior-at-kura-sushi-branch-goes-viral-on-social-media",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T09:49:30.000Z",
+      "title": "Episode Two: A Death in the Dark",
+      "url": "https://theintercept.com/2025/10/15/collateral-damage-episode-two-death-dark",
+      "source": "The Intercept",
+      "published_utc": "2025-10-15T10:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Ayushmann Khurrana, Rashmika Mandanna, Nawazuddin Siddiqui and Dinesh Vijan Talk ‘Thamma,’ Maddock’s Expanding Horror Comedy Universe (EXCLUSIVE)",
+      "url": "https://variety.com/2025/film/news/ayushmann-khurrana-rashmika-mandanna-nawazuddin-siddiqui-thamma-1236553295",
+      "source": "Film",
+      "published_utc": "2025-10-15T09:53:42.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -107,66 +120,30 @@
       "region": "World"
     },
     {
-      "title": "Square Eyes Acquires ‘The Kartli Kingdom’ Ahead of IDFA World Premiere (EXCLUSIVE)",
-      "url": "https://variety.com/2025/film/global/square-eyes-the-kartli-kingdom-idfa-1236553252",
-      "source": "Film",
-      "published_utc": "2025-10-15T08:13:49.000Z",
+      "title": "Solange Knowles is USC’s first ever scholar in residence",
+      "url": "https://www.thefader.com/2025/10/15/solange-knowles-usc-professor",
+      "source": "The FADER",
+      "published_utc": "2025-10-15T08:41:50.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
       },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Heads of 3 opposition parties meet to discuss vote for next PM",
-      "url": "https://japantoday.com/category/politics/Heads-of-3-opposition-parties-meet-to-discuss-vote-for-next-PM",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:42:45.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Ex-employee apprehended after 2 nursing home residents die in Saitama",
-      "url": "https://japantoday.com/category/crime/Ex-employee-apprehended-after-2-nursing-home-residents-die-in-Saitama",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:36:30.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "78-year-old man arrested on suspicion of killing female relative in her 40s ‘at her request’",
-      "url": "https://japantoday.com/category/crime/78-year-old-man-arrested-on-suspicion-of-killing-female-relative-in-her-40s-%E2%80%98at-her-request%E2%80%99",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:34:49.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
+      "category": "Culture",
       "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 846,
-    "dedup_pass1": 832,
+    "collected": 830,
+    "dedup_pass1": 818,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "aquariumdrunkard.com"
+    ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -189,56 +166,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.598,
+        "sec": 0.489,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.345,
+        "sec": 0.322,
         "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.295,
+        "sec": 0.3,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.237,
+        "sec": 0.244,
         "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.18,
+        "sec": 0.179,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.144,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.149,
+        "sec": 0.126,
         "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.109,
-        "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.099,
+        "sec": 0.125,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.085,
-        "kept": 14
+        "host": "globalnews.ca",
+        "sec": 0.099,
+        "kept": 10
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.045,
-        "kept": 10
+        "host": "www.mlb.com",
+        "sec": 0.077,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 280.96,
+    "elapsed_sec": 239.81,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -277,14 +254,14 @@
       "preferred_bonus": 48,
       "substack_tagged": 0,
       "sports_team_hits": 14,
-      "sports_player_hits": 20,
-      "sports_result_win_hits": 22,
+      "sports_player_hits": 19,
+      "sports_result_win_hits": 20,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 21,
-      "sports_final_hits": 2,
-      "sports_final_score_hits": 2,
+      "sports_focus_team_hits": 20,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -293,7 +270,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 23,
+      "link_verification_fail": 31,
       "soft_404_drops": 41,
       "max_age_drops": 0,
       "min_age_drops": 8,
