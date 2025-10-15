@@ -1,7 +1,65 @@
 {
-  "generated_utc": "2025-10-15T16:45:39.141Z",
-  "count": 9,
+  "generated_utc": "2025-10-15T16:59:49.563Z",
+  "count": 10,
   "items": [
+    {
+      "title": "5 Blue Jays named Gold Glove finalists, including Clement twice!",
+      "url": "https://www.mlb.com/bluejays/news/2025-gold-glove-award-finalists",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-15T16:48:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Poll: Will The Phillies Trade Alec Bohm This Winter?",
+      "url": "https://www.mlbtraderumors.com/2025/10/poll-will-the-phillies-trade-alec-bohm-this-winter.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-15T16:47:13.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Laika’s Matt Levin on Launching Live-Action and Taking the Company Into Its ‘New Chapter’ With Lord and Miller, Lulu Wang and More",
+      "url": "https://variety.com/2025/film/artists/laika-launches-into-live-action-1236547715",
+      "source": "Film",
+      "published_utc": "2025-10-15T16:45:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "TMZ Streaming Live, Come Into Our Newsroom and Watch Things Happen!",
+      "url": "https://www.tmz.com/2025/10/15/watch-tmz-live-today",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-15T16:38:22.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "OPEC Cracks Down on “Paper Barrels” With Independent Review",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/OPEC-Cracks-Down-on-Paper-Barrels-With-Independent-Review.html",
@@ -23,6 +81,19 @@
       "url": "https://cultmtl.com/2025/10/canada-invests-52-million-to-improve-access-to-healthcare-in-english-for-quebec-anglos",
       "source": "Cult MTL",
       "published_utc": "2025-10-15T16:27:59.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "John Muirhead shares new album, The Nomad",
+      "url": "https://canadianbeats.ca/2025/10/15/john-muirhead-shares-new-album-the-nomad",
+      "source": "Canadian Beats Media",
+      "published_utc": "2025-10-15T16:26:33.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -69,71 +140,19 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Angel City FC’s Christen Press announces retirement",
-      "url": "https://www.dailynews.com/2025/10/15/angel-city-fcs-christen-press-announces-retirement",
-      "source": "Daily News",
-      "published_utc": "2025-10-15T16:08:31.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Sophie B. Hawkins shares new acoustic version of “Right Beside You”",
-      "url": "https://canadianbeats.ca/2025/10/15/sophie-b-hawkins-shares-new-acoustic-version-of-right-beside-you",
-      "source": "Canadian Beats Media",
-      "published_utc": "2025-10-15T16:03:34.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Simon Wiesenthal Center to Honor Warner Bros. Discovery Chief David Zaslav With Humanitarian Award",
-      "url": "https://variety.com/2025/biz/news/david-zaslav-dana-bash-cnn-simon-wiesenthal-center-honor-1236553234",
-      "source": "Film",
-      "published_utc": "2025-10-15T16:01:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Russia’s Fuel Shortages Ripple Across Central Asia",
-      "url": "https://oilprice.com/Energy/Energy-General/Russias-Fuel-Shortages-Ripple-Across-Central-Asia.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-15T16:00:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 857,
-    "dedup_pass1": 840,
+    "collected": 844,
+    "dedup_pass1": 826,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "thehill.com"
+    ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -155,57 +174,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.cp24.com",
-        "sec": 0.796,
-        "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.709,
-        "kept": 10
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.605,
-        "kept": 14
-      },
-      {
-        "host": "www.blogto.com",
-        "sec": 0.548,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.261,
-        "kept": 14
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.201,
+        "sec": 1.737,
         "kept": 8
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.201,
+        "sec": 0.47,
         "kept": 0
+      },
+      {
+        "host": "www.blogto.com",
+        "sec": 0.465,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.294,
+        "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.176,
+        "sec": 0.271,
         "kept": 0
       },
       {
+        "host": "www.cp24.com",
+        "sec": 0.249,
+        "kept": 14
+      },
+      {
         "host": "www.nhl.com",
-        "sec": 0.106,
+        "sec": 0.121,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.096,
+        "sec": 0.105,
+        "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.085,
+        "kept": 10
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.069,
         "kept": 14
       }
     ],
-    "elapsed_sec": 306.3,
+    "elapsed_sec": 347.01,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -233,7 +252,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 9,
+      "ps_fatal_hits": 7,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -244,14 +263,14 @@
       "preferred_bonus": 47,
       "substack_tagged": 0,
       "sports_team_hits": 14,
-      "sports_player_hits": 10,
-      "sports_result_win_hits": 20,
+      "sports_player_hits": 9,
+      "sports_result_win_hits": 17,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 13,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_final_hits": 0,
+      "sports_final_score_hits": 0,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -260,8 +279,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 28,
-      "soft_404_drops": 39,
+      "link_verification_fail": 40,
+      "soft_404_drops": 40,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 3,
