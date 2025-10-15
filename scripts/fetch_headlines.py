@@ -1,13 +1,4 @@
-# Create the project structure and files, including the user's full fetch_headlines.py as provided.
-import os, json, pathlib
-
-base = "/mnt/data/mpb_headlines_pkg"
-scripts_dir = os.path.join(base, "scripts")
-config_dir = os.path.join(base, "config")
-os.makedirs(scripts_dir, exist_ok=True)
-os.makedirs(config_dir, exist_ok=True)
-
-fetch_code = r'''#!/usr/bin/env python3
+#!/usr/bin/env python3
 # scripts/fetch_headlines.py
 #
 # Build headlines.json from feeds.txt with strict link verification,
@@ -25,7 +16,7 @@ import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone, timedelta
-from typing import List, Tuple, Iterable
+from typing import Tuple, Iterable
 from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
 
 import feedparser  # type: ignore
@@ -76,7 +67,6 @@ MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))    # �
 REQUIRE_EXACT_COUNT         = int(os.getenv("MPB_REQUIRE_EXACT_COUNT", "69"))
 
 # ---------- SAFETY-NET FALLBACK (NEW) ----------
-# Comma-separated override via MPB_FALLBACK_FEEDS; defaults are solid, newsy, and fast.
 DEFAULT_FALLBACK_FEEDS = [
     "https://www.reuters.com/world/us/rss",
     "https://www.reuters.com/world/rss",
@@ -88,8 +78,8 @@ FALLBACK_FEEDS = [
     u.strip() for u in os.getenv("MPB_FALLBACK_FEEDS", ",".join(DEFAULT_FALLBACK_FEEDS)).split(",")
     if u.strip()
 ]
-FALLBACK_MAX_AGE_HOURS = float(os.getenv("MPB_FALLBACK_MAX_AGE_HOURS", "24"))  # must be fresh
-FALLBACK_MIN_ITEMS     = int(os.getenv("MPB_FALLBACK_MIN_ITEMS", "1"))         # inject exactly 1 when empty
+FALLBACK_MAX_AGE_HOURS = float(os.getenv("MPB_FALLBACK_MAX_AGE_HOURS", "24"))
+FALLBACK_MIN_ITEMS     = int(os.getenv("MPB_FALLBACK_MIN_ITEMS", "1"))
 
 # Source hygiene limits
 PER_HOST_MAX = {
@@ -109,7 +99,6 @@ PREFERRED_DOMAINS = {
     "cultmtl.com",
 }
 
-# Market sanity: which domains can assert “records/milestones”
 MARKET_AUTH_DOMAINS = {
     "wsj.com","ft.com","bloomberg.com","reuters.com","coindesk.com","marketwatch.com","cnbc.com","apnews.com"
 }
@@ -217,8 +206,8 @@ ARTICLE_HINT_PATTERNS = [
     r'property="og:type"\s+content="article"',
     r'property="og:title"\s+content="[^"]{10,}"',
 ]
-MIN_BODY_BYTES = int(os.getenv("MPB_MIN_BODY_BYTES", "4096"))         # ≥ 4KB
-MIN_ARTICLE_WORDS = int(os.getenv("MPB_MIN_ARTICLE_WORDS", "120"))    # ≥ 120 words
+MIN_BODY_BYTES = int(os.getenv("MPB_MIN_BODY_BYTES", "4096"))
+MIN_ARTICLE_WORDS = int(os.getenv("MPB_MIN_ARTICLE_WORDS", "120"))
 
 @dataclass
 class Tag:
@@ -675,7 +664,7 @@ def is_market_headline_sane(title: str, url: str, published_iso: str, session: r
     milestone = bool(re.search(r"\b(all[-\s]?time high|record|hits?\s*(?:\d{2,3},?\d{3}|[1-9]\d?k))\b", t))
     btc_round = bool(re.search(r"\bbitcoin|btc\b.*\b(20k|30k|40k|50k|60k|70k|80k|90k|100k)\b", t))
     if not (milestone or btc_round):
-        return True  # not a risky claim
+        return True
 
     age_h = hours_since(published_iso, time.time())
     if age_h > 12.0:
@@ -705,16 +694,6 @@ def is_market_headline_sane(title: str, url: str, published_iso: str, session: r
 def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tuple[bool, str, int, str]:
     """
     Returns (ok, final_url, status_code, reason)
-
-    Enforces:
-      - final status 2xx
-      - HTML/XHTML content-type
-      - body size >= MIN_BODY_BYTES
-      - not homepage-like
-      - no obvious soft-404 phrases
-      - canonical/og:url sanity (not pointing to root or different host)
-      - robots noindex not present
-      - article hints present and approximate word count >= MIN_ARTICLE_WORDS
     """
     if not VERIFY_LINKS:
         return True, url, 200, "verification disabled"
@@ -791,7 +770,7 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
 
             if soft404_regex.search(text_for_search) or soft404_regex.search(title_text):
                 debug_counts["soft_404_drops"] += 1
-                return False, final_url, status, "soft-404-text")
+                return False, final_url, status, "soft-404-text"
 
             if canonical:
                 cu = urlparse(canonical)
@@ -833,17 +812,15 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
 
 # ---------- SAFETY-NET HELPERS (NEW) ----------
 def _fallback_feeds_iter() -> list[str]:
-    # simple guard in case user empties the env var
     return FALLBACK_FEEDS if FALLBACK_FEEDS else DEFAULT_FALLBACK_FEEDS
 
 def _fallback_pick_from_feed(session: requests.Session, feed_url: str, debug_counts: dict) -> dict | None:
-    """Try a single RSS feed and return first validated item or None."""
     try:
         blob = http_get(session, feed_url)
         if not blob:
             return None
         parsed = feedparser.parse(blob)
-        entries = parsed.entries[:8]  # small scan
+        entries = parsed.entries[:8]
     except Exception:
         return None
 
@@ -856,13 +833,11 @@ def _fallback_pick_from_feed(session: requests.Session, feed_url: str, debug_cou
         if not pub:
             continue
 
-        # Age bounds: respect MIN_AGE_SEC and the *tighter* FALLBACK_MAX_AGE_HOURS for freshness
         age_h = hours_since(pub, time.time())
         if age_h < (MIN_AGE_SEC / 3600.0) or age_h > FALLBACK_MAX_AGE_HOURS:
             continue
 
         can_url = canonicalize_url(link)
-        # Minimal item shell
         it = {
             "title": title,
             "url":   can_url or link,
@@ -891,7 +866,6 @@ def _fallback_pick_from_feed(session: requests.Session, feed_url: str, debug_cou
     return None
 
 def _safety_net_one_headline(session: requests.Session, debug_counts: dict) -> tuple[dict | None, dict]:
-    """Try multiple trusted feeds and return exactly one verified headline if available."""
     stats = {"used": False, "feed": None, "title": None}
     for f in _fallback_feeds_iter():
         it = _fallback_pick_from_feed(session, f, debug_counts)
@@ -947,7 +921,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         "hype_ceasefire": 0,
     }
 
-    # new debug counters
     debug_counts = {
         "link_verification_fail": 0,
         "soft_404_drops": 0,
@@ -1056,7 +1029,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             if h == MPB_SUBSTACK_HOST: source_label = "MyPyBiTE Substack"
 
             pub = pick_published(e)
-            if not pub:  # drop undated; we enforce a max age window
+            if not pub:
                 continue
 
             item = {
@@ -1284,7 +1257,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         team_hit   = bool(RE_JAYS_TEAM.search(title))
         player_hit = bool(RE_JAYS_PLAYERS.search(title))
         win_hit    = bool(RE_JAYS_WIN.search(title))
-        loss_hit   = bool(RE_JAYS_LOSS(search(title))) if False else bool(RE_JAYS_LOSS.search(title))  # keep pattern
+        loss_hit   = bool(RE_JAYS_LOSS.search(title))
 
         focus_team_hit = bool(RE_MLB_TEAMS.search(title))
         final_hit      = bool(RE_MLB_FINAL_WORD.search(title) or RE_SCORELINE.search(title))
@@ -1342,7 +1315,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     survivors.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
     survivors = survivors[:MAX_TOTAL]
 
-    # ---- BREAKERS: tag up to 3 (layout stays in same grid on FE) ----
+    # ---- BREAKERS ----
     def breaker_score(it: dict) -> tuple:
         title = it.get("title","")
         score = float(it.get("score", 0.0))
@@ -1355,12 +1328,12 @@ def build(feeds_file: str, out_path: str) -> dict:
         return (urgent + safety + markets + saber + recency_boost, score, _ts(it.get("published_utc","")))
     for i, it in enumerate(sorted(survivors, key=breaker_score, reverse=True)):
         if i >= BREAKER_LIMIT: break
-        if looks_aggregator(it.get("source",""), it.get("url","")):  # skip obvious wires/aggregators
+        if looks_aggregator(it.get("source",""), it.get("url","")):
             continue
         it.setdefault("effects", {})
         it["effects"]["style"] = "breaker"
 
-    # ---- Hard filters: time window + link verification + market sanity ----
+    # ---- Hard filters ----
     def within_age_bounds(it: dict) -> bool:
         age_h = hours_since(it.get("published_utc",""), time.time())
         if age_h > MAX_AGE_HOURS:
@@ -1384,13 +1357,12 @@ def build(feeds_file: str, out_path: str) -> dict:
         it["canonical_url"] = final_url
         verified.append(it)
 
-    # ---- SAFETY-NET INJECTION: guarantee at least one working headline ----
+    # ---- SAFETY-NET INJECTION ----
     fallback_stats = {"used": False, "feed": None, "title": None}
     if FALLBACK_MIN_ITEMS > 0 and len(verified) < 1:
         picked, stats = _safety_net_one_headline(session, debug_counts)
         fallback_stats.update(stats)
         if picked:
-            # Put it at the top; FE will still render its grid normally.
             verified.insert(0, picked)
 
     # ---- Backfill to EXACT 69 if needed ----
@@ -1489,7 +1461,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             "verify_links": VERIFY_LINKS,
             "reject_homepage_redirect": REJECT_REDIRECT_TO_HOMEPAGE,
             "block_aggregators": BLOCK_AGGREGATORS,
-            # NEW: visibility into the safety-net usage
             "fallback": {
                 "used": fallback_stats.get("used", False),
                 "feed": fallback_stats.get("feed"),
@@ -1524,57 +1495,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-'''
-
-# Write fetch_headlines.py
-pathlib.Path(os.path.join(scripts_dir, "fetch_headlines.py")).write_text(fetch_code, encoding="utf-8")
-
-# Minimal sample feeds.txt and weights config
-feeds_txt = """# --- TORONTO LOCAL ---
-https://www.cp24.com/rss/ctvnews-ca-top-stories-public-rss-1.822009
-# --- WORLD ---
-https://www.reuters.com/world/us/rss
-https://www.reuters.com/world/rss
-https://www.cbc.ca/cmlink/rss-topstories
-"""
-pathlib.Path(os.path.join(base, "feeds.txt")).write_text(feeds_txt, encoding="utf-8")
-
-weights = {
-  "recency": {"half_life_hours": 6.0, "age_penalty_after_24h": -0.6, "age_penalty_after_36h": -0.4, "superseded_cluster_penalty": -0.9},
-  "categories": {"Business": 0.2, "Markets": 0.25, "Economy": 0.2, "Tech": 0.15, "World": 0.15, "Canada": 0.15},
-  "sources": {"aggregator_penalty": -0.5, "press_wire_penalty": -0.4, "preferred_domains_bonus": 0.25},
-  "public_safety": {"has_fatality_points": 1.0, "per_death_points": 0.1, "max_death_points": 2.0, "per_injured_points": 0.02, "max_injury_points": 0.6, "violent_keywords_bonus": 0.2, "violent_keywords": ["shooting","stabbing","explosion","blast","drone","strike"]},
-  "markets": {"btc_abs_move_threshold_pct": 7.0, "btc_points": 1.6, "index_abs_move_threshold_pct": 1.0, "index_points": 1.0, "nikkei_abs_move_threshold_pct": 1.0, "nikkei_points": 0.7, "single_stock_abs_move_threshold_pct": 10.0, "single_stock_points": 1.2},
-  "effects": {"lightsaber_min_score": 2.5, "lightsaber_also_if": {"body_count_ge": 5, "btc_abs_move_ge_pct": 8.0, "single_stock_abs_move_ge_pct": 15.0}, "glitch_min_score": 1.8},
-  "reorder": {"nate_hours_hint_bonus": 0.25, "nate_hours_hint_max_hours": 6.0},
-  "regional": {"weights": {"country_match": 1.2}, "max_bonus": 2.4},
-  "sports": {"team_match_points": 0.8, "player_match_points": 0.35, "result_win_points": 0.45, "result_loss_points": 0.25, "evening_window_points": 0.7, "playoff_mode_points": 0.4, "focus_team_points": 0.55, "final_story_points": 0.75, "final_with_score_points": 0.45}
-}
-pathlib.Path(os.path.join(config_dir, "weights.json5")).write_text(json.dumps(weights, indent=2), encoding="utf-8")
-
-# requirements
-req = """feedparser==6.0.11
-requests>=2.31.0
-beautifulsoup4>=4.12.2
-json5>=0.9.24
-"""
-pathlib.Path(os.path.join(base, "requirements.txt")).write_text(req, encoding="utf-8")
-
-# README (kept OUT of fetch_headlines.py to avoid triple-quote issues)
-readme = """# MYPYBITE NewsRiver Backend (strict verification + safety net)
-
-- Generates `headlines.json` with hard link checks and a fallback to guarantee **at least one sub-24h working headline**.
-- Frontend stays unchanged; just point it at the published JSON.
-
-## Quick start
-
-```bash
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-export MPB_VERIFY_LINKS=1
-export MPB_REJECT_REDIRECT_TO_HOMEPAGE=1
-export MPB_BLOCK_AGGREGATORS=1
-export MPB_FALLBACK_MIN_ITEMS=1
-
-python3 scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
