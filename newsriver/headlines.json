@@ -1,7 +1,46 @@
 {
-  "generated_utc": "2025-10-15T14:58:18.484Z",
+  "generated_utc": "2025-10-15T15:19:44.125Z",
   "count": 7,
   "items": [
+    {
+      "title": "‘Sinners’ Production Designer Hannah Beachler on Weaving in Folklore, History and Sprituality Into Her Sets",
+      "url": "https://variety.com/2025/artisans/festivals/sinners-production-design-folklore-history-sprituality-1236547060",
+      "source": "Variety",
+      "published_utc": "2025-10-15T15:15:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Beyoncé Pays Tribute to D’Angelo, 'We Will Never Forget You'",
+      "url": "https://www.tmz.com/2025/10/15/beyonce-dangelo-tribute-death-cancer",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-15T15:09:08.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "MSNBC President Rebecca Kutler Reveals Cancer Diagnosis",
+      "url": "https://variety.com/2025/tv/news/msnbc-president-rebecca-kutler-breast-cancer-diagnosis-1236553535",
+      "source": "Variety",
+      "published_utc": "2025-10-15T15:02:15.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "‘Hypnosis Mic’ Makes Japanese Box-Office History With $16.5 Million Haul on Limited Release (EXCLUSIVE)",
       "url": "https://variety.com/2025/film/news/hypnosis-mic-japanese-box-office-history-1236553540",
@@ -42,19 +81,6 @@
       "region": "World"
     },
     {
-      "title": "Mets Sign Joe Jacques To Minors Contract",
-      "url": "https://www.mlbtraderumors.com/2025/10/mets-sign-joe-jacques-to-minors-contract.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-15T14:33:40.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Hungary Slams EU’s Energy Policy",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/Hungary-Slams-EUs-Energy-Policy.html",
       "source": "Oilprice.com",
@@ -69,45 +95,16 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "Another STM strike: Montreal bus drivers and metro operators warn of potential walkout",
-      "url": "https://cultmtl.com/2025/10/another-stm-strike-montreal-bus-drivers-metro-operators-warn-of-potential-walkout",
-      "source": "Cult MTL",
-      "published_utc": "2025-10-15T14:07:44.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "How Will U.S. Tariffs Reshape the Global Auto Industry?",
-      "url": "https://oilprice.com/Energy/Energy-General/How-Will-US-Tariffs-Reshape-the-Global-Auto-Industry.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-15T14:00:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 846,
-    "dedup_pass1": 831,
+    "collected": 845,
+    "dedup_pass1": 832,
     "dedup_final": 320,
     "slow_domains": [
-      "rollcall.com"
+      "thehill.com"
     ],
     "timeouts": [
       "japantoday.com",
@@ -133,38 +130,43 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 2.016,
+        "sec": 1.454,
         "kept": 8
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.561,
+        "sec": 0.512,
         "kept": 0
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.439,
+        "sec": 0.404,
         "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.369,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.29,
-        "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.262,
+        "sec": 0.308,
         "kept": 0
       },
       {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.214,
+        "kept": 14
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.21,
+        "kept": 14
+      },
+      {
         "host": "www.nhl.com",
-        "sec": 0.167,
+        "sec": 0.208,
         "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.128,
+        "kept": 14
       },
       {
         "host": "www.mlb.com",
@@ -172,17 +174,12 @@
         "kept": 14
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.1,
-        "kept": 14
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.094,
+        "sec": 0.085,
         "kept": 10
       }
     ],
-    "elapsed_sec": 260.19,
+    "elapsed_sec": 312.98,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -210,7 +207,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 12,
+      "ps_fatal_hits": 9,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -221,12 +218,12 @@
       "preferred_bonus": 50,
       "substack_tagged": 0,
       "sports_team_hits": 13,
-      "sports_player_hits": 13,
-      "sports_result_win_hits": 18,
+      "sports_player_hits": 11,
+      "sports_result_win_hits": 16,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 13,
+      "sports_focus_team_hits": 12,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -237,11 +234,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 44,
-      "soft_404_drops": 24,
+      "link_verification_fail": 29,
+      "soft_404_drops": 38,
       "max_age_drops": 0,
-      "min_age_drops": 20,
-      "market_sanity_drops": 3,
+      "min_age_drops": 8,
+      "market_sanity_drops": 2,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
