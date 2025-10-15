@@ -1,7 +1,72 @@
 {
-  "generated_utc": "2025-10-15T13:46:49.064Z",
-  "count": 3,
+  "generated_utc": "2025-10-15T13:58:49.640Z",
+  "count": 6,
   "items": [
+    {
+      "title": "MLBTR Podcast: Murakami To Be Posted This Offseason, Managerial Vacancies, And More!",
+      "url": "https://www.mlbtraderumors.com/2025/10/mlbtr-podcast-murakami-to-be-posted-this-offseason-managerial-vacancies-and-more.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-15T13:48:18.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Christopher Nolan Praises Dwayne Johnson, Says ‘Smashing Machine’ Will Be ‘Understood More Over Time’: ‘I Don’t Think You’ll See a Better Performance This Year or Most Other Years’",
+      "url": "https://variety.com/2025/film/news/christopher-nolan-praises-dwayne-johnson-smashing-machine-1236553426",
+      "source": "Film",
+      "published_utc": "2025-10-15T13:47:13.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Hulu’s ‘Murdaugh: Death in the Family’ Is an Engaging Tapestry of Privilege, Greed and Lies: TV Review",
+      "url": "https://variety.com/2025/tv/reviews/murdaugh-death-in-the-family-review-hulu-1236535286",
+      "source": "Variety",
+      "published_utc": "2025-10-15T13:45:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "‘The Testament of Ann Lee’ Star Viola Prettejohn on Standing Ovation Tears and Why She’d Follow Amanda Seyfried to the Promised Land: ‘She’s Quite Entrancing!’",
+      "url": "https://variety.com/2025/film/global/testament-of-ann-lee-star-viola-prettejohn-dancing-singing-1236552406",
+      "source": "Film",
+      "published_utc": "2025-10-15T13:34:15.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Kevin Federline Accuses Britney Spears of Cheating on Him, With a Woman",
+      "url": "https://www.tmz.com/2025/10/15/kevin-federline-britney-spears-cheating",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-15T13:31:41.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "The Opener: ALCS, Re-Signings, Cubs",
       "url": "https://www.mlbtraderumors.com/2025/10/the-opener-alcs-re-signings-cubs.html",
@@ -14,44 +79,19 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "What to do today in Montreal",
-      "url": "https://cultmtl.com/2025/10/what-to-do-today-in-montreal-mtl-to-do-list-stone-and-bone-spectacular",
-      "source": "Cult MTL",
-      "published_utc": "2025-10-15T12:51:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Study: We're losing the war against drug-resistant infections faster than we thought",
-      "url": "https://www.npr.org/sections/goats-and-soda/2025/10/15/g-s1-93449/antibiotic-resistance-bacteria",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-15T12:13:56.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 748,
-    "dedup_pass1": 745,
+    "collected": 848,
+    "dedup_pass1": 833,
     "dedup_final": 320,
     "slow_domains": [
-      "www.cp24.com"
+      "thehill.com"
     ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -63,7 +103,9 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
+      "nypost.com",
       "toronto.citynews.ca",
+      "variety.com",
       "www.boston.com",
       "www.marketwatch.com",
       "www.npr.org",
@@ -71,57 +113,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.cp24.com",
-        "sec": 4.364,
-        "kept": 14
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.485,
+        "sec": 0.533,
         "kept": 0
       },
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.254,
-        "kept": 0
+        "host": "www.cp24.com",
+        "sec": 0.378,
+        "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.251,
+        "sec": 0.252,
         "kept": 14
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.187,
-        "kept": 8
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.182,
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.245,
         "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.163,
+        "sec": 0.214,
         "kept": 0
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.131,
-        "kept": 10
+        "host": "toronto.citynews.ca",
+        "sec": 0.195,
+        "kept": 8
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.192,
+        "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.116,
+        "sec": 0.139,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.092,
+        "sec": 0.101,
         "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.055,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 301.36,
+    "elapsed_sec": 266.42,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -149,7 +191,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 12,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -157,17 +199,17 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 50,
+      "preferred_bonus": 49,
       "substack_tagged": 0,
       "sports_team_hits": 12,
       "sports_player_hits": 13,
-      "sports_result_win_hits": 16,
+      "sports_result_win_hits": 17,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 14,
-      "sports_final_hits": 0,
-      "sports_final_score_hits": 0,
+      "sports_focus_team_hits": 15,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -176,8 +218,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 44,
-      "soft_404_drops": 30,
+      "link_verification_fail": 43,
+      "soft_404_drops": 33,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 5,
