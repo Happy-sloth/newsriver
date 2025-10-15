@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-15T17:49:40.517Z",
+  "generated_utc": "2025-10-15T17:57:08.189Z",
   "count": 10,
   "items": [
+    {
+      "title": "NPB’s Rakuten Eagles Re-Sign Luke Voit",
+      "url": "https://www.mlbtraderumors.com/2025/10/npbs-rakuten-eagles-re-sign-luke-voit.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-15T17:44:07.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Gwyneth Paltrow Slams ‘Gwyneth: The Biography’ as ‘Rubbish’ and Shades the Author: ‘It’s Very Sexist…  Why Do the Men Get Walter Isaacson and I Get This Hack?’",
       "url": "https://variety.com/2025/film/news/gwyneth-paltrow-slams-biography-author-hack-1236553590",
@@ -16,7 +29,7 @@
       "region": "World"
     },
     {
-      "title": "The Internet’s Favorite Bag Brand Just Teamed Up With Timberland & It’s Selling Out Fast",
+      "title": "Telfar, The Internet’s Favorite Bag Brand, Just Teamed Up With Timberland & It’s Selling Out Fast",
       "url": "https://www.rollingstone.com/product-recommendations/style/telfar-timberland-shoes-bags-where-to-buy-online-1235447766",
       "source": "Rolling Stone",
       "published_utc": "2025-10-15T17:35:47.000Z",
@@ -43,6 +56,19 @@
       },
       "category": "Energy",
       "region": "Canada"
+    },
+    {
+      "title": "A celebration of the South's rich — and messy — heritage, delivered on a plate",
+      "url": "https://www.npr.org/2025/10/15/nx-s1-5558287/michael-twitty-cookbook-recipes-from-the-american-south",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T17:30:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
     },
     {
       "title": "Trump officials back firm in fight over California offshore oil drilling after huge spill",
@@ -108,42 +134,13 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Jennifer Fox to Produce AMPAS Governors Awards – Film News in Brief",
-      "url": "https://variety.com/2025/film/news/film-news-in-brief-oct-13-2025-1236547669",
-      "source": "Film",
-      "published_utc": "2025-10-15T17:00:03.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Copper and Gold Are Driving a Mining Renaissance",
-      "url": "https://oilprice.com/Metals/Gold/Copper-and-Gold-Are-Driving-a-Mining-Renaissance.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-15T17:00:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
     "collected": 844,
-    "dedup_pass1": 824,
+    "dedup_pass1": 826,
     "dedup_final": 320,
     "slow_domains": [
       "thehill.com"
@@ -171,57 +168,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.bls.gov",
-        "sec": 0.836,
-        "kept": 0
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.805,
-        "kept": 14
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.61,
-        "kept": 14
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.574,
+        "sec": 0.708,
         "kept": 10
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.562,
+        "sec": 0.482,
         "kept": 0
       },
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.413,
+        "host": "www.cp24.com",
+        "sec": 0.367,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.349,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.4,
+        "sec": 0.348,
         "kept": 8
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.263,
+        "host": "www.bls.gov",
+        "sec": 0.311,
         "kept": 0
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.233,
-        "kept": 14
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.268,
+        "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.207,
+        "sec": 0.182,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.149,
+        "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.134,
         "kept": 14
       }
     ],
-    "elapsed_sec": 340.41,
+    "elapsed_sec": 293.01,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -257,7 +254,7 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 47,
+      "preferred_bonus": 49,
       "substack_tagged": 0,
       "sports_team_hits": 13,
       "sports_player_hits": 7,
@@ -276,11 +273,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 24,
-      "soft_404_drops": 42,
+      "link_verification_fail": 33,
+      "soft_404_drops": 43,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 3,
+      "market_sanity_drops": 4,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
