@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-15T23:34:25.547Z",
-  "count": 10,
+  "generated_utc": "2025-10-15T23:44:36.961Z",
+  "count": 9,
   "items": [
     {
       "title": "Sabrina Carpenter will select 20 lucky fans to join her on Short n’ Sweet TV show",
@@ -127,22 +127,6 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "The LNG Boom That’s Pricing Out American Consumers",
-      "url": "https://oilprice.com/Energy/Natural-Gas/The-LNG-Boom-Thats-Pricing-Out-American-Consumers.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-15T22:00:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
@@ -151,12 +135,13 @@
     "collected": 842,
     "dedup_pass1": 829,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.yrp.ca"
+    ],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
-      "www.cbc.ca",
-      "www.yrp.ca"
+      "www.cbc.ca"
     ],
     "errors": [
       "alert.weather.gc.ca",
@@ -177,56 +162,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.425,
+        "sec": 0.401,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.322,
+        "sec": 0.372,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.256,
+        "sec": 0.275,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.219,
+        "sec": 0.215,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.216,
+        "sec": 0.177,
         "kept": 8
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.18,
-        "kept": 0
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.141,
-        "kept": 14
-      },
-      {
         "host": "www.nhl.com",
-        "sec": 0.099,
+        "sec": 0.171,
         "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.071,
+        "sec": 0.134,
         "kept": 10
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.129,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.12,
+        "kept": 14
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.056,
+        "sec": 0.052,
         "kept": 14
       }
     ],
-    "elapsed_sec": 269.28,
+    "elapsed_sec": 238.99,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -266,7 +251,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 13,
       "sports_player_hits": 6,
-      "sports_result_win_hits": 18,
+      "sports_result_win_hits": 17,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 26,
       "sports_playoff_hits": 0,
@@ -281,10 +266,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 40,
-      "soft_404_drops": 33,
+      "link_verification_fail": 39,
+      "soft_404_drops": 34,
       "max_age_drops": 0,
-      "min_age_drops": 10,
+      "min_age_drops": 8,
       "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
