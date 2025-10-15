@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-15T19:18:56.528Z",
-  "count": 11,
+  "generated_utc": "2025-10-15T19:33:50.258Z",
+  "count": 6,
   "items": [
     {
-      "title": "2K’s ‘Project Ethos’ Game to Move Forward as Studio 31st Union Sets Ben Brinkman as New Boss",
-      "url": "https://variety.com/2025/gaming/news/project-ethos-update-31st-union-ben-brinkman-1236553878",
-      "source": "Variety",
-      "published_utc": "2025-10-15T19:13:08.000Z",
+      "title": "He Tweeted Charlie Kirk “Won’t Be Remembered as a Hero.” The State Dept. Revoked His Visa",
+      "url": "https://theintercept.com/2025/10/15/state-department-charlie-kirk-visa-social-media-censorship",
+      "source": "The Intercept",
+      "published_utc": "2025-10-15T19:19:27.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -16,10 +16,10 @@
       "region": "World"
     },
     {
-      "title": "Jim Carrey in Talks to Star in ‘The Jetsons’ Live-Action Movie",
-      "url": "https://variety.com/2025/film/news/jim-carrey-jetsons-live-action-movie-1236553869",
-      "source": "Film",
-      "published_utc": "2025-10-15T19:04:52.000Z",
+      "title": "2K’s ‘Project Ethos’ Game to Move Forward as Studio 31st Union Sets Ben Brinkman as New Boss",
+      "url": "https://variety.com/2025/gaming/news/project-ethos-update-31st-union-ben-brinkman-1236553878",
+      "source": "Variety",
+      "published_utc": "2025-10-15T19:13:08.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -43,32 +43,6 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "LISTEN: Inside the Hive Mind of the Duffer Brothers and ‘Stranger Things’; French YouTuber Inoxtag Scales New Heights",
-      "url": "https://variety.com/2025/biz/news/duffer-brothers-stranger-things-inoxtag-daily-variety-1236553841",
-      "source": "Film",
-      "published_utc": "2025-10-15T18:56:37.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Apple’s Souped-Up Vision Pro AR/VR Headset Still Costs $3,500, but It May Be the Product’s Last Upgrade for a While",
-      "url": "https://variety.com/2025/digital/news/apple-vision-pro-headset-m5-upgrade-price-development-paused-1236553756",
-      "source": "Variety",
-      "published_utc": "2025-10-15T18:53:22.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     },
     {
       "title": "Blue Jays-Mariners ALCS Game 3 FAQ, lineups (8 p.m. ET, FS1)",
@@ -114,52 +88,13 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "Penelope Milford, Oscar-Nominated Actress in ‘Coming Home,’ Dies at 77",
-      "url": "https://variety.com/2025/film/news/penelope-milford-dead-coming-home-1236553775",
-      "source": "Film",
-      "published_utc": "2025-10-15T18:33:08.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Trump Fabricates Story of Hand-to-Hand Combat Between Troops and Child Gangsters in D.C.",
-      "url": "https://theintercept.com/2025/10/15/trump-lie-national-guard-dc-tren-de-aragua",
-      "source": "The Intercept",
-      "published_utc": "2025-10-15T18:29:35.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Netflix wants its own video podcast library, so it’s partnering with Spotify",
-      "url": "https://www.tubefilter.com/2025/10/15/netflix-spotify-video-podcast-partnership-the-ringer-true-crime",
-      "source": "Tubefilter",
-      "published_utc": "2025-10-15T18:27:22.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 845,
-    "dedup_pass1": 832,
+    "collected": 844,
+    "dedup_pass1": 831,
     "dedup_final": 320,
     "slow_domains": [
       "thehill.com"
@@ -187,57 +122,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.742,
-        "kept": 0
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.511,
+        "sec": 0.451,
         "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.298,
-        "kept": 14
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.448,
+        "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.289,
+        "sec": 0.341,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.213,
+        "sec": 0.285,
         "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.203,
-        "kept": 8
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.142,
-        "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.134,
+        "sec": 0.224,
         "kept": 0
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.128,
+        "host": "www.cp24.com",
+        "sec": 0.223,
         "kept": 14
       },
       {
-        "host": "globalnews.ca",
+        "host": "www.federalreserve.gov",
+        "sec": 0.135,
+        "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
         "sec": 0.086,
+        "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.08,
+        "kept": 8
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.071,
         "kept": 10
       }
     ],
-    "elapsed_sec": 343.26,
+    "elapsed_sec": 295.1,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -276,8 +211,8 @@
       "preferred_bonus": 49,
       "substack_tagged": 0,
       "sports_team_hits": 12,
-      "sports_player_hits": 8,
-      "sports_result_win_hits": 16,
+      "sports_player_hits": 9,
+      "sports_result_win_hits": 15,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -292,8 +227,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 39,
-      "soft_404_drops": 35,
+      "link_verification_fail": 31,
+      "soft_404_drops": 46,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 2,
