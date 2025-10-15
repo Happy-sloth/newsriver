@@ -1,4 +1,13 @@
-#!/usr/bin/env python3
+# Create the project structure and files, including the user's full fetch_headlines.py as provided.
+import os, textwrap, json, zipfile, io, pathlib
+
+base = "/mnt/data/mpb_headlines_pkg"
+scripts_dir = os.path.join(base, "scripts")
+config_dir = os.path.join(base, "config")
+os.makedirs(scripts_dir, exist_ok=True)
+os.makedirs(config_dir, exist_ok=True)
+
+fetch_code = r'''#!/usr/bin/env python3
 # scripts/fetch_headlines.py
 #
 # Build headlines.json from feeds.txt with strict link verification,
@@ -1515,3 +1524,56 @@ def main():
 
 if __name__ == "__main__":
     main()
+'''
+open(os.path.join(scripts_dir, "fetch_headlines.py"), "w", encoding="utf-8").write(fetch_code)
+
+# Minimal sample feeds.txt and weights config
+feeds_txt = """# --- TORONTO LOCAL ---
+https://www.cp24.com/rss/ctvnews-ca-top-stories-public-rss-1.822009
+# --- WORLD ---
+https://www.reuters.com/world/us/rss
+https://www.reuters.com/world/rss
+https://www.cbc.ca/cmlink/rss-topstories
+"""
+
+open(os.path.join(base, "feeds.txt"), "w", encoding="utf-8").write(feeds_txt)
+
+weights = {
+  "recency": {"half_life_hours": 6.0, "age_penalty_after_24h": -0.6, "age_penalty_after_36h": -0.4, "superseded_cluster_penalty": -0.9},
+  "categories": {"Business": 0.2, "Markets": 0.25, "Economy": 0.2, "Tech": 0.15, "World": 0.15, "Canada": 0.15},
+  "sources": {"aggregator_penalty": -0.5, "press_wire_penalty": -0.4, "preferred_domains_bonus": 0.25},
+  "public_safety": {"has_fatality_points": 1.0, "per_death_points": 0.1, "max_death_points": 2.0, "per_injured_points": 0.02, "max_injury_points": 0.6, "violent_keywords_bonus": 0.2, "violent_keywords": ["shooting","stabbing","explosion","blast","drone","strike"]},
+  "markets": {"btc_abs_move_threshold_pct": 7.0, "btc_points": 1.6, "index_abs_move_threshold_pct": 1.0, "index_points": 1.0, "nikkei_abs_move_threshold_pct": 1.0, "nikkei_points": 0.7, "single_stock_abs_move_threshold_pct": 10.0, "single_stock_points": 1.2},
+  "effects": {"lightsaber_min_score": 2.5, "lightsaber_also_if": {"body_count_ge": 5, "btc_abs_move_ge_pct": 8.0, "single_stock_abs_move_ge_pct": 15.0}, "glitch_min_score": 1.8},
+  "reorder": {"nate_hours_hint_bonus": 0.25, "nate_hours_hint_max_hours": 6.0},
+  "regional": {"weights": {"country_match": 1.2}, "max_bonus": 2.4},
+  "sports": {"team_match_points": 0.8, "player_match_points": 0.35, "result_win_points": 0.45, "result_loss_points": 0.25, "evening_window_points": 0.7, "playoff_mode_points": 0.4, "focus_team_points": 0.55, "final_story_points": 0.75, "final_with_score_points": 0.45}
+}
+open(os.path.join(config_dir, "weights.json5"), "w", encoding="utf-8").write(json.dumps(weights, indent=2))
+
+# requirements
+req = """feedparser==6.0.11
+requests>=2.31.0
+beautifulsoup4>=4.12.2
+json5>=0.9.24
+"""
+open(os.path.join(base, "requirements.txt"), "w", encoding="utf-8").write(req)
+
+# README
+readme = """# MYPYBITE NewsRiver Backend (strict verification + safety net)
+
+- Generates `headlines.json` with hard link checks and a fallback to guarantee **at least one sub-24h working headline**.
+- Frontend stays unchanged; just point it at the published JSON.
+
+## Quick start
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+export MPB_VERIFY_LINKS=1
+export MPB_REJECT_REDIRECT_TO_HOMEPAGE=1
+export MPB_BLOCK_AGGREGATORS=1
+export MPB_FALLBACK_MIN_ITEMS=1
+
+python3 scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
