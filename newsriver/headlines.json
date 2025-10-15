@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-15T15:49:53.442Z",
-  "count": 9,
+  "generated_utc": "2025-10-15T15:59:06.987Z",
+  "count": 10,
   "items": [
+    {
+      "title": "AloneKitty shares new single, “Stay The Same” (Interview)",
+      "url": "https://canadianbeats.ca/2025/10/15/alonekitty-shares-new-single-stay-the-same-interview",
+      "source": "Canadian Beats Media",
+      "published_utc": "2025-10-15T15:47:25.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "Laika at 20: ‘ParaNorman’ Returns, Live-Action and How the Company Is Ramping Up Development",
       "url": "https://variety.com/2025/film/festivals/laika-at-20-paranorman-returns-live-action-development-1236547182",
@@ -37,6 +50,22 @@
         "lightsaber": false,
         "glitch": false,
         "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "5 Blue Jays named Gold Glove finalists, including Clement twice!",
+      "url": "https://www.mlb.com/bluejays/news/2025-gold-glove-award-finalists",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-15T15:36:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
       },
       "category": "General",
       "region": "World"
@@ -108,29 +137,20 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "‘Hypnosis Mic’ Makes Japanese Box-Office History With $16.5 Million Haul on Limited Release (EXCLUSIVE)",
-      "url": "https://variety.com/2025/film/news/hypnosis-mic-japanese-box-office-history-1236553540",
-      "source": "Film",
-      "published_utc": "2025-10-15T14:55:15.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 860,
-    "dedup_pass1": 846,
+    "collected": 833,
+    "dedup_pass1": 819,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "hypebeast.com",
+      "thehill.com"
+    ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -152,57 +172,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "globalnews.ca",
+        "sec": 0.982,
+        "kept": 10
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.474,
+        "sec": 0.497,
         "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.411,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.361,
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.428,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.3,
+        "sec": 0.299,
         "kept": 14
       },
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.283,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.268,
+        "sec": 0.242,
         "kept": 8
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.217,
+        "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.214,
+        "kept": 14
+      },
+      {
         "host": "www.nhl.com",
-        "sec": 0.225,
+        "sec": 0.163,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.139,
+        "sec": 0.087,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.103,
+        "sec": 0.058,
         "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.07,
-        "kept": 10
       }
     ],
-    "elapsed_sec": 284.68,
+    "elapsed_sec": 336.12,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -230,7 +250,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 9,
+      "ps_fatal_hits": 10,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -240,15 +260,15 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 13,
+      "sports_team_hits": 14,
       "sports_player_hits": 10,
-      "sports_result_win_hits": 17,
+      "sports_result_win_hits": 15,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 13,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_focus_team_hits": 12,
+      "sports_final_hits": 0,
+      "sports_final_score_hits": 0,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -257,10 +277,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 29,
+      "link_verification_fail": 43,
       "soft_404_drops": 38,
       "max_age_drops": 0,
-      "min_age_drops": 9,
+      "min_age_drops": 8,
       "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
