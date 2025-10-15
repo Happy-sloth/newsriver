@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-15T10:46:41.769Z",
-  "count": 5,
+  "generated_utc": "2025-10-15T10:57:56.222Z",
+  "count": 7,
   "items": [
     {
-      "title": "Oble Adds to Mipcom Slate Canneseries’ Flanders’ ‘How to Kill Your Sister,’ Spanish Comedy ‘Segunda Temporada’ From ‘Autodefensa’ Creators (EXCLUSIVE)",
-      "url": "https://variety.com/2025/tv/global/oble-segunda-temporada-how-to-kill-your-sister-1236553308",
-      "source": "Variety",
-      "published_utc": "2025-10-15T10:30:00.000Z",
+      "title": "Natalie Portman Lights Up Lumière With Grace and Humor",
+      "url": "https://variety.com/2025/film/global/natalie-portman-lights-up-lumiere-grace-humor-1236553340",
+      "source": "Film",
+      "published_utc": "2025-10-15T10:28:24.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -55,6 +55,32 @@
       "region": "World"
     },
     {
+      "title": "Video of nuisance behavior at Kurasushi goes viral on social media",
+      "url": "https://japantoday.com/category/national/video-of-nuisance-behavior-at-kura-sushi-branch-goes-viral-on-social-media",
+      "source": "Japan Today",
+      "published_utc": "2025-10-15T09:49:30.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Bruce Springsteen Hails Stephen Graham’s Portrayal of His ‘Troubled’ Father in ‘Deliver Me From Nowhere’: He ‘Just Naturally Inhabited His Skin’",
+      "url": "https://variety.com/2025/film/global/bruce-springsteen-hails-stephen-graham-in-biopic-1236553262",
+      "source": "Film",
+      "published_utc": "2025-10-15T09:26:29.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
       "title": "Doha Film Festival Unveils Competition Lineup, With Emphasis on Gaza and Regional Fare",
       "url": "https://variety.com/2025/film/festivals/doha-film-festival-competition-lineup-gaza-1236553231",
       "source": "Film",
@@ -71,14 +97,11 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 830,
-    "dedup_pass1": 816,
+    "collected": 844,
+    "dedup_pass1": 830,
     "dedup_final": 320,
-    "slow_domains": [
-      "rollcall.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -100,57 +123,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "globalnews.ca",
+        "sec": 0.749,
+        "kept": 10
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.463,
+        "sec": 0.38,
         "kept": 0
       },
       {
+        "host": "toronto.citynews.ca",
+        "sec": 0.23,
+        "kept": 8
+      },
+      {
         "host": "www.cp24.com",
-        "sec": 0.417,
+        "sec": 0.224,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.27,
+        "sec": 0.217,
         "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.234,
-        "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.224,
+        "sec": 0.217,
         "kept": 0
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.157,
-        "kept": 14
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.196,
+        "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.156,
+        "sec": 0.183,
         "kept": 0
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.11,
-        "kept": 10
-      },
-      {
         "host": "www.federalreserve.gov",
-        "sec": 0.088,
+        "sec": 0.117,
         "kept": 14
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.084,
-        "kept": 8
+        "host": "www.mlb.com",
+        "sec": 0.077,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 306.14,
+    "elapsed_sec": 263.28,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -190,13 +213,13 @@
       "substack_tagged": 0,
       "sports_team_hits": 14,
       "sports_player_hits": 18,
-      "sports_result_win_hits": 20,
+      "sports_result_win_hits": 21,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 19,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_focus_team_hits": 20,
+      "sports_final_hits": 2,
+      "sports_final_score_hits": 2,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -205,8 +228,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 35,
-      "soft_404_drops": 40,
+      "link_verification_fail": 34,
+      "soft_404_drops": 39,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 7,
