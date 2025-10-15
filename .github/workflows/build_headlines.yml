@@ -13,18 +13,35 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
+      # Collector caps (collect plenty, then filter hard)
       MPB_MAX_PER_FEED: "14"
-      MPB_MAX_TOTAL: "69"            # always publish 69 for the grid
+      MPB_MAX_TOTAL: "320"
+
+      # Time + budgets
       MPB_HTTP_TIMEOUT: "10"
       MPB_SLOW_FEED_WARN: "3.5"
       MPB_GLOBAL_BUDGET: "210"
       NEWSRIVER_TIMEZONE: "America/Toronto"
-      MPB_BREAKER_LIMIT: "3"         # up to 3 “breaking” items
-      # Strict link verification + safety net:
+      MPB_BREAKER_LIMIT: "3"
+
+      # Recency + exact publish count
+      MPB_MAX_AGE_HOURS: "69"
+      MPB_MIN_AGE_SEC: "60"
+      MPB_REQUIRE_EXACT_COUNT: "69"
+
+      # Strict link verification + article heuristics
       MPB_VERIFY_LINKS: "1"
       MPB_REJECT_REDIRECT_TO_HOMEPAGE: "1"
       MPB_BLOCK_AGGREGATORS: "1"
+      MPB_MIN_BODY_BYTES: "4096"
+      MPB_MIN_ARTICLE_WORDS: "120"
+
+      # Safety net (guarantee at least one fresh, working headline if all else fails)
       MPB_FALLBACK_MIN_ITEMS: "1"
+      MPB_FALLBACK_MAX_AGE_HOURS: "24"
+
+      # Realistic UA helps reduce anti-bot redirects to homepages
+      MPB_ALT_UA: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
     steps:
       - name: Checkout repo
@@ -63,8 +80,23 @@ jobs:
           set -euo pipefail
           mkdir -p newsriver
           python scripts/fetch_headlines.py --feeds-file feeds.txt --out newsriver/headlines.json
-          echo "-----"
+          echo "----- basic check"
           jq -r '.generated_utc, .count' newsriver/headlines.json
+          echo "----- verification stats (sanity drops, soft-404s, etc.)"
+          jq -r '._debug.sanity_stats' newsriver/headlines.json
+          echo "----- slow/timeouts/errors (first 10 timing samples)"
+          jq -r '._debug | {slow_domains, timeouts, errors, feed_times_sample}' newsriver/headlines.json
+          echo "----- sample URLs (top 10)"
+          jq -r '.items[:10][] | [.published_utc, .source, .title, .url] | @tsv' newsriver/headlines.json
+
+      - name: Fail if nothing verified
+        run: |
+          set -euo pipefail
+          c=$(jq -r '.count' newsriver/headlines.json)
+          if [ "$c" -lt 1 ]; then
+            echo "No verified articles made it through filters. Failing run."
+            exit 1
+          fi
 
       - name: Upload artifact (for debugging/inspection)
         uses: actions/upload-artifact@v4
