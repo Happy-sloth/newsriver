@@ -1,7 +1,49 @@
 {
-  "generated_utc": "2025-10-15T19:01:14.568Z",
-  "count": 12,
+  "generated_utc": "2025-10-15T19:18:56.528Z",
+  "count": 11,
   "items": [
+    {
+      "title": "2K’s ‘Project Ethos’ Game to Move Forward as Studio 31st Union Sets Ben Brinkman as New Boss",
+      "url": "https://variety.com/2025/gaming/news/project-ethos-update-31st-union-ben-brinkman-1236553878",
+      "source": "Variety",
+      "published_utc": "2025-10-15T19:13:08.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Jim Carrey in Talks to Star in ‘The Jetsons’ Live-Action Movie",
+      "url": "https://variety.com/2025/film/news/jim-carrey-jetsons-live-action-movie-1236553869",
+      "source": "Film",
+      "published_utc": "2025-10-15T19:04:52.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Crude Oil Could Fall Below $50, BofA Warns",
+      "url": "https://oilprice.com/Energy/Crude-Oil/Crude-Oil-Could-Fall-Below-50-BofA-Warns.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-15T19:00:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
     {
       "title": "LISTEN: Inside the Hive Mind of the Duffer Brothers and ‘Stranger Things’; French YouTuber Inoxtag Scales New Heights",
       "url": "https://variety.com/2025/biz/news/duffer-brothers-stranger-things-inoxtag-daily-variety-1236553841",
@@ -58,19 +100,6 @@
       "region": "World"
     },
     {
-      "title": "‘America’s Funniest Home Videos’ Owner V10 Entertainment and Vice Studios Create New Video Clip Competition Show (EXCLUSIVE)",
-      "url": "https://variety.com/2025/tv/news/v10-entertainment-vice-studios-video-clip-competition-show-1236553735",
-      "source": "Variety",
-      "published_utc": "2025-10-15T18:46:45.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Mexico Sends $3 Billion in Subsidized Fuel to Cuba in Just Four Months",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/Mexico-Sends-3-Billion-in-Subsidized-Fuel-to-Cuba-in-Just-Four-Months.html",
       "source": "Oilprice.com",
@@ -85,19 +114,6 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "No Doubt Adds Six Dates to 2026 Residency at Las Vegas’ Sphere",
-      "url": "https://variety.com/2025/music/news/no-doubt-announces-2026-residency-las-vegas-sphere-1236545053",
-      "source": "Variety",
-      "published_utc": "2025-10-15T18:39:38.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     },
     {
       "title": "Penelope Milford, Oscar-Nominated Actress in ‘Coming Home,’ Dies at 77",
@@ -137,41 +153,17 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "How UCLA’s defense went from pushovers to taking over",
-      "url": "https://www.dailynews.com/2025/10/15/how-uclas-defense-went-from-pushovers-to-taking-over",
-      "source": "Daily News",
-      "published_utc": "2025-10-15T18:21:36.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Netflix’s ‘KPop Demon Hunters’ Returning to Movie Theaters For Halloween Sing-Along Screenings",
-      "url": "https://variety.com/2025/film/news/kpop-demon-hunters-movie-theaters-halloween-screenings-1236553788",
-      "source": "Film",
-      "published_utc": "2025-10-15T18:18:26.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
     "collected": 845,
-    "dedup_pass1": 833,
+    "dedup_pass1": 832,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "thehill.com"
+    ],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -195,57 +187,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.742,
+        "kept": 0
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 1.335,
+        "sec": 0.511,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.438,
+        "sec": 0.298,
         "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.268,
-        "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.264,
+        "sec": 0.289,
         "kept": 14
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.237,
-        "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.225,
-        "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.189,
+        "sec": 0.213,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.141,
+        "sec": 0.203,
         "kept": 8
       },
       {
+        "host": "www.federalreserve.gov",
+        "sec": 0.142,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.134,
+        "kept": 0
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.084,
+        "sec": 0.128,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.062,
+        "sec": 0.086,
         "kept": 10
       }
     ],
-    "elapsed_sec": 290.71,
+    "elapsed_sec": 343.26,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -273,7 +265,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 12,
+      "ps_fatal_hits": 13,
       "ps_injury_hits": 1,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -289,7 +281,7 @@
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 13,
+      "sports_focus_team_hits": 12,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -300,7 +292,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 37,
+      "link_verification_fail": 39,
       "soft_404_drops": 35,
       "max_age_drops": 0,
       "min_age_drops": 8,
