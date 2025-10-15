@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-15T07:47:57.154Z",
-  "count": 14,
+  "generated_utc": "2025-10-15T07:55:57.517Z",
+  "count": 15,
   "items": [
     {
       "title": "Heads of 3 opposition parties meet to discuss vote for next PM",
@@ -20,6 +20,19 @@
       "url": "https://japantoday.com/category/crime/Ex-employee-apprehended-after-2-nursing-home-residents-die-in-Saitama",
       "source": "Japan Today",
       "published_utc": "2025-10-15T07:36:30.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "78-year-old man arrested on suspicion of killing female relative in her 40s ‘at her request’",
+      "url": "https://japantoday.com/category/crime/78-year-old-man-arrested-on-suspicion-of-killing-female-relative-in-her-40s-%E2%80%98at-her-request%E2%80%99",
+      "source": "Japan Today",
+      "published_utc": "2025-10-15T07:34:49.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -198,7 +211,7 @@
     "dedup_pass1": 832,
     "dedup_final": 320,
     "slow_domains": [
-      "thehill.com"
+      "rollcall.com"
     ],
     "timeouts": [
       "news.communitech.ca",
@@ -223,56 +236,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.479,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.418,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.338,
-        "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.295,
-        "kept": 8
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.228,
+        "sec": 0.432,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.199,
+        "sec": 0.307,
         "kept": 14
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.136,
+        "host": "www.bls.gov",
+        "sec": 0.269,
+        "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.245,
         "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.233,
+        "kept": 8
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.212,
+        "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.127,
+        "sec": 0.106,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.08,
+        "sec": 0.09,
+        "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.066,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.067,
+        "sec": 0.037,
         "kept": 10
       }
     ],
-    "elapsed_sec": 225.7,
+    "elapsed_sec": 225.45,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
