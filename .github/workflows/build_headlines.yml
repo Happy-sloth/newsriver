@@ -97,21 +97,17 @@ jobs:
           echo "----- sample URLs"
           jq -r '.items[:10][] | [.published_utc, .source, .title, .url] | @tsv' newsriver/headlines.json || true
 
-      # Post-build cleaner (kills 404/soft-404, non-articles, >72h)
-      - name: Set up Node
+      - name: Set up Node (for cleaner)
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Install Node deps for cleaner
-        run: npm i node-fetch@3 p-limit@5
-
-      - name: Write cleaner script
+      - name: Write cleaner script (to temp, not repo)
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p tools
-          cat << 'EOF' > tools/validate-links.mjs
+          CLEANER="$RUNNER_TEMP/validate-links.mjs"
+          cat << 'EOF' > "$CLEANER"
           // Post-build cleaner for newsriver/headlines.json
           // - keep only ≤72h items
           // - drop aggregators/home/section pages
@@ -119,10 +115,7 @@ jobs:
           // - detect soft-404/empty by body rules + keywords
           // - ensure "article-likeness" by URL and body (min words)
           // - preserve effects/category/region if present
-
           import fs from "node:fs";
-          import fetch from "node-fetch";
-          import pLimit from "p-limit";
 
           const DATA_PATH = "newsriver/headlines.json";
 
@@ -131,7 +124,7 @@ jobs:
           const MIN_WORDS  = Number(process.env.CLEAN_MIN_WORDS || "120");
           const CONC       = Number(process.env.CLEAN_CONCURRENCY || "6");
           const TIMEOUT_MS = Number(process.env.CLEAN_TIMEOUT_MS || "12000");
-          const UA = process.env.MPB_ALT_UA || "Mozilla/5.0 mypybite-cleaner";
+          const UA         = process.env.MPB_ALT_UA || "Mozilla/5.0 mypybite-cleaner";
 
           const AGGR = /(news\.google|news\.yahoo|apple\.news|bing\.com\/news|msn\.com\/en-|flipboard\.com|drudgereport\.com|newsnow\.co\.uk|feedly\.com)/i;
           const SECTION = /\/(news|world|business|markets|sports|technology|tech|culture|entertainment|opinion|politics|video|videos|live|frontpage|homepage|home|today)\/*$/i;
@@ -182,29 +175,21 @@ jobs:
             return Number.isFinite(ts) && (Date.now() - ts <= MAX_AGE_MS);
           }
 
-          async function fetchWithFollow(url) {
-            const mk = (method) => ({
-              method,
-              redirect: "follow",
-              headers: { "user-agent": UA, "accept": "text/html,application/xhtml+xml" }
-            });
-
-            // some sites block HEAD
+          async function fetchWithTimeout(url, opts = {}) {
+            const ctl = new AbortController();
+            const t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
             try {
-              const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
-              const res = await fetch(url, { ...mk("HEAD"), signal: ctl.signal });
+              const res = await fetch(url, {
+                redirect: "follow",
+                headers: { "user-agent": UA, "accept": "text/html,application/xhtml+xml" },
+                signal: ctl.signal,
+                ...opts,
+              });
               clearTimeout(t);
-              if (res.ok) return res;
-            } catch {}
-
-            const ctl2 = new AbortController(); const t2 = setTimeout(() => ctl2.abort(), TIMEOUT_MS);
-            try {
-              const res = await fetch(url, { ...mk("GET"), signal: ctl2.signal });
-              clearTimeout(t2);
               return res;
-            } catch {
-              clearTimeout(t2);
-              return { ok:false, status:0, url };
+            } catch (e) {
+              clearTimeout(t);
+              return { ok:false, status:0, url, text: async () => "" };
             }
           }
 
@@ -242,6 +227,25 @@ jobs:
             }
           }
 
+          // simple concurrency limiter
+          async function mapLimit(arr, limit, fn) {
+            const out = new Array(arr.length);
+            let i = 0, active = 0;
+            return new Promise((resolve) => {
+              const pump = () => {
+                while (active < limit && i < arr.length) {
+                  const idx = i++; active++;
+                  Promise.resolve(fn(arr[idx], idx))
+                    .then(v => { out[idx] = v; })
+                    .catch(() => { out[idx] = null; })
+                    .finally(() => { active--; pump(); });
+                }
+                if (i >= arr.length && active === 0) resolve(out);
+              };
+              pump();
+            });
+          }
+
           (async function main(){
             const { kind, wrapper, items } = loadJSON();
 
@@ -260,29 +264,20 @@ jobs:
               .filter(it => isLikelyArticle(it.url))
               .filter(it => { if (seen.has(it.url)) return false; seen.add(it.url); return true; });
 
-            const limit = pLimit(Number(process.env.CLEAN_CONCURRENCY || CONC));
-            const cleaned = await Promise.all(base.map(it => limit(async () => {
+            const cleaned = await mapLimit(base, CONC, async (it) => {
               try {
-                const res = await fetchWithFollow(it.url);
+                // HEAD first (some sites block it; fallback to GET)
+                let res = await fetchWithTimeout(it.url, { method: "HEAD" });
+                if (!res.ok) res = await fetchWithTimeout(it.url, { method: "GET" });
                 if (!res.ok || res.status < 200 || res.status >= 300) return null;
+
                 const finalUrl = normalize(res.url || it.url);
                 if (!isLikelyArticle(finalUrl)) return null;
 
-                // GET body for soft-404/body checks (if needed)
-                let body = "";
-                try {
-                  // Always do a GET body to be strict
-                  const res2 = await fetch(finalUrl, {
-                    method: "GET",
-                    redirect: "follow",
-                    headers: { "user-agent": UA, "accept": "text/html,application/xhtml+xml" }
-                  });
-                  if (!res2.ok) return null;
-                  body = await res2.text();
-                } catch {
-                  return null;
-                }
-
+                // Always GET body to detect soft-404/emptiness
+                const res2 = await fetchWithTimeout(finalUrl, { method: "GET" });
+                if (!res2.ok) return null;
+                const body = await res2.text();
                 if (!looksLikeArticleBody(body)) return null;
 
                 const keep = {
@@ -298,17 +293,18 @@ jobs:
               } catch {
                 return null;
               }
-            })));
+            });
 
             const out = cleaned.filter(Boolean);
-
             saveJSON(kind, wrapper, out);
             console.log(`Cleaner kept ${out.length} / ${items.length} items`);
           })().catch(e => { console.error(e); process.exit(1); });
           EOF
+          echo "Cleaner written to: $CLEANER"
+          echo "CLEANER_PATH=$CLEANER" >> $GITHUB_ENV
 
       - name: Run cleaner (rewrite headlines.json)
-        run: node tools/validate-links.mjs
+        run: node "$CLEANER_PATH"
 
       - name: Post-clean probe (non-fatal log)
         shell: bash
@@ -322,35 +318,21 @@ jobs:
             echo "$CODE $BYTES $URL"
           done
 
-      - name: Upload artifact (json + cleaner)
-        uses: actions/upload-artifact@v4
-        with:
-          name: headlines-and-cleaner
-          path: |
-            newsriver/headlines.json
-            tools/validate-links.mjs
-
       - name: Commit & push with rebase (handles non-fast-forward)
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Only stage the generated JSON so the working tree remains clean
           git add newsriver/headlines.json
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "ci: build+clean headlines.json (drop 404/soft-404, >72h, non-articles)"
-          for i in 1 2 3; do
-            git fetch origin main
-            git pull --rebase origin main
-            if git push origin HEAD:main; then
-              echo "Pushed successfully."
-              exit 0
-            fi
-            echo "Push failed, retrying ($i/3)..."
-            sleep $((i * 5))
-          done
-          echo "Push failed after retries."
-          exit 1
+          git commit -m "ci: build+clean headlines.json (drop 404/soft-404, ≤72h, non-articles)"
+          # Ensure no untracked/unstaged changes exist before rebase
+          git status --porcelain
+          git fetch origin main
+          git pull --rebase origin main
+          git push origin HEAD:main
