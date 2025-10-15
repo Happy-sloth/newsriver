@@ -36,16 +36,19 @@ jobs:
       MPB_MIN_BODY_BYTES: "4096"
       MPB_MIN_ARTICLE_WORDS: "120"
 
-      # Safety net (guarantee at least one fresh, working headline if all else fails)
+      # Safety net
       MPB_FALLBACK_MIN_ITEMS: "1"
       MPB_FALLBACK_MAX_AGE_HOURS: "24"
 
-      # Realistic UA helps reduce anti-bot redirects to homepages
+      # Realistic UA
       MPB_ALT_UA: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for rebase/push
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -53,10 +56,10 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
-      - name: Install tools (jq)
+      - name: Install tools (jq + curl)
         run: |
           sudo apt-get update
-          sudo apt-get install -y jq
+          sudo apt-get install -y jq curl
 
       - name: Install Python deps
         run: |
@@ -82,31 +85,62 @@ jobs:
           python scripts/fetch_headlines.py --feeds-file feeds.txt --out newsriver/headlines.json
           echo "----- basic check"
           jq -r '.generated_utc, .count' newsriver/headlines.json
-          echo "----- verification stats (sanity drops, soft-404s, etc.)"
+          echo "----- verification stats"
           jq -r '._debug.sanity_stats' newsriver/headlines.json
-          echo "----- slow/timeouts/errors (first 10 timing samples)"
-          jq -r '._debug | {slow_domains, timeouts, errors, feed_times_sample}' newsriver/headlines.json
-          echo "----- sample URLs (top 10)"
+          echo "----- sample URLs"
           jq -r '.items[:10][] | [.published_utc, .source, .title, .url] | @tsv' newsriver/headlines.json
 
-      - name: Fail if nothing verified
+      - name: Post-verify HTTP probe (fail on home/soft-404)
+        shell: bash
         run: |
           set -euo pipefail
-          c=$(jq -r '.count' newsriver/headlines.json)
-          if [ "$c" -lt 1 ]; then
-            echo "No verified articles made it through filters. Failing run."
-            exit 1
-          fi
+          TMPLOG=probe.log
+          : > "$TMPLOG"
+          jq -r '.items[:80][] | .url' newsriver/headlines.json | while read -r URL; do
+            echo ">> Probing: $URL" | tee -a "$TMPLOG"
+            CODE=$(curl -A "$MPB_ALT_UA" -L -m 15 -s -w '%{http_code}' -o /tmp/body.html "$URL")
+            BYTES=$(wc -c </tmp/body.html | tr -d ' ')
+            if [ "$CODE" -lt 200 ] || [ "$CODE" -ge 300 ]; then
+              echo "!! Non-2xx ($CODE): $URL" | tee -a "$TMPLOG"; exit 1
+            fi
+            if [ "$BYTES" -lt 3500 ]; then
+              echo "!! Too small body ($BYTES bytes): $URL" | tee -a "$TMPLOG"; exit 1
+            fi
+            if ! grep -qiE '<(article|meta|title|div|p)[ >]' /tmp/body.html; then
+              echo "!! Not HTML-like content: $URL" | tee -a "$TMPLOG"; exit 1
+            fi
+          done
+          echo "All probes passed."
 
-      - name: Upload artifact (for debugging/inspection)
+      - name: Upload artifact (json + probe log)
         uses: actions/upload-artifact@v4
         with:
-          name: headlines.json
-          path: newsriver/headlines.json
+          name: headlines-and-probe
+          path: |
+            newsriver/headlines.json
+            probe.log
 
-      - name: Commit if changed
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "newsriver/headlines.json"
-          message: "ci: update headlines.json"
-          default_author: github_actions
+      - name: Commit & push with rebase (handles non-fast-forward)
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add newsriver/headlines.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "ci: update headlines.json"
+          for i in 1 2 3; do
+            git fetch origin main
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              echo "Pushed successfully."
+              exit 0
+            fi
+            echo "Push failed, retrying ($i/3)..."
+            sleep $((i * 5))
+          done
+          echo "Push failed after retries."
+          exit 1
