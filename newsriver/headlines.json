@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-15T21:46:14.987Z",
-  "count": 9,
+  "generated_utc": "2025-10-15T21:55:50.244Z",
+  "count": 10,
   "items": [
+    {
+      "title": "Police searching for additional survivors of former USC grad student accused of rape, sexual assault",
+      "url": "https://www.dailynews.com/2025/10/15/police-searching-for-additional-survivors-of-former-usc-grad-student-accused-of-rape-sexual-assault",
+      "source": "Daily News",
+      "published_utc": "2025-10-15T21:46:33.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "13 LA County employees accused of making fraudulent claims for COVID relief funds",
       "url": "https://www.dailynews.com/2025/10/15/13-la-county-employees-accused-of-making-fraudulent-claims-for-covid-relief-funds",
@@ -126,8 +139,8 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 844,
-    "dedup_pass1": 830,
+    "collected": 842,
+    "dedup_pass1": 828,
     "dedup_final": 320,
     "slow_domains": [
       "thehill.com"
@@ -155,57 +168,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "globalnews.ca",
-        "sec": 0.597,
-        "kept": 10
+        "host": "www.cp24.com",
+        "sec": 0.461,
+        "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.522,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.406,
-        "kept": 14
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.4,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.327,
+        "sec": 0.442,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.31,
+        "sec": 0.306,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.26,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.186,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.186,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.255,
+        "sec": 0.162,
         "kept": 8
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.218,
+        "sec": 0.153,
         "kept": 0
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.184,
+        "host": "www.mlb.com",
+        "sec": 0.146,
         "kept": 14
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.129,
-        "kept": 14
+        "host": "globalnews.ca",
+        "sec": 0.122,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 314.12,
+    "elapsed_sec": 263.06,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -233,7 +246,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 10,
+      "ps_fatal_hits": 8,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
