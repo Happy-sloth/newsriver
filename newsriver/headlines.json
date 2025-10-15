@@ -1,7 +1,46 @@
 {
-  "generated_utc": "2025-10-15T09:42:49.591Z",
-  "count": 13,
+  "generated_utc": "2025-10-15T09:56:21.748Z",
+  "count": 12,
   "items": [
+    {
+      "title": "Ayushmann Khurrana, Rashmika Mandanna, Nawazuddin Siddiqui and Dinesh Vijan Talk ‘Thamma,’ Maddock’s Expanding Horror Comedy Universe (EXCLUSIVE)",
+      "url": "https://variety.com/2025/film/news/ayushmann-khurrana-rashmika-mandanna-nawazuddin-siddiqui-thamma-1236553295",
+      "source": "Film",
+      "published_utc": "2025-10-15T09:53:42.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Video of nuisance behavior at Kurasushi goes viral on social media",
+      "url": "https://japantoday.com/category/national/video-of-nuisance-behavior-at-kura-sushi-branch-goes-viral-on-social-media",
+      "source": "Japan Today",
+      "published_utc": "2025-10-15T09:49:30.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "‘Dr. Pimple Popper: Breaking Out,’ ‘6000lb Diaries’ Acquired by Warner Bros. Discovery for European Audiences (EXCLUSIVE)",
+      "url": "https://variety.com/2025/tv/news/dr-pimple-popper-breaking-out-6000lb-diaries-warner-bros-discovery-1236553313",
+      "source": "Variety",
+      "published_utc": "2025-10-15T09:47:47.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Creator Economy Crosses Over Into Mainstream Media at Mipcom as After Party Studios, Dhar Mann Studios and Tubi Unpack Their Different Models",
       "url": "https://variety.com/2025/tv/global/creator-economy-upfronts-mipcom-after-party-dhar-mann-tubi-1236552566",
@@ -68,19 +107,6 @@
       "region": "World"
     },
     {
-      "title": "Solange Knowles is USC’s first ever scholar in residence",
-      "url": "https://www.thefader.com/2025/10/15/solange-knowles-usc-professor",
-      "source": "The FADER",
-      "published_utc": "2025-10-15T08:41:50.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
       "title": "Square Eyes Acquires ‘The Kartli Kingdom’ Ahead of IDFA World Premiere (EXCLUSIVE)",
       "url": "https://variety.com/2025/film/global/square-eyes-the-kartli-kingdom-idfa-1236553252",
       "source": "Film",
@@ -131,59 +157,15 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Video of nuisance behavior at Kura Sushi goes viral on social media",
-      "url": "https://japantoday.com/category/national/video-of-nuisance-behavior-at-kura-sushi-branch-goes-viral-on-social-media",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:33:59.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "More Supertankers Divert After U.S. Sanctions Hit Chinese Oil Port",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/More-Supertankers-Divert-After-US-Sanctions-Hit-Chinese-Oil-Port.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-15T07:15:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
-      },
-      "category": "Energy",
-      "region": "Canada"
-    },
-    {
-      "title": "Guess Who This 'Hansons' Fan Turned Into!",
-      "url": "https://www.tmz.com/2025/10/15/guess-who-this-hansons-fan-turned-into",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-15T07:10:53.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
     "collected": 846,
-    "dedup_pass1": 831,
+    "dedup_pass1": 832,
     "dedup_final": 320,
-    "slow_domains": [
-      "toronto.citynews.ca"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -206,57 +188,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "toronto.citynews.ca",
-        "sec": 3.666,
-        "kept": 8
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.522,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.491,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.297,
+        "sec": 0.598,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.278,
+        "sec": 0.345,
+        "kept": 14
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.295,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.224,
+        "sec": 0.237,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.196,
+        "host": "www.bls.gov",
+        "sec": 0.18,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.093,
+        "sec": 0.149,
         "kept": 14
       },
       {
+        "host": "www.nhl.com",
+        "sec": 0.109,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.099,
+        "kept": 8
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.059,
+        "sec": 0.085,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.039,
+        "sec": 0.045,
         "kept": 10
       }
     ],
-    "elapsed_sec": 263.17,
+    "elapsed_sec": 280.96,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -284,7 +266,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 12,
+      "ps_fatal_hits": 13,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
