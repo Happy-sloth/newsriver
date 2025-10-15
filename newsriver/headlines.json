@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-15T08:25:12.602Z",
-  "count": 10,
+  "generated_utc": "2025-10-15T08:49:04.528Z",
+  "count": 9,
   "items": [
     {
       "title": "Square Eyes Acquires ‘The Kartli Kingdom’ Ahead of IDFA World Premiere (EXCLUSIVE)",
@@ -110,19 +110,6 @@
       "region": "World"
     },
     {
-      "title": "Supreme Court rejects Alex Jones' appeal of Sandy Hook shooting defamation judgment",
-      "url": "https://www.npr.org/2025/10/15/nx-s1-5574929/supreme-court-alex-jones-defamation-judgment",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-15T05:38:47.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Chevron Wants to Weigh In on the Launch of Venture Global’s New LNG Plant",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/Chevron-Wants-to-Weigh-In-on-the-Launch-of-Venture-Globals-New-LNG-Plant.html",
       "source": "Oilprice.com",
@@ -170,56 +157,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.521,
+        "sec": 0.537,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.425,
+        "sec": 0.276,
         "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.278,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.248,
-        "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.235,
-        "kept": 8
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.234,
+        "sec": 0.206,
         "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.164,
+        "sec": 0.197,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.193,
+        "kept": 8
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.188,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.141,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.124,
+        "sec": 0.085,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.079,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.112,
+        "sec": 0.069,
         "kept": 10
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.085,
-        "kept": 14
       }
     ],
-    "elapsed_sec": 296.07,
+    "elapsed_sec": 240.18,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -247,7 +234,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 12,
+      "ps_fatal_hits": 11,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -278,7 +265,7 @@
       "soft_404_drops": 31,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 5,
+      "market_sanity_drops": 6,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
