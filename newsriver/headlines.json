@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-15T04:58:05.923Z",
-  "count": 5,
+  "generated_utc": "2025-10-15T05:19:21.657Z",
+  "count": 3,
   "items": [
     {
       "title": "Conan O’Brien’s Emmy-Winning TBS Series Lands at Radial Entertainment",
@@ -40,39 +40,13 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Could content creators + experiential marketing be the magic sauce? Night and its new acquisition are going to find out",
-      "url": "https://www.tubefilter.com/2025/10/14/night-experiential-supply-co-acquisition-content-creator-live-events",
-      "source": "Tubefilter",
-      "published_utc": "2025-10-15T02:12:46.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "‘Dancing With the Stars’ Reaches 50 Million Votes During Emotional Dedication Night — and a New Duo Tops the Leaderboard",
-      "url": "https://variety.com/2025/tv/news/dancing-with-the-stars-dedication-night-1236552808",
-      "source": "Variety",
-      "published_utc": "2025-10-15T02:01:41.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 833,
-    "dedup_pass1": 821,
+    "collected": 832,
+    "dedup_pass1": 820,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
@@ -98,57 +72,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "www.cp24.com",
+        "sec": 0.441,
+        "kept": 14
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.477,
+        "sec": 0.409,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.319,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.289,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.27,
+        "sec": 0.304,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.24,
+        "sec": 0.279,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.13,
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.254,
         "kept": 0
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.117,
-        "kept": 14
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.111,
+        "sec": 0.195,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.101,
-        "kept": 14
+        "host": "www.nhl.com",
+        "sec": 0.102,
+        "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.076,
+        "sec": 0.081,
         "kept": 10
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.079,
+        "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.073,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 224.29,
+    "elapsed_sec": 305.58,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -187,7 +161,7 @@
       "preferred_bonus": 49,
       "substack_tagged": 0,
       "sports_team_hits": 11,
-      "sports_player_hits": 20,
+      "sports_player_hits": 21,
       "sports_result_win_hits": 19,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
@@ -203,7 +177,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 31,
+      "link_verification_fail": 18,
       "soft_404_drops": 30,
       "max_age_drops": 0,
       "min_age_drops": 8,
