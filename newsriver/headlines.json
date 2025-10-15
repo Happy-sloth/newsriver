@@ -1,7 +1,39 @@
 {
-  "generated_utc": "2025-10-15T20:41:57.180Z",
+  "generated_utc": "2025-10-15T20:56:46.572Z",
   "count": 10,
   "items": [
+    {
+      "title": "Blue Jays-Mariners ALCS Game 3 FAQ, lineups (8 ET, FS1)",
+      "url": "https://www.mlb.com/bluejays/news/blue-jays-vs-mariners-alcs-game-3-starting-lineups-pitching-matchup",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-15T20:42:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Latest Blue Jays injuries & transactions",
+      "url": "https://www.mlb.com/bluejays/news/blue-jays-injuries-and-roster-moves",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-15T20:35:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Gustavo Dudamel Celebrates 17 Years at LA Phil With Chris Martin, Alejandro Iñárritu and LL Cool J",
       "url": "https://variety.com/2025/music/columns/gustavo-dudamel-la-phil-chris-martin-alejandro-inarritu-and-ll-cool-j-1236553522",
@@ -94,57 +126,33 @@
       "region": "World"
     },
     {
-      "title": "OpenAI’s Plans to Roll Out AI ‘Erotica’ for ChatGPT Slammed by Anti-Porn Group",
-      "url": "https://variety.com/2025/digital/news/openai-erotica-chatgpt-anti-porn-group-ncose-1236553925",
-      "source": "Variety",
-      "published_utc": "2025-10-15T20:03:41.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "How Will America’s Lithium Boom Impact Prices?",
       "url": "https://oilprice.com/Metals/Commodities/How-Will-Americas-Lithium-Boom-Impact-Prices.html",
       "source": "Oilprice.com",
       "published_utc": "2025-10-15T20:00:00.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
+        "lightsaber": false,
+        "glitch": true,
         "reasons": [
-          "score≥2.5"
+          "score≥1.6"
         ],
-        "style": "lightsaber"
+        "style": "glitch"
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "Chicago White Sox Praise Pope Leo XIV For Cubs 'Lost' Quip",
-      "url": "https://www.tmz.com/2025/10/15/white-sox-praise-pope-leo-for-cubs-quip",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-15T19:54:28.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 845,
-    "dedup_pass1": 832,
+    "collected": 843,
+    "dedup_pass1": 828,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "rollcall.com",
+      "thehill.com"
+    ],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -166,57 +174,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.bls.gov",
-        "sec": 0.454,
-        "kept": 0
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.411,
+        "sec": 0.55,
         "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.3,
-        "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.265,
+        "sec": 0.474,
+        "kept": 14
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.305,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.25,
+        "sec": 0.221,
         "kept": 0
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.198,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.177,
+        "kept": 8
+      },
+      {
         "host": "www.federalreserve.gov",
-        "sec": 0.181,
+        "sec": 0.162,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.157,
+        "sec": 0.119,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.129,
+        "sec": 0.118,
         "kept": 14
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.111,
-        "kept": 8
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.04,
+        "sec": 0.101,
         "kept": 10
       }
     ],
-    "elapsed_sec": 308.05,
+    "elapsed_sec": 300.77,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -244,7 +252,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 10,
       "ps_injury_hits": 1,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -252,7 +260,7 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 48,
+      "preferred_bonus": 47,
       "substack_tagged": 0,
       "sports_team_hits": 13,
       "sports_player_hits": 6,
@@ -271,8 +279,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 39,
-      "soft_404_drops": 42,
+      "link_verification_fail": 37,
+      "soft_404_drops": 43,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 4,
