@@ -6,25 +6,25 @@
           "gamePk": "401812722",
           "gameDate": "2025-10-15T23:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MEM"
               },
-              "score": 0
+              "score": 7
             },
             "home": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 0
+              "score": 11
             }
           }
         },
