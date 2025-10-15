@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-10-15T19:33:50.258Z",
+  "generated_utc": "2025-10-15T19:45:13.959Z",
   "count": 6,
   "items": [
     {
@@ -29,6 +29,22 @@
       "region": "World"
     },
     {
+      "title": "The federal government is still shut down. Here's what that means across the country",
+      "url": "https://www.npr.org/2025/10/15/nx-s1-5575134/government-shutdown",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T19:07:26.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
       "title": "Crude Oil Could Fall Below $50, BofA Warns",
       "url": "https://oilprice.com/Energy/Crude-Oil/Crude-Oil-Could-Fall-Below-50-BofA-Warns.html",
       "source": "Oilprice.com",
@@ -45,7 +61,7 @@
       "region": "Canada"
     },
     {
-      "title": "Blue Jays-Mariners ALCS Game 3 FAQ, lineups (8 p.m. ET, FS1)",
+      "title": "Blue Jays-Mariners ALCS Game 3 FAQ, lineups (8 ET, FS1)",
       "url": "https://www.mlb.com/bluejays/news/blue-jays-vs-mariners-alcs-game-3-starting-lineups-pitching-matchup",
       "source": "Blue Jays News",
       "published_utc": "2025-10-15T18:48:00.000Z",
@@ -72,32 +88,17 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "Mexico Sends $3 Billion in Subsidized Fuel to Cuba in Just Four Months",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/Mexico-Sends-3-Billion-in-Subsidized-Fuel-to-Cuba-in-Just-Four-Months.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-15T18:40:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 844,
+    "collected": 846,
     "dedup_pass1": 831,
     "dedup_final": 320,
     "slow_domains": [
-      "thehill.com"
+      "thehill.com",
+      "theintercept.com"
     ],
     "timeouts": [
       "japantoday.com",
@@ -123,56 +124,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.451,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.448,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.341,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.285,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.224,
+        "sec": 0.511,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.223,
+        "sec": 0.467,
         "kept": 14
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.135,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.086,
-        "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.08,
-        "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.071,
+        "sec": 0.442,
         "kept": 10
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.324,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.309,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.262,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.189,
+        "kept": 8
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.165,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.087,
+        "kept": 0
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.079,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 295.1,
+    "elapsed_sec": 260.25,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -212,7 +213,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 12,
       "sports_player_hits": 9,
-      "sports_result_win_hits": 15,
+      "sports_result_win_hits": 17,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -227,11 +228,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 31,
+      "link_verification_fail": 41,
       "soft_404_drops": 46,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 2,
+      "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
