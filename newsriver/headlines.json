@@ -1,7 +1,46 @@
 {
-  "generated_utc": "2025-10-15T15:37:05.321Z",
+  "generated_utc": "2025-10-15T15:49:53.442Z",
   "count": 9,
   "items": [
+    {
+      "title": "Laika at 20: ‘ParaNorman’ Returns, Live-Action and How the Company Is Ramping Up Development",
+      "url": "https://variety.com/2025/film/festivals/laika-at-20-paranorman-returns-live-action-development-1236547182",
+      "source": "Film",
+      "published_utc": "2025-10-15T15:45:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "How Laika Used CG for Its New Short ‘ParaNorman: The Thrifting’",
+      "url": "https://variety.com/2025/film/artists/how-laika-used-cg-paranorman-the-thrifting-1236547708",
+      "source": "Film",
+      "published_utc": "2025-10-15T15:45:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Israel’s Mounting Ceasefire Violations in Gaza",
+      "url": "https://theintercept.com/2025/10/15/israel-ceasefire-violations-gaza-aid",
+      "source": "The Intercept",
+      "published_utc": "2025-10-15T15:39:59.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Cenovus Boosts MEG Energy Stake Ahead of Crucial Takeover Vote",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/Cenovus-Boosts-MEG-Energy-Stake-Ahead-of-Crucial-Takeover-Vote.html",
@@ -32,36 +71,10 @@
       "region": "World"
     },
     {
-      "title": "Ludacris Unveils New Movado Collab and Says Kevin Hart Forced Him to Step Up His Watch Game",
-      "url": "https://www.rollingstone.com/product-recommendations/lifestyle/ludacris-movado-watch-collaboration-campaign-buy-online-1235439062",
-      "source": "Rolling Stone",
-      "published_utc": "2025-10-15T15:30:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "How Epic ‘Wildwood’ Is Pushing Laika Into More Innovative Techniques and With Bigger Scope and Scale",
       "url": "https://variety.com/2025/film/artists/laika-wildwood-innovative-techniques-bigger-scope-1236547703",
       "source": "Film",
       "published_utc": "2025-10-15T15:25:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "‘Sinners’ Production Designer Hannah Beachler on Weaving in Folklore, History and Sprituality Into Her Sets",
-      "url": "https://variety.com/2025/artisans/festivals/sinners-production-design-folklore-history-sprituality-1236547060",
-      "source": "Variety",
-      "published_utc": "2025-10-15T15:15:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -97,19 +110,6 @@
       "region": "World"
     },
     {
-      "title": "MSNBC President Rebecca Kutler Reveals Cancer Diagnosis",
-      "url": "https://variety.com/2025/tv/news/msnbc-president-rebecca-kutler-breast-cancer-diagnosis-1236553535",
-      "source": "Variety",
-      "published_utc": "2025-10-15T15:02:15.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "‘Hypnosis Mic’ Makes Japanese Box-Office History With $16.5 Million Haul on Limited Release (EXCLUSIVE)",
       "url": "https://variety.com/2025/film/news/hypnosis-mic-japanese-box-office-history-1236553540",
       "source": "Film",
@@ -126,12 +126,10 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 859,
+    "collected": 860,
     "dedup_pass1": 846,
     "dedup_final": 320,
-    "slow_domains": [
-      "hypebeast.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -155,56 +153,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.542,
+        "sec": 0.474,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.397,
+        "sec": 0.411,
         "kept": 14
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.361,
+        "kept": 0
+      },
+      {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.299,
+        "sec": 0.3,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.273,
+        "sec": 0.283,
         "kept": 0
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.212,
-        "kept": 0
+        "host": "toronto.citynews.ca",
+        "sec": 0.268,
+        "kept": 8
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.16,
+        "sec": 0.225,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.147,
+        "sec": 0.139,
         "kept": 14
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.142,
-        "kept": 8
-      },
-      {
         "host": "www.mlb.com",
-        "sec": 0.121,
+        "sec": 0.103,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.113,
+        "sec": 0.07,
         "kept": 10
       }
     ],
-    "elapsed_sec": 252.2,
+    "elapsed_sec": 284.68,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -244,7 +242,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 13,
       "sports_player_hits": 10,
-      "sports_result_win_hits": 18,
+      "sports_result_win_hits": 17,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -259,10 +257,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 43,
+      "link_verification_fail": 29,
       "soft_404_drops": 38,
       "max_age_drops": 0,
-      "min_age_drops": 8,
+      "min_age_drops": 9,
       "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
