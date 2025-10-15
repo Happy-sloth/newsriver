@@ -1,7 +1,33 @@
 {
-  "generated_utc": "2025-10-15T14:47:32.213Z",
-  "count": 8,
+  "generated_utc": "2025-10-15T14:58:18.484Z",
+  "count": 7,
   "items": [
+    {
+      "title": "‘Hypnosis Mic’ Makes Japanese Box-Office History With $16.5 Million Haul on Limited Release (EXCLUSIVE)",
+      "url": "https://variety.com/2025/film/news/hypnosis-mic-japanese-box-office-history-1236553540",
+      "source": "Film",
+      "published_utc": "2025-10-15T14:55:15.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Zach’s Picks of the Week – October 13 – 18, 2025",
+      "url": "https://canadianbeats.ca/2025/10/15/zachs-picks-of-the-week-october-13-18-2025",
+      "source": "Canadian Beats Media",
+      "published_utc": "2025-10-15T14:42:36.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "Anthony Volpe Undergoes Shoulder Surgery",
       "url": "https://www.mlbtraderumors.com/2025/10/anthony-volpe-undergoes-shoulder-surgery.html",
@@ -63,66 +89,28 @@
       "source": "Oilprice.com",
       "published_utc": "2025-10-15T14:00:00.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
+        "lightsaber": false,
+        "glitch": true,
         "reasons": [
-          "score≥2.5"
+          "score≥1.6"
         ],
-        "style": "lightsaber"
+        "style": "glitch"
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "MLBTR Podcast: Murakami To Be Posted This Offseason, Managerial Vacancies, And More!",
-      "url": "https://www.mlbtraderumors.com/2025/10/mlbtr-podcast-murakami-to-be-posted-this-offseason-managerial-vacancies-and-more.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-15T13:48:18.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Christopher Nolan Praises Dwayne Johnson, Says ‘Smashing Machine’ Will Be ‘Understood More Over Time’: ‘I Don’t Think You’ll See a Better Performance This Year or Most Other Years’",
-      "url": "https://variety.com/2025/film/news/christopher-nolan-praises-dwayne-johnson-smashing-machine-1236553426",
-      "source": "Film",
-      "published_utc": "2025-10-15T13:47:13.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Netflix Combines VFX Businesses Under Unified ‘Eyeline’ Brand",
-      "url": "https://variety.com/2025/digital/news/netflix-eyeline-combined-scanline-vfx-operations-1236553456",
-      "source": "Film",
-      "published_utc": "2025-10-15T13:39:57.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 772,
-    "dedup_pass1": 766,
+    "collected": 846,
+    "dedup_pass1": 831,
     "dedup_final": 320,
     "slow_domains": [
-      "thehill.com"
+      "rollcall.com"
     ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -134,6 +122,7 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
+      "nypost.com",
       "toronto.citynews.ca",
       "variety.com",
       "www.boston.com",
@@ -143,57 +132,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.486,
-        "kept": 14
+        "host": "toronto.citynews.ca",
+        "sec": 2.016,
+        "kept": 8
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.466,
+        "sec": 0.561,
+        "kept": 0
+      },
+      {
+        "host": "www.blogto.com",
+        "sec": 0.439,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.465,
+        "sec": 0.369,
         "kept": 14
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.417,
-        "kept": 0
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.335,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.29,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.247,
+        "sec": 0.262,
         "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.182,
-        "kept": 8
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.144,
+        "sec": 0.167,
         "kept": 0
       },
       {
+        "host": "www.mlb.com",
+        "sec": 0.112,
+        "kept": 14
+      },
+      {
         "host": "www.federalreserve.gov",
-        "sec": 0.103,
+        "sec": 0.1,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.075,
+        "sec": 0.094,
         "kept": 10
       }
     ],
-    "elapsed_sec": 344.31,
+    "elapsed_sec": 260.19,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -221,7 +210,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 9,
+      "ps_fatal_hits": 12,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -233,7 +222,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 13,
       "sports_player_hits": 13,
-      "sports_result_win_hits": 16,
+      "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -248,11 +237,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 39,
-      "soft_404_drops": 27,
+      "link_verification_fail": 44,
+      "soft_404_drops": 24,
       "max_age_drops": 0,
-      "min_age_drops": 8,
-      "market_sanity_drops": 4,
+      "min_age_drops": 20,
+      "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
