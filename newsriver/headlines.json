@@ -1,51 +1,12 @@
 {
-  "generated_utc": "2025-10-15T07:55:57.517Z",
-  "count": 15,
+  "generated_utc": "2025-10-15T08:25:12.602Z",
+  "count": 10,
   "items": [
     {
-      "title": "Heads of 3 opposition parties meet to discuss vote for next PM",
-      "url": "https://japantoday.com/category/politics/Heads-of-3-opposition-parties-meet-to-discuss-vote-for-next-PM",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:42:45.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Ex-employee apprehended after 2 nursing home residents die in Saitama",
-      "url": "https://japantoday.com/category/crime/Ex-employee-apprehended-after-2-nursing-home-residents-die-in-Saitama",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:36:30.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "78-year-old man arrested on suspicion of killing female relative in her 40s ‘at her request’",
-      "url": "https://japantoday.com/category/crime/78-year-old-man-arrested-on-suspicion-of-killing-female-relative-in-her-40s-%E2%80%98at-her-request%E2%80%99",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:34:49.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Video of nuisance behavior at Kura Sushi goes viral on social media",
-      "url": "https://japantoday.com/category/national/video-of-nuisance-behavior-at-kura-sushi-branch-goes-viral-on-social-media",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:33:59.000Z",
+      "title": "Square Eyes Acquires ‘The Kartli Kingdom’ Ahead of IDFA World Premiere (EXCLUSIVE)",
+      "url": "https://variety.com/2025/film/global/square-eyes-the-kartli-kingdom-idfa-1236553252",
+      "source": "Film",
+      "published_utc": "2025-10-15T08:13:49.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -60,12 +21,12 @@
       "source": "Oilprice.com",
       "published_utc": "2025-10-15T07:15:00.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
+        "lightsaber": false,
+        "glitch": true,
         "reasons": [
-          "score≥2.5"
+          "score≥1.6"
         ],
-        "style": "lightsaber"
+        "style": "glitch"
       },
       "category": "Energy",
       "region": "Canada"
@@ -123,7 +84,7 @@
       "region": "World"
     },
     {
-      "title": "FilmSharks Secures Rights to Political Action Thriller Project ‘Insurrección,’ Teams With ‘El Capo”s Marlon Moreno (EXCLUSIVE)",
+      "title": "FilmSharks Secures Rights to Political Action Thriller Project ‘Insurrección,’ Teams With ‘El Capo’s’ Marlon Moreno (EXCLUSIVE)",
       "url": "https://variety.com/2025/film/global/filmsharks-insurreccion-marlon-moreno-latin-american-thriller-1236552935",
       "source": "Film",
       "published_utc": "2025-10-15T06:00:00.000Z",
@@ -176,44 +137,17 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "Britain must urgently prepare for hotter temperatures, climate advisers warn",
-      "url": "https://japantoday.com/category/world/britain-must-urgently-prepare-for-hotter-temperatures-climate-advisers-warn",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T04:37:52.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Pennsylvania man pleads guilty in arson attack at governor's mansion",
-      "url": "https://www.npr.org/2025/10/14/nx-s1-5574497/pennsylvania-guilty-plea-arson-attack-at-governor-mansion",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-15T03:58:48.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 846,
-    "dedup_pass1": 832,
+    "collected": 832,
+    "dedup_pass1": 817,
     "dedup_final": 320,
-    "slow_domains": [
-      "rollcall.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -236,56 +170,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.432,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.307,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.269,
+        "sec": 0.521,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.245,
+        "sec": 0.425,
         "kept": 14
       },
       {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.278,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.248,
+        "kept": 0
+      },
+      {
         "host": "toronto.citynews.ca",
-        "sec": 0.233,
+        "sec": 0.235,
         "kept": 8
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.212,
+        "sec": 0.234,
         "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.106,
+        "sec": 0.164,
         "kept": 0
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.09,
-        "kept": 14
-      },
-      {
         "host": "www.mlb.com",
-        "sec": 0.066,
+        "sec": 0.124,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.037,
+        "sec": 0.112,
         "kept": 10
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.085,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 225.45,
+    "elapsed_sec": 296.07,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -313,7 +247,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 12,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -321,17 +255,17 @@
       "market_single_hits": 1,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 49,
+      "preferred_bonus": 48,
       "substack_tagged": 0,
-      "sports_team_hits": 11,
+      "sports_team_hits": 12,
       "sports_player_hits": 22,
-      "sports_result_win_hits": 21,
+      "sports_result_win_hits": 20,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 21,
-      "sports_final_hits": 2,
-      "sports_final_score_hits": 2,
+      "sports_focus_team_hits": 20,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -340,11 +274,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 23,
-      "soft_404_drops": 30,
+      "link_verification_fail": 24,
+      "soft_404_drops": 31,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 4,
+      "market_sanity_drops": 5,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
