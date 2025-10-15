@@ -1,7 +1,91 @@
 {
-  "generated_utc": "2025-10-15T22:56:40.949Z",
-  "count": 8,
+  "generated_utc": "2025-10-15T23:16:29.855Z",
+  "count": 13,
   "items": [
+    {
+      "title": "Sabrina Carpenter will select 20 lucky fans to join her on Short n’ Sweet TV show",
+      "url": "https://www.dailynews.com/2025/10/15/sabrina-carpenter-will-select-20-lucky-fans-to-join-her-on-short-n-sweet-tv-show",
+      "source": "Daily News",
+      "published_utc": "2025-10-15T23:11:12.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Flag football: Newbury Park wins Marmonte League title; West Ranch and Hart fighting for Foothill League crown",
+      "url": "https://www.dailynews.com/2025/10/15/flag-football-newbury-park-wins-marmonte-league-title-west-ranch-and-hart-fighting-for-foothill-league-crown",
+      "source": "Daily News",
+      "published_utc": "2025-10-15T23:10:37.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "ICE sued over removal of survivors of human trafficking, domestic violence",
+      "url": "https://www.dailynews.com/2025/10/15/ice-sued-over-removal-of-survivors-of-human-trafficking-domestic-violence",
+      "source": "Daily News",
+      "published_utc": "2025-10-15T23:09:50.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Mark Ruffalo Saved Woody Harrelson From a Bar Fight After ‘Now You See Me’ Filming: ‘A Whole Melee Broke Out’ and Could’ve Gone ‘Disastrously Wrong’",
+      "url": "https://variety.com/2025/film/news/mark-ruffalo-saved-woody-harrelson-bar-fight-1236553690",
+      "source": "Film",
+      "published_utc": "2025-10-15T23:05:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "American Clean Energy Under Pressure from Foreign Patent Fronts",
+      "url": "https://oilprice.com/Alternative-Energy/Renewable-Energy/American-Clean-Energy-Under-Pressure-from-Foreign-Patent-Fronts.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-15T23:00:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
+    {
+      "title": "Latest Blue Jays injuries & transactions",
+      "url": "https://www.mlb.com/bluejays/news/blue-jays-injuries-and-roster-moves",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-15T22:53:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Firefighters rescue stranded pup from rising floodwaters",
       "url": "https://www.dailynews.com/2025/10/15/ventura-dog-rescue-flood",
@@ -16,16 +100,16 @@
       "region": "World"
     },
     {
-      "title": "Nine Players Elect Free Agency",
-      "url": "https://www.mlbtraderumors.com/2025/10/nine-players-elect-free-agency-2.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-15T22:17:51.000Z",
+      "title": "Indigenous House, a streaming service led by Native creators, opens its doors",
+      "url": "https://www.tubefilter.com/2025/10/15/indigenous-house-native-american-content-hub-streaming-service",
+      "source": "Tubefilter",
+      "published_utc": "2025-10-15T22:28:58.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
       },
-      "category": "General",
+      "category": "Culture",
       "region": "World"
     },
     {
@@ -98,28 +182,17 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "Our Favorite ‘Wicked’ Merch Collabs You’ll Want to Keep ‘For Good’",
-      "url": "https://www.rollingstone.com/product-recommendations/lifestyle/best-wicked-merch-collabs-1235161888",
-      "source": "Rolling Stone",
-      "published_utc": "2025-10-15T21:28:52.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 844,
-    "dedup_pass1": 832,
+    "collected": 842,
+    "dedup_pass1": 829,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "thehill.com"
+    ],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -143,57 +216,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "globalnews.ca",
-        "sec": 0.554,
-        "kept": 10
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.503,
-        "kept": 0
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.418,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.294,
-        "kept": 14
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.28,
-        "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.26,
-        "kept": 8
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.235,
+        "sec": 0.48,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.233,
+        "sec": 0.358,
         "kept": 14
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.126,
+        "host": "www.bls.gov",
+        "sec": 0.356,
         "kept": 0
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.113,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.31,
         "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.246,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.165,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.138,
+        "kept": 8
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.124,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.119,
+        "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.083,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 275.13,
+    "elapsed_sec": 230.98,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -235,9 +308,9 @@
       "sports_player_hits": 6,
       "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
-      "sports_evening_hits": 28,
+      "sports_evening_hits": 27,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 14,
+      "sports_focus_team_hits": 13,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -248,8 +321,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 39,
-      "soft_404_drops": 37,
+      "link_verification_fail": 37,
+      "soft_404_drops": 34,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 3,
