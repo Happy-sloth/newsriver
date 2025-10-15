@@ -1,46 +1,7 @@
 {
-  "generated_utc": "2025-10-15T10:57:56.222Z",
-  "count": 7,
+  "generated_utc": "2025-10-15T11:16:51.144Z",
+  "count": 1,
   "items": [
-    {
-      "title": "Natalie Portman Lights Up Lumière With Grace and Humor",
-      "url": "https://variety.com/2025/film/global/natalie-portman-lights-up-lumiere-grace-humor-1236553340",
-      "source": "Film",
-      "published_utc": "2025-10-15T10:28:24.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Israel keeps Gaza border crossing closed while reducing aid deliveries",
-      "url": "https://www.npr.org/2025/10/15/nx-s1-5574953/israel-gaza-border-crossing-aid",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-15T10:09:48.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Oscars: Saudi Arabia Picks Shahad Ameen’s ‘Hijra’ for International Feature Race",
-      "url": "https://variety.com/2025/global/global/saudi-arabia-shahad-ameen-hijra-ts-oscar-candidate-1236553294",
-      "source": "Variety",
-      "published_utc": "2025-10-15T10:04:18.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
     {
       "title": "Episode Two: A Death in the Dark",
       "url": "https://theintercept.com/2025/10/15/collateral-damage-episode-two-death-dark",
@@ -53,52 +14,13 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Video of nuisance behavior at Kurasushi goes viral on social media",
-      "url": "https://japantoday.com/category/national/video-of-nuisance-behavior-at-kura-sushi-branch-goes-viral-on-social-media",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T09:49:30.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Bruce Springsteen Hails Stephen Graham’s Portrayal of His ‘Troubled’ Father in ‘Deliver Me From Nowhere’: He ‘Just Naturally Inhabited His Skin’",
-      "url": "https://variety.com/2025/film/global/bruce-springsteen-hails-stephen-graham-in-biopic-1236553262",
-      "source": "Film",
-      "published_utc": "2025-10-15T09:26:29.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Doha Film Festival Unveils Competition Lineup, With Emphasis on Gaza and Regional Fare",
-      "url": "https://variety.com/2025/film/festivals/doha-film-festival-competition-lineup-gaza-1236553231",
-      "source": "Film",
-      "published_utc": "2025-10-15T09:08:21.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 844,
-    "dedup_pass1": 830,
+    "collected": 640,
+    "dedup_pass1": 635,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
@@ -113,67 +35,61 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "nypost.com",
-      "toronto.citynews.ca",
-      "variety.com",
-      "www.boston.com",
-      "www.marketwatch.com",
-      "www.npr.org",
-      "www.wsj.com"
+      "toronto.citynews.ca"
     ],
     "feed_times_sample": [
       {
-        "host": "globalnews.ca",
-        "sec": 0.749,
-        "kept": 10
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.38,
+        "sec": 0.506,
         "kept": 0
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.23,
-        "kept": 8
+        "host": "www.bls.gov",
+        "sec": 0.418,
+        "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.224,
+        "host": "www.mlb.com",
+        "sec": 0.4,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.217,
+        "sec": 0.395,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.217,
-        "kept": 0
+        "host": "toronto.citynews.ca",
+        "sec": 0.324,
+        "kept": 8
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.311,
+        "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.196,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.183,
+        "sec": 0.258,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.117,
+        "sec": 0.147,
         "kept": 14
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.077,
-        "kept": 14
+        "host": "www.nhl.com",
+        "sec": 0.136,
+        "kept": 0
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.116,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 263.28,
+    "elapsed_sec": 283.75,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -201,7 +117,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 14,
+      "ps_fatal_hits": 12,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -209,17 +125,17 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 47,
+      "preferred_bonus": 48,
       "substack_tagged": 0,
       "sports_team_hits": 14,
-      "sports_player_hits": 18,
-      "sports_result_win_hits": 21,
+      "sports_player_hits": 12,
+      "sports_result_win_hits": 13,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 20,
-      "sports_final_hits": 2,
-      "sports_final_score_hits": 2,
+      "sports_focus_team_hits": 4,
+      "sports_final_hits": 0,
+      "sports_final_score_hits": 0,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -228,11 +144,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 34,
-      "soft_404_drops": 39,
+      "link_verification_fail": 31,
+      "soft_404_drops": 32,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 7,
+      "market_sanity_drops": 9,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
