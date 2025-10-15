@@ -1,20 +1,7 @@
 {
-  "generated_utc": "2025-10-15T08:49:04.528Z",
-  "count": 9,
+  "generated_utc": "2025-10-15T09:03:21.284Z",
+  "count": 4,
   "items": [
-    {
-      "title": "Square Eyes Acquires ‘The Kartli Kingdom’ Ahead of IDFA World Premiere (EXCLUSIVE)",
-      "url": "https://variety.com/2025/film/global/square-eyes-the-kartli-kingdom-idfa-1236553252",
-      "source": "Film",
-      "published_utc": "2025-10-15T08:13:49.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
     {
       "title": "More Supertankers Divert After U.S. Sanctions Hit Chinese Oil Port",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/More-Supertankers-Divert-After-US-Sanctions-Hit-Chinese-Oil-Port.html",
@@ -32,75 +19,10 @@
       "region": "Canada"
     },
     {
-      "title": "Guess Who This 'Hansons' Fan Turned Into!",
-      "url": "https://www.tmz.com/2025/10/15/guess-who-this-hansons-fan-turned-into",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-15T07:10:53.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "‘High Wire’ Director Calif Chong on Stephen Chow Dreams, BFI London Film Festival Premiere and Making Immigration Funny",
-      "url": "https://variety.com/2025/film/festivals/high-wire-calif-chong-stephen-chow-bfi-london-film-festival-racism-1236553223",
-      "source": "Film",
-      "published_utc": "2025-10-15T07:04:21.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Victoria's Secret Fashion Show, Hottest Moments Over the Years",
-      "url": "https://www.tmz.com/2025/10/15/victorias-secret-fashion-show-hottest-moments",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-15T07:01:54.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Kandi Burruss' Fall Fashion Finds for Under $50",
-      "url": "https://www.tmz.com/2025/10/15/kandi-burruss-fall-items-under-50",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-15T07:01:19.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "FilmSharks Secures Rights to Political Action Thriller Project ‘Insurrección,’ Teams With ‘El Capo’s’ Marlon Moreno (EXCLUSIVE)",
-      "url": "https://variety.com/2025/film/global/filmsharks-insurreccion-marlon-moreno-latin-american-thriller-1236552935",
-      "source": "Film",
-      "published_utc": "2025-10-15T06:00:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Fremantle’s Doc ‘Luca: Seeing Red’ Not Just About Ferrari, Argue Protagonist Luca di Montezemolo and Director Manish Pandey: ‘Family, Italy, Loyalty’",
-      "url": "https://variety.com/2025/tv/global/luca-seeing-red-ferrari-luca-di-montezemolo-manish-pandey-1236552745",
-      "source": "Variety",
-      "published_utc": "2025-10-15T06:00:00.000Z",
+      "title": "Supreme Court rejects Alex Jones' appeal of Sandy Hook shooting defamation judgment",
+      "url": "https://www.npr.org/2025/10/15/nx-s1-5574929/supreme-court-alex-jones-defamation-judgment",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T05:38:47.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -124,17 +46,29 @@
       },
       "category": "Energy",
       "region": "Canada"
+    },
+    {
+      "title": "Pennsylvania man pleads guilty in arson attack at governor's mansion",
+      "url": "https://www.npr.org/2025/10/14/nx-s1-5574497/pennsylvania-guilty-plea-arson-attack-at-governor-mansion",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T03:58:48.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 832,
-    "dedup_pass1": 817,
+    "collected": 738,
+    "dedup_pass1": 733,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -146,9 +80,7 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "nypost.com",
       "toronto.citynews.ca",
-      "variety.com",
       "www.boston.com",
       "www.marketwatch.com",
       "www.npr.org",
@@ -156,57 +88,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "toronto.citynews.ca",
+        "sec": 1.279,
+        "kept": 8
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.426,
+        "kept": 0
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.537,
+        "sec": 0.4,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.276,
+        "sec": 0.395,
         "kept": 14
       },
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.206,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.197,
-        "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.193,
-        "kept": 8
+        "host": "www.mlb.com",
+        "sec": 0.351,
+        "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.188,
+        "sec": 0.333,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.141,
+        "sec": 0.232,
         "kept": 0
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.085,
+        "host": "www.federalreserve.gov",
+        "sec": 0.163,
         "kept": 14
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.079,
-        "kept": 14
+        "host": "www.nhl.com",
+        "sec": 0.144,
+        "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.069,
+        "sec": 0.078,
         "kept": 10
       }
     ],
-    "elapsed_sec": 240.18,
+    "elapsed_sec": 328.51,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -234,25 +166,25 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 10,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
       "market_nikkei_hits": 0,
-      "market_single_hits": 1,
+      "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
       "preferred_bonus": 48,
       "substack_tagged": 0,
       "sports_team_hits": 12,
       "sports_player_hits": 22,
-      "sports_result_win_hits": 20,
+      "sports_result_win_hits": 17,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 20,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_focus_team_hits": 17,
+      "sports_final_hits": 0,
+      "sports_final_score_hits": 0,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -261,11 +193,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 24,
-      "soft_404_drops": 31,
+      "link_verification_fail": 43,
+      "soft_404_drops": 37,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 6,
+      "market_sanity_drops": 7,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
