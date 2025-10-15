@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-15T17:39:52.720Z",
-  "count": 13,
+  "generated_utc": "2025-10-15T17:49:40.517Z",
+  "count": 10,
   "items": [
     {
       "title": "Gwyneth Paltrow Slams ‘Gwyneth: The Biography’ as ‘Rubbish’ and Shades the Author: ‘It’s Very Sexist…  Why Do the Men Get Walter Isaacson and I Get This Hack?’",
@@ -84,19 +84,6 @@
       "region": "World"
     },
     {
-      "title": "How to Watch Tonight’s Bernie Sanders, Alexandria Ocasio-Cortez Town Hall Online",
-      "url": "https://www.rollingstone.com/product-recommendations/streaming/watch-bernie-sanders-aoc-town-hall-online-stream-free-1235447890",
-      "source": "Rolling Stone",
-      "published_utc": "2025-10-15T17:17:20.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "‘Red, White & Royal Blue’ Sequel Lands New Title, Director",
       "url": "https://variety.com/2025/film/news/red-white-royal-blue-sequel-new-title-director-1236553679",
       "source": "Film",
@@ -114,19 +101,6 @@
       "url": "https://www.dailynews.com/2025/10/15/trump-warns-of-relocating-olympic-from-la-world-cup-from-boston",
       "source": "Daily News",
       "published_utc": "2025-10-15T17:11:28.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "These are 5 LA-area restaurants where the experience goes beyond food",
-      "url": "https://www.dailynews.com/2025/10/15/these-are-5-la-area-restaurants-where-the-experience-goes-beyond-food",
-      "source": "Daily News",
-      "published_utc": "2025-10-15T17:00:57.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -163,34 +137,19 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "City of Toronto, CreateTO break ground on new transit-oriented, mixed-use community in Scarborough Southwest with 256 new affordable rental homes",
-      "url": "https://www.toronto.ca/news/city-of-toronto-createto-break-ground-on-new-transit-oriented-mixed-use-community-in-scarborough-southwest-with-256-new-affordable-rental-homes",
-      "source": "News Releases – City of Toronto",
-      "published_utc": "2025-10-15T16:59:16.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Weather",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 856,
-    "dedup_pass1": 838,
+    "collected": 844,
+    "dedup_pass1": 824,
     "dedup_final": 320,
     "slow_domains": [
       "thehill.com"
     ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -212,57 +171,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.blogto.com",
-        "sec": 0.472,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.46,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.286,
-        "kept": 14
-      },
-      {
         "host": "www.bls.gov",
-        "sec": 0.241,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.217,
-        "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.147,
+        "sec": 0.836,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.111,
+        "sec": 0.805,
         "kept": 14
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.099,
+        "host": "www.cp24.com",
+        "sec": 0.61,
         "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.098,
-        "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.086,
+        "sec": 0.574,
         "kept": 10
+      },
+      {
+        "host": "www.blogto.com",
+        "sec": 0.562,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.413,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.4,
+        "kept": 8
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.263,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.233,
+        "kept": 14
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.207,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 335.47,
+    "elapsed_sec": 340.41,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -298,17 +257,17 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 48,
+      "preferred_bonus": 47,
       "substack_tagged": 0,
       "sports_team_hits": 13,
-      "sports_player_hits": 8,
-      "sports_result_win_hits": 19,
+      "sports_player_hits": 7,
+      "sports_result_win_hits": 16,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 14,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_focus_team_hits": 13,
+      "sports_final_hits": 0,
+      "sports_final_score_hits": 0,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -317,11 +276,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 25,
+      "link_verification_fail": 24,
       "soft_404_drops": 42,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 2,
+      "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
