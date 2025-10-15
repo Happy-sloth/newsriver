@@ -1,30 +1,30 @@
 #!/usr/bin/env python3
 """
-headline_ticker.py — build a tiny 3-item ticker feed for the pill UI.
+headline_ticker.py — step 2: hyperbolic-only ticker for pill UI.
 
-Inputs:
-  --in   path to enriched headlines JSON (default: ./newsriver/headlines.json)
-  --out  path to ticker JSON to write     (default: ./newsriver/dredge_heds.json)
+- Reads  : ./newsriver/headlines.json  (unchanged pipeline source)
+- Writes : ./newsriver/dredge_heds.json (front-end ticker reads this)
 
-Selection strategy (same as before):
-  1) Filter to <=30h (hard cap). Prefer <=20h (soft window).
-  2) Up to TWO regional items, priority: Toronto → Vancouver → Montreal → New York → London (UK).
-     For each city, take the freshest non-crypto item.
-  3) ONE crypto (BTC/ETH). Prefer <=10h, then <=20h, else <=30h.
-  4) Backfill with freshest non-crypto to reach 3.
+Rules:
+  • SPORTS (hyperbolic): only specified pro teams (with a few aliases).
+    Rank by proximity to Toronto; Toronto teams get a big bonus.
+  • CASUALTY (hyperbolic): death/mass-casualty keywords AND the headline
+    geo is within 1200 km of Toronto. Geo is detected from the title
+    (gazetteer) or inferred from clearly local Toronto outlets.
 
-Output schema (matches front-end ticker):
-{
-  "items":[
-    {"text":"…","url":"…","flags":{"is_breaking":false,"is_landmark":false,"has_bitcoin":false}}
-  ],
-  "generated_at":"2025-01-15T01:31:10Z"
-}
+Selection:
+  1) Gather SPORTS + CASUALTY candidates (≤30h old, prefer ≤20h).
+  2) Score = recency_weight + proximity_weight (+ TOR team bonus).
+  3) Pick top 3 unique items.
+  4) Emit ticker schema: {"items":[{"text","url","flags":{...}},...],"generated_at": "…Z"}
+
+No front-end changes required.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -32,224 +32,322 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-# ---- Config knobs ------------------------------------------------------------
+# ------------------- Config knobs -------------------
 
-CITY_PRIORITY: List[Tuple[str, re.Pattern]] = [
-    ("Toronto",   re.compile(r"\btoronto\b|\bblue\s*jays\b|\bjays\b|\bmaple\s*leafs\b|\bleafs\b|\braptors\b|\bargos?\b|\btfc\b", re.I)),
-    ("Vancouver", re.compile(r"\bvancouver\b|\bwhitecaps\b", re.I)),
-    ("Montreal",  re.compile(r"\bmontreal\b|\bcanadiens\b|\bhabs\b|\balouettes\b", re.I)),
-    ("New York",  re.compile(r"\bnew\s*york\b(?!\s*times)", re.I)),
-    ("London",    re.compile(r"\blondon\b(?!,\s*ont|\s*ontario)", re.I)),  # prefer London, UK
-]
+SOFT_HOURS = 20
+HARD_HOURS = 30
+MAX_ITEMS  = 3
 
-CRYPTO_RE       = re.compile(r"\b(btc|bitcoin|eth|ethereum)\b", re.I)
-CRYPTO_DOMAINS  = re.compile(r"(coindesk|cointelegraph|theblock|decrypt|blockworks|coinmarketcap)", re.I)
-AGGREGATOR_RE   = re.compile(r"news\.google|news\.yahoo|apple\.news|bing\.com/news|msn\.com/en-", re.I)
+# Toronto ref (CN Tower-ish)
+TOR_LAT, TOR_LON = 43.6532, -79.3832
+CASUALTY_MAX_KM = 1200.0
+
+# Casualty (mass-incident) cues
+CASUALTY_RE = re.compile(
+    r"\b(dead|deaths?|killed|killing|fatal(ity|ities)?|mass\s+shooting|shooting|"
+    r"explosion|blast|bomb(ing)?|missile|air[-\s]?strike|"
+    r"earthquake|tornado|hurricane|wildfire|flood|tsunami|derailment|casualties?)\b",
+    re.I
+)
+
+# Obvious "Breaking" words (for flags only)
 BREAKING_HINTRE = re.compile(r"\b(breaking|developing|just in|alert)\b", re.I)
 
-SOFT_HOURS        = 20
-HARD_HOURS        = 30
-CRYPTO_PREF_HOURS = 10
-MAX_ITEMS         = 3
+# Treat these Toronto outlets as local-to-Toronto even without city mention
+TORONTO_LOCAL_DOMAINS = (
+    "toronto.citynews.ca",
+    "www.cp24.com",
+    "www.thestar.com",  # Toronto Star
+    "www.blogto.com",
+    "www.cbc.ca"  # CBC could be national; still OK for many GTA items
+)
 
-# ---- Types -------------------------------------------------------------------
+# Gazetteer (name -> (lat, lon)) — focused on within ~1200km of Toronto + a few team cities.
+GAZETTEER: Dict[str, Tuple[float, float]] = {
+    # GTA / Ontario
+    "toronto": (43.6532, -79.3832), "mississauga": (43.5890, -79.6441), "brampton": (43.7315, -79.7624),
+    "vaughan": (43.8372, -79.5083), "markham": (43.8561, -79.3370), "richmond hill": (43.8828, -79.4403),
+    "scarborough": (43.7731, -79.2578), "oakville": (43.4675, -79.6877), "burlington": (43.3255, -79.7990),
+    "oshawa": (43.8971, -78.8658), "pickering": (43.8384, -79.0868), "ajax": (43.8509, -79.0204),
+    "whitby": (43.8971, -78.9429), "aurora": (44.0065, -79.4504), "newmarket": (44.0592, -79.4613),
+    "hamilton": (43.2557, -79.8711), "guelph": (43.5448, -80.2482), "kitchener": (43.4516, -80.4925),
+    "waterloo": (43.4643, -80.5204), "cambridge": (43.3616, -80.3144), "london, ontario": (42.9849, -81.2453),
+    "st. catharines": (43.1594, -79.2469), "niagara falls": (43.0896, -79.0849), "windsor": (42.3149, -83.0364),
+    "barrie": (44.3894, -79.6903), "kingston": (44.2312, -76.4860), "ottawa": (45.4215, -75.6972),
+    # Quebec / East
+    "montreal": (45.5019, -73.5674), "quebec city": (46.8139, -71.2080), "sherbrooke": (45.4042, -71.8929),
+    # U.S. Great Lakes / Northeast
+    "buffalo": (42.8864, -78.8784), "rochester": (43.1566, -77.6088), "syracuse": (43.0481, -76.1474),
+    "albany": (42.6526, -73.7562), "boston": (42.3601, -71.0589), "new york": (40.7128, -74.0060),
+    "jersey city": (40.7178, -74.0431), "newark": (40.7357, -74.1724), "philadelphia": (39.9526, -75.1652),
+    "pittsburgh": (40.4406, -79.9959), "cleveland": (41.4993, -81.6944), "columbus": (39.9612, -82.9988),
+    "cincinnati": (39.1031, -84.5120), "detroit": (42.3314, -83.0458), "chicago": (41.8781, -87.6298),
+    "milwaukee": (43.0389, -87.9065), "washington": (38.9072, -77.0369), "baltimore": (39.2904, -76.6122),
+    # West Coast (for team mapping, even if >1200km)
+    "seattle": (47.6062, -122.3321), "san francisco": (37.7749, -122.4194), "los angeles": (34.0522, -118.2437),
+    "miami": (25.7617, -80.1918),
+}
+
+def haversine_km(lat1, lon1, lat2, lon2) -> float:
+    R = 6371.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dphi  = math.radians(lat2 - lat1)
+    dlmb  = math.radians(lon2 - lon1)
+    a = math.sin(dphi/2)**2 + math.cos(p1)*math.cos(p2)*math.sin(dlmb/2)**2
+    return 2*R*math.asin(math.sqrt(a))
+
+def km_to_toronto(city: str) -> Optional[float]:
+    c = city.lower()
+    if c not in GAZETTEER: return None
+    lat, lon = GAZETTEER[c]
+    return haversine_km(TOR_LAT, TOR_LON, lat, lon)
+
+# Sports team → city mapping (regex → canonical city name)
+SPORTS_TEAMS: List[Tuple[re.Pattern, str, str]] = [
+    # Toronto teams
+    (re.compile(r"\btoronto\s+maple\s*leafs\b|\bmaple\s*leafs\b|\bleafs\b", re.I), "Toronto", "NHL"),
+    (re.compile(r"\btoronto\s+blue\s*jays\b|\bblue\s*jays\b|\bjays\b", re.I), "Toronto", "MLB"),
+    (re.compile(r"\btoronto\s+argos?\b|\bargos?\b", re.I), "Toronto", "CFL"),
+    (re.compile(r"\btoronto\s+raptors\b|\braptors\b", re.I), "Toronto", "NBA"),
+    (re.compile(r"\btoronto\s+fc\b|\btfc\b", re.I), "Toronto", "MLS"),
+    (re.compile(r"\btoronto\s+sceptre\b", re.I), "Toronto", "OTHER"),
+    # Others you listed
+    (re.compile(r"\bmiami\s+dolphins?\b", re.I), "Miami", "NFL"),
+    (re.compile(r"\bsan\s+francisco\s+49(?:ers|’ers|ers)\b|\b49(?:ers|’ers|ers)\b", re.I), "San Francisco", "NFL"),
+    (re.compile(r"\bcincinnati\s+bengals?\b|\bbengals?\b", re.I), "Cincinnati", "NFL"),
+    (re.compile(r"\bla\s+dodgers\b|\blos\s+angeles\s+dodgers\b|\bdodgers\b", re.I), "Los Angeles", "MLB"),
+    (re.compile(r"\bmilwaukee\s+brewers\b|\bbrewers\b", re.I), "Milwaukee", "MLB"),
+    (re.compile(r"\bseattle\s+mariners\b|\bmariners\b", re.I), "Seattle", "MLB"),
+]
+
+AGGREGATOR_RE = re.compile(r"news\.google|news\.yahoo|apple\.news|bing\.com/news|msn\.com/en-", re.I)
+CRYPTO_DOMAINS = re.compile(r"(coindesk|cointelegraph|theblock|decrypt|blockworks|coinmarketcap)", re.I)
+
+# ------------------- Types -------------------
 
 @dataclass
-class Item:
+class RawItem:
     title: str
     url: str
     ts: datetime
     source: str
-    region_city: Optional[str]
-    is_crypto: bool
+    domain: str
 
-# ---- Helpers -----------------------------------------------------------------
+@dataclass
+class Cand:
+    item: RawItem
+    kind: str           # "SPORTS" | "CASUALTY"
+    city: Optional[str] # detected city
+    km: Optional[float] # distance to Toronto
+    score: float
+
+# ------------------- Core helpers -------------------
 
 def _to_list(root: Any) -> List[Dict[str, Any]]:
     if isinstance(root, list): return root
     if isinstance(root, dict):
-        for k in ("items", "articles", "data"):
+        for k in ("items","articles","data"):
             v = root.get(k)
             if isinstance(v, list): return v
     return []
 
-def _pick_url(it: Dict[str, Any]) -> str:
-    for k in ("canonical_url", "url", "link", "href", "permalink"):
-        v = it.get(k)
-        if isinstance(v, str) and v.strip():
-            return v.strip()
-    guid = it.get("guid")
-    if isinstance(guid, dict) and isinstance(guid.get("link"), str):
-        return guid["link"].strip()
+def _pick_url(d: Dict[str, Any]) -> str:
+    for k in ("canonical_url","url","link","href","permalink"):
+        v = d.get(k)
+        if isinstance(v, str) and v.strip(): return v.strip()
+    g = d.get("guid")
+    if isinstance(g, dict) and isinstance(g.get("link"), str): return g["link"].strip()
     return ""
 
-def _pick_title(it: Dict[str, Any]) -> str:
-    for k in ("title", "headline", "name", "text"):
-        v = it.get(k)
-        if isinstance(v, str) and v.strip():
-            return v.strip()
+def _pick_title(d: Dict[str, Any]) -> str:
+    for k in ("title","headline","name","text"):
+        v = d.get(k)
+        if isinstance(v, str) and v.strip(): return v.strip()
     return ""
 
-def _pick_source(it: Dict[str, Any]) -> str:
-    v = it.get("source") or it.get("publisher") or it.get("domain")
-    if isinstance(v, dict):
-        v = v.get("name") or v.get("domain")
+def _pick_source(d: Dict[str, Any]) -> str:
+    v = d.get("source") or d.get("publisher") or d.get("domain")
+    if isinstance(v, dict): v = v.get("name") or v.get("domain")
     return str(v or "")
+
+def _domain(url: str) -> str:
+    try:
+        from urllib.parse import urlparse
+        h = urlparse(url).netloc.lower()
+        return h[4:] if h.startswith("www.") else h
+    except Exception:
+        return ""
 
 def _parse_ts(raw: Any) -> Optional[datetime]:
     if isinstance(raw, (int, float)):
-        sec = raw / 1000.0 if raw > 10_000_000_000 else raw
+        sec = raw/1000.0 if raw > 10_000_000_000 else raw
         return datetime.fromtimestamp(sec, tz=timezone.utc)
     if not raw: return None
     s = str(raw).strip()
     s = s[:-1] + "+00:00" if s.endswith("Z") else s
     try:
-        dt = datetime.fromisoformat(s)
-        return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+        dt = datetime.fromisoformat(s);  return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
     except Exception:
         pass
     try:
-        dt = parsedate_to_datetime(s)
-        return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+        dt = parsedate_to_datetime(s);   return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
     except Exception:
         return None
 
-def _first_ts(it: Dict[str, Any]) -> Optional[datetime]:
+def _first_ts(d: Dict[str, Any]) -> Optional[datetime]:
     for k in ("published_utc","published_at","published","updated_at","pubDate","date","time","timestamp"):
-        dt = _parse_ts(it.get(k))
+        dt = _parse_ts(d.get(k))
         if dt: return dt.astimezone(timezone.utc)
     return None
 
-def _domain_from_url(url: str) -> str:
-    try:
-        from urllib.parse import urlparse
-        host = urlparse(url).netloc.lower()
-        return host[4:] if host.startswith("www.") else host
-    except Exception:
-        return ""
-
-def _is_agg(source: str, url: str) -> bool:
-    return bool(AGGREGATOR_RE.search(f"{source} {url}"))
-
-def _detect_city(title: str) -> Optional[str]:
-    for city, pat in CITY_PRIORITY:
-        if pat.search(title):
-            if city == "London" and re.search(r"\blondon\b,\s*(ont|ontario)\b", title, re.I):
-                return None
-            return city
-    return None
-
-def _is_crypto(title: str, url: str) -> bool:
-    return bool(CRYPTO_RE.search(title)) or bool(CRYPTO_DOMAINS.search(_domain_from_url(url)))
-
-def _age_hours(dt: datetime, now: datetime) -> float:
-    return max(0.0, (now - dt).total_seconds() / 3600.0)
+def _age_hours(dt: datetime) -> float:
+    now = datetime.now(timezone.utc)
+    return max(0.0, (now - dt).total_seconds()/3600.0)
 
 def _dedupe_key(title: str, url: str) -> str:
-    return f"{title.strip().lower()}|{_domain_from_url(url)}"
+    return f"{title.strip().lower()}|{_domain(url)}"
 
-# ---- Core selection -----------------------------------------------------------
-
-def load_items(path: Path) -> List[Item]:
+def load_raw(path: Path) -> List[RawItem]:
     try:
         root = json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return []
-    now = datetime.now(timezone.utc)
-
-    out: List[Item] = []
-    for raw in _to_list(root):
-        title = _pick_title(raw)
-        url   = _pick_url(raw)
+    out: List[RawItem] = []
+    for r in _to_list(root):
+        title = _pick_title(r); url = _pick_url(r)
         if not title or not url: continue
-        if _is_agg(_pick_source(raw), url): continue
-
-        ts = _first_ts(raw)
-        if not ts: continue
-        if _age_hours(ts, now) > HARD_HOURS: continue
-
-        out.append(Item(
-            title=title,
-            url=url,
-            ts=ts,
-            source=_pick_source(raw),
-            region_city=_detect_city(title),
-            is_crypto=_is_crypto(title, url),
-        ))
-
-    out.sort(key=lambda i: i.ts, reverse=True)  # freshest first
+        src = _pick_source(r)
+        if AGGREGATOR_RE.search(f"{src} {url}"): continue
+        ts = _first_ts(r)
+        if not ts or _age_hours(ts) > HARD_HOURS: continue
+        out.append(RawItem(title=title, url=url, ts=ts, source=src, domain=_domain(url)))
+    # newest first
+    out.sort(key=lambda x: x.ts, reverse=True)
     return out
 
-def choose_ticker(items: List[Item]) -> List[Item]:
-    now = datetime.now(timezone.utc)
-    chosen: List[Item] = []
+# ------------------- Detection -------------------
+
+def detect_sports_city(title: str) -> Optional[str]:
+    for pat, city, _league in SPORTS_TEAMS:
+        if pat.search(title): return city
+    return None
+
+CITY_NAME_RE = re.compile("|".join(
+    sorted((re.escape(n) for n in GAZETTEER.keys()), key=len, reverse=True)
+), re.I)
+
+def detect_city_from_title(title: str) -> Optional[str]:
+    m = CITY_NAME_RE.search(title)
+    if not m: return None
+    name = m.group(0).lower()
+    # normalize common variants
+    if name == "london, ontario": return "london, ontario"
+    return name
+
+def infer_toronto_from_domain(domain: str) -> bool:
+    return domain in TORONTO_LOCAL_DOMAINS
+
+def is_crypto_like(title: str, domain: str) -> bool:
+    return bool(re.search(r"\b(btc|bitcoin|eth|ethereum)\b", title, re.I)) or bool(CRYPTO_DOMAINS.search(domain))
+
+# ------------------- Candidate building -------------------
+
+def build_candidates(rows: List[RawItem]) -> List[Cand]:
+    cands: List[Cand] = []
+
+    for r in rows:
+        title_l = r.title.lower()
+
+        # SPORTS: match listed pro teams only (crypto-filtered out)
+        sport_city = detect_sports_city(title_l)
+        if sport_city and not is_crypto_like(title_l, r.domain):
+            km = km_to_toronto(sport_city.lower())
+            cands.append(Cand(item=r, kind="SPORTS", city=sport_city, km=km, score=0.0))
+            continue
+
+        # CASUALTY: must have cues + within 1200 km of Toronto
+        if CASUALTY_RE.search(title_l):
+            city = detect_city_from_title(title_l)
+            if not city and infer_toronto_from_domain(r.domain):
+                city = "toronto"
+            if city:
+                km = km_to_toronto(city)
+                if km is not None and km <= CASUALTY_MAX_KM:
+                    cands.append(Cand(item=r, kind="CASUALTY", city=city, km=km, score=0.0))
+
+    return cands
+
+# ------------------- Scoring & selection -------------------
+
+def score_candidate(c: Cand) -> float:
+    # Recency: newer is better (≤20h gets a boost)
+    age_h = _age_hours(c.item.ts)
+    recency = max(0.0, (HARD_HOURS - age_h))  # 0..30
+    if age_h <= SOFT_HOURS:
+        recency += 10.0
+
+    # Proximity: closer is better (SPORTS uses proximity for ordering; CASUALTY is hard-capped at 1200 km)
+    prox = 0.0
+    if c.km is not None:
+        prox = max(0.0, 1000.0 - c.km) / 10.0  # 0..100-ish
+
+    # Toronto team bonus
+    tor_bonus = 40.0 if (c.kind == "SPORTS" and (c.city or "").lower() == "toronto") else 0.0
+
+    return recency + prox + tor_bonus
+
+def select_top(cands: List[Cand]) -> List[Cand]:
     seen = set()
+    for c in cands:
+        c.score = score_candidate(c)
+    cands.sort(key=lambda x: (x.score, x.item.ts), reverse=True)
 
-    def add(it: Item) -> bool:
-        key = _dedupe_key(it.title, it.url)
-        if key in seen: return False
+    out: List[Cand] = []
+    for c in cands:
+        key = _dedupe_key(c.item.title, c.item.url)
+        if key in seen: continue
         seen.add(key)
-        chosen.append(it)
-        return True
+        out.append(c)
+        if len(out) >= MAX_ITEMS: break
+    return out
 
-    soft_noncrypto = [i for i in items if not i.is_crypto and _age_hours(i.ts, now) <= SOFT_HOURS]
-    hard_noncrypto = [i for i in items if not i.is_crypto]
+# ------------------- Wire -------------------
 
-    # 1) Up to two regional (priority order)
-    for city, _ in CITY_PRIORITY:
-        if len(chosen) >= 2: break
-        pool = [i for i in soft_noncrypto if i.region_city == city] or [i for i in hard_noncrypto if i.region_city == city]
-        if pool: add(pool[0])
-
-    # 2) One crypto, freshest within pref windows
-    crypto10 = [i for i in items if i.is_crypto and _age_hours(i.ts, now) <= CRYPTO_PREF_HOURS]
-    crypto20 = [i for i in items if i.is_crypto and _age_hours(i.ts, now) <= SOFT_HOURS]
-    crypto30 = [i for i in items if i.is_crypto]
-    for pool in (crypto10, crypto20, crypto30):
-        if len(chosen) >= 3: break
-        if pool: add(pool[0])
-
-    # 3) Backfill to 3 with freshest non-crypto
-    if len(chosen) < MAX_ITEMS:
-        for it in soft_noncrypto + [i for i in hard_noncrypto if _dedupe_key(i.title, i.url) not in seen]:
-            if len(chosen) >= MAX_ITEMS: break
-            add(it)
-
-    return chosen[:MAX_ITEMS]
-
-def to_ticker_wire(items: List[Item]) -> Dict[str, Any]:
+def to_ticker_wire(picked: List[Cand]) -> Dict[str, Any]:
     def iso(dt: datetime) -> str:
         return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    wire_items = []
-    for it in items:
+    items = []
+    for c in picked:
         flags = {
-            "has_bitcoin": bool(CRYPTO_RE.search(it.title)),
-            "is_breaking": bool(BREAKING_HINTRE.search(it.title)),
-            "is_landmark": bool(it.region_city in {"Toronto"} or re.search(r"\b(blue\s*jays|maple\s*leafs|raptors)\b", it.title, re.I)),
+            "is_breaking": bool(BREAKING_HINTRE.search(c.item.title)),
+            "is_landmark": (c.kind == "SPORTS" and (c.city or "").lower() == "toronto"),
+            "has_bitcoin": False,  # hyperbolic ticker excludes crypto on purpose
         }
-        wire_items.append({"text": it.title, "url": it.url, "flags": flags})
+        items.append({
+            "text": c.item.title,
+            "url":  c.item.url,
+            "flags": flags
+        })
+    return {"items": items, "generated_at": iso(datetime.now(timezone.utc))}
 
-    return {"items": wire_items, "generated_at": iso(datetime.now(timezone.utc))}
-
-# ---- CLI ---------------------------------------------------------------------
+# ------------------- CLI -------------------
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Build 3-item ticker JSON for pill UI.")
-    ap.add_argument("--in",  dest="inp", default="./newsriver/headlines.json",     help="input enriched headlines JSON")
-    ap.add_argument("--out", dest="out", default="./newsriver/dredge_heds.json",  help="output ticker JSON (front-end reads this)")
+    ap = argparse.ArgumentParser(description="Build hyperbolic-only 3-item ticker JSON for pill UI.")
+    ap.add_argument("--in",  dest="inp", default="./newsriver/headlines.json",    help="input enriched headlines JSON")
+    ap.add_argument("--out", dest="out", default="./newsriver/dredge_heds.json", help="output ticker JSON (front-end reads this)")
     args = ap.parse_args()
 
-    in_path  = Path(args.inp)
+    rows = load_raw(Path(args.inp))
+    cands = build_candidates(rows)
+    picked = select_top(cands)
+    wire = to_ticker_wire(picked)
+
     out_path = Path(args.out)
-
-    items  = load_items(in_path)
-    picked = choose_ticker(items)
-    wire   = to_ticker_wire(picked)
-
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(wire, ensure_ascii=False, separators=(",", ":"), indent=2), encoding="utf-8")
-    print(f"[headline_ticker] wrote {len(wire['items'])} items → {out_path}")
+    print(f"[headline_ticker] {len(picked)} items → {out_path}")
     return 0
 
 if __name__ == "__main__":
