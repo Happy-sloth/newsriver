@@ -1,7 +1,23 @@
 {
-  "generated_utc": "2025-10-15T05:19:21.657Z",
-  "count": 3,
+  "generated_utc": "2025-10-15T05:41:46.463Z",
+  "count": 4,
   "items": [
+    {
+      "title": "Chevron Wants to Weigh In on the Launch of Venture Global’s New LNG Plant",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Chevron-Wants-to-Weigh-In-on-the-Launch-of-Venture-Globals-New-LNG-Plant.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-15T05:32:56.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
     {
       "title": "Conan O’Brien’s Emmy-Winning TBS Series Lands at Radial Entertainment",
       "url": "https://variety.com/2025/tv/news/conan-obrien-tbs-series-radial-entertainment-1236552670",
@@ -45,10 +61,12 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 832,
+    "collected": 833,
     "dedup_pass1": 820,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "rollcall.com"
+    ],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -59,7 +77,6 @@
       "feeds.reuters.com"
     ],
     "caps_hit": [
-      "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
       "nypost.com",
@@ -73,56 +90,56 @@
     "feed_times_sample": [
       {
         "host": "www.cp24.com",
-        "sec": 0.441,
+        "sec": 0.906,
+        "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.653,
+        "kept": 8
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.618,
         "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.409,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.304,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.279,
+        "sec": 0.474,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.254,
+        "sec": 0.469,
         "kept": 0
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.195,
-        "kept": 8
+        "host": "www.bls.gov",
+        "sec": 0.292,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.29,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.27,
+        "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.102,
+        "sec": 0.14,
         "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.081,
+        "sec": 0.087,
         "kept": 10
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.079,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.073,
-        "kept": 14
       }
     ],
-    "elapsed_sec": 305.58,
+    "elapsed_sec": 345.79,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -158,7 +175,7 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 49,
+      "preferred_bonus": 48,
       "substack_tagged": 0,
       "sports_team_hits": 11,
       "sports_player_hits": 21,
@@ -177,7 +194,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 18,
+      "link_verification_fail": 32,
       "soft_404_drops": 30,
       "max_age_drops": 0,
       "min_age_drops": 8,
