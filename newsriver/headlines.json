@@ -1,12 +1,25 @@
 {
-  "generated_utc": "2025-10-15T07:39:12.674Z",
-  "count": 15,
+  "generated_utc": "2025-10-15T07:47:57.154Z",
+  "count": 14,
   "items": [
     {
-      "title": "78-year-old man arrested on suspicion of killing female relative in her 40s ‘at her request’",
-      "url": "https://japantoday.com/category/crime/78-year-old-man-arrested-on-suspicion-of-killing-female-relative-in-her-40s-%E2%80%98at-her-request%E2%80%99",
+      "title": "Heads of 3 opposition parties meet to discuss vote for next PM",
+      "url": "https://japantoday.com/category/politics/Heads-of-3-opposition-parties-meet-to-discuss-vote-for-next-PM",
       "source": "Japan Today",
-      "published_utc": "2025-10-15T07:34:49.000Z",
+      "published_utc": "2025-10-15T07:42:45.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Ex-employee apprehended after 2 nursing home residents die in Saitama",
+      "url": "https://japantoday.com/category/crime/Ex-employee-apprehended-after-2-nursing-home-residents-die-in-Saitama",
+      "source": "Japan Today",
+      "published_utc": "2025-10-15T07:36:30.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -20,32 +33,6 @@
       "url": "https://japantoday.com/category/national/video-of-nuisance-behavior-at-kura-sushi-branch-goes-viral-on-social-media",
       "source": "Japan Today",
       "published_utc": "2025-10-15T07:33:59.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Heads of 3 opposition parties to meet to discuss vote for next PM",
-      "url": "https://japantoday.com/category/politics/Heads-of-3-opposition-parties-meet-to-discuss-vote-for-next-PM",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:33:45.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Ex-nursing home employee apprehended after 2 residents die in Saitama",
-      "url": "https://japantoday.com/category/crime/Ex-employee-apprehended-after-2-nursing-home-residents-die-in-Saitama",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T07:33:28.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -211,7 +198,7 @@
     "dedup_pass1": 832,
     "dedup_final": 320,
     "slow_domains": [
-      "reason.com"
+      "thehill.com"
     ],
     "timeouts": [
       "news.communitech.ca",
@@ -235,57 +222,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.cp24.com",
-        "sec": 0.474,
-        "kept": 14
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.439,
+        "sec": 0.479,
         "kept": 0
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.327,
+        "host": "www.cp24.com",
+        "sec": 0.418,
         "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.263,
-        "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.156,
+        "sec": 0.338,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.149,
+        "sec": 0.295,
         "kept": 8
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.132,
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.228,
         "kept": 0
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.117,
-        "kept": 10
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.093,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.199,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.084,
+        "sec": 0.136,
         "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.127,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.08,
+        "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.067,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 339.89,
+    "elapsed_sec": 225.7,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -325,11 +312,11 @@
       "substack_tagged": 0,
       "sports_team_hits": 11,
       "sports_player_hits": 22,
-      "sports_result_win_hits": 19,
+      "sports_result_win_hits": 21,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 19,
+      "sports_focus_team_hits": 21,
       "sports_final_hits": 2,
       "sports_final_score_hits": 2,
       "hype_politics": 0,
@@ -340,8 +327,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 33,
-      "soft_404_drops": 26,
+      "link_verification_fail": 23,
+      "soft_404_drops": 30,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 4,
