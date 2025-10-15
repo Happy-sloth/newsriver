@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-15T05:49:54.975Z",
-  "count": 7,
+  "generated_utc": "2025-10-15T05:58:01.698Z",
+  "count": 6,
   "items": [
+    {
+      "title": "Supreme Court rejects Alex Jones' appeal of Sandy Hook shooting defamation judgment",
+      "url": "https://www.npr.org/2025/10/15/nx-s1-5574929/supreme-court-alex-jones-defamation-judgment",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T05:38:47.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Chevron Wants to Weigh In on the Launch of Venture Global’s New LNG Plant",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/Chevron-Wants-to-Weigh-In-on-the-Launch-of-Venture-Globals-New-LNG-Plant.html",
@@ -17,19 +30,6 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "Britain must urgently prepare for hotter temperatures, climate advisers warn",
-      "url": "https://japantoday.com/category/world/britain-must-urgently-prepare-for-hotter-temperatures-climate-advisers-warn",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T04:37:52.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     },
     {
       "title": "Conan O’Brien’s Emmy-Winning TBS Series Lands at Radial Entertainment",
@@ -53,22 +53,6 @@
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Yamamoto throws 3-hitter as Dodgers beat Brewers 5-1 for 2-0 lead in NLCS",
-      "url": "https://japantoday.com/category/sports/yamamoto-throws-3-hitter-as-dodgers-beat-brewers-5-1-for-2-0-lead-in-nlcs",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T03:47:57.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
       },
       "category": "General",
       "region": "World"
@@ -103,13 +87,14 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 848,
-    "dedup_pass1": 835,
+    "collected": 834,
+    "dedup_pass1": 821,
     "dedup_final": 320,
     "slow_domains": [
-      "rollcall.com"
+      "financialpost.com"
     ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -131,57 +116,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.mlb.com",
-        "sec": 0.631,
-        "kept": 14
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.619,
+        "sec": 0.532,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.512,
+        "sec": 0.33,
         "kept": 8
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.469,
-        "kept": 0
-      },
-      {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.438,
+        "sec": 0.273,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.351,
+        "sec": 0.251,
         "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.328,
+        "sec": 0.24,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.167,
+        "kept": 0
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.151,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.208,
+        "sec": 0.081,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.204,
+        "sec": 0.071,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.161,
+        "sec": 0.068,
         "kept": 10
       }
     ],
-    "elapsed_sec": 267.86,
+    "elapsed_sec": 251.87,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -221,13 +206,13 @@
       "substack_tagged": 0,
       "sports_team_hits": 11,
       "sports_player_hits": 22,
-      "sports_result_win_hits": 21,
+      "sports_result_win_hits": 19,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 21,
-      "sports_final_hits": 2,
-      "sports_final_score_hits": 2,
+      "sports_focus_team_hits": 20,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -237,7 +222,7 @@
     },
     "sanity_stats": {
       "link_verification_fail": 31,
-      "soft_404_drops": 29,
+      "soft_404_drops": 31,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 3,
