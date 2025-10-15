@@ -1,12 +1,64 @@
 {
-  "generated_utc": "2025-10-15T09:25:56.569Z",
-  "count": 12,
+  "generated_utc": "2025-10-15T09:42:49.591Z",
+  "count": 13,
   "items": [
+    {
+      "title": "Creator Economy Crosses Over Into Mainstream Media at Mipcom as After Party Studios, Dhar Mann Studios and Tubi Unpack Their Different Models",
+      "url": "https://variety.com/2025/tv/global/creator-economy-upfronts-mipcom-after-party-dhar-mann-tubi-1236552566",
+      "source": "Variety",
+      "published_utc": "2025-10-15T09:30:55.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Bruce Springsteen Hails Stephen Graham’s Portrayal of His ‘Troubled’ Father in ‘Deliver Me From Nowhere’: He ‘Just Naturally Inhabited His Skin’",
+      "url": "https://variety.com/2025/film/global/bruce-springsteen-hails-stephen-graham-in-biopic-1236553262",
+      "source": "Film",
+      "published_utc": "2025-10-15T09:26:29.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Doha Film Festival Unveils Competition Lineup, With Emphasis on Gaza and Regional Fare",
       "url": "https://variety.com/2025/film/festivals/doha-film-festival-competition-lineup-gaza-1236553231",
       "source": "Film",
       "published_utc": "2025-10-15T09:08:21.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Thousands of federal employees are getting laid off. Will a judge intervene?",
+      "url": "https://www.npr.org/2025/10/15/nx-s1-5574111/government-shutdown-federal-employees-congress-rif",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T09:01:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "How much can Tesla pay Elon Musk? Delaware's Supreme Court will decide",
+      "url": "https://www.npr.org/2025/10/15/nx-s1-5567930/elon-musk-tesla-compensation-case-appeal",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-15T09:00:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -121,54 +173,17 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "‘High Wire’ Director Calif Chong on Stephen Chow Dreams, BFI London Film Festival Premiere and Making Immigration Funny",
-      "url": "https://variety.com/2025/film/festivals/high-wire-calif-chong-stephen-chow-bfi-london-film-festival-racism-1236553223",
-      "source": "Film",
-      "published_utc": "2025-10-15T07:04:21.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Victoria's Secret Fashion Show, Hottest Moments Over the Years",
-      "url": "https://www.tmz.com/2025/10/15/victorias-secret-fashion-show-hottest-moments",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-15T07:01:54.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Kandi Burruss' Fall Fashion Finds for Under $50",
-      "url": "https://www.tmz.com/2025/10/15/kandi-burruss-fall-items-under-50",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-15T07:01:19.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
     "collected": 846,
-    "dedup_pass1": 830,
+    "dedup_pass1": 831,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "toronto.citynews.ca"
+    ],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -191,57 +206,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "toronto.citynews.ca",
+        "sec": 3.666,
+        "kept": 8
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.548,
+        "sec": 0.522,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
+        "sec": 0.491,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.297,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
         "sec": 0.278,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.264,
+        "sec": 0.224,
         "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.263,
-        "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.199,
-        "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.192,
-        "kept": 8
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.178,
+        "sec": 0.196,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.095,
+        "sec": 0.093,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.079,
+        "sec": 0.059,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.045,
+        "sec": 0.039,
         "kept": 10
       }
     ],
-    "elapsed_sec": 278.24,
+    "elapsed_sec": 263.17,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -269,7 +284,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 12,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -279,8 +294,8 @@
       "press_penalties": 0,
       "preferred_bonus": 48,
       "substack_tagged": 0,
-      "sports_team_hits": 13,
-      "sports_player_hits": 21,
+      "sports_team_hits": 14,
+      "sports_player_hits": 20,
       "sports_result_win_hits": 22,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
@@ -296,8 +311,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 21,
-      "soft_404_drops": 42,
+      "link_verification_fail": 23,
+      "soft_404_drops": 41,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 6,
