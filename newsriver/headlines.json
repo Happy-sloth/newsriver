@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-15T06:51:24.562Z",
-  "count": 9,
+  "generated_utc": "2025-10-15T07:01:24.704Z",
+  "count": 7,
   "items": [
     {
       "title": "FilmSharks Secures Rights to Political Action Thriller Project ‘Insurrección,’ Teams With ‘El Capo”s Marlon Moreno (EXCLUSIVE)",
@@ -58,19 +58,6 @@
       "region": "Canada"
     },
     {
-      "title": "Britain must urgently prepare for hotter temperatures, climate advisers warn",
-      "url": "https://japantoday.com/category/world/britain-must-urgently-prepare-for-hotter-temperatures-climate-advisers-warn",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T04:37:52.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Conan O’Brien’s Emmy-Winning TBS Series Lands at Radial Entertainment",
       "url": "https://variety.com/2025/tv/news/conan-obrien-tbs-series-radial-entertainment-1236552670",
       "source": "Variety",
@@ -97,22 +84,6 @@
       "region": "World"
     },
     {
-      "title": "Yamamoto throws 3-hitter as Dodgers beat Brewers 5-1 for 2-0 lead in NLCS",
-      "url": "https://japantoday.com/category/sports/yamamoto-throws-3-hitter-as-dodgers-beat-brewers-5-1-for-2-0-lead-in-nlcs",
-      "source": "Japan Today",
-      "published_utc": "2025-10-15T03:47:57.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Newsom rejects parole for Patricia Krenwinkel, convicted in the 1969 Manson family murders",
       "url": "https://www.dailynews.com/2025/10/14/newsom-rejects-parole-for-patricia-krenwinkel-convicted-in-the-1969-manson-family-murders",
       "source": "Daily News",
@@ -129,11 +100,12 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 842,
-    "dedup_pass1": 829,
+    "collected": 832,
+    "dedup_pass1": 819,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -142,6 +114,7 @@
       "feeds.reuters.com"
     ],
     "caps_hit": [
+      "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
       "nypost.com",
@@ -154,18 +127,23 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.cp24.com",
-        "sec": 0.508,
-        "kept": 14
-      },
-      {
-        "host": "www.blogto.com",
-        "sec": 0.445,
+        "host": "www.bls.gov",
+        "sec": 0.555,
         "kept": 0
       },
       {
+        "host": "www.blogto.com",
+        "sec": 0.509,
+        "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.347,
+        "kept": 14
+      },
+      {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.275,
+        "sec": 0.265,
         "kept": 14
       },
       {
@@ -174,37 +152,32 @@
         "kept": 0
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.211,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.166,
+        "sec": 0.153,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.139,
-        "kept": 14
-      },
-      {
         "host": "www.nhl.com",
-        "sec": 0.128,
+        "sec": 0.089,
         "kept": 0
       },
       {
+        "host": "www.mlb.com",
+        "sec": 0.074,
+        "kept": 14
+      },
+      {
         "host": "www.federalreserve.gov",
-        "sec": 0.075,
+        "sec": 0.07,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.053,
+        "sec": 0.062,
         "kept": 10
       }
     ],
-    "elapsed_sec": 303.36,
+    "elapsed_sec": 251.97,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -240,17 +213,17 @@
       "market_single_hits": 1,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 45,
+      "preferred_bonus": 49,
       "substack_tagged": 0,
       "sports_team_hits": 11,
       "sports_player_hits": 22,
-      "sports_result_win_hits": 21,
+      "sports_result_win_hits": 19,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 21,
-      "sports_final_hits": 2,
-      "sports_final_score_hits": 2,
+      "sports_focus_team_hits": 20,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -259,8 +232,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 30,
-      "soft_404_drops": 30,
+      "link_verification_fail": 31,
+      "soft_404_drops": 31,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 4,
