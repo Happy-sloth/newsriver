@@ -1,12 +1,25 @@
 {
-  "generated_utc": "2025-10-15T23:44:36.961Z",
-  "count": 9,
+  "generated_utc": "2025-10-15T23:56:06.507Z",
+  "count": 8,
   "items": [
     {
       "title": "Sabrina Carpenter will select 20 lucky fans to join her on Short n’ Sweet TV show",
       "url": "https://www.dailynews.com/2025/10/15/sabrina-carpenter-will-select-20-lucky-fans-to-join-her-on-short-n-sweet-tv-show",
       "source": "Daily News",
       "published_utc": "2025-10-15T23:11:12.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Flag football: Newbury Park wins Marmonte League title; West Ranch and Hart fighting for Foothill League crown",
+      "url": "https://www.dailynews.com/2025/10/15/flag-football-newbury-park-wins-marmonte-league-title-west-ranch-and-hart-fighting-for-foothill-league-crown",
+      "source": "Daily News",
+      "published_utc": "2025-10-15T23:10:37.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -98,45 +111,16 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "Nine Players Elect Free Agency",
-      "url": "https://www.mlbtraderumors.com/2025/10/nine-players-elect-free-agency-2.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-15T22:17:51.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Top 5 Branded Videos of the Week: Love is in the air",
-      "url": "https://www.tubefilter.com/2025/10/15/top-5-youtube-branded-videos-mrbeast-salish-matter-daniel-labelle",
-      "source": "Tubefilter",
-      "published_utc": "2025-10-15T22:10:45.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 842,
-    "dedup_pass1": 829,
+    "collected": 845,
+    "dedup_pass1": 830,
     "dedup_final": 320,
     "slow_domains": [
-      "www.yrp.ca"
+      "toronto.citynews.ca"
     ],
     "timeouts": [
       "japantoday.com",
@@ -148,7 +132,6 @@
       "feeds.reuters.com"
     ],
     "caps_hit": [
-      "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
       "nypost.com",
@@ -161,57 +144,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "toronto.citynews.ca",
+        "sec": 5.092,
+        "kept": 8
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.401,
+        "sec": 0.535,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.372,
+        "sec": 0.355,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.275,
+        "sec": 0.298,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.215,
+        "sec": 0.235,
         "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.177,
-        "kept": 8
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.171,
+        "sec": 0.206,
         "kept": 0
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.134,
-        "kept": 10
-      },
-      {
         "host": "www.bls.gov",
-        "sec": 0.129,
+        "sec": 0.199,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.12,
+        "sec": 0.14,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.052,
+        "sec": 0.103,
         "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.079,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 238.99,
+    "elapsed_sec": 245.19,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -247,7 +230,7 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 50,
+      "preferred_bonus": 48,
       "substack_tagged": 0,
       "sports_team_hits": 13,
       "sports_player_hits": 6,
@@ -266,8 +249,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 39,
-      "soft_404_drops": 34,
+      "link_verification_fail": 36,
+      "soft_404_drops": 35,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 3,
