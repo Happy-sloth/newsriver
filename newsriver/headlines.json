@@ -1,7 +1,49 @@
 {
-  "generated_utc": "2025-10-15T14:20:21.401Z",
+  "generated_utc": "2025-10-15T14:47:32.213Z",
   "count": 8,
   "items": [
+    {
+      "title": "Anthony Volpe Undergoes Shoulder Surgery",
+      "url": "https://www.mlbtraderumors.com/2025/10/anthony-volpe-undergoes-shoulder-surgery.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-15T14:38:53.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Mets Sign Joe Jacques To Minors Contract",
+      "url": "https://www.mlbtraderumors.com/2025/10/mets-sign-joe-jacques-to-minors-contract.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-15T14:33:40.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Hungary Slams EU’s Energy Policy",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Hungary-Slams-EUs-Energy-Policy.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-15T14:30:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
     {
       "title": "Another STM strike: Montreal bus drivers and metro operators warn of potential walkout",
       "url": "https://cultmtl.com/2025/10/another-stm-strike-montreal-bus-drivers-metro-operators-warn-of-potential-walkout",
@@ -69,56 +111,18 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "‘The Testament of Ann Lee’ Star Viola Prettejohn on Standing Ovation Tears and Why She’d Follow Amanda Seyfried to the Promised Land: ‘She’s Quite Entrancing!’",
-      "url": "https://variety.com/2025/film/global/testament-of-ann-lee-star-viola-prettejohn-dancing-singing-1236552406",
-      "source": "Film",
-      "published_utc": "2025-10-15T13:34:15.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Kevin Federline Accuses Britney Spears of Cheating on Him, With a Woman",
-      "url": "https://www.tmz.com/2025/10/15/kevin-federline-britney-spears-cheating",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-15T13:31:41.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "The Opener: ALCS, Re-Signings, Cubs",
-      "url": "https://www.mlbtraderumors.com/2025/10/the-opener-alcs-re-signings-cubs.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-15T13:30:16.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 838,
-    "dedup_pass1": 823,
+    "collected": 772,
+    "dedup_pass1": 766,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "thehill.com"
+    ],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -130,7 +134,6 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "nypost.com",
       "toronto.citynews.ca",
       "variety.com",
       "www.boston.com",
@@ -140,57 +143,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.blogto.com",
-        "sec": 0.576,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.428,
-        "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.419,
-        "kept": 8
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.414,
-        "kept": 0
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.486,
+        "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.385,
+        "sec": 0.466,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.322,
+        "sec": 0.465,
         "kept": 14
+      },
+      {
+        "host": "www.blogto.com",
+        "sec": 0.417,
+        "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.24,
+        "sec": 0.335,
         "kept": 14
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.216,
-        "kept": 14
+        "host": "www.bls.gov",
+        "sec": 0.247,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.182,
+        "kept": 8
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.144,
+        "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.196,
+        "sec": 0.103,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.142,
+        "sec": 0.075,
         "kept": 10
       }
     ],
-    "elapsed_sec": 303.06,
+    "elapsed_sec": 344.31,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -218,7 +221,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 9,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -228,13 +231,13 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 12,
+      "sports_team_hits": 13,
       "sports_player_hits": 13,
-      "sports_result_win_hits": 17,
+      "sports_result_win_hits": 16,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 14,
+      "sports_focus_team_hits": 13,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -245,11 +248,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 38,
+      "link_verification_fail": 39,
       "soft_404_drops": 27,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 3,
+      "market_sanity_drops": 4,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
