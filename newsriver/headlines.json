@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-15T19:57:11.056Z",
-  "count": 3,
+  "generated_utc": "2025-10-15T20:20:33.432Z",
+  "count": 8,
   "items": [
     {
-      "title": "He Tweeted Charlie Kirk “Won’t Be Remembered as a Hero.” The State Dept. Revoked His Visa",
-      "url": "https://theintercept.com/2025/10/15/state-department-charlie-kirk-visa-social-media-censorship",
-      "source": "The Intercept",
-      "published_utc": "2025-10-15T19:19:27.000Z",
+      "title": "UCLA football team happy to deliver for Jerry Neuheisel",
+      "url": "https://www.dailynews.com/2025/10/15/ucla-football-team-happy-to-deliver-for-jerry-neuheisel",
+      "source": "Daily News",
+      "published_utc": "2025-10-15T20:17:12.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -16,47 +16,108 @@
       "region": "World"
     },
     {
-      "title": "The federal government is still shut down. Here's what that means across the country",
-      "url": "https://www.npr.org/2025/10/15/nx-s1-5575134/government-shutdown",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-15T19:07:26.000Z",
+      "title": "Twins To Interview Nick Punto About Managerial Vacancy",
+      "url": "https://www.mlbtraderumors.com/2025/10/twins-to-interview-nick-punto-about-managerial-vacancy.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-15T20:13:10.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "General",
       "region": "World"
     },
     {
-      "title": "Crude Oil Could Fall Below $50, BofA Warns",
-      "url": "https://oilprice.com/Energy/Crude-Oil/Crude-Oil-Could-Fall-Below-50-BofA-Warns.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-15T19:00:00.000Z",
+      "title": "‘Splinter Cell: Deathwatch’ Renewed for Season 2 at Netflix",
+      "url": "https://variety.com/2025/tv/news/splinter-cell-deathwatch-renewed-season-2-netflix-1236553948",
+      "source": "Variety",
+      "published_utc": "2025-10-15T20:06:36.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "OpenAI’s Plans to Roll Out AI ‘Erotica’ for ChatGPT Slammed by Anti-Porn Group",
+      "url": "https://variety.com/2025/digital/news/openai-erotica-chatgpt-anti-porn-group-ncose-1236553925",
+      "source": "Variety",
+      "published_utc": "2025-10-15T20:03:41.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "How Will America’s Lithium Boom Impact Prices?",
+      "url": "https://oilprice.com/Metals/Commodities/How-Will-Americas-Lithium-Boom-Impact-Prices.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-15T20:00:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
         "reasons": [
-          "score≥1.6"
+          "score≥2.5"
         ],
-        "style": "glitch"
+        "style": "lightsaber"
       },
       "category": "Energy",
       "region": "Canada"
+    },
+    {
+      "title": "Twins Claim Ryan Kreidler",
+      "url": "https://www.mlbtraderumors.com/2025/10/twins-claim-ryan-kreidler.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-15T19:56:40.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Chicago White Sox Praise Pope Leo XIV For Cubs 'Lost' Quip",
+      "url": "https://www.tmz.com/2025/10/15/white-sox-praise-pope-leo-for-cubs-quip",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-15T19:54:28.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "‘Big Rock Burning’ Documentary, About Aftermath of Palisades Fire, Reveals Trailer and Streaming Date",
+      "url": "https://variety.com/2025/film/news/big-rock-burning-documentary-trailer-streaming-date-1236553792",
+      "source": "Film",
+      "published_utc": "2025-10-15T19:28:03.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 846,
-    "dedup_pass1": 831,
+    "collected": 856,
+    "dedup_pass1": 844,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -78,57 +139,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "www.blogto.com",
+        "sec": 0.472,
+        "kept": 0
+      },
+      {
         "host": "www.cp24.com",
-        "sec": 0.609,
+        "sec": 0.348,
         "kept": 14
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.479,
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.279,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.277,
-        "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.274,
-        "kept": 8
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.232,
+        "sec": 0.229,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.232,
+        "sec": 0.207,
         "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.215,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.125,
-        "kept": 0
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.07,
-        "kept": 10
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.06,
+        "sec": 0.171,
         "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.134,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.116,
+        "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.11,
+        "kept": 8
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.062,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 309.88,
+    "elapsed_sec": 258.65,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -164,17 +225,17 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 49,
+      "preferred_bonus": 48,
       "substack_tagged": 0,
-      "sports_team_hits": 12,
-      "sports_player_hits": 8,
-      "sports_result_win_hits": 20,
+      "sports_team_hits": 13,
+      "sports_player_hits": 7,
+      "sports_result_win_hits": 21,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 12,
-      "sports_final_hits": 0,
-      "sports_final_score_hits": 0,
+      "sports_focus_team_hits": 13,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -184,7 +245,7 @@
     },
     "sanity_stats": {
       "link_verification_fail": 40,
-      "soft_404_drops": 44,
+      "soft_404_drops": 43,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 4,
