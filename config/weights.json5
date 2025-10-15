@@ -1,6 +1,6 @@
 {
   // weights.json5 — server-side scoring knobs
-  // Version: v0.6.1 (adds MLB finals & Nate hint keys used by fetch_headlines.py)
+  // Version: v0.6.2 (tuned for CA bias + daytime markets + evening sports + gentler BTC threshold)
   timezone: "America/Toronto",
 
   // -------- Recency & decay --------
@@ -22,40 +22,40 @@
 
   // -------- Reordering stability (UI aids; safe to keep) --------
   reorder: {
-    protect_top_n: 8,
+    protect_top_n: 10,         // was 8 — steadier top when markets are active
     min_reorder_delta: 1.25,
     grace_period_minutes: 3,
     rank_drift_tolerance: 0.5,
 
-    // NEW: slight freshness nudge for Nate Silver contributor page scrape
-    nate_hours_hint_bonus: 0.40,   // was 0.25
-    nate_hours_hint_max_hours: 8   // was 6
+    // slight freshness nudge for Nate contributor page scrape
+    nate_hours_hint_bonus: 0.40,
+    nate_hours_hint_max_hours: 8
   },
 
-  // -------- Regional bias --------
+  // -------- Regional bias (Canada-forward) --------
   regional: {
     weights: {
-      country_match: 1.2,
-      province_match: 1.0,  // was 0.8
-      city_match: 1.2,      // was 0.6
-      adjacent_province: 0.3
+      country_match: 1.3,      // was 1.2
+      province_match: 1.1,     // was 1.0
+      city_match: 1.3,         // was 1.2
+      adjacent_province: 0.35  // was 0.3
     },
-    max_bonus: 3.0          // was 2.4
+    max_bonus: 3.6             // was 3.0 — gives CA matches a bit more headroom
   },
 
   // -------- Category nudges --------
   categories: {
-    "Public Safety": 0.9,
+    "Public Safety": 1.0,      // was 0.9 — “bleeds/leads” clarity
     "Weather": 0.6,
     "Transit": 0.4,
     "Local": 0.5,
-    "Business": 0.2,
-    "Energy": 0.2,
-    "Real Estate": 0.15,
-    "Tech": 0.15,
+    "Business": 0.45,          // was 0.2 — stronger daytime bias
+    "Energy": 0.30,            // was 0.2 — useful for CA economy
+    "Real Estate": 0.20,       // was 0.15
+    "Tech": 0.20,              // was 0.15
     "Culture": 0.25,
     "Youth": 0.25,
-    "Sports": 0.55,   // was 0.35 — stronger baseline so Sports isn't drowned by Business
+    "Sports": 0.60,            // was 0.55 — evening prominence
     "General": 0.0
   },
 
@@ -75,23 +75,23 @@
     ]
   },
 
-  // -------- Markets --------
+  // -------- Markets (daytime bias + gentler BTC threshold) --------
   markets: {
-    btc_abs_move_threshold_pct: 7.0,
-    btc_points: 1.6,
-    index_abs_move_threshold_pct: 1.0,
-    index_points: 1.0,
+    btc_abs_move_threshold_pct: 4.0,  // was 7.0 — more BTC/crypto headlines surface
+    btc_points: 1.9,                  // was 1.6
+    index_abs_move_threshold_pct: 0.8,// was 1.0
+    index_points: 1.2,                // was 1.0
     nikkei_abs_move_threshold_pct: 1.0,
     nikkei_points: 0.7,
-    single_stock_abs_move_threshold_pct: 10.0,
-    single_stock_points: 1.2,
+    single_stock_abs_move_threshold_pct: 8.0, // was 10.0
+    single_stock_points: 1.3,                 // was 1.2
     time_windows: {
-      markets_open: { start: "09:30", end: "16:00", points: 0.6 },
+      markets_open: { start: "09:30", end: "16:00", points: 0.8 }, // was 0.6 — stronger daytime tilt
       asia_window:  { start: "01:20", end: "03:30", points: 0.5 }
     }
   },
 
-  // -------- Entertainment (kept as-is; doesn’t affect Jays) --------
+  // -------- Entertainment --------
   entertainment: {
     release_keywords: [
       "premiere","trailer","season","finale","episode","cast","casting",
@@ -118,21 +118,21 @@
 
   // -------- SPORTS (keys used by your Python) --------
   sports: {
-    // Jays-centric knobs (you had these already)
-    team_match_points:        1.25, // was 1.00 — “Blue Jays”, “Toronto Blue Jays”, “Jays”
-    player_match_points:      0.60, // was 0.50 — Guerrero, Bichette, Kirk, Bassitt, Gausman, Lauer, Yesavage
-    result_win_points:        1.15, // was 0.70 — “beat”, “shut out”, “walk-off”, “clinch”, “sweep”, etc.
-    result_loss_points:       0.35, // was 0.40 — losses still matter but less
-    evening_window_points:    1.20, // was 0.90 — 18:30–22:30 ET
-    playoff_mode_points:      0.90, // was 0.60 — when MPB_PLAYOFFS=1 and a result is detected
+    // Jays-centric knobs
+    team_match_points:        1.25,
+    player_match_points:      0.60,
+    result_win_points:        1.15,
+    result_loss_points:       0.35,
+    evening_window_points:    1.20, // 18:30–22:30 ET
+    playoff_mode_points:      0.90,
 
-    // MLB focus teams & finals (Red Sox, Yankees, Mariners, Dodgers, Phillies + Jays)
-    focus_team_points:        0.70, // was 0.55 — non-Jays focus teams still float but below Jays wins
-    final_story_points:       1.10, // was 0.75 — Final/Postgame/Recap OR looks like a game-final
-    final_with_score_points:  0.70  // was 0.45 — explicit scoreline like “4-3”
+    // MLB focus teams & finals
+    focus_team_points:        0.70,
+    final_story_points:       1.10,
+    final_with_score_points:  0.70
   },
 
-  // -------- Google Trends assist (optional) --------
+  // -------- Google Trends assist (CA) --------
   trends: {
     enabled: true,
     provider: "google_trends",
@@ -143,7 +143,7 @@
     match_bonus_max: 1.0,
     half_life_hours: 12,
     ttl_hours: 24,
-    cap_total_points: 1.2
+    cap_total_points: 1.3   // was 1.2 — a touch more for CA zeitgeist
   },
 
   // -------- Sources handling --------
@@ -151,12 +151,12 @@
     aggregator_penalty: -0.6,
     press_wire_penalty: -0.5,
     preferred_domains_bonus: 0.25
-    // Note: specific preferred domains are defined in Python (PREFERRED_DOMAINS).
+    // Specific preferred domains remain in Python (PREFERRED_DOMAINS).
   },
 
   // -------- Dedupe knobs (UI feel) --------
   dedupe: {
-    jaccard_threshold: 0.82,       // keep your Python default behavior consistent
+    jaccard_threshold: 0.82,
     newer_bias_points: 0.3,
     non_aggregator_bias_points: 0.3
   },
@@ -169,7 +169,7 @@
       btc_abs_move_ge_pct: 8.0,
       single_stock_abs_move_ge_pct: 15.0
     },
-    glitch_min_score: 1.6   // was 1.8
+    glitch_min_score: 1.6
   },
 
   // -------- Developing stories (optional UI) --------
