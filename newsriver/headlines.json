@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-16T06:49:59.719Z",
-  "count": 14,
+  "generated_utc": "2025-10-16T07:01:00.875Z",
+  "count": 13,
   "items": [
     {
       "title": "Pakistani Crime Thriller ‘Jujji’ Acquired by Buffalo 8 for Worldwide Distribution, Trailer Unveiled (EXCLUSIVE)",
@@ -106,19 +106,6 @@
       "region": "World"
     },
     {
-      "title": "A.J. Preller Discusses Padres’ Rotation",
-      "url": "https://www.mlbtraderumors.com/2025/10/a-j-preller-discusses-padres-rotation.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-16T05:24:45.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Trump confirms the CIA is conducting covert operations inside Venezuela",
       "url": "https://www.npr.org/2025/10/16/g-s1-93677/trump-confirms-cia-operations-venezuela",
       "source": "NPR Topics: Home Page Top Stories",
@@ -209,9 +196,7 @@
     "collected": 840,
     "dedup_pass1": 822,
     "dedup_final": 320,
-    "slow_domains": [
-      "www150.statcan.gc.ca"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -235,57 +220,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 10.306,
+        "host": "www.blogto.com",
+        "sec": 0.555,
         "kept": 0
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.585,
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.487,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.445,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.374,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.264,
+        "sec": 0.418,
         "kept": 14
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.209,
+        "sec": 0.357,
         "kept": 8
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.209,
+        "host": "www.nhl.com",
+        "sec": 0.355,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.192,
-        "kept": 0
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.317,
+        "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.143,
+        "sec": 0.214,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.099,
+        "sec": 0.194,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.069,
+        "sec": 0.098,
         "kept": 10
       }
     ],
-    "elapsed_sec": 235.71,
+    "elapsed_sec": 272.02,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -340,8 +325,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 39,
-      "soft_404_drops": 25,
+      "link_verification_fail": 35,
+      "soft_404_drops": 26,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 2,
