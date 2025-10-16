@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-16T19:36:45.333Z",
+  "generated_utc": "2025-10-16T19:45:25.298Z",
   "count": 7,
   "items": [
+    {
+      "title": "NPR 'founding mother' Susan Stamberg has died",
+      "url": "https://www.npr.org/2025/10/16/1184880448/susan-stamberg-obituary",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-16T19:27:40.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Kevin Alcántara Undergoes Sports Hernia Surgery",
       "url": "https://www.mlbtraderumors.com/2025/10/kevin-alcantara-undergoes-sports-hernia-surgery.html",
@@ -85,28 +98,17 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "LA Daily News Week 8 football previews and predictions, Friday’s games",
-      "url": "https://www.dailynews.com/2025/10/16/la-daily-news-week-7-football-previews-and-predictions-fridays-games",
-      "source": "Daily News",
-      "published_utc": "2025-10-16T18:42:45.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 846,
+    "collected": 847,
     "dedup_pass1": 831,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "thehill.com"
+    ],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -131,56 +133,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.699,
+        "sec": 0.776,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.505,
+        "sec": 0.491,
         "kept": 0
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.403,
-        "kept": 10
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.303,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.254,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.198,
+        "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.184,
+        "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.393,
+        "sec": 0.17,
         "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.126,
+        "kept": 10
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.392,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.391,
+        "sec": 0.124,
         "kept": 14
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.386,
+        "sec": 0.087,
         "kept": 8
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.302,
-        "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.301,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.2,
-        "kept": 0
       }
     ],
-    "elapsed_sec": 271.96,
+    "elapsed_sec": 255.2,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -208,7 +210,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 19,
+      "ps_fatal_hits": 20,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -220,7 +222,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 12,
       "sports_player_hits": 3,
-      "sports_result_win_hits": 16,
+      "sports_result_win_hits": 17,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -235,7 +237,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 37,
+      "link_verification_fail": 35,
       "soft_404_drops": 41,
       "max_age_drops": 0,
       "min_age_drops": 8,
