@@ -1,9 +1,22 @@
 {
-  "generated_utc": "2025-10-16T18:50:45.620Z",
-  "count": 10,
+  "generated_utc": "2025-10-16T18:59:40.872Z",
+  "count": 8,
   "items": [
     {
-      "title": "LA Daily News Week 7 football previews and predictions, Friday’s games",
+      "title": "MrBeast filed a trademark for a financial services company (and a bunch of other stuff)",
+      "url": "https://www.tubefilter.com/2025/10/16/mrbeast-industries-financial-us-trademark-office-filings",
+      "source": "Tubefilter",
+      "published_utc": "2025-10-16T18:51:46.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "LA Daily News Week 8 football previews and predictions, Friday’s games",
       "url": "https://www.dailynews.com/2025/10/16/la-daily-news-week-7-football-previews-and-predictions-fridays-games",
       "source": "Daily News",
       "published_utc": "2025-10-16T18:42:45.000Z",
@@ -20,19 +33,6 @@
       "url": "https://www.dailynews.com/2025/10/16/porter-ranch-resident-hopes-crowd-sourcing-of-gas-to-all-electric-homes-will-help-close-aliso-canyon",
       "source": "Daily News",
       "published_utc": "2025-10-16T18:31:33.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Netflix Canada Orders Series Adaptation of Cat Cahill’s ‘Gilbert Girls’ Western Romance Books",
-      "url": "https://variety.com/2025/tv/news/netflix-gilbert-girls-western-romance-series-granville-girl-1236554698",
-      "source": "Variety",
-      "published_utc": "2025-10-16T18:30:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -105,46 +105,16 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Ozzy Osbourne, Garrett Leight Release Posthumous Prince of Darkness-Style Sunglasses Collection",
-      "url": "https://www.rollingstone.com/product-recommendations/lifestyle/ozzy-osbourne-garrett-leight-sunglasses-buy-online-1235448112",
-      "source": "Rolling Stone",
-      "published_utc": "2025-10-16T18:02:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "How Saudi Arabia Is Freeing a Million Barrels a Day for Export",
-      "url": "https://oilprice.com/Energy/Crude-Oil/How-Saudi-Arabia-Is-Freeing-a-Million-Barrels-a-Day-for-Export.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-16T18:00:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 842,
-    "dedup_pass1": 827,
+    "collected": 856,
+    "dedup_pass1": 844,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -167,56 +137,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.59,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.455,
+        "sec": 0.58,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.433,
+        "sec": 0.35,
         "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.396,
-        "kept": 8
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.279,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.234,
-        "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.226,
+        "sec": 0.318,
         "kept": 14
       },
       {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.268,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.226,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.215,
+        "kept": 8
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.158,
+        "kept": 0
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.152,
+        "kept": 10
+      },
+      {
         "host": "www.federalreserve.gov",
-        "sec": 0.193,
+        "sec": 0.14,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.136,
+        "sec": 0.078,
         "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.1,
-        "kept": 10
       }
     ],
-    "elapsed_sec": 312.94,
+    "elapsed_sec": 241.29,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -244,7 +214,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 14,
+      "ps_fatal_hits": 17,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -252,17 +222,17 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 49,
+      "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 12,
+      "sports_team_hits": 13,
       "sports_player_hits": 2,
-      "sports_result_win_hits": 14,
+      "sports_result_win_hits": 15,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 19,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_final_hits": 2,
+      "sports_final_score_hits": 2,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -271,8 +241,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 32,
-      "soft_404_drops": 24,
+      "link_verification_fail": 38,
+      "soft_404_drops": 28,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 2,
