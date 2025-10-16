@@ -1,38 +1,25 @@
 {
-  "generated_utc": "2025-10-16T14:19:23.029Z",
-  "count": 6,
+  "generated_utc": "2025-10-16T14:44:50.818Z",
+  "count": 5,
   "items": [
     {
-      "title": "The Life of a Showgirl: Diane von Furstenberg on Her Glorious Career, Marriage to Barry Diller and Why ‘The Closet Is Very Important’",
-      "url": "https://variety.com/2025/awards/features/diane-von-furstenberg-nyc-culture-award-barry-diller-marriage-1236552054",
-      "source": "Variety",
-      "published_utc": "2025-10-16T14:00:00.000Z",
+      "title": "How to throw a perfect show",
+      "url": "https://www.thefader.com/2025/10/16/how-to-throw-a-show-festival-dj-night",
+      "source": "The FADER",
+      "published_utc": "2025-10-16T14:36:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
       },
-      "category": "General",
+      "category": "Culture",
       "region": "World"
     },
     {
-      "title": "Apple’s Steve Jobs to Appear on $1 U.S. Coin: ‘Make Something Wonderful’",
-      "url": "https://variety.com/2025/digital/news/steve-jobs-1-dollar-us-coin-american-innovation-1236554423",
-      "source": "Variety",
-      "published_utc": "2025-10-16T13:56:43.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Traders Spooked by Massive Crude Inventory Build",
-      "url": "https://oilprice.com/Energy/Crude-Oil/Traders-Spooked-by-Massive-Crude-Inventory-Build.html",
+      "title": "Africa’s Largest Refinery Faces Setbacks in Gasoline Production",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Africas-Largest-Refinery-Faces-Setbacks-in-Gasoline-Production.html",
       "source": "Oilprice.com",
-      "published_utc": "2025-10-16T13:38:00.000Z",
+      "published_utc": "2025-10-16T14:30:00.000Z",
       "effects": {
         "lightsaber": true,
         "glitch": false,
@@ -45,10 +32,10 @@
       "region": "Canada"
     },
     {
-      "title": "Some of the things Gaza needs: A government, security and tools to rebuild",
-      "url": "https://www.npr.org/2025/10/16/g-s1-93590/gaza-reconstruction-government",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-16T13:37:21.000Z",
+      "title": "Rachael Ray Seen Outside 'Drew Barrymore' Studio After Health Rumors",
+      "url": "https://www.tmz.com/2025/10/16/rachael-ray-resurfaces-new-york-city",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-16T14:23:33.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -58,41 +45,42 @@
       "region": "World"
     },
     {
-      "title": "‘The Age of Disclosure’: Documentary Revealing Government Cover-Up of Non-Human Intelligence Sets Release in Theaters and on Amazon, Plus New Trailer",
-      "url": "https://variety.com/2025/film/news/the-age-of-disclosure-ufo-documentary-release-date-trailer-1236554168",
+      "title": "Celebs Pack Victoria’s Secret Fashion Show After-Party in NYC",
+      "url": "https://www.tmz.com/2025/10/16/victorias-secret-after-party-new-york-city",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-16T14:17:08.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "‘How to Shout,’ Starring ‘Bloodaxe’ Lead Alina Tomnikov, Set for World Sales With Summerside Media (EXCLUSIVE)",
+      "url": "https://variety.com/2025/film/global/how-to-shout-alina-tomnikov-sales-summerside-1236554398",
       "source": "Film",
-      "published_utc": "2025-10-16T13:30:00.000Z",
+      "published_utc": "2025-10-16T14:16:45.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
       },
       "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Why you should care about Montreal’s election on Nov. 2",
-      "url": "https://cultmtl.com/2025/10/why-you-should-care-about-montreal-election-on-nov-2",
-      "source": "Cult MTL",
-      "published_utc": "2025-10-16T13:29:39.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
       "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 846,
-    "dedup_pass1": 828,
+    "collected": 855,
+    "dedup_pass1": 840,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "rollcall.com"
+    ],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -114,57 +102,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.505,
-        "kept": 8
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.484,
+        "sec": 0.478,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.382,
+        "sec": 0.339,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.316,
+        "sec": 0.309,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.233,
-        "kept": 0
+        "host": "toronto.citynews.ca",
+        "sec": 0.295,
+        "kept": 8
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.218,
+        "sec": 0.262,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.185,
+        "host": "www.bls.gov",
+        "sec": 0.212,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.145,
+        "sec": 0.178,
         "kept": 14
       },
       {
+        "host": "www.nhl.com",
+        "sec": 0.147,
+        "kept": 0
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.091,
+        "sec": 0.142,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.054,
+        "sec": 0.081,
         "kept": 10
       }
     ],
-    "elapsed_sec": 270.53,
+    "elapsed_sec": 226.93,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -192,7 +180,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 14,
+      "ps_fatal_hits": 16,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -200,17 +188,17 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 48,
+      "preferred_bonus": 49,
       "substack_tagged": 0,
       "sports_team_hits": 14,
       "sports_player_hits": 2,
-      "sports_result_win_hits": 14,
+      "sports_result_win_hits": 15,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 12,
-      "sports_final_hits": 2,
-      "sports_final_score_hits": 2,
+      "sports_final_hits": 3,
+      "sports_final_score_hits": 3,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -219,8 +207,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 36,
-      "soft_404_drops": 30,
+      "link_verification_fail": 38,
+      "soft_404_drops": 27,
       "max_age_drops": 0,
       "min_age_drops": 9,
       "market_sanity_drops": 4,
