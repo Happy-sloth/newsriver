@@ -1,15 +1,18 @@
 {
-  "generated_utc": "2025-10-16T11:32:08.069Z",
+  "generated_utc": "2025-10-16T11:45:23.942Z",
   "count": 0,
   "items": [],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 851,
-    "dedup_pass1": 833,
+    "collected": 837,
+    "dedup_pass1": 819,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "thehill.com"
+    ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -31,57 +34,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "www.blogto.com",
+        "sec": 0.509,
+        "kept": 0
+      },
+      {
         "host": "globalnews.ca",
-        "sec": 0.664,
+        "sec": 0.413,
         "kept": 10
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.534,
-        "kept": 0
+        "host": "www.cp24.com",
+        "sec": 0.295,
+        "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.493,
-        "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.402,
-        "kept": 8
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.386,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.318,
-        "kept": 0
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.236,
-        "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.231,
+        "sec": 0.275,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.215,
+        "sec": 0.239,
+        "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.226,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.188,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.174,
+        "kept": 8
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.159,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.211,
+        "sec": 0.105,
         "kept": 14
       }
     ],
-    "elapsed_sec": 245.32,
+    "elapsed_sec": 245.34,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -109,7 +112,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 10,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -119,15 +122,15 @@
       "press_penalties": 0,
       "preferred_bonus": 47,
       "substack_tagged": 0,
-      "sports_team_hits": 16,
+      "sports_team_hits": 15,
       "sports_player_hits": 5,
       "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 12,
-      "sports_final_hits": 3,
-      "sports_final_score_hits": 3,
+      "sports_final_hits": 2,
+      "sports_final_score_hits": 2,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -136,11 +139,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 34,
+      "link_verification_fail": 37,
       "soft_404_drops": 37,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 4,
+      "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
