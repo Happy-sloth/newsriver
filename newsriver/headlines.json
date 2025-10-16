@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-16T06:25:19.447Z",
+  "generated_utc": "2025-10-16T06:49:59.719Z",
   "count": 14,
   "items": [
     {
-      "title": "Warner Bros. Discovery and CJ ENM Form Strategic Partnership to Expand K-Content Reach",
-      "url": "https://variety.com/2025/tv/news/warner-bros-discovery-cj-enm-partnership-k-content-1236554309",
-      "source": "Variety",
-      "published_utc": "2025-10-16T06:17:23.000Z",
+      "title": "Pakistani Crime Thriller ‘Jujji’ Acquired by Buffalo 8 for Worldwide Distribution, Trailer Unveiled (EXCLUSIVE)",
+      "url": "https://variety.com/2025/film/news/pakistani-crime-thriller-jujji-buffalo-8-1236554322",
+      "source": "Film",
+      "published_utc": "2025-10-16T06:42:30.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -14,6 +14,22 @@
       },
       "category": "General",
       "region": "World"
+    },
+    {
+      "title": "Montana Judge Throws Out Climate Lawsuit",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Montana-Judge-Throws-Out-Climate-Lawsuit.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-16T06:30:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
     },
     {
       "title": "Blue Jays-Mariners ALCS Game 4 FAQ (8:30 ET, FS1)",
@@ -129,19 +145,6 @@
       "region": "World"
     },
     {
-      "title": "Britney Spears Slams Kevin Federline’s ‘Extremely Hurtful and Exhausting’ Memoir Allegations: ‘I Have Had Enough’",
-      "url": "https://variety.com/2025/music/news/britney-spears-responds-kevin-federline-memoir-1236554285",
-      "source": "Variety",
-      "published_utc": "2025-10-16T05:04:43.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Toronto's bottom of the order takes top billing in Game 3 rout",
       "url": "https://www.mlb.com/bluejays/news/blue-jays-score-5-runs-third-inning-alcs-game-3",
       "source": "Blue Jays News",
@@ -204,10 +207,10 @@
     "feeds_total": 122,
     "cap_items": 320,
     "collected": 840,
-    "dedup_pass1": 823,
+    "dedup_pass1": 822,
     "dedup_final": 320,
     "slow_domains": [
-      "financialpost.com"
+      "www150.statcan.gc.ca"
     ],
     "timeouts": [
       "japantoday.com",
@@ -232,57 +235,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.blogto.com",
-        "sec": 0.385,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.265,
-        "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.26,
-        "kept": 8
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.253,
-        "kept": 0
-      },
-      {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.253,
+        "sec": 10.306,
+        "kept": 0
+      },
+      {
+        "host": "www.blogto.com",
+        "sec": 0.585,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.191,
+        "sec": 0.374,
         "kept": 14
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.136,
-        "kept": 10
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.264,
+        "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.209,
+        "kept": 8
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.209,
+        "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.114,
+        "sec": 0.192,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.091,
+        "sec": 0.143,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.083,
+        "sec": 0.099,
         "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.069,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 224.77,
+    "elapsed_sec": 235.71,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -310,7 +313,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 10,
+      "ps_fatal_hits": 9,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -322,7 +325,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 16,
       "sports_player_hits": 5,
-      "sports_result_win_hits": 20,
+      "sports_result_win_hits": 19,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -337,7 +340,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 40,
+      "link_verification_fail": 39,
       "soft_404_drops": 25,
       "max_age_drops": 0,
       "min_age_drops": 8,
