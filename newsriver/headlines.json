@@ -1,7 +1,23 @@
 {
-  "generated_utc": "2025-10-16T07:20:43.816Z",
-  "count": 16,
+  "generated_utc": "2025-10-16T07:37:15.023Z",
+  "count": 18,
   "items": [
+    {
+      "title": "U.S. Expects Japan to Suspend Russian Energy Purchases",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/US-Expects-Japan-to-Suspend-Russian-Energy-Purchases.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-16T07:30:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
     {
       "title": "'Dancing With The Stars' Hot Bod Guess Who!",
       "url": "https://www.tmz.com/2025/10/16/dancing-with-the-stars-hot-bod-guess-who",
@@ -55,6 +71,19 @@
       "region": "World"
     },
     {
+      "title": "Read what a Chinese officer wrote of D-Day in his diary salvaged in Hong Kong",
+      "url": "https://japantoday.com/category/world/read-what-a-chinese-officer-wrote-of-d-day-in-his-diary-salvaged-in-hong-kong",
+      "source": "Japan Today",
+      "published_utc": "2025-10-16T06:50:05.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
       "title": "Pakistani Crime Thriller ‘Jujji’ Acquired by Buffalo 8 for Worldwide Distribution, Trailer Unveiled (EXCLUSIVE)",
       "url": "https://variety.com/2025/film/news/pakistani-crime-thriller-jujji-buffalo-8-1236554322",
       "source": "Film",
@@ -73,12 +102,12 @@
       "source": "Oilprice.com",
       "published_utc": "2025-10-16T06:30:00.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
+        "lightsaber": false,
+        "glitch": true,
         "reasons": [
-          "score≥2.5"
+          "score≥1.6"
         ],
-        "style": "lightsaber"
+        "style": "glitch"
       },
       "category": "Energy",
       "region": "Canada"
@@ -232,12 +261,13 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 841,
-    "dedup_pass1": 825,
+    "collected": 855,
+    "dedup_pass1": 838,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.cp24.com"
+    ],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -260,56 +290,56 @@
     "feed_times_sample": [
       {
         "host": "www.cp24.com",
-        "sec": 2.714,
+        "sec": 7.696,
         "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.422,
-        "kept": 8
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.416,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.32,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.275,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.192,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.181,
+        "sec": 0.529,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.1,
+        "sec": 0.525,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.478,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.422,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.353,
+        "kept": 8
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.24,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.234,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.099,
+        "sec": 0.22,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.096,
+        "sec": 0.13,
         "kept": 10
       }
     ],
-    "elapsed_sec": 243.14,
+    "elapsed_sec": 270.29,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -347,15 +377,15 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 16,
+      "sports_team_hits": 17,
       "sports_player_hits": 5,
       "sports_result_win_hits": 19,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 12,
-      "sports_final_hits": 2,
-      "sports_final_score_hits": 2,
+      "sports_final_hits": 3,
+      "sports_final_score_hits": 3,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -364,7 +394,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 35,
+      "link_verification_fail": 36,
       "soft_404_drops": 26,
       "max_age_drops": 0,
       "min_age_drops": 8,
