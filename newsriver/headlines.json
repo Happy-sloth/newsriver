@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-16T04:20:41.483Z",
-  "count": 8,
+  "generated_utc": "2025-10-16T04:42:57.845Z",
+  "count": 6,
   "items": [
     {
-      "title": "‘South Park’ Abruptly Starts Season 28 With Viral ‘6-7’ TikTok Trend and Peter Thiel Hunting Down Trump’s Antichrist Baby",
-      "url": "https://variety.com/2025/tv/news/south-park-season-28-tiktok-peter-thiel-antichrist-trump-1236554275",
-      "source": "Variety",
-      "published_utc": "2025-10-16T04:02:40.000Z",
+      "title": "Big dingers in Seattle: Blue Jays power back into ALCS",
+      "url": "https://www.mlb.com/bluejays/news/blue-jays-win-alcs-game-3-2025",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-16T04:25:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": true,
@@ -19,26 +19,10 @@
       "region": "World"
     },
     {
-      "title": "Blue Jays cut Mariners' ALCS lead to 2-1 with 13-4 rout",
-      "url": "https://japantoday.com/category/sports/guerrero-springer-sparks-blue-jays-who-hit-5hrs-and-cut-mariners-alcs-lead-to-2-1-with-13-4-rout",
-      "source": "Japan Today",
-      "published_utc": "2025-10-16T03:56:15.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Big dingers in Seattle: Blue Jays power back into ALCS",
-      "url": "https://www.mlb.com/bluejays/news/blue-jays-win-alcs-game-3-2025",
-      "source": "Blue Jays News",
-      "published_utc": "2025-10-16T03:42:00.000Z",
+      "title": "‘South Park’ Abruptly Starts Season 28 With Viral ‘6-7’ TikTok Trend and Peter Thiel Hunting Down Trump’s Antichrist Baby",
+      "url": "https://variety.com/2025/tv/news/south-park-season-28-tiktok-peter-thiel-antichrist-trump-1236554275",
+      "source": "Variety",
+      "published_utc": "2025-10-16T04:02:40.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": true,
@@ -104,32 +88,17 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Sumo wrestlers bring 1,500 years of tradition to London's Royal Albert Hall",
-      "url": "https://japantoday.com/category/sports/photos-show-sumo-wrestlers-bring-1-500-years-of-tradition-to-london%27s-royal-albert-hall",
-      "source": "Japan Today",
-      "published_utc": "2025-10-16T01:43:46.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 856,
-    "dedup_pass1": 839,
+    "collected": 841,
+    "dedup_pass1": 826,
     "dedup_final": 320,
-    "slow_domains": [
-      "financialpost.com",
-      "rollcall.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -151,57 +120,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.901,
-        "kept": 8
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.531,
+        "sec": 0.625,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.283,
+        "sec": 0.43,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.282,
+        "sec": 0.258,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.247,
+        "sec": 0.249,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.237,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.152,
+        "sec": 0.215,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.112,
+        "sec": 0.129,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.09,
+        "sec": 0.126,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.049,
+        "sec": 0.092,
         "kept": 10
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.088,
+        "kept": 8
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.077,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 260.05,
+    "elapsed_sec": 251.8,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -239,15 +208,15 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 15,
+      "sports_team_hits": 14,
       "sports_player_hits": 8,
-      "sports_result_win_hits": 20,
+      "sports_result_win_hits": 19,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 12,
-      "sports_final_hits": 3,
-      "sports_final_score_hits": 3,
+      "sports_final_hits": 2,
+      "sports_final_score_hits": 2,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -256,7 +225,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 36,
+      "link_verification_fail": 39,
       "soft_404_drops": 24,
       "max_age_drops": 0,
       "min_age_drops": 8,
