@@ -1,7 +1,36 @@
 {
-  "generated_utc": "2025-10-16T12:34:44.491Z",
-  "count": 2,
+  "generated_utc": "2025-10-16T13:15:05.043Z",
+  "count": 4,
   "items": [
+    {
+      "title": "Mike Bern shares new single, “Into The River”",
+      "url": "https://canadianbeats.ca/2025/10/16/mike-bern-shares-new-single-into-the-river",
+      "source": "Canadian Beats Media",
+      "published_utc": "2025-10-16T12:44:38.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Mitacs CEO Stephen Lucas on Mobilizing Research Talent to Power BC’s Innovation Economy",
+      "url": "https://techcouver.com/2025/10/16/mitacs-ceo-stephen-lucas-on-mobilizing-research-talent-in-bc",
+      "source": "Techcouver.com",
+      "published_utc": "2025-10-16T12:37:57.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "Tech",
+      "region": "Canada"
+    },
     {
       "title": "Phil Yost :: Bent City",
       "url": "https://aquariumdrunkard.com/2025/10/16/phil-yost-bent-city",
@@ -32,86 +61,76 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 845,
-    "dedup_pass1": 825,
+    "collected": 466,
+    "dedup_pass1": 464,
     "dedup_final": 320,
-    "slow_domains": [
-      "rollcall.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
     "errors": [
-      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "nypost.com",
-      "toronto.citynews.ca",
-      "variety.com",
-      "www.boston.com",
-      "www.marketwatch.com",
-      "www.npr.org",
-      "www.wsj.com"
+      "toronto.citynews.ca"
     ],
     "feed_times_sample": [
       {
-        "host": "www.cp24.com",
-        "sec": 0.558,
-        "kept": 14
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.463,
+        "sec": 0.377,
         "kept": 0
       },
       {
+        "host": "www.cp24.com",
+        "sec": 0.351,
+        "kept": 14
+      },
+      {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.255,
+        "sec": 0.288,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.254,
+        "sec": 0.224,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.217,
+        "host": "www.bls.gov",
+        "sec": 0.193,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.207,
+        "sec": 0.155,
         "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.202,
-        "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.149,
+        "sec": 0.143,
         "kept": 8
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.132,
-        "kept": 10
+        "host": "www.nhl.com",
+        "sec": 0.131,
+        "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.075,
+        "sec": 0.069,
         "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.055,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 285.32,
+    "elapsed_sec": 373.61,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -139,7 +158,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 10,
+      "ps_fatal_hits": 8,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -147,15 +166,15 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 48,
+      "preferred_bonus": 42,
       "substack_tagged": 0,
-      "sports_team_hits": 14,
-      "sports_player_hits": 4,
-      "sports_result_win_hits": 18,
+      "sports_team_hits": 13,
+      "sports_player_hits": 0,
+      "sports_result_win_hits": 10,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 11,
+      "sports_focus_team_hits": 2,
       "sports_final_hits": 2,
       "sports_final_score_hits": 2,
       "hype_politics": 0,
@@ -166,11 +185,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 37,
-      "soft_404_drops": 38,
+      "link_verification_fail": 14,
+      "soft_404_drops": 15,
       "max_age_drops": 0,
-      "min_age_drops": 8,
-      "market_sanity_drops": 3,
+      "min_age_drops": 0,
+      "market_sanity_drops": 6,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
