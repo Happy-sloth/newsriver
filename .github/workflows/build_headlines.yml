@@ -8,10 +8,6 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: newsriver-build
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,19 +25,19 @@ jobs:
       NEWSRIVER_TIMEZONE: "America/Toronto"
       MPB_BREAKER_LIMIT: "3"
 
-      # Recency + exact publish count
+      # Recency + exact publish count (pre-clean)
       MPB_MAX_AGE_HOURS: "69"
       MPB_MIN_AGE_SEC: "60"
       MPB_REQUIRE_EXACT_COUNT: "69"
 
-      # Strict link verification + article heuristics
+      # Strict link verification inside the Python collector
       MPB_VERIFY_LINKS: "1"
       MPB_REJECT_REDIRECT_TO_HOMEPAGE: "1"
       MPB_BLOCK_AGGREGATORS: "1"
       MPB_MIN_BODY_BYTES: "4096"
       MPB_MIN_ARTICLE_WORDS: "120"
 
-      # Safety net
+      # Safety net for Python collector
       MPB_FALLBACK_MIN_ITEMS: "1"
       MPB_FALLBACK_MAX_AGE_HOURS: "24"
 
@@ -49,17 +45,16 @@ jobs:
       MPB_ALT_UA: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
       # Cleaner thresholds (post-build)
-      CLEAN_MAX_AGE_HOURS: "72"         # hard clamp for ≤72h
-      CLEAN_MIN_BODY_BYTES: "4096"      # soft-404/empty guard
-      CLEAN_MIN_WORDS: "120"            # not an article if below
+      CLEAN_MAX_AGE_HOURS: "72"         # target clamp
+      CLEAN_MIN_BODY_BYTES: "2800"      # softened
+      CLEAN_MIN_WORDS: "80"             # softened
       CLEAN_CONCURRENCY: "6"
       CLEAN_TIMEOUT_MS: "12000"
-
-      # Default branch
-      DEFAULT_BRANCH: "main"
+      CLEAN_RELAX_THRESHOLD: "30"       # if strict < 30, do relaxed pass
+      CLEAN_RELAX_MAX_AGE_HOURS: "96"   # relaxed clamp
 
     steps:
-      - name: Checkout repo (full history for rebase)
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -116,19 +111,18 @@ jobs:
           CLEANER="$RUNNER_TEMP/validate-links.mjs"
           cat << 'EOF' > "$CLEANER"
           // Post-build cleaner for newsriver/headlines.json
-          // - keep only ≤72h items
-          // - drop aggregators/home/section pages
-          // - follow redirects; kill non-2xx
-          // - detect soft-404/empty by body rules + keywords
-          // - ensure "article-likeness" by URL and body (min words)
-          // - preserve effects/category/region if present
+          // Pass A (strict): ≤72h, follow redirects, 2xx only, body bytes/words, anti-aggregator, article-like URL
+          // If < RELAX_THRESHOLD => Pass B (relaxed): ≤96h, skip body word/byte checks, keep anti-aggregator + article-like URL
           import fs from "node:fs";
 
           const DATA_PATH = "newsriver/headlines.json";
 
-          const MAX_AGE_MS = Number(process.env.CLEAN_MAX_AGE_HOURS || "72") * 3600 * 1000;
-          const MIN_BYTES  = Number(process.env.CLEAN_MIN_BODY_BYTES || "4096");
-          const MIN_WORDS  = Number(process.env.CLEAN_MIN_WORDS || "120");
+          const MAX_AGE_MS_STRICT = Number(process.env.CLEAN_MAX_AGE_HOURS || "72") * 3600 * 1000;
+          const MAX_AGE_MS_RELAX  = Number(process.env.CLEAN_RELAX_MAX_AGE_HOURS || "96") * 3600 * 1000;
+          const RELAX_THRESHOLD   = Number(process.env.CLEAN_RELAX_THRESHOLD || "30");
+
+          const MIN_BYTES  = Number(process.env.CLEAN_MIN_BODY_BYTES || "2800");
+          const MIN_WORDS  = Number(process.env.CLEAN_MIN_WORDS || "80");
           const CONC       = Number(process.env.CLEAN_CONCURRENCY || "6");
           const TIMEOUT_MS = Number(process.env.CLEAN_TIMEOUT_MS || "12000");
           const UA         = process.env.MPB_ALT_UA || "Mozilla/5.0 mypybite-cleaner";
@@ -177,9 +171,9 @@ jobs:
             }
           }
 
-          function within72h(tsIso) {
+          function within(tsIso, maxAgeMs) {
             const ts = Date.parse(tsIso || "");
-            return Number.isFinite(ts) && (Date.now() - ts <= MAX_AGE_MS);
+            return Number.isFinite(ts) && (Date.now() - ts <= maxAgeMs);
           }
 
           async function fetchWithTimeout(url, opts = {}) {
@@ -194,7 +188,7 @@ jobs:
               });
               clearTimeout(t);
               return res;
-            } catch (e) {
+            } catch {
               clearTimeout(t);
               return { ok:false, status:0, url, text: async () => "" };
             }
@@ -234,6 +228,22 @@ jobs:
             }
           }
 
+          function prep(items, maxAgeMs) {
+            const seen = new Set();
+            return items.map(it => {
+              const u = absoluteUrl(it?.canonical_url || it?.url) || absoluteUrl(it?.url);
+              if (!u) return null;
+              return {
+                ...it,
+                url: normalize(u),
+                published_utc: it?.published_utc || it?.published || it?.date || new Date().toISOString()
+              };
+            }).filter(Boolean)
+              .filter(it => within(it.published_utc, maxAgeMs))
+              .filter(it => isLikelyArticle(it.url))
+              .filter(it => { if (seen.has(it.url)) return false; seen.add(it.url); return true; });
+          }
+
           // simple concurrency limiter
           async function mapLimit(arr, limit, fn) {
             const out = new Array(arr.length);
@@ -253,27 +263,9 @@ jobs:
             });
           }
 
-          (async function main(){
-            const { kind, wrapper, items } = loadJSON();
-
-            // Pre-filter by age & URL shape
-            const seen = new Set();
-            const base = items.map(it => {
-              const u = absoluteUrl(it?.canonical_url || it?.url) || absoluteUrl(it?.url);
-              if (!u) return null;
-              return {
-                ...it,
-                url: normalize(u),
-                published_utc: it?.published_utc || it?.published || it?.date || new Date().toISOString()
-              };
-            }).filter(Boolean)
-              .filter(it => within72h(it.published_utc))
-              .filter(it => isLikelyArticle(it.url))
-              .filter(it => { if (seen.has(it.url)) return false; seen.add(it.url); return true; });
-
-            const cleaned = await mapLimit(base, CONC, async (it) => {
+          async function strictClean(base) {
+            return (await mapLimit(base, CONC, async (it) => {
               try {
-                // HEAD first (some sites block it; fallback to GET)
                 let res = await fetchWithTimeout(it.url, { method: "HEAD" });
                 if (!res.ok) res = await fetchWithTimeout(it.url, { method: "GET" });
                 if (!res.ok || res.status < 200 || res.status >= 300) return null;
@@ -281,7 +273,6 @@ jobs:
                 const finalUrl = normalize(res.url || it.url);
                 if (!isLikelyArticle(finalUrl)) return null;
 
-                // Always GET body to detect soft-404/emptiness
                 const res2 = await fetchWithTimeout(finalUrl, { method: "GET" });
                 if (!res2.ok) return null;
                 const body = await res2.text();
@@ -300,11 +291,57 @@ jobs:
               } catch {
                 return null;
               }
-            });
+            })).filter(Boolean);
+          }
 
-            const out = cleaned.filter(Boolean);
-            saveJSON(kind, wrapper, out);
-            console.log(`Cleaner kept ${out.length} / ${items.length} items`);
+          (async function main(){
+            const { kind, wrapper, items } = loadJSON();
+
+            // Pass A — strict
+            const baseStrict = prep(items, MAX_AGE_MS_STRICT);
+            let cleaned = await strictClean(baseStrict);
+
+            // Pass B — relaxed fallback (only if too few survive)
+            if (cleaned.length < RELAX_THRESHOLD) {
+              const baseRelax = prep(items, MAX_AGE_MS_RELAX);
+              // relaxed: skip body/bytes checks; just confirm 2xx and article-like
+              const relaxed = (await mapLimit(baseRelax, CONC, async (it) => {
+                try {
+                  let res = await fetchWithTimeout(it.url, { method: "HEAD" });
+                  if (!res.ok) res = await fetchWithTimeout(it.url, { method: "GET" });
+                  if (!res.ok || res.status < 200 || res.status >= 300) return null;
+
+                  const finalUrl = normalize(res.url || it.url);
+                  if (!isLikelyArticle(finalUrl)) return null;
+
+                  return {
+                    title: String(it.title || "").trim(),
+                    url: finalUrl,
+                    source: it.source || "",
+                    published_utc: new Date(it.published_utc).toISOString(),
+                    ...(it.effects ? { effects: it.effects } : {}),
+                    ...(it.category ? { category: it.category } : {}),
+                    ...(it.region ? { region: it.region } : {})
+                  };
+                } catch {
+                  return null;
+                }
+              })).filter(Boolean);
+
+              // Prefer strict items, then top up with relaxed ones (dedup by URL)
+              const seen = new Set(cleaned.map(x => x.url));
+              for (const r of relaxed) {
+                if (!seen.has(r.url)) {
+                  cleaned.push(r);
+                  seen.add(r.url);
+                }
+              }
+            }
+
+            // Save
+            // (Keep wrapper if original was an object)
+            saveJSON(kind, wrapper, cleaned);
+            console.log(`Cleaner output ${cleaned.length} items`);
           })().catch(e => { console.error(e); process.exit(1); });
           EOF
           echo "Cleaner written to: $CLEANER"
@@ -325,45 +362,38 @@ jobs:
             echo "$CODE $BYTES $URL"
           done
 
-      # --------- SAFE COMMIT / REBASE / PUSH (keeps our new headlines.json on any conflict) ----------
-      - name: Commit & push headlines.json (safe rebase; keep ours on conflict)
+      - name: Commit & push with safe rebase
         shell: bash
         run: |
           set -euo pipefail
+          git config user.name "github-actions"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git config user.name  "newsriver-bot"
-          git config user.email "newsriver-bot@users.noreply.github.com"
-
-          # Stage only the generated JSON (keeps tree clean)
           git add newsriver/headlines.json
-
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "ci: build+clean headlines.json (drop 404/soft-404, ≤72h, non-articles)"
+          git commit -m "ci: build+clean headlines.json (strict + relaxed fallback)"
 
-          # Make sure we have latest from default branch
-          git fetch origin "$DEFAULT_BRANCH"
-
-          # Try a clean rebase first
-          if ! git rebase "origin/$DEFAULT_BRANCH"; then
-            echo "Rebase conflict – preferring freshly-generated headlines.json"
+          # Rebase and push (handle non-fast-forward & ephemeral conflicts on JSON)
+          git fetch origin main
+          if ! git pull --rebase origin main; then
+            echo "Rebase conflict — keeping freshly generated headlines.json"
             git checkout --ours -- newsriver/headlines.json || true
             git add newsriver/headlines.json
             git rebase --continue || true
           fi
 
-          # Retry push up to 3x in case of race with another runner
           for i in 1 2 3; do
-            if git push origin HEAD:"$DEFAULT_BRANCH"; then
+            if git push origin HEAD:main; then
               echo "Push succeeded"
               break
             fi
-            echo "Push failed (attempt $i) – rebasing again and retrying..."
-            git fetch origin "$DEFAULT_BRANCH"
-            if ! git rebase "origin/$DEFAULT_BRANCH"; then
+            echo "Push failed (attempt $i) — rebasing again and retrying..."
+            git fetch origin main
+            if ! git pull --rebase origin main; then
               git checkout --ours -- newsriver/headlines.json || true
               git add newsriver/headlines.json
               git rebase --continue || true
