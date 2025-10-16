@@ -6,25 +6,25 @@
           "gamePk": "401812726",
           "gameDate": "2025-10-16T23:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "NO"
               },
-              "score": 13
+              "score": 21
             },
             "home": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 19
+              "score": 38
             }
           }
         },
@@ -44,13 +44,13 @@
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 11
+              "score": 18
             },
             "home": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 21
+              "score": 29
             }
           }
         },
