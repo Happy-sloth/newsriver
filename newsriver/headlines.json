@@ -1,7 +1,36 @@
 {
-  "generated_utc": "2025-10-16T20:41:25.010Z",
-  "count": 8,
+  "generated_utc": "2025-10-16T20:50:35.468Z",
+  "count": 7,
   "items": [
+    {
+      "title": "First major storm of the season adds 700 million gallons to LA County water supply",
+      "url": "https://www.dailynews.com/2025/10/16/first-major-storm-of-the-season-adds-700-million-gallons-to-la-county-water-supply",
+      "source": "Daily News",
+      "published_utc": "2025-10-16T20:47:27.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Blue Jays-Mariners ALCS Game 4 FAQ, lineups (8:30 ET, FS1)",
+      "url": "https://www.mlb.com/bluejays/news/blue-jays-vs-mariners-alcs-game-4-starting-lineups-pitching-matchup",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-16T20:37:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "KISS Guitarist Ace Frehley On Life Support With Brain Bleed",
       "url": "https://www.tmz.com/2025/10/16/kiss-guitarist-ace-frehley-life-support-brain-bleed",
@@ -69,57 +98,19 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "Despite big harvests, most farmers are losing money",
-      "url": "https://www.npr.org/2025/10/16/nx-s1-5575115/despite-big-harvests-most-farmers-are-losing-money",
-      "source": "NPR Topics: Economy",
-      "published_utc": "2025-10-16T19:52:37.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "The latest layoffs at HUD target fair housing investigators around the U.S.",
-      "url": "https://www.npr.org/2025/10/16/nx-s1-5574318/the-latest-layoffs-at-hud-target-fair-housing-investigators-around-the-u-s",
-      "source": "NPR Topics: Economy",
-      "published_utc": "2025-10-16T19:52:32.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Rays Re-Sign Kodi Whitley To Minor League Deal",
-      "url": "https://www.mlbtraderumors.com/2025/10/rays-re-sign-kodi-whitley-to-minor-league-deal.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-16T19:46:01.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 857,
-    "dedup_pass1": 843,
+    "collected": 844,
+    "dedup_pass1": 829,
     "dedup_final": 320,
     "slow_domains": [
       "thehill.com"
     ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -141,57 +132,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.blogto.com",
-        "sec": 0.6,
-        "kept": 0
+        "host": "www.mlb.com",
+        "sec": 0.55,
+        "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.476,
+        "host": "www.blogto.com",
+        "sec": 0.51,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.413,
+        "sec": 0.504,
         "kept": 14
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.349,
-        "kept": 8
-      },
-      {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.282,
+        "sec": 0.466,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.233,
+        "host": "www.bls.gov",
+        "sec": 0.3,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.211,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.161,
+        "sec": 0.29,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.15,
+        "sec": 0.138,
         "kept": 14
       },
       {
+        "host": "toronto.citynews.ca",
+        "sec": 0.137,
+        "kept": 8
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.121,
+        "kept": 0
+      },
+      {
         "host": "globalnews.ca",
-        "sec": 0.141,
+        "sec": 0.072,
         "kept": 10
       }
     ],
-    "elapsed_sec": 343.09,
+    "elapsed_sec": 281.43,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -219,7 +210,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 19,
+      "ps_fatal_hits": 17,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -229,15 +220,15 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 17,
+      "sports_team_hits": 16,
       "sports_player_hits": 3,
       "sports_result_win_hits": 20,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 17,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_focus_team_hits": 15,
+      "sports_final_hits": 0,
+      "sports_final_score_hits": 0,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -246,10 +237,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 37,
-      "soft_404_drops": 46,
+      "link_verification_fail": 31,
+      "soft_404_drops": 43,
       "max_age_drops": 0,
-      "min_age_drops": 9,
+      "min_age_drops": 8,
       "market_sanity_drops": 1,
       "backfill_steps_used": 0
     },
