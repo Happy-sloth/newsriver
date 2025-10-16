@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-16T07:56:14.612Z",
-  "count": 17,
+  "generated_utc": "2025-10-16T08:50:21.059Z",
+  "count": 14,
   "items": [
     {
-      "title": "U.S. Expects Japan to Suspend Russian Energy Purchases",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/US-Expects-Japan-to-Suspend-Russian-Energy-Purchases.html",
+      "title": "Indian Refiners Prepare to Reduce Russian Oil Imports",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/Indian-Refiners-Prepare-to-Reduce-Russian-Oil-Imports.html",
       "source": "Oilprice.com",
-      "published_utc": "2025-10-16T07:30:00.000Z",
+      "published_utc": "2025-10-16T08:40:00.000Z",
       "effects": {
         "lightsaber": true,
         "glitch": false,
@@ -14,6 +14,22 @@
           "score≥2.5"
         ],
         "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
+    {
+      "title": "U.S. Expects Japan to Suspend Russian Energy Purchases",
+      "url": "https://oilprice.com/Latest-Energy-News/World-News/US-Expects-Japan-to-Suspend-Russian-Energy-Purchases.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-16T07:30:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
       },
       "category": "Energy",
       "region": "Canada"
@@ -185,64 +201,6 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Doctors Without Borders permanently closes its emergency center in Haiti's capital",
-      "url": "https://www.npr.org/2025/10/16/g-s1-93672/doctors-without-borders-closes-haiti",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-16T05:04:57.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Toronto's bottom of the order takes top billing in Game 3 rout",
-      "url": "https://www.mlb.com/bluejays/news/blue-jays-score-5-runs-third-inning-alcs-game-3",
-      "source": "Blue Jays News",
-      "published_utc": "2025-10-16T04:56:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "El Camino Real girls volleyball wins share of West Valley League title",
-      "url": "https://www.dailynews.com/2025/10/15/el-camino-real-girls-volleyball-wins-share-of-west-valley-league-title",
-      "source": "Daily News",
-      "published_utc": "2025-10-16T04:55:34.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Russia’s Middle East Power Play Is Unravelling",
-      "url": "https://oilprice.com/Geopolitics/Africa/Russias-Middle-East-Power-Play-Is-Unravelling.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-16T04:53:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
@@ -251,9 +209,7 @@
     "collected": 841,
     "dedup_pass1": 826,
     "dedup_final": 320,
-    "slow_domains": [
-      "www.cp24.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -277,57 +233,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.cp24.com",
-        "sec": 7.623,
-        "kept": 14
-      },
-      {
-        "host": "www.blogto.com",
-        "sec": 0.536,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.32,
+        "sec": 0.688,
         "kept": 8
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.308,
-        "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.205,
+        "host": "www.blogto.com",
+        "sec": 0.469,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.198,
+        "sec": 0.429,
         "kept": 0
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.197,
-        "kept": 0
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.301,
+        "kept": 14
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.111,
+        "host": "www.cp24.com",
+        "sec": 0.295,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.101,
+        "sec": 0.227,
         "kept": 14
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.224,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.195,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.136,
+        "kept": 0
+      },
+      {
         "host": "globalnews.ca",
-        "sec": 0.064,
+        "sec": 0.116,
         "kept": 10
       }
     ],
-    "elapsed_sec": 261.56,
+    "elapsed_sec": 336.07,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -382,7 +338,7 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 38,
+      "link_verification_fail": 32,
       "soft_404_drops": 27,
       "max_age_drops": 0,
       "min_age_drops": 8,
