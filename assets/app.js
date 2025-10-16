@@ -326,7 +326,9 @@ function showLastUpdated(iso) {
 }
 
 async function loadJson() {
-  const url = `${JSON_URL}?t=${Date.now()}`; // cache-buster
+  // Per-minute cache-buster to dodge stale CDN/browser/Zoho caches.
+  const url = `${JSON_URL}?v=${Math.floor(Date.now()/60000)}`;
+  console.log("[NewsRiver] fetching", url);
   const resp = await fetch(url, { cache: "no-store" });
   if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
   return await resp.json();
