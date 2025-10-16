@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-16T19:15:12.288Z",
-  "count": 11,
+  "generated_utc": "2025-10-16T19:28:55.636Z",
+  "count": 9,
   "items": [
+    {
+      "title": "Kevin Alcántara Undergoes Sports Hernia Surgery",
+      "url": "https://www.mlbtraderumors.com/2025/10/kevin-alcantara-undergoes-sports-hernia-surgery.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-16T19:15:38.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Crowdfund for Automated Composting Technology from Victoria Zips Past Goal",
       "url": "https://techcouver.com/2025/10/16/crowdfund-automated-composting-technology-victoria",
@@ -111,56 +124,16 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Trump says he plans to meet Putin again as Ukraine war drags",
-      "url": "https://www.npr.org/2025/10/16/nx-s1-5576499/trump-putin-zelenskyy-russia-ukraine",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-16T18:24:29.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Residents still waiting for full results of Aliso Canyon disaster health study a decade later",
-      "url": "https://www.dailynews.com/2025/10/16/residents-still-waiting-for-full-results-of-aliso-canyon-disaster-health-study-a-decade-later",
-      "source": "Daily News",
-      "published_utc": "2025-10-16T18:23:37.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "SoCalGas paid out more than $2 billion in settlements from Aliso Canyon gas leak",
-      "url": "https://www.dailynews.com/2025/10/16/socalgas-paid-out-more-than-2-billion-in-settlements-from-aliso-canyon-gas-leak",
-      "source": "Daily News",
-      "published_utc": "2025-10-16T18:19:08.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 840,
-    "dedup_pass1": 827,
+    "collected": 843,
+    "dedup_pass1": 829,
     "dedup_final": 320,
     "slow_domains": [
-      "rollcall.com",
-      "thehill.com"
+      "rollcall.com"
     ],
     "timeouts": [
       "japantoday.com",
@@ -185,57 +158,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "globalnews.ca",
+        "sec": 0.552,
+        "kept": 10
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.529,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.385,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.328,
-        "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.284,
-        "kept": 8
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.267,
+        "sec": 0.488,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.257,
+        "sec": 0.423,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.152,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.289,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.273,
         "kept": 0
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.114,
-        "kept": 10
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.106,
+        "host": "www.cp24.com",
+        "sec": 0.24,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.094,
+        "sec": 0.153,
+        "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.139,
+        "kept": 8
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.117,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.095,
         "kept": 14
       }
     ],
-    "elapsed_sec": 290.62,
+    "elapsed_sec": 320.31,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -263,7 +236,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 15,
+      "ps_fatal_hits": 18,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -274,7 +247,7 @@
       "preferred_bonus": 48,
       "substack_tagged": 0,
       "sports_team_hits": 12,
-      "sports_player_hits": 2,
+      "sports_player_hits": 4,
       "sports_result_win_hits": 16,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
@@ -290,10 +263,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 39,
-      "soft_404_drops": 27,
+      "link_verification_fail": 38,
+      "soft_404_drops": 28,
       "max_age_drops": 0,
-      "min_age_drops": 8,
+      "min_age_drops": 20,
       "market_sanity_drops": 2,
       "backfill_steps_used": 0
     },
