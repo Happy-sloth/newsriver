@@ -1,7 +1,46 @@
 {
-  "generated_utc": "2025-10-16T10:21:15.880Z",
-  "count": 2,
+  "generated_utc": "2025-10-16T10:45:06.446Z",
+  "count": 5,
   "items": [
+    {
+      "title": "The two wildcards shaping the tail end of the Virginia race for governor",
+      "url": "https://www.npr.org/2025/10/16/nx-s1-5575760/virginia-election-governor-2025-shutdown",
+      "source": "NPR Topics: Economy",
+      "published_utc": "2025-10-16T09:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Health insurance premiums are going up next year — unless you work at these companies",
+      "url": "https://www.npr.org/2025/10/16/nx-s1-5561051/health-care-costs-premiums-companies-cost-of-living",
+      "source": "NPR Topics: Economy",
+      "published_utc": "2025-10-16T09:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Should the bus be free? Transit advocates are divided",
+      "url": "https://www.npr.org/2025/10/16/nx-s1-5535831/new-york-free-buses-advocates-divided",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-16T09:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Janet Yang to Close Taiwan Content Fest With Keynote on Asian Cinema’s Global Push",
       "url": "https://variety.com/2025/film/news/janet-yang-taiwan-content-fest-keynote-1236554349",
@@ -35,8 +74,8 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 837,
-    "dedup_pass1": 818,
+    "collected": 836,
+    "dedup_pass1": 817,
     "dedup_final": 320,
     "slow_domains": [
       "rollcall.com"
@@ -64,57 +103,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.719,
-        "kept": 8
+        "host": "www.mlb.com",
+        "sec": 0.626,
+        "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.697,
+        "sec": 0.532,
         "kept": 0
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.457,
+        "kept": 10
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.542,
+        "sec": 0.416,
         "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.49,
-        "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.299,
+        "sec": 0.325,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.27,
-        "kept": 0
+        "host": "toronto.citynews.ca",
+        "sec": 0.232,
+        "kept": 8
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.259,
+        "sec": 0.204,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.201,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.2,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.23,
+        "sec": 0.112,
         "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.123,
-        "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.085,
-        "kept": 10
       }
     ],
-    "elapsed_sec": 306.65,
+    "elapsed_sec": 258.06,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -169,8 +208,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 33,
-      "soft_404_drops": 37,
+      "link_verification_fail": 35,
+      "soft_404_drops": 36,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 2,
