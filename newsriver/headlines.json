@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-16T19:45:25.298Z",
+  "generated_utc": "2025-10-16T19:57:04.501Z",
   "count": 7,
   "items": [
     {
-      "title": "NPR 'founding mother' Susan Stamberg has died",
-      "url": "https://www.npr.org/2025/10/16/1184880448/susan-stamberg-obituary",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-16T19:27:40.000Z",
+      "title": "Rays Re-Sign Kodi Whitley To Minor League Deal",
+      "url": "https://www.mlbtraderumors.com/2025/10/rays-re-sign-kodi-whitley-to-minor-league-deal.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-16T19:46:01.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -50,12 +50,12 @@
       "source": "Oilprice.com",
       "published_utc": "2025-10-16T19:00:00.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
+        "lightsaber": false,
+        "glitch": true,
         "reasons": [
-          "score≥2.5"
+          "score≥1.6"
         ],
-        "style": "lightsaber"
+        "style": "glitch"
       },
       "category": "Energy",
       "region": "Canada"
@@ -74,19 +74,6 @@
       "region": "World"
     },
     {
-      "title": "Cher Honors Warner Records COO Tom Corson at City of Hope’s Spirit of Life Gala, Raising Nearly $6 Million",
-      "url": "https://variety.com/2025/music/news/city-of-hope-spirit-of-life-gala-cher-honors-tom-corson-1236554743",
-      "source": "Variety",
-      "published_utc": "2025-10-16T18:59:43.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "MrBeast filed a trademark for a financial services company (and a bunch of other stuff)",
       "url": "https://www.tubefilter.com/2025/10/16/mrbeast-industries-financial-us-trademark-office-filings",
       "source": "Tubefilter",
@@ -98,19 +85,32 @@
       },
       "category": "Culture",
       "region": "World"
+    },
+    {
+      "title": "How Saudi Arabia Is Freeing a Million Barrels a Day for Export",
+      "url": "https://oilprice.com/Energy/Crude-Oil/How-Saudi-Arabia-Is-Freeing-a-Million-Barrels-a-Day-for-Export.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-16T18:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "Energy",
+      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 847,
-    "dedup_pass1": 831,
+    "collected": 584,
+    "dedup_pass1": 580,
     "dedup_final": 320,
-    "slow_domains": [
-      "thehill.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -122,54 +122,43 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "nypost.com",
-      "toronto.citynews.ca",
-      "variety.com",
-      "www.boston.com",
-      "www.marketwatch.com",
-      "www.npr.org",
-      "www.wsj.com"
+      "toronto.citynews.ca"
     ],
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.776,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.491,
+        "sec": 0.532,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.303,
+        "sec": 0.32,
         "kept": 14
       },
       {
+        "host": "www.cp24.com",
+        "sec": 0.283,
+        "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.277,
+        "kept": 0
+      },
+      {
         "host": "www.bls.gov",
-        "sec": 0.254,
+        "sec": 0.266,
         "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.198,
+        "sec": 0.212,
         "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.184,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.17,
-        "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.126,
-        "kept": 10
+        "host": "toronto.citynews.ca",
+        "sec": 0.165,
+        "kept": 8
       },
       {
         "host": "www.federalreserve.gov",
@@ -177,12 +166,17 @@
         "kept": 14
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.087,
-        "kept": 8
+        "host": "www.mlb.com",
+        "sec": 0.08,
+        "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.045,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 255.2,
+    "elapsed_sec": 310.19,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -210,7 +204,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 20,
+      "ps_fatal_hits": 17,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -218,15 +212,15 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 49,
+      "preferred_bonus": 50,
       "substack_tagged": 0,
       "sports_team_hits": 12,
-      "sports_player_hits": 3,
-      "sports_result_win_hits": 17,
+      "sports_player_hits": 0,
+      "sports_result_win_hits": 11,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 19,
+      "sports_focus_team_hits": 1,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -237,11 +231,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 35,
-      "soft_404_drops": 41,
+      "link_verification_fail": 39,
+      "soft_404_drops": 29,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 2,
+      "market_sanity_drops": 5,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
