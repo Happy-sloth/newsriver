@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: newsriver-build
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -51,8 +55,11 @@ jobs:
       CLEAN_CONCURRENCY: "6"
       CLEAN_TIMEOUT_MS: "12000"
 
+      # Default branch
+      DEFAULT_BRANCH: "main"
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repo (full history for rebase)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -318,21 +325,47 @@ jobs:
             echo "$CODE $BYTES $URL"
           done
 
-      - name: Commit & push with rebase (handles non-fast-forward)
+      # --------- SAFE COMMIT / REBASE / PUSH (keeps our new headlines.json on any conflict) ----------
+      - name: Commit & push headlines.json (safe rebase; keep ours on conflict)
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Only stage the generated JSON so the working tree remains clean
+
+          git config user.name  "newsriver-bot"
+          git config user.email "newsriver-bot@users.noreply.github.com"
+
+          # Stage only the generated JSON (keeps tree clean)
           git add newsriver/headlines.json
+
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
+
           git commit -m "ci: build+clean headlines.json (drop 404/soft-404, ≤72h, non-articles)"
-          # Ensure no untracked/unstaged changes exist before rebase
-          git status --porcelain
-          git fetch origin main
-          git pull --rebase origin main
-          git push origin HEAD:main
+
+          # Make sure we have latest from default branch
+          git fetch origin "$DEFAULT_BRANCH"
+
+          # Try a clean rebase first
+          if ! git rebase "origin/$DEFAULT_BRANCH"; then
+            echo "Rebase conflict – preferring freshly-generated headlines.json"
+            git checkout --ours -- newsriver/headlines.json || true
+            git add newsriver/headlines.json
+            git rebase --continue || true
+          fi
+
+          # Retry push up to 3x in case of race with another runner
+          for i in 1 2 3; do
+            if git push origin HEAD:"$DEFAULT_BRANCH"; then
+              echo "Push succeeded"
+              break
+            fi
+            echo "Push failed (attempt $i) – rebasing again and retrying..."
+            git fetch origin "$DEFAULT_BRANCH"
+            if ! git rebase "origin/$DEFAULT_BRANCH"; then
+              git checkout --ours -- newsriver/headlines.json || true
+              git add newsriver/headlines.json
+              git rebase --continue || true
+            fi
+          done
