@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-16T20:20:55.423Z",
+  "generated_utc": "2025-10-16T20:41:25.010Z",
   "count": 8,
   "items": [
+    {
+      "title": "KISS Guitarist Ace Frehley On Life Support With Brain Bleed",
+      "url": "https://www.tmz.com/2025/10/16/kiss-guitarist-ace-frehley-life-support-brain-bleed",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-16T20:18:05.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Noah Schnapp Says Press ‘Would Pry’ and Ask ‘Are You Gay?’ When He Was 13 Years Old at ‘Stranger Things’ Junkets: ‘I Didn’t Know What to Say’",
       "url": "https://variety.com/2025/film/news/noah-schnapp-press-questions-gay-1236554619",
@@ -95,29 +108,15 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "NPR 'founding mother' Susan Stamberg has died",
-      "url": "https://www.npr.org/2025/10/16/1184880448/susan-stamberg-obituary",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-16T19:27:40.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 858,
-    "dedup_pass1": 844,
+    "collected": 857,
+    "dedup_pass1": 843,
     "dedup_final": 320,
     "slow_domains": [
-      "rollcall.com",
       "thehill.com"
     ],
     "timeouts": [
@@ -142,57 +141,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.bls.gov",
-        "sec": 0.56,
+        "host": "www.blogto.com",
+        "sec": 0.6,
         "kept": 0
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.539,
+        "host": "www.bls.gov",
+        "sec": 0.476,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.521,
+        "sec": 0.413,
         "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.415,
-        "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.384,
+        "sec": 0.349,
         "kept": 8
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.273,
-        "kept": 14
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.282,
+        "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.254,
+        "sec": 0.233,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.225,
+        "sec": 0.211,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.213,
+        "sec": 0.161,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.15,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.139,
+        "sec": 0.141,
         "kept": 10
       }
     ],
-    "elapsed_sec": 309.37,
+    "elapsed_sec": 343.09,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -220,7 +219,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 22,
+      "ps_fatal_hits": 19,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -230,9 +229,9 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 15,
+      "sports_team_hits": 17,
       "sports_player_hits": 3,
-      "sports_result_win_hits": 19,
+      "sports_result_win_hits": 20,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -247,10 +246,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 36,
-      "soft_404_drops": 43,
+      "link_verification_fail": 37,
+      "soft_404_drops": 46,
       "max_age_drops": 0,
-      "min_age_drops": 8,
+      "min_age_drops": 9,
       "market_sanity_drops": 1,
       "backfill_steps_used": 0
     },
