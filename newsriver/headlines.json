@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-16T08:50:21.059Z",
-  "count": 14,
+  "generated_utc": "2025-10-16T09:03:01.754Z",
+  "count": 9,
   "items": [
     {
       "title": "Indian Refiners Prepare to Reduce Russian Oil Imports",
@@ -35,71 +35,6 @@
       "region": "Canada"
     },
     {
-      "title": "'Dancing With The Stars' Hot Bod Guess Who!",
-      "url": "https://www.tmz.com/2025/10/16/dancing-with-the-stars-hot-bod-guess-who",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-16T07:01:17.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "‘The Diplomat’ Re-Centers Keri Russell and Rufus Sewell’s Live Wire Chemistry With an Effective Season 3 Shake-Up: TV Review",
-      "url": "https://variety.com/2025/tv/reviews/the-diplomat-season-3-review-keri-russell-1236554173",
-      "source": "Variety",
-      "published_utc": "2025-10-16T07:01:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "‘Outlander’ Star Sam Heughan Returns to Stage in First-Look Images From Royal Shakespeare Company’s 1990s Glasgow-Set ‘Macbeth’ (EXCLUSIVE)",
-      "url": "https://variety.com/2025/theater/news/outlander-sam-heughan-macbeth-first-look-images-rsc-1236553615",
-      "source": "Variety",
-      "published_utc": "2025-10-16T07:00:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Yoshinaga Sayuri to Receive Lifetime Achievement Award at Tokyo Film Festival",
-      "url": "https://variety.com/2025/film/festivals/yoshinaga-sayuri-lifetime-achievement-award-tokyo-film-festival-1236554334",
-      "source": "Film",
-      "published_utc": "2025-10-16T06:58:51.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Pakistani Crime Thriller ‘Jujji’ Acquired by Buffalo 8 for Worldwide Distribution, Trailer Unveiled (EXCLUSIVE)",
-      "url": "https://variety.com/2025/film/news/pakistani-crime-thriller-jujji-buffalo-8-1236554322",
-      "source": "Film",
-      "published_utc": "2025-10-16T06:42:30.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Montana Judge Throws Out Climate Lawsuit",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/Montana-Judge-Throws-Out-Climate-Lawsuit.html",
       "source": "Oilprice.com",
@@ -127,19 +62,6 @@
           "score≥1.6"
         ],
         "style": "glitch"
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "‘Conclave’ Composer Volker Bertelmann, ‘The Brutalist’s’ Daniel Blumberg Win at the 25th World Soundtrack Awards",
-      "url": "https://variety.com/2025/film/global/25th-world-soundtrack-awards-winners-1236554054",
-      "source": "Film",
-      "published_utc": "2025-10-16T06:02:05.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
       },
       "category": "General",
       "region": "World"
@@ -190,28 +112,48 @@
       "region": "World"
     },
     {
-      "title": "Trump confirms the CIA is conducting covert operations inside Venezuela",
-      "url": "https://www.npr.org/2025/10/16/g-s1-93677/trump-confirms-cia-operations-venezuela",
-      "source": "NPR Topics: Home Page Top Stories",
-      "published_utc": "2025-10-16T05:22:59.000Z",
+      "title": "Toronto's bottom of the order takes top billing in Game 3 rout",
+      "url": "https://www.mlb.com/bluejays/news/blue-jays-score-5-runs-third-inning-alcs-game-3",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-16T04:56:00.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": false,
-        "reasons": []
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
       },
       "category": "General",
       "region": "World"
+    },
+    {
+      "title": "Russia’s Middle East Power Play Is Unravelling",
+      "url": "https://oilprice.com/Geopolitics/Africa/Russias-Middle-East-Power-Play-Is-Unravelling.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-16T04:53:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "Energy",
+      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 841,
-    "dedup_pass1": 826,
+    "collected": 507,
+    "dedup_pass1": 504,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "hypebeast.com"
+    ],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -223,67 +165,61 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "nypost.com",
-      "toronto.citynews.ca",
-      "variety.com",
-      "www.boston.com",
-      "www.marketwatch.com",
-      "www.npr.org",
-      "www.wsj.com"
+      "toronto.citynews.ca"
     ],
     "feed_times_sample": [
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.688,
-        "kept": 8
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.469,
+        "sec": 0.511,
         "kept": 0
       },
       {
+        "host": "toronto.citynews.ca",
+        "sec": 0.396,
+        "kept": 8
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.268,
+        "kept": 14
+      },
+      {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.429,
+        "sec": 0.262,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.301,
-        "kept": 14
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.295,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.227,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.224,
-        "kept": 0
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.195,
+        "sec": 0.244,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.136,
+        "sec": 0.209,
         "kept": 0
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.163,
+        "kept": 0
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.132,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.108,
+        "kept": 14
+      },
+      {
         "host": "globalnews.ca",
-        "sec": 0.116,
+        "sec": 0.093,
         "kept": 10
       }
     ],
-    "elapsed_sec": 336.07,
+    "elapsed_sec": 317.33,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -311,7 +247,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 10,
+      "ps_fatal_hits": 6,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -319,15 +255,15 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 50,
+      "preferred_bonus": 42,
       "substack_tagged": 0,
-      "sports_team_hits": 16,
-      "sports_player_hits": 5,
-      "sports_result_win_hits": 18,
+      "sports_team_hits": 14,
+      "sports_player_hits": 1,
+      "sports_result_win_hits": 8,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 12,
+      "sports_focus_team_hits": 2,
       "sports_final_hits": 2,
       "sports_final_score_hits": 2,
       "hype_politics": 0,
@@ -338,11 +274,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 32,
-      "soft_404_drops": 27,
+      "link_verification_fail": 27,
+      "soft_404_drops": 29,
       "max_age_drops": 0,
-      "min_age_drops": 8,
-      "market_sanity_drops": 2,
+      "min_age_drops": 0,
+      "market_sanity_drops": 7,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
