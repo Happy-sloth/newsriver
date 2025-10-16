@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-16T17:40:00.567Z",
-  "count": 5,
+  "generated_utc": "2025-10-16T17:49:10.302Z",
+  "count": 6,
   "items": [
+    {
+      "title": "Diane Keaton Has Been Cremated, Days After Dying From Pneumonia Infection",
+      "url": "https://www.tmz.com/2025/10/16/diane-keaton-cremated-bacterial-pneumonia-infection",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-16T17:43:35.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Directors’ Fortnight Extended to Return for Three Day Festival in Los Angeles – Film News in Brief",
       "url": "https://variety.com/2025/film/news/film-news-in-brief-oct-13-2025-1236547669",
@@ -29,6 +42,19 @@
       "region": "World"
     },
     {
+      "title": "‘F1’ Director Joseph Kosinski Looks Back on Shooting Brad Pitt Racing Film: ‘God, That Was Pretty Reckless’",
+      "url": "https://variety.com/2025/film/news/f1-joseph-kosinski-brad-pitt-racing-1236552916",
+      "source": "Film",
+      "published_utc": "2025-10-16T17:30:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
       "title": "TalkShopLive, Star-Driven Digital Commerce Platform, Lands YouTube Integration (EXCLUSIVE)",
       "url": "https://variety.com/2025/digital/news/talkshoplive-youtube-integration-e-commerce-1236554563",
       "source": "Variety",
@@ -42,23 +68,10 @@
       "region": "World"
     },
     {
-      "title": "Aaron Judge Will Not Require Elbow Surgery; Rodón, Volpe Likely Unavailable To Begin 2026",
+      "title": "Aaron Judge Will Not Require Elbow Surgery; Rodón, Volpe Expected To Start 2026 On IL",
       "url": "https://www.mlbtraderumors.com/2025/10/aaron-judge-will-not-require-elbow-surgery-rodon-volpe-likely-unavailable-to-begin-2026.html",
       "source": "MLB Trade Rumors",
       "published_utc": "2025-10-16T17:05:04.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Outfest Returns After Two-Year Hiatus With New Screening Series, Including ‘Broken Hearts Club’ 25th Anniversary Celebration",
-      "url": "https://variety.com/2025/film/columns/outfest-returns-broken-hearts-club-25th-anniversary-1236554053",
-      "source": "Film",
-      "published_utc": "2025-10-16T17:00:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -71,13 +84,13 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 847,
-    "dedup_pass1": 830,
+    "collected": 846,
+    "dedup_pass1": 827,
     "dedup_final": 320,
     "slow_domains": [
-      "rollcall.com",
+      "energynow.ca",
       "thehill.com",
-      "www.gorillavsbear.net"
+      "www.tmz.com"
     ],
     "timeouts": [
       "japantoday.com",
@@ -102,57 +115,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "toronto.citynews.ca",
+        "sec": 2.057,
+        "kept": 8
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.507,
+        "sec": 0.504,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.439,
+        "sec": 0.461,
         "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.366,
-        "kept": 14
+        "host": "globalnews.ca",
+        "sec": 0.415,
+        "kept": 10
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.294,
+        "sec": 0.293,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.212,
-        "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.147,
-        "kept": 8
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.124,
+        "sec": 0.275,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.121,
+        "sec": 0.226,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.181,
+        "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.136,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.096,
+        "sec": 0.098,
         "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.085,
-        "kept": 10
       }
     ],
-    "elapsed_sec": 312.85,
+    "elapsed_sec": 298.25,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -188,17 +201,17 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 49,
+      "preferred_bonus": 48,
       "substack_tagged": 0,
-      "sports_team_hits": 13,
+      "sports_team_hits": 12,
       "sports_player_hits": 2,
       "sports_result_win_hits": 16,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 16,
-      "sports_final_hits": 2,
-      "sports_final_score_hits": 2,
+      "sports_final_hits": 1,
+      "sports_final_score_hits": 1,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -207,11 +220,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 28,
-      "soft_404_drops": 39,
+      "link_verification_fail": 38,
+      "soft_404_drops": 41,
       "max_age_drops": 0,
       "min_age_drops": 0,
-      "market_sanity_drops": 2,
+      "market_sanity_drops": 1,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
