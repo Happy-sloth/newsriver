@@ -1,7 +1,36 @@
 {
-  "generated_utc": "2025-10-16T21:00:04.057Z",
-  "count": 5,
+  "generated_utc": "2025-10-16T21:12:13.141Z",
+  "count": 6,
   "items": [
+    {
+      "title": "Susan Stamberg, Pioneering NPR Journalist, Dies at 87",
+      "url": "https://variety.com/2025/digital/obituaries-people-news/susan-stamberg-dead-npr-1236554884",
+      "source": "Variety",
+      "published_utc": "2025-10-16T21:02:01.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Data Centers Spark Bipartisan Fury Over As Energy Costs Soar",
+      "url": "https://oilprice.com/Energy/Energy-General/Data-Centers-Spark-Bipartisan-Fury-Over-As-Energy-Costs-Soar.html",
+      "source": "Oilprice.com",
+      "published_utc": "2025-10-16T21:00:00.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.5"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Energy",
+      "region": "Canada"
+    },
     {
       "title": "Disney Extends Contract of Kristina Schake, Head of Corporate Communications, Through June 2027",
       "url": "https://variety.com/2025/biz/news/disney-renews-kristina-schake-chief-communications-officer-june-2027-1236554888",
@@ -45,23 +74,10 @@
       "region": "World"
     },
     {
-      "title": "Noah Schnapp Says Press ‘Would Pry’ and Ask ‘Are You Gay?’ When He Was 13 Years Old at ‘Stranger Things’ Junkets: ‘I Didn’t Know What to Say’",
-      "url": "https://variety.com/2025/film/news/noah-schnapp-press-questions-gay-1236554619",
-      "source": "Film",
-      "published_utc": "2025-10-16T20:10:17.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Kristen Wiig Channels Her Inner Showgirl in ‘Palm Royale’ Season 2 Trailer (TV News Roundup)",
-      "url": "https://variety.com/2025/tv/news/tv-news-roundup-oct-13-2025-1236551376",
-      "source": "Variety",
-      "published_utc": "2025-10-16T20:08:15.000Z",
+      "title": "Adelita Grijalva can force a vote on the Epstein files, but she's still not sworn in",
+      "url": "https://www.npr.org/2025/10/16/g-s1-93709/adelita-grijalva-mike-johnson-swearing-in",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-16T20:30:20.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -74,8 +90,8 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 845,
-    "dedup_pass1": 830,
+    "collected": 846,
+    "dedup_pass1": 831,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
@@ -102,56 +118,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.629,
-        "kept": 0
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.494,
-        "kept": 10
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.438,
-        "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.395,
-        "kept": 8
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.308,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.293,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.261,
+        "sec": 0.514,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.24,
+        "sec": 0.247,
         "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.242,
+        "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.239,
+        "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.235,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.226,
+        "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.162,
+        "sec": 0.153,
         "kept": 14
       },
       {
+        "host": "toronto.citynews.ca",
+        "sec": 0.116,
+        "kept": 8
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.151,
+        "sec": 0.082,
         "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.063,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 334.53,
+    "elapsed_sec": 275.84,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -191,11 +207,11 @@
       "substack_tagged": 0,
       "sports_team_hits": 16,
       "sports_player_hits": 3,
-      "sports_result_win_hits": 21,
+      "sports_result_win_hits": 22,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 15,
+      "sports_focus_team_hits": 13,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -206,11 +222,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 35,
+      "link_verification_fail": 34,
       "soft_404_drops": 44,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 1,
+      "market_sanity_drops": 0,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
