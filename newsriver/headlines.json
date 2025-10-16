@@ -1,7 +1,59 @@
 {
-  "generated_utc": "2025-10-16T07:01:00.875Z",
-  "count": 13,
+  "generated_utc": "2025-10-16T07:20:43.816Z",
+  "count": 16,
   "items": [
+    {
+      "title": "'Dancing With The Stars' Hot Bod Guess Who!",
+      "url": "https://www.tmz.com/2025/10/16/dancing-with-the-stars-hot-bod-guess-who",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-16T07:01:17.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "‘The Diplomat’ Re-Centers Keri Russell and Rufus Sewell’s Live Wire Chemistry With an Effective Season 3 Shake-Up: TV Review",
+      "url": "https://variety.com/2025/tv/reviews/the-diplomat-season-3-review-keri-russell-1236554173",
+      "source": "Variety",
+      "published_utc": "2025-10-16T07:01:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "‘Outlander’ Star Sam Heughan Returns to Stage in First-Look Images From Royal Shakespeare Company’s 1990s Glasgow-Set ‘Macbeth’ (EXCLUSIVE)",
+      "url": "https://variety.com/2025/theater/news/outlander-sam-heughan-macbeth-first-look-images-rsc-1236553615",
+      "source": "Variety",
+      "published_utc": "2025-10-16T07:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Yoshinaga Sayuri to Receive Lifetime Achievement Award at Tokyo Film Festival",
+      "url": "https://variety.com/2025/film/festivals/yoshinaga-sayuri-lifetime-achievement-award-tokyo-film-festival-1236554334",
+      "source": "Film",
+      "published_utc": "2025-10-16T06:58:51.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Pakistani Crime Thriller ‘Jujji’ Acquired by Buffalo 8 for Worldwide Distribution, Trailer Unveiled (EXCLUSIVE)",
       "url": "https://variety.com/2025/film/news/pakistani-crime-thriller-jujji-buffalo-8-1236554322",
@@ -175,26 +227,13 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "Diamondbacks Hire J.R. House As Third Base Coach",
-      "url": "https://www.mlbtraderumors.com/2025/10/diamondbacks-hire-j-r-house-as-third-base-coach.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-16T03:35:20.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 840,
-    "dedup_pass1": 822,
+    "collected": 841,
+    "dedup_pass1": 825,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
@@ -220,57 +259,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.blogto.com",
-        "sec": 0.555,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.487,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.445,
-        "kept": 0
-      },
-      {
         "host": "www.cp24.com",
-        "sec": 0.418,
+        "sec": 2.714,
         "kept": 14
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.357,
+        "sec": 0.422,
         "kept": 8
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.355,
+        "host": "www.blogto.com",
+        "sec": 0.416,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.317,
+        "sec": 0.32,
         "kept": 14
       },
       {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.275,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.192,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.181,
+        "kept": 0
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.214,
+        "sec": 0.1,
         "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.194,
+        "sec": 0.099,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.098,
+        "sec": 0.096,
         "kept": 10
       }
     ],
-    "elapsed_sec": 272.02,
+    "elapsed_sec": 243.14,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
