@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-10-16T17:49:10.302Z",
+  "generated_utc": "2025-10-16T17:57:37.575Z",
   "count": 6,
   "items": [
     {
@@ -84,18 +84,19 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 846,
-    "dedup_pass1": 827,
+    "collected": 860,
+    "dedup_pass1": 840,
     "dedup_final": 320,
     "slow_domains": [
+      "cultmtl.com",
       "energynow.ca",
       "thehill.com",
-      "www.tmz.com"
+      "variety.com"
     ],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
-      "www.cbc.ca"
+      "www.cbc.ca",
+      "www.yrp.ca"
     ],
     "errors": [
       "alert.weather.gc.ca",
@@ -116,56 +117,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 2.057,
+        "sec": 1.306,
         "kept": 8
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.504,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.461,
-        "kept": 0
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.415,
+        "sec": 0.604,
         "kept": 10
       },
       {
+        "host": "www.blogto.com",
+        "sec": 0.455,
+        "kept": 0
+      },
+      {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.293,
+        "sec": 0.321,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.275,
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.233,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.226,
+        "sec": 0.212,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.181,
+        "sec": 0.211,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.136,
+        "sec": 0.185,
         "kept": 14
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.15,
+        "kept": 0
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.098,
+        "sec": 0.099,
         "kept": 14
       }
     ],
-    "elapsed_sec": 298.25,
+    "elapsed_sec": 323.47,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -193,7 +194,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 17,
+      "ps_fatal_hits": 18,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -203,15 +204,15 @@
       "press_penalties": 0,
       "preferred_bonus": 48,
       "substack_tagged": 0,
-      "sports_team_hits": 12,
+      "sports_team_hits": 13,
       "sports_player_hits": 2,
-      "sports_result_win_hits": 16,
+      "sports_result_win_hits": 17,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 16,
-      "sports_final_hits": 1,
-      "sports_final_score_hits": 1,
+      "sports_final_hits": 2,
+      "sports_final_score_hits": 2,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -220,10 +221,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 38,
+      "link_verification_fail": 29,
       "soft_404_drops": 41,
       "max_age_drops": 0,
-      "min_age_drops": 0,
+      "min_age_drops": 8,
       "market_sanity_drops": 1,
       "backfill_steps_used": 0
     },
