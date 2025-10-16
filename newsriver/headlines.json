@@ -1,18 +1,42 @@
 {
-  "generated_utc": "2025-10-16T11:45:23.942Z",
-  "count": 0,
-  "items": [],
+  "generated_utc": "2025-10-16T11:57:21.079Z",
+  "count": 2,
+  "items": [
+    {
+      "title": "What to do today in Montreal",
+      "url": "https://cultmtl.com/2025/10/what-to-do-today-in-montreal-mtl-to-do-list-skyline",
+      "source": "Cult MTL",
+      "published_utc": "2025-10-16T11:51:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Britney Spears responds to Kevin Federline’s “hurtful and exhausting” book claims",
+      "url": "https://www.thefader.com/2025/10/16/britney-spears-kevin-federlines-book-response",
+      "source": "The FADER",
+      "published_utc": "2025-10-16T10:22:07.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    }
+  ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 837,
-    "dedup_pass1": 819,
+    "collected": 595,
+    "dedup_pass1": 590,
     "dedup_final": 320,
-    "slow_domains": [
-      "thehill.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
-      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -24,67 +48,61 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "nypost.com",
-      "toronto.citynews.ca",
-      "variety.com",
-      "www.boston.com",
-      "www.marketwatch.com",
-      "www.npr.org",
-      "www.wsj.com"
+      "toronto.citynews.ca"
     ],
     "feed_times_sample": [
       {
+        "host": "www.mlb.com",
+        "sec": 0.726,
+        "kept": 14
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.509,
+        "sec": 0.702,
         "kept": 0
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.413,
-        "kept": 10
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.295,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.275,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.239,
-        "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.226,
+        "sec": 0.397,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.188,
+        "host": "www.bls.gov",
+        "sec": 0.393,
         "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.383,
+        "kept": 14
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.174,
+        "sec": 0.34,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.159,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.23,
         "kept": 14
       },
       {
+        "host": "www.nhl.com",
+        "sec": 0.227,
+        "kept": 0
+      },
+      {
         "host": "www.federalreserve.gov",
-        "sec": 0.105,
+        "sec": 0.172,
         "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.137,
+        "kept": 10
       }
     ],
-    "elapsed_sec": 245.34,
+    "elapsed_sec": 317.79,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -112,7 +130,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 10,
+      "ps_fatal_hits": 9,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -122,13 +140,13 @@
       "press_penalties": 0,
       "preferred_bonus": 47,
       "substack_tagged": 0,
-      "sports_team_hits": 15,
-      "sports_player_hits": 5,
-      "sports_result_win_hits": 18,
+      "sports_team_hits": 13,
+      "sports_player_hits": 2,
+      "sports_result_win_hits": 12,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 12,
+      "sports_focus_team_hits": 2,
       "sports_final_hits": 2,
       "sports_final_score_hits": 2,
       "hype_politics": 0,
@@ -139,11 +157,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 37,
-      "soft_404_drops": 37,
+      "link_verification_fail": 33,
+      "soft_404_drops": 28,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 3,
+      "market_sanity_drops": 5,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
