@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-10-16T10:57:47.552Z",
-  "count": 5,
+  "generated_utc": "2025-10-16T11:16:38.390Z",
+  "count": 4,
   "items": [
     {
       "title": "The two wildcards shaping the tail end of the Virginia race for governor",
@@ -42,10 +42,10 @@
       "region": "World"
     },
     {
-      "title": "Janet Yang to Close Taiwan Content Fest With Keynote on Asian Cinema’s Global Push",
-      "url": "https://variety.com/2025/film/news/janet-yang-taiwan-content-fest-keynote-1236554349",
-      "source": "Film",
-      "published_utc": "2025-10-16T08:53:47.000Z",
+      "title": "Ethan Hawke and Richard Linklater find the heartbreak in 'Blue Moon'",
+      "url": "https://www.npr.org/2025/10/16/nx-s1-5397991/blue-moon-movie-richard-linklater-ethan-hawke",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-16T09:00:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -53,22 +53,6 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Indian Refiners Prepare to Reduce Russian Oil Imports",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/Indian-Refiners-Prepare-to-Reduce-Russian-Oil-Imports.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-16T08:40:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
@@ -103,57 +87,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "www.blogto.com",
+        "sec": 0.512,
+        "kept": 0
+      },
+      {
         "host": "toronto.citynews.ca",
-        "sec": 0.583,
+        "sec": 0.49,
         "kept": 8
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.561,
-        "kept": 0
-      },
-      {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.447,
+        "sec": 0.458,
         "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.422,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.357,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.409,
+        "sec": 0.312,
         "kept": 0
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.316,
+        "host": "www.cp24.com",
+        "sec": 0.136,
         "kept": 14
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.284,
+        "host": "www.federalreserve.gov",
+        "sec": 0.132,
         "kept": 14
+      },
+      {
+        "host": "globalnews.ca",
+        "sec": 0.123,
+        "kept": 10
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.213,
+        "sec": 0.114,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.198,
+        "sec": 0.111,
         "kept": 0
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.082,
-        "kept": 10
       }
     ],
-    "elapsed_sec": 334.3,
+    "elapsed_sec": 239.3,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -181,7 +165,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 10,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -189,7 +173,7 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 47,
+      "preferred_bonus": 46,
       "substack_tagged": 0,
       "sports_team_hits": 15,
       "sports_player_hits": 5,
@@ -208,11 +192,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 33,
+      "link_verification_fail": 35,
       "soft_404_drops": 37,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 2,
+      "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
