@@ -1,7 +1,62 @@
 {
-  "generated_utc": "2025-10-16T21:12:13.141Z",
-  "count": 6,
+  "generated_utc": "2025-10-16T21:33:14.161Z",
+  "count": 10,
   "items": [
+    {
+      "title": "Blue Jays-Mariners ALCS Game 4 FAQ, lineups (8:30 ET, FS1)",
+      "url": "https://www.mlb.com/bluejays/news/blue-jays-vs-mariners-alcs-game-4-starting-lineups-pitching-matchup",
+      "source": "Blue Jays News",
+      "published_utc": "2025-10-16T21:18:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥1.6"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Kevin Costner Loses Bid to Throw Out ‘Horizon 2’ Stunt Performer’s Harassment Suit",
+      "url": "https://variety.com/2025/film/news/kevin-costner-horizon-2-harassment-lawsuit-1236554666",
+      "source": "Film",
+      "published_utc": "2025-10-16T21:14:15.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Kroy Biermann Rips Kim Zolciak for Blabbing About Divorce, Says It Hurts Kids",
+      "url": "https://www.tmz.com/2025/10/16/kroy-biermann-kim-zolciak-divorce-public-comments",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-16T21:11:34.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Ex-national security adviser John Bolton indicted in classified documents case",
+      "url": "https://www.npr.org/2025/10/16/nx-s1-5554306/john-bolton-indicted",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-10-16T21:05:39.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Susan Stamberg, Pioneering NPR Journalist, Dies at 87",
       "url": "https://variety.com/2025/digital/obituaries-people-news/susan-stamberg-dead-npr-1236554884",
@@ -32,6 +87,19 @@
       "region": "Canada"
     },
     {
+      "title": "Music Industry Moves: Oneohtrix Point Never — a.k.a. Daniel Lopatin — Inks Global Deal With Universal Music Publishing",
+      "url": "https://variety.com/2025/music/news/umpg-inks-the-marias-global-publishing-deal-1236551766",
+      "source": "Variety",
+      "published_utc": "2025-10-16T21:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
       "title": "Disney Extends Contract of Kristina Schake, Head of Corporate Communications, Through June 2027",
       "url": "https://variety.com/2025/biz/news/disney-renews-kristina-schake-chief-communications-officer-june-2027-1236554888",
       "source": "Variety",
@@ -58,22 +126,6 @@
       "region": "World"
     },
     {
-      "title": "Blue Jays-Mariners ALCS Game 4 FAQ, lineups (8:30 ET, FS1)",
-      "url": "https://www.mlb.com/bluejays/news/blue-jays-vs-mariners-alcs-game-4-starting-lineups-pitching-matchup",
-      "source": "Blue Jays News",
-      "published_utc": "2025-10-16T20:37:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.6"
-        ],
-        "style": "glitch"
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Adelita Grijalva can force a vote on the Epstein files, but she's still not sworn in",
       "url": "https://www.npr.org/2025/10/16/g-s1-93709/adelita-grijalva-mike-johnson-swearing-in",
       "source": "NPR Topics: Home Page Top Stories",
@@ -90,10 +142,12 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 846,
-    "dedup_pass1": 831,
+    "collected": 842,
+    "dedup_pass1": 830,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "thehill.com"
+    ],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -117,57 +171,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "globalnews.ca",
+        "sec": 0.636,
+        "kept": 10
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.498,
+        "kept": 8
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.514,
+        "sec": 0.489,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.484,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.247,
+        "sec": 0.296,
         "kept": 14
       },
       {
-        "host": "www.nhl.com",
+        "host": "www.cp24.com",
+        "sec": 0.284,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
         "sec": 0.242,
         "kept": 0
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.239,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.235,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.226,
+        "host": "www.nhl.com",
+        "sec": 0.228,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.153,
+        "sec": 0.105,
         "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.116,
-        "kept": 8
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.082,
+        "sec": 0.086,
         "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.063,
-        "kept": 10
       }
     ],
-    "elapsed_sec": 275.84,
+    "elapsed_sec": 297.06,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -195,7 +249,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 17,
+      "ps_fatal_hits": 15,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -207,11 +261,11 @@
       "substack_tagged": 0,
       "sports_team_hits": 16,
       "sports_player_hits": 3,
-      "sports_result_win_hits": 22,
+      "sports_result_win_hits": 23,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 13,
+      "sports_focus_team_hits": 14,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -223,7 +277,7 @@
     },
     "sanity_stats": {
       "link_verification_fail": 34,
-      "soft_404_drops": 44,
+      "soft_404_drops": 45,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 0,
