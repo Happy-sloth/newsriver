@@ -1,18 +1,31 @@
 {
-  "generated_utc": "2025-10-16T14:44:50.818Z",
-  "count": 5,
+  "generated_utc": "2025-10-16T14:57:41.503Z",
+  "count": 6,
   "items": [
     {
-      "title": "How to throw a perfect show",
-      "url": "https://www.thefader.com/2025/10/16/how-to-throw-a-show-festival-dj-night",
-      "source": "The FADER",
-      "published_utc": "2025-10-16T14:36:00.000Z",
+      "title": "Ollie shares new single, “This That”",
+      "url": "https://canadianbeats.ca/2025/10/16/ollie-shares-new-single-this-that",
+      "source": "Canadian Beats Media",
+      "published_utc": "2025-10-16T14:50:47.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
         "reasons": []
       },
       "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Shae Cornette Joins ESPN’s ‘First Take’ After Molly Qerim Exit",
+      "url": "https://variety.com/2025/tv/news/shae-cornette-espn-first-take-host-stephen-a-smith-1236554484",
+      "source": "Variety",
+      "published_utc": "2025-10-16T14:46:24.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
       "region": "World"
     },
     {
@@ -74,13 +87,14 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 855,
-    "dedup_pass1": 840,
+    "collected": 842,
+    "dedup_pass1": 827,
     "dedup_final": 320,
     "slow_domains": [
-      "rollcall.com"
+      "thehill.com"
     ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -102,57 +116,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.blogto.com",
-        "sec": 0.478,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.339,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.309,
-        "kept": 14
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.295,
+        "sec": 1.463,
         "kept": 8
       },
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.262,
+        "host": "www.blogto.com",
+        "sec": 0.601,
         "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.212,
+        "sec": 0.342,
         "kept": 0
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.178,
+        "host": "www.cp24.com",
+        "sec": 0.318,
+        "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.224,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.222,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.147,
+        "sec": 0.135,
         "kept": 0
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.142,
+        "host": "www.federalreserve.gov",
+        "sec": 0.131,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.081,
+        "sec": 0.087,
         "kept": 10
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.072,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 226.93,
+    "elapsed_sec": 254.37,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -180,7 +194,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 16,
+      "ps_fatal_hits": 15,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -190,15 +204,15 @@
       "press_penalties": 0,
       "preferred_bonus": 49,
       "substack_tagged": 0,
-      "sports_team_hits": 14,
+      "sports_team_hits": 13,
       "sports_player_hits": 2,
-      "sports_result_win_hits": 15,
+      "sports_result_win_hits": 14,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 12,
-      "sports_final_hits": 3,
-      "sports_final_score_hits": 3,
+      "sports_final_hits": 2,
+      "sports_final_score_hits": 2,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -207,10 +221,10 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 38,
+      "link_verification_fail": 37,
       "soft_404_drops": 27,
       "max_age_drops": 0,
-      "min_age_drops": 9,
+      "min_age_drops": 20,
       "market_sanity_drops": 4,
       "backfill_steps_used": 0
     },
