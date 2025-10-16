@@ -1,46 +1,7 @@
 {
-  "generated_utc": "2025-10-16T07:47:36.084Z",
-  "count": 21,
+  "generated_utc": "2025-10-16T07:56:14.612Z",
+  "count": 17,
   "items": [
-    {
-      "title": "Prosecutors seek death sentence for man over 3 crossbow murders in  2020",
-      "url": "https://japantoday.com/category/crime/prosecutors-seek-death-sentence-for-man-over-3-crossbow-murders-in-2020",
-      "source": "Japan Today",
-      "published_utc": "2025-10-16T07:34:05.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Sumo wrestlers bring 1,500 years of tradition to London's Royal Albert Hall",
-      "url": "https://japantoday.com/category/sports/photos-show-sumo-wrestlers-bring-1-500-years-of-tradition-to-london%27s-royal-albert-hall",
-      "source": "Japan Today",
-      "published_utc": "2025-10-16T07:33:45.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Bessent says he told Kato that Japan should stop Russian energy imports",
-      "url": "https://japantoday.com/category/politics/US-pushes-Japan-to-help-hobble-Russia-by-ceasing-energy-imports",
-      "source": "Japan Today",
-      "published_utc": "2025-10-16T07:33:10.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
     {
       "title": "U.S. Expects Japan to Suspend Russian Energy Purchases",
       "url": "https://oilprice.com/Latest-Energy-News/World-News/US-Expects-Japan-to-Suspend-Russian-Energy-Purchases.html",
@@ -101,19 +62,6 @@
       "url": "https://variety.com/2025/film/festivals/yoshinaga-sayuri-lifetime-achievement-award-tokyo-film-festival-1236554334",
       "source": "Film",
       "published_utc": "2025-10-16T06:58:51.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Read what a Chinese officer wrote of D-Day in his diary salvaged in Hong Kong",
-      "url": "https://japantoday.com/category/world/read-what-a-chinese-officer-wrote-of-d-day-in-his-diary-salvaged-in-hong-kong",
-      "source": "Japan Today",
-      "published_utc": "2025-10-16T06:50:05.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -300,11 +248,14 @@
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 855,
-    "dedup_pass1": 839,
+    "collected": 841,
+    "dedup_pass1": 826,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.cp24.com"
+    ],
     "timeouts": [
+      "japantoday.com",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -326,57 +277,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.blogto.com",
-        "sec": 0.435,
-        "kept": 0
-      },
-      {
         "host": "www.cp24.com",
-        "sec": 0.337,
+        "sec": 7.623,
         "kept": 14
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.261,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.247,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.152,
-        "kept": 0
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.107,
-        "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.104,
+        "host": "www.blogto.com",
+        "sec": 0.536,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.094,
+        "sec": 0.32,
         "kept": 8
       },
       {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.308,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.205,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.198,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.197,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.111,
+        "kept": 14
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.072,
+        "sec": 0.101,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.049,
+        "sec": 0.064,
         "kept": 10
       }
     ],
-    "elapsed_sec": 289.48,
+    "elapsed_sec": 261.56,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -404,7 +355,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 10,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -414,15 +365,15 @@
       "press_penalties": 0,
       "preferred_bonus": 50,
       "substack_tagged": 0,
-      "sports_team_hits": 17,
+      "sports_team_hits": 16,
       "sports_player_hits": 5,
-      "sports_result_win_hits": 19,
+      "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 12,
-      "sports_final_hits": 3,
-      "sports_final_score_hits": 3,
+      "sports_final_hits": 2,
+      "sports_final_score_hits": 2,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
@@ -431,11 +382,11 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 35,
+      "link_verification_fail": 38,
       "soft_404_drops": 27,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 3,
+      "market_sanity_drops": 2,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
