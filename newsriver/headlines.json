@@ -1,7 +1,33 @@
 {
-  "generated_utc": "2025-10-16T16:48:13.106Z",
+  "generated_utc": "2025-10-16T17:00:12.499Z",
   "count": 12,
   "items": [
+    {
+      "title": "TMZ Streaming Live, Come Into Our Newsroom and Watch Things Happen!",
+      "url": "https://www.tmz.com/2025/10/16/watch-tmz-live-today",
+      "source": "TMZ.com",
+      "published_utc": "2025-10-16T16:47:23.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Aaron Judge Will Not Require Elbow Surgery; Rodón, Volpe Likely Unavailable To Begin 2026",
+      "url": "https://www.mlbtraderumors.com/2025/10/aaron-judge-will-not-require-elbow-surgery-rodon-volpe-likely-unavailable-to-begin-2026.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-10-16T16:45:04.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Steven Soderbergh’s ‘The Christophers’ Sells to Neon, Sets 2026 Release",
       "url": "https://variety.com/2025/film/news/steven-soderbergh-the-christophers-neon-2026-release-1236554576",
@@ -13,6 +39,19 @@
         "reasons": []
       },
       "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Spotify creating AI tools in partnership with major labels",
+      "url": "https://www.thefader.com/2025/10/16/spotify-creating-ai-tools-in-partnership-with-major-labels",
+      "source": "The FADER",
+      "published_utc": "2025-10-16T16:44:01.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
       "region": "World"
     },
     {
@@ -33,19 +72,6 @@
       "url": "https://variety.com/2025/gaming/news/battlefield-6-sales-record-gaming-news-roundup-1236554599",
       "source": "Variety",
       "published_utc": "2025-10-16T16:31:08.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Aaron Judge Will Not Require Elbow Surgery; Rodón, Volpe Likely Unavailable To Begin 2026",
-      "url": "https://www.mlbtraderumors.com/2025/10/aaron-judge-will-not-require-elbow-surgery-rodon-volpe-likely-unavailable-to-begin-2026.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-16T16:30:04.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -137,42 +163,17 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "'Breaking Bad' Star RJ Mitte Engaged to Kennedy Suarez",
-      "url": "https://www.tmz.com/2025/10/16/rj-mitte-engaged-breaking-bad",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-16T16:04:40.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "The Holy Gasp shares new release, “Out of the Hands of the Wicked”",
-      "url": "https://canadianbeats.ca/2025/10/16/the-holy-gasp-shares-new-release-out-of-the-hands-of-the-wicked",
-      "source": "Canadian Beats Media",
-      "published_utc": "2025-10-16T16:01:16.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 842,
+    "collected": 843,
     "dedup_pass1": 827,
     "dedup_final": 320,
     "slow_domains": [
-      "rollcall.com"
+      "rollcall.com",
+      "thehill.com"
     ],
     "timeouts": [
       "japantoday.com",
@@ -198,56 +199,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.387,
+        "sec": 0.592,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.347,
+        "sec": 0.344,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.309,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.234,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.171,
-        "kept": 0
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.153,
-        "kept": 8
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.144,
-        "kept": 14
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.136,
+        "sec": 0.317,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.136,
+        "sec": 0.259,
         "kept": 0
       },
       {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.248,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.228,
+        "kept": 0
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.168,
+        "kept": 8
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.148,
+        "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.114,
+        "kept": 14
+      },
+      {
         "host": "globalnews.ca",
-        "sec": 0.089,
+        "sec": 0.079,
         "kept": 10
       }
     ],
-    "elapsed_sec": 291.26,
+    "elapsed_sec": 285.77,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
