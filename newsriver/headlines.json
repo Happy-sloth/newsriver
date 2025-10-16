@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-16T20:50:35.468Z",
-  "count": 7,
+  "generated_utc": "2025-10-16T21:00:04.057Z",
+  "count": 5,
   "items": [
+    {
+      "title": "Disney Extends Contract of Kristina Schake, Head of Corporate Communications, Through June 2027",
+      "url": "https://variety.com/2025/biz/news/disney-renews-kristina-schake-chief-communications-officer-june-2027-1236554888",
+      "source": "Variety",
+      "published_utc": "2025-10-16T20:53:14.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "First major storm of the season adds 700 million gallons to LA County water supply",
       "url": "https://www.dailynews.com/2025/10/16/first-major-storm-of-the-season-adds-700-million-gallons-to-la-county-water-supply",
@@ -32,19 +45,6 @@
       "region": "World"
     },
     {
-      "title": "KISS Guitarist Ace Frehley On Life Support With Brain Bleed",
-      "url": "https://www.tmz.com/2025/10/16/kiss-guitarist-ace-frehley-life-support-brain-bleed",
-      "source": "TMZ.com",
-      "published_utc": "2025-10-16T20:18:05.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Noah Schnapp Says Press ‘Would Pry’ and Ask ‘Are You Gay?’ When He Was 13 Years Old at ‘Stranger Things’ Junkets: ‘I Didn’t Know What to Say’",
       "url": "https://variety.com/2025/film/news/noah-schnapp-press-questions-gay-1236554619",
       "source": "Film",
@@ -69,46 +69,15 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Lifetime Unveils 2025 Christmas Movie Slate Featuring James Lafferty, Brandy Norwood and Vivica A. Fox: Full Schedule",
-      "url": "https://variety.com/lists/lifetime-christmas-movie-schedule-2025-holiday-slate",
-      "source": "Film",
-      "published_utc": "2025-10-16T20:00:13.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Russia's Fuel Crisis Spills into Central Asia",
-      "url": "https://oilprice.com/Energy/Energy-General/Russias-Fuel-Crisis-Spills-into-Central-Asia.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-10-16T20:00:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.5"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 844,
-    "dedup_pass1": 829,
+    "collected": 845,
+    "dedup_pass1": 830,
     "dedup_final": 320,
-    "slow_domains": [
-      "thehill.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "japantoday.com",
       "news.communitech.ca",
@@ -132,57 +101,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.mlb.com",
-        "sec": 0.55,
-        "kept": 14
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.51,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.504,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.466,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.3,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.29,
-        "kept": 14
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.138,
-        "kept": 14
-      },
-      {
-        "host": "toronto.citynews.ca",
-        "sec": 0.137,
-        "kept": 8
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.121,
+        "sec": 0.629,
         "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.072,
+        "sec": 0.494,
         "kept": 10
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.438,
+        "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.395,
+        "kept": 8
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.308,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.293,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.261,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.24,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.162,
+        "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.151,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 281.43,
+    "elapsed_sec": 334.53,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -222,7 +191,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 16,
       "sports_player_hits": 3,
-      "sports_result_win_hits": 20,
+      "sports_result_win_hits": 21,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -237,8 +206,8 @@
       "hype_ceasefire": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 31,
-      "soft_404_drops": 43,
+      "link_verification_fail": 35,
+      "soft_404_drops": 44,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 1,
