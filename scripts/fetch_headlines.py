@@ -3,7 +3,7 @@
 #
 # Build headlines.json from feeds.txt with strict link verification,
 # 24–69h freshness window (set MPB_MAX_AGE_HOURS in env), market sanity checks,
-# and an exact 69-item guarantee when REQUIRE_EXACT_COUNT>0.
+# and an exact 33-item guarantee when REQUIRE_EXACT_COUNT>0.
 # PLUS: Safety-net fallback to guarantee at least one working headline.
 
 from __future__ import annotations
@@ -44,7 +44,7 @@ MAX_PER_FEED      = int(os.getenv("MPB_MAX_PER_FEED", "14"))
 MAX_TOTAL         = int(os.getenv("MPB_MAX_TOTAL", "320"))
 BREAKER_LIMIT     = int(os.getenv("MPB_BREAKER_LIMIT", "3"))
 
-HTTP_TIMEOUT_S    = float(os.getenv("MPB_HTTP_TIMEOUT", "10"))
+HTTP_TIMEOUT_S    = float(os.getenv("MPB_HTTP_TIMEOUT", "18"))
 SLOW_FEED_WARN_S  = float(os.getenv("MPB_SLOW_FEED_WARN", "3.5"))
 GLOBAL_BUDGET_S   = float(os.getenv("MPB_GLOBAL_BUDGET", "210"))
 
@@ -65,7 +65,7 @@ REJECT_REDIRECT_TO_HOMEPAGE = os.getenv("MPB_REJECT_REDIRECT_TO_HOMEPAGE", "1") 
 BLOCK_AGGREGATORS           = os.getenv("MPB_BLOCK_AGGREGATORS", "1") == "1"
 MIN_AGE_SEC                 = int(os.getenv("MPB_MIN_AGE_SEC", "60"))        # ≥ 1 minute old
 MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))    # ≤ X hours old; set 24 in env to hard-cap
-REQUIRE_EXACT_COUNT         = int(os.getenv("MPB_REQUIRE_EXACT_COUNT", "69"))
+REQUIRE_EXACT_COUNT         = int(os.getenv("MPB_REQUIRE_EXACT_COUNT", "33"))
 
 # ---------- SAFETY-NET FALLBACK ----------
 DEFAULT_FALLBACK_FEEDS = [
@@ -1223,7 +1223,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
     ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
     ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
-    ps_per_inj   = float(W(weights, "public_safety.per_injured_points", 0.02))
+    ps_per_inj   = float(W(weights, "public_safety.per_injury_points", 0.02))
     ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
     ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
     ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
@@ -1453,7 +1453,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         if picked:
             verified.insert(0, picked)
 
-    # ---- Backfill to EXACT 69 if needed ----
+    # ---- Backfill to EXACT 33 if needed ----
     def backfill_exact(keep: list[dict], candidates: Iterable[dict]) -> list[dict]:
         want = REQUIRE_EXACT_COUNT
         if want <= 0: return keep
