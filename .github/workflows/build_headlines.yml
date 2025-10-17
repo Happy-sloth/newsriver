@@ -5,6 +5,11 @@ on:
   schedule:
     - cron: "*/12 * * * *"  # every 12 minutes
 
+# Prevent overlapping runs from racing each other (avoids stale outputs)
+concurrency:
+  group: newsriver-headlines
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -93,7 +98,7 @@ jobs:
           mkdir -p newsriver
           python scripts/fetch_headlines.py --feeds-file feeds.txt --out newsriver/headlines.json
           echo "----- collector snapshot"
-          jq -r '.generated_utc, .count' newsriver/headlines.json || true
+          jq -r '._debug.version, .generated_utc, .count' newsriver/headlines.json || true
           jq -r '.items[:6][] | [.published_utc, .source, .title, .url] | @tsv' newsriver/headlines.json || true
 
       - name: Set up Node (for cleaner)
@@ -317,12 +322,13 @@ jobs:
           echo "----- probe a sample of cleaned items -----"
           jq -r '.items[:12][] | .url' newsriver/headlines.json | while read -r URL; do
             [ -z "$URL" ] && continue
-            CODE=$(curl -A "$MPB_ALT_UA" -L -m 15 -s -w '%{http_code}' -o /tmp/body.html "$URL" || echo "000")
+            # Explicit no-cache headers to avoid stale CDN bodies in probe
+            CODE=$(curl -A "$MPB_ALT_UA" -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' -L -m 15 -s -w '%{http_code}' -o /tmp/body.html "$URL" || echo "000")
             BYTES=$(wc -c </tmp/body.html | tr -d ' ')
             echo "$CODE $BYTES $URL"
           done
           echo "----- summary"
-          jq -r '.generated_utc, .count' newsriver/headlines.json || true
+          jq -r '._debug.version, .generated_utc, .count' newsriver/headlines.json || true
 
       - name: Commit & push with rebase (conflict-safe)
         shell: bash
