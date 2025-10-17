@@ -5,10 +5,12 @@ on:
   schedule:
     - cron: "*/12 * * * *"  # every 12 minutes
 
-# Prevent overlapping runs from racing each other (avoids stale outputs)
+# Prevent overlapping runs from racing each other.
+# IMPORTANT: queue newer runs instead of canceling the in-progress one,
+# so a long build isn’t killed by the next schedule tick.
 concurrency:
   group: newsriver-headlines
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: write
