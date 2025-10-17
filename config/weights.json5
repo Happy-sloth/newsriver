@@ -1,181 +1,103 @@
 {
   // weights.json5 — server-side scoring knobs
-  // Version: v0.6.2 (tuned for CA bias + daytime markets + evening sports + gentler BTC threshold)
+  // Version: v0.7 (CA bias + <24h dominance + Jays/finals + stricter anti-fluff)
   timezone: "America/Toronto",
 
-  // -------- Recency & decay --------
+  // -------- Recency --------
   recency: {
-    half_life_hours: 6,
-    max_age_hours: 72,
-    age_penalty_after_24h: -0.6,
-    age_penalty_after_36h: -0.4,
-    superseded_cluster_penalty: -0.9
+    half_life_hours: 4.0,
+    age_penalty_after_24h: -1.2,
+    age_penalty_after_36h: -0.6,
+    superseded_cluster_penalty: -1.1
   },
 
-  // Category-specific decay tweaks (sports uses global)
-  recency_overrides: {
-    categories: {
-      "Culture": { half_life_hours: 4, max_age_hours: 48 },
-      "Youth":   { half_life_hours: 4, max_age_hours: 48 }
-    }
-  },
-
-  // -------- Reordering stability (UI aids; safe to keep) --------
+  // -------- Reorder (only Nate hints used by your code) --------
   reorder: {
-    protect_top_n: 10,         // was 8 — steadier top when markets are active
-    min_reorder_delta: 1.25,
-    grace_period_minutes: 3,
-    rank_drift_tolerance: 0.5,
-
-    // slight freshness nudge for Nate contributor page scrape
-    nate_hours_hint_bonus: 0.40,
-    nate_hours_hint_max_hours: 8
+    nate_hours_hint_bonus: 0.30,
+    nate_hours_hint_max_hours: 6.0
   },
 
-  // -------- Regional bias (Canada-forward) --------
+  // -------- Regional (Canada-first) --------
   regional: {
     weights: {
-      country_match: 1.3,      // was 1.2
-      province_match: 1.1,     // was 1.0
-      city_match: 1.3,         // was 1.2
-      adjacent_province: 0.35  // was 0.3
+      country_match: 1.6
     },
-    max_bonus: 3.6             // was 3.0 — gives CA matches a bit more headroom
+    max_bonus: 2.8
   },
 
-  // -------- Category nudges --------
+  // -------- Category nudges (must match infer_tag outputs) --------
   categories: {
-    "Public Safety": 1.0,      // was 0.9 — “bleeds/leads” clarity
+    "Public Safety": 1.0,
     "Weather": 0.6,
     "Transit": 0.4,
-    "Local": 0.5,
-    "Business": 0.45,          // was 0.2 — stronger daytime bias
-    "Energy": 0.30,            // was 0.2 — useful for CA economy
-    "Real Estate": 0.20,       // was 0.15
-    "Tech": 0.20,              // was 0.15
-    "Culture": 0.25,
-    "Youth": 0.25,
-    "Sports": 0.60,            // was 0.55 — evening prominence
+    "Local": 0.7,
+    "Business": 0.45,
+    "Energy": 0.30,
+    "Real Estate": 0.20,
+    "Tech": 0.20,
+    "Culture": 0.0,
+    "Youth": -0.15,
     "General": 0.0
+    // Note: your infer_tag does not emit "Sports"; sports scoring comes from the 'sports' block below.
+  },
+
+  // -------- Source hygiene --------
+  sources: {
+    aggregator_penalty: -0.7,
+    press_wire_penalty: -0.5,
+    preferred_domains_bonus: 0.35
   },
 
   // -------- Public-safety severity --------
   public_safety: {
-    has_fatality_points: 1.0,
-    per_death_points: 0.12,
-    max_death_points: 2.0,
-    per_injured_points: 0.03,
-    max_injury_points: 0.6,
-    violent_keywords_bonus: 0.2,
+    has_fatality_points: 1.6,
+    per_death_points: 0.18,
+    max_death_points: 3.0,
+    per_injured_points: 0.05,
+    max_injury_points: 1.0,
+    violent_keywords_bonus: 0.35,
     violent_keywords: [
       "shooting","shot","stabbing","stabbed","homicide","murder",
       "manslaughter","fatal crash","deadly crash","collision","mass casualty",
       "kidnapping","amber alert","hostage","gunfire","mass shooting",
-      "assault","carjacking","drive-by","bomb threat","arson"
+      "assault","carjacking","drive-by","bomb threat","arson","evacuate",
+      "wildfire","earthquake","explosion","tornado","hurricane"
     ]
   },
 
-  // -------- Markets (daytime bias + gentler BTC threshold) --------
+  // -------- Markets (keep signal, mute noise) --------
   markets: {
-    btc_abs_move_threshold_pct: 4.0,  // was 7.0 — more BTC/crypto headlines surface
-    btc_points: 1.9,                  // was 1.6
-    index_abs_move_threshold_pct: 0.8,// was 1.0
-    index_points: 1.2,                // was 1.0
+    btc_abs_move_threshold_pct: 6.0,
+    btc_points: 1.6,
+    index_abs_move_threshold_pct: 0.9,
+    index_points: 0.9,
     nikkei_abs_move_threshold_pct: 1.0,
     nikkei_points: 0.7,
-    single_stock_abs_move_threshold_pct: 8.0, // was 10.0
-    single_stock_points: 1.3,                 // was 1.2
-    time_windows: {
-      markets_open: { start: "09:30", end: "16:00", points: 0.8 }, // was 0.6 — stronger daytime tilt
-      asia_window:  { start: "01:20", end: "03:30", points: 0.5 }
-    }
+    single_stock_abs_move_threshold_pct: 12.0,
+    single_stock_points: 1.2
   },
 
-  // -------- Entertainment --------
-  entertainment: {
-    release_keywords: [
-      "premiere","trailer","season","finale","episode","cast","casting",
-      "box office","album","single","ep","tracklist","tour","concert",
-      "festival","red carpet","press junket","teaser","first look","review",
-      "renewed","canceled","soundtrack","chart","debut"
-    ],
-    keyword_points_per_match: 0.35,
-    keyword_points_cap: 0.8,
-    trade_entity_bonus: 0.3,
-    trade_entity_cap: 0.6,
-    trade_domains: [
-      "variety.com","hollywoodreporter.com","deadline.com","thewrap.com",
-      "rollingstone.com","people.com","billboard.com","ew.com","worldofreel.com",
-      "showbiz411.com","tmz.com"
-    ],
-    time_windows: [
-      { key: "evening_pop", start: "18:30", end: "00:30", points: 0.5 },
-      { key: "weekend_pop", days: ["Fri","Sat","Sun"], start: "11:00", end: "23:00", points: 0.4 },
-      { key: "music_release", days: ["Thu","Fri","Sat"], start: "20:00", end: "14:00", points: 0.4 },
-      { key: "box_office", days: ["Sun","Mon"], start: "09:00", end: "12:00", points: 0.4 }
-    ]
-  },
-
-  // -------- SPORTS (keys used by your Python) --------
+  // -------- Sports (Jays + finals) --------
   sports: {
-    // Jays-centric knobs
-    team_match_points:        1.25,
-    player_match_points:      0.60,
-    result_win_points:        1.15,
+    team_match_points:        1.30,
+    player_match_points:      0.55,
+    result_win_points:        0.65,
     result_loss_points:       0.35,
-    evening_window_points:    1.20, // 18:30–22:30 ET
-    playoff_mode_points:      0.90,
-
-    // MLB focus teams & finals
-    focus_team_points:        0.70,
-    final_story_points:       1.10,
-    final_with_score_points:  0.70
-  },
-
-  // -------- Google Trends assist (CA) --------
-  trends: {
-    enabled: true,
-    provider: "google_trends",
-    geo: "CA",
-    top_n: 30,
-    fields_to_match: ["title","summary"],
-    match_bonus_min: 0.2,
-    match_bonus_max: 1.0,
-    half_life_hours: 12,
-    ttl_hours: 24,
-    cap_total_points: 1.3   // was 1.2 — a touch more for CA zeitgeist
-  },
-
-  // -------- Sources handling --------
-  sources: {
-    aggregator_penalty: -0.6,
-    press_wire_penalty: -0.5,
-    preferred_domains_bonus: 0.25
-    // Specific preferred domains remain in Python (PREFERRED_DOMAINS).
-  },
-
-  // -------- Dedupe knobs (UI feel) --------
-  dedupe: {
-    jaccard_threshold: 0.82,
-    newer_bias_points: 0.3,
-    non_aggregator_bias_points: 0.3
+    evening_window_points:    0.85,
+    playoff_mode_points:      0.60,
+    focus_team_points:        0.90,
+    final_story_points:       1.20,
+    final_with_score_points:  0.60
   },
 
   // -------- Display effects thresholds --------
   effects: {
-    lightsaber_min_score: 2.5,
+    lightsaber_min_score: 2.6,
     lightsaber_also_if: {
-      body_count_ge: 5,
+      body_count_ge: 4,
       btc_abs_move_ge_pct: 8.0,
       single_stock_abs_move_ge_pct: 15.0
     },
-    glitch_min_score: 1.6
-  },
-
-  // -------- Developing stories (optional UI) --------
-  developing: {
-    max_manual_slots: 3,
-    pin_bonus_points: 2.0,
-    unpin_decay_minutes: 180
+    glitch_min_score: 1.9
   }
 }
