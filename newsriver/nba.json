@@ -58,25 +58,25 @@
           "gamePk": "401812728",
           "gameDate": "2025-10-16T23:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "HOU"
               },
-              "score": 95
+              "score": 133
             },
             "home": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 87
+              "score": 115
             }
           }
         },
@@ -84,25 +84,25 @@
           "gamePk": "401812729",
           "gameDate": "2025-10-17T00:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 57
+              "score": 120
             },
             "home": {
               "team": {
                 "abbreviation": "CHI"
               },
-              "score": 62
+              "score": 126
             }
           }
         },
@@ -114,21 +114,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 14
+              "score": 84
             },
             "home": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 19
+              "score": 90
             }
           }
         }
