@@ -2,7 +2,8 @@
 # scripts/fetch_headlines.py
 #
 # Build headlines.json from feeds.txt with strict link verification,
-# 69h freshness window, market sanity checks, and an exact 69-item guarantee.
+# 24–69h freshness window (set MPB_MAX_AGE_HOURS in env), market sanity checks,
+# and an exact 69-item guarantee when REQUIRE_EXACT_COUNT>0.
 # PLUS: Safety-net fallback to guarantee at least one working headline.
 
 from __future__ import annotations
@@ -63,10 +64,10 @@ VERIFY_LINKS                = os.getenv("MPB_VERIFY_LINKS", "1") == "1"
 REJECT_REDIRECT_TO_HOMEPAGE = os.getenv("MPB_REJECT_REDIRECT_TO_HOMEPAGE", "1") == "1"
 BLOCK_AGGREGATORS           = os.getenv("MPB_BLOCK_AGGREGATORS", "1") == "1"
 MIN_AGE_SEC                 = int(os.getenv("MPB_MIN_AGE_SEC", "60"))        # ≥ 1 minute old
-MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))    # ≤ 69 hours old
+MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))    # ≤ X hours old; set 24 in env to hard-cap
 REQUIRE_EXACT_COUNT         = int(os.getenv("MPB_REQUIRE_EXACT_COUNT", "69"))
 
-# ---------- SAFETY-NET FALLBACK (NEW) ----------
+# ---------- SAFETY-NET FALLBACK ----------
 DEFAULT_FALLBACK_FEEDS = [
     "https://www.reuters.com/world/us/rss",
     "https://www.reuters.com/world/rss",
@@ -81,12 +82,25 @@ FALLBACK_FEEDS = [
 FALLBACK_MAX_AGE_HOURS = float(os.getenv("MPB_FALLBACK_MAX_AGE_HOURS", "24"))
 FALLBACK_MIN_ITEMS     = int(os.getenv("MPB_FALLBACK_MIN_ITEMS", "1"))
 
-# Source hygiene limits
-PER_HOST_MAX = {
-    "toronto.citynews.ca": 8,
-    "financialpost.com": 6,
-    "cultmtl.com": 6,
-}
+# Source hygiene limits (now env-overridable)
+def _load_per_host_max() -> dict[str, int]:
+    raw = os.getenv("MPB_PER_HOST_MAX", "").strip()
+    if not raw:
+        return {
+            "toronto.citynews.ca": 8,
+            "financialpost.com": 6,
+            "cultmtl.com": 6,
+        }
+    try:
+        return json.loads(raw)
+    except Exception:
+        return {
+            "toronto.citynews.ca": 8,
+            "financialpost.com": 6,
+            "cultmtl.com": 6,
+        }
+
+PER_HOST_MAX = _load_per_host_max()
 
 PREFERRED_DOMAINS = {
     "cbc.ca","globalnews.ca","ctvnews.ca","blogto.com","toronto.citynews.ca",
@@ -193,7 +207,7 @@ RE_BREAKING = re.compile(
     r"missile|air[-\s]?strike|explosion|blast|drone|shooting|casualties?|dead|killed)\b", re.I
 )
 
-# --- Soft-404 / article detection (NEW) ---
+# --- Soft-404 / article detection ---
 SOFT_404_PATTERNS = [
     r"\b(page not found|sorry, we (couldn'?t|cannot) find|content (is )?unavailable)\b",
     r"\b(does not exist|no longer available|moved permanently|has been removed)\b",
@@ -208,6 +222,34 @@ ARTICLE_HINT_PATTERNS = [
 ]
 MIN_BODY_BYTES = int(os.getenv("MPB_MIN_BODY_BYTES", "4096"))
 MIN_ARTICLE_WORDS = int(os.getenv("MPB_MIN_ARTICLE_WORDS", "120"))
+
+# --- Reject list for low-signal celebrity bait (pre-score) ---
+REJECT_PATTERNS = [
+    re.compile(r"\blebron\b", re.I),
+    re.compile(r"\bkardashian\b", re.I),
+    re.compile(r"\btmz\b", re.I),
+]
+ALLOW_DURING_PLAYOFFS = os.getenv("MPB_ALLOW_REJECT_DURING_PLAYOFFS", "1") == "1"
+
+def should_reject_title(title: str, playoffs_on: bool) -> bool:
+    if playoffs_on and ALLOW_DURING_PLAYOFFS:
+        return False
+    t = title or ""
+    for pat in REJECT_PATTERNS:
+        if pat.search(t):
+            return True
+    return False
+
+def is_mlb_final_title(title: str) -> bool:
+    if not title:
+        return False
+    return bool(RE_MLB_FINAL_WORD.search(title) or RE_SCORELINE.search(title) or RE_JAYS_WIN.search(title) or RE_JAYS_LOSS.search(title))
+
+def is_sports_domain(host: str) -> bool:
+    if not host:
+        return False
+    host = host.lower()
+    return any(host.endswith(d) for d in SPORTS_PRIOR_DOMAINS)
 
 @dataclass
 class Tag:
@@ -228,6 +270,7 @@ def infer_tag(section_header: str) -> Tag:
     if "TRANSIT" in s or "CITY SERVICE" in s:return Tag("Transit", "Canada")
     if "COURTS" in s or "CRIME" in s or "PUBLIC SAFETY" in s:
                                              return Tag("Public Safety", "Canada")
+    if "SPORTS" in s:                        return Tag("Sports", "Canada")
     return Tag("General", "World")
 
 def canonicalize_url(url: str) -> str:
@@ -492,7 +535,7 @@ def _hours_from_rel(s: str) -> float | None:
     return None
 
 # ---------------- HTML scrapers (Nate/CP24) ----------------
-def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
+def scrape_nate_silver(html: bytes, spec: FeedSpec, playoffs_on: bool) -> list[dict]:
     items: list[dict] = []
     text = html.decode("utf-8", errors="ignore")
     if BeautifulSoup is not None:
@@ -506,6 +549,7 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
             if not href or "contributors/" in href: continue
             title = (a.get_text(" ", strip=True) or "").strip()
             if not title or len(title) < 8 or href in seen: continue
+            if should_reject_title(title, playoffs_on): continue
             seen.add(href)
 
             age_hint = None
@@ -539,6 +583,7 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
         if "contributors/" in href: continue
         title = re.sub(r"\s+", " ", m.group(2)).strip()
         if not title or href in seen: continue
+        if should_reject_title(title, playoffs_on): continue
         seen.add(href)
         age_hint = _hours_from_rel(chunk)
         pub_dt = datetime.now(timezone.utc) - timedelta(hours=age_hint) if age_hint is not None else datetime.now(timezone.utc)
@@ -558,12 +603,31 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec) -> list[dict]:
         if len(items) >= MAX_PER_FEED: break
     return items
 
-def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
+def scrape_cp24(html: bytes, spec: FeedSpec, playoffs_on: bool) -> list[dict]:
     base_host = "www.cp24.com"
     items: list[dict] = []
     text = html.decode("utf-8", errors="ignore")
 
-    def make_item(href: str, title: str) -> dict | None:
+    def _cp24_extract_time(node) -> str | None:
+        try:
+            if not node or not BeautifulSoup:
+                return None
+            tnode = node.find("time")
+            if tnode:
+                txt = (tnode.get_text(" ", strip=True) or "").strip()
+                rel_h = _hours_from_rel(txt)
+                if rel_h is not None:
+                    dt = datetime.now(timezone.utc) - timedelta(hours=rel_h)
+                    return _to_iso_utc(dt)
+                dt_s = tnode.get("datetime") or txt
+                iso = parse_any_dt_str(dt_s)
+                if iso:
+                    return iso
+        except Exception:
+            return None
+        return None
+
+    def make_item(href: str, title: str, pub_iso: str | None) -> dict | None:
         if not href or not title:
             return None
         url = href.strip()
@@ -572,12 +636,13 @@ def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
         if "cp24.com" not in url.lower(): return None
         ttl = strip_source_tail(title).strip()
         if len(ttl) < 6: return None
+        if should_reject_title(ttl, playoffs_on): return None
         can_url = canonicalize_url(url)
         return {
             "title": ttl,
             "url": can_url,
             "source": "CP24",
-            "published_utc": datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),
+            "published_utc": pub_iso or datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),
             "category": spec.tag.category,
             "region": spec.tag.region,
             "canonical_url": can_url,
@@ -593,7 +658,8 @@ def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
             href = (a.get("href") or "").strip()
             if not href or href.startswith("#") or href.startswith("mailto:"): continue
             title = (a.get_text(" ", strip=True) or "").strip()
-            it = make_item(href, title)
+            pub_iso = _cp24_extract_time(a) or _cp24_extract_time(a.parent)
+            it = make_item(href, title, pub_iso)
             if not it: continue
             if it["canonical_url"] in seen: continue
             seen.add(it["canonical_url"])
@@ -607,7 +673,7 @@ def scrape_cp24(html: bytes, spec: FeedSpec) -> list[dict]:
         raw = re.sub(r"<[^>]+>", " ", m.group(2) or "")
         title = re.sub(r"\s+", " ", raw).strip()
         if not href or not title: continue
-        it = make_item(href, title)
+        it = make_item(href, title, None)
         if not it: continue
         if it["canonical_url"] in seen: continue
         seen.add(it["canonical_url"])
@@ -630,7 +696,7 @@ def html_meta_times(html_bytes: bytes) -> tuple[datetime | None, datetime | None
     if not BeautifulSoup:
         return (None, None)
     try:
-        soup = BeautifulSoup(html_bytes, "html.parser")
+        soup = BeautifulSoup(html_bytes, "htmlparser") if False else BeautifulSoup(html_bytes, "html.parser")
         pub = None; upd = None
         for tag in soup.find_all("meta"):
             n = (tag.get("name") or tag.get("property") or "").lower()
@@ -716,6 +782,12 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
     body = getattr(resp, "content", b"") or b""
     ctype = (resp.headers.get("Content-Type") or "").lower()
     robots = (resp.headers.get("X-Robots-Tag") or "").lower()
+    host_final = host_of(final_url)
+
+    # Early len(body) test — relax for sports domains
+    min_bytes_early = MIN_BODY_BYTES
+    if is_sports_domain(host_final):
+        min_bytes_early = max(1500, int(MIN_BODY_BYTES * 0.4))
 
     if status < 200 or status >= 300:
         debug_counts["link_verification_fail"] += 1
@@ -723,7 +795,7 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
     if ("text/html" not in ctype) and ("application/xhtml" not in ctype):
         debug_counts["link_verification_fail"] += 1
         return False, final_url, status, f"bad-ctype:{ctype}"
-    if len(body) < MIN_BODY_BYTES:
+    if len(body) < min_bytes_early:
         debug_counts["soft_404_drops"] += 1
         return False, final_url, status, "body-too-small"
 
@@ -746,7 +818,7 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
             soup = BeautifulSoup(body, "html.parser")
 
             if soup.title and soup.title.string:
-                title_text = (soup.title.string or "").strip().lower()
+                title_text = (soup.title.string or "").strip()
 
             can_tag = soup.find("link", rel=lambda v: v and "canonical" in v)
             if can_tag and can_tag.get("href"):
@@ -768,7 +840,7 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
             text_for_search = " ".join((soup.get_text(" ", strip=True) or "").split())
             word_count = len(re.findall(r"\w+", text_for_search))
 
-            if soft404_regex.search(text_for_search) or soft404_regex.search(title_text):
+            if soft404_regex.search(text_for_search) or soft404_regex.search((title_text or "").lower()):
                 debug_counts["soft_404_drops"] += 1
                 return False, final_url, status, "soft-404-text"
 
@@ -790,8 +862,14 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
                     debug_counts["soft_404_drops"] += 1
                     return False, final_url, status, "ogurl-homepage"
 
+            # Relax article-ness for sports finals/box scores
+            is_sports_final = is_mlb_final_title(title_text) or is_sports_domain(host_final)
+            min_words = MIN_ARTICLE_WORDS
+            if is_sports_final:
+                min_words = max(40, int(MIN_ARTICLE_WORDS * 0.3))
+
             hints_ok = (og_type == "article") or bool(hint_re.search(str(body)))
-            if not hints_ok or word_count < MIN_ARTICLE_WORDS:
+            if not hints_ok or word_count < min_words:
                 debug_counts["soft_404_drops"] += 1
                 return False, final_url, status, f"not-article-like:{word_count}w"
 
@@ -810,7 +888,7 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
 
     return True, final_url, status, "ok"
 
-# ---------- SAFETY-NET HELPERS (NEW) ----------
+# ---------- SAFETY-NET HELPERS ----------
 def _fallback_feeds_iter() -> list[str]:
     return FALLBACK_FEEDS if FALLBACK_FEEDS else DEFAULT_FALLBACK_FEEDS
 
@@ -919,6 +997,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         "hype_jobs": 0,
         "hype_sports": 0,
         "hype_ceasefire": 0,
+        "reject_hits": 0,
     }
 
     debug_counts = {
@@ -969,8 +1048,11 @@ def build(feeds_file: str, out_path: str) -> dict:
         # ---- HTML scrapers (CP24/Nate) ----
         if h_feed.endswith("cp24.com"):
             try:
-                scraped = scrape_cp24(blob, spec)
+                scraped = scrape_cp24(blob, spec, playoffs_on)
                 for it in scraped:
+                    if should_reject_title(it["title"], playoffs_on):
+                        score_dbg["reject_hits"] += 1
+                        continue
                     h = host_of(it["url"])
                     cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
                     if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
@@ -986,9 +1068,12 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         if "fivethirtyeight.com/contributors/nate-silver" in spec.url:
             try:
-                scraped = scrape_nate_silver(blob, spec)
+                scraped = scrape_nate_silver(blob, spec, playoffs_on)
                 if scraped:
                     for it in scraped:
+                        if should_reject_title(it["title"], playoffs_on):
+                            score_dbg["reject_hits"] += 1
+                            continue
                         h = host_of(it["url"])
                         cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
                         if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
@@ -1015,6 +1100,9 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         for e in entries:
             title = (e.get("title") or "").strip()
+            if should_reject_title(title, playoffs_on):
+                score_dbg["reject_hits"] += 1
+                continue
             link  = (e.get("link")  or "").strip()
             if not title or not link: continue
             can_url = canonicalize_url(link)
@@ -1448,7 +1536,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v2.2.0-fallback-1",
+            "version": "fetch-v2.3.0-fallback-1",  # bumped for reject+relax+sports tag
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
