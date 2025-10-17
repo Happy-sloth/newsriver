@@ -1,7 +1,33 @@
 {
-  "generated_utc": "2025-10-17T08:47:22.630Z",
+  "generated_utc": "2025-10-17T09:00:05.238Z",
   "count": 69,
   "items": [
+    {
+      "title": "The Classic Samba Goes Cookies & Cream",
+      "url": "https://www.highsnobiety.com/p/adam-et-rope-adidas-samba",
+      "source": "Highsnobiety",
+      "published_utc": "2025-10-17T08:46:29.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "adidas' Slim Samba Grew Into a Winter-Ready Dress Shoe",
+      "url": "https://www.highsnobiety.com/p/adidas-samba-wtr-sneaker",
+      "source": "Highsnobiety",
+      "published_utc": "2025-10-17T08:43:41.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "MIPCOM 2025: Distribution & Dealmaking, Major Studios, Turkish TV & The Creator Economy",
       "url": "https://deadline.com/2025/10/mipcom-2025-distribution-creator-economy-global-tv-cannes-1236590113",
@@ -42,23 +68,10 @@
       "region": "World"
     },
     {
-      "title": "Bitcoin Loses $106K as Bullish Crypto Bets Rack up $800M in Liquidations",
-      "url": "https://www.coindesk.com/markets/2025/10/17/bitcoin-loses-usd106k-as-bullish-crypto-bets-rack-up-usd800m-in-liquidations",
-      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
-      "published_utc": "2025-10-17T08:37:18.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Business",
-      "region": "World"
-    },
-    {
-      "title": "Nike's Comfiest Clog Goes Giant Grapefruit",
+      "title": "Nike's Self-Massaging Clog Has Got the Juice",
       "url": "https://www.highsnobiety.com/p/nike-mind-001-clog",
       "source": "Highsnobiety",
-      "published_utc": "2025-10-17T08:35:17.000Z",
+      "published_utc": "2025-10-17T08:40:16.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -91,6 +104,19 @@
         "reasons": []
       },
       "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Global markets fall and gold hits record high",
+      "url": "https://www.theguardian.com/business/2025/oct/17/global-stock-markets-fall-and-gold-hits-record-high-amid-jitters-over-us-banks",
+      "source": "World news | The Guardian",
+      "published_utc": "2025-10-17T08:32:01.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
       "region": "World"
     },
     {
@@ -150,19 +176,6 @@
       "url": "https://www.highsnobiety.com/p/vans-mte-mountain-mid-waterproof-sneaker",
       "source": "Highsnobiety",
       "published_utc": "2025-10-17T08:11:59.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "adidas' Slim Samba Grew up Into a Winter-Ready Dress Shoe",
-      "url": "https://www.highsnobiety.com/p/adidas-samba-wtr-sneaker",
-      "source": "Highsnobiety",
-      "published_utc": "2025-10-17T08:09:07.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -907,26 +920,13 @@
       },
       "category": "Business",
       "region": "World"
-    },
-    {
-      "title": "2025 MAMA AWARDS announces stacked first round of performers",
-      "url": "https://www.nme.com/news/music/2025-mama-awards-announces-stacked-first-round-of-performers-3899713",
-      "source": "NME",
-      "published_utc": "2025-10-17T06:13:20.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 840,
-    "dedup_pass1": 823,
+    "collected": 839,
+    "dedup_pass1": 822,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
@@ -953,56 +953,56 @@
     "feed_times_sample": [
       {
         "host": "www.blogto.com",
-        "sec": 0.53,
+        "sec": 0.602,
         "kept": 0
       },
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.446,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.29,
+        "host": "www.cp24.com",
+        "sec": 0.363,
         "kept": 14
       },
       {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.292,
+        "kept": 14
+      },
+      {
+        "host": "toronto.citynews.ca",
+        "sec": 0.268,
+        "kept": 8
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.242,
+        "kept": 0
+      },
+      {
         "host": "www.bls.gov",
-        "sec": 0.269,
+        "sec": 0.239,
         "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.132,
+        "sec": 0.211,
         "kept": 0
       },
       {
-        "host": "toronto.citynews.ca",
-        "sec": 0.128,
-        "kept": 8
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.125,
-        "kept": 14
-      },
-      {
         "host": "www.mlb.com",
-        "sec": 0.123,
-        "kept": 14
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.09,
+        "sec": 0.164,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.072,
+        "sec": 0.14,
         "kept": 10
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.094,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 284.58,
+    "elapsed_sec": 294.61,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1025,7 +1025,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 11,
+      "ps_fatal_hits": 12,
       "ps_injury_hits": 0,
       "market_btc_hits": 1,
       "market_index_hits": 0,
@@ -1050,13 +1050,13 @@
       "hype_jobs": 0,
       "hype_sports": 0,
       "hype_ceasefire": 0,
-      "reject_hits": 0
+      "reject_hits": 1
     },
     "sanity_stats": {
-      "link_verification_fail": 33,
-      "soft_404_drops": 29,
+      "link_verification_fail": 22,
+      "soft_404_drops": 28,
       "max_age_drops": 0,
-      "min_age_drops": 8,
+      "min_age_drops": 20,
       "market_sanity_drops": 5,
       "backfill_steps_used": 0
     },
