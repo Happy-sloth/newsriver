@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-18T20:47:24.063Z",
+  "generated_utc": "2025-10-18T20:56:41.994Z",
   "count": 69,
   "items": [
     {
-      "title": "Playboi Carti charged with assault after alleged fight with girlfriend and limo driver: report",
-      "url": "https://pagesix.com/2025/10/18/celebrity-news/playboi-carti-charged-with-assault-after-alleged-fight-with-girlfriend-and-limo-driver-report",
-      "source": "New York Post",
-      "published_utc": "2025-10-18T20:44:19.000Z",
+      "title": "'Your father had the courage': Meghan McCain under fire for comment about 'No Kings' rally",
+      "url": "https://www.rawstory.com/meghan-mccain-2674211942",
+      "source": "Raw Story",
+      "published_utc": "2025-10-18T20:51:30.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -16,10 +16,36 @@
       "region": "World"
     },
     {
-      "title": "No Tyrants protest",
-      "url": "https://japantoday.com/category/picture-of-the-day/no-tyrants-protest",
-      "source": "Japan Today",
-      "published_utc": "2025-10-18T20:41:05.000Z",
+      "title": "What I Saw at the No Kings Rally in New York City",
+      "url": "https://reason.com/2025/10/18/what-i-saw-at-the-no-kings-rally-in-new-york-city",
+      "source": "Reason.com",
+      "published_utc": "2025-10-18T20:46:06.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Roman Storm asks DeFi devs: Can you be sure DOJ won't charge you?",
+      "url": "https://cointelegraph.com/news/roman-storm-asks-defi-devs-doj-won-t-charge",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-10-18T20:44:59.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Business",
+      "region": "World"
+    },
+    {
+      "title": "Playboi Carti charged with assault after alleged fight with girlfriend and limo driver: report",
+      "url": "https://pagesix.com/2025/10/18/celebrity-news/playboi-carti-charged-with-assault-after-alleged-fight-with-girlfriend-and-limo-driver-report",
+      "source": "New York Post",
+      "published_utc": "2025-10-18T20:44:19.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -932,41 +958,17 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "‘The Diplomat’s Keri Russell Says Her “No-Nonsense” Hair Has A “Really Fun Little Moment” In Season 3",
-      "url": "https://deadline.com/2025/10/the-diplomat-keri-russell-hair-fun-little-moment-season-3-1236591237",
-      "source": "Deadline",
-      "published_utc": "2025-10-18T18:47:35.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "UCLA men’s basketball gets what it wanted from San Diego State",
-      "url": "https://www.dailynews.com/2025/10/18/ucla-mens-basketball-gets-what-it-wanted-from-san-diego-state",
-      "source": "Daily News",
-      "published_utc": "2025-10-18T18:46:10.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 833,
-    "dedup_pass1": 810,
+    "collected": 819,
+    "dedup_pass1": 796,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.gorillavsbear.net"
+    ],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -990,56 +992,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.119,
+        "sec": 1.123,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.911,
+        "sec": 0.881,
         "kept": 10
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.717,
+        "host": "www.cp24.com",
+        "sec": 0.555,
         "kept": 14
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.672,
+        "host": "www.mlb.com",
+        "sec": 0.524,
         "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.506,
+        "sec": 0.427,
         "kept": 0
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.496,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.376,
+        "sec": 0.372,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.333,
+        "sec": 0.311,
         "kept": 14
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.249,
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.2,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.249,
+        "sec": 0.176,
         "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.115,
+        "kept": 0
       }
     ],
-    "elapsed_sec": 301.34,
+    "elapsed_sec": 304.18,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1072,15 +1074,15 @@
       "press_penalties": 0,
       "preferred_bonus": 48,
       "substack_tagged": 0,
-      "sports_team_hits": 13,
+      "sports_team_hits": 12,
       "sports_player_hits": 5,
-      "sports_result_win_hits": 21,
+      "sports_result_win_hits": 19,
       "sports_result_loss_hits": 1,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 11,
-      "sports_final_hits": 4,
-      "sports_final_score_hits": 4,
+      "sports_focus_team_hits": 10,
+      "sports_final_hits": 2,
+      "sports_final_score_hits": 2,
       "hype_politics": 0,
       "hype_conflict": 0,
       "hype_markets": 0,
