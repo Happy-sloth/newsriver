@@ -1,7 +1,49 @@
 {
-  "generated_utc": "2025-10-18T08:57:27.339Z",
+  "generated_utc": "2025-10-18T09:17:51.157Z",
   "count": 69,
   "items": [
+    {
+      "title": "Skeletons found in mass grave are ancient Roman soldiers, study finds",
+      "url": "https://www.bbc.com/news/articles/ckgknnqp33qo?at_campaign=rss&at_medium=RSS",
+      "source": "BBC News",
+      "published_utc": "2025-10-18T09:03:10.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Why the No Kings Protests Matter",
+      "url": "https://theintercept.com/2025/10/18/no-kings-protests-trump-fascism",
+      "source": "The Intercept",
+      "published_utc": "2025-10-18T09:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Israel confirms latest body returned from Gaza is dead hostage",
+      "url": "https://www.bbc.com/news/articles/c5yp3eq9knvo?at_campaign=rss&at_medium=RSS",
+      "source": "BBC News",
+      "published_utc": "2025-10-18T08:53:29.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "breaker"
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Michael Mann Receives Prix Lumière at Lyon Festival From Isabelle Huppert’s Hands",
       "url": "https://variety.com/2025/film/global/michael-mann-prix-lumiere-lyon-festival-isabelle-hupperts-1236556071",
@@ -458,22 +500,6 @@
       "region": "World"
     },
     {
-      "title": "Israel confirms latest body returned from Gaza is dead hostage",
-      "url": "https://www.bbc.com/news/articles/c5yp3eq9knvo?at_campaign=rss&at_medium=RSS",
-      "source": "BBC News",
-      "published_utc": "2025-10-18T06:28:53.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6"
-        ],
-        "style": "breaker"
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Trump drops the F-bomb before the cameras",
       "url": "https://japantoday.com/category/world/president-donald-trump-drops-the-f-bomb-before-the-cameras.-it-wasn%27t-the-first-time",
       "source": "Japan Today",
@@ -915,32 +941,6 @@
       },
       "category": "Sports",
       "region": "Canada"
-    },
-    {
-      "title": "Hamas and Islamic Jihad Defy Trump’s Ceasefire, ‘Negotiating with Himself’; No Disarmament Commitment",
-      "url": "https://www.breitbart.com/politics/2025/10/17/hamas-islamic-jihad-defy-trumps-ceasefire-no-disarmament-commitment",
-      "source": "Breitbart News",
-      "published_utc": "2025-10-18T03:43:27.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "‘9-1-1’ Actor Rockmond Dunbar Loses Lawsuit Against Disney Over COVID Vaccine Dispute",
-      "url": "https://www.thewrap.com/9-1-1-rockmond-dunbar-loses-lawsuit-disney",
-      "source": "TheWrap",
-      "published_utc": "2025-10-18T03:43:26.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
@@ -949,7 +949,9 @@
     "collected": 827,
     "dedup_pass1": 813,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "theintercept.com"
+    ],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -973,56 +975,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.1,
+        "sec": 1.051,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.586,
+        "sec": 0.649,
         "kept": 10
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.533,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.373,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.264,
-        "kept": 0
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.251,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.213,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.17,
+        "sec": 0.427,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.143,
+        "sec": 0.315,
         "kept": 14
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.086,
+        "host": "www.bls.gov",
+        "sec": 0.308,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.292,
         "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.262,
+        "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.254,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.11,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.098,
+        "kept": 0
       }
     ],
-    "elapsed_sec": 307.85,
+    "elapsed_sec": 288.38,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1045,7 +1047,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 14,
+      "ps_fatal_hits": 13,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1074,7 +1076,7 @@
     },
     "sanity_stats": {
       "link_verification_fail": 22,
-      "soft_404_drops": 24,
+      "soft_404_drops": 36,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 6,
