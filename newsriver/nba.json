@@ -162,25 +162,25 @@
           "gamePk": "401812737",
           "gameDate": "2025-10-18T02:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 104
+              "score": 106
             },
             "home": {
               "team": {
                 "abbreviation": "GS"
               },
-              "score": 101
+              "score": 103
             }
           }
         },
@@ -192,21 +192,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 86
+              "score": 100
             },
             "home": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 90
+              "score": 105
             }
           }
         }
