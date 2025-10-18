@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-18T08:44:19.963Z",
+  "generated_utc": "2025-10-18T08:57:27.339Z",
   "count": 69,
   "items": [
+    {
+      "title": "Michael Mann Receives Prix Lumière at Lyon Festival From Isabelle Huppert’s Hands",
+      "url": "https://variety.com/2025/film/global/michael-mann-prix-lumiere-lyon-festival-isabelle-hupperts-1236556071",
+      "source": "Film",
+      "published_utc": "2025-10-18T08:52:09.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "LA Daily News football wrap-up: All the stories, photos and scores from Week 8 games",
       "url": "https://www.dailynews.com/2025/10/18/la-daily-news-football-wrap-up-all-the-stories-photos-and-scores-from-week-8-games",
@@ -315,6 +328,19 @@
       "url": "https://www.tmz.com/2025/10/18/whats-the-big-frigin-difference-barbara-palvin",
       "source": "TMZ.com",
       "published_utc": "2025-10-18T07:01:02.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "National Guard activated ahead of No Kings protests planned across US",
+      "url": "https://www.bbc.com/news/articles/c93xgyp1zv4o?at_campaign=rss&at_medium=RSS",
+      "source": "BBC News",
+      "published_utc": "2025-10-18T07:00:36.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -915,38 +941,6 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Blue Jays on verge of elimination after Mariners slam their way back",
-      "url": "https://www.mlb.com/bluejays/news/mariners-win-alcs-game-5-2025",
-      "source": "Blue Jays News",
-      "published_utc": "2025-10-18T03:36:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Sports",
-      "region": "Canada"
-    },
-    {
-      "title": "Rockies To Narrow Front Office Search To Finalists Next Week",
-      "url": "https://www.mlbtraderumors.com/2025/10/rockies-to-narrow-front-office-search-to-finalists-next-week.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-10-18T03:35:20.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.9"
-        ],
-        "style": "glitch"
-      },
-      "category": "Sports",
-      "region": "Canada"
     }
   ],
   "_debug": {
@@ -979,56 +973,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.969,
+        "sec": 1.1,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.796,
+        "sec": 0.586,
         "kept": 10
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.558,
+        "host": "www.blogto.com",
+        "sec": 0.533,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.373,
         "kept": 14
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.517,
+        "host": "www.bls.gov",
+        "sec": 0.264,
         "kept": 0
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.467,
-        "kept": 0
+        "host": "www.mlb.com",
+        "sec": 0.251,
+        "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.406,
+        "sec": 0.213,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.17,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.341,
+        "sec": 0.143,
         "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.272,
-        "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.219,
-        "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.208,
+        "sec": 0.086,
         "kept": 14
       }
     ],
-    "elapsed_sec": 324.26,
+    "elapsed_sec": 307.85,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1079,8 +1073,8 @@
       "reject_hits": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 24,
-      "soft_404_drops": 23,
+      "link_verification_fail": 22,
+      "soft_404_drops": 24,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 6,
