@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-19T09:45:31.212Z",
+  "generated_utc": "2025-10-19T09:56:53.291Z",
   "count": 69,
   "items": [
+    {
+      "title": "Watch Panic! At The Disco perform with former drummer Spencer Smith for the first time in 12 years",
+      "url": "https://www.nme.com/news/music/watch-panic-at-the-disco-perform-with-former-drummer-spencer-smith-for-the-first-time-in-12-years-3900217",
+      "source": "NME",
+      "published_utc": "2025-10-19T09:46:39.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "US warns of 'imminent' breach of Gaza ceasefire with planned attack on civilians",
       "url": "https://www.bbc.com/news/articles/cm2elr16jjqo?at_campaign=rss&at_medium=RSS",
@@ -56,6 +69,19 @@
       },
       "category": "Sports",
       "region": "Canada"
+    },
+    {
+      "title": "Crisis-hit Bolivia to vote in run-off election, ending decades of socialism",
+      "url": "https://www.aljazeera.com/news/2025/10/19/crisis-hit-bolivia-to-vote-in-run-off-election-ending-decades-of-socialism?traffic_source=rss",
+      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
+      "published_utc": "2025-10-19T09:18:53.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
     },
     {
       "title": "BetMGM Promo Code NYPDM1500: Get a 20% first deposit match up to $1,500 for Rams vs. Jaguars",
@@ -787,19 +813,6 @@
       "region": "World"
     },
     {
-      "title": "Afghanistan, Pakistan agree to immediate ceasefire after talks in Doha",
-      "url": "https://www.aljazeera.com/news/2025/10/19/afghanistan-pakistan-agree-to-immediate-ceasefire-after-talks-in-doha?traffic_source=rss",
-      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
-      "published_utc": "2025-10-19T02:35:27.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Report: Democrat California State Sen. to Challenge Nancy Pelosi in Primary",
       "url": "https://www.breitbart.com/politics/2025/10/18/report-democrat-california-state-sen-to-challenge-nancy-pelosi-in-primary",
       "source": "Breitbart News",
@@ -934,29 +947,16 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Ilya Sorokin still looked shaky for Islanders despite big penalty save",
-      "url": "https://nypost.com/2025/10/18/sports/ilya-sorokin-still-looked-shaky-for-islanders-despite-big-penalty-save",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-10-19T01:47:30.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Sports",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 713,
-    "dedup_pass1": 705,
+    "collected": 717,
+    "dedup_pass1": 709,
     "dedup_final": 320,
     "slow_domains": [
-      "theintercept.com"
+      "feeds.npr.org"
     ],
     "timeouts": [
       "news.communitech.ca",
@@ -971,63 +971,64 @@
       "financialpost.com",
       "globalnews.ca",
       "toronto.citynews.ca",
+      "www.boston.com",
       "www.marketwatch.com",
       "www.npr.org",
       "www.wsj.com"
     ],
     "feed_times_sample": [
       {
-        "host": "globalnews.ca",
-        "sec": 1.269,
-        "kept": 10
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 1.149,
+        "sec": 1.063,
         "kept": 8
       },
       {
+        "host": "globalnews.ca",
+        "sec": 0.885,
+        "kept": 10
+      },
+      {
         "host": "www.cp24.com",
-        "sec": 0.622,
+        "sec": 0.662,
         "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.517,
+        "sec": 0.464,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.401,
+        "sec": 0.404,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.351,
+        "sec": 0.353,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.321,
+        "sec": 0.299,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.216,
+        "sec": 0.244,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.202,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.101,
+        "sec": 0.202,
         "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.096,
-        "kept": 0
       }
     ],
-    "elapsed_sec": 302.75,
+    "elapsed_sec": 293.46,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1063,7 +1064,7 @@
       "sports_team_hits": 14,
       "sports_player_hits": 8,
       "sports_result_win_hits": 13,
-      "sports_result_loss_hits": 2,
+      "sports_result_loss_hits": 3,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 10,
@@ -1078,7 +1079,7 @@
       "reject_hits": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 29,
+      "link_verification_fail": 35,
       "soft_404_drops": 30,
       "max_age_drops": 0,
       "min_age_drops": 8,
