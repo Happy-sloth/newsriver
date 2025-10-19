@@ -53,6 +53,60 @@
               "team": {
                 "abbreviation": "LAC"
               },
+              "score": 3
+            }
+          }
+        },
+        {
+          "gamePk": 401772864,
+          "gameDate": "2025-10-19T20:25Z",
+          "status": {
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 7
+            }
+          }
+        },
+        {
+          "gamePk": 401772863,
+          "gameDate": "2025-10-19T20:25Z",
+          "status": {
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GB"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ARI"
+              },
               "score": 0
             }
           }
@@ -243,60 +297,6 @@
                 "abbreviation": "NYJ"
               },
               "score": 6
-            }
-          }
-        },
-        {
-          "gamePk": 401772864,
-          "gameDate": "2025-10-19T20:25Z",
-          "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 0
-            }
-          }
-        },
-        {
-          "gamePk": 401772863,
-          "gameDate": "2025-10-19T20:25Z",
-          "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GB"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ARI"
-              },
-              "score": 0
             }
           }
         },
