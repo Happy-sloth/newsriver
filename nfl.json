@@ -47,45 +47,18 @@
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 23
+              "score": 31
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 3
+              "score": 10
             }
           }
         },
         {
           "gamePk": 401772864,
-          "gameDate": "2025-10-19T20:25Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 8
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 20
-            }
-          }
-        },
-        {
-          "gamePk": 401772863,
           "gameDate": "2025-10-19T20:25Z",
           "status": {
             "abstractGameState": "Live",
@@ -99,9 +72,36 @@
           "teams": {
             "away": {
               "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 15
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 27
+            }
+          }
+        },
+        {
+          "gamePk": 401772863,
+          "gameDate": "2025-10-19T20:25Z",
+          "status": {
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
                 "abbreviation": "GB"
               },
-              "score": 6
+              "score": 13
             },
             "home": {
               "team": {
