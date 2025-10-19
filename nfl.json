@@ -4,87 +4,6 @@
       "date": "2025-10-19",
       "games": [
         {
-          "gamePk": 401772757,
-          "gameDate": "2025-10-19T20:05Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "NYG"
-              },
-              "score": 32
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 30
-            }
-          }
-        },
-        {
-          "gamePk": 401772864,
-          "gameDate": "2025-10-19T20:25Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 22
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 44
-            }
-          }
-        },
-        {
-          "gamePk": 401772863,
-          "gameDate": "2025-10-19T20:25Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GB"
-              },
-              "score": 27
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ARI"
-              },
-              "score": 23
-            }
-          }
-        },
-        {
           "gamePk": 401772635,
           "gameDate": "2025-10-19T13:30Z",
           "status": {
@@ -274,6 +193,33 @@
           }
         },
         {
+          "gamePk": 401772757,
+          "gameDate": "2025-10-19T20:05Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NYG"
+              },
+              "score": 32
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 33
+            }
+          }
+        },
+        {
           "gamePk": 401772756,
           "gameDate": "2025-10-19T20:05Z",
           "status": {
@@ -297,6 +243,60 @@
                 "abbreviation": "LAC"
               },
               "score": 24
+            }
+          }
+        },
+        {
+          "gamePk": 401772864,
+          "gameDate": "2025-10-19T20:25Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 22
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 44
+            }
+          }
+        },
+        {
+          "gamePk": 401772863,
+          "gameDate": "2025-10-19T20:25Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GB"
+              },
+              "score": 27
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ARI"
+              },
+              "score": 23
             }
           }
         },
