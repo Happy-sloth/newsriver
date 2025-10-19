@@ -4,11 +4,92 @@
       "date": "2025-10-19",
       "games": [
         {
-          "gamePk": 401772861,
-          "gameDate": "2025-10-19T17:00Z",
+          "gamePk": 401772757,
+          "gameDate": "2025-10-19T20:05Z",
           "status": {
             "abstractGameState": "Live",
             "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NYG"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": 401772756,
+          "gameDate": "2025-10-19T20:05Z",
+          "status": {
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 6
+            },
+            "home": {
+              "team": {
+                "abbreviation": "LAC"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": 401772635,
+          "gameDate": "2025-10-19T13:30Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAR"
+              },
+              "score": 35
+            },
+            "home": {
+              "team": {
+                "abbreviation": "JAX"
+              },
+              "score": 7
+            }
+          }
+        },
+        {
+          "gamePk": 401772861,
+          "gameDate": "2025-10-19T17:00Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -34,8 +115,8 @@
           "gamePk": 401772754,
           "gameDate": "2025-10-19T17:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -115,8 +196,8 @@
           "gamePk": 401772862,
           "gameDate": "2025-10-19T17:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -134,7 +215,7 @@
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 19
+              "score": 22
             }
           }
         },
@@ -142,8 +223,8 @@
           "gamePk": 401772860,
           "gameDate": "2025-10-19T17:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -162,87 +243,6 @@
                 "abbreviation": "NYJ"
               },
               "score": 6
-            }
-          }
-        },
-        {
-          "gamePk": 401772635,
-          "gameDate": "2025-10-19T13:30Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAR"
-              },
-              "score": 35
-            },
-            "home": {
-              "team": {
-                "abbreviation": "JAX"
-              },
-              "score": 7
-            }
-          }
-        },
-        {
-          "gamePk": 401772757,
-          "gameDate": "2025-10-19T20:05Z",
-          "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "NYG"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 0
-            }
-          }
-        },
-        {
-          "gamePk": 401772756,
-          "gameDate": "2025-10-19T20:05Z",
-          "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LAC"
-              },
-              "score": 0
             }
           }
         },
