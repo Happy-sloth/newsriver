@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-10-19T07:17:42.848Z",
+  "generated_utc": "2025-10-19T07:31:47.117Z",
   "count": 69,
   "items": [
     {
-      "title": "US says Hamas is planning 'imminent' attack on Gaza civilians",
+      "title": "US warns Hamas is planning 'imminent' attack on Gaza civilians in breach of ceasefire",
       "url": "https://www.bbc.com/news/articles/cm2elr16jjqo?at_campaign=rss&at_medium=RSS",
       "source": "BBC News",
-      "published_utc": "2025-10-19T07:03:23.000Z",
+      "published_utc": "2025-10-19T07:23:28.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -16,10 +16,23 @@
       "region": "World"
     },
     {
+      "title": "Y/Project References Surface in H&M’s Glenn Martens Collaboration",
+      "url": "https://hypebeast.com/2025/10/hm-glenn-martens-collection-lookbook-release-info",
+      "source": "Hypebeast",
+      "published_utc": "2025-10-19T07:23:17.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
       "title": "Colombia accuses US of 'murder' after strike on submarine",
       "url": "https://www.bbc.com/news/articles/cn8xg1jve73o?at_campaign=rss&at_medium=RSS",
       "source": "BBC News",
-      "published_utc": "2025-10-19T06:44:09.000Z",
+      "published_utc": "2025-10-19T07:18:37.000Z",
       "effects": {
         "lightsaber": true,
         "glitch": false,
@@ -162,6 +175,19 @@
         "reasons": []
       },
       "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "BitMine accumulates $1.5B in Ether since crash despite Lee’s treasury bubble fears",
+      "url": "https://cointelegraph.com/news/tom-lee-is-still-buying-eth-despite-saying-dat-bubble-has-burst",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-10-19T05:00:47.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Business",
       "region": "World"
     },
     {
@@ -523,11 +549,8 @@
       "published_utc": "2025-10-19T00:26:09.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.9"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Sports",
       "region": "Canada"
@@ -929,49 +952,20 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "The Only Aurora Shoe You'll Ever Need",
-      "url": "https://www.highsnobiety.com/p/nepenthes-aurora-shoe-co",
-      "source": "Highsnobiety",
-      "published_utc": "2025-10-18T21:15:40.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Skate Shoes Built Like a Bulletproof Tank",
-      "url": "https://www.highsnobiety.com/p/vans-otw-authentic-dyneema-vibram",
-      "source": "Highsnobiety",
-      "published_utc": "2025-10-18T21:07:35.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 489,
-    "dedup_pass1": 482,
+    "collected": 451,
+    "dedup_pass1": 445,
     "dedup_final": 320,
-    "slow_domains": [
-      "www.gorillavsbear.net"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
     ],
     "errors": [
-      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -982,57 +976,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "toronto.citynews.ca",
-        "sec": 1.07,
-        "kept": 8
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.934,
+        "sec": 0.989,
         "kept": 10
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.553,
-        "kept": 14
+        "host": "toronto.citynews.ca",
+        "sec": 0.847,
+        "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.463,
+        "host": "www.cp24.com",
+        "sec": 0.67,
         "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.451,
+        "sec": 0.571,
         "kept": 0
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.545,
+        "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.286,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.277,
+        "sec": 0.312,
         "kept": 0
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.271,
+        "sec": 0.277,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.227,
+        "sec": 0.268,
         "kept": 14
       },
       {
+        "host": "www.nhl.com",
+        "sec": 0.247,
+        "kept": 0
+      },
+      {
         "host": "www.federalreserve.gov",
-        "sec": 0.195,
+        "sec": 0.185,
         "kept": 14
       }
     ],
-    "elapsed_sec": 327.66,
+    "elapsed_sec": 343.83,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1055,7 +1049,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 10,
+      "ps_fatal_hits": 9,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1065,7 +1059,7 @@
       "press_penalties": 0,
       "preferred_bonus": 40,
       "substack_tagged": 0,
-      "sports_team_hits": 14,
+      "sports_team_hits": 13,
       "sports_player_hits": 5,
       "sports_result_win_hits": 8,
       "sports_result_loss_hits": 1,
@@ -1083,8 +1077,8 @@
       "reject_hits": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 27,
-      "soft_404_drops": 30,
+      "link_verification_fail": 26,
+      "soft_404_drops": 18,
       "max_age_drops": 0,
       "min_age_drops": 0,
       "market_sanity_drops": 8,
