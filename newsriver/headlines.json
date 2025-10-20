@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-20T11:46:20.982Z",
+  "generated_utc": "2025-10-20T11:57:05.512Z",
   "count": 69,
   "items": [
+    {
+      "title": "'I quit': GOP fundraiser publicly dumps 'increasingly corrupt' party",
+      "url": "https://www.rawstory.com/trump-corrupt",
+      "source": "Raw Story",
+      "published_utc": "2025-10-20T11:54:05.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "'Supreme Court screwed up': Expert claims justices' 'arrogance' has messed up Trump plans",
       "url": "https://www.rawstory.com/supreme-court-trump-2674214461",
@@ -90,7 +103,7 @@
       "region": "World"
     },
     {
-      "title": "Amazon AWS outage knocks Coinbase mobile app offline, Robinhood also affected",
+      "title": "Amazon AWS outage knocks Coinbase mobile app offline, Robinhood disrupted",
       "url": "https://cointelegraph.com/news/amazon-aws-outage-coinbase-app-robinhood",
       "source": "Cointelegraph.com News",
       "published_utc": "2025-10-20T11:29:14.000Z",
@@ -247,6 +260,19 @@
         "reasons": []
       },
       "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "China’s economic growth slows amid Trump tariff war and property woes",
+      "url": "https://www.theguardian.com/business/2025/oct/20/china-economic-growth-trump-tariff-war-property-gdp",
+      "source": "World news | The Guardian",
+      "published_utc": "2025-10-20T11:13:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
       "region": "World"
     },
     {
@@ -412,19 +438,6 @@
       "region": "World"
     },
     {
-      "title": "Amazon Web Services Outage: ‘Significant Signs of Recovery’ After Snapchat, Roblox and Other Major Websites Go Down",
-      "url": "https://variety.com/2025/digital/global/amazon-web-services-outage-recovery-signs-snapchat-roblox-offline-1236556879",
-      "source": "Variety",
-      "published_utc": "2025-10-20T10:56:01.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Charli XCX says her relationship with label Atlantic used to be “turbulent” but is “in a good place” now",
       "url": "https://www.nme.com/news/music/charli-xcx-says-her-relationship-with-label-atlantic-used-to-be-turbulent-but-is-in-a-good-place-now-3900446",
       "source": "NME",
@@ -548,19 +561,6 @@
       "region": "Canada"
     },
     {
-      "title": "Some stars go to super secretive lengths to make sure their cosmetic procedures go undetected",
-      "url": "https://pagesix.com/2025/10/20/entertainment/some-stars-go-to-super-secretive-lengths-to-make-sure-their-cosmetic-procedures-go-undetected",
-      "source": "New York Post",
-      "published_utc": "2025-10-20T10:35:51.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Channel 4’s Nevine Mabro Becomes BBC’s Storyville Chief",
       "url": "https://deadline.com/2025/10/nevine-mabro-joins-bbc-storyville-from-channel-4-1236591974",
       "source": "Deadline",
@@ -672,19 +672,6 @@
       },
       "category": "Local",
       "region": "Canada"
-    },
-    {
-      "title": "Malware attack on Japan office supplier Askul halts services of other firms",
-      "url": "https://japantoday.com/category/crime/japanese-office-supplier-askul-shuts-down-services-due-to-malware-attack",
-      "source": "Japan Today",
-      "published_utc": "2025-10-20T10:24:06.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     },
     {
       "title": "Nike Turned a Classic Running Shoe Into Its Sweetest Stepper Yet",
@@ -817,7 +804,7 @@
       "region": "World"
     },
     {
-      "title": "Home Trust enters reverse mortgage market with launch of EquityAccess",
+      "title": "Home Trust becomes Canada’s newest reverse mortgage provider with EquityAccess product",
       "url": "https://www.canadianmortgagetrends.com/2025/10/home-trust-enters-reverse-mortgage-market-with-launch-of-equityaccess",
       "source": "CMT News",
       "published_utc": "2025-10-20T10:09:58.000Z",
@@ -938,17 +925,28 @@
       },
       "category": "General",
       "region": "World"
+    },
+    {
+      "title": "Trump Denies Demanding Zelensky Cede Entire Region to Putin: ‘We Never Discussed That!’",
+      "url": "https://www.mediaite.com/media/news/trump-denies-demanding-zelensky-cede-entire-region-to-putin-we-never-discussed-that",
+      "source": "Mediaite",
+      "published_utc": "2025-10-20T09:59:57.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 825,
-    "dedup_pass1": 804,
+    "collected": 739,
+    "dedup_pass1": 735,
     "dedup_final": 320,
-    "slow_domains": [
-      "rollcall.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -961,9 +959,7 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "nypost.com",
       "toronto.citynews.ca",
-      "variety.com",
       "www.boston.com",
       "www.marketwatch.com",
       "www.npr.org",
@@ -972,56 +968,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.379,
+        "sec": 1.722,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.959,
+        "sec": 1.028,
         "kept": 10
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.491,
-        "kept": 14
+        "host": "www.blogto.com",
+        "sec": 0.605,
+        "kept": 0
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.486,
-        "kept": 0
+        "host": "www.mlb.com",
+        "sec": 0.584,
+        "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.395,
+        "sec": 0.424,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.367,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.272,
-        "kept": 0
-      },
-      {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.254,
+        "sec": 0.363,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.215,
+        "sec": 0.287,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.268,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.264,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.143,
+        "sec": 0.145,
         "kept": 14
       }
     ],
-    "elapsed_sec": 316.33,
+    "elapsed_sec": 309.88,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1044,7 +1040,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 17,
+      "ps_fatal_hits": 15,
       "ps_injury_hits": 0,
       "market_btc_hits": 1,
       "market_index_hits": 0,
@@ -1052,12 +1048,12 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 48,
+      "preferred_bonus": 49,
       "substack_tagged": 0,
-      "sports_team_hits": 17,
+      "sports_team_hits": 16,
       "sports_player_hits": 8,
-      "sports_result_win_hits": 17,
-      "sports_result_loss_hits": 4,
+      "sports_result_win_hits": 13,
+      "sports_result_loss_hits": 3,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 9,
@@ -1069,14 +1065,14 @@
       "hype_jobs": 0,
       "hype_sports": 0,
       "hype_ceasefire": 0,
-      "reject_hits": 2
+      "reject_hits": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 24,
-      "soft_404_drops": 40,
+      "link_verification_fail": 33,
+      "soft_404_drops": 33,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 6,
+      "market_sanity_drops": 7,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
