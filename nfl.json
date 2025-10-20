@@ -1,8 +1,35 @@
 {
   "dates": [
     {
-      "date": "2025-10-19",
+      "date": "2025-10-20",
       "games": [
+        {
+          "gamePk": 401772924,
+          "gameDate": "2025-10-20T00:20Z",
+          "status": {
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "ATL"
+              },
+              "score": 3
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SF"
+              },
+              "score": 13
+            }
+          }
+        },
         {
           "gamePk": 401772635,
           "gameDate": "2025-10-19T13:30Z",
@@ -297,33 +324,6 @@
                 "abbreviation": "ARI"
               },
               "score": 23
-            }
-          }
-        },
-        {
-          "gamePk": 401772924,
-          "gameDate": "2025-10-20T00:20Z",
-          "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SF"
-              },
-              "score": 0
             }
           }
         },
