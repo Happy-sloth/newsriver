@@ -81,6 +81,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install feedparser requests beautifulsoup4 json5
 
+      - name: Sanity checks (paths & files)
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "PWD=$(pwd)"
+          echo "Repo tree (top level):"
+          ls -lah
+          echo "newsriver dir (will host output):"
+          mkdir -p newsriver && ls -lah newsriver || true
+          echo "Ensure feeds.txt exists at repo root:"
+          test -f feeds.txt || { echo "ERROR: feeds.txt not found at repo root"; exit 1; }
+
       - name: Guardrail — strip embedded README block if present
         shell: bash
         run: |
@@ -97,7 +109,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p newsriver
           python scripts/fetch_headlines.py --feeds-file feeds.txt --out newsriver/headlines.json
           echo "----- collector snapshot"
           jq -r '._debug.version, .generated_utc, .count' newsriver/headlines.json || true
@@ -182,9 +193,9 @@ jobs:
           function looksLikeArticleBody(html = ""){
             if (!html || html.length < MIN_BYTES) return false;
             if (SOFT_404_PAT.test(html)) return false;
-            const text = html.replace(/<script[\s\S]*?<\/script>/gi," ")
-                             .replace(/<style[\s\S]*?<\/style>/gi," ")
-                             .replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+            const text = html.replace(/<script[\\s\\S]*?<\\/script>/gi," ")
+                             .replace(/<style[\\s\\S]*?<\\/style>/gi," ")
+                             .replace(/<[^>]+>/g," ").replace(/\\s+/g," ").trim();
             const words = text.split(" ").filter(Boolean);
             return words.length >= MIN_WORDS;
           }
@@ -197,9 +208,9 @@ jobs:
           function saveJSON(kind, wrapper, items){
             if (kind === "object"){
               const out = { ...wrapper, generated_utc: new Date().toISOString(), count: items.length, items };
-              fs.writeFileSync(DATA_PATH, JSON.stringify(out, null, 2) + "\n","utf8");
+              fs.writeFileSync(DATA_PATH, JSON.stringify(out, null, 2) + "\\n","utf8");
             }else{
-              fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\n","utf8");
+              fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\\n","utf8");
             }
           }
           async function mapLimit(arr, limit, fn){
@@ -339,7 +350,9 @@ jobs:
           git config user.name  "github-actions"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add newsriver/headlines.json
+          # Force-add in case .gitignore excludes JSON or folder
+          git add -f newsriver/headlines.json
+
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
@@ -352,7 +365,7 @@ jobs:
           if ! git pull --rebase origin main; then
             echo "Rebase conflict – preferring generated headlines.json"
             git checkout --ours -- newsriver/headlines.json || true
-            git add newsriver/headlines.json
+            git add -f newsriver/headlines.json
             git rebase --continue || true
           fi
 
@@ -366,7 +379,7 @@ jobs:
             git fetch origin main
             if ! git rebase origin/main; then
               git checkout --ours -- newsriver/headlines.json || true
-              git add newsriver/headlines.json
+              git add -f newsriver/headlines.json
               git rebase --continue || true
             fi
           done
