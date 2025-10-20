@@ -1,7 +1,33 @@
 {
-  "generated_utc": "2025-10-20T08:47:49.347Z",
+  "generated_utc": "2025-10-20T08:59:28.222Z",
   "count": 69,
   "items": [
+    {
+      "title": "Oscar-Winning Director Ben Proudfoot Talks Historical Significance Of ‘The Eyes Of Ghana’, Scoring Doc At Abbey Road Studios & Why Project Was A “Full Circle Moment” For Barack Obama",
+      "url": "https://deadline.com/2025/10/ben-proudfoot-the-eyes-of-ghana-abbey-road-barack-obama-1236591704",
+      "source": "Deadline",
+      "published_utc": "2025-10-20T08:50:52.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Hundreds Of Websites & Apps Reported Offline Following Outage At North Virginia Amazon Web Services  Data Center",
+      "url": "https://deadline.com/2025/10/website-apps-offline-outage-virginia-amazon-web-services-1236591933",
+      "source": "Deadline",
+      "published_utc": "2025-10-20T08:50:43.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "Fall Out Boy Celebrates 20 Years of ‘From Under The Cork Tree’ With Special Edition",
       "url": "https://hypebeast.com/2025/10/fall-out-boy-from-under-the-cork-tree-20th-anniversary-album-stream",
@@ -926,35 +952,6 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "It doesn't get any better than Game 7. Here's everything to watch for",
-      "url": "https://www.mlb.com/bluejays/news/2025-alcs-game-7-storylines-what-to-watch",
-      "source": "Blue Jays News",
-      "published_utc": "2025-10-20T04:16:39.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.9"
-        ],
-        "style": "glitch"
-      },
-      "category": "Sports",
-      "region": "Canada"
-    },
-    {
-      "title": "Kevin Durant's Houston Rockets Contract Extension Scores Him the Highest Career Earnings in NBA History at $598.2 Million USD",
-      "url": "https://hypebeast.com/2025/10/kevin-durant-makes-history-houston-rockets-contract-extension-highest-career-earnings-nba-history-news",
-      "source": "Hypebeast",
-      "published_utc": "2025-10-20T04:15:43.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
@@ -986,56 +983,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.378,
+        "sec": 1.005,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.996,
+        "sec": 0.94,
         "kept": 10
       },
       {
+        "host": "www.blogto.com",
+        "sec": 0.626,
+        "kept": 0
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.471,
+        "sec": 0.47,
         "kept": 14
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.406,
+        "host": "www.bls.gov",
+        "sec": 0.329,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.337,
+        "sec": 0.309,
         "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.296,
+        "sec": 0.299,
         "kept": 14
       },
       {
         "host": "www150.statcan.gc.ca",
-        "sec": 0.234,
-        "kept": 0
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.127,
+        "sec": 0.197,
         "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.123,
+        "sec": 0.183,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.096,
+        "sec": 0.087,
         "kept": 14
       }
     ],
-    "elapsed_sec": 304.24,
+    "elapsed_sec": 280.25,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1086,10 +1083,10 @@
       "reject_hits": 4
     },
     "sanity_stats": {
-      "link_verification_fail": 26,
-      "soft_404_drops": 39,
+      "link_verification_fail": 25,
+      "soft_404_drops": 27,
       "max_age_drops": 0,
-      "min_age_drops": 8,
+      "min_age_drops": 20,
       "market_sanity_drops": 4,
       "backfill_steps_used": 0
     },
