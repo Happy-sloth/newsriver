@@ -39,7 +39,6 @@ jobs:
           elif [[ -f newsriver/scripts/requirements.txt ]]; then
             pip install -r newsriver/scripts/requirements.txt
           else
-            # Minimal common libs; adjust in your requirements file later
             pip install feedparser requests python-dateutil beautifulsoup4
           fi
 
@@ -58,25 +57,31 @@ jobs:
           if [[ ! -f "$FILE" ]]; then
             echo "ERROR: $FILE not found"; exit 1
           fi
-          python - <<'PY'
-import json, sys
-p="newsriver/newsriver/dredge_heds.json"
-with open(p,"r",encoding="utf-8") as f:
-    data=json.load(f)
-items=data.get("items",[]) if isinstance(data,dict) else []
-if not isinstance(items,list):
+          python -c '
+import json, sys, os
+p = "newsriver/newsriver/dredge_heds.json"
+try:
+    with open(p, "r", encoding="utf-8") as f:
+        data = json.load(f)
+except Exception as e:
+    print(f"ERROR: cannot parse {p}: {e}", file=sys.stderr); sys.exit(1)
+
+items = data.get("items", []) if isinstance(data, dict) else []
+if not isinstance(items, list):
     print("ERROR: items is not a list", file=sys.stderr); sys.exit(1)
 if len(items) < 3:
     print(f"ERROR: items has length {len(items)} (<3). Abort publish.", file=sys.stderr); sys.exit(1)
-for i,it in enumerate(items):
-    url = (it or {}).get("url","")
-    title = (it or {}).get("display") or (it or {}).get("hyped") or (it or {}).get("title")
-    if not url or not isinstance(url,str):
+for i, it in enumerate(items):
+    if not isinstance(it, dict):
+        print(f"ERROR: item {i} not an object", file=sys.stderr); sys.exit(1)
+    url = it.get("url", "")
+    title = it.get("display") or it.get("text") or it.get("hyped") or it.get("title")
+    if not isinstance(url, str) or not url.strip():
         print(f"ERROR: item {i} missing valid url", file=sys.stderr); sys.exit(1)
-    if not title or not isinstance(title,str):
-        print(f"ERROR: item {i} missing display/hyped/title", file=sys.stderr); sys.exit(1)
+    if not isinstance(title, str) or not title.strip():
+        print(f"ERROR: item {i} missing display/text/title", file=sys.stderr); sys.exit(1)
 print("Validation OK: dredge_heds.json")
-PY
+'
 
       - name: Commit and push if changed
         run: |
