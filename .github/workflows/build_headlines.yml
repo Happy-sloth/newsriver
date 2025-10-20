@@ -6,8 +6,7 @@ on:
     - cron: "*/12 * * * *"  # every 12 minutes
 
 # Prevent overlapping runs from racing each other.
-# IMPORTANT: queue newer runs instead of canceling the in-progress one,
-# so a long build isn’t killed by the next schedule tick.
+# Queue newer runs instead of canceling an in-progress one.
 concurrency:
   group: newsriver-headlines
   cancel-in-progress: false
@@ -81,12 +80,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install feedparser requests beautifulsoup4 json5
 
-      - name: Ensure output dir
-        run: |
-          set -euo pipefail
-          mkdir -p newsriver
-          ls -lah newsriver || true
-
       - name: Guardrail — strip embedded README block if present
         shell: bash
         run: |
@@ -99,14 +92,14 @@ jobs:
       - name: Syntax check
         run: python -m py_compile scripts/fetch_headlines.py
 
-      - name: Build headlines.json
+      - name: Build headlines.json (to repo root)
         shell: bash
         run: |
           set -euo pipefail
-          python scripts/fetch_headlines.py --feeds-file feeds.txt --out newsriver/headlines.json
+          python scripts/fetch_headlines.py --feeds-file feeds.txt --out headlines.json
           echo "----- collector snapshot"
-          jq -r '._debug.version, .generated_utc, .count' newsriver/headlines.json || true
-          jq -r '.items[:6][] | [.published_utc, .source, .title, .url] | @tsv' newsriver/headlines.json || true
+          jq -r '._debug.version, .generated_utc, .count' headlines.json || true
+          jq -r '.items[:6][] | [.published_utc, .source, .title, .url] | @tsv' headlines.json || true
 
       - name: Set up Node (for cleaner)
         uses: actions/setup-node@v4
@@ -121,7 +114,7 @@ jobs:
           cat << 'EOF' > "$CLEANER"
           import fs from "node:fs";
 
-          const DATA_PATH = "newsriver/headlines.json";
+          const DATA_PATH = "headlines.json";
 
           const MAX_AGE_MS = Number(process.env.CLEAN_MAX_AGE_HOURS || "72") * 3600 * 1000;
           const MIN_BYTES  = Number(process.env.CLEAN_MIN_BODY_BYTES || "2048");
@@ -234,7 +227,6 @@ jobs:
             }).filter(Boolean)
               .filter(it => withinWindow(it.published_utc))
               .filter(it => {
-                // relaxed mode: allow section pages; strict mode: require article-likeness
                 if (!relaxed && !isLikelyArticle(it.url)) return false;
                 if (AGGR.test(it.url)) return false;
                 if (seen.has(it.url)) return false; seen.add(it.url); return true;
@@ -269,7 +261,6 @@ jobs:
             return cleaned.filter(Boolean);
           }
 
-          // relaxedClean: no body fetch; just age + not-aggregator + URL shape (looser)
           async function relaxedClean(items){
             return prefilter(items, true).map(it => {
               const keep = {
@@ -302,7 +293,6 @@ jobs:
             // Final guard: never publish "empty" river
             if (out.length < TARGET_MIN_RELAX){
               console.log(`Cleaner would publish only ${out.length} items; keeping original collector output.`);
-              // keep original wrapper shape if present
               if (kind === "object"){
                 saveJSON(kind, wrapper, items);
               }else{
@@ -327,15 +317,14 @@ jobs:
         run: |
           set -euo pipefail
           echo "----- probe a sample of cleaned items -----"
-          jq -r '.items[:12][] | .url' newsriver/headlines.json | while read -r URL; do
+          jq -r '.items[:12][] | .url' headlines.json | while read -r URL; do
             [ -z "$URL" ] && continue
-            # Explicit no-cache headers to avoid stale CDN bodies in probe
             CODE=$(curl -A "$MPB_ALT_UA" -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' -L -m 15 -s -w '%{http_code}' -o /tmp/body.html "$URL" || echo "000")
             BYTES=$(wc -c </tmp/body.html | tr -d ' ')
             echo "$CODE $BYTES $URL"
           done
           echo "----- summary"
-          jq -r '._debug.version, .generated_utc, .count' newsriver/headlines.json || true
+          jq -r '._debug.version, .generated_utc, .count' headlines.json || true
 
       - name: Commit & push with rebase (conflict-safe)
         shell: bash
@@ -344,22 +333,22 @@ jobs:
           git config user.name  "github-actions"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Force-add in case .gitignore excludes JSON or folder
-          git add -f newsriver/headlines.json
+          # Force-add in case .gitignore excludes JSON
+          git add -f headlines.json
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "ci: build+clean headlines.json (relaxed thresholds + fallback)"
+          git commit -m "ci: build+clean headlines.json (root path)"
 
           git fetch origin main
           # Try fast-forward via rebase
           if ! git pull --rebase origin main; then
             echo "Rebase conflict – preferring generated headlines.json"
-            git checkout --ours -- newsriver/headlines.json || true
-            git add -f newsriver/headlines.json
+            git checkout --ours -- headlines.json || true
+            git add -f headlines.json
             git rebase --continue || true
           fi
 
@@ -372,8 +361,8 @@ jobs:
             echo "Push failed (attempt $i) – rebasing again and retrying..."
             git fetch origin main
             if ! git rebase origin/main; then
-              git checkout --ours -- newsriver/headlines.json || true
-              git add -f newsriver/headlines.json
+              git checkout --ours -- headlines.json || true
+              git add -f headlines.json
               git rebase --continue || true
             fi
           done
