@@ -81,17 +81,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install feedparser requests beautifulsoup4 json5
 
-      - name: Sanity checks (paths & files)
-        shell: bash
+      - name: Ensure output dir
         run: |
           set -euo pipefail
-          echo "PWD=$(pwd)"
-          echo "Repo tree (top level):"
-          ls -lah
-          echo "newsriver dir (will host output):"
-          mkdir -p newsriver && ls -lah newsriver || true
-          echo "Ensure feeds.txt exists at repo root:"
-          test -f feeds.txt || { echo "ERROR: feeds.txt not found at repo root"; exit 1; }
+          mkdir -p newsriver
+          ls -lah newsriver || true
 
       - name: Guardrail — strip embedded README block if present
         shell: bash
@@ -193,9 +187,9 @@ jobs:
           function looksLikeArticleBody(html = ""){
             if (!html || html.length < MIN_BYTES) return false;
             if (SOFT_404_PAT.test(html)) return false;
-            const text = html.replace(/<script[\\s\\S]*?<\\/script>/gi," ")
-                             .replace(/<style[\\s\\S]*?<\\/style>/gi," ")
-                             .replace(/<[^>]+>/g," ").replace(/\\s+/g," ").trim();
+            const text = html.replace(/<script[\s\S]*?<\/script>/gi," ")
+                             .replace(/<style[\s\S]*?<\/style>/gi," ")
+                             .replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
             const words = text.split(" ").filter(Boolean);
             return words.length >= MIN_WORDS;
           }
@@ -208,9 +202,9 @@ jobs:
           function saveJSON(kind, wrapper, items){
             if (kind === "object"){
               const out = { ...wrapper, generated_utc: new Date().toISOString(), count: items.length, items };
-              fs.writeFileSync(DATA_PATH, JSON.stringify(out, null, 2) + "\\n","utf8");
+              fs.writeFileSync(DATA_PATH, JSON.stringify(out, null, 2) + "\n","utf8");
             }else{
-              fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\\n","utf8");
+              fs.writeFileSync(DATA_PATH, JSON.stringify(items, null, 2) + "\n","utf8");
             }
           }
           async function mapLimit(arr, limit, fn){
