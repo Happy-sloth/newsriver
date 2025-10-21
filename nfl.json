@@ -4,33 +4,6 @@
       "date": "2025-10-21",
       "games": [
         {
-          "gamePk": 401772826,
-          "gameDate": "2025-10-21T02:00Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 19
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SEA"
-              },
-              "score": 27
-            }
-          }
-        },
-        {
           "gamePk": 401772941,
           "gameDate": "2025-10-17T00:15Z",
           "status": {
@@ -405,6 +378,33 @@
                 "abbreviation": "DET"
               },
               "score": 24
+            }
+          }
+        },
+        {
+          "gamePk": 401772826,
+          "gameDate": "2025-10-21T02:00Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 19
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SEA"
+              },
+              "score": 27
             }
           }
         }
