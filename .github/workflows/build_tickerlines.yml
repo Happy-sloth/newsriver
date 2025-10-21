@@ -26,7 +26,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Show repo tree (top-level and newsriver/)
+      - name: Show repo tree (top-level and likely places)
         run: |
           echo "Workspace: $GITHUB_WORKSPACE"
           ls -la
@@ -34,6 +34,10 @@ jobs:
           ls -la newsriver || true
           echo "---- newsriver/scripts/"
           ls -la newsriver/scripts || true
+          echo "---- locate fetch_tickerlines.py"
+          find . -maxdepth 4 -type f -name "fetch_tickerlines.py" -print || true
+          echo "---- locate headlines.json"
+          find . -maxdepth 4 -type f -name "headlines.json" -print || true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -55,18 +59,39 @@ jobs:
         run: |
           mkdir -p newsriver/newsriver
 
-      - name: Verify script exists at expected path
+      - name: Locate script and input; run build
         run: |
-          if [[ ! -f newsriver/scripts/fetch_tickerlines.py ]]; then
-            echo "ERROR: expected script not found at newsriver/scripts/fetch_tickerlines.py" >&2
-            echo "TIP: Confirm the file is committed to THIS branch and path shown above." >&2
+          set -e
+
+          # 1) Locate the script (prefer the path shown in your screenshot)
+          if [[ -f "newsriver/scripts/fetch_tickerlines.py" ]]; then
+            SCRIPT_PATH="newsriver/scripts/fetch_tickerlines.py"
+          else
+            SCRIPT_PATH="$(find . -maxdepth 4 -type f -name 'fetch_tickerlines.py' | head -n1 || true)"
+          fi
+          if [[ -z "$SCRIPT_PATH" ]]; then
+            echo "ERROR: fetch_tickerlines.py not found under repo root." >&2
             exit 2
           fi
-          head -n 3 newsriver/scripts/fetch_tickerlines.py || true
+          echo "Using script: $SCRIPT_PATH"
 
-      - name: Build ticker JSON (fetch_tickerlines.py)
-        run: |
-          python newsriver/scripts/fetch_tickerlines.py
+          # 2) Locate input headlines.json (your script default expects ./newsriver/headlines.json)
+          DEFAULT_IN="./newsriver/headlines.json"
+          if [[ -f "$DEFAULT_IN" ]]; then
+            INPATH="$DEFAULT_IN"
+          else
+            INPATH="$(find . -maxdepth 4 -type f -name 'headlines.json' | head -n1 || true)"
+          fi
+          if [[ -z "$INPATH" ]]; then
+            echo "ERROR: headlines.json not found (expected at $DEFAULT_IN)." >&2
+            exit 3
+          fi
+          echo "Using input: $INPATH"
+
+          # 3) Always write to the canonical output the frontend uses
+          OUTPATH="./newsriver/newsriver/dredge_heds.json"
+
+          python "$SCRIPT_PATH" --in "$INPATH" --out "$OUTPATH"
 
       - name: Validate dredge_heds.json
         uses: actions/github-script@v7
