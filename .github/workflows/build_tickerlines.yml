@@ -63,7 +63,7 @@ jobs:
         run: |
           set -e
 
-          # 1) Locate the script (prefer the path shown in your screenshot)
+          # 1) Locate the script (prefer the expected path)
           if [[ -f "newsriver/scripts/fetch_tickerlines.py" ]]; then
             SCRIPT_PATH="newsriver/scripts/fetch_tickerlines.py"
           else
@@ -75,7 +75,7 @@ jobs:
           fi
           echo "Using script: $SCRIPT_PATH"
 
-          # 2) Locate input headlines.json (your script default expects ./newsriver/headlines.json)
+          # 2) Locate input headlines.json (script default expects ./newsriver/headlines.json)
           DEFAULT_IN="./newsriver/headlines.json"
           if [[ -f "$DEFAULT_IN" ]]; then
             INPATH="$DEFAULT_IN"
@@ -88,7 +88,7 @@ jobs:
           fi
           echo "Using input: $INPATH"
 
-          # 3) Always write to the canonical output the frontend uses
+          # 3) Canonical output used by frontend/validator
           OUTPATH="./newsriver/newsriver/dredge_heds.json"
 
           python "$SCRIPT_PATH" --in "$INPATH" --out "$OUTPATH"
@@ -97,8 +97,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const fs = require('fs');
-            const core = require('@actions/core');
+            const fs = require('fs'); // 'core' is provided by github-script v7
 
             const p = 'newsriver/newsriver/dredge_heds.json';
             if (!fs.existsSync(p)) {
