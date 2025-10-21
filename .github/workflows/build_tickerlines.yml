@@ -26,7 +26,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Show repo tree (top-level and likely places)
+      - name: Show repo tree (top-level and newsriver/)
         run: |
           echo "Workspace: $GITHUB_WORKSPACE"
           ls -la
@@ -34,10 +34,6 @@ jobs:
           ls -la newsriver || true
           echo "---- newsriver/scripts/"
           ls -la newsriver/scripts || true
-          echo "---- locate fetch_tickerlines.py"
-          find . -maxdepth 4 -type f -name "fetch_tickerlines.py" -print || true
-          echo "---- locate headlines.json"
-          find . -maxdepth 4 -type f -name "headlines.json" -print || true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -59,83 +55,42 @@ jobs:
         run: |
           mkdir -p newsriver/newsriver
 
-      - name: Locate script and input; run build
+      - name: Build ticker JSON (fetch_tickerlines.py)
         run: |
-          set -e
-
-          # 1) Locate the script (prefer the expected path)
-          if [[ -f "newsriver/scripts/fetch_tickerlines.py" ]]; then
-            SCRIPT_PATH="newsriver/scripts/fetch_tickerlines.py"
-          else
-            SCRIPT_PATH="$(find . -maxdepth 4 -type f -name 'fetch_tickerlines.py' | head -n1 || true)"
-          fi
-          if [[ -z "$SCRIPT_PATH" ]]; then
-            echo "ERROR: fetch_tickerlines.py not found under repo root." >&2
-            exit 2
-          fi
-          echo "Using script: $SCRIPT_PATH"
-
-          # 2) Locate input headlines.json (script default expects ./newsriver/headlines.json)
-          DEFAULT_IN="./newsriver/headlines.json"
-          if [[ -f "$DEFAULT_IN" ]]; then
-            INPATH="$DEFAULT_IN"
-          else
-            INPATH="$(find . -maxdepth 4 -type f -name 'headlines.json' | head -n1 || true)"
-          fi
-          if [[ -z "$INPATH" ]]; then
-            echo "ERROR: headlines.json not found (expected at $DEFAULT_IN)." >&2
-            exit 3
-          fi
-          echo "Using input: $INPATH"
-
-          # 3) Canonical output used by frontend/validator
-          OUTPATH="./newsriver/newsriver/dredge_heds.json"
-
-          python "$SCRIPT_PATH" --in "$INPATH" --out "$OUTPATH"
+          # headlines.json is at repo root; override the default --in path
+          python newsriver/scripts/fetch_tickerlines.py \
+            --in ./headlines.json \
+            --out ./newsriver/newsriver/dredge_heds.json
 
       - name: Validate dredge_heds.json
         uses: actions/github-script@v7
         with:
           script: |
-            const fs = require('fs'); // 'core' is provided by github-script v7
+            const fs = require('fs'); // 'core' is injected by github-script v7
 
             const p = 'newsriver/newsriver/dredge_heds.json';
             if (!fs.existsSync(p)) {
-              core.setFailed(`ERROR: ${p} not found`);
-              return;
+              throw new Error(`ERROR: ${p} not found`);
             }
 
             let data;
             try {
               data = JSON.parse(fs.readFileSync(p, 'utf8'));
             } catch (e) {
-              core.setFailed(`ERROR: cannot parse ${p}: ${e.message}`);
-              return;
+              throw new Error(`ERROR: cannot parse ${p}: ${e.message}`);
             }
 
-            const items = (data && Array.isArray(data.items)) ? data.items : [];
-            if (!Array.isArray(items)) {
-              core.setFailed('ERROR: items is not a list');
-              return;
-            }
-            if (items.length < 3) {
-              core.setFailed(`ERROR: items has length ${items.length} (<3). Abort publish.`);
-              return;
-            }
+            const items = Array.isArray(data?.items) ? data.items : [];
+            if (!Array.isArray(items)) throw new Error('ERROR: items is not a list');
+            if (items.length < 3) throw new Error(`ERROR: items has length ${items.length} (<3). Abort publish.`);
             for (let i = 0; i < items.length; i++) {
-              const it = items[i] || {};
+              const it = items[i] ?? {};
               const url = typeof it.url === 'string' ? it.url.trim() : '';
-              const title = (it.display || it.text || it.hyped || it.title || '').trim();
-              if (!url) {
-                core.setFailed(`ERROR: item ${i} missing valid url`);
-                return;
-              }
-              if (!title) {
-                core.setFailed(`ERROR: item ${i} missing display/text/title`);
-                return;
-              }
+              const title = String(it.display || it.text || it.hyped || it.title || '').trim();
+              if (!url)   throw new Error(`ERROR: item ${i} missing valid url`);
+              if (!title) throw new Error(`ERROR: item ${i} missing display/text/title`);
             }
-            core.info('Validation OK: dredge_heds.json');
+            console.log('Validation OK: dredge_heds.json');
 
       - name: Commit and push if changed
         run: |
