@@ -40,12 +40,10 @@ jobs:
             pip install feedparser requests python-dateutil beautifulsoup4 json5
           fi
 
-      - name: Ensure output directory exists
-        run: mkdir -p newsriver/newsriver
-
-      - name: Build ticker JSON (fetch_tickerlines.py)
+      - name: Build ticker JSON
         run: |
           # Script lives at repo root /scripts; headlines.json is at repo root.
+          mkdir -p newsriver/newsriver
           python scripts/fetch_tickerlines.py --in ./headlines.json --out ./newsriver/newsriver/dredge_heds.json
 
       - name: Validate dredge_heds.json
@@ -86,7 +84,10 @@ jobs:
               if (!url) { core.setFailed(`item ${i} missing valid url`); return; }
               if (!text) { core.setFailed(`item ${i} missing display/text/title`); return; }
             }
-            core.info(`Validation OK: ${items.length} items`)
+
+            // Print a short preview for sanity
+            const preview = JSON.stringify(data).slice(0, 400);
+            core.info(`Validation OK: ${items.length} items. Preview: ${preview}${preview.length===400?'…':''}`);
 
       - name: Commit and push if changed
         run: |
@@ -100,3 +101,22 @@ jobs:
             git commit -m "ticker: update dredge_heds.json [ci skip]"
             git push
           fi
+
+      # Optional: sanity-check that GitHub Pages is serving the new JSON
+      - name: Check GitHub Pages availability (retry briefly)
+        env:
+          PAGES_URL: https://mypybite.github.io/newsriver/newsriver/dredge_heds.json
+        run: |
+          echo "Checking $PAGES_URL"
+          for i in {1..6}; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$PAGES_URL?cb=$(date +%s)")
+            echo "Attempt $i: HTTP $code"
+            if [[ "$code" == "200" ]]; then
+              echo "OK: GitHub Pages is serving the file."
+              curl -s "$PAGES_URL?cb=$(date +%s)" | head -c 200 && echo
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "WARNING: GitHub Pages not returning 200 yet. It may still propagate."
+          exit 0
