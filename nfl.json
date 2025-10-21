@@ -20,40 +20,13 @@
               "team": {
                 "abbreviation": "HOU"
               },
-              "score": 6
+              "score": 12
             },
             "home": {
               "team": {
                 "abbreviation": "SEA"
               },
-              "score": 17
-            }
-          }
-        },
-        {
-          "gamePk": 401772816,
-          "gameDate": "2025-10-20T23:00Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TB"
-              },
-              "score": 9
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DET"
-              },
-              "score": 24
+              "score": 27
             }
           }
         },
@@ -405,6 +378,33 @@
                 "abbreviation": "SF"
               },
               "score": 20
+            }
+          }
+        },
+        {
+          "gamePk": 401772816,
+          "gameDate": "2025-10-20T23:00Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TB"
+              },
+              "score": 9
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DET"
+              },
+              "score": 24
             }
           }
         }
