@@ -26,6 +26,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Show repo tree (top-level and newsriver/)
+        run: |
+          echo "Workspace: $GITHUB_WORKSPACE"
+          ls -la
+          echo "---- newsriver/"
+          ls -la newsriver || true
+          echo "---- newsriver/scripts/"
+          ls -la newsriver/scripts || true
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -45,6 +54,13 @@ jobs:
       - name: Ensure output directory exists
         run: |
           mkdir -p newsriver/newsriver
+
+      - name: Verify script exists
+        run: |
+          if [[ ! -f newsriver/scripts/fetch_tickerlines.py ]]; then
+            echo "ERROR: expected script not found at newsriver/scripts/fetch_tickerlines.py" >&2
+            exit 2
+          fi
 
       - name: Build ticker JSON (fetch_tickerlines.py)
         run: |
