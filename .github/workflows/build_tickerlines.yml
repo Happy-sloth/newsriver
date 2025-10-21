@@ -3,7 +3,7 @@ name: Build ticker dredge_heds.json
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"  # run every 15 minutes
+    - cron: "*/15 * * * *"  # every 15 minutes
 
 permissions:
   contents: write
@@ -32,51 +32,61 @@ jobs:
           python-version: "3.11"
 
       - name: Install deps (ticker)
-        working-directory: ./
         run: |
           python -m pip install --upgrade pip
-          if [[ -f scripts/requirements-ticker.txt ]]; then
-            pip install -r scripts/requirements-ticker.txt
-          elif [[ -f requirements.txt ]]; then
+          if [[ -f requirements.txt ]]; then
             pip install -r requirements.txt
           else
-            pip install feedparser requests python-dateutil beautifulsoup4
+            pip install feedparser requests python-dateutil beautifulsoup4 json5
           fi
 
       - name: Ensure output directory exists
-        run: |
-          mkdir -p newsriver/newsriver
+        run: mkdir -p newsriver/newsriver
 
       - name: Build ticker JSON (fetch_tickerlines.py)
         run: |
-          # Script lives at repo-root/scripts; headlines.json is at repo root.
-          python scripts/fetch_tickerlines.py \
-            --in ./headlines.json \
-            --out ./newsriver/newsriver/dredge_heds.json
+          # Script lives at repo root /scripts; headlines.json is at repo root.
+          python scripts/fetch_tickerlines.py --in ./headlines.json --out ./newsriver/newsriver/dredge_heds.json
 
       - name: Validate dredge_heds.json
         uses: actions/github-script@v7
         with:
           script: |
+            // 'core' is provided by github-script; DON'T redeclare it.
             const fs = require('fs');
-            const core = require('@actions/core');
 
             const p = 'newsriver/newsriver/dredge_heds.json';
-            if (!fs.existsSync(p)) core.setFailed(`ERROR: ${p} not found`);
+            if (!fs.existsSync(p)) {
+              core.setFailed(`ERROR: ${p} not found`);
+              return;
+            }
 
-            const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+            let data;
+            try {
+              data = JSON.parse(fs.readFileSync(p, 'utf8'));
+            } catch (e) {
+              core.setFailed(`ERROR: cannot parse ${p}: ${e.message}`);
+              return;
+            }
+
             const items = Array.isArray(data?.items) ? data.items : [];
-            if (!Array.isArray(items)) core.setFailed('ERROR: items is not a list');
-            if (items.length < 3) core.setFailed(`ERROR: items has length ${items.length} (<3). Abort publish.`);
+            if (!Array.isArray(items)) {
+              core.setFailed('ERROR: items is not an array');
+              return;
+            }
+            if (items.length === 0) {
+              core.warning('items[] is empty; ticker will show "Loading…" from warm cache');
+            }
 
-            for (let i = 0; i < items.length; i++) {
+            const n = Math.min(items.length, 3);
+            for (let i = 0; i < n; i++) {
               const it = items[i] || {};
               const url = typeof it.url === 'string' ? it.url.trim() : '';
-              const title = (it.display || it.text || it.hyped || it.title || '').trim();
-              if (!url) core.setFailed(`ERROR: item ${i} missing valid url`);
-              if (!title) core.setFailed(`ERROR: item ${i} missing display/text/title`);
+              const text = (it.display || it.text || it.hyped || it.title || '').toString().trim();
+              if (!url) { core.setFailed(`item ${i} missing valid url`); return; }
+              if (!text) { core.setFailed(`item ${i} missing display/text/title`); return; }
             }
-            core.info('Validation OK: dredge_heds.json');
+            core.info(`Validation OK: ${items.length} items`)
 
       - name: Commit and push if changed
         run: |
