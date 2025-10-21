@@ -2,46 +2,37 @@
 """
 fetch_tickerlines.py — build a hyperbolic-only ticker payload for the pill UI.
 
-- Reads  : ./headlines.json  (single source of truth; repo root)
+- Reads  : ./headlines.json                  (repo root)
 - Writes : ./newsriver/newsriver/dredge_heds.json  (front-end ticker reads this)
 
-Selection buckets (HARD filter by age first):
-  A) SPORTS (Toronto-heavy + MLB postseason signals)
-  B) CASUALTY (mass-incident near Toronto)
-Fallback:
-  C) Fresh LOCAL Toronto headlines (domain signal), newest-first
+Priority:
+  1) SPORTS (Toronto-heavy + MLB postseason)
+  2) CASUALTY (mass-incident within ~1200km)
+Backfill if needed (to always emit 3 items):
+  3) LOCAL Toronto-domain items (fresh)
+  4) FRESHEST general headlines (non-aggregators, non-crypto)
 
-We cap at 3 items, 1 per domain.
-
-Exit codes:
-  0 = success; 1 = input missing/invalid; 2 = not enough items (<3)
+We still keep: ≤24h hard age, ≤12h soft, 1-per-domain.
 """
 from __future__ import annotations
 
-import argparse
-import json
-import math
-import re
-import sys
+import argparse, json, math, re, sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-# ------------------- Config knobs -------------------
+# ------------------- Config -------------------
 
-# Fresher window than before
 SOFT_HOURS = 12
 HARD_HOURS = 24
-MAX_ITEMS  = 3
-PER_DOMAIN_CAP = 1  # prevent multiple from same outlet
+MAX_ITEMS = 3
+PER_DOMAIN_CAP = 1
 
-# Toronto ref
 TOR_LAT, TOR_LON = 43.6532, -79.3832
 CASUALTY_MAX_KM = 1200.0
 
-# Casualty cues
 CASUALTY_RE = re.compile(
     r"\b(dead|deaths?|killed|killing|fatal(ity|ities)?|mass\s+shooting|shooting|"
     r"explosion|blast|bomb(ing)?|missile|air[-\s]?strike|"
@@ -49,23 +40,19 @@ CASUALTY_RE = re.compile(
     re.I
 )
 
-# Obvious "Breaking" words (for flags only)
 BREAKING_HINTRE = re.compile(r"\b(breaking|developing|just in|alert)\b", re.I)
 
-# Treat these as GTA-local even without "Toronto" in the title
 TORONTO_LOCAL_DOMAINS = {
     "toronto.citynews.ca",
     "www.cp24.com",
-    "www.thestar.com",   # Toronto Star
+    "www.thestar.com",
     "www.blogto.com",
-    "www.cbc.ca",        # National but lots of GTA items
+    "www.cbc.ca",
     "globalnews.ca",
     "toronto.ctvnews.ca",
 }
 
-# Gazetteer (name -> (lat, lon))
 GAZETTEER: Dict[str, Tuple[float, float]] = {
-    # GTA / Ontario (subset sufficient for 1200km rule)
     "toronto": (43.6532, -79.3832), "mississauga": (43.5890, -79.6441),
     "brampton": (43.7315, -79.7624), "vaughan": (43.8372, -79.5083),
     "markham": (43.8561, -79.3370), "scarborough": (43.7731, -79.2578),
@@ -78,7 +65,6 @@ GAZETTEER: Dict[str, Tuple[float, float]] = {
     "st. catharines": (43.1594, -79.2469), "niagara falls": (43.0896, -79.0849),
     "windsor": (42.3149, -83.0364), "barrie": (44.3894, -79.6903),
     "kingston": (44.2312, -76.4860), "ottawa": (45.4215, -75.6972),
-    # US nearby
     "buffalo": (42.8864, -78.8784), "rochester": (43.1566, -77.6088),
     "detroit": (42.3314, -83.0458), "cleveland": (41.4993, -81.6944),
 }
@@ -97,10 +83,9 @@ def km_to_toronto(city: str) -> Optional[float]:
     lat, lon = GAZETTEER[c]
     return haversine_km(TOR_LAT, TOR_LON, lat, lon)
 
-# --- SPORTS detection (Toronto & MLB postseason emphasis) ---
+# --- SPORTS (Toronto emphasis) ---
 
 SPORTS_TEAMS: List[Tuple[re.Pattern, str]] = [
-    # Toronto pro teams
     (re.compile(r"\btoronto\s+blue\s*jays\b|\bblue\s*jays\b|\bjays\b", re.I), "toronto"),
     (re.compile(r"\btoronto\s+maple\s*leafs\b|\bmaple\s*leafs\b|\bleafs\b", re.I), "toronto"),
     (re.compile(r"\btoronto\s+raptors\b|\braptors\b", re.I), "toronto"),
@@ -108,13 +93,7 @@ SPORTS_TEAMS: List[Tuple[re.Pattern, str]] = [
     (re.compile(r"\btoronto\s+argos?\b|\bargos?\b", re.I), "toronto"),
 ]
 
-POSTSEASON_RE = re.compile(
-    r"\b(ALCS|NLCS|ALDS|NLDS|World Series|postseason|playoffs?)\b", re.I
-)
-BLUEJAYS_SCORE_RE = re.compile(
-    r"\b(blue\s*jays|jays)\b.*\b(\d+)\b.*\b(\d+)\b|\b(\d+)\b.*\b(\d+)\b.*\b(blue\s*jays|jays)\b",
-    re.I,
-)
+POSTSEASON_RE = re.compile(r"\b(ALCS|NLCS|ALDS|NLDS|World Series|postseason|playoffs?)\b", re.I)
 
 AGGREGATOR_RE = re.compile(r"news\.google|news\.yahoo|apple\.news|bing\.com/news|msn\.com/en-", re.I)
 CRYPTO_DOMAINS = re.compile(r"(coindesk|cointelegraph|theblock|decrypt|blockworks|coinmarketcap)", re.I)
@@ -132,12 +111,12 @@ class RawItem:
 @dataclass
 class Cand:
     item: RawItem
-    kind: str           # "SPORTS" | "CASUALTY" | "LOCAL"
-    city: Optional[str] # detected city
-    km: Optional[float] # distance to Toronto
+    kind: str           # "SPORTS" | "CASUALTY" | "LOCAL" | "FRESH"
+    city: Optional[str]
+    km: Optional[float]
     score: float
 
-# ------------------- Core helpers -------------------
+# ------------------- Helpers -------------------
 
 def _to_list(root: Any) -> List[Dict[str, Any]]:
     if isinstance(root, list): return root
@@ -228,12 +207,10 @@ def load_raw(path: Path) -> List[RawItem]:
 
 def detect_sports_city(title: str) -> Optional[str]:
     t = title.lower()
-    # direct Toronto team match
     for pat, city in SPORTS_TEAMS:
         if pat.search(t): return city
-    # postseason Blue Jays phrasing
     if "blue jays" in t or "jays" in t:
-        if POSTSEASON_RE.search(t) or BLUEJAYS_SCORE_RE.search(t):
+        if POSTSEASON_RE.search(t):
             return "toronto"
     return None
 
@@ -256,100 +233,96 @@ def is_crypto_like(title: str, domain: str) -> bool:
 
 # ------------------- Candidate building -------------------
 
-def build_candidates(rows: List[RawItem]) -> Tuple[List[Cand], List[Cand], List[Cand]]:
+def build_pools(rows: List[RawItem]) -> Tuple[List[Cand], List[Cand], List[Cand], List[Cand]]:
     sports: List[Cand] = []
     casualty: List[Cand] = []
     local: List[Cand] = []
+    fresh: List[Cand] = []
 
     for r in rows:
-        title_l = r.title.lower()
+        t = r.title.lower()
 
-        # SPORTS (Toronto emphasis, no crypto)
-        sport_city = detect_sports_city(title_l)
-        if sport_city and not is_crypto_like(title_l, r.domain):
+        sport_city = detect_sports_city(t)
+        if sport_city and not is_crypto_like(t, r.domain):
             km = km_to_toronto(sport_city)
-            sports.append(Cand(item=r, kind="SPORTS", city=sport_city, km=km, score=0.0))
+            sports.append(Cand(r, "SPORTS", sport_city, km, 0.0))
             continue
 
-        # CASUALTY (≤1200km)
-        if CASUALTY_RE.search(title_l):
-            city = detect_city_from_title(title_l)
+        if CASUALTY_RE.search(t):
+            city = detect_city_from_title(t)
             if not city and infer_toronto_from_domain(r.domain):
                 city = "toronto"
             if city:
                 km = km_to_toronto(city)
                 if km is not None and km <= CASUALTY_MAX_KM:
-                    casualty.append(Cand(item=r, kind="CASUALTY", city=city, km=km, score=0.0))
+                    casualty.append(Cand(r, "CASUALTY", city, km, 0.0))
             continue
 
-        # Fallback LOCAL pool (fresh GTA domains)
         if r.domain in TORONTO_LOCAL_DOMAINS:
-            local.append(Cand(item=r, kind="LOCAL", city="toronto", km=0.0, score=0.0))
+            local.append(Cand(r, "LOCAL", "toronto", 0.0, 0.0))
+        else:
+            # general fresh headlines (non-aggregators, non-crypto)
+            if not is_crypto_like(t, r.domain):
+                fresh.append(Cand(r, "FRESH", None, None, 0.0))
 
-    return sports, casualty, local
+    return sports, casualty, local, fresh
 
 # ------------------- Scoring & selection -------------------
 
-def _age_boost(ts: datetime) -> float:
+def age_boost(ts: datetime) -> float:
     age_h = _age_hours(ts)
-    recency = max(0.0, (HARD_HOURS - age_h))  # 0..24
+    recency = max(0.0, (HARD_HOURS - age_h))
     if age_h <= SOFT_HOURS:
         recency += 10.0
     return recency
 
-def score_candidate(c: Cand) -> float:
-    base = _age_boost(c.item.ts)
-
-    prox = 0.0
+def score(c: Cand) -> float:
+    s = age_boost(c.item.ts)
     if c.km is not None:
-        prox = max(0.0, 1000.0 - c.km) / 10.0  # 0..100-ish
-
-    tor_bonus = 0.0
+        s += max(0.0, 1000.0 - c.km) / 10.0
     if c.kind == "SPORTS" and (c.city or "").lower() == "toronto":
-        tor_bonus = 50.0  # bigger bias to Jays/Leafs/Raps
+        s += 50.0
+    return s
 
-    # Extra postseason bump for Jays
-    if c.kind == "SPORTS" and "blue jays" in c.item.title.lower() and POSTSEASON_RE.search(c.item.title):
-        tor_bonus += 25.0
-
-    return base + prox + tor_bonus
-
-def select_top(sports: List[Cand], casualty: List[Cand], local: List[Cand]) -> List[Cand]:
-    # Score all
-    for lst in (sports, casualty, local):
-        for c in lst:
-            c.score = score_candidate(c)
-
-    # Merge with priority order: SPORTS > CASUALTY > LOCAL
-    merged = sorted(sports, key=lambda x: (x.score, x.item.ts), reverse=True) + \
-             sorted(casualty, key=lambda x: (x.score, x.item.ts), reverse=True) + \
-             sorted(local, key=lambda x: (x.score, x.item.ts), reverse=True)
+def take_with_caps(cands: List[Cand], want: int, already: List[Cand]) -> List[Cand]:
+    seen_keys = { _dedupe_key(x.item.title, x.item.url) for x in already }
+    per_domain: Dict[str,int] = {}
+    for x in already:
+        d = x.item.domain or ""
+        per_domain[d] = per_domain.get(d, 0) + 1
 
     out: List[Cand] = []
-    seen_keys = set()
-    per_domain: Dict[str, int] = {}
-
-    for c in merged:
+    for c in sorted(cands, key=lambda x: (x.score, x.item.ts), reverse=True):
         key = _dedupe_key(c.item.title, c.item.url)
-        if key in seen_keys:
-            continue
-        dom = c.item.domain or ""
-        if PER_DOMAIN_CAP > 0 and per_domain.get(dom, 0) >= PER_DOMAIN_CAP:
-            continue
-
-        seen_keys.add(key)
-        per_domain[dom] = per_domain.get(dom, 0) + 1
+        if key in seen_keys: continue
+        d = c.item.domain or ""
+        if PER_DOMAIN_CAP and per_domain.get(d, 0) >= PER_DOMAIN_CAP: continue
         out.append(c)
-        if len(out) >= MAX_ITEMS:
-            break
+        seen_keys.add(key)
+        per_domain[d] = per_domain.get(d, 0) + 1
+        if len(out) >= want: break
     return out
+
+def select_top(sports: List[Cand], casualty: List[Cand], local: List[Cand], fresh: List[Cand]) -> List[Cand]:
+    for bag in (sports, casualty, local, fresh):
+        for c in bag: c.score = score(c)
+
+    picked: List[Cand] = []
+    picked += take_with_caps(sports, MAX_ITEMS - len(picked), picked)
+    if len(picked) < MAX_ITEMS:
+        picked += take_with_caps(casualty, MAX_ITEMS - len(picked), picked)
+    if len(picked) < MAX_ITEMS:
+        picked += take_with_caps(local, MAX_ITEMS - len(picked), picked)
+    if len(picked) < MAX_ITEMS:
+        picked += take_with_caps(fresh, MAX_ITEMS - len(picked), picked)
+
+    return picked[:MAX_ITEMS]
 
 # ------------------- Wire -------------------
 
-def to_ticker_wire(picked: List[Cand]) -> Dict[str, Any]:
+def to_wire(picked: List[Cand]) -> Dict[str, Any]:
     def iso(dt: datetime) -> str:
         return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
     items = []
     for c in picked:
         flags = {
@@ -360,7 +333,7 @@ def to_ticker_wire(picked: List[Cand]) -> Dict[str, Any]:
         items.append({
             "text": c.item.title,
             "display": c.item.title,
-            "url":  c.item.url,
+            "url": c.item.url,
             "flags": flags
         })
     return {"items": items, "generated_utc": iso(datetime.now(timezone.utc))}
@@ -368,7 +341,7 @@ def to_ticker_wire(picked: List[Cand]) -> Dict[str, Any]:
 # ------------------- CLI -------------------
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Build hyperbolic-only 3-item ticker JSON for pill UI.")
+    ap = argparse.ArgumentParser(description="Build 3-item ticker JSON")
     ap.add_argument("--in",  dest="inp", default="./headlines.json", help="input headlines JSON (repo root)")
     ap.add_argument("--out", dest="out", default="./newsriver/newsriver/dredge_heds.json",
                     help="output ticker JSON (front-end reads this)")
@@ -376,17 +349,20 @@ def main() -> int:
 
     rows = load_raw(Path(args.inp))
     if not rows:
-        print("[fetch_tickerlines] ERROR: no usable input rows from headlines.json", file=sys.stderr)
+        print("[fetch_tickerlines] ERROR: no usable input rows", file=sys.stderr)
         return 1
 
-    sports, casualty, local = build_candidates(rows)
-    picked = select_top(sports, casualty, local)
+    sports, casualty, local, fresh = build_pools(rows)
+    picked = select_top(sports, casualty, local, fresh)
 
-    if len(picked) < 3:
-        print(f"[fetch_tickerlines] ERROR: only {len(picked)} items selected (<3). Abort.", file=sys.stderr)
-        return 2
-
-    wire = to_ticker_wire(picked)
+    # ALWAYS emit 3 by design now (if we couldn’t, emit what we have but with exit 0)
+    if not picked:
+        print("[fetch_tickerlines] WARN: no candidates; emitting Loading placeholders", file=sys.stderr)
+        wire = {"items":[{"text":"Loading…","display":"Loading…","url":"#","flags":{}}]*3,"generated_utc":datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+    else:
+        wire = to_wire(picked)
+        if len(picked) < MAX_ITEMS:
+            print(f"[fetch_tickerlines] WARN: only {len(picked)} items; backfilled from local/fresh pools", file=sys.stderr)
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
