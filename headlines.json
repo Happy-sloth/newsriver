@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-22T07:49:54.180Z",
+  "generated_utc": "2025-10-22T07:58:28.066Z",
   "count": 69,
   "items": [
+    {
+      "title": "Siegelman Stable Drop Another Exclusive New York Knicks",
+      "url": "https://hypebeast.com/2025/10/siegelman-stable-new-york-knicks-madison-square-garden-return-exclusive-collaboration-release-info",
+      "source": "Hypebeast",
+      "published_utc": "2025-10-22T07:50:32.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "More than 40 dead after multi-vehicle crash in Uganda",
       "url": "https://www.bbc.com/news/articles/cgql9lwddw5o?at_campaign=rss&at_medium=RSS",
@@ -15,6 +28,19 @@
           "body_count≥4"
         ],
         "style": "breaker"
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Video: Peru declares 30-day state of emergency in Lima amid rising crime",
+      "url": "https://www.aljazeera.com/video/newsfeed/2025/10/22/video-peru-declares-30-day-state-of-emergency-in-lima-amid-rising-crime?traffic_source=rss",
+      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
+      "published_utc": "2025-10-22T07:42:55.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
       },
       "category": "General",
       "region": "World"
@@ -908,42 +934,13 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Netflix Strikes Unprecedented Dual-Deal With Mattel and Hasbro for 'KPop Demon Hunters'",
-      "url": "https://hypebeast.com/2025/10/netflix-mattel-hasbro-kpop-demon-hunters-dual-deal-co-master-toys-licensee-news",
-      "source": "Hypebeast",
-      "published_utc": "2025-10-22T04:21:39.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "NFL’s investigation into Brian Daboll’s fiery medical tent incident remains ‘ongoing’",
-      "url": "https://nypost.com/2025/10/22/sports/nfls-investigation-into-giants-medical-tent-incident-ongoing",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-10-22T04:17:30.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.9"
-        ],
-        "style": "glitch"
-      },
-      "category": "Sports",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 825,
-    "dedup_pass1": 809,
+    "collected": 824,
+    "dedup_pass1": 808,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
@@ -969,56 +966,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.402,
+        "sec": 1.018,
         "kept": 8
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.679,
+        "host": "www.bls.gov",
+        "sec": 0.737,
         "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.581,
+        "sec": 0.696,
         "kept": 10
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.54,
+        "sec": 0.675,
         "kept": 14
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.362,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.351,
-        "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.224,
+        "host": "www.blogto.com",
+        "sec": 0.64,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.221,
+        "sec": 0.62,
+        "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.315,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.29,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.198,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.198,
+        "sec": 0.159,
         "kept": 0
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.142,
-        "kept": 14
       }
     ],
-    "elapsed_sec": 313.26,
+    "elapsed_sec": 323.31,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1066,10 +1063,10 @@
       "hype_jobs": 0,
       "hype_sports": 0,
       "hype_ceasefire": 0,
-      "reject_hits": 2
+      "reject_hits": 3
     },
     "sanity_stats": {
-      "link_verification_fail": 20,
+      "link_verification_fail": 23,
       "soft_404_drops": 43,
       "max_age_drops": 0,
       "min_age_drops": 8,
