@@ -6,25 +6,25 @@
           "gamePk": "401809234",
           "gameDate": "2025-10-22T23:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "CLE"
               },
-              "score": 13
+              "score": 23
             },
             "home": {
               "team": {
                 "abbreviation": "NY"
               },
-              "score": 18
+              "score": 33
             }
           }
         },
@@ -44,13 +44,13 @@
               "team": {
                 "abbreviation": "BKN"
               },
-              "score": 21
+              "score": 29
             },
             "home": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 20
+              "score": 34
             }
           }
         },
@@ -70,13 +70,13 @@
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 23
+              "score": 34
             },
             "home": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 19
+              "score": 23
             }
           }
         },
