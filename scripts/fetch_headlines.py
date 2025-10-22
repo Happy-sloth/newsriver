@@ -5,6 +5,10 @@
 # 24–69h freshness window (set MPB_MAX_AGE_HOURS in env), market sanity checks,
 # and an exact 33-item guarantee when REQUIRE_EXACT_COUNT>0.
 # PLUS: Safety-net fallback to guarantee at least one working headline.
+# NEW:
+# - Run-length limiter: no more than 2 in a row by domain and by cluster/topic
+# - Regional scoring supports Toronto city-match bonus from weights.json5
+# - Optional "Polling/Projection" category via section headers
 
 from __future__ import annotations
 
@@ -178,6 +182,12 @@ RE_MLB_TEAMS = re.compile(
 RE_MLB_FINAL_WORD = re.compile(r"\b(final|finals|post\s*game|postgame|recap)\b", re.I)
 RE_SCORELINE = re.compile(r"\b\d{1,2}\s*[–-]\s*\d{1,2}\b")
 
+# --- Toronto city cues (for regional.city_match_toronto bonus) ---
+RE_TORONTO_CUES = re.compile(
+    r"\b(toronto|gta|scarborough|etobicoke|north\s+york|mississauga|brampton|peel\s+region|durham\s+region|york\s+region|ttc|rogers\s+centre|scotiabank\s+arena)\b",
+    re.I
+)
+
 WEAK_TO_STRONG_POLITICS = [
     (re.compile(r"\bcriticiz(?:e|es|ed|ing)\b", re.I), "slams"),
     (re.compile(r"\bcondemn(?:s|ed|ing)?\b", re.I), "lashes"),
@@ -271,6 +281,7 @@ def infer_tag(section_header: str) -> Tag:
     if "COURTS" in s or "CRIME" in s or "PUBLIC SAFETY" in s:
                                              return Tag("Public Safety", "Canada")
     if "SPORTS" in s:                        return Tag("Sports", "Canada")
+    if "POLL" in s or "ELECTION" in s:       return Tag("Polling/Projection", "World")  # new optional category
     return Tag("General", "World")
 
 def canonicalize_url(url: str) -> str:
@@ -296,6 +307,10 @@ def canonical_id(url: str) -> str:
 
 def host_of(url: str) -> str:
     try: return (urlparse(url).netloc or "").lower()
+    except Exception: return ""
+
+def path_of(url: str) -> str:
+    try: return (urlparse(url).path or "")
     except Exception: return ""
 
 def strip_source_tail(title: str) -> str:
@@ -384,7 +399,6 @@ def _cache_bust_url(url: str) -> str:
         new_q = urlencode(q, doseq=True)
         return urlunsplit((parts.scheme, parts.netloc, parts.path, new_q, parts.fragment))
     except Exception:
-        # On any parsing issue, append a trivial `?v=...` (or `&v=...`)
         sep = "&" if ("?" in (url or "")) else "?"
         return f"{url}{sep}v={int(time.time() // 60)}"
 
@@ -1249,7 +1263,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
     ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
     ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
-    ps_per_inj   = float(W(weights, "public_safety.per_injury_points", 0.02))
+    ps_per_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))  # intentionally reads max_injury for cap
     ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
     ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
     ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
@@ -1281,6 +1295,11 @@ def build(feeds_file: str, out_path: str) -> dict:
     sp_focus_team  = float(W(weights, "sports.focus_team_points", 0.55))
     sp_final_story = float(W(weights, "sports.final_story_points", 0.75))
     sp_final_score = float(W(weights, "sports.final_with_score_points", 0.45))
+
+    # Regional/Toronto weights
+    regional_country_pts = float(W(weights, "regional.weights.country_match", 1.2))
+    regional_city_pts    = float(W(weights, "regional.weights.city_match_toronto", 0.0))  # new
+    regional_max_bonus   = float(W(weights, "regional.max_bonus", 2.4))
 
     now_ts_scoring = time.time()
 
@@ -1356,12 +1375,16 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["single_stock_trigger"] = stk_pts; total += stk_pts; score_dbg["market_single_hits"] += 1
         it["_single_move_abs"] = single_move
 
+        # Regional bonuses (country + Toronto city cues), capped by regional.max_bonus
         reg_bonus = 0.0
         if it.get("region") == "Canada":
-            reg_bonus += float(W(weights, "regional.weights.country_match", 1.2))
+            reg_bonus += regional_country_pts
+        # Toronto city cues: headline OR URL path/host matches
+        if regional_city_pts > 0.0:
+            if RE_TORONTO_CUES.search(title) or "toronto" in host or "/toronto" in path_of(url).lower():
+                reg_bonus += regional_city_pts
         if reg_bonus:
-            max_b = float(W(weights, "regional.max_bonus", 2.4))
-            reg_bonus = min(reg_bonus, max_b)
+            reg_bonus = min(reg_bonus, regional_max_bonus)
             comps["regional"] = round(reg_bonus, 4); total += reg_bonus
 
         ah = it.get("age_hint_hours", None)
@@ -1534,8 +1557,44 @@ def build(feeds_file: str, out_path: str) -> dict:
         else:
             debug_counts["backfill_steps_used"] = REQUIRE_EXACT_COUNT
 
-    # Final trim/order
+    # ---- Run-length limiter: prevent >2 in a row by domain and by cluster/topic ----
+    def enforce_run_length(arr: list[dict], key_fn, max_run: int = 2) -> list[dict]:
+        out = arr[:]
+        i = 0
+        last_key = None
+        run = 0
+        n = len(out)
+        while i < n:
+            k = key_fn(out[i])
+            if k == last_key:
+                run += 1
+            else:
+                last_key = k
+                run = 1
+            if run > max_run:
+                # find the nearest later item that breaks the run
+                j = i + 1
+                swapped = False
+                while j < n:
+                    if key_fn(out[j]) != last_key:
+                        out[i], out[j] = out[j], out[i]
+                        swapped = True
+                        run = 1
+                        last_key = key_fn(out[i])
+                        break
+                    j += 1
+                if not swapped:
+                    # nothing to swap; break out (rare)
+                    break
+            i += 1
+        return out
+
+    # Apply limiter by domain, then by cluster_id (topic)
     verified.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
+    verified = enforce_run_length(verified, key_fn=lambda it: host_of(it.get("url","")), max_run=2)
+    verified = enforce_run_length(verified, key_fn=lambda it: it.get("cluster_id",""), max_run=2)
+
+    # Final trim/order
     verified = verified[:REQUIRE_EXACT_COUNT or 69]
 
     elapsed_total = time.time() - start
@@ -1562,7 +1621,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v2.3.1-no-cache-1",  # bumped for cache-buster & no-cache headers
+            "version": "fetch-v2.4.0-runlen2-toronto",  # bumped for run-length limiter & Toronto city bonus
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
