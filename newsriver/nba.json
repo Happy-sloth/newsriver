@@ -6,6 +6,32 @@
           "gamePk": "401809234",
           "gameDate": "2025-10-22T23:00Z",
           "status": {
+            "detailedState": "Live",
+            "abstractGameState": "Live"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 27
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NY"
+              },
+              "score": 40
+            }
+          }
+        },
+        {
+          "gamePk": "401809933",
+          "gameDate": "2025-10-22T23:00Z",
+          "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
           },
@@ -16,41 +42,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 23
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NY"
-              },
-              "score": 33
-            }
-          }
-        },
-        {
-          "gamePk": "401809933",
-          "gameDate": "2025-10-22T23:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "BKN"
               },
-              "score": 29
+              "score": 32
             },
             "home": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 34
+              "score": 38
             }
           }
         },
@@ -62,21 +62,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 34
+              "score": 41
             },
             "home": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 23
+              "score": 40
             }
           }
         },
@@ -84,25 +84,25 @@
           "gamePk": "401809935",
           "gameDate": "2025-10-22T23:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "TOR"
               },
-              "score": 0
+              "score": 7
             },
             "home": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 0
+              "score": 4
             }
           }
         },
@@ -110,25 +110,25 @@
           "gamePk": "401809936",
           "gameDate": "2025-10-22T23:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "PHI"
               },
-              "score": 0
+              "score": 10
             },
             "home": {
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 0
+              "score": 11
             }
           }
         },
