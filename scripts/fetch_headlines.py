@@ -77,7 +77,7 @@ DEFAULT_FALLBACK_FEEDS = [
     "https://www.reuters.com/world/rss",
     "https://www.cbc.ca/cmlink/rss-topstories",
     "https://www.ctvnews.ca/rss/ctvnews-ca-top-stories-public-rss-1.822009",
-    "https://globalnews.ca/feed/"
+    "https://globalnews.ca/feed/",
     "https://www.cp24.com"
 ]
 FALLBACK_FEEDS = [
@@ -764,6 +764,11 @@ def is_same_day(a: datetime | None, b: datetime | None) -> bool:
     if not a or not b: return False
     return a.date() == b.date()
 
+def host_endswith(host: str, domain_set: set[str]) -> bool:
+    """True if host matches any domain in set by suffix (handles www.*)."""
+    host = (host or "").lower()
+    return any(host.endswith(d) for d in domain_set)
+
 def is_market_headline_sane(title: str, url: str, published_iso: str, session: requests.Session, debug_counts: dict) -> bool:
     """Block stale milestone/record claims unless corroborated."""
     t = title.lower()
@@ -1095,7 +1100,7 @@ def build(feeds_file: str, out_path: str) -> dict:
                         continue
                     h = host_of(it["url"])
                     cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
-                    if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
+                    if in_evening and host_endswith(h, SPORTS_PRIOR_DOMAINS) and cap < 10: cap = 10
                     if per_host_counts.get(h, 0) >= cap:
                         if h and h not in caps_hit: caps_hit.append(h)
                         continue
@@ -1116,7 +1121,7 @@ def build(feeds_file: str, out_path: str) -> dict:
                             continue
                         h = host_of(it["url"])
                         cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
-                        if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
+                        if in_evening and host_endswith(h, SPORTS_PRIOR_DOMAINS) and cap < 10: cap = 10
                         if per_host_counts.get(h, 0) >= cap:
                             if h and h not in caps_hit: caps_hit.append(h)
                             continue
@@ -1148,7 +1153,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             can_url = canonicalize_url(link)
             h = host_of(can_url or link)
             cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
-            if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
+            if in_evening and host_endswith(h, SPORTS_PRIOR_DOMAINS) and cap < 10: cap = 10
             if per_host_counts.get(h, 0) >= cap:
                 if h and h not in caps_hit: caps_hit.append(h)
                 continue
@@ -1208,7 +1213,8 @@ def build(feeds_file: str, out_path: str) -> dict:
         b_aggr = looks_aggregator(b.get("source",""), b.get("url",""))
         if a_aggr != b_aggr: return not a_aggr
         ha, hb = host_of(a["url"]), host_of(b["url"])
-        if (ha in PREFERRED_DOMAINS) != (hb in PREFERRED_DOMAINS): return ha in PREFERRED_DOMAINS
+        if (host_endswith(ha, PREFERRED_DOMAINS)) != (host_endswith(hb, PREFERRED_DOMAINS)): 
+            return host_endswith(ha, PREFERRED_DOMAINS)
         return len(a["url"]) < len(b["url"])
 
     def _is_jays_game_title(it: dict) -> bool:
@@ -1330,7 +1336,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["aggregator_penalty"] = agg_pen; total += agg_pen; score_dbg["agg_penalties"] += 1
         if is_press_wire(url):
             comps["press_wire_penalty"] = wire_pen; total += wire_pen; score_dbg["press_penalties"] += 1
-        if host in PREFERRED_DOMAINS:
+        if host_endswith(host, PREFERRED_DOMAINS):
             comps["preferred_domain"] = pref_bonus; total += pref_bonus; score_dbg["preferred_bonus"] += 1
 
         deaths, injured, has_fatal_cue = parse_casualties(title)
@@ -1621,7 +1627,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v2.4.0-runlen2-toronto",  # bumped for run-length limiter & Toronto city bonus
+            "version": "fetch-v2.4.1-runlen2-toronto-prefendsfix",  # bumped for comma bug + preferred-endswith
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
