@@ -78,6 +78,7 @@ DEFAULT_FALLBACK_FEEDS = [
     "https://www.cbc.ca/cmlink/rss-topstories",
     "https://www.ctvnews.ca/rss/ctvnews-ca-top-stories-public-rss-1.822009",
     "https://globalnews.ca/feed/"
+    "https://www.cp24.com"
 ]
 FALLBACK_FEEDS = [
     u.strip() for u in os.getenv("MPB_FALLBACK_FEEDS", ",".join(DEFAULT_FALLBACK_FEEDS)).split(",")
@@ -113,7 +114,6 @@ PREFERRED_DOMAINS = {
     "bankofcanada.ca","federalreserve.gov","bls.gov","statcan.gc.ca",
     "sec.gov","cftc.gov","marketwatch.com",
     "coindesk.com","cointelegraph.com",
-    "fivethirtyeight.com",
     "cultmtl.com",
 }
 
