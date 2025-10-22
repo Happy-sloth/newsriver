@@ -1,6 +1,6 @@
 {
   // weights.json5 — server-side scoring knobs
-  // Version: v0.7 (CA bias + <24h dominance + Jays/finals + stricter anti-fluff)
+  // Version: v0.8 (CA/Toronto bias ↑, Jays playoffs ↑, aggregator clamp ↑, anti-fluff ↑, effects tighten)
   timezone: "America/Toronto",
 
   // -------- Recency --------
@@ -18,14 +18,17 @@
   },
 
   // -------- Regional (Canada-first) --------
+  // Added explicit Toronto city boost (fold into max_bonus).
   regional: {
     weights: {
-      country_match: 1.6
+      country_match: 1.6,
+      city_match_toronto: 0.8  // apply when headline/url/body clearly match Toronto
     },
-    max_bonus: 2.8
+    max_bonus: 3.5
   },
 
   // -------- Category nudges (must match infer_tag outputs) --------
+  // TEMP: "General" demoted to cool off untagged polling/horse-race items until infer_tag emits Polling/Projection.
   categories: {
     "Public Safety": 1.0,
     "Weather": 0.6,
@@ -37,25 +40,28 @@
     "Tech": 0.20,
     "Culture": 0.0,
     "Youth": -0.15,
-    "General": 0.0
+    "Polling/Projection": -0.6,   // new: for horse-race/odds pieces (enable once infer_tag supports it)
+    "General": -0.2               // TEMP: revert to 0.0 after Polling/Projection tagging lands
     // Note: your infer_tag does not emit "Sports"; sports scoring comes from the 'sports' block below.
   },
 
   // -------- Source hygiene --------
+  // Stronger clamp on aggregators/press wires; preferred domains punch harder.
   sources: {
-    aggregator_penalty: -0.7,
-    press_wire_penalty: -0.5,
-    preferred_domains_bonus: 0.35
+    aggregator_penalty: -1.2,
+    press_wire_penalty: -0.9,
+    preferred_domains_bonus: 0.8
   },
 
   // -------- Public-safety severity --------
+  // Trim keyword gaming; keep fatality/injury weight intact.
   public_safety: {
     has_fatality_points: 1.6,
     per_death_points: 0.18,
     max_death_points: 3.0,
     per_injured_points: 0.05,
     max_injury_points: 1.0,
-    violent_keywords_bonus: 0.35,
+    violent_keywords_bonus: 0.25,
     violent_keywords: [
       "shooting","shot","stabbing","stabbed","homicide","murder",
       "manslaughter","fatal crash","deadly crash","collision","mass casualty",
@@ -66,31 +72,34 @@
   },
 
   // -------- Markets (keep signal, mute noise) --------
+  // Emphasize true moves; consider limiting single_stock to CAD/TSX in code later.
   markets: {
-    btc_abs_move_threshold_pct: 6.0,
+    btc_abs_move_threshold_pct: 5.0,
     btc_points: 1.6,
     index_abs_move_threshold_pct: 0.9,
     index_points: 0.9,
     nikkei_abs_move_threshold_pct: 1.0,
     nikkei_points: 0.7,
-    single_stock_abs_move_threshold_pct: 12.0,
-    single_stock_points: 1.2
+    single_stock_abs_move_threshold_pct: 10.0,
+    single_stock_points: 1.4
   },
 
   // -------- Sports (Jays + finals) --------
+  // Make playoff nights decisive without letting fluff flood.
   sports: {
     team_match_points:        1.30,
     player_match_points:      0.55,
     result_win_points:        0.65,
     result_loss_points:       0.35,
-    evening_window_points:    0.85,
-    playoff_mode_points:      0.60,
-    focus_team_points:        0.90,
+    evening_window_points:    1.10,
+    playoff_mode_points:      1.00,
+    focus_team_points:        1.20,
     final_story_points:       1.20,
     final_with_score_points:  0.60
   },
 
   // -------- Display effects thresholds --------
+  // Slightly raise glitch bar to reduce hype on marginal items.
   effects: {
     lightsaber_min_score: 2.6,
     lightsaber_also_if: {
@@ -98,6 +107,6 @@
       btc_abs_move_ge_pct: 8.0,
       single_stock_abs_move_ge_pct: 15.0
     },
-    glitch_min_score: 1.9
+    glitch_min_score: 2.1
   }
 }
