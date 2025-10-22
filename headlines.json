@@ -1,7 +1,53 @@
 {
-  "generated_utc": "2025-10-22T10:46:51.710Z",
+  "generated_utc": "2025-10-22T10:58:18.388Z",
   "count": 69,
   "items": [
+    {
+      "title": "Trump is handing Democrats a new 'political gift' that Republicans should fear: analyst",
+      "url": "https://www.rawstory.com/trump-doj-2674221587",
+      "source": "Raw Story",
+      "published_utc": "2025-10-22T10:52:33.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "The best moments from the Blue Jays’ postseason run (so far)",
+      "url": "https://toronto.citynews.ca/2025/10/22/toronto-blue-jays-postseason-best-moments-alcs-alds-scherzer-guerrero-springer",
+      "source": "CityNews Toronto",
+      "published_utc": "2025-10-22T10:50:09.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Local",
+      "region": "Canada"
+    },
+    {
+      "title": "More than 40 dead after multi-vehicle crash in Uganda",
+      "url": "https://www.bbc.com/news/articles/cgql9lwddw5o?at_campaign=rss&at_medium=RSS",
+      "source": "BBC News",
+      "published_utc": "2025-10-22T10:42:44.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6",
+          "body_count≥4"
+        ],
+        "style": "breaker"
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Architectural Influences Define OAO’s FW25 Footwear Releases",
       "url": "https://hypebeast.com/2025/10/oao-les-arcs-boots-low-the-curve-2-lookbook-release-info",
@@ -68,19 +114,6 @@
         "reasons": []
       },
       "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Who are the 95 Palestinian healthcare workers held captive by Israel?",
-      "url": "https://www.aljazeera.com/news/2025/10/22/who-are-the-95-palestinian-healthcare-workers-held-captive-by-israel?traffic_source=rss",
-      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
-      "published_utc": "2025-10-22T10:31:43.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
       "region": "World"
     },
     {
@@ -419,23 +452,6 @@
         "lightsaber": false,
         "glitch": false,
         "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "More than 40 dead after multi-vehicle crash in Uganda",
-      "url": "https://www.bbc.com/news/articles/cgql9lwddw5o?at_campaign=rss&at_medium=RSS",
-      "source": "BBC News",
-      "published_utc": "2025-10-22T09:58:26.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6",
-          "body_count≥4"
-        ],
-        "style": "breaker"
       },
       "category": "General",
       "region": "World"
@@ -922,33 +938,19 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "New Balance Perfected the Dad Shoe. The Dad Sweater Is Next",
-      "url": "https://www.highsnobiety.com/p/new-balance-batoner-sweaters",
-      "source": "Highsnobiety",
-      "published_utc": "2025-10-22T08:23:06.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 122,
     "cap_items": 320,
-    "collected": 813,
-    "dedup_pass1": 797,
+    "collected": 823,
+    "dedup_pass1": 807,
     "dedup_final": 320,
     "slow_domains": [
-      "reason.com"
+      "www.stereogum.com"
     ],
     "timeouts": [
       "news.communitech.ca",
-      "www.canadianmortgagetrends.com",
       "www.cbc.ca"
     ],
     "errors": [
@@ -970,56 +972,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.62,
+        "sec": 1.769,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.605,
+        "sec": 0.825,
         "kept": 10
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.484,
-        "kept": 14
-      },
-      {
-        "host": "www.blogto.com",
-        "sec": 0.362,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.264,
+        "sec": 0.539,
         "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.264,
+        "sec": 0.453,
         "kept": 14
       },
       {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.259,
+        "host": "www.blogto.com",
+        "sec": 0.336,
         "kept": 0
       },
       {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.309,
+        "kept": 14
+      },
+      {
         "host": "www.bls.gov",
-        "sec": 0.17,
+        "sec": 0.257,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.198,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.127,
+        "sec": 0.109,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.112,
+        "sec": 0.091,
         "kept": 0
       }
     ],
-    "elapsed_sec": 275.86,
+    "elapsed_sec": 290.79,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1052,7 +1054,7 @@
       "press_penalties": 0,
       "preferred_bonus": 48,
       "substack_tagged": 0,
-      "sports_team_hits": 10,
+      "sports_team_hits": 11,
       "sports_player_hits": 2,
       "sports_result_win_hits": 15,
       "sports_result_loss_hits": 1,
@@ -1070,7 +1072,7 @@
       "reject_hits": 4
     },
     "sanity_stats": {
-      "link_verification_fail": 26,
+      "link_verification_fail": 25,
       "soft_404_drops": 40,
       "max_age_drops": 0,
       "min_age_drops": 8,
