@@ -103,7 +103,7 @@
   effects: {
     lightsaber_min_score: 2.6,
     lightsaber_also_if: {
-      body_count_ge: 4,
+      body_count_ge: 3,
       btc_abs_move_ge_pct: 8.0,
       single_stock_abs_move_ge_pct: 15.0
     },
