@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # scripts/fetch_nba.py
 #
-# Build newsriver/nba.json in the relay shape your flipboard expects.
+# Build nba.json in the relay shape your flipboard expects (written to repo root).
 # - Source: ESPN NBA scoreboard (yesterday + today merged)
 # - Stdlib only
 # - Robust state mapping (Preview/Live/Final)
@@ -24,7 +24,8 @@ try:
 except Exception:
     ZoneInfo = None  # type: ignore
 
-OUT = Path("newsriver/nba.json")
+# IMPORTANT: Pages is configured for main / (root), so write to the repo root.
+OUT = Path("nba.json")
 
 # ESPN NBA scoreboard
 # Today: https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard
