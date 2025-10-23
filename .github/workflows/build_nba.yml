@@ -12,11 +12,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout (force correct branch + full history)
         uses: actions/checkout@v4
         with:
-          # Keep credentials so git push works
           persist-credentials: true
+          ref: main           # <<< CHANGE THIS if your amended fetch_nba.py lives on another branch
+          fetch-depth: 0
+
+      - name: Show current commit
+        run: git log -1 --oneline
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -28,8 +32,16 @@ jobs:
           python -m pip install -U pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Show fetch_nba.py (first 120 lines)
+        run: sed -n '1,120p' scripts/fetch_nba.py
+
       - name: Fetch NBA
         run: python scripts/fetch_nba.py
+
+      - name: Show nba.json (debug)
+        run: |
+          echo "---- nba.json ----"
+          head -200 newsriver/nba.json || true
 
       - name: Commit & push if changed
         run: |
