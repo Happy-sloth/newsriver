@@ -5,10 +5,12 @@
 # 24–69h freshness window (set MPB_MAX_AGE_HOURS in env), market sanity checks,
 # and an exact 33-item guarantee when REQUIRE_EXACT_COUNT>0.
 # PLUS: Safety-net fallback to guarantee at least one working headline.
+#
 # NEW:
 # - Run-length limiter: no more than 2 in a row by domain and by cluster/topic
 # - Regional scoring supports Toronto city-match bonus from weights.json5
 # - Optional "Polling/Projection" category via section headers
+# - Toronto-first minimum (env MPB_MIN_TORONTO, default 9) with Canadian city backfill
 
 from __future__ import annotations
 
@@ -70,6 +72,14 @@ BLOCK_AGGREGATORS           = os.getenv("MPB_BLOCK_AGGREGATORS", "1") == "1"
 MIN_AGE_SEC                 = int(os.getenv("MPB_MIN_AGE_SEC", "60"))        # ≥ 1 minute old
 MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))    # ≤ X hours old; set 24 in env to hard-cap
 REQUIRE_EXACT_COUNT         = int(os.getenv("MPB_REQUIRE_EXACT_COUNT", "33"))
+
+# --- Toronto-first minimum + city backfill ---
+MPB_MIN_TORONTO             = int(os.getenv("MPB_MIN_TORONTO", "9"))
+CITY_BACKFILL_ORDER = [
+    # Used only if Toronto fails to reach MPB_MIN_TORONTO; preserves this priority.
+    "Vancouver", "Montreal", "Halifax", "Winnipeg",
+    "Calgary", "Edmonton", "Ottawa", "Quebec City", "Hamilton"
+]
 
 # ---------- SAFETY-NET FALLBACK ----------
 DEFAULT_FALLBACK_FEEDS = [
@@ -371,7 +381,7 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
 
 def _new_session() -> requests.Session:
     s = requests.Session()
-    # --- ADDED: default no-cache headers to defeat stale proxies/CDNs ---
+    # no-cache headers to reduce stale RSS from intermediaries/CDNs
     s.headers.update({
         "User-Agent": USER_AGENT,
         "Accept": ACCEPT_HEADER,
@@ -389,12 +399,10 @@ def _looks_like_xml(content: bytes, ctype: str) -> bool:
     head = (content[:64] or b"").lstrip()
     return head.startswith(b"<?xml") or b"<rss" in head or b"<feed" in head
 
-# --- ADDED: tiny helper to add a cache-buster to any URL ---
 def _cache_bust_url(url: str) -> str:
     try:
         parts = urlsplit(url)
         q = parse_qs(parts.query, keep_blank_values=True)
-        # 1-minute resolution is enough; forces intermediaries to revalidate
         q["_mpb"] = [str(int(time.time() // 60))]
         new_q = urlencode(q, doseq=True)
         return urlunsplit((parts.scheme, parts.netloc, parts.path, new_q, parts.fragment))
@@ -404,7 +412,6 @@ def _cache_bust_url(url: str) -> str:
 
 def http_get(session: requests.Session, url: str) -> bytes | None:
     try:
-        # --- ADDED: cache-buster + no-cache headers even on the first probe ---
         bust = _cache_bust_url(url)
         headers_primary = {
             "Cache-Control": "no-cache, no-store, max-age=0",
@@ -417,7 +424,6 @@ def http_get(session: requests.Session, url: str) -> bytes | None:
         if getattr(resp, "ok", False) and resp.content:
             ctype = resp.headers.get("Content-Type", "").lower()
             if _looks_like_xml(resp.content, ctype): return resp.content
-        # fall back (HTML scrapers) — keep your alt-UA, but also bust caches
         alt_headers = {
             "User-Agent": ALT_USER_AGENT,
             "Accept": ACCEPT_HEADER,
@@ -720,7 +726,6 @@ def scrape_cp24(html: bytes, spec: FeedSpec, playoffs_on: bool) -> list[dict]:
         items.append(it)
         if len(items) >= MAX_PER_FEED: break
     return items
-
 # ---------- Link verification & market sanity ----------
 def is_homepage_like(url: str) -> bool:
     try:
@@ -736,7 +741,7 @@ def html_meta_times(html_bytes: bytes) -> tuple[datetime | None, datetime | None
     if not BeautifulSoup:
         return (None, None)
     try:
-        soup = BeautifulSoup(html_bytes, "htmlparser") if False else BeautifulSoup(html_bytes, "html.parser")
+        soup = BeautifulSoup(html_bytes, "html.parser")
         pub = None; upd = None
         for tag in soup.find_all("meta"):
             n = (tag.get("name") or tag.get("property") or "").lower()
@@ -764,13 +769,8 @@ def is_same_day(a: datetime | None, b: datetime | None) -> bool:
     if not a or not b: return False
     return a.date() == b.date()
 
-def host_endswith(host: str, domain_set: set[str]) -> bool:
-    """True if host matches any domain in set by suffix (handles www.*)."""
-    host = (host or "").lower()
-    return any(host.endswith(d) for d in domain_set)
-
 def is_market_headline_sane(title: str, url: str, published_iso: str, session: requests.Session, debug_counts: dict) -> bool:
-    """Block stale milestone/record claims unless corroborated."""
+    # Block stale "record/all-time high" / BTC round-number claims unless recent or from trusted domains.
     t = title.lower()
     milestone = bool(re.search(r"\b(all[-\s]?time high|record|hits?\s*(?:\d{2,3},?\d{3}|[1-9]\d?k))\b", t))
     btc_round = bool(re.search(r"\bbitcoin|btc\b.*\b(20k|30k|40k|50k|60k|70k|80k|90k|100k)\b", t))
@@ -803,9 +803,7 @@ def is_market_headline_sane(title: str, url: str, published_iso: str, session: r
     return False
 
 def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tuple[bool, str, int, str]:
-    """
-    Returns (ok, final_url, status_code, reason)
-    """
+    """Returns (ok, final_url, status_code, reason)."""
     if not VERIFY_LINKS:
         return True, url, 200, "verification disabled"
 
@@ -829,7 +827,6 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
     robots = (resp.headers.get("X-Robots-Tag") or "").lower()
     host_final = host_of(final_url)
 
-    # Early len(body) test — relax for sports domains
     min_bytes_early = MIN_BODY_BYTES
     if is_sports_domain(host_final):
         min_bytes_early = max(1500, int(MIN_BODY_BYTES * 0.4))
@@ -907,7 +904,6 @@ def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tupl
                     debug_counts["soft_404_drops"] += 1
                     return False, final_url, status, "ogurl-homepage"
 
-            # Relax article-ness for sports finals/box scores
             is_sports_final = is_mlb_final_title(title_text) or is_sports_domain(host_final)
             min_words = MIN_ARTICLE_WORDS
             if is_sports_final:
@@ -1100,7 +1096,7 @@ def build(feeds_file: str, out_path: str) -> dict:
                         continue
                     h = host_of(it["url"])
                     cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
-                    if in_evening and host_endswith(h, SPORTS_PRIOR_DOMAINS) and cap < 10: cap = 10
+                    if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
                     if per_host_counts.get(h, 0) >= cap:
                         if h and h not in caps_hit: caps_hit.append(h)
                         continue
@@ -1121,7 +1117,7 @@ def build(feeds_file: str, out_path: str) -> dict:
                             continue
                         h = host_of(it["url"])
                         cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
-                        if in_evening and host_endswith(h, SPORTS_PRIOR_DOMAINS) and cap < 10: cap = 10
+                        if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
                         if per_host_counts.get(h, 0) >= cap:
                             if h and h not in caps_hit: caps_hit.append(h)
                             continue
@@ -1153,7 +1149,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             can_url = canonicalize_url(link)
             h = host_of(can_url or link)
             cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
-            if in_evening and host_endswith(h, SPORTS_PRIOR_DOMAINS) and cap < 10: cap = 10
+            if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
             if per_host_counts.get(h, 0) >= cap:
                 if h and h not in caps_hit: caps_hit.append(h)
                 continue
@@ -1213,8 +1209,8 @@ def build(feeds_file: str, out_path: str) -> dict:
         b_aggr = looks_aggregator(b.get("source",""), b.get("url",""))
         if a_aggr != b_aggr: return not a_aggr
         ha, hb = host_of(a["url"]), host_of(b["url"])
-        if (host_endswith(ha, PREFERRED_DOMAINS)) != (host_endswith(hb, PREFERRED_DOMAINS)): 
-            return host_endswith(ha, PREFERRED_DOMAINS)
+        pref = lambda h: any((h or "").endswith(d) for d in PREFERRED_DOMAINS)
+        if pref(ha) != pref(hb): return pref(ha)
         return len(a["url"]) < len(b["url"])
 
     def _is_jays_game_title(it: dict) -> bool:
@@ -1269,7 +1265,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
     ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
     ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
-    ps_per_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))  # intentionally reads max_injury for cap
+    ps_per_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
     ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
     ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
     ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
@@ -1304,7 +1300,7 @@ def build(feeds_file: str, out_path: str) -> dict:
 
     # Regional/Toronto weights
     regional_country_pts = float(W(weights, "regional.weights.country_match", 1.2))
-    regional_city_pts    = float(W(weights, "regional.weights.city_match_toronto", 0.0))  # new
+    regional_city_pts    = float(W(weights, "regional.weights.city_match_toronto", 0.0))
     regional_max_bonus   = float(W(weights, "regional.max_bonus", 2.4))
 
     now_ts_scoring = time.time()
@@ -1336,7 +1332,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["aggregator_penalty"] = agg_pen; total += agg_pen; score_dbg["agg_penalties"] += 1
         if is_press_wire(url):
             comps["press_wire_penalty"] = wire_pen; total += wire_pen; score_dbg["press_penalties"] += 1
-        if host_endswith(host, PREFERRED_DOMAINS):
+        if any((host or "").endswith(d) for d in PREFERRED_DOMAINS):
             comps["preferred_domain"] = pref_bonus; total += pref_bonus; score_dbg["preferred_bonus"] += 1
 
         deaths, injured, has_fatal_cue = parse_casualties(title)
@@ -1385,9 +1381,8 @@ def build(feeds_file: str, out_path: str) -> dict:
         reg_bonus = 0.0
         if it.get("region") == "Canada":
             reg_bonus += regional_country_pts
-        # Toronto city cues: headline OR URL path/host matches
         if regional_city_pts > 0.0:
-            if RE_TORONTO_CUES.search(title) or "toronto" in host or "/toronto" in path_of(url).lower():
+            if RE_TORONTO_CUES.search(title) or "toronto" in (host or "") or "/toronto" in path_of(url).lower():
                 reg_bonus += regional_city_pts
         if reg_bonus:
             reg_bonus = min(reg_bonus, regional_max_bonus)
@@ -1427,10 +1422,8 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["sports.playoff_mode"] = sp_playoffs; total += sp_playoffs; score_dbg["sports_playoff_hits"] += 1
 
         effects = {"lightsaber": False, "glitch": False, "reasons": []}
-        if total >= ls_min:
-            effects["lightsaber"] = True; effects["reasons"].append(f"score≥{ls_min}")
-        if it["_ps_deaths"] >= also_body:
-            effects["lightsaber"] = True; effects["reasons"].append(f"body_count≥{also_body}")
+        if total >= ls_min: effects["lightsaber"] = True; effects["reasons"].append(f"score≥{ls_min}")
+        if it["_ps_deaths"] >= also_body: effects["lightsaber"] = True; effects["reasons"].append(f"body_count≥{also_body}")
         if it["_btc_move_abs"] is not None and it["_btc_move_abs"] >= also_btc:
             effects["lightsaber"] = True; effects["reasons"].append(f"btc_move≥{also_btc}%")
         if it["_single_move_abs"] is not None and it["_single_move_abs"] >= also_stk:
@@ -1438,7 +1431,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         if not effects["lightsaber"] and total >= glitch_min:
             effects["glitch"] = True; effects["reasons"].append(f"score≥{glitch_min}")
 
-        if host == MPB_SUBSTACK_HOST:
+        if host_of(url) == MPB_SUBSTACK_HOST:
             effects["glitch"] = True
             if not effects["lightsaber"]: effects["reasons"].append("substack")
             effects["decay_at"] = iso_add_hours(it.get("published_utc"), 24.0)
@@ -1476,7 +1469,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         it.setdefault("effects", {})
         it["effects"]["style"] = "breaker"
 
-    # ---- Hard filters ----
+    # ---- Hard filters & verification ----
     def within_age_bounds(it: dict) -> bool:
         age_h = hours_since(it.get("published_utc",""), time.time())
         if age_h > MAX_AGE_HOURS:
@@ -1563,6 +1556,94 @@ def build(feeds_file: str, out_path: str) -> dict:
         else:
             debug_counts["backfill_steps_used"] = REQUIRE_EXACT_COUNT
 
+    # ---- Toronto-first minimum + city backfill ----
+    def toronto_hit(it: dict) -> bool:
+        t = it.get("title","")
+        u = it.get("url","")
+        s = (it.get("source","") or "").lower()
+        h = host_of(u)
+        p = path_of(u).lower()
+        return bool(
+            RE_TORONTO_CUES.search(t) or
+            "toronto" in (h or "") or "/toronto" in p or
+            "cp24" in s or "citynews" in s or "blogto" in s or "thestar" in s
+        )
+
+    def city_hit(it: dict, city: str) -> bool:
+        c = city.lower()
+        t = (it.get("title","") or "").lower()
+        u = it.get("url","") or ""
+        h = (host_of(u) or "").lower()
+        p = (path_of(u) or "").lower()
+        return (c in t) or (f"/{c}" in p) or (c in h)
+
+    def enforce_toronto_min(arr: list[dict], candidates: Iterable[dict]) -> list[dict]:
+        """Ensure ≥ MPB_MIN_TORONTO Toronto items; if short, fill remainder with other cities in CITY_BACKFILL_ORDER."""
+        want = max(0, MPB_MIN_TORONTO)
+        if want == 0: return arr
+        have = [it for it in arr if toronto_hit(it)]
+        if len(have) >= want:
+            return arr
+
+        # Promote Toronto from candidates first
+        seen_ids = {x["canonical_id"] for x in arr}
+        seen_urls = {x["canonical_url"] for x in arr}
+        BF_THRESH = 0.78
+
+        def looks_distinct(a: dict, b: dict) -> bool:
+            return jaccard(set(title_tokens(a["title"])), set(title_tokens(b["title"]))) < BF_THRESH
+
+        pool: list[dict] = []
+        for it in sorted(list(candidates), key=lambda x: _ts(x.get("published_utc","")), reverse=True):
+            if len(have) + len(pool) >= want:
+                break
+            if it["canonical_id"] in seen_ids or it["canonical_url"] in seen_urls:
+                continue
+            if not toronto_hit(it):
+                continue
+            if not within_age_bounds(it):
+                continue
+            ok, final_url, status, reason = verify_link(session, it["url"], debug_counts)
+            if not ok:
+                continue
+            it["url"] = final_url
+            it["canonical_url"] = final_url
+            if any(not looks_distinct(it, k) for k in arr):
+                continue
+            pool.append(it)
+
+        out = arr[:] + pool
+        # If still short, allow other Canadian cities (priority order)
+        need_more = want - len([it for it in out if toronto_hit(it)])
+        if need_more > 0:
+            for city in CITY_BACKFILL_ORDER:
+                for it in sorted(list(candidates), key=lambda x: _ts(x.get("published_utc","")), reverse=True):
+                    if need_more <= 0:
+                        break
+                    if it["canonical_id"] in {x["canonical_id"] for x in out}:
+                        continue
+                    if not city_hit(it, city):
+                        continue
+                    if not within_age_bounds(it):
+                        continue
+                    ok, final_url, status, reason = verify_link(session, it["url"], debug_counts)
+                    if not ok:
+                        continue
+                    it["url"] = final_url
+                    it["canonical_url"] = final_url
+                    # keep distinct
+                    if any(jaccard(set(title_tokens(it["title"])), set(title_tokens(k["title"]))) >= 0.78 for k in out):
+                        continue
+                    out.append(it)
+                    need_more -= 1
+                if need_more <= 0:
+                    break
+
+        return out
+
+    if REQUIRE_EXACT_COUNT > 0:
+        verified = enforce_toronto_min(verified, final_candidates_source)
+
     # ---- Run-length limiter: prevent >2 in a row by domain and by cluster/topic ----
     def enforce_run_length(arr: list[dict], key_fn, max_run: int = 2) -> list[dict]:
         out = arr[:]
@@ -1578,7 +1659,6 @@ def build(feeds_file: str, out_path: str) -> dict:
                 last_key = k
                 run = 1
             if run > max_run:
-                # find the nearest later item that breaks the run
                 j = i + 1
                 swapped = False
                 while j < n:
@@ -1590,17 +1670,14 @@ def build(feeds_file: str, out_path: str) -> dict:
                         break
                     j += 1
                 if not swapped:
-                    # nothing to swap; break out (rare)
                     break
             i += 1
         return out
 
-    # Apply limiter by domain, then by cluster_id (topic)
+    # Sort by (recency, score), apply limiter, then trim to the exact target (or 69 if not enforcing)
     verified.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
     verified = enforce_run_length(verified, key_fn=lambda it: host_of(it.get("url","")), max_run=2)
     verified = enforce_run_length(verified, key_fn=lambda it: it.get("cluster_id",""), max_run=2)
-
-    # Final trim/order
     verified = verified[:REQUIRE_EXACT_COUNT or 69]
 
     elapsed_total = time.time() - start
@@ -1627,7 +1704,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v2.4.1-runlen2-toronto-prefendsfix",  # bumped for comma bug + preferred-endswith
+            "version": "fetch-v2.5.0-citymin",  # Toronto-first minimum + city backfill
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
