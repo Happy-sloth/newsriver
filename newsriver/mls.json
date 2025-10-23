@@ -3,8 +3,8 @@
     {
       "games": [
         {
-          "gamePk": "760057",
-          "gameDate": "2025-10-23T00:30Z",
+          "gamePk": "760079",
+          "gameDate": "2025-10-25T00:00Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -16,41 +16,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "ORL"
+                "abbreviation": "NSH"
               },
-              "score": 1
+              "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "CHI"
+                "abbreviation": "MIA"
               },
-              "score": 3
-            }
-          }
-        },
-        {
-          "gamePk": "760058",
-          "gameDate": "2025-10-23T02:30Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "RSL"
-              },
-              "score": 1
-            },
-            "home": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 2
+              "score": 0
             }
           }
         }
