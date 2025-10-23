@@ -54,11 +54,11 @@ def _now_utc() -> datetime:
 
 def _et_today_and_yesterday() -> tuple[datetime, datetime]:
     """
-    Return (today_ET, yesterday_ET) as naive dates anchored to America/Toronto.
-    We only need the date part to build ESPN ?dates=YYYYMMDD.
+    Return (today_ET, yesterday_ET) as dates anchored to America/Toronto.
+    Only the date part is used to build ESPN ?dates=YYYYMMDD.
     """
     if ZoneInfo is None:
-        # Fallback: approximate ET by UTC-4 (current setting as of Oct). Good enough for this use.
+        # Fallback: approximate ET by UTC-4 (OK for current needs).
         now = _now_utc() - timedelta(hours=4)
     else:
         now = datetime.now(ZoneInfo("America/Toronto"))
