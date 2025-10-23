@@ -1,30 +1,46 @@
 {
+  "generated_utc": "2025-10-23T02:01:01.082853Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "TEST-PLACEHOLDER-1",
-          "gameDate": "2025-10-22T23:00:00Z",
+          "gamePk": "401504210",
+          "gameDate": "2022-11-20T23:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
-              "team": { "abbreviation": "TOR" },
-              "score": null
+              "team": {
+                "abbreviation": "TAT"
+              },
+              "score": 24
             },
             "home": {
-              "team": { "abbreviation": "WPG" },
-              "score": null
+              "team": {
+                "abbreviation": "WBB"
+              },
+              "score": 23
             }
           }
         }
       ]
     }
-  ]
+  ],
+  "_meta": {
+    "source": "espn",
+    "urls": [
+      "https://site.api.espn.com/apis/site/v2/sports/football/cfl/scoreboard?dates=20251022",
+      "https://site.api.espn.com/apis/site/v2/sports/football/cfl/scoreboard?dates=20251023"
+    ],
+    "games_count": 1,
+    "http_timeout_sec": 7.5,
+    "recent_final_max_hours": 0,
+    "version": "cfl-relay-1.1"
+  }
 }
