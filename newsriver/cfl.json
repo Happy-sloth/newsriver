@@ -3,28 +3,24 @@
     {
       "games": [
         {
-          "gamePk": "401504210",
-          "gameDate": "2022-11-20T23:00Z",
+          "gamePk": "TEST-PLACEHOLDER-1",
+          "gameDate": "2025-10-22T23:00:00Z",
           "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
           },
           "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
           },
           "teams": {
             "away": {
-              "team": {
-                "abbreviation": "TAT"
-              },
-              "score": 24
+              "team": { "abbreviation": "TOR" },
+              "score": null
             },
             "home": {
-              "team": {
-                "abbreviation": "WBB"
-              },
-              "score": 23
+              "team": { "abbreviation": "WPG" },
+              "score": null
             }
           }
         }
