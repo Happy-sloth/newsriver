@@ -1500,7 +1500,6 @@ def build(feeds_file: str, out_path: str) -> dict:
         fallback_stats.update(stats)
         if picked:
             verified.insert(0, picked)
-
     # ---- Backfill to EXACT 33 if needed ----
     def backfill_exact(keep: list[dict], candidates: Iterable[dict]) -> list[dict]:
         want = REQUIRE_EXACT_COUNT
