@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-24T08:49:02.781Z",
+  "generated_utc": "2025-10-24T09:01:35.210Z",
   "count": 69,
   "items": [
+    {
+      "title": "HUF’s Winter 2025 Collection Offers Fresh Takes on Classic Pieces",
+      "url": "https://hypebeast.com/2025/10/huf-winter-25-collection-release-info",
+      "source": "Hypebeast",
+      "published_utc": "2025-10-24T08:48:41.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "Fetch.ai, Ocean Protocol agree on return of $120M in FET tokens to avoid legal battle",
       "url": "https://cointelegraph.com/news/fet-ocean-protocol-return-120m-legal-battle",
@@ -39,22 +52,6 @@
         "reasons": []
       },
       "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Palestinian child killed in Israeli raid on West Bank as settlers rampage",
-      "url": "https://www.aljazeera.com/news/2025/10/24/palestinian-child-killed-in-israeli-raid-on-west-bank-as-settlers-rampage?traffic_source=rss",
-      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
-      "published_utc": "2025-10-24T08:23:07.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.8"
-        ],
-        "style": "breaker"
-      },
-      "category": "General",
       "region": "World"
     },
     {
@@ -779,19 +776,6 @@
       "region": "World"
     },
     {
-      "title": "Data Shows 12-Foot Great White Sharks Lingering Off Carolinas Amid Winter Migration",
-      "url": "https://dailycaller.com/2025/10/23/data-12-foot-great-white-sharks-carolinas-winter-migration",
-      "source": "The Daily Caller",
-      "published_utc": "2025-10-24T03:57:29.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Brewers Promote Matt Arnold To President Of Baseball Operations",
       "url": "https://www.mlbtraderumors.com/2025/10/brewers-promote-matt-arnold-to-president-of-baseball-operations.html",
       "source": "MLB Trade Rumors",
@@ -926,17 +910,28 @@
       },
       "category": "Culture",
       "region": "World"
+    },
+    {
+      "title": "Microsoft Suggests the Next-Generation Xbox Will Deliver an \"Ultra-Premium\" Experience",
+      "url": "https://hypebeast.com/2025/10/microsoft-hints-next-gen-xbox-will-be-ultra-premium-experience-news",
+      "source": "Hypebeast",
+      "published_utc": "2025-10-24T03:18:36.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 150,
     "cap_items": 320,
-    "collected": 555,
-    "dedup_pass1": 550,
+    "collected": 478,
+    "dedup_pass1": 474,
     "dedup_final": 320,
-    "slow_domains": [
-      "www.gorillavsbear.net"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -954,56 +949,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.438,
+        "sec": 1.673,
         "kept": 8
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.69,
-        "kept": 0
+        "host": "www.mlb.com",
+        "sec": 0.583,
+        "kept": 14
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.46,
+        "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.684,
+        "sec": 0.398,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.593,
-        "kept": 0
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.479,
-        "kept": 14
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.391,
+        "host": "www.blogto.com",
+        "sec": 0.396,
         "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.369,
+        "sec": 0.332,
         "kept": 10
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.286,
-        "kept": 14
+        "host": "www.bls.gov",
+        "sec": 0.253,
+        "kept": 0
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.22,
+        "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.247,
+        "sec": 0.121,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.188,
+        "sec": 0.099,
         "kept": 14
       }
     ],
-    "elapsed_sec": 330.04,
+    "elapsed_sec": 325.1,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1015,8 +1010,8 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 15,
-      "ps_injury_hits": 1,
+      "ps_fatal_hits": 9,
+      "ps_injury_hits": 0,
       "market_btc_hits": 1,
       "market_index_hits": 0,
       "market_nikkei_hits": 0,
@@ -1026,12 +1021,12 @@
       "preferred_bonus": 121,
       "substack_tagged": 0,
       "sports_team_hits": 14,
-      "sports_player_hits": 7,
-      "sports_result_win_hits": 9,
+      "sports_player_hits": 5,
+      "sports_result_win_hits": 7,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 5,
+      "sports_focus_team_hits": 4,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -1043,11 +1038,11 @@
       "reject_hits": 1
     },
     "sanity_stats": {
-      "link_verification_fail": 27,
-      "soft_404_drops": 31,
+      "link_verification_fail": 28,
+      "soft_404_drops": 20,
       "max_age_drops": 0,
-      "min_age_drops": 8,
-      "market_sanity_drops": 8,
+      "min_age_drops": 12,
+      "market_sanity_drops": 9,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
