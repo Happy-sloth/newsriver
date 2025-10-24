@@ -11,16 +11,13 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout (force correct branch + full history)
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          ref: main           # <<< CHANGE THIS if your amended fetch_nba.py lives on another branch
           fetch-depth: 0
-
-      - name: Show current commit
-        run: git log -1 --oneline
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -32,25 +29,28 @@ jobs:
           python -m pip install -U pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Show fetch_nba.py (first 120 lines)
-        run: sed -n '1,120p' scripts/fetch_nba.py
-
       - name: Fetch NBA
         run: python scripts/fetch_nba.py
 
-      - name: Show nba.json (debug)
-        run: |
-          echo "---- nba.json ----"
-          head -200 newsriver/nba.json || true
+      - name: Copy to repo root for Pages
+        run: cp newsriver/nba.json nba.json
 
-      - name: Commit & push if changed
+      - name: Commit & push if changed (with rebase)
         run: |
-          if [ -n "$(git status --porcelain newsriver/nba.json)" ]; then
-            git config user.name "github-actions[bot]"
+          set -e
+          if [ -n "$(git status --porcelain -- newsriver/nba.json nba.json)" ]; then
+            git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add newsriver/nba.json
-            git commit -m "chore(newsriver): refresh nba.json"
-            git push
+            git add newsriver/nba.json nba.json
+            git commit -m "chore: refresh NBA json"
+
+            for attempt in 1 2 3; do
+              git pull --rebase --autostash origin main && \
+              git push origin HEAD:main && exit 0
+              echo "Push race, retrying ($attempt)…"; sleep 2
+            done
+            git pull --rebase --autostash origin main
+            git push origin HEAD:main
           else
             echo "No NBA changes."
           fi
