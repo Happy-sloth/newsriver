@@ -11,11 +11,13 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: true
+          fetch-depth: 0  # allow pull --rebase before push
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -30,18 +32,27 @@ jobs:
       - name: Fetch CFL
         run: python scripts/fetch_cfl.py
 
-      # NEW: copy relay output to repo root so GitHub Pages serves /newsriver/cfl.json
-      - name: Copy to root for Pages
+      - name: Copy to repo root for Pages
         run: cp newsriver/cfl.json cfl.json
 
-      - name: Commit & push if changed
+      - name: Commit & push if changed (with rebase)
         run: |
+          set -e
           if [ -n "$(git status --porcelain -- newsriver/cfl.json cfl.json)" ]; then
-            git config user.name "github-actions[bot]"
+            git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add newsriver/cfl.json cfl.json
-            git commit -m "chore(newsriver): publish cfl.json (root + relay)"
-            git push
+            git commit -m "chore: refresh CFL json"
+
+            # handle non-fast-forward (another job/user pushed to main)
+            for attempt in 1 2 3; do
+              git pull --rebase --autostash origin main && \
+              git push origin HEAD:main && exit 0
+              echo "Push race, retrying ($attempt)…"; sleep 2
+            done
+            # final try (lets the job fail if still racing)
+            git pull --rebase --autostash origin main
+            git push origin HEAD:main
           else
             echo "No CFL changes."
           fi
