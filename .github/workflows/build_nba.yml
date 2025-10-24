@@ -2,7 +2,7 @@ name: Build NBA JSON
 
 on:
   schedule:
-    - cron: "*/10 * * * *"   # every 10 minutes
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -11,7 +11,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,16 +31,34 @@ jobs:
       - name: Fetch NBA
         run: python scripts/fetch_nba.py
 
-      - name: Copy to repo root for Pages
-        run: cp newsriver/nba.json nba.json
+      # Find nba.json regardless of where the script wrote it, then
+      # copy to BOTH root and newsriver/ so front-end + subdir are in sync.
+      - name: Normalize output paths
+        run: |
+          set -e
+          SRC=""
+          for p in newsriver/nba.json nba.json newsriver/newsriver/nba.json; do
+            if [ -f "$p" ]; then SRC="$p"; break; fi
+          done
+          if [ -z "$SRC" ]; then
+            echo "❌ nba.json not produced. Listing repo:"
+            ls -la
+            echo "Listing newsriver/:"
+            ls -la newsriver || true
+            exit 1
+          fi
+          echo "Found NBA JSON at: $SRC"
+          mkdir -p newsriver
+          cp "$SRC" nba.json
+          cp "$SRC" newsriver/nba.json
 
       - name: Commit & push if changed (with rebase)
         run: |
           set -e
-          if [ -n "$(git status --porcelain -- newsriver/nba.json nba.json)" ]; then
+          if [ -n "$(git status --porcelain -- nba.json newsriver/nba.json)" ]; then
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add newsriver/nba.json nba.json
+            git add nba.json newsriver/nba.json
             git commit -m "chore: refresh NBA json"
 
             for attempt in 1 2 3; do
