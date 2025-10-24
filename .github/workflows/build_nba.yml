@@ -31,8 +31,6 @@ jobs:
       - name: Fetch NBA
         run: python scripts/fetch_nba.py
 
-      # Find nba.json regardless of where the script wrote it, then
-      # copy to BOTH root and newsriver/ so front-end + subdir are in sync.
       - name: Normalize output paths
         run: |
           set -e
@@ -41,16 +39,18 @@ jobs:
             if [ -f "$p" ]; then SRC="$p"; break; fi
           done
           if [ -z "$SRC" ]; then
-            echo "❌ nba.json not produced. Listing repo:"
-            ls -la
-            echo "Listing newsriver/:"
-            ls -la newsriver || true
-            exit 1
+            echo "❌ nba.json not produced."; ls -la; ls -la newsriver || true; exit 1
           fi
           echo "Found NBA JSON at: $SRC"
           mkdir -p newsriver
-          cp "$SRC" nba.json
-          cp "$SRC" newsriver/nba.json
+
+          # Only copy when source != target to avoid 'cp: same file' errors.
+          if [ "$SRC" != "nba.json" ]; then
+            cp "$SRC" nba.json
+          fi
+          if [ "$SRC" != "newsriver/nba.json" ]; then
+            cp "$SRC" newsriver/nba.json
+          fi
 
       - name: Commit & push if changed (with rebase)
         run: |
