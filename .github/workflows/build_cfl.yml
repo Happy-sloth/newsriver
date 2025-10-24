@@ -30,16 +30,17 @@ jobs:
       - name: Fetch CFL
         run: python scripts/fetch_cfl.py
 
-      - name: Copy to repo root
+      # NEW: copy relay output to repo root so GitHub Pages serves /newsriver/cfl.json
+      - name: Copy to root for Pages
         run: cp newsriver/cfl.json cfl.json
 
       - name: Commit & push if changed
         run: |
-          if [ -n "$(git status --porcelain newsriver/cfl.json cfl.json)" ]; then
+          if [ -n "$(git status --porcelain -- newsriver/cfl.json cfl.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add newsriver/cfl.json cfl.json
-            git commit -m "chore: refresh CFL json"
+            git commit -m "chore(newsriver): publish cfl.json (root + relay)"
             git push
           else
             echo "No CFL changes."
