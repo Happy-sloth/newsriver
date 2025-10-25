@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2025-10-25T08:43:32.005Z",
+  "generated_utc": "2025-10-25T08:57:02.363Z",
   "count": 69,
   "items": [
+    {
+      "title": "Jameela Jamil accidentally orgasmed while DJing in front of 6,000 farmers",
+      "url": "https://www.nme.com/news/music/jameela-jamil-accidentally-orgasmed-while-djing-in-front-of-6000-farmers-3902165",
+      "source": "NME",
+      "published_utc": "2025-10-25T08:47:22.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "Ariana Grande says Madonna gave her a “warm welcome” at the beginning of her career",
       "url": "https://www.nme.com/news/music/ariana-grande-says-madonna-gave-her-a-warm-welcome-at-the-beginning-of-her-career-3902162",
@@ -826,11 +839,8 @@
       "published_utc": "2025-10-24T23:40:07.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥1.8"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Local",
       "region": "Canada"
@@ -951,26 +961,13 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "Deadline’s Sound & Screen: Film Sets Lineup For 2025 Edition, From ‘Kpop Demon Hunters’ To Kesha, Oscar Winners Ludwig Göransson, Alexandre Desplat, Michael Giacchino & More",
-      "url": "https://deadline.com/2025/10/2025-sound-and-screen-film-lineup-deadline-1236596407",
-      "source": "Deadline",
-      "published_utc": "2025-10-24T22:57:03.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 150,
     "cap_items": 320,
-    "collected": 454,
-    "dedup_pass1": 451,
+    "collected": 478,
+    "dedup_pass1": 475,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
@@ -978,6 +975,7 @@
       "www.cbc.ca"
     ],
     "errors": [
+      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -989,56 +987,56 @@
     "feed_times_sample": [
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.044,
+        "sec": 1.12,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.643,
+        "sec": 0.408,
         "kept": 10
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.502,
+        "sec": 0.404,
         "kept": 0
-      },
-      {
-        "host": "www150.statcan.gc.ca",
-        "sec": 0.449,
-        "kept": 0
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.431,
-        "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.335,
+        "sec": 0.31,
         "kept": 14
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.314,
-        "kept": 0
-      },
-      {
         "host": "www.bls.gov",
-        "sec": 0.266,
+        "sec": 0.26,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.257,
+        "sec": 0.251,
         "kept": 14
       },
       {
+        "host": "www.mlb.com",
+        "sec": 0.251,
+        "kept": 14
+      },
+      {
+        "host": "www150.statcan.gc.ca",
+        "sec": 0.198,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.128,
+        "kept": 0
+      },
+      {
         "host": "www.federalreserve.gov",
-        "sec": 0.185,
+        "sec": 0.083,
         "kept": 14
       }
     ],
-    "elapsed_sec": 340.99,
+    "elapsed_sec": 324.14,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1060,7 +1058,7 @@
       "press_penalties": 0,
       "preferred_bonus": 122,
       "substack_tagged": 0,
-      "sports_team_hits": 12,
+      "sports_team_hits": 14,
       "sports_player_hits": 6,
       "sports_result_win_hits": 10,
       "sports_result_loss_hits": 0,
@@ -1079,7 +1077,7 @@
     },
     "sanity_stats": {
       "link_verification_fail": 13,
-      "soft_404_drops": 21,
+      "soft_404_drops": 34,
       "max_age_drops": 0,
       "min_age_drops": 0,
       "market_sanity_drops": 8,
