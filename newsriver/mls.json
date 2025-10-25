@@ -3,8 +3,8 @@
     {
       "games": [
         {
-          "gamePk": "760079",
-          "gameDate": "2025-10-25T00:00Z",
+          "gamePk": "760067",
+          "gameDate": "2025-10-26T21:30Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -16,15 +16,67 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "NSH"
+                "abbreviation": "CHI"
               },
-              "score": 1
+              "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "MIA"
+                "abbreviation": "PHI"
               },
-              "score": 3
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "760076",
+          "gameDate": "2025-10-26T23:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "VAN"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "760070",
+          "gameDate": "2025-10-27T01:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "POR"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SD"
+              },
+              "score": 0
             }
           }
         }
