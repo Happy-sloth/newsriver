@@ -4,60 +4,6 @@
       "date": "2025-10-26",
       "games": [
         {
-          "gamePk": 401772762,
-          "gameDate": "2025-10-26T20:25Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 24
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 44
-            }
-          }
-        },
-        {
-          "gamePk": 401772761,
-          "gameDate": "2025-10-26T20:25Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TEN"
-              },
-              "score": 14
-            },
-            "home": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 38
-            }
-          }
-        },
-        {
           "gamePk": 401772760,
           "gameDate": "2025-10-26T17:00Z",
           "status": {
@@ -270,6 +216,60 @@
                 "abbreviation": "NO"
               },
               "score": 3
+            }
+          }
+        },
+        {
+          "gamePk": 401772762,
+          "gameDate": "2025-10-26T20:25Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 24
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 44
+            }
+          }
+        },
+        {
+          "gamePk": 401772761,
+          "gameDate": "2025-10-26T20:25Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TEN"
+              },
+              "score": 14
+            },
+            "home": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 38
             }
           }
         },
