@@ -4,6 +4,33 @@
       "date": "2025-10-26",
       "games": [
         {
+          "gamePk": 401772869,
+          "gameDate": "2025-10-26T20:05Z",
+          "status": {
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TB"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NO"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
           "gamePk": 401772760,
           "gameDate": "2025-10-26T17:00Z",
           "status": {
@@ -34,8 +61,8 @@
           "gamePk": 401772758,
           "gameDate": "2025-10-26T17:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -47,7 +74,7 @@
               "team": {
                 "abbreviation": "NYJ"
               },
-              "score": 32
+              "score": 39
             },
             "home": {
               "team": {
@@ -61,8 +88,8 @@
           "gamePk": 401772868,
           "gameDate": "2025-10-26T17:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -88,8 +115,8 @@
           "gamePk": 401772867,
           "gameDate": "2025-10-26T17:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -142,8 +169,8 @@
           "gamePk": 401772759,
           "gameDate": "2025-10-26T17:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -169,8 +196,8 @@
           "gamePk": 401772866,
           "gameDate": "2025-10-26T17:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -193,38 +220,11 @@
           }
         },
         {
-          "gamePk": 401772869,
-          "gameDate": "2025-10-26T20:05Z",
-          "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TB"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NO"
-              },
-              "score": 0
-            }
-          }
-        },
-        {
           "gamePk": 401772762,
           "gameDate": "2025-10-26T20:25Z",
           "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -250,8 +250,8 @@
           "gamePk": 401772761,
           "gameDate": "2025-10-26T20:25Z",
           "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
           },
           "linescore": {
             "currentPeriod": 0,
