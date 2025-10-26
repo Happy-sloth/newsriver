@@ -4,33 +4,6 @@
       "date": "2025-10-26",
       "games": [
         {
-          "gamePk": 401772869,
-          "gameDate": "2025-10-26T20:05Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TB"
-              },
-              "score": 23
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NO"
-              },
-              "score": 3
-            }
-          }
-        },
-        {
           "gamePk": 401772762,
           "gameDate": "2025-10-26T20:25Z",
           "status": {
@@ -47,13 +20,13 @@
               "team": {
                 "abbreviation": "DAL"
               },
-              "score": 17
+              "score": 24
             },
             "home": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 37
+              "score": 44
             }
           }
         },
@@ -61,8 +34,8 @@
           "gamePk": 401772761,
           "gameDate": "2025-10-26T20:25Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -74,7 +47,7 @@
               "team": {
                 "abbreviation": "TEN"
               },
-              "score": 7
+              "score": 14
             },
             "home": {
               "team": {
@@ -270,6 +243,33 @@
                 "abbreviation": "HOU"
               },
               "score": 26
+            }
+          }
+        },
+        {
+          "gamePk": 401772869,
+          "gameDate": "2025-10-26T20:05Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TB"
+              },
+              "score": 23
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NO"
+              },
+              "score": 3
             }
           }
         },
