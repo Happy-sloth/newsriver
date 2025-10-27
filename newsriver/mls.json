@@ -3,34 +3,8 @@
     {
       "games": [
         {
-          "gamePk": "760067",
-          "gameDate": "2025-10-26T21:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 2
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 2
-            }
-          }
-        },
-        {
-          "gamePk": "760076",
-          "gameDate": "2025-10-26T23:30Z",
+          "gamePk": "760073",
+          "gameDate": "2025-10-27T22:45Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -42,21 +16,21 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "DAL"
+                "abbreviation": "CLB"
               },
               "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "VAN"
+                "abbreviation": "CIN"
               },
-              "score": 3
+              "score": 0
             }
           }
         },
         {
-          "gamePk": "760070",
-          "gameDate": "2025-10-27T01:30Z",
+          "gamePk": "760088",
+          "gameDate": "2025-10-28T01:00Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -68,15 +42,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "POR"
+                "abbreviation": "SEA"
               },
-              "score": 1
+              "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "SD"
+                "abbreviation": "MIN"
               },
-              "score": 2
+              "score": 0
             }
           }
         }
