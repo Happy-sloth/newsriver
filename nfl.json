@@ -4,33 +4,6 @@
       "date": "2025-10-27",
       "games": [
         {
-          "gamePk": 401772925,
-          "gameDate": "2025-10-27T00:20Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GB"
-              },
-              "score": 35
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PIT"
-              },
-              "score": 25
-            }
-          }
-        },
-        {
           "gamePk": 401772760,
           "gameDate": "2025-10-26T17:00Z",
           "status": {
@@ -297,6 +270,33 @@
                 "abbreviation": "IND"
               },
               "score": 38
+            }
+          }
+        },
+        {
+          "gamePk": 401772925,
+          "gameDate": "2025-10-27T00:20Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GB"
+              },
+              "score": 35
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PIT"
+              },
+              "score": 25
             }
           }
         },
