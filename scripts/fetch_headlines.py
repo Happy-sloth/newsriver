@@ -11,6 +11,7 @@
 # - Regional scoring supports Toronto city-match bonus from weights.json5
 # - Optional "Polling/Projection" category via section headers
 # - Toronto-first minimum (env MPB_MIN_TORONTO, default 9) with Canadian city backfill
+# - Labour tagging: category="Labour", region CA hints, priority_reason audit trail
 
 from __future__ import annotations
 
@@ -23,7 +24,7 @@ import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone, timedelta
-from typing import Tuple, Iterable
+from typing import Tuple, Iterable, Any, Dict, List, Optional
 from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode, urlsplit, urlunsplit, parse_qs
 
 import feedparser  # type: ignore
@@ -44,6 +45,101 @@ try:
     from zoneinfo import ZoneInfo  # py>=3.9
 except Exception:
     ZoneInfo = None
+
+# ================= Labour tagging helpers (NEW) =================
+LABOUR_DEFAULT_KEYWORDS = [
+    "strike","walkout","work stoppage","lockout","wildcat","picket",
+    "arbitration","mediation","collective bargaining",
+    "tentative deal","ratification","binding arbitration",
+    "back-to-work order","back to work","return-to-work",
+    "salary increase","wage increase","cost-of-living adjustment",
+    "back to school order","job action","work-to-rule","strike vote"
+]
+LABOUR_DEFAULT_ENTITIES = [
+    "CUPE","OPSEU","PSAC","Unifor","ATU","OECTA","ETFO","OSSTF",
+    "Teamsters","SEIU","UFCW","IAMAW","IBEW","UNITE HERE"
+]
+CA_HINT_DOMAINS = {
+    "cbc.ca","globalnews.ca","ctvnews.ca","cp24.com","toronto.citynews.ca",
+    "theglobeandmail.com","financialpost.com","nationalpost.com",
+    "thestar.com","montrealgazette.com","vancouversun.com","calgaryherald.com",
+    "edmontonjournal.com","winnipegfreepress.com","ottawacitizen.com",
+    "timescolonist.com","saltwire.com","dailyhive.com","citynews.ca",
+    "labourstart.org"
+}
+
+def load_labour_hints(weights: Dict[str, Any]) -> Dict[str, Any]:
+    """Read optional labour_keywords from weights.json5, fall back to defaults."""
+    def _get(path: str, default):
+        cur = weights
+        for part in path.split("."):
+            if isinstance(cur, dict) and part in cur:
+                cur = cur[part]
+            else:
+                return default
+        return cur
+    blk = _get("labour_keywords", {})
+    kw_bonus = float(blk.get("keyword_bonus", 0.9)) if isinstance(blk, dict) else 0.9
+    kws = (blk.get("keywords") if isinstance(blk, dict) else None) or LABOUR_DEFAULT_KEYWORDS
+    ents = (blk.get("entities") if isinstance(blk, dict) else None) or LABOUR_DEFAULT_ENTITIES
+    return {
+        "keyword_bonus": kw_bonus,
+        "keywords": [k.lower() for k in kws],
+        "entities": [e.lower() for e in ents],
+    }
+
+def is_canadian_context(url: str, title: str, summary: str) -> bool:
+    host = ""
+    try:
+        host = (urlparse(url).netloc or "").lower()
+    except Exception:
+        pass
+    if any(host.endswith(d) for d in CA_HINT_DOMAINS):
+        return True
+    text = f"{title} {summary}".lower()
+    locality = [
+        "canada","canadian","ottawa","toronto","ontario","bc","british columbia",
+        "vancouver","alberta","calgary","edmonton","saskatchewan","manitoba",
+        "winnipeg","quebec","montreal","lavalle","new brunswick","nova scotia",
+        "halifax","pei","prince edward island","newfoundland","yukon","nunavut",
+        "northwest territories"
+    ]
+    return any(tok in text for tok in locality)
+
+def tag_labour_if_applicable(item: Dict[str, Any], labour_hints: Dict[str, Any]) -> None:
+    """
+    Mutates `item` in-place:
+      - sets category="Labour" if keyword/entity hits,
+      - ensures region="CA" when context is Canadian,
+      - appends reasons into priority_reason (list).
+    """
+    title = (item.get("title") or "").lower()
+    summary = (item.get("summary") or item.get("description") or "").lower()
+    url = item.get("url") or item.get("link") or ""
+    reasons: List[str] = []
+
+    hits_kw = [kw for kw in labour_hints["keywords"] if kw in title or kw in summary]
+    hits_en = [en for en in labour_hints["entities"] if en in title or en in summary]
+    if hits_kw or hits_en:
+        item["category"] = "Labour"
+        if hits_kw:
+            reasons.append("kw:" + ",".join(sorted(set(hits_kw))[:3]))
+        if hits_en:
+            reasons.append("entity:" + ",".join(sorted(set(hits_en))[:3]))
+
+    if is_canadian_context(url, item.get("title",""), item.get("summary","")):
+        item["region"] = "Canada"  # align with existing scoring branch that checks "Canada"
+        reasons.append("region:CA")
+
+    if reasons:
+        pr = item.get("priority_reason")
+        if isinstance(pr, list):
+            pr.extend(reasons)
+        elif isinstance(pr, str):
+            item["priority_reason"] = [pr] + reasons
+        else:
+            item["priority_reason"] = reasons
+# ================= end Labour helpers =================
 
 # ---------------- Tunables ----------------
 MAX_PER_FEED      = int(os.getenv("MPB_MAX_PER_FEED", "14"))
@@ -478,7 +574,6 @@ def parse_any_dt_str(s: str) -> str | None:
     except Exception:
         pass
     return None
-
 def pick_published(entry) -> str | None:
     for key in ("published_parsed","updated_parsed","created_parsed"):
         t = getattr(entry, key, None)
@@ -726,6 +821,7 @@ def scrape_cp24(html: bytes, spec: FeedSpec, playoffs_on: bool) -> list[dict]:
         items.append(it)
         if len(items) >= MAX_PER_FEED: break
     return items
+
 # ---------- Link verification & market sanity ----------
 def is_homepage_like(url: str) -> bool:
     try:
@@ -994,11 +1090,13 @@ def _safety_net_one_headline(session: requests.Session, debug_counts: dict) -> t
             stats["title"] = it["title"]
             return it, stats
     return None, stats
-
 # ---------- Build ----------
 def build(feeds_file: str, out_path: str) -> dict:
     start = time.time()
     weights, weights_debug = load_weights()
+    # Load once for entire run (NEW)
+    labour_hints = load_labour_hints(weights or {})
+
     specs = parse_feeds_txt(feeds_file)
 
     collected: list[dict] = []
@@ -1094,6 +1192,9 @@ def build(feeds_file: str, out_path: str) -> dict:
                     if should_reject_title(it["title"], playoffs_on):
                         score_dbg["reject_hits"] += 1
                         continue
+                    # Labour wiring (NEW)
+                    tag_labour_if_applicable(it, labour_hints)
+
                     h = host_of(it["url"])
                     cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
                     if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
@@ -1115,6 +1216,9 @@ def build(feeds_file: str, out_path: str) -> dict:
                         if should_reject_title(it["title"], playoffs_on):
                             score_dbg["reject_hits"] += 1
                             continue
+                        # Labour wiring (NEW)
+                        tag_labour_if_applicable(it, labour_hints)
+
                         h = host_of(it["url"])
                         cap = PER_HOST_MAX.get(h, MAX_PER_FEED)
                         if in_evening and h in SPORTS_PRIOR_DOMAINS and cap < 10: cap = 10
@@ -1172,6 +1276,15 @@ def build(feeds_file: str, out_path: str) -> dict:
                 "canonical_id":  canonical_id(can_url or link),
                 "cluster_id":    fuzzy_title_key(title),
             }
+
+            # Labour wiring (NEW)
+            # Try to pass along any summary/description for better keyword hits
+            if "summary" in e and isinstance(e["summary"], str):
+                item["summary"] = e["summary"]
+            elif "description" in e and isinstance(e["description"], str):
+                item["summary"] = e["description"]
+            tag_labour_if_applicable(item, labour_hints)
+
             collected.append(item)
             per_host_counts[h] = per_host_counts.get(h, 0) + 1
             kept_from_feed += 1
@@ -1265,7 +1378,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
     ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
     ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
-    ps_per_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
+    ps_per_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))  # note: your original file had this mismatch
     ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
     ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
     ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
@@ -1423,10 +1536,10 @@ def build(feeds_file: str, out_path: str) -> dict:
 
         effects = {"lightsaber": False, "glitch": False, "reasons": []}
         if total >= ls_min: effects["lightsaber"] = True; effects["reasons"].append(f"score≥{ls_min}")
-        if it["_ps_deaths"] >= also_body: effects["lightsaber"] = True; effects["reasons"].append(f"body_count≥{also_body}")
-        if it["_btc_move_abs"] is not None and it["_btc_move_abs"] >= also_btc:
+        if it.get("_ps_deaths", 0) >= also_body: effects["lightsaber"] = True; effects["reasons"].append(f"body_count≥{also_body}")
+        if it.get("_btc_move_abs") is not None and it["_btc_move_abs"] >= also_btc:
             effects["lightsaber"] = True; effects["reasons"].append(f"btc_move≥{also_btc}%")
-        if it["_single_move_abs"] is not None and it["_single_move_abs"] >= also_stk:
+        if it.get("_single_move_abs") is not None and it["_single_move_abs"] >= also_stk:
             effects["lightsaber"] = True; effects["reasons"].append(f"single_stock_move≥{also_stk}%")
         if not effects["lightsaber"] and total >= glitch_min:
             effects["glitch"] = True; effects["reasons"].append(f"score≥{glitch_min}")
@@ -1500,6 +1613,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         fallback_stats.update(stats)
         if picked:
             verified.insert(0, picked)
+
     # ---- Backfill to EXACT 33 if needed ----
     def backfill_exact(keep: list[dict], candidates: Iterable[dict]) -> list[dict]:
         want = REQUIRE_EXACT_COUNT
@@ -1703,7 +1817,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v2.5.0-citymin",  # Toronto-first minimum + city backfill
+            "version": "fetch-v2.6.0-labour",  # bumped for Labour tagging
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
