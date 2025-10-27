@@ -1,6 +1,6 @@
 {
   // weights.json5 — server-side scoring knobs
-  // Version: v0.8 (CA/Toronto bias ↑, Jays playoffs ↑, aggregator clamp ↑, anti-fluff ↑, effects tighten)
+  // Version: v0.8.1 (adds Labour category boost; preserves all original content)
   timezone: "America/Toronto",
 
   // -------- Recency --------
@@ -30,6 +30,7 @@
   // -------- Category nudges (must match infer_tag outputs) --------
   // TEMP: "General" demoted to cool off untagged polling/horse-race items until infer_tag emits Polling/Projection.
   categories: {
+    "Labour": 1.20,            // NEW: surface collective-bargaining/strike coverage
     "Public Safety": 1.0,
     "Weather": 0.6,
     "Transit": 0.4,
@@ -109,65 +110,71 @@
     },
     glitch_min_score: 2.1
   }
+
+  // ---- NOTE ----
+  // The following original lines were Python pasted into the weights file.
+  // Leaving them as-is would break JSON parsing. They’re preserved below as comments.
+  // If you truly need them executed, they belong in your Python (e.g., fetch_headlines.py).
+
+  //     # --------- Scoring ---------
+  //     half_life_h = float(W(weights, "recency.half_life_hours", 6.0))
+  //     age_pen_24  = float(W(weights, "recency.age_penalty_after_24h", -0.6))
+  //     age_pen_36  = float(W(weights, "recency.age_penalty_after_36h", -0.4))
+  //     superseded_pen = float(W(weights, "recency.superseded_cluster_penalty", -0.9))
+  //     cat_table   = dict(W(weights, "categories", {}))
+  //     agg_pen     = float(W(weights, "sources.aggregator_penalty", -0.5))
+  //     wire_pen    = float(W(weights, "sources.press_wire_penalty", -0.4))
+  //     pref_bonus  = float(W(weights, "sources.preferred_domains_bonus", 0.25))
+  //
+  //     # --- Public safety (fixed key names) ---
+  //     ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
+  //     ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
+  //     ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
+  //     ps_per_inj   = float(W(weights, "public_safety.per_injury_points", 0.10))  # <-- FIXED (used to read max_injury_points)
+  //     ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.60))
+  //     ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
+  //     ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
+  //
+  //     # --- Markets ---
+  //     btc_thr   = float(W(weights, "markets.btc_abs_move_threshold_pct", 7.0))
+  //     btc_pts   = float(W(weights, "markets.btc_points", 1.6))
+  //     idx_thr   = float(W(weights, "markets.index_abs_move_threshold_pct", 1.0))
+  //     idx_pts   = float(W(weights, "markets.index_points", 1.0))
+  //     nik_thr   = float(W(weights, "markets.nikkei_abs_move_threshold_pct", 1.0))
+  //     nik_pts   = float(W(weights, "markets.nikkei_points", 0.7))
+  //     stk_thr   = float(W(weights, "markets.single_stock_abs_move_threshold_pct", 10.0))
+  //     stk_pts   = float(W(weights, "markets.single_stock_points", 1.2))
+  //
+  //     # --- Effects thresholds ---
+  //     ls_min    = float(W(weights, "effects.lightsaber_min_score", 2.5))
+  //     also_body = int(W(weights, "effects.lightsaber_also_if.body_count_ge", 5))
+  //     also_btc  = float(W(weights, "effects.lightsaber_also_if.btc_abs_move_ge_pct", 8.0))
+  //     also_stk  = float(W(weights, "effects.lightsaber_also_if.single_stock_abs_move_ge_pct", 15.0))
+  //     glitch_min= float(W(weights, "effects.glitch_min_score", 1.8))
+  //
+  //     # --- Reorder hints ---
+  //     nate_bonus           = float(W(weights, "reorder.nate_hours_hint_bonus", 0.25))
+  //     nate_bonus_max_hours = float(W(weights, "reorder.nate_hours_hint_max_hours", 6.0))
+  //
+  //     # --- Sports ---
+  //     sp_team        = float(W(weights, "sports.team_match_points", 0.80))
+  //     sp_player      = float(W(weights, "sports.player_match_points", 0.35))
+  //     sp_win         = float(W(weights, "sports.result_win_points", 0.45))
+  //     sp_loss        = float(W(weights, "sports.result_loss_points", 0.25))
+  //     sp_evening     = float(W(weights, "sports.evening_window_points", 0.70))
+  //     sp_playoffs    = float(W(weights, "sports.playoff_mode_points", 0.40))
+  //     sp_focus_team  = float(W(weights, "sports.focus_team_points", 0.55))
+  //     sp_final_story = float(W(weights, "sports.final_story_points", 0.75))
+  //     sp_final_score = float(W(weights, "sports.final_with_score_points", 0.45))
+  //
+  //     # --- Regional/Toronto weights ---
+  //     regional_country_pts = float(W(weights, "regional.weights.country_match", 1.2))
+  //     regional_city_pts    = float(W(weights, "regional.weights.city_match_toronto", 0.0))
+  //     regional_max_bonus   = float(W(weights, "regional.max_bonus", 2.4))
+  // def Wf(d: dict, path: str, default: float) -> float:
+  //     try:
+  //         v = W(d, path, default)
+  //         return float(v)
+  //     except Exception:
+  //         return float(default)
 }
-    # --------- Scoring ---------
-    half_life_h = float(W(weights, "recency.half_life_hours", 6.0))
-    age_pen_24  = float(W(weights, "recency.age_penalty_after_24h", -0.6))
-    age_pen_36  = float(W(weights, "recency.age_penalty_after_36h", -0.4))
-    superseded_pen = float(W(weights, "recency.superseded_cluster_penalty", -0.9))
-    cat_table   = dict(W(weights, "categories", {}))
-    agg_pen     = float(W(weights, "sources.aggregator_penalty", -0.5))
-    wire_pen    = float(W(weights, "sources.press_wire_penalty", -0.4))
-    pref_bonus  = float(W(weights, "sources.preferred_domains_bonus", 0.25))
-
-    # --- Public safety (fixed key names) ---
-    ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
-    ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
-    ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
-    ps_per_inj   = float(W(weights, "public_safety.per_injury_points", 0.10))  # <-- FIXED (used to read max_injury_points)
-    ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.60))
-    ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
-    ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
-
-    # --- Markets ---
-    btc_thr   = float(W(weights, "markets.btc_abs_move_threshold_pct", 7.0))
-    btc_pts   = float(W(weights, "markets.btc_points", 1.6))
-    idx_thr   = float(W(weights, "markets.index_abs_move_threshold_pct", 1.0))
-    idx_pts   = float(W(weights, "markets.index_points", 1.0))
-    nik_thr   = float(W(weights, "markets.nikkei_abs_move_threshold_pct", 1.0))
-    nik_pts   = float(W(weights, "markets.nikkei_points", 0.7))
-    stk_thr   = float(W(weights, "markets.single_stock_abs_move_threshold_pct", 10.0))
-    stk_pts   = float(W(weights, "markets.single_stock_points", 1.2))
-
-    # --- Effects thresholds ---
-    ls_min    = float(W(weights, "effects.lightsaber_min_score", 2.5))
-    also_body = int(W(weights, "effects.lightsaber_also_if.body_count_ge", 5))
-    also_btc  = float(W(weights, "effects.lightsaber_also_if.btc_abs_move_ge_pct", 8.0))
-    also_stk  = float(W(weights, "effects.lightsaber_also_if.single_stock_abs_move_ge_pct", 15.0))
-    glitch_min= float(W(weights, "effects.glitch_min_score", 1.8))
-
-    # --- Reorder hints ---
-    nate_bonus           = float(W(weights, "reorder.nate_hours_hint_bonus", 0.25))
-    nate_bonus_max_hours = float(W(weights, "reorder.nate_hours_hint_max_hours", 6.0))
-
-    # --- Sports ---
-    sp_team        = float(W(weights, "sports.team_match_points", 0.80))
-    sp_player      = float(W(weights, "sports.player_match_points", 0.35))
-    sp_win         = float(W(weights, "sports.result_win_points", 0.45))
-    sp_loss        = float(W(weights, "sports.result_loss_points", 0.25))
-    sp_evening     = float(W(weights, "sports.evening_window_points", 0.70))
-    sp_playoffs    = float(W(weights, "sports.playoff_mode_points", 0.40))
-    sp_focus_team  = float(W(weights, "sports.focus_team_points", 0.55))
-    sp_final_story = float(W(weights, "sports.final_story_points", 0.75))
-    sp_final_score = float(W(weights, "sports.final_with_score_points", 0.45))
-
-    # --- Regional/Toronto weights ---
-    regional_country_pts = float(W(weights, "regional.weights.country_match", 1.2))
-    regional_city_pts    = float(W(weights, "regional.weights.city_match_toronto", 0.0))
-    regional_max_bonus   = float(W(weights, "regional.max_bonus", 2.4))
-def Wf(d: dict, path: str, default: float) -> float:
-    try:
-        v = W(d, path, default)
-        return float(v)
-    except Exception:
-        return float(default)
