@@ -3,8 +3,8 @@
     {
       "games": [
         {
-          "gamePk": "760073",
-          "gameDate": "2025-10-27T22:45Z",
+          "gamePk": "760085",
+          "gameDate": "2025-10-28T22:45Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -16,39 +16,13 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "CLB"
+                "abbreviation": "NYC"
               },
               "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "CIN"
-              },
-              "score": 1
-            }
-          }
-        },
-        {
-          "gamePk": "760088",
-          "gameDate": "2025-10-28T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SEA"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIN"
+                "abbreviation": "CLT"
               },
               "score": 0
             }
