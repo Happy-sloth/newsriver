@@ -1,14 +1,14 @@
 {
   "dates": [
     {
-      "date": "2025-10-30",
+      "date": "2025-10-31",
       "games": [
         {
           "gamePk": 401772943,
           "gameDate": "2025-10-31T00:15Z",
           "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -20,13 +20,13 @@
               "team": {
                 "abbreviation": "BAL"
               },
-              "score": 0
+              "score": 14
             },
             "home": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 0
+              "score": 6
             }
           }
         },
