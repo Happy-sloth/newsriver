@@ -1,7 +1,23 @@
 {
-  "generated_utc": "2025-10-31T09:41:20.616Z",
+  "generated_utc": "2025-10-31T09:51:52.542Z",
   "count": 69,
   "items": [
+    {
+      "title": "Man, 22, charged in human trafficking investigation in Niagara Falls",
+      "url": "https://toronto.citynews.ca/2025/10/31/man-22-charged-in-human-trafficking-investigation-in-niagara-falls",
+      "source": "CityNews Toronto",
+      "published_utc": "2025-10-31T09:43:53.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Local",
+      "region": "Canada"
+    },
     {
       "title": "A ‘Conjuring’ Prequel Film Is in the Works",
       "url": "https://hypebeast.com/2025/10/conjuring-prequel-film-in-development-warner-bros-new-line",
@@ -610,6 +626,19 @@
       "region": "Canada"
     },
     {
+      "title": "“The James Dean of the Baltics” Juozas Budraitis to Receive Tallinn Film Festival Lifetime Award",
+      "url": "https://www.hollywoodreporter.com/movies/movie-news/tallinn-poff-james-dean-baltics-juozas-budraitis-tribute-1236411027",
+      "source": "The Hollywood Reporter",
+      "published_utc": "2025-10-31T07:59:27.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
       "title": "Hurricane Melissa death toll rises as aid struggles to reach parts of Jamaica",
       "url": "https://www.bbc.com/news/articles/clylqpyg8pjo?at_campaign=rss&at_medium=RSS",
       "source": "BBC News",
@@ -939,43 +968,15 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Dave Mustaine on why Megadeth are covering Metallica’s ‘Ride The Lightning’: “Our intentions were pure”",
-      "url": "https://www.nme.com/news/music/dave-mustaine-on-why-megadeth-are-covering-metallicas-ride-the-lightning-our-intentions-were-pure-3903973",
-      "source": "NME",
-      "published_utc": "2025-10-31T05:26:42.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Dogecoin Slides 5.5% as $0.1940 Support Cracks on Volume Spike",
-      "url": "https://www.coindesk.com/markets/2025/10/31/dogecoin-slides-5-5-as-usd0-1940-support-cracks-on-volume-spike",
-      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
-      "published_utc": "2025-10-31T05:22:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Business",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 151,
     "cap_items": 320,
-    "collected": 701,
-    "dedup_pass1": 694,
+    "collected": 715,
+    "dedup_pass1": 708,
     "dedup_final": 320,
-    "slow_domains": [
-      "rollcall.com"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -989,63 +990,64 @@
       "financialpost.com",
       "globalnews.ca",
       "toronto.citynews.ca",
+      "www.boston.com",
       "www.marketwatch.com",
       "www.npr.org",
       "www.wsj.com"
     ],
     "feed_times_sample": [
       {
-        "host": "www.labourstart.org",
-        "sec": 1.304,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.981,
+        "sec": 1.576,
         "kept": 8
       },
       {
+        "host": "www.labourstart.org",
+        "sec": 1.261,
+        "kept": 0
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.59,
+        "kept": 14
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.405,
+        "sec": 0.457,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.376,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.313,
+        "sec": 0.332,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.297,
+        "sec": 0.288,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.243,
-        "kept": 0
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.225,
+        "sec": 0.254,
         "kept": 10
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.174,
+        "sec": 0.231,
+        "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.216,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.074,
+        "sec": 0.098,
         "kept": 14
       }
     ],
-    "elapsed_sec": 290.88,
+    "elapsed_sec": 292.48,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1080,7 +1082,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 15,
       "sports_player_hits": 4,
-      "sports_result_win_hits": 14,
+      "sports_result_win_hits": 16,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -1096,11 +1098,11 @@
       "reject_hits": 4
     },
     "sanity_stats": {
-      "link_verification_fail": 29,
+      "link_verification_fail": 33,
       "soft_404_drops": 33,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 6,
+      "market_sanity_drops": 5,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
