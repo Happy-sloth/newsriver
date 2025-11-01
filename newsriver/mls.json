@@ -6,12 +6,12 @@
           "gamePk": "760086",
           "gameDate": "2025-11-01T19:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
@@ -44,7 +44,7 @@
               "team": {
                 "abbreviation": "PHI"
               },
-              "score": 0
+              "score": 3
             },
             "home": {
               "team": {
