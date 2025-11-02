@@ -84,19 +84,19 @@
           "gamePk": "760077",
           "gameDate": "2025-11-02T01:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "VAN"
               },
-              "score": 0
+              "score": 1
             },
             "home": {
               "team": {
@@ -128,7 +128,7 @@
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 1
+              "score": 2
             }
           }
         }
