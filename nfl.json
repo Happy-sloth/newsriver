@@ -20,7 +20,7 @@
               "team": {
                 "abbreviation": "CHI"
               },
-              "score": 34
+              "score": 41
             },
             "home": {
               "team": {
@@ -47,7 +47,7 @@
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 24
+              "score": 27
             },
             "home": {
               "team": {
@@ -61,8 +61,8 @@
           "gamePk": 401772872,
           "gameDate": "2025-11-02T18:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -74,40 +74,13 @@
               "team": {
                 "abbreviation": "CAR"
               },
-              "score": 13
+              "score": 16
             },
             "home": {
               "team": {
                 "abbreviation": "GB"
               },
-              "score": 6
-            }
-          }
-        },
-        {
-          "gamePk": 401772764,
-          "gameDate": "2025-11-02T18:00Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAC"
-              },
-              "score": 27
-            },
-            "home": {
-              "team": {
-                "abbreviation": "TEN"
-              },
-              "score": 20
+              "score": 13
             }
           }
         },
@@ -115,8 +88,8 @@
           "gamePk": 401772763,
           "gameDate": "2025-11-02T18:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -142,8 +115,8 @@
           "gamePk": 401772767,
           "gameDate": "2025-11-02T18:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -161,7 +134,7 @@
               "team": {
                 "abbreviation": "NYG"
               },
-              "score": 17
+              "score": 24
             }
           }
         },
@@ -182,13 +155,13 @@
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 10
+              "score": 17
             },
             "home": {
               "team": {
                 "abbreviation": "PIT"
               },
-              "score": 24
+              "score": 27
             }
           }
         },
@@ -220,11 +193,38 @@
           }
         },
         {
+          "gamePk": 401772764,
+          "gameDate": "2025-11-02T18:00Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAC"
+              },
+              "score": 27
+            },
+            "home": {
+              "team": {
+                "abbreviation": "TEN"
+              },
+              "score": 20
+            }
+          }
+        },
+        {
           "gamePk": 401772873,
           "gameDate": "2025-11-02T21:05Z",
           "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -250,8 +250,8 @@
           "gamePk": 401772874,
           "gameDate": "2025-11-02T21:05Z",
           "status": {
-            "abstractGameState": "Preview",
-            "detailedState": "Scheduled"
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
           },
           "linescore": {
             "currentPeriod": 0,
