@@ -4,60 +4,6 @@
       "date": "2025-11-02",
       "games": [
         {
-          "gamePk": 401772765,
-          "gameDate": "2025-11-02T18:00Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 41
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CIN"
-              },
-              "score": 42
-            }
-          }
-        },
-        {
-          "gamePk": 401772870,
-          "gameDate": "2025-11-02T18:00Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 18
-            },
-            "home": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 15
-            }
-          }
-        },
-        {
           "gamePk": 401772873,
           "gameDate": "2025-11-02T21:05Z",
           "status": {
@@ -108,6 +54,60 @@
                 "abbreviation": "LAR"
               },
               "score": 7
+            }
+          }
+        },
+        {
+          "gamePk": 401772768,
+          "gameDate": "2025-11-02T21:25Z",
+          "status": {
+            "abstractGameState": "Live",
+            "detailedState": "In Progress"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "KC"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "BUF"
+              },
+              "score": 7
+            }
+          }
+        },
+        {
+          "gamePk": 401772765,
+          "gameDate": "2025-11-02T18:00Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CHI"
+              },
+              "score": 47
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CIN"
+              },
+              "score": 42
             }
           }
         },
@@ -274,11 +274,11 @@
           }
         },
         {
-          "gamePk": 401772768,
-          "gameDate": "2025-11-02T21:25Z",
+          "gamePk": 401772870,
+          "gameDate": "2025-11-02T18:00Z",
           "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
+            "abstractGameState": "Final",
+            "detailedState": "Final"
           },
           "linescore": {
             "currentPeriod": 0,
@@ -288,15 +288,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "KC"
+                "abbreviation": "DEN"
               },
-              "score": 0
+              "score": 18
             },
             "home": {
               "team": {
-                "abbreviation": "BUF"
+                "abbreviation": "HOU"
               },
-              "score": 0
+              "score": 15
             }
           }
         },
