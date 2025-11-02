@@ -4,33 +4,6 @@
       "date": "2025-11-02",
       "games": [
         {
-          "gamePk": 401772943,
-          "gameDate": "2025-10-31T00:15Z",
-          "status": {
-            "abstractGameState": "Final",
-            "detailedState": "Final"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BAL"
-              },
-              "score": 28
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIA"
-              },
-              "score": 6
-            }
-          }
-        },
-        {
           "gamePk": 401772765,
           "gameDate": "2025-11-02T18:00Z",
           "status": {
@@ -351,6 +324,33 @@
                 "abbreviation": "WSH"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": 401772943,
+          "gameDate": "2025-10-31T00:15Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BAL"
+              },
+              "score": 28
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIA"
+              },
+              "score": 6
             }
           }
         },
