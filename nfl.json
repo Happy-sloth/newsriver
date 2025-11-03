@@ -4,33 +4,6 @@
       "date": "2025-11-03",
       "games": [
         {
-          "gamePk": 401772926,
-          "gameDate": "2025-11-03T01:20Z",
-          "status": {
-            "abstractGameState": "Live",
-            "detailedState": "In Progress"
-          },
-          "linescore": {
-            "currentPeriod": 0,
-            "currentPeriodOrdinal": "",
-            "currentPeriodTimeRemaining": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SEA"
-              },
-              "score": 38
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 7
-            }
-          }
-        },
-        {
           "gamePk": 401772765,
           "gameDate": "2025-11-02T18:00Z",
           "status": {
@@ -324,6 +297,33 @@
                 "abbreviation": "BUF"
               },
               "score": 28
+            }
+          }
+        },
+        {
+          "gamePk": 401772926,
+          "gameDate": "2025-11-03T01:20Z",
+          "status": {
+            "abstractGameState": "Final",
+            "detailedState": "Final"
+          },
+          "linescore": {
+            "currentPeriod": 0,
+            "currentPeriodOrdinal": "",
+            "currentPeriodTimeRemaining": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SEA"
+              },
+              "score": 38
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 14
             }
           }
         },
