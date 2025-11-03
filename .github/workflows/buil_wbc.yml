@@ -1,0 +1,43 @@
+name: Build WBC JSON
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"  # every 30 min
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sanity (no deps)
+        run: python -V
+
+      # If/when you have a real source, uncomment and set WBC_SRC here:
+      # - name: Set WBC source
+      #   run: echo "WBC_SRC=https://<your-scoreboard-endpoint>" >> $GITHUB_ENV
+
+      - name: Build wbc.json (root + newsriver/)
+        run: |
+          python3 fetch_wbc.py
+
+      - name: Commit & push WBC JSON
+        run: |
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wbc.json newsriver/wbc.json
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Update WBC JSON"
+            git push
+          fi
