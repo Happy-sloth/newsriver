@@ -28,7 +28,18 @@ jobs:
       - name: Build wbc.json (root + newsriver/)
         run: |
           set -e
-          python3 newsriver/scripts/fetch_wbc.py
+          # Try both common locations for your script
+          if [ -f "newsriver/scripts/fetch_wbc.py" ]; then
+            python3 newsriver/scripts/fetch_wbc.py
+          elif [ -f "scripts/fetch_wbc.py" ]; then
+            python3 scripts/fetch_wbc.py
+          else
+            echo "ERROR: fetch_wbc.py not found in newsriver/scripts/ or scripts/" >&2
+            echo "Repo root is: $(pwd)"
+            echo "--- Tree (top level) ---"
+            ls -la
+            exit 1
+          fi
 
       - name: Verify outputs exist
         run: |
