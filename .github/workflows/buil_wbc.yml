@@ -27,7 +27,15 @@ jobs:
 
       - name: Build wbc.json (root + newsriver/)
         run: |
-          python3 fetch_wbc.py
+          set -e
+          python3 newsriver/scripts/fetch_wbc.py
+
+      - name: Verify outputs exist
+        run: |
+          set -e
+          test -f wbc.json || (echo "ERROR: wbc.json not found at repo root" && exit 1)
+          test -f newsriver/wbc.json || (echo "ERROR: newsriver/wbc.json not found" && exit 1)
+          ls -la wbc.json newsriver/wbc.json
 
       - name: Commit & push WBC JSON
         run: |
