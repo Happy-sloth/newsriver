@@ -3,8 +3,8 @@
     {
       "games": [
         {
-          "gamePk": "760074",
-          "gameDate": "2025-11-02T23:30Z",
+          "gamePk": "760089",
+          "gameDate": "2025-11-04T03:45Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -16,41 +16,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "CIN"
+                "abbreviation": "MIN"
               },
               "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "CLB"
+                "abbreviation": "SEA"
               },
-              "score": 4
-            }
-          }
-        },
-        {
-          "gamePk": "760083",
-          "gameDate": "2025-11-03T01:45Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAFC"
-              },
-              "score": 4
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ATX"
-              },
-              "score": 1
+              "score": 0
             }
           }
         }
