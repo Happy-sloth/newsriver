@@ -1,0 +1,34 @@
+{
+  "dates": [
+    {
+      "games": [
+        {
+          "gamePk": "401507523",
+          "gameDate": "2023-03-21T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "USA"
+              },
+              "score": 2
+            },
+            "home": {
+              "team": {
+                "abbreviation": "JPN"
+              },
+              "score": 3
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
