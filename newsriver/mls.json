@@ -3,8 +3,8 @@
     {
       "games": [
         {
-          "gamePk": "760089",
-          "gameDate": "2025-11-04T03:45Z",
+          "gamePk": "760078",
+          "gameDate": "2025-11-07T20:00Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -16,15 +16,41 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "MIN"
+                "abbreviation": "DAL"
               },
-              "score": 2
+              "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "SEA"
+                "abbreviation": "VAN"
               },
-              "score": 3
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "760087",
+          "gameDate": "2025-11-08T00:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NYC"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CLT"
+              },
+              "score": 0
             }
           }
         }
