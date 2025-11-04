@@ -27,18 +27,45 @@ jobs:
           python -m pip install -U pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Fetch AHL
+      - name: Debug workspace layout
         run: |
-          python newsriver/scripts/fetch_ahl.py
+          echo "PWD: $(pwd)"
+          echo "Top-level:"
+          ls -la
+          echo "Search for fetch_ahl.py:"
+          find . -maxdepth 3 -type f -name "fetch_ahl.py" -print || true
 
-      - name: Verify output exists
+      - name: Run fetch_ahl.py (auto-detect path)
+        id: run_fetch
+        shell: bash
         run: |
-          test -f newsriver/ahl.json || (echo "ERROR: newsriver/ahl.json not found" && exit 1)
+          set -euo pipefail
+          # Prefer nested repo layout if present, else fallback to /scripts
+          if [ -f newsriver/scripts/fetch_ahl.py ]; then
+            TARGET="newsriver/scripts/fetch_ahl.py"
+          elif [ -f scripts/fetch_ahl.py ]; then
+            TARGET="scripts/fetch_ahl.py"
+          else
+            echo "ERROR: fetch_ahl.py not found under newsriver/scripts/ or scripts/"
+            exit 1
+          fi
+          echo "Using: $TARGET"
+          python "$TARGET"
 
-      # Optional: also publish a root copy for consistency with other feeds
-      - name: Copy to root (optional)
+      - name: Verify output exists (newsriver/ahl.json)
         run: |
-          cp newsriver/ahl.json ahl.json || true
+          if [ ! -f newsriver/ahl.json ]; then
+            echo "ERROR: newsriver/ahl.json not produced by script."
+            echo "Workspace tree (depth 3):"
+            find . -maxdepth 3 -type f -name "ahl.json" -print || true
+            exit 1
+          fi
+          jq -e . newsriver/ahl.json >/dev/null || (echo "ERROR: Invalid JSON in newsriver/ahl.json" && exit 1)
+
+      # Optional root copy for front-ends that read from /
+      - name: Copy to repo root (optional)
+        run: |
+          cp newsriver/ahl.json ahl.json
 
       - name: Commit & push if changed
         run: |
