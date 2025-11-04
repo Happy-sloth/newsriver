@@ -15,7 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # keep credentials so git push works
           persist-credentials: true
 
       - name: Setup Python
@@ -29,14 +28,25 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Fetch AHL
-        run: python scripts/fetch_ahl.py
+        run: |
+          python newsriver/scripts/fetch_ahl.py
+
+      - name: Verify output exists
+        run: |
+          test -f newsriver/ahl.json || (echo "ERROR: newsriver/ahl.json not found" && exit 1)
+
+      # Optional: also publish a root copy for consistency with other feeds
+      - name: Copy to root (optional)
+        run: |
+          cp newsriver/ahl.json ahl.json || true
 
       - name: Commit & push if changed
         run: |
-          if [ -n "$(git status --porcelain newsriver/ahl.json)" ]; then
+          CHANGED=$(git status --porcelain -- newsriver/ahl.json ahl.json)
+          if [ -n "$CHANGED" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add newsriver/ahl.json
+            git add newsriver/ahl.json ahl.json
             git commit -m "chore(newsriver): refresh ahl.json"
             git push
           else
