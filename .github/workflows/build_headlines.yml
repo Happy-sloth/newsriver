@@ -326,6 +326,21 @@ jobs:
           echo "----- summary"
           jq -r '._debug.version, .generated_utc, .count' headlines.json || true
 
+      - name: Duplicate to /newsriver/headlines.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p newsriver
+          cp -f headlines.json newsriver/headlines.json
+          echo "Root count:       $(jq -r '.count' headlines.json)"
+          echo "Newsriver count:  $(jq -r '.count' newsriver/headlines.json)"
+          # Simple consistency check (count + generated_utc)
+          ROOT_META="$(jq -r '.generated_utc + ":" + (.count|tostring)' headlines.json)"
+          NR_META="$(jq -r '.generated_utc + ":" + (.count|tostring)' newsriver/headlines.json)"
+          if [ "$ROOT_META" != "$NR_META" ]; then
+            echo "Mismatch between root and /newsriver copies"; exit 1
+          fi
+
       - name: Commit & push with rebase (conflict-safe)
         shell: bash
         run: |
@@ -334,21 +349,22 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Force-add in case .gitignore excludes JSON
-          git add -f headlines.json
+          git add -f headlines.json newsriver/headlines.json
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "ci: build+clean headlines.json (root path)"
+          META="$(jq -r '.generated_utc + " (#" + (.count|tostring) + " items)"' headlines.json)"
+          git commit -m "ci: build+clean headlines.json ${META}"
 
           git fetch origin main
           # Try fast-forward via rebase
           if ! git pull --rebase origin main; then
             echo "Rebase conflict – preferring generated headlines.json"
-            git checkout --ours -- headlines.json || true
-            git add -f headlines.json
+            git checkout --ours -- headlines.json newsriver/headlines.json || true
+            git add -f headlines.json newsriver/headlines.json
             git rebase --continue || true
           fi
 
@@ -361,8 +377,8 @@ jobs:
             echo "Push failed (attempt $i) – rebasing again and retrying..."
             git fetch origin main
             if ! git rebase origin/main; then
-              git checkout --ours -- headlines.json || true
-              git add -f headlines.json
+              git checkout --ours -- headlines.json newsriver/headlines.json || true
+              git add -f headlines.json newsriver/headlines.json
               git rebase --continue || true
             fi
           done
