@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 # scripts/fetch_nba.py
 #
-# Build nba.json in the relay shape your flipboard expects (written to repo root).
-# - Source: ESPN NBA scoreboard (yesterday + today merged)
-# - Stdlib only
-# - Robust state mapping (Preview/Live/Final)
-# - Correct quarter labeling (1st/2nd/3rd/4th, OT for 5+)
-# - Stable sorting (Live → Preview by start → Final by recency)
-# - Adds generated_utc and a small _meta block for debugging
+# Build fresh nba.json in the relay shape your flipboard expects.
+# Changes in this version:
+#  - Writes to BOTH repo root (nba.json) and newsriver/nba.json
+#  - Freshness guard: keep Live always, keep Preview within PREVIEW_HOURS,
+#    keep Final within FINAL_HOURS (defaults: 36h Preview, 6h Final)
+#  - Continues to merge Yesterday + Today in America/Toronto
+#  - Stdlib only
 
 from __future__ import annotations
 
 import json
+import os
 import sys
 import urllib.request
 from pathlib import Path
@@ -24,23 +25,26 @@ try:
 except Exception:
     ZoneInfo = None  # type: ignore
 
-# IMPORTANT: Pages is configured for main / (root), so write to the repo root.
-OUT = Path("nba.json")
+# OUTPUTS (write both so FE can read either path)
+OUT_ROOT = Path("nba.json")
+OUT_SUB  = Path("newsriver/nba.json")
 
 # ESPN NBA scoreboard
 # Today: https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard
-# Specific date: append ?dates=YYYYMMDD
+# ?dates=YYYYMMDD for specific date
 ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
 
 # Network behavior
 HTTP_TIMEOUT = 12.0
-USER_AGENT = "NewsRiverRelay/1.0 (NBA) +https://mypybite.github.io/newsriver/"
+USER_AGENT = "NewsRiverRelay/1.1 (NBA)"
 
-# Minor abbreviation fixes for logos / consistency
+# Freshness windows (can override via env)
+PREVIEW_HOURS = int(os.getenv("MPB_NBA_PREVIEW_HOURS", "36"))
+FINAL_HOURS   = int(os.getenv("MPB_NBA_FINAL_HOURS", "6"))
+
+# Minor abbreviation fixes
 ABBR_FIX = {
-    # Warriors sometimes appear as "GS"
     "GS": "GSW",
-    # Occasional variants seen across feeds; harmless if not present
     "NO": "NOP",
     "SA": "SAS",
     "NY": "NYK",
@@ -53,22 +57,23 @@ ABBR_FIX = {
 def _now_utc() -> datetime:
     return datetime.now(timezone.utc)
 
+def _now_et() -> datetime:
+    if ZoneInfo is None:
+        # Conservative fallback ~ET (UTC-4/5). Only date matters for ESPN query.
+        return _now_utc() - timedelta(hours=4)
+    return datetime.now(ZoneInfo("America/Toronto"))
+
 def _et_today_and_yesterday() -> tuple[datetime, datetime]:
     """
-    Return (today_ET, yesterday_ET) as dates anchored to America/Toronto.
-    Only the date part is used to build ESPN ?dates=YYYYMMDD.
+    Return (today_ET_midnightUTC, yesterday_ET_midnightUTC).
+    Only the date portion is used (strftime to YYYYMMDD).
     """
-    if ZoneInfo is None:
-        # Fallback: approximate ET by UTC-4 (OK for current needs).
-        now = _now_utc() - timedelta(hours=4)
-    else:
-        now = datetime.now(ZoneInfo("America/Toronto"))
-    today = now.date()
-    yday = (now - timedelta(days=1)).date()
-    # Return as UTC-aware midnights for convenience (only strftime is used)
+    now_et = _now_et()
+    today = now_et.date()
+    yday  = (now_et - timedelta(days=1)).date()
     return (
         datetime(today.year, today.month, today.day, tzinfo=timezone.utc),
-        datetime(yday.year, yday.month, yday.day, tzinfo=timezone.utc),
+        datetime(yday.year,  yday.month,  yday.day,  tzinfo=timezone.utc),
     )
 
 def _parse_iso_or_none(s: Optional[str]) -> Optional[datetime]:
@@ -80,20 +85,12 @@ def _parse_iso_or_none(s: Optional[str]) -> Optional[datetime]:
         return None
 
 def ord_period(n: Optional[int]) -> Optional[str]:
-    """
-    Quarter label:
-      1 -> 1st, 2 -> 2nd, 3 -> 3rd, 4 -> 4th, 5+ -> OT
-    """
     if not n:
         return None
-    if n == 1:
-        return "1st"
-    if n == 2:
-        return "2nd"
-    if n == 3:
-        return "3rd"
-    if n == 4:
-        return "4th"
+    if n == 1: return "1st"
+    if n == 2: return "2nd"
+    if n == 3: return "3rd"
+    if n == 4: return "4th"
     return "OT"
 
 def map_state_from_types(status_obj: Dict[str, Any], comp_status_obj: Dict[str, Any]) -> str:
@@ -119,8 +116,7 @@ def map_state_from_types(status_obj: Dict[str, Any], comp_status_obj: Dict[str, 
             return "Preview"
         return None
 
-    m = _state_from(status_obj) or _state_from(comp_status_obj)
-    return m or "Preview"
+    return _state_from(status_obj) or _state_from(comp_status_obj) or "Preview"
 
 def abbr(team_obj: Dict[str, Any]) -> str:
     raw = ((team_obj or {}).get("abbreviation") or "TEAM").upper()
@@ -138,6 +134,7 @@ def fetch_json(url: str, timeout: float = HTTP_TIMEOUT) -> Optional[dict]:
             url,
             headers={
                 "Cache-Control": "no-cache",
+                "Pragma": "no-cache",
                 "User-Agent": USER_AGENT,
             },
         )
@@ -157,13 +154,7 @@ def espn_url_for_date(dt: Optional[datetime]) -> str:
 
 def to_relay_from_espn(data: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
-    Convert a single ESPN payload to the relay game's shape the FE expects.
-    Relay fields used by FE:
-      - gamePk, gameDate
-      - status.detailedState / abstractGameState (Live/Final/Preview)
-      - linescore.currentPeriodOrdinal / currentQuarter
-      - teams.away/home.team.abbreviation
-      - teams.away/home.score
+    Convert a single ESPN payload to the relay shape the FE expects.
     """
     events = (data or {}).get("events") or []
     out: List[Dict[str, Any]] = []
@@ -181,7 +172,7 @@ def to_relay_from_espn(data: Dict[str, Any]) -> List[Dict[str, Any]]:
 
         game_id = ev.get("id") or comp.get("id") or ""
 
-        # Period / quarter info (NBA)
+        # Period / quarter info
         period_num = (
             status.get("period")
             or (comp_status.get("period") if isinstance(comp_status, dict) else None)
@@ -238,11 +229,22 @@ def to_relay_from_espn(data: Dict[str, Any]) -> List[Dict[str, Any]]:
 
     return out
 
-def write_fallback():
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    with OUT.open("w", encoding="utf-8") as f:
-        json.dump({"dates": [{"games": []}]}, f, indent=2)
-    print(f"[nba] wrote fallback {OUT}", file=sys.stderr)
+def write_payload(relay: dict) -> None:
+    # Ensure both locations exist
+    OUT_ROOT.parent.mkdir(parents=True, exist_ok=True)
+    OUT_SUB.parent.mkdir(parents=True, exist_ok=True)
+
+    with OUT_ROOT.open("w", encoding="utf-8") as f:
+        json.dump(relay, f, indent=2)
+    with OUT_SUB.open("w", encoding="utf-8") as f:
+        json.dump(relay, f, indent=2)
+
+    print(f"[nba] wrote {OUT_ROOT} and {OUT_SUB} games={len(relay['dates'][0]['games'])}", file=sys.stderr)
+
+def write_fallback() -> None:
+    relay = {"generated_utc": _now_utc().isoformat().replace("+00:00", "Z"),
+             "dates": [{"games": []}]}
+    write_payload(relay)
 
 def _state_rank(s: str) -> int:
     # Live → Preview → Final
@@ -261,6 +263,22 @@ def _start_dt_of(game: Dict[str, Any]) -> datetime:
         except Exception:
             pass
     return _parse_iso_or_none(game.get("gameDate")) or _now_utc()
+
+def _keep_game(game: Dict[str, Any], now: datetime) -> bool:
+    """
+    Freshness guard:
+      - Live: keep always
+      - Preview: keep if |start - now| <= PREVIEW_HOURS
+      - Final: keep if (now - start) <= FINAL_HOURS
+    """
+    state = ((game.get("status") or {}).get("abstractGameState") or "").lower()
+    start = _start_dt_of(game)
+    if state == "live":
+        return True
+    if state == "preview":
+        return abs((start - now).total_seconds()) <= PREVIEW_HOURS * 3600
+    # Final / Unknown
+    return (now - start).total_seconds() <= FINAL_HOURS * 3600
 
 def main():
     # Build URLs for yesterday+today in America/Toronto
@@ -306,37 +324,43 @@ def main():
         seen.add(gid)
         unique.append(g)
 
-    # Sort: Live → Preview (by start ascending) → Final (by start descending)
+    # Freshness filter
+    now = _now_utc()
+    fresh = [g for g in unique if _keep_game(g, now)]
+
+    if not fresh:
+        # If the guard filtered everything (e.g., offseason), write empty but fresh timestamp
+        write_fallback()
+        return
+
+    # Sort: Live → Preview (by start asc) → Final (by start desc)
     def _sort_key(g: Dict[str, Any]):
         state = (g.get("status") or {}).get("abstractGameState", "")
         rank = _state_rank(state)
         start_dt = _start_dt_of(g)
         if state == "Final":
-            # newer Finals first
             return (rank, -start_dt.timestamp())
-        # earlier games first for Live/Preview
         return (rank, start_dt.timestamp())
 
-    unique.sort(key=_sort_key)
+    fresh.sort(key=_sort_key)
 
     relay = {
-        "generated_utc": _now_utc().isoformat().replace("+00:00", "Z"),
+        "generated_utc": now.isoformat().replace("+00:00", "Z"),
         "dates": [{"games": [
-            {k: v for k, v in g.items() if k != "_start_dt"} for g in unique
+            {k: v for k, v in g.items() if k != "_start_dt"} for g in fresh
         ]}],
         "_meta": {
             "source": "espn",
             "urls": [yday_url, today_url],
-            "games_count": len(unique),
+            "games_count": len(fresh),
             "http_timeout_sec": HTTP_TIMEOUT,
-            "version": "nba-relay-1.0",
-        }
+            "version": "nba-relay-1.1",
+            "preview_hours": PREVIEW_HOURS,
+            "final_hours": FINAL_HOURS,
+        },
     }
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    with OUT.open("w", encoding="utf-8") as f:
-        json.dump(relay, f, indent=2)
-    print(f"[nba] wrote {OUT} games={len(unique)}", file=sys.stderr)
+    write_payload(relay)
 
 if __name__ == "__main__":
     main()
