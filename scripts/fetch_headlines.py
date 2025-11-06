@@ -1395,8 +1395,9 @@ def build(feeds_file: str, out_path: str) -> dict:
     ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
     ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
     ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
-    ps_per_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))  # keep existing
-    ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
+    # FIXED: read the per-injury increment, not the cap
+    ps_per_inj   = float(W(weights, "public_safety.per_injury_points", 0.05))
+    ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 1.0))
     ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
     ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
 
@@ -1590,7 +1591,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             total += bump
             score_dbg["major_figure_hits"] += 1
 
-        # Effects tagging (unchanged thresholds; will help UI glow choices)
+        # Effects tagging
         effects = {"lightsaber": False, "glitch": False, "reasons": []}
         if total >= ls_min: effects["lightsaber"] = True; effects["reasons"].append(f"score≥{ls_min}")
         if it.get("_ps_deaths", 0) >= also_body: effects["lightsaber"] = True; effects["reasons"].append(f"body_count≥{also_body}")
@@ -1629,7 +1630,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         recency_boost = max(0.0, 24.0 - age_h) / 24.0
         urgent = 1.0 if (RE_BREAKING.search(title) or CONFLICT_CUES.search(title) or RE_OBIT_URGENCY.search(title)) else 0.0
         safety = 1.0 if (it.get("_ps_deaths",0) > 0 or it.get("_ps_has_fatal")) else 0.0
-        markets = 1.0 if ((it.get("_btc_move_abs") or 0) >= 8.0 or (it.get("_single_move_abs") or 0) >= 15.0) else 0.0
+        markets = 1.0 if ((it.get("_btc_move_abs") or 0) >= 8.0 or ((it.get("_single_move_abs") or 0) >= 15.0)) else 0.0
         saber = 1.0 if it.get("effects",{}).get("lightsaber") else 0.0
         return (urgent + safety + markets + saber + recency_boost, score, _ts(it.get("published_utc","")))
     for i, it in enumerate(sorted(survivors, key=breaker_score, reverse=True)):
