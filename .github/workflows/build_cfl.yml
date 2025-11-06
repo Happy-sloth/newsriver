@@ -8,51 +8,77 @@ on:
 permissions:
   contents: write
 
+# Prevent parallel push races across all JSON builders
+concurrency:
+  group: newsriver-json-push
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          fetch-depth: 0  # allow pull --rebase before push
+          fetch-depth: 0  # needed for rebase/pull
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: Install deps
+      - name: Install deps (if any)
         run: |
           python -m pip install -U pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Fetch CFL
-        run: python scripts/fetch_cfl.py
-
-      - name: Copy to repo root for Pages
-        run: cp newsriver/cfl.json cfl.json
-
-      - name: Commit & push if changed (with rebase)
+      # Optional: clamp or tune server-side final linger via env
+      - name: Fetch CFL (build newsriver/cfl.json)
+        env:
+          CFL_HTTP_TIMEOUT_SEC: "7.5"
+          CFL_RECENT_FINAL_MAX_HOURS: "0"   # keep server-side finals untrimmed; FE handles linger
         run: |
-          set -e
-          if [ -n "$(git status --porcelain -- newsriver/cfl.json cfl.json)" ]; then
-            git config user.name  "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add newsriver/cfl.json cfl.json
-            git commit -m "chore: refresh CFL json"
+          set -euo pipefail
+          python scripts/fetch_cfl.py
+          # Mirror to repo root for Pages
+          cp newsriver/cfl.json cfl.json
 
-            # handle non-fast-forward (another job/user pushed to main)
-            for attempt in 1 2 3; do
-              git pull --rebase --autostash origin main && \
-              git push origin HEAD:main && exit 0
-              echo "Push race, retrying ($attempt)…"; sleep 2
-            done
-            # final try (lets the job fail if still racing)
-            git pull --rebase --autostash origin main
-            git push origin HEAD:main
-          else
+      - name: Commit & push if changed (safe, with rebase + retries)
+        run: |
+          set -euo pipefail
+
+          # Mark workspace as safe (sometimes needed in Actions)
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+          CHANGED="$(git status --porcelain -- newsriver/cfl.json cfl.json || true)"
+          if [ -z "$CHANGED" ]; then
             echo "No CFL changes."
+            exit 0
           fi
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Make sure we're up to date before committing
+          git fetch origin main
+          git pull --rebase --autostash origin main
+
+          git add newsriver/cfl.json cfl.json
+          git commit -m "chore(newsriver): refresh cfl.json"
+
+          # Push with a few retries in case another workflow pushed in the gap
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "Push succeeded on attempt $attempt"
+              exit 0
+            fi
+            echo "Push race detected, retrying ($attempt)…"
+            sleep 2
+            git pull --rebase --autostash origin main
+          done
+
+          # Final try (lets the job fail loudly if still racing)
+          git push origin HEAD:main
