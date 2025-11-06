@@ -12,6 +12,12 @@
 # - Optional "Polling/Projection" category via section headers
 # - Toronto-first minimum (env MPB_MIN_TORONTO, default 9) with Canadian city backfill
 # - Labour tagging: category="Labour", region CA hints, priority_reason audit trail
+#
+# AMENDMENTS (2025-11-06):
+# - Urgency/obituary signals expanded: dies, died, passes, passed away, obituary, obit, RIP
+# - AM business bias (06:00–12:00 ET) with small scoring bonus
+# - “Major figure” bump (tiny roster) esp. when paired with obituary terms
+# - Monotonic generated_utc and itemset_hash in output for front-end freshness gating
 
 from __future__ import annotations
 
@@ -46,7 +52,7 @@ try:
 except Exception:
     ZoneInfo = None
 
-# ================= Labour tagging helpers (NEW) =================
+# ================= Labour tagging helpers (EXISTING) =================
 LABOUR_DEFAULT_KEYWORDS = [
     "strike","walkout","work stoppage","lockout","wildcat","picket",
     "arbitration","mediation","collective bargaining",
@@ -69,7 +75,6 @@ CA_HINT_DOMAINS = {
 }
 
 def load_labour_hints(weights: Dict[str, Any]) -> Dict[str, Any]:
-    """Read optional labour_keywords from weights.json5, fall back to defaults."""
     def _get(path: str, default):
         cur = weights
         for part in path.split("."):
@@ -107,12 +112,6 @@ def is_canadian_context(url: str, title: str, summary: str) -> bool:
     return any(tok in text for tok in locality)
 
 def tag_labour_if_applicable(item: Dict[str, Any], labour_hints: Dict[str, Any]) -> None:
-    """
-    Mutates `item` in-place:
-      - sets category="Labour" if keyword/entity hits,
-      - ensures region="CA" when context is Canadian,
-      - appends reasons into priority_reason (list).
-    """
     title = (item.get("title") or "").lower()
     summary = (item.get("summary") or item.get("description") or "").lower()
     url = item.get("url") or item.get("link") or ""
@@ -128,7 +127,7 @@ def tag_labour_if_applicable(item: Dict[str, Any], labour_hints: Dict[str, Any])
             reasons.append("entity:" + ",".join(sorted(set(hits_en))[:3]))
 
     if is_canadian_context(url, item.get("title",""), item.get("summary","")):
-        item["region"] = "Canada"  # align with existing scoring branch that checks "Canada"
+        item["region"] = "Canada"
         reasons.append("region:CA")
 
     if reasons:
@@ -158,21 +157,20 @@ ALT_USER_AGENT = os.getenv(
     "MPB_ALT_UA",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 )
-ACCEPT_HEADER = "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, text/html;q=0.7, */*;q=0.5"
+ACCEPT_HEADER = "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5"
 ACCEPT_LANG   = "en-US,en;q=0.8"
 
-# Enforcers (configurable via env)
+# Enforcers
 VERIFY_LINKS                = os.getenv("MPB_VERIFY_LINKS", "1") == "1"
 REJECT_REDIRECT_TO_HOMEPAGE = os.getenv("MPB_REJECT_REDIRECT_TO_HOMEPAGE", "1") == "1"
 BLOCK_AGGREGATORS           = os.getenv("MPB_BLOCK_AGGREGATORS", "1") == "1"
-MIN_AGE_SEC                 = int(os.getenv("MPB_MIN_AGE_SEC", "60"))        # ≥ 1 minute old
-MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))    # ≤ X hours old; set 24 in env to hard-cap
+MIN_AGE_SEC                 = int(os.getenv("MPB_MIN_AGE_SEC", "60"))
+MAX_AGE_HOURS               = float(os.getenv("MPB_MAX_AGE_HOURS", "69"))
 REQUIRE_EXACT_COUNT         = int(os.getenv("MPB_REQUIRE_EXACT_COUNT", "33"))
 
 # --- Toronto-first minimum + city backfill ---
 MPB_MIN_TORONTO             = int(os.getenv("MPB_MIN_TORONTO", "9"))
 CITY_BACKFILL_ORDER = [
-    # Used only if Toronto fails to reach MPB_MIN_TORONTO; preserves this priority.
     "Vancouver", "Montreal", "Halifax", "Winnipeg",
     "Calgary", "Edmonton", "Ottawa", "Quebec City", "Hamilton"
 ]
@@ -193,7 +191,7 @@ FALLBACK_FEEDS = [
 FALLBACK_MAX_AGE_HOURS = float(os.getenv("MPB_FALLBACK_MAX_AGE_HOURS", "24"))
 FALLBACK_MIN_ITEMS     = int(os.getenv("MPB_FALLBACK_MIN_ITEMS", "1"))
 
-# Source hygiene limits (now env-overridable)
+# Source hygiene limits (env-overridable)
 def _load_per_host_max() -> dict[str, int]:
     raw = os.getenv("MPB_PER_HOST_MAX", "").strip()
     if not raw:
@@ -317,10 +315,15 @@ RE_IDX  = re.compile(r"\b(S&P|Nasdaq|Dow|TSX|TSXV)\b.*?" + RE_PCT, re.I)
 RE_NIK  = re.compile(r"\b(Nikkei(?:\s*225)?)\b.*?" + RE_PCT, re.I)
 RE_TICK_PCT = re.compile(r"\b([A-Z]{2,5})\b[^%]{0,40}" + RE_PCT)
 
-# Breaking cue
+# Breaking cue (EXISTING) — keep
 RE_BREAKING = re.compile(
     r"\b(breaking|developing|just in|alert|evacuate|earthquake|hurricane|wildfire|flood|tsunami|tornado|"
     r"missile|air[-\s]?strike|explosion|blast|drone|shooting|casualties?|dead|killed)\b", re.I
+)
+
+# --- NEW: obituary/urgency terms (beyond 'dead|killed') ---
+RE_OBIT_URGENCY = re.compile(
+    r"\b(dies|died|passes|passed away|obituary|obit|rip)\b", re.I
 )
 
 # --- Soft-404 / article detection ---
@@ -387,7 +390,7 @@ def infer_tag(section_header: str) -> Tag:
     if "COURTS" in s or "CRIME" in s or "PUBLIC SAFETY" in s:
                                              return Tag("Public Safety", "Canada")
     if "SPORTS" in s:                        return Tag("Sports", "Canada")
-    if "POLL" in s or "ELECTION" in s:       return Tag("Polling/Projection", "World")  # new optional category
+    if "POLL" in s or "ELECTION" in s:       return Tag("Polling/Projection", "World")
     return Tag("General", "World")
 
 def canonicalize_url(url: str) -> str:
@@ -477,7 +480,6 @@ def parse_feeds_txt(path: str) -> list[FeedSpec]:
 
 def _new_session() -> requests.Session:
     s = requests.Session()
-    # no-cache headers to reduce stale RSS from intermediaries/CDNs
     s.headers.update({
         "User-Agent": USER_AGENT,
         "Accept": ACCEPT_HEADER,
@@ -574,6 +576,7 @@ def parse_any_dt_str(s: str) -> str | None:
     except Exception:
         pass
     return None
+
 def pick_published(entry) -> str | None:
     for key in ("published_parsed","updated_parsed","created_parsed"):
         t = getattr(entry, key, None)
@@ -606,6 +609,15 @@ def iso_add_hours(iso_s: str | None, hours: float) -> str:
     if base is None: base = datetime.now(timezone.utc)
     if base.tzinfo is None: base = base.replace(tzinfo=timezone.utc)
     return (base + timedelta(hours=hours)).astimezone(timezone.utc).isoformat().replace("+00:00","Z")
+
+def iso_add_seconds(iso_s: str, seconds: int) -> str:
+    try:
+        base = datetime.fromisoformat(iso_s.replace("Z","+00:00"))
+    except Exception:
+        base = datetime.now(timezone.utc)
+    if base.tzinfo is None:
+        base = base.replace(tzinfo=timezone.utc)
+    return (base + timedelta(seconds=seconds)).astimezone(timezone.utc).isoformat().replace("+00:00","Z")
 
 def now_in_tz(tz_name: str) -> datetime:
     if ZoneInfo is None: return datetime.now(timezone.utc)
@@ -641,7 +653,8 @@ WORD_NUM = {"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight
             "eighteen":18,"nineteen":19,"twenty":20}
 RE_DEATH = re.compile(r"\b((?:\d+|one|two|three|four|five|six|seven|eight|nine|ten))\s+(?:people\s+)?(?:dead|killed|deaths?)\b", re.I)
 RE_INJ   = re.compile(r"\b((?:\d+|one|two|three|four|five|six|seven|eight|nine|ten))\s+(?:people\s+)?(?:injured|hurt)\b", re.I)
-RE_FATAL_CUE = re.compile(r"\b(dead|killed|homicide|murder|fatal|deadly)\b", re.I)
+# AMENDED: include obit verbs as fatal cues too
+RE_FATAL_CUE = re.compile(r"\b(dead|killed|homicide|murder|fatal|deadly|dies|died|passes|passed away|obituary|obit|rip)\b", re.I)
 
 def word_or_int_to_int(s: str) -> int:
     s = s.lower()
@@ -652,7 +665,7 @@ def parse_casualties(title: str) -> tuple[int,int,bool]:
     deaths = 0; injured = 0
     for m in RE_DEATH.finditer(title): deaths += word_or_int_to_int(m.group(1))
     for m in RE_INJ.finditer(title): injured += word_or_int_to_int(m.group(1))
-    has_fatal_cue = bool(RE_FATAL_CUE.search(title))
+    has_fatal_cue = bool(RE_FATAL_CUE.search(title) or RE_OBIT_URGENCY.search(title))
     return deaths, injured, has_fatal_cue
 
 # ---------------- Market helpers ----------------
@@ -715,7 +728,7 @@ def scrape_nate_silver(html: bytes, spec: FeedSpec, playoffs_on: bool) -> list[d
             if len(items) >= MAX_PER_FEED: break
         return items
 
-    # Fallback regex pass (coarse)
+    # Fallback regex pass
     seen = set()
     for chunk in re.split(r"(?i)<article\b", text):
         m = re.search(r'href="(https?://fivethirtyeight\.com/[^"]+)"[^>]*>([^<]{8,})</a>', chunk, flags=re.I)
@@ -866,7 +879,6 @@ def is_same_day(a: datetime | None, b: datetime | None) -> bool:
     return a.date() == b.date()
 
 def is_market_headline_sane(title: str, url: str, published_iso: str, session: requests.Session, debug_counts: dict) -> bool:
-    # Block stale "record/all-time high" / BTC round-number claims unless recent or from trusted domains.
     t = title.lower()
     milestone = bool(re.search(r"\b(all[-\s]?time high|record|hits?\s*(?:\d{2,3},?\d{3}|[1-9]\d?k))\b", t))
     btc_round = bool(re.search(r"\bbitcoin|btc\b.*\b(20k|30k|40k|50k|60k|70k|80k|90k|100k)\b", t))
@@ -899,7 +911,6 @@ def is_market_headline_sane(title: str, url: str, published_iso: str, session: r
     return False
 
 def verify_link(session: requests.Session, url: str, debug_counts: dict) -> tuple[bool, str, int, str]:
-    """Returns (ok, final_url, status_code, reason)."""
     if not VERIFY_LINKS:
         return True, url, 200, "verification disabled"
 
@@ -1090,11 +1101,11 @@ def _safety_net_one_headline(session: requests.Session, debug_counts: dict) -> t
             stats["title"] = it["title"]
             return it, stats
     return None, stats
+
 # ---------- Build ----------
 def build(feeds_file: str, out_path: str) -> dict:
     start = time.time()
     weights, weights_debug = load_weights()
-    # Load once for entire run (NEW)
     labour_hints = load_labour_hints(weights or {})
 
     specs = parse_feeds_txt(feeds_file)
@@ -1137,6 +1148,10 @@ def build(feeds_file: str, out_path: str) -> dict:
         "hype_sports": 0,
         "hype_ceasefire": 0,
         "reject_hits": 0,
+        # NEW debug:
+        "obit_hits": 0,
+        "major_figure_hits": 0,
+        "business_am_hits": 0,
     }
 
     debug_counts = {
@@ -1155,6 +1170,12 @@ def build(feeds_file: str, out_path: str) -> dict:
     evening_start = now_et.replace(hour=18, minute=30, second=0, microsecond=0)
     evening_end   = now_et.replace(hour=22, minute=30, second=0, microsecond=0)
     in_evening = (evening_start <= now_et <= evening_end)
+
+    # NEW: Morning business window (06:00–12:00 ET)
+    morning_start = now_et.replace(hour=6,  minute=0,  second=0, microsecond=0)
+    morning_end   = now_et.replace(hour=12, minute=0,  second=0, microsecond=0)
+    in_morning = (morning_start <= now_et <= morning_end)
+
     playoffs_on = os.getenv("MPB_PLAYOFFS", "0") == "1"
 
     print(f"[fetch] feeds={len(specs)} max_per_feed={MAX_PER_FEED} global_cap={MAX_TOTAL}")
@@ -1192,7 +1213,6 @@ def build(feeds_file: str, out_path: str) -> dict:
                     if should_reject_title(it["title"], playoffs_on):
                         score_dbg["reject_hits"] += 1
                         continue
-                    # Labour wiring (NEW)
                     tag_labour_if_applicable(it, labour_hints)
 
                     h = host_of(it["url"])
@@ -1216,7 +1236,6 @@ def build(feeds_file: str, out_path: str) -> dict:
                         if should_reject_title(it["title"], playoffs_on):
                             score_dbg["reject_hits"] += 1
                             continue
-                        # Labour wiring (NEW)
                         tag_labour_if_applicable(it, labour_hints)
 
                         h = host_of(it["url"])
@@ -1277,8 +1296,6 @@ def build(feeds_file: str, out_path: str) -> dict:
                 "cluster_id":    fuzzy_title_key(title),
             }
 
-            # Labour wiring (NEW)
-            # Try to pass along any summary/description for better keyword hits
             if "summary" in e and isinstance(e["summary"], str):
                 item["summary"] = e["summary"]
             elif "description" in e and isinstance(e["description"], str):
@@ -1378,7 +1395,7 @@ def build(feeds_file: str, out_path: str) -> dict:
     ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
     ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
     ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
-    ps_per_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))  # note: your original file had this mismatch
+    ps_per_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))  # keep existing
     ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.6))
     ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
     ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
@@ -1416,6 +1433,22 @@ def build(feeds_file: str, out_path: str) -> dict:
     regional_city_pts    = float(W(weights, "regional.weights.city_match_toronto", 0.0))
     regional_max_bonus   = float(W(weights, "regional.max_bonus", 2.4))
 
+    # NEW: AM business bias + major figure bump (weights with sane defaults)
+    business_am_pts      = float(W(weights, "daypart.business_am_points", 0.6))  # small; ~equiv to +2–3h frozen
+    major_figure_pts     = float(W(weights, "salience.major_figure_points", 0.6))
+    business_kw = re.compile(
+        r"\b(earnings|eps|revenue|guidance|forecast|outlook|dividend|acquisition|merger|ipo|offering|"
+        r"inflation|cpi|ppi|jobs|unemployment|payrolls|bank of canada|boc|federal reserve|fed|rate|hike|cut|"
+        r"tsx|tsxv|canadian dollar|loonie|cad|stock|shares|bond|yields|crypto|bitcoin|btc|ethereum|eth)\b",
+        re.I
+    )
+    major_figures_re = re.compile(
+        r"\b(joe biden|donald trump|barack obama|kamala harris|dick cheney|al gore|mike pence|"
+        r"justin trudeau|stephen harper|jean chrétien|brian mulroney|paul martin|"
+        r"doug ford|kathleen wynne|rachel notley|danielle smith|tony blair|gordon brown|emmanuel macron|angela merkel)\b",
+        re.I
+    )
+
     now_ts_scoring = time.time()
 
     def violent_kw_hit(title: str) -> bool:
@@ -1448,13 +1481,18 @@ def build(feeds_file: str, out_path: str) -> dict:
         if any((host or "").endswith(d) for d in PREFERRED_DOMAINS):
             comps["preferred_domain"] = pref_bonus; total += pref_bonus; score_dbg["preferred_bonus"] += 1
 
+        # Public safety + obituary urgency
         deaths, injured, has_fatal_cue = parse_casualties(title)
+        obit_hit = bool(RE_OBIT_URGENCY.search(title))
+        if obit_hit:
+            score_dbg["obit_hits"] += 1
         it["_ps_deaths"] = deaths
         it["_ps_injured"] = injured
-        it["_ps_has_fatal"] = has_fatal_cue
+        it["_ps_has_fatal"] = has_fatal_cue or obit_hit
+        it["is_urgent"] = bool(it["_ps_has_fatal"])  # exposes urgency to UI if needed
 
         ps_score = 0.0
-        if has_fatal_cue or deaths > 0: ps_score += ps_has_fatal; score_dbg["ps_fatal_hits"] += 1
+        if it["_ps_has_fatal"]: ps_score += ps_has_fatal; score_dbg["ps_fatal_hits"] += 1
         if deaths > 0:  ps_score += min(ps_max_death, ps_per_death * deaths)
         if injured > 0: ps_score += min(ps_max_inj,   ps_per_inj   * injured); score_dbg["ps_injury_hits"] += 1
         if violent_kw_hit(title): ps_score += ps_kw_bonus
@@ -1490,7 +1528,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             comps["single_stock_trigger"] = stk_pts; total += stk_pts; score_dbg["market_single_hits"] += 1
         it["_single_move_abs"] = single_move
 
-        # Regional bonuses (country + Toronto city cues), capped by regional.max_bonus
+        # Regional bonuses
         reg_bonus = 0.0
         if it.get("region") == "Canada":
             reg_bonus += regional_country_pts
@@ -1501,10 +1539,12 @@ def build(feeds_file: str, out_path: str) -> dict:
             reg_bonus = min(reg_bonus, regional_max_bonus)
             comps["regional"] = round(reg_bonus, 4); total += reg_bonus
 
+        # Nate hours hint bonus (unchanged)
         ah = it.get("age_hint_hours", None)
         if ah is not None and ah <= nate_bonus_max_hours:
             comps["nate_hours_hint_bonus"] = nate_bonus; total += nate_bonus
 
+        # Sports bonuses (unchanged)
         team_hit   = bool(RE_JAYS_TEAM.search(title))
         player_hit = bool(RE_JAYS_PLAYERS.search(title))
         win_hit    = bool(RE_JAYS_WIN.search(title))
@@ -1534,6 +1574,23 @@ def build(feeds_file: str, out_path: str) -> dict:
         if playoffs_on and (team_hit or focus_team_hit) and (win_hit or loss_hit or final_hit):
             comps["sports.playoff_mode"] = sp_playoffs; total += sp_playoffs; score_dbg["sports_playoff_hits"] += 1
 
+        # NEW: Morning business bias (06:00–12:00 ET), small & meaningful
+        if in_morning:
+            if business_kw.search(title) or any((host or "").endswith(d) for d in ("theglobeandmail.com","financialpost.com","bloomberg.com","reuters.com","apnews.com")):
+                comps["daypart.business_am"] = business_am_pts
+                total += business_am_pts
+                score_dbg["business_am_hits"] += 1
+
+        # NEW: Major figure bump (tiny roster); stronger if paired with obit terms
+        if major_figures_re.search(title):
+            bump = major_figure_pts
+            if obit_hit:
+                bump += 0.25  # gentle extra nudge on obituary
+            comps["salience.major_figure"] = round(bump, 4)
+            total += bump
+            score_dbg["major_figure_hits"] += 1
+
+        # Effects tagging (unchanged thresholds; will help UI glow choices)
         effects = {"lightsaber": False, "glitch": False, "reasons": []}
         if total >= ls_min: effects["lightsaber"] = True; effects["reasons"].append(f"score≥{ls_min}")
         if it.get("_ps_deaths", 0) >= also_body: effects["lightsaber"] = True; effects["reasons"].append(f"body_count≥{also_body}")
@@ -1570,7 +1627,7 @@ def build(feeds_file: str, out_path: str) -> dict:
         score = float(it.get("score", 0.0))
         age_h = hours_since(it.get("published_utc",""), time.time())
         recency_boost = max(0.0, 24.0 - age_h) / 24.0
-        urgent = 1.0 if (RE_BREAKING.search(title) or CONFLICT_CUES.search(title)) else 0.0
+        urgent = 1.0 if (RE_BREAKING.search(title) or CONFLICT_CUES.search(title) or RE_OBIT_URGENCY.search(title)) else 0.0
         safety = 1.0 if (it.get("_ps_deaths",0) > 0 or it.get("_ps_has_fatal")) else 0.0
         markets = 1.0 if ((it.get("_btc_move_abs") or 0) >= 8.0 or (it.get("_single_move_abs") or 0) >= 15.0) else 0.0
         saber = 1.0 if it.get("effects",{}).get("lightsaber") else 0.0
@@ -1691,14 +1748,12 @@ def build(feeds_file: str, out_path: str) -> dict:
         return (c in t) or (f"/{c}" in p) or (c in h)
 
     def enforce_toronto_min(arr: list[dict], candidates: Iterable[dict]) -> list[dict]:
-        """Ensure ≥ MPB_MIN_TORONTO Toronto items; if short, fill remainder with other cities in CITY_BACKFILL_ORDER."""
         want = max(0, MPB_MIN_TORONTO)
         if want == 0: return arr
         have = [it for it in arr if toronto_hit(it)]
         if len(have) >= want:
             return arr
 
-        # Promote Toronto from candidates first
         seen_ids = {x["canonical_id"] for x in arr}
         seen_urls = {x["canonical_url"] for x in arr}
         BF_THRESH = 0.78
@@ -1726,7 +1781,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             pool.append(it)
 
         out = arr[:] + pool
-        # If still short, allow other Canadian cities (priority order)
         need_more = want - len([it for it in out if toronto_hit(it)])
         if need_more > 0:
             for city in CITY_BACKFILL_ORDER:
@@ -1744,7 +1798,6 @@ def build(feeds_file: str, out_path: str) -> dict:
                         continue
                     it["url"] = final_url
                     it["canonical_url"] = final_url
-                    # keep distinct
                     if any(jaccard(set(title_tokens(it["title"])), set(title_tokens(k["title"]))) >= 0.78 for k in out):
                         continue
                     out.append(it)
@@ -1787,7 +1840,6 @@ def build(feeds_file: str, out_path: str) -> dict:
             i += 1
         return out
 
-    # Sort by (recency, score), apply limiter, then trim to the exact target (or 69 if not enforcing)
     verified.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
     verified = enforce_run_length(verified, key_fn=lambda it: host_of(it.get("url","")), max_run=2)
     verified = enforce_run_length(verified, key_fn=lambda it: it.get("cluster_id",""), max_run=2)
@@ -1795,8 +1847,25 @@ def build(feeds_file: str, out_path: str) -> dict:
 
     elapsed_total = time.time() - start
 
+    # NEW: itemset hash for monotonic/freshness aids
+    itemset_hash = hashlib.sha1("|".join(sorted(x["canonical_id"] for x in verified)).encode("utf-8")).hexdigest()[:16]
+
+    # Monotonic generated_utc: bump by +1s if same or older than previous file
+    generated_utc = datetime.now(timezone.utc).isoformat().replace("+00:00","Z")
+    try:
+        if os.path.exists(out_path):
+            with open(out_path, "r", encoding="utf-8") as pf:
+                prev = json.load(pf)
+                prev_ts = prev.get("generated_utc")
+                if isinstance(prev_ts, str):
+                    if _ts(generated_utc) <= _ts(prev_ts):
+                        generated_utc = iso_add_seconds(prev_ts, 1)
+    except Exception:
+        pass
+
     out = {
-        "generated_utc": datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),
+        "generated_utc": generated_utc,
+        "itemset_hash": itemset_hash,  # NEW
         "count": len(verified),
         "items": verified,
         "_debug": {
@@ -1817,7 +1886,7 @@ def build(feeds_file: str, out_path: str) -> dict:
             "http_timeout_sec": HTTP_TIMEOUT_S,
             "slow_feed_warn_sec": SLOW_FEED_WARN_S,
             "global_budget_sec": GLOBAL_BUDGET_S,
-            "version": "fetch-v2.6.0-labour",  # bumped for Labour tagging
+            "version": "fetch-v2.7.0-obits-am-bias",  # bumped for obituary + AM bias + monotonic
             "weights_loaded": weights_debug.get("weights_loaded", False),
             "weights_keys": weights_debug.get("weights_keys", []),
             "weights_error": weights_debug.get("weights_error", None),
@@ -1858,7 +1927,7 @@ def main():
             "feeds_total","collected","dedup_pass1","dedup_final","elapsed_sec",
             "slow_domains","timeouts","errors","weights_loaded","weights_keys",
             "weights_error","weights_path","score_stats","sanity_stats","require_exact_count",
-            "fallback"
+            "fallback","version","itemset_hash"
         ]
     })
 
