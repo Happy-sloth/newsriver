@@ -1,6 +1,6 @@
 {
   // weights.json5 — server-side scoring knobs
-  // Version: v0.8.1 (adds Labour category boost; preserves all original content)
+  // Version: v0.9.0 (adds daypart + salience + labour_keywords; preserves all original content)
   timezone: "America/Toronto",
 
   // -------- Recency --------
@@ -109,6 +109,47 @@
       single_stock_abs_move_ge_pct: 15.0
     },
     glitch_min_score: 2.1
+  },
+
+  // ======== NEW TUNING BLOCKS (used by fetch_headlines.py) ========
+
+  // Time-of-day nudges
+  daypart: {
+    // Morning (06:00–12:00 ET) business bias applied when business KWs or biz outlets hit.
+    business_am_points: 0.6
+  },
+
+  // Salience bumps (tiny but decisive when paired with obits)
+  salience: {
+    major_figure_points: 0.6,
+    // Optional: curated roster you can edit without code changes
+    major_figures: [
+      // Canada
+      "Justin Trudeau","Stephen Harper","Jean Chrétien","Brian Mulroney","Paul Martin",
+      "Doug Ford","Kathleen Wynne","Rachel Notley","Danielle Smith",
+      // U.S.
+      "Joe Biden","Donald Trump","Barack Obama","Kamala Harris",
+      "Dick Cheney","Al Gore","Mike Pence",
+      // Europe (a few durable names)
+      "Emmanuel Macron","Angela Merkel","Tony Blair","Gordon Brown"
+    ]
+  },
+
+  // Labour tagging knobs (used by load_labour_hints)
+  labour_keywords: {
+    keyword_bonus: 0.9,
+    keywords: [
+      "strike","walkout","work stoppage","lockout","wildcat","picket",
+      "arbitration","mediation","collective bargaining",
+      "tentative deal","ratification","binding arbitration",
+      "back-to-work order","back to work","return-to-work",
+      "salary increase","wage increase","cost-of-living adjustment",
+      "back to school order","job action","work-to-rule","strike vote"
+    ],
+    entities: [
+      "CUPE","OPSEU","PSAC","Unifor","ATU","OECTA","ETFO","OSSTF",
+      "Teamsters","SEIU","UFCW","IAMAW","IBEW","UNITE HERE"
+    ]
   }
 
   // ---- NOTE ----
