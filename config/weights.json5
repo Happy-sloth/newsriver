@@ -130,7 +130,7 @@
   //     ps_has_fatal = float(W(weights, "public_safety.has_fatality_points", 1.0))
   //     ps_per_death = float(W(weights, "public_safety.per_death_points", 0.10))
   //     ps_max_death = float(W(weights, "public_safety.max_death_points", 2.0))
-  //     ps_per_inj   = float(W(weights, "public_safety.per_injury_points", 0.10))  # <-- FIXED (used to read max_injury_points)
+  //     ps_per_inj   = float(W(weights, "public_safety.per_injury_points", 0.10))  // <-- FIXED (used to read max_injury_points)
   //     ps_max_inj   = float(W(weights, "public_safety.max_injury_points", 0.60))
   //     ps_kw_bonus  = float(W(weights, "public_safety.violent_keywords_bonus", 0.2))
   //     ps_kw_list   = [k.lower() for k in W(weights, "public_safety.violent_keywords", [])]
