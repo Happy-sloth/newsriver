@@ -3,8 +3,8 @@
     {
       "games": [
         {
-          "gamePk": "760078",
-          "gameDate": "2025-11-07T20:00Z",
+          "gamePk": "760084",
+          "gameDate": "2025-11-08T20:00Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -16,21 +16,21 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "DAL"
+                "abbreviation": "ATX"
               },
               "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "VAN"
+                "abbreviation": "LAFC"
               },
               "score": 0
             }
           }
         },
         {
-          "gamePk": "760087",
-          "gameDate": "2025-11-08T00:00Z",
+          "gamePk": "760069",
+          "gameDate": "2025-11-08T20:00Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -42,15 +42,93 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "NYC"
+                "abbreviation": "CHI"
               },
-              "score": 3
+              "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "CLT"
+                "abbreviation": "PHI"
               },
-              "score": 1
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "760090",
+          "gameDate": "2025-11-08T21:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SEA"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "760075",
+          "gameDate": "2025-11-08T23:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CLB"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CIN"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "760081",
+          "gameDate": "2025-11-09T01:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NSH"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIA"
+              },
+              "score": 0
             }
           }
         }
