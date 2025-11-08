@@ -1,31 +1,83 @@
 {
-  "generated_utc": "2025-11-08T03:27:32.619361Z",
+  "generated_utc": "2025-11-08T03:49:55.963420Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401809775",
-          "gameDate": "2025-11-08T01:00Z",
+          "gamePk": "401809779",
+          "gameDate": "2025-11-08T03:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 34
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 44
+            }
+          }
+        },
+        {
+          "gamePk": "401809780",
+          "gameDate": "2025-11-08T03:00Z",
+          "status": {
+            "detailedState": "Live",
+            "abstractGameState": "Live"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "OKC"
+              },
+              "score": 42
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 37
+            }
+          }
+        },
+        {
+          "gamePk": "401809775",
+          "gameDate": "2025-11-08T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 104
+              "score": 108
             },
             "home": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 119
+              "score": 126
             }
           }
         },
@@ -33,12 +85,12 @@
           "gamePk": "401809776",
           "gameDate": "2025-11-08T01:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
@@ -52,58 +104,6 @@
                 "abbreviation": "MEM"
               },
               "score": 118
-            }
-          }
-        },
-        {
-          "gamePk": "401809779",
-          "gameDate": "2025-11-08T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 6
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 18
-            }
-          }
-        },
-        {
-          "gamePk": "401809780",
-          "gameDate": "2025-11-08T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "OKC"
-              },
-              "score": 24
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 20
             }
           }
         },
