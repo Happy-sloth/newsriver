@@ -1,8 +1,34 @@
 {
-  "generated_utc": "2025-11-08T03:32:26.884Z",
-  "itemset_hash": "1ab1491d50538260",
+  "generated_utc": "2025-11-08T03:56:57.210Z",
+  "itemset_hash": "bebd51716dfc21da",
   "count": 69,
   "items": [
+    {
+      "title": "Hayley Williams “Leaks” 2026 Solo Tour Dates",
+      "url": "https://consequence.net/2025/11/hayley-williams-leaks-2026-solo-tour-dates",
+      "source": "Consequence",
+      "published_utc": "2025-11-08T03:46:13.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "‘Pluribus’ Includes “Made By Humans” Disclaimer In Credits Amid AI Discourse",
+      "url": "https://deadline.com/2025/11/pluribus-credits-made-by-humans-1236611581",
+      "source": "Deadline",
+      "published_utc": "2025-11-08T03:32:49.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "‘Maxton Hall – The World Between Us’ Season 2 Soundtrack: All The Songs You’ll Hear",
       "url": "https://deadline.com/feature/maxton-hall-the-world-between-us-season-2-soundtrack-songs-1236611582",
@@ -10,11 +36,8 @@
       "published_utc": "2025-11-08T03:17:25.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -960,50 +983,20 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "Jack Johnson Announces 2026 North American Tour, Unveils “Hold on to the Light”: Stream",
-      "url": "https://consequence.net/2025/11/jack-johnson-2026-north-american-tour-hold-on-to-the-light",
-      "source": "Consequence",
-      "published_utc": "2025-11-07T22:04:54.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Nike’s Cracked Krampus-Themed Dunk Skate Shoe Is Terrifyingly Good",
-      "url": "https://www.highsnobiety.com/p/nike-sb-dunk-low-krampus",
-      "source": "Highsnobiety",
-      "published_utc": "2025-11-07T22:04:53.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Labour",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 479,
-    "dedup_pass1": 474,
+    "collected": 455,
+    "dedup_pass1": 451,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
-      "weather.gc.ca",
-      "www.cbc.ca",
-      "www.publicsafety.gc.ca",
-      "www150.statcan.gc.ca"
+      "www.cbc.ca"
     ],
     "errors": [
-      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -1015,56 +1008,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.384,
+        "sec": 1.246,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.04,
+        "sec": 0.943,
         "kept": 8
       },
       {
+        "host": "www.cp24.com",
+        "sec": 0.43,
+        "kept": 14
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.538,
+        "sec": 0.412,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.486,
+        "sec": 0.401,
         "kept": 10
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.378,
+        "kept": 0
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.397,
+        "sec": 0.341,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.35,
+        "sec": 0.286,
         "kept": 14
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.342,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.154,
-        "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.115,
+        "sec": 0.113,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.073,
+        "sec": 0.107,
         "kept": 14
       }
     ],
-    "elapsed_sec": 324.68,
+    "elapsed_sec": 322.12,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1090,7 +1083,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 12,
+      "ps_fatal_hits": 10,
       "ps_injury_hits": 2,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1104,7 +1097,7 @@
       "sports_player_hits": 2,
       "sports_result_win_hits": 10,
       "sports_result_loss_hits": 1,
-      "sports_evening_hits": 11,
+      "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
       "sports_focus_team_hits": 1,
       "sports_final_hits": 0,
