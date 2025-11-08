@@ -1,60 +1,8 @@
 {
-  "generated_utc": "2025-11-08T05:15:52.550818Z",
+  "generated_utc": "2025-11-08T05:33:46.486750Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401809779",
-          "gameDate": "2025-11-08T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 96
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 118
-            }
-          }
-        },
-        {
-          "gamePk": "401809780",
-          "gameDate": "2025-11-08T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "OKC"
-              },
-              "score": 125
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 95
-            }
-          }
-        },
         {
           "gamePk": "401810038",
           "gameDate": "2025-11-09T00:00Z",
@@ -260,6 +208,58 @@
                 "abbreviation": "LAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401809779",
+          "gameDate": "2025-11-08T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 104
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 129
+            }
+          }
+        },
+        {
+          "gamePk": "401809780",
+          "gameDate": "2025-11-08T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "OKC"
+              },
+              "score": 132
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 101
             }
           }
         },
