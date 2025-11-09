@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-09T11:29:24.543Z",
+  "generated_utc": "2025-11-09T11:38:44.600Z",
   "itemset_hash": "df509edba1417a9a",
   "count": 69,
   "items": [
@@ -955,8 +955,8 @@
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 735,
-    "dedup_pass1": 728,
+    "collected": 725,
+    "dedup_pass1": 718,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
@@ -980,56 +980,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.238,
+        "sec": 1.205,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.673,
+        "sec": 0.898,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.491,
-        "kept": 14
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.476,
+        "sec": 0.589,
         "kept": 10
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.384,
+        "sec": 0.367,
+        "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.361,
         "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.372,
+        "sec": 0.319,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.292,
+        "sec": 0.311,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.174,
+        "sec": 0.247,
         "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.098,
+        "sec": 0.139,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.088,
+        "sec": 0.081,
         "kept": 14
       }
     ],
-    "elapsed_sec": 299.04,
+    "elapsed_sec": 292.19,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1055,7 +1055,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 18,
+      "ps_fatal_hits": 19,
       "ps_injury_hits": 1,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1081,12 +1081,12 @@
       "hype_sports": 0,
       "hype_ceasefire": 0,
       "reject_hits": 2,
-      "obit_hits": 2,
+      "obit_hits": 3,
       "major_figure_hits": 3,
       "business_am_hits": 60
     },
     "sanity_stats": {
-      "link_verification_fail": 29,
+      "link_verification_fail": 34,
       "soft_404_drops": 81,
       "max_age_drops": 0,
       "min_age_drops": 8,
