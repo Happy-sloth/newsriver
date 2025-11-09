@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-09T03:43:19.822262Z",
+  "generated_utc": "2025-11-09T04:00:38.779421Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810041",
-          "gameDate": "2025-11-09T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 122
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 128
-            }
-          }
-        },
         {
           "gamePk": "401810044",
           "gameDate": "2025-11-09T02:00Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 69
+              "score": 82
             },
             "home": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 78
+              "score": 95
             }
           }
         },
@@ -59,25 +33,25 @@
           "gamePk": "401810045",
           "gameDate": "2025-11-09T03:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 0
+              "score": 25
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 0
+              "score": 19
             }
           }
         },
@@ -104,6 +78,32 @@
                 "abbreviation": "ATL"
               },
               "score": 122
+            }
+          }
+        },
+        {
+          "gamePk": "401810041",
+          "gameDate": "2025-11-09T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CHI"
+              },
+              "score": 122
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 128
             }
           }
         },
