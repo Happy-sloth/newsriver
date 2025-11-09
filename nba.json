@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-09T04:56:22.788636Z",
+  "generated_utc": "2025-11-09T05:18:26.240493Z",
   "dates": [
     {
       "games": [
@@ -19,13 +19,195 @@
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 62
+              "score": 79
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 51
+              "score": 67
+            }
+          }
+        },
+        {
+          "gamePk": "401810046",
+          "gameDate": "2025-11-09T20:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIL"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810047",
+          "gameDate": "2025-11-09T23:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BKN"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NYK"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810048",
+          "gameDate": "2025-11-09T23:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BOS"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ORL"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810049",
+          "gameDate": "2025-11-09T23:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "OKC"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MEM"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810050",
+          "gameDate": "2025-11-10T00:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DET"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810051",
+          "gameDate": "2025-11-10T01:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810052",
+          "gameDate": "2025-11-10T02:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 0
             }
           }
         },
@@ -217,10 +399,10 @@
   "_meta": {
     "source": "espn",
     "urls": [
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251107",
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251108"
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251108",
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251109"
     ],
-    "games_count": 8,
+    "games_count": 15,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
