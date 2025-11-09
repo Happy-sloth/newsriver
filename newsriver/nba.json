@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-09T04:32:29.085447Z",
+  "generated_utc": "2025-11-09T04:47:14.586450Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810044",
-          "gameDate": "2025-11-09T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 97
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 117
-            }
-          }
-        },
         {
           "gamePk": "401810045",
           "gameDate": "2025-11-09T03:30Z",
@@ -45,13 +19,39 @@
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 47
+              "score": 60
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 45
+              "score": 46
+            }
+          }
+        },
+        {
+          "gamePk": "401810044",
+          "gameDate": "2025-11-09T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 100
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 117
             }
           }
         },
