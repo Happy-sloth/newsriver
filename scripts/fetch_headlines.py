@@ -834,7 +834,6 @@ def scrape_cp24(html: bytes, spec: FeedSpec, playoffs_on: bool) -> list[dict]:
         items.append(it)
         if len(items) >= MAX_PER_FEED: break
     return items
-
 # ---------- Link verification & market sanity ----------
 def is_homepage_like(url: str) -> bool:
     try:
@@ -1621,7 +1620,6 @@ def build(feeds_file: str, out_path: str) -> dict:
     # ---- Sort by recency then score, initial trim ----
     survivors.sort(key=lambda x: (_ts(x["published_utc"]), x.get("score", 0.0)), reverse=True)
     survivors = survivors[:MAX_TOTAL]
-
     # ---- BREAKERS ----
     def breaker_score(it: dict) -> tuple:
         title = it.get("title","")
