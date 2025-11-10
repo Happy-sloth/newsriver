@@ -1,57 +1,57 @@
 {
-  "generated_utc": "2025-11-10T03:55:27.500478Z",
+  "generated_utc": "2025-11-10T04:25:17.295000Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810051",
-          "gameDate": "2025-11-10T01:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 78
-            },
-            "home": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 107
-            }
-          }
-        },
-        {
           "gamePk": "401810052",
           "gameDate": "2025-11-10T02:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 115
+              "score": 144
             },
             "home": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 88
+              "score": 117
+            }
+          }
+        },
+        {
+          "gamePk": "401810051",
+          "gameDate": "2025-11-10T01:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 83
+            },
+            "home": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 114
             }
           }
         },
