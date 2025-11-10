@@ -1,8 +1,37 @@
 {
-  "generated_utc": "2025-11-10T06:29:53.330Z",
-  "itemset_hash": "9f5393cc08d6a437",
+  "generated_utc": "2025-11-10T06:56:21.100Z",
+  "itemset_hash": "abb836c402211ba7",
   "count": 69,
   "items": [
+    {
+      "title": "NOCTA and Nike Launch New Cardinal Stock Collection for Holiday 2025",
+      "url": "https://hypebeast.com/2025/11/nocta-nike-cardinal-stock-holiday-2025-collection-release-info",
+      "source": "Hypebeast",
+      "published_utc": "2025-11-10T06:37:28.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "Labour",
+      "region": "World"
+    },
+    {
+      "title": "XG announce details of debut album ‘The Core’",
+      "url": "https://www.nme.com/news/music/xg-announce-details-of-debut-album-the-core-3906901",
+      "source": "NME",
+      "published_utc": "2025-11-10T06:29:08.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "B.C. man recalls ‘chaos’ of Hurricane Melissa during Jamaica stay",
       "url": "https://globalnews.ca/news/11518743/bc-man-jamaica-return-hurricane-melissa-recovery",
@@ -26,11 +55,8 @@
       "published_utc": "2025-11-10T06:13:24.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -129,11 +155,8 @@
       "published_utc": "2025-11-10T05:48:14.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Business",
       "region": "World"
@@ -145,11 +168,8 @@
       "published_utc": "2025-11-10T05:36:42.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Business",
       "region": "World"
@@ -453,7 +473,7 @@
       "region": "Canada"
     },
     {
-      "title": "US Senate votes to advance bill to end 40-day government shutdown",
+      "title": "US Senate takes first step toward ending 40-day government shutdown",
       "url": "https://www.aljazeera.com/news/2025/11/10/us-senators-advance-bill-to-end-record-government-shutdown?traffic_source=rss",
       "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
       "published_utc": "2025-11-10T04:01:04.000Z",
@@ -643,11 +663,8 @@
       "published_utc": "2025-11-10T02:27:44.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Culture",
       "region": "World"
@@ -955,32 +972,6 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "‘Gilmore Girls’ Beaus Jared Padalecki & Matt Czuchry Weigh In On Team Dean, Team Jess & Team Logan Debate",
-      "url": "https://deadline.com/2025/11/gilmore-girls-jared-padalecki-matt-czuchry-team-dean-jess-1236612284",
-      "source": "Deadline",
-      "published_utc": "2025-11-09T23:45:04.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "David Letterman & The Killers Induct Warren Zevon Into Rock & Roll Hall Of Fame",
-      "url": "https://www.stereogum.com/2329178/david-letterman-the-killers-induct-warren-zevon-into-rock-roll-hall-of-fame/news",
-      "source": "Stereogum",
-      "published_utc": "2025-11-09T23:29:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
@@ -989,9 +980,7 @@
     "collected": 489,
     "dedup_pass1": 483,
     "dedup_final": 320,
-    "slow_domains": [
-      "www.gorillavsbear.net"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -1009,56 +998,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 2.137,
+        "sec": 1.421,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.941,
+        "sec": 1.016,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.761,
-        "kept": 14
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.759,
+        "sec": 0.631,
         "kept": 10
       },
       {
+        "host": "www.mlb.com",
+        "sec": 0.556,
+        "kept": 14
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.604,
+        "sec": 0.477,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.517,
+        "sec": 0.453,
+        "kept": 14
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.358,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.462,
+        "sec": 0.254,
         "kept": 0
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.287,
-        "kept": 14
-      },
-      {
         "host": "www.nhl.com",
-        "sec": 0.238,
+        "sec": 0.144,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.215,
+        "sec": 0.086,
         "kept": 14
       }
     ],
-    "elapsed_sec": 352.13,
+    "elapsed_sec": 344.16,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
