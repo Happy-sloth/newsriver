@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-11-10T03:04:16.614051Z",
+  "generated_utc": "2025-11-10T03:55:27.500478Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810050",
-          "gameDate": "2025-11-10T00:30Z",
+          "gamePk": "401810051",
+          "gameDate": "2025-11-10T01:30Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -13,6 +13,58 @@
           "linescore": {
             "currentPeriodOrdinal": "4th",
             "currentQuarter": "4th"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 78
+            },
+            "home": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 107
+            }
+          }
+        },
+        {
+          "gamePk": "401810052",
+          "gameDate": "2025-11-10T02:00Z",
+          "status": {
+            "detailedState": "Live",
+            "abstractGameState": "Live"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 115
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 88
+            }
+          }
+        },
+        {
+          "gamePk": "401810050",
+          "gameDate": "2025-11-10T00:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
@@ -26,58 +78,6 @@
                 "abbreviation": "PHI"
               },
               "score": 108
-            }
-          }
-        },
-        {
-          "gamePk": "401810051",
-          "gameDate": "2025-11-10T01:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 53
-            },
-            "home": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 55
-            }
-          }
-        },
-        {
-          "gamePk": "401810052",
-          "gameDate": "2025-11-10T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIN"
-              },
-              "score": 67
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 48
             }
           }
         },
