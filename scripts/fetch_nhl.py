@@ -2,14 +2,15 @@
 # scripts/fetch_nhl.py
 #
 # Purpose: Build a clean NHL relay JSON for MyPyBITE flipboard.
-# - Gets today's schedule (ET). If it's before 4 a.m. ET, also includes yesterday.
-# - Tries multiple NHL endpoints with retries/backoff (statsapi first, api-web fallback).
-# - Normalizes to your existing front-end shape: {"dates":[{"date": "...", "games":[...]}]}
-# - Adds generated_utc and source for debugging/freshness.
+# - Gets today's schedule in ET. If before 04:00 ET, also includes yesterday.
+# - Tries multiple NHL endpoints with retries and backoff (statsapi first, api-web fallback).
+# - Normalizes to: {"generated_utc": "...Z", "source": [...], "dates":[{"date":"YYYY-MM-DD","games":[...]}]}
+# - Writes to OUTFILE and also to newsriver/OUTFILE if OUTFILE is a bare filename.
 #
 # Env (optional):
-#   SCHEDULE_DATE=YYYY-MM-DD   # fetch only this date (skips the early-morning "yesterday" rule)
-#   OUTFILE=nhl.json           # output filename (default nhl.json)
+#   SCHEDULE_DATE=YYYY-MM-DD
+#   OUTFILE=nhl.json
+#   OUTFILE_EXTRA=newsriver/nhl.json   # if set, also write here
 #
 # Stdlib only.
 
@@ -22,11 +23,16 @@ import socket
 import datetime
 import urllib.request
 import urllib.error
+from typing import Tuple, List, Dict, Any
 
 OUTFILE = os.environ.get("OUTFILE", "nhl.json")
+OUTFILE_EXTRA = os.environ.get("OUTFILE_EXTRA")
 SCHEDULE_DATE = os.environ.get("SCHEDULE_DATE")  # YYYY-MM-DD or None
 EARLY_MORNING_ET_CUTOFF = 4  # include yesterday if now < 04:00 ET
 USER_AGENT = "MyPyBITE/nhl-relay (newsriver)"
+
+CANADIAN_ABBRS = {"TOR", "MTL", "OTT", "WPG", "EDM", "CGY", "VAN"}
+
 
 # ----- time helpers -----
 def today_eastern_date() -> datetime.date:
@@ -34,7 +40,6 @@ def today_eastern_date() -> datetime.date:
         from zoneinfo import ZoneInfo
         now = datetime.datetime.now(ZoneInfo("America/Toronto"))
     except Exception:
-        # Fallback: UTC; not perfect for boundary but safe
         now = datetime.datetime.utcnow()
     return now.date()
 
@@ -43,12 +48,13 @@ def now_eastern_hour() -> int:
         from zoneinfo import ZoneInfo
         return datetime.datetime.now(ZoneInfo("America/Toronto")).hour
     except Exception:
-        return datetime.datetime.utcnow().hour  # fallback
+        return datetime.datetime.utcnow().hour
 
 def fmt_date(d: datetime.date) -> str:
     return d.strftime("%Y-%m-%d")
 
-# ----- candidate endpoints (use statsapi first) -----
+
+# ----- candidate endpoints (statsapi first) -----
 CANDIDATES = [
     {
         "name": "statsapi",
@@ -78,7 +84,6 @@ def fetch_with_retries(url: str, attempts: int = 6, first_delay: float = 0.9):
     last_err = None
     for i in range(1, attempts + 1):
         try:
-            # Optional DNS warm-up; non-fatal
             try:
                 host = urllib.request.urlparse(url).hostname
                 if host:
@@ -101,18 +106,41 @@ def fetch_with_retries(url: str, attempts: int = 6, first_delay: float = 0.9):
         else:
             raise last_err or RuntimeError("Unknown fetch error")
 
+
+# ----- state helpers -----
+def map_state_generic(val: str) -> str:
+    t = (val or "").upper()
+    if ("IN_PROGRESS" in t) or ("LIVE" in t) or ("STARTED" in t):
+        return "Live"
+    if ("FINAL" in t) or (t == "FINAL") or ("OFF" in t):
+        return "Final"
+    if ("PRE" in t) or ("FUT" in t) or ("SCHEDULED" in t) or ("UPCOMING" in t) or (t == "PREVIEW"):
+        return "Preview"
+    return "Unknown"
+
+
 # ----- normalizers -----
-def _abbr_from_team(team: dict) -> str:
+def _abbr_from_team(team: Dict[str, Any]) -> str:
     return (
         team.get("abbreviation")
         or team.get("triCode")
+        or (team.get("shortName") if isinstance(team.get("shortName"), str) else None)
         or (team.get("name", "")[:3].upper() if team.get("name") else "")
         or ""
     ).upper()
 
-def norm_from_statsapi(data: dict, date_str: str) -> list[dict]:
-    """Return list of game entries normalized from statsapi schedule response."""
-    games_out: list[dict] = []
+def _score_or_none(x: Any):
+    return x if isinstance(x, int) else None
+
+def _final_winner_abbr(away_abbr: str, home_abbr: str, away_score, home_score, state: str):
+    if state != "Final":
+        return None
+    if isinstance(away_score, int) and isinstance(home_score, int) and away_score != home_score:
+        return away_abbr if away_score > home_score else home_abbr
+    return None
+
+def norm_from_statsapi(data: Dict[str, Any], date_str: str) -> List[Dict[str, Any]]:
+    games_out: List[Dict[str, Any]] = []
     dates = (data or {}).get("dates") or []
     if dates and dates[0].get("games"):
         for g in dates[0]["games"]:
@@ -127,30 +155,37 @@ def norm_from_statsapi(data: dict, date_str: str) -> list[dict]:
             aw_abbr = _abbr_from_team(awt) or "AWY"
             hm_abbr = _abbr_from_team(hmt) or "HOM"
 
+            abstract = status.get("abstractGameState", "") or ""
+            detailed = status.get("detailedState", "") or abstract
+            mapped = map_state_generic(detailed or abstract)
+
+            away_score = _score_or_none(aw.get("score"))
+            home_score = _score_or_none(hm.get("score"))
+
             games_out.append(
                 {
                     "gamePk": g.get("gamePk"),
                     "gameDate": g.get("gameDate"),
                     "status": {
-                        "abstractGameState": status.get("abstractGameState", "") or "",
-                        "detailedState": status.get("detailedState", "") or status.get("abstractGameState", "") or "",
+                        "abstractGameState": mapped,
+                        "detailedState": (detailed or "").upper() or mapped,
                     },
                     "teams": {
-                        "away": {"team": {"abbreviation": aw_abbr, "triCode": aw_abbr}, "score": aw.get("score", 0)},
-                        "home": {"team": {"abbreviation": hm_abbr, "triCode": hm_abbr}, "score": hm.get("score", 0)},
+                        "away": {"team": {"abbreviation": aw_abbr, "triCode": aw_abbr}, "score": away_score},
+                        "home": {"team": {"abbreviation": hm_abbr, "triCode": hm_abbr}, "score": home_score},
                     },
                     "linescore": {
                         "currentPeriod": ls.get("currentPeriod") or 0,
                         "currentPeriodOrdinal": ls.get("currentPeriodOrdinal") or "",
                         "currentPeriodTimeRemaining": ls.get("currentPeriodTimeRemaining") or "",
                     },
+                    "finalWinner": _final_winner_abbr(aw_abbr, hm_abbr, away_score, home_score, mapped),
                 }
             )
     return games_out
 
-def norm_from_apiweb(data: dict, date_str: str) -> list[dict]:
-    """Return list of game entries normalized from api-web schedule response."""
-    games_raw: list[dict] = []
+def norm_from_apiweb(data: Dict[str, Any], date_str: str) -> List[Dict[str, Any]]:
+    games_raw: List[Dict[str, Any]] = []
 
     if isinstance(data, dict):
         if "gameWeek" in data and isinstance(data["gameWeek"], list):
@@ -165,48 +200,36 @@ def norm_from_apiweb(data: dict, date_str: str) -> list[dict]:
             if (data.get("date") in (None, "", date_str)) or (data.get("date") == date_str):
                 games_raw.extend(data["games"])
 
-    def map_state(s: str) -> str:
-        s = (s or "").upper()
-        if any(x in s for x in ("IN_PROGRESS", "LIVE", "STARTED")):
-            return "Live"
-        if any(x in s for x in ("FINAL", "OFF")) or s == "FINAL":
-            return "Final"
-        if any(x in s for x in ("PRE", "FUT", "SCHEDULED")):
-            return "Preview"
-        return "Unknown"
+    def abbr(node: Dict[str, Any]) -> str:
+        return (
+            node.get("abbrev")
+            or node.get("abbreviation")
+            or (node.get("triCode") if isinstance(node.get("triCode"), str) else None)
+            or (node.get("name", "")[:3].upper() if node.get("name") else "")
+            or ""
+        ).upper()
 
-    games_out: list[dict] = []
+    games_out: List[Dict[str, Any]] = []
     for g in games_raw:
         game_date = g.get("startTimeUTC") or g.get("gameDate") or ""
+
         state_raw = (g.get("gameState") or "")
         if not state_raw and isinstance(g.get("status"), dict):
             st = g["status"]
             state_raw = st.get("detailedState") or st.get("abstractGameState") or ""
+        mapped = map_state_generic(state_raw)
 
         aw = g.get("awayTeam") or {}
         hm = g.get("homeTeam") or {}
 
-        def abbr(node: dict) -> str:
-            return (
-                node.get("abbrev")
-                or node.get("abbreviation")
-                or (node.get("triCode") if isinstance(node.get("triCode"), str) else None)
-                or (node.get("name", "")[:3].upper() if node.get("name") else "")
-                or ""
-            ).upper()
-
         aw_abbr = abbr(aw) or "AWY"
         hm_abbr = abbr(hm) or "HOM"
 
-        aw_score = (
-            (aw.get("score") if isinstance(aw.get("score"), int) else None)
-            or (g.get("awayTeamScore") if isinstance(g.get("awayTeamScore"), int) else None)
-            or 0
+        away_score = _score_or_none(
+            aw.get("score") if isinstance(aw.get("score"), int) else g.get("awayTeamScore")
         )
-        hm_score = (
-            (hm.get("score") if isinstance(hm.get("score"), int) else None)
-            or (g.get("homeTeamScore") if isinstance(g.get("homeTeamScore"), int) else None)
-            or 0
+        home_score = _score_or_none(
+            hm.get("score") if isinstance(hm.get("score"), int) else g.get("homeTeamScore")
         )
 
         games_out.append(
@@ -214,26 +237,27 @@ def norm_from_apiweb(data: dict, date_str: str) -> list[dict]:
                 "gamePk": g.get("id") or g.get("gamePk"),
                 "gameDate": game_date,
                 "status": {
-                    "abstractGameState": map_state(state_raw),
-                    "detailedState": (state_raw or "").upper() or map_state(state_raw),
+                    "abstractGameState": mapped,
+                    "detailedState": (state_raw or "").upper() or mapped,
                 },
                 "teams": {
-                    "away": {"team": {"abbreviation": aw_abbr, "triCode": aw_abbr}, "score": aw_score},
-                    "home": {"team": {"abbreviation": hm_abbr, "triCode": hm_abbr}, "score": hm_score},
+                    "away": {"team": {"abbreviation": aw_abbr, "triCode": aw_abbr}, "score": away_score},
+                    "home": {"team": {"abbreviation": hm_abbr, "triCode": hm_abbr}, "score": home_score},
                 },
                 "linescore": {
                     "currentPeriod": 0,
                     "currentPeriodOrdinal": "",
                     "currentPeriodTimeRemaining": "",
                 },
+                "finalWinner": _final_winner_abbr(aw_abbr, hm_abbr, away_score, home_score, mapped),
             }
         )
 
     return games_out
 
+
 # ----- per-date fetch using candidates -----
-def fetch_games_for_date(date_str: str) -> tuple[list[dict], str]:
-    """Return (games, source_name) for a single date, trying candidates in order."""
+def fetch_games_for_date(date_str: str) -> Tuple[List[Dict[str, Any]], str]:
     errors = []
     for cand in CANDIDATES:
         url = cand["url"](date_str)
@@ -249,28 +273,27 @@ def fetch_games_for_date(date_str: str) -> tuple[list[dict], str]:
     msgs = "; ".join([f"{name}: {msg}" for name, msg in errors])
     raise RuntimeError(f"All NHL endpoints failed for {date_str}: {msgs}")
 
-def build_payload(primary_date: str, include_yesterday: bool) -> dict:
-    sources_used: list[str] = []
-    all_games: list[dict] = []
+def build_payload(primary_date: str, include_yesterday: bool) -> Dict[str, Any]:
+    sources_used: List[str] = []
+    all_games: List[Dict[str, Any]] = []
 
-    # primary (today or SCHEDULE_DATE)
     games_today, src_today = fetch_games_for_date(primary_date)
     all_games.extend(games_today)
     sources_used.append(src_today)
 
-    # include yesterday (early morning ET only, and only if not using explicit SCHEDULE_DATE)
     if include_yesterday:
         dt = datetime.datetime.strptime(primary_date, "%Y-%m-%d").date()
         y_str = fmt_date(dt - datetime.timedelta(days=1))
         try:
             games_y, src_y = fetch_games_for_date(y_str)
-            # de-dupe by gamePk when both days overlap (unlikely, but safe)
             seen = set()
-            merged: list[dict] = []
+            merged: List[Dict[str, Any]] = []
             for g in all_games + games_y:
-                key = g.get("gamePk") or (g.get("teams", {}).get("away", {}).get("team", {}).get("abbreviation", "") + "-" +
-                                          g.get("teams", {}).get("home", {}).get("team", {}).get("abbreviation", "") + "-" +
-                                          (g.get("gameDate") or ""))
+                key = g.get("gamePk") or (
+                    (g.get("teams", {}).get("away", {}).get("team", {}).get("abbreviation", "") + "-" +
+                     g.get("teams", {}).get("home", {}).get("team", {}).get("abbreviation", "") + "-" +
+                     (g.get("gameDate") or ""))
+                )
                 if key in seen:
                     continue
                 seen.add(key)
@@ -280,12 +303,29 @@ def build_payload(primary_date: str, include_yesterday: bool) -> dict:
         except Exception as e:
             print(f"[warn] yesterday fetch failed: {e}", file=sys.stderr)
 
-    payload = {
+    payload: Dict[str, Any] = {
         "generated_utc": datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
-        "source": list(dict.fromkeys(sources_used)),  # unique order
+        "source": list(dict.fromkeys(sources_used)),
+        "meta": {
+            "canadian_abbrs": sorted(CANADIAN_ABBRS),
+        },
         "dates": [{"date": primary_date, "games": all_games}],
     }
     return payload
+
+
+def _ensure_dir(path: str) -> None:
+    d = os.path.dirname(path)
+    if d and not os.path.exists(d):
+        os.makedirs(d, exist_ok=True)
+
+def _default_extra_path(outfile: str) -> str | None:
+    # If OUTFILE is a bare filename like "nhl.json", mirror to "newsriver/nhl.json"
+    base = os.path.basename(outfile)
+    if base == outfile:
+        return os.path.join("newsriver", base)
+    return None
+
 
 def main() -> int:
     if SCHEDULE_DATE:
@@ -302,11 +342,29 @@ def main() -> int:
         print(f"Error building NHL payload: {e}", file=sys.stderr)
         return 1
 
+    # Write primary OUTFILE
+    _ensure_dir(OUTFILE)
     with open(OUTFILE, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))
 
-    print(f"Wrote {OUTFILE} for {primary} with {len(payload['dates'][0]['games'])} games. sources={payload.get('source')}")
+    # Write secondary path if requested or if OUTFILE is bare
+    extra_path = OUTFILE_EXTRA or _default_extra_path(OUTFILE)
+    if extra_path:
+        try:
+            _ensure_dir(extra_path)
+            with open(extra_path, "w", encoding="utf-8") as f2:
+                json.dump(payload, f2, ensure_ascii=False, separators=(",", ":"))
+        except Exception as e:
+            print(f"[warn] failed to write extra output {extra_path}: {e}", file=sys.stderr)
+
+    count = len(payload["dates"][0]["games"])
+    sources = payload.get("source")
+    print(f"Wrote {OUTFILE} for {primary} with {count} games. sources={sources}")
+    if extra_path:
+        print(f"Mirrored to {extra_path}")
+
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
