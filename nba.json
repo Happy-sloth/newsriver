@@ -1,60 +1,8 @@
 {
-  "generated_utc": "2025-11-11T04:22:07.938070Z",
+  "generated_utc": "2025-11-11T04:44:49.396856Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810059",
-          "gameDate": "2025-11-11T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "NOP"
-              },
-              "score": 96
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 121
-            }
-          }
-        },
-        {
-          "gamePk": "401810060",
-          "gameDate": "2025-11-11T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIN"
-              },
-              "score": 112
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 102
-            }
-          }
-        },
         {
           "gamePk": "401810061",
           "gameDate": "2025-11-11T03:30Z",
@@ -71,13 +19,65 @@
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 33
+              "score": 52
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 39
+              "score": 52
+            }
+          }
+        },
+        {
+          "gamePk": "401810059",
+          "gameDate": "2025-11-11T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NOP"
+              },
+              "score": 98
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHX"
+              },
+              "score": 121
+            }
+          }
+        },
+        {
+          "gamePk": "401810060",
+          "gameDate": "2025-11-11T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 120
+            },
+            "home": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 113
             }
           }
         },
