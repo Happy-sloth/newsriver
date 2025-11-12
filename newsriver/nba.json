@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-12T04:35:17.403497Z",
+  "generated_utc": "2025-11-12T04:50:00.405274Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810066",
-          "gameDate": "2025-11-12T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 123
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 147
-            }
-          }
-        },
         {
           "gamePk": "401810067",
           "gameDate": "2025-11-12T04:00Z",
@@ -37,21 +11,47 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 28
+              "score": 41
             },
             "home": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 25
+              "score": 42
+            }
+          }
+        },
+        {
+          "gamePk": "401810066",
+          "gameDate": "2025-11-12T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 128
+            },
+            "home": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 152
             }
           }
         },
