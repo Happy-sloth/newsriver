@@ -3,16 +3,22 @@ name: Build NHL JSON
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *" # every 30 min
+    - cron: "*/5 * * * *"  # every 5 min
 
 permissions:
   contents: write
+
+concurrency:
+  group: newsriver-json
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for rebase
 
       - uses: actions/setup-python@v5
         with:
@@ -37,17 +43,48 @@ jobs:
           # To test a specific date, uncomment:
           # SCHEDULE_DATE: "2025-10-08"
         run: |
+          set -e
           python3 scripts/fetch_nhl.py
+          test -s nhl.json
+          mkdir -p newsriver
+          cp nhl.json newsriver/nhl.json
+          echo "Preview of nhl.json:"
+          head -c 200 nhl.json || true
+          echo
+          echo "Preview of newsriver/nhl.json:"
+          head -c 200 newsriver/nhl.json || true
+          echo
 
-      - name: Commit & push nhl.json
+      - name: Commit & push nhl.json (root + /newsriver) with rebase
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nhl.json
+
+          # Rebase on latest main to avoid non-fast-forward
+          git fetch origin
+          git checkout main
+          git pull --rebase --autostash origin main
+
+          git add nhl.json newsriver/nhl.json
+
           if git diff --cached --quiet; then
             echo "No changes."
-          else
-            git commit -m "Update nhl.json"
-            git push
+            exit 0
           fi
+
+          git commit -m "Update nhl.json"
+          # Push with a simple retry to ride out brief races
+          for i in 1 2 3; do
+            if git push origin main; then
+              echo "Push succeeded."
+              exit 0
+            fi
+            echo "Push failed. Attempt $i. Rebasing and retrying..."
+            git fetch origin
+            git pull --rebase --autostash origin main || true
+            sleep 2
+          done
+
+          echo "Push failed after retries."
+          exit 1
