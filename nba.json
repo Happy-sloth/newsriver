@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-13T07:55:03.674985Z",
+  "generated_utc": "2025-11-13T08:23:17.760104Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810073",
-          "gameDate": "2025-11-13T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 95
-            },
-            "home": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 112
-            }
-          }
-        },
         {
           "gamePk": "401810080",
           "gameDate": "2025-11-14T00:00Z",
@@ -194,7 +168,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251112",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251113"
     ],
-    "games_count": 7,
+    "games_count": 6,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
