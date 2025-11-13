@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-13T03:48:29.950954Z",
+  "generated_utc": "2025-11-13T04:13:58.312876Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810076",
-          "gameDate": "2025-11-13T01:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 112
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 105
-            }
-          }
-        },
         {
           "gamePk": "401810077",
           "gameDate": "2025-11-13T02:47Z",
@@ -37,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 38
+              "score": 45
             },
             "home": {
               "team": {
                 "abbreviation": "OKC"
               },
-              "score": 70
+              "score": 76
             }
           }
         },
@@ -71,13 +45,13 @@
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 47
+              "score": 66
             },
             "home": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 37
+              "score": 46
             }
           }
         },
@@ -89,21 +63,47 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 11
+              "score": 39
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 12
+              "score": 38
+            }
+          }
+        },
+        {
+          "gamePk": "401810076",
+          "gameDate": "2025-11-13T01:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHX"
+              },
+              "score": 123
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 114
             }
           }
         },
