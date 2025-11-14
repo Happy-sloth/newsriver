@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-11-14T01:19:50.158885Z",
+  "generated_utc": "2025-11-14T02:52:11.452111Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810080",
-          "gameDate": "2025-11-14T00:00Z",
+          "gamePk": "401810081",
+          "gameDate": "2025-11-14T02:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 67
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 54
-            }
-          }
-        },
-        {
-          "gamePk": "401810081",
-          "gameDate": "2025-11-14T02:00Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "IND"
               },
-              "score": 0
+              "score": 29
             },
             "home": {
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 0
+              "score": 44
             }
           }
         },
@@ -59,25 +33,51 @@
           "gamePk": "401810082",
           "gameDate": "2025-11-14T02:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 0
+              "score": 53
             },
             "home": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 0
+              "score": 45
+            }
+          }
+        },
+        {
+          "gamePk": "401810080",
+          "gameDate": "2025-11-14T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TOR"
+              },
+              "score": 126
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 113
             }
           }
         }
