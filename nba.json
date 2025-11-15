@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-15T04:39:28.915664Z",
+  "generated_utc": "2025-11-15T04:50:40.933204Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401809788",
-          "gameDate": "2025-11-15T01:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "OT",
-            "currentQuarter": "OT"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAC"
-              },
-              "score": 127
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 125
-            }
-          }
-        },
         {
           "gamePk": "401809789",
           "gameDate": "2025-11-15T02:30Z",
@@ -45,13 +19,39 @@
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 80
+              "score": 82
             },
             "home": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 84
+              "score": 91
+            }
+          }
+        },
+        {
+          "gamePk": "401809788",
+          "gameDate": "2025-11-15T01:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAC"
+              },
+              "score": 133
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 127
             }
           }
         },
