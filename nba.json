@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-11-15T03:32:06.544691Z",
+  "generated_utc": "2025-11-15T03:54:25.947023Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401809785",
-          "gameDate": "2025-11-15T01:00Z",
+          "gamePk": "401809788",
+          "gameDate": "2025-11-15T01:30Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 129
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIL"
-              },
-              "score": 129
-            }
-          }
-        },
-        {
-          "gamePk": "401809788",
-          "gameDate": "2025-11-15T01:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "LAC"
               },
-              "score": 88
+              "score": 108
             },
             "home": {
               "team": {
                 "abbreviation": "DAL"
               },
-              "score": 79
+              "score": 100
             }
           }
         },
@@ -71,13 +45,13 @@
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 28
+              "score": 47
             },
             "home": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 30
+              "score": 45
             }
           }
         },
@@ -104,6 +78,32 @@
                 "abbreviation": "HOU"
               },
               "score": 140
+            }
+          }
+        },
+        {
+          "gamePk": "401809785",
+          "gameDate": "2025-11-15T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CHA"
+              },
+              "score": 134
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIL"
+              },
+              "score": 147
             }
           }
         },
