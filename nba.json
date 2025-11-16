@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-16T20:58:02.943477Z",
+  "generated_utc": "2025-11-16T21:20:33.634470Z",
   "dates": [
     {
       "games": [
@@ -11,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 11
+              "score": 37
             },
             "home": {
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 26
+              "score": 43
             }
           }
         },
@@ -33,25 +33,25 @@
           "gamePk": "401810089",
           "gameDate": "2025-11-16T21:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 0
+              "score": 13
             },
             "home": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 0
+              "score": 18
             }
           }
         },
