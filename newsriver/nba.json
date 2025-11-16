@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-16T23:15:12.409484Z",
+  "generated_utc": "2025-11-16T23:30:12.251760Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810089",
-          "gameDate": "2025-11-16T21:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 110
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SAS"
-              },
-              "score": 120
-            }
-          }
-        },
         {
           "gamePk": "401810090",
           "gameDate": "2025-11-16T23:00Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "BKN"
               },
-              "score": 7
+              "score": 18
             },
             "home": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 6
+              "score": 21
             }
           }
         },
@@ -182,6 +156,32 @@
                 "abbreviation": "UTAH"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810089",
+          "gameDate": "2025-11-16T21:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 110
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SAS"
+              },
+              "score": 123
             }
           }
         },
