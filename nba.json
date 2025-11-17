@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-17T03:50:43.680230Z",
+  "generated_utc": "2025-11-17T04:23:59.717041Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810095",
-          "gameDate": "2025-11-17T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "OT",
-            "currentQuarter": "OT"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 132
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 136
-            }
-          }
-        },
         {
           "gamePk": "401810094",
           "gameDate": "2025-11-17T01:00Z",
@@ -52,6 +26,32 @@
                 "abbreviation": "PHX"
               },
               "score": 122
+            }
+          }
+        },
+        {
+          "gamePk": "401810095",
+          "gameDate": "2025-11-17T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CHI"
+              },
+              "score": 147
+            },
+            "home": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 150
             }
           }
         },
