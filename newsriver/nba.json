@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-17T06:58:38.554732Z",
+  "generated_utc": "2025-11-17T07:25:37.029497Z",
   "dates": [
     {
       "games": [
@@ -210,58 +210,6 @@
               "score": 0
             }
           }
-        },
-        {
-          "gamePk": "401810094",
-          "gameDate": "2025-11-17T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 124
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 122
-            }
-          }
-        },
-        {
-          "gamePk": "401810095",
-          "gameDate": "2025-11-17T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 147
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 150
-            }
-          }
         }
       ]
     }
@@ -272,7 +220,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251116",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251117"
     ],
-    "games_count": 10,
+    "games_count": 8,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
