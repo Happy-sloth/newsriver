@@ -2,7 +2,7 @@
 # scripts/fetch_nhl.py
 #
 # Purpose: Build a clean NHL relay JSON for MyPyBITE flipboard.
-# - Gets today's schedule in ET. If before 04:00 ET, also includes yesterday.
+# - Gets today's schedule in ET. If before 09:30 ET, also includes yesterday.
 # - Tries multiple NHL endpoints with retries and backoff (statsapi first, api-web fallback).
 # - Normalizes to: {"generated_utc": "...Z", "source": [...], "dates":[{"date":"YYYY-MM-DD","games":[...]}]}
 # - Writes to OUTFILE and also to newsriver/OUTFILE if OUTFILE is a bare filename.
@@ -28,7 +28,12 @@ from typing import Tuple, List, Dict, Any
 OUTFILE = os.environ.get("OUTFILE", "nhl.json")
 OUTFILE_EXTRA = os.environ.get("OUTFILE_EXTRA")
 SCHEDULE_DATE = os.environ.get("SCHEDULE_DATE")  # YYYY-MM-DD or None
-EARLY_MORNING_ET_CUTOFF = 4  # include yesterday if now < 04:00 ET
+
+# We keep yesterday's games while it's still "morning" in ET.
+# Window: from midnight until 09:30 ET.
+MORNING_CUTOFF_HOUR_ET = 9
+MORNING_CUTOFF_MINUTE_ET = 30
+
 USER_AGENT = "MyPyBITE/nhl-relay (newsriver)"
 
 CANADIAN_ABBRS = {"TOR", "MTL", "OTT", "WPG", "EDM", "CGY", "VAN"}
@@ -43,12 +48,33 @@ def today_eastern_date() -> datetime.date:
         now = datetime.datetime.utcnow()
     return now.date()
 
+
 def now_eastern_hour() -> int:
+    # Kept for compatibility; not used by the morning window logic anymore.
     try:
         from zoneinfo import ZoneInfo
         return datetime.datetime.now(ZoneInfo("America/Toronto")).hour
     except Exception:
         return datetime.datetime.utcnow().hour
+
+
+def include_yesterday_window_et() -> bool:
+    """
+    Return True if we should include yesterday's games:
+    Before 09:30 ET on the current day.
+    """
+    try:
+        from zoneinfo import ZoneInfo
+        now = datetime.datetime.now(ZoneInfo("America/Toronto"))
+    except Exception:
+        now = datetime.datetime.utcnow()
+
+    if now.hour < MORNING_CUTOFF_HOUR_ET:
+        return True
+    if now.hour == MORNING_CUTOFF_HOUR_ET and now.minute < MORNING_CUTOFF_MINUTE_ET:
+        return True
+    return False
+
 
 def fmt_date(d: datetime.date) -> str:
     return d.strftime("%Y-%m-%d")
@@ -68,6 +94,7 @@ CANDIDATES = [
     },
 ]
 
+
 def _req(url: str) -> urllib.request.Request:
     return urllib.request.Request(
         url,
@@ -78,6 +105,7 @@ def _req(url: str) -> urllib.request.Request:
             "Pragma": "no-cache",
         },
     )
+
 
 def fetch_with_retries(url: str, attempts: int = 6, first_delay: float = 0.9):
     delay = first_delay
@@ -129,8 +157,10 @@ def _abbr_from_team(team: Dict[str, Any]) -> str:
         or ""
     ).upper()
 
+
 def _score_or_none(x: Any):
     return x if isinstance(x, int) else None
+
 
 def _final_winner_abbr(away_abbr: str, home_abbr: str, away_score, home_score, state: str):
     if state != "Final":
@@ -138,6 +168,7 @@ def _final_winner_abbr(away_abbr: str, home_abbr: str, away_score, home_score, s
     if isinstance(away_score, int) and isinstance(home_score, int) and away_score != home_score:
         return away_abbr if away_score > home_score else home_abbr
     return None
+
 
 def norm_from_statsapi(data: Dict[str, Any], date_str: str) -> List[Dict[str, Any]]:
     games_out: List[Dict[str, Any]] = []
@@ -183,6 +214,7 @@ def norm_from_statsapi(data: Dict[str, Any], date_str: str) -> List[Dict[str, An
                 }
             )
     return games_out
+
 
 def norm_from_apiweb(data: Dict[str, Any], date_str: str) -> List[Dict[str, Any]]:
     games_raw: List[Dict[str, Any]] = []
@@ -273,6 +305,7 @@ def fetch_games_for_date(date_str: str) -> Tuple[List[Dict[str, Any]], str]:
     msgs = "; ".join([f"{name}: {msg}" for name, msg in errors])
     raise RuntimeError(f"All NHL endpoints failed for {date_str}: {msgs}")
 
+
 def build_payload(primary_date: str, include_yesterday: bool) -> Dict[str, Any]:
     sources_used: List[str] = []
     all_games: List[Dict[str, Any]] = []
@@ -319,6 +352,7 @@ def _ensure_dir(path: str) -> None:
     if d and not os.path.exists(d):
         os.makedirs(d, exist_ok=True)
 
+
 def _default_extra_path(outfile: str) -> str | None:
     # If OUTFILE is a bare filename like "nhl.json", mirror to "newsriver/nhl.json"
     base = os.path.basename(outfile)
@@ -334,7 +368,8 @@ def main() -> int:
     else:
         today = today_eastern_date()
         primary = fmt_date(today)
-        include_y = now_eastern_hour() < EARLY_MORNING_ET_CUTOFF
+        # Include yesterday's games until 09:30 ET
+        include_y = include_yesterday_window_et()
 
     try:
         payload = build_payload(primary, include_y)
