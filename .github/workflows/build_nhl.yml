@@ -3,7 +3,7 @@ name: Build NHL JSON
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"  # every 5 min
+    - cron: "* * * * *"  # every 1 min
 
 permissions:
   contents: write
