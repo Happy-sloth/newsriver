@@ -1,8 +1,24 @@
 {
-  "generated_utc": "2025-11-19T10:48:13.634Z",
-  "itemset_hash": "84bed7b7a89dc567",
+  "generated_utc": "2025-11-19T10:58:59.717Z",
+  "itemset_hash": "14c2a03cd877f0b2",
   "count": 69,
   "items": [
+    {
+      "title": "Fox News Favored Over BBC News By Much Of British Public, Says UK Culture Minister",
+      "url": "https://deadline.com/2025/11/fox-news-favored-bbc-news-british-public-ian-murray-1236622310",
+      "source": "Deadline",
+      "published_utc": "2025-11-19T10:49:33.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "Culture",
+      "region": "Canada"
+    },
     {
       "title": "Roblox introduces controversial age verification features following child safety “concerns”",
       "url": "https://www.nme.com/news/gaming-news/roblox-controversial-age-verification-features-child-safety-concerns-3910015",
@@ -155,11 +171,8 @@
       "published_utc": "2025-11-19T10:20:09.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -313,11 +326,8 @@
       "published_utc": "2025-11-19T09:54:30.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Business",
       "region": "World"
@@ -965,29 +975,13 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Orioles Trade Grayson Rodriguez To Angels For Taylor Ward",
-      "url": "https://www.mlbtraderumors.com/2025/11/orioles-trade-grayson-rodriguez-to-angels-for-taylor-ward.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-11-19T05:55:06.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Sports",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 452,
-    "dedup_pass1": 447,
+    "collected": 476,
+    "dedup_pass1": 471,
     "dedup_final": 320,
     "slow_domains": [
       "aquariumdrunkard.com"
@@ -997,6 +991,7 @@
       "www.cbc.ca"
     ],
     "errors": [
+      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -1007,57 +1002,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.labourstart.org",
-        "sec": 1.784,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 1.043,
+        "sec": 1.423,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.618,
-        "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.584,
-        "kept": 10
-      },
-      {
-        "host": "www.blogto.com",
-        "sec": 0.389,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.285,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.223,
+        "host": "www.labourstart.org",
+        "sec": 1.356,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.218,
+        "sec": 0.612,
         "kept": 14
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.131,
+        "host": "globalnews.ca",
+        "sec": 0.542,
+        "kept": 10
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.421,
+        "kept": 14
+      },
+      {
+        "host": "www.blogto.com",
+        "sec": 0.357,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.269,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.146,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.086,
+        "sec": 0.106,
         "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.102,
+        "kept": 0
       }
     ],
-    "elapsed_sec": 340.23,
+    "elapsed_sec": 325.5,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1095,7 +1090,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 5,
       "sports_player_hits": 4,
-      "sports_result_win_hits": 17,
+      "sports_result_win_hits": 18,
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -1115,7 +1110,7 @@
     },
     "sanity_stats": {
       "link_verification_fail": 25,
-      "soft_404_drops": 20,
+      "soft_404_drops": 32,
       "max_age_drops": 0,
       "min_age_drops": 0,
       "market_sanity_drops": 8,
