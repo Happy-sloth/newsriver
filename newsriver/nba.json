@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-19T04:01:01.334566Z",
+  "generated_utc": "2025-11-19T04:35:02.008484Z",
   "dates": [
     {
       "games": [
@@ -11,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 25
+              "score": 61
             },
             "home": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 20
+              "score": 57
             }
           }
         },
@@ -33,25 +33,25 @@
           "gamePk": "401810109",
           "gameDate": "2025-11-19T04:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 0
+              "score": 27
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 0
+              "score": 21
             }
           }
         },
