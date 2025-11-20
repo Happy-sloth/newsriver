@@ -1,60 +1,8 @@
 {
-  "generated_utc": "2025-11-20T05:17:40.542551Z",
+  "generated_utc": "2025-11-20T05:38:38.965390Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810117",
-          "gameDate": "2025-11-20T02:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 112
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 109
-            }
-          }
-        },
-        {
-          "gamePk": "401810118",
-          "gameDate": "2025-11-20T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 116
-            },
-            "home": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 116
-            }
-          }
-        },
         {
           "gamePk": "401810119",
           "gameDate": "2025-11-21T00:00Z",
@@ -156,6 +104,58 @@
                 "abbreviation": "SAS"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810118",
+          "gameDate": "2025-11-20T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CHI"
+              },
+              "score": 122
+            },
+            "home": {
+              "team": {
+                "abbreviation": "POR"
+              },
+              "score": 121
+            }
+          }
+        },
+        {
+          "gamePk": "401810117",
+          "gameDate": "2025-11-20T02:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NYK"
+              },
+              "score": 113
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 111
             }
           }
         },
