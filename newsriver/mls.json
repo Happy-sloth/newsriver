@@ -1,7 +1,34 @@
 {
   "dates": [
     {
-      "games": []
+      "games": [
+        {
+          "gamePk": "760833",
+          "gameDate": "2025-11-23T02:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAFC"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "VAN"
+              },
+              "score": 0
+            }
+          }
+        }
+      ]
     }
   ]
 }
