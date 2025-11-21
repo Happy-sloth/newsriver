@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-21T03:36:14.437220Z",
+  "generated_utc": "2025-11-21T03:57:30.051453Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810121",
-          "gameDate": "2025-11-21T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "OT",
-            "currentQuarter": "OT"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 121
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIL"
-              },
-              "score": 114
-            }
-          }
-        },
         {
           "gamePk": "401810120",
           "gameDate": "2025-11-21T01:00Z",
@@ -52,6 +26,32 @@
                 "abbreviation": "MEM"
               },
               "score": 137
+            }
+          }
+        },
+        {
+          "gamePk": "401810121",
+          "gameDate": "2025-11-21T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 123
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIL"
+              },
+              "score": 114
             }
           }
         },
