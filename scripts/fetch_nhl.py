@@ -3,7 +3,8 @@
 #
 # Purpose: Build a clean NHL relay JSON for MyPyBITE flipboard.
 # - Gets today's schedule in ET. If before 09:30 ET, also includes yesterday.
-# - Tries multiple NHL endpoints with retries and backoff (statsapi first, api-web fallback).
+# - Tries multiple NHL endpoints with retries and backoff
+#   (api-web first for freshness, statsapi as fallback).
 # - Normalizes to: {"generated_utc": "...Z", "source": [...], "dates":[{"date":"YYYY-MM-DD","games":[...]}]}
 # - Writes to OUTFILE and also to newsriver/OUTFILE if OUTFILE is a bare filename.
 #
@@ -23,6 +24,7 @@ import socket
 import datetime
 import urllib.request
 import urllib.error
+from urllib.parse import urlparse
 from typing import Tuple, List, Dict, Any
 
 OUTFILE = os.environ.get("OUTFILE", "nhl.json")
@@ -80,17 +82,17 @@ def fmt_date(d: datetime.date) -> str:
     return d.strftime("%Y-%m-%d")
 
 
-# ----- candidate endpoints (statsapi first) -----
+# ----- candidate endpoints (api-web preferred, statsapi fallback) -----
 CANDIDATES = [
-    {
-        "name": "statsapi",
-        "url": lambda d: f"https://statsapi.web.nhl.com/api/v1/schedule?date={d}&hydrate=linescore,team",
-        "kind": "statsapi",
-    },
     {
         "name": "api-web",
         "url": lambda d: f"https://api-web.nhle.com/v1/schedule/{d}",
         "kind": "apiweb",
+    },
+    {
+        "name": "statsapi",
+        "url": lambda d: f"https://statsapi.web.nhl.com/api/v1/schedule?date={d}&hydrate=linescore,team",
+        "kind": "statsapi",
     },
 ]
 
@@ -112,8 +114,9 @@ def fetch_with_retries(url: str, attempts: int = 6, first_delay: float = 0.9):
     last_err = None
     for i in range(1, attempts + 1):
         try:
+            # Best-effort DNS precheck; ignore failures here.
             try:
-                host = urllib.request.urlparse(url).hostname
+                host = urlparse(url).hostname
                 if host:
                     socket.gethostbyname(host)
             except Exception:
@@ -337,7 +340,10 @@ def build_payload(primary_date: str, include_yesterday: bool) -> Dict[str, Any]:
             print(f"[warn] yesterday fetch failed: {e}", file=sys.stderr)
 
     payload: Dict[str, Any] = {
-        "generated_utc": datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
+        "generated_utc": datetime.datetime.utcnow()
+        .replace(tzinfo=datetime.timezone.utc)
+        .isoformat()
+        .replace("+00:00", "Z"),
         "source": list(dict.fromkeys(sources_used)),
         "meta": {
             "canadian_abbrs": sorted(CANADIAN_ABBRS),
