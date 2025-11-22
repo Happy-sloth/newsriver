@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-22T05:25:20.351858Z",
+  "generated_utc": "2025-11-22T05:39:24.433131Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401809798",
-          "gameDate": "2025-11-22T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 115
-            },
-            "home": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 111
-            }
-          }
-        },
         {
           "gamePk": "401810123",
           "gameDate": "2025-11-22T18:00Z",
@@ -234,6 +208,32 @@
                 "abbreviation": "UTAH"
               },
               "score": 112
+            }
+          }
+        },
+        {
+          "gamePk": "401809798",
+          "gameDate": "2025-11-22T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "POR"
+              },
+              "score": 127
+            },
+            "home": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 123
             }
           }
         },
