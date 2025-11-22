@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-22T21:55:15.427967Z",
+  "generated_utc": "2025-11-22T22:15:56.422064Z",
   "dates": [
     {
       "games": [
@@ -7,25 +7,25 @@
           "gamePk": "401810124",
           "gameDate": "2025-11-22T22:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "NYK"
               },
-              "score": 0
+              "score": 5
             },
             "home": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 0
+              "score": 2
             }
           }
         },
