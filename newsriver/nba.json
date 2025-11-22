@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-22T17:54:45.957316Z",
+  "generated_utc": "2025-11-22T18:22:48.019719Z",
   "dates": [
     {
       "games": [
@@ -7,25 +7,25 @@
           "gamePk": "401810123",
           "gameDate": "2025-11-22T18:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 0
+              "score": 10
             },
             "home": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 0
+              "score": 18
             }
           }
         },
