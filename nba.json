@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-11-22T03:51:58.749063Z",
+  "generated_utc": "2025-11-22T04:19:49.633213Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401809794",
-          "gameDate": "2025-11-22T01:30Z",
+          "gamePk": "401809795",
+          "gameDate": "2025-11-22T02:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "NOP"
-              },
-              "score": 107
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 105
-            }
-          }
-        },
-        {
-          "gamePk": "401809795",
-          "gameDate": "2025-11-22T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "MIN"
               },
-              "score": 82
+              "score": 100
             },
             "home": {
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 77
+              "score": 99
             }
           }
         },
@@ -63,21 +37,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 46
+              "score": 71
             },
             "home": {
               "team": {
                 "abbreviation": "HOU"
               },
-              "score": 49
+              "score": 70
             }
           }
         },
@@ -97,13 +71,13 @@
               "team": {
                 "abbreviation": "OKC"
               },
-              "score": 38
+              "score": 67
             },
             "home": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 45
+              "score": 68
             }
           }
         },
@@ -123,13 +97,39 @@
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 40
+              "score": 65
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 39
+              "score": 72
+            }
+          }
+        },
+        {
+          "gamePk": "401809794",
+          "gameDate": "2025-11-22T01:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NOP"
+              },
+              "score": 115
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 118
             }
           }
         },
