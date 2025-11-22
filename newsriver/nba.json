@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-22T20:20:38.329473Z",
+  "generated_utc": "2025-11-22T20:39:30.242785Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810123",
-          "gameDate": "2025-11-22T18:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAC"
-              },
-              "score": 131
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 107
-            }
-          }
-        },
         {
           "gamePk": "401810124",
           "gameDate": "2025-11-22T22:00Z",
@@ -182,6 +156,32 @@
                 "abbreviation": "DEN"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810123",
+          "gameDate": "2025-11-22T18:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAC"
+              },
+              "score": 131
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CHA"
+              },
+              "score": 116
             }
           }
         }
