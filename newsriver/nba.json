@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-11-22T04:39:01.552958Z",
+  "generated_utc": "2025-11-22T04:50:06.715136Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401809795",
-          "gameDate": "2025-11-22T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIN"
-              },
-              "score": 113
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 112
-            }
-          }
-        },
         {
           "gamePk": "401809796",
           "gameDate": "2025-11-22T02:30Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 87
+              "score": 99
             },
             "home": {
               "team": {
                 "abbreviation": "HOU"
               },
-              "score": 92
+              "score": 96
             }
           }
         },
@@ -71,7 +45,7 @@
               "team": {
                 "abbreviation": "OKC"
               },
-              "score": 79
+              "score": 99
             },
             "home": {
               "team": {
@@ -97,13 +71,39 @@
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 79
+              "score": 89
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 87
+              "score": 93
+            }
+          }
+        },
+        {
+          "gamePk": "401809795",
+          "gameDate": "2025-11-22T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 113
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHX"
+              },
+              "score": 114
             }
           }
         },
