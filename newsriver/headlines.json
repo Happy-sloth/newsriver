@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-22T21:46:59.989Z",
+  "generated_utc": "2025-11-22T21:57:44.605Z",
   "itemset_hash": "a5e56e9bccbf10c4",
   "count": 69,
   "items": [
@@ -317,7 +317,7 @@
       "region": "World"
     },
     {
-      "title": "Christopher Nolan Jokes ‘Batman Begins’ Was “Consolation Prize” For Not Getting To Direct ‘Troy’",
+      "title": "Christopher Nolan On Directing ‘Batman Begins’ After Getting Passed Over For ‘Troy’",
       "url": "https://deadline.com/2025/11/christopher-nolan-batman-begins-consolation-prize-troy-1236626551",
       "source": "Deadline",
       "published_utc": "2025-11-22T19:40:19.000Z",
@@ -980,12 +980,11 @@
     "feeds_total": 154,
     "cap_items": 320,
     "collected": 474,
-    "dedup_pass1": 468,
+    "dedup_pass1": 469,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
-      "pitchfork.com",
       "www.cbc.ca"
     ],
     "errors": [
@@ -1000,57 +999,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.labourstart.org",
-        "sec": 1.992,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 0.906,
+        "sec": 1.362,
         "kept": 8
       },
       {
+        "host": "www.labourstart.org",
+        "sec": 1.188,
+        "kept": 0
+      },
+      {
         "host": "globalnews.ca",
-        "sec": 0.744,
+        "sec": 0.712,
         "kept": 10
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.382,
-        "kept": 14
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.353,
+        "sec": 0.423,
         "kept": 0
       },
       {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.311,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.308,
-        "kept": 0
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.298,
+        "host": "www.mlb.com",
+        "sec": 0.356,
         "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.245,
+        "sec": 0.294,
         "kept": 14
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.098,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.256,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.169,
         "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.125,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.113,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 337.83,
+    "elapsed_sec": 346.34,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1102,7 +1101,7 @@
       "hype_sports": 0,
       "hype_ceasefire": 0,
       "reject_hits": 0,
-      "obit_hits": 3,
+      "obit_hits": 4,
       "major_figure_hits": 1,
       "business_am_hits": 0
     },
