@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-22T06:50:37.340869Z",
+  "generated_utc": "2025-11-22T07:15:23.246961Z",
   "dates": [
     {
       "games": [
@@ -314,32 +314,6 @@
               "score": 118
             }
           }
-        },
-        {
-          "gamePk": "401809793",
-          "gameDate": "2025-11-22T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIA"
-              },
-              "score": 143
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 107
-            }
-          }
         }
       ]
     }
@@ -350,7 +324,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251121",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251122"
     ],
-    "games_count": 13,
+    "games_count": 12,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
