@@ -3,28 +3,54 @@
     {
       "games": [
         {
-          "gamePk": "760833",
-          "gameDate": "2025-11-23T02:30Z",
+          "gamePk": "760862",
+          "gameDate": "2025-11-23T22:00Z",
           "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
           },
           "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
           },
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "LAFC"
+                "abbreviation": "MIA"
               },
-              "score": 2
+              "score": 0
             },
             "home": {
               "team": {
-                "abbreviation": "VAN"
+                "abbreviation": "CIN"
               },
-              "score": 2
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "760834",
+          "gameDate": "2025-11-24T00:45Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NYC"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 0
             }
           }
         }
