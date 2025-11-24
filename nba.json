@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-24T05:56:05.026560Z",
+  "generated_utc": "2025-11-24T06:30:46.949709Z",
   "dates": [
     {
       "games": [
@@ -314,32 +314,6 @@
               "score": 106
             }
           }
-        },
-        {
-          "gamePk": "401810135",
-          "gameDate": "2025-11-24T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 95
-            },
-            "home": {
-              "team": {
-                "abbreviation": "OKC"
-              },
-              "score": 122
-            }
-          }
         }
       ]
     }
@@ -350,7 +324,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251123",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251124"
     ],
-    "games_count": 13,
+    "games_count": 12,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
