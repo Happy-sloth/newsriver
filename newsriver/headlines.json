@@ -1,8 +1,24 @@
 {
-  "generated_utc": "2025-11-25T04:43:08.137Z",
-  "itemset_hash": "15b484be82dcdae5",
+  "generated_utc": "2025-11-25T05:00:05.259Z",
+  "itemset_hash": "6806d35739fb3bbf",
   "count": 69,
   "items": [
+    {
+      "title": "Households are reaching a breaking point as insolvencies surge",
+      "url": "https://www.canadianmortgagetrends.com/2025/11/households-are-reaching-a-breaking-point-as-insolvencies-surge",
+      "source": "CMT News",
+      "published_utc": "2025-11-25T04:41:42.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "breaker"
+      },
+      "category": "Real Estate",
+      "region": "Canada"
+    },
     {
       "title": "Travis Scott's 'CIRCUS MAXIMUS' Tour Shatters All Solo Rap Records",
       "url": "https://hypebeast.com/2025/11/travis-scott-circus-maximus-tour-becomes-highest-grossing-shatters-all-solo-rap-records-news",
@@ -75,7 +91,7 @@
         "reasons": [
           "score≥2.1"
         ],
-        "style": "breaker"
+        "style": "glitch"
       },
       "category": "General",
       "region": "World"
@@ -129,11 +145,8 @@
       "published_utc": "2025-11-25T04:06:19.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -961,34 +974,23 @@
       },
       "category": "Energy",
       "region": "Canada"
-    },
-    {
-      "title": "‘Tis the season of giving, and charitable contributions increasingly flow through creator channels",
-      "url": "https://www.tubefilter.com/2025/11/24/tiltify-giving-report-holiday-season-charity",
-      "source": "Tubefilter",
-      "published_utc": "2025-11-24T23:58:48.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Labour",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 440,
-    "dedup_pass1": 436,
+    "collected": 426,
+    "dedup_pass1": 422,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "pitchfork.com",
-      "www.cbc.ca"
+      "www.cbc.ca",
+      "www.mining.com"
     ],
     "errors": [
+      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -1000,56 +1002,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 2.2,
+        "sec": 1.922,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.122,
+        "sec": 1.033,
         "kept": 8
       },
       {
+        "host": "www.cp24.com",
+        "sec": 1.024,
+        "kept": 14
+      },
+      {
         "host": "globalnews.ca",
-        "sec": 0.541,
+        "sec": 0.524,
         "kept": 10
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.394,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.36,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.307,
-        "kept": 14
-      },
-      {
         "host": "www.mlb.com",
-        "sec": 0.286,
+        "sec": 0.464,
         "kept": 14
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.245,
+        "host": "www.blogto.com",
+        "sec": 0.39,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.209,
+        "sec": 0.385,
         "kept": 14
       },
       {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.373,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.247,
+        "kept": 0
+      },
+      {
         "host": "www.nhl.com",
-        "sec": 0.137,
+        "sec": 0.141,
         "kept": 0
       }
     ],
-    "elapsed_sec": 339.72,
+    "elapsed_sec": 321.54,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1108,9 +1110,9 @@
     "sanity_stats": {
       "link_verification_fail": 16,
       "soft_404_drops": 21,
-      "max_age_drops": 24,
+      "max_age_drops": 35,
       "min_age_drops": 0,
-      "market_sanity_drops": 4,
+      "market_sanity_drops": 3,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
