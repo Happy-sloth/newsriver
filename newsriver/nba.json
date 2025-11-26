@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-11-26T01:44:42.466935Z",
+  "generated_utc": "2025-11-26T03:06:15.535536Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401809799",
-          "gameDate": "2025-11-26T00:00Z",
+          "gamePk": "401809800",
+          "gameDate": "2025-11-26T01:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 75
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 106
-            }
-          }
-        },
-        {
-          "gamePk": "401809800",
-          "gameDate": "2025-11-26T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "ORL"
               },
-              "score": 32
+              "score": 121
             },
             "home": {
               "team": {
                 "abbreviation": "PHI"
               },
-              "score": 35
+              "score": 83
             }
           }
         },
@@ -78,6 +52,32 @@
                 "abbreviation": "LAL"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401809799",
+          "gameDate": "2025-11-26T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "ATL"
+              },
+              "score": 113
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 132
             }
           }
         }
