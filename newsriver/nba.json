@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-11-27T03:43:34.024022Z",
+  "generated_utc": "2025-11-27T04:01:10.960443Z",
   "dates": [
     {
       "games": [
@@ -11,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "HOU"
               },
-              "score": 22
+              "score": 36
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 25
+              "score": 41
             }
           }
         },
@@ -45,13 +45,13 @@
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 34
+              "score": 48
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 34
+              "score": 52
             }
           }
         },
@@ -71,13 +71,13 @@
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 41
+              "score": 60
             },
             "home": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 23
+              "score": 37
             }
           }
         },
@@ -210,32 +210,6 @@
               "score": 101
             }
           }
-        },
-        {
-          "gamePk": "401809802",
-          "gameDate": "2025-11-26T22:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DET"
-              },
-              "score": 114
-            },
-            "home": {
-              "team": {
-                "abbreviation": "BOS"
-              },
-              "score": 117
-            }
-          }
         }
       ]
     }
@@ -246,7 +220,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251125",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251126"
     ],
-    "games_count": 9,
+    "games_count": 8,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
