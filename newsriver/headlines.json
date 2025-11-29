@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-11-29T11:16:37.724Z",
-  "itemset_hash": "9dceec95d4578552",
+  "generated_utc": "2025-11-29T11:31:45.733Z",
+  "itemset_hash": "6c8f1d109fa5dc32",
   "count": 69,
   "items": [
     {
@@ -34,6 +34,19 @@
       "url": "https://www.thefp.com/p/the-weekend-press-siblings-are-a-gift",
       "source": "The Free Press",
       "published_utc": "2025-11-29T11:01:06.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Pope's visit to Lebanon sparks hope but also frustration",
+      "url": "https://www.npr.org/2025/11/29/nx-s1-5623028/pope-leo-lebanon",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-11-29T11:01:00.000Z",
       "effects": {
         "lightsaber": false,
         "glitch": false,
@@ -83,6 +96,19 @@
       },
       "category": "Labour",
       "region": "Canada"
+    },
+    {
+      "title": "As the 2025 Atlantic hurricane season ends, the future of forecasting is AI",
+      "url": "https://www.npr.org/2025/11/29/nx-s1-5604290/atlantic-hurricane-season-forecast-ai-google",
+      "source": "NPR Topics: Home Page Top Stories",
+      "published_utc": "2025-11-29T11:00:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
     },
     {
       "title": "Newly Unveiled Photos of MLK Jr. Show Depth of NYPD’s Surveillance",
@@ -364,7 +390,7 @@
       "region": "World"
     },
     {
-      "title": "Sri Lanka seeks foreign help as Cyclone Ditwah death toll reaches 123",
+      "title": "Sri Lanka seeks foreign help as Cyclone Ditwah death toll reaches 132",
       "url": "https://www.aljazeera.com/news/2025/11/29/sri-lanka-seeks-foreign-help-as-cyclone-ditwah-death-toll-reaches-123?traffic_source=rss",
       "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
       "published_utc": "2025-11-29T08:50:11.000Z",
@@ -581,11 +607,8 @@
       "published_utc": "2025-11-29T07:28:20.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Sports",
       "region": "Canada"
@@ -656,7 +679,7 @@
       "region": "World"
     },
     {
-      "title": "Indonesia death toll rises to 248 after catastrophic flooding in Sumatra",
+      "title": "Indonesia death toll rises to 303 after catastrophic flooding in Sumatra",
       "url": "https://www.aljazeera.com/news/2025/11/29/indonesia-death-toll-rises-to-248-after-catastrophic-flooding-in-sumatra?traffic_source=rss",
       "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
       "published_utc": "2025-11-29T07:00:27.000Z",
@@ -900,45 +923,16 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Pete Hegseth Calls Out ‘Fabricated’ and ‘Inflammatory’ Reports About Drug Boat Strikes: ‘Fake News’",
-      "url": "https://www.thewrap.com/pete-hegseth-response-drug-boat-strikes",
-      "source": "TheWrap",
-      "published_utc": "2025-11-29T04:24:01.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Labour",
-      "region": "World"
-    },
-    {
-      "title": "Cat Macario’s two goals help lead USWNT to victory over Italy in friendly match",
-      "url": "https://nypost.com/2025/11/28/sports/cat-macario-helps-lead-uswnt-to-victory-over-italy-in-friendly-match",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2025-11-29T04:21:58.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Sports",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 798,
-    "dedup_pass1": 787,
+    "collected": 808,
+    "dedup_pass1": 797,
     "dedup_final": 320,
-    "slow_domains": [
-      "www.gorillavsbear.net"
-    ],
+    "slow_domains": [],
     "timeouts": [
-      "canadianbeats.ca",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
@@ -960,57 +954,57 @@
     ],
     "feed_times_sample": [
       {
-        "host": "www.labourstart.org",
-        "sec": 2.013,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 1.095,
+        "sec": 1.538,
         "kept": 8
       },
       {
-        "host": "globalnews.ca",
-        "sec": 0.485,
-        "kept": 10
-      },
-      {
-        "host": "www.blogto.com",
-        "sec": 0.381,
+        "host": "www.labourstart.org",
+        "sec": 1.491,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.348,
+        "sec": 0.628,
         "kept": 14
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.334,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.311,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.215,
+        "host": "www.blogto.com",
+        "sec": 0.463,
         "kept": 0
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.162,
+        "host": "globalnews.ca",
+        "sec": 0.394,
+        "kept": 10
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.354,
+        "kept": 0
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.304,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.12,
+        "sec": 0.298,
         "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.259,
+        "kept": 14
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.128,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 320.51,
+    "elapsed_sec": 332.75,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1036,7 +1030,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 17,
+      "ps_fatal_hits": 18,
       "ps_injury_hits": 0,
       "market_btc_hits": 2,
       "market_index_hits": 0,
@@ -1048,7 +1042,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 7,
       "sports_player_hits": 4,
-      "sports_result_win_hits": 18,
+      "sports_result_win_hits": 19,
       "sports_result_loss_hits": 2,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
@@ -1063,15 +1057,15 @@
       "hype_ceasefire": 0,
       "reject_hits": 1,
       "obit_hits": 5,
-      "major_figure_hits": 4,
-      "business_am_hits": 57
+      "major_figure_hits": 3,
+      "business_am_hits": 66
     },
     "sanity_stats": {
-      "link_verification_fail": 21,
+      "link_verification_fail": 19,
       "soft_404_drops": 51,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 7,
+      "market_sanity_drops": 5,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
