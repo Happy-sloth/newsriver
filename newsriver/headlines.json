@@ -1,8 +1,24 @@
 {
-  "generated_utc": "2025-11-30T05:27:33.615Z",
-  "itemset_hash": "9a13220daccd5bd2",
+  "generated_utc": "2025-11-30T05:45:06.944Z",
+  "itemset_hash": "7a83d6b35463eeb6",
   "count": 69,
   "items": [
+    {
+      "title": "ETH may reclaim $3.2K soon, based on low stablecoin yields: Santiment",
+      "url": "https://cointelegraph.com/news/ether-price-recovery-signs-stablecoin-yields-low-santiment",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-11-30T05:29:01.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "Business",
+      "region": "World"
+    },
     {
       "title": "Orioles Sign Ryan Helsley",
       "url": "https://www.mlbtraderumors.com/2025/11/orioles-sign-ryan-helsley.html",
@@ -965,36 +981,20 @@
       },
       "category": "Business",
       "region": "World"
-    },
-    {
-      "title": "Tom Stoppard, celebrated British playwright, dies aged 88",
-      "url": "https://www.aljazeera.com/news/2025/11/29/tom-stoppard-celebrated-british-playwright-dies-aged-88?traffic_source=rss",
-      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
-      "published_utc": "2025-11-29T18:56:04.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 473,
-    "dedup_pass1": 466,
+    "collected": 449,
+    "dedup_pass1": 442,
     "dedup_final": 320,
-    "slow_domains": [
-      "www.gorillavsbear.net"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
     ],
     "errors": [
-      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -1005,57 +1005,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "www.labourstart.org",
+        "sec": 1.296,
+        "kept": 0
+      },
+      {
         "host": "toronto.citynews.ca",
-        "sec": 1.779,
+        "sec": 0.761,
         "kept": 8
       },
       {
-        "host": "www.labourstart.org",
-        "sec": 1.435,
+        "host": "www.blogto.com",
+        "sec": 0.419,
         "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.774,
-        "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.642,
+        "sec": 0.353,
         "kept": 14
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.563,
-        "kept": 0
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.337,
+        "sec": 0.317,
         "kept": 10
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.294,
+        "sec": 0.297,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.286,
+        "sec": 0.288,
         "kept": 0
       },
       {
-        "host": "www.nhl.com",
-        "sec": 0.266,
-        "kept": 0
+        "host": "www.cp24.com",
+        "sec": 0.247,
+        "kept": 14
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.206,
+        "sec": 0.126,
         "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.101,
+        "kept": 0
       }
     ],
-    "elapsed_sec": 332.75,
+    "elapsed_sec": 350.6,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1113,8 +1113,8 @@
     },
     "sanity_stats": {
       "link_verification_fail": 15,
-      "soft_404_drops": 31,
-      "max_age_drops": 0,
+      "soft_404_drops": 18,
+      "max_age_drops": 9,
       "min_age_drops": 0,
       "market_sanity_drops": 11,
       "backfill_steps_used": 0
