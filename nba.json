@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-11-29T23:54:55.714176Z",
+  "generated_utc": "2025-11-30T01:29:05.641440Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810148",
-          "gameDate": "2025-11-29T22:00Z",
+          "gamePk": "401810149",
+          "gameDate": "2025-11-29T23:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,21 +17,21 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "BOS"
+                "abbreviation": "TOR"
               },
-              "score": 94
+              "score": 104
             },
             "home": {
               "team": {
-                "abbreviation": "MIN"
+                "abbreviation": "CHA"
               },
-              "score": 96
+              "score": 104
             }
           }
         },
         {
-          "gamePk": "401810149",
-          "gameDate": "2025-11-29T23:00Z",
+          "gamePk": "401810150",
+          "gameDate": "2025-11-30T00:30Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -43,41 +43,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 50
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 39
-            }
-          }
-        },
-        {
-          "gamePk": "401810150",
-          "gameDate": "2025-11-30T00:30Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "CHI"
               },
-              "score": 0
+              "score": 49
             },
             "home": {
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 0
+              "score": 56
             }
           }
         },
@@ -85,25 +59,25 @@
           "gamePk": "401810151",
           "gameDate": "2025-11-30T01:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 0
+              "score": 19
             },
             "home": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 0
+              "score": 18
             }
           }
         },
@@ -111,25 +85,25 @@
           "gamePk": "401810152",
           "gameDate": "2025-11-30T01:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "BKN"
               },
-              "score": 0
+              "score": 13
             },
             "home": {
               "team": {
                 "abbreviation": "MIL"
               },
-              "score": 0
+              "score": 21
             }
           }
         },
@@ -208,6 +182,32 @@
                 "abbreviation": "LAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810148",
+          "gameDate": "2025-11-29T22:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BOS"
+              },
+              "score": 115
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 119
             }
           }
         }
