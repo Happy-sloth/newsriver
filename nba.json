@@ -1,60 +1,8 @@
 {
-  "generated_utc": "2025-11-30T23:54:45.113564Z",
+  "generated_utc": "2025-12-01T01:44:08.198625Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810157",
-          "gameDate": "2025-11-30T23:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BOS"
-              },
-              "score": 49
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 46
-            }
-          }
-        },
-        {
-          "gamePk": "401810158",
-          "gameDate": "2025-11-30T23:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 44
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 51
-            }
-          }
-        },
         {
           "gamePk": "401810159",
           "gameDate": "2025-11-30T23:00Z",
@@ -63,47 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "OT",
+            "currentQuarter": "OT"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 48
+              "score": 124
             },
             "home": {
               "team": {
                 "abbreviation": "PHI"
               },
-              "score": 50
-            }
-          }
-        },
-        {
-          "gamePk": "401810160",
-          "gameDate": "2025-11-30T23:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "OKC"
-              },
-              "score": 40
-            },
-            "home": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 38
+              "score": 124
             }
           }
         },
@@ -111,25 +33,25 @@
           "gamePk": "401810161",
           "gameDate": "2025-12-01T00:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 0
+              "score": 93
             },
             "home": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 0
+              "score": 89
             }
           }
         },
@@ -182,6 +104,84 @@
                 "abbreviation": "LAL"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810157",
+          "gameDate": "2025-11-30T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BOS"
+              },
+              "score": 117
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 115
+            }
+          }
+        },
+        {
+          "gamePk": "401810158",
+          "gameDate": "2025-11-30T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TOR"
+              },
+              "score": 94
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NYK"
+              },
+              "score": 116
+            }
+          }
+        },
+        {
+          "gamePk": "401810160",
+          "gameDate": "2025-11-30T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "OKC"
+              },
+              "score": 123
+            },
+            "home": {
+              "team": {
+                "abbreviation": "POR"
+              },
+              "score": 115
             }
           }
         },
