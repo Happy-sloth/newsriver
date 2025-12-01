@@ -1,9 +1,19 @@
 {
   "items":[
     {
-      "text":"Cows in Europe are getting lumpy skin disease. Will your cheese cost more?",
-      "display":"Cows in Europe are getting lumpy skin disease. Will your cheese cost more?",
-      "url":"https://globalnews.ca/news/11554465/cows-europe-lumpy-skin-disease-cheese",
+      "text":"Man mauled to death by lion after breaking into enclosure in Brazil",
+      "display":"Man mauled to death by lion after breaking into enclosure in Brazil",
+      "url":"https://globalnews.ca/news/11554260/man-mauled-killed-lion-brazil",
+      "flags":{
+        "is_breaking":true,
+        "is_landmark":false,
+        "has_bitcoin":false
+      }
+    },
+    {
+      "text":"Lockdown at North York high school after reports of gun seen at the school: police",
+      "display":"Lockdown at North York high school after reports of gun seen at the school: police",
+      "url":"https://toronto.citynews.ca/2025/12/01/lockdown-at-north-york-high-school-after-reports-of-gun-seen-at-the-school-police",
       "flags":{
         "is_breaking":false,
         "is_landmark":false,
@@ -11,19 +21,9 @@
       }
     },
     {
-      "text":"Marc Miller named new culture minister",
-      "display":"Marc Miller named new culture minister",
-      "url":"https://toronto.citynews.ca/2025/12/01/marc-miller-named-new-culture-minister",
-      "flags":{
-        "is_breaking":false,
-        "is_landmark":false,
-        "has_bitcoin":false
-      }
-    },
-    {
-      "text":"Republicans Amplified Pro-Gun Control Protesters In Tennessee",
-      "display":"Republicans Amplified Pro-Gun Control Protesters In Tennessee",
-      "url":"https://fivethirtyeight.com/videos/republicans-amplified-pro-gun-control-protesters-in-tennessee",
+      "text":"Politics Podcast",
+      "display":"Politics Podcast",
+      "url":"https://fivethirtyeight.com/tag/politics-podcast",
       "flags":{
         "is_breaking":false,
         "is_landmark":false,
@@ -31,5 +31,5 @@
       }
     }
   ],
-  "generated_utc":"2025-12-01T21:35:05Z"
+  "generated_utc":"2025-12-01T21:47:10Z"
 }
