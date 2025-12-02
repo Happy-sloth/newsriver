@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-02T03:59:00.621205Z",
+  "generated_utc": "2025-12-02T04:36:42.076863Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810170",
-          "gameDate": "2025-12-02T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 115
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 112
-            }
-          }
-        },
         {
           "gamePk": "401810171",
           "gameDate": "2025-12-02T02:00Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "HOU"
               },
-              "score": 91
+              "score": 125
             },
             "home": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 104
+              "score": 130
             }
           }
         },
@@ -63,21 +37,47 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 42
+              "score": 79
             },
             "home": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 41
+              "score": 63
+            }
+          }
+        },
+        {
+          "gamePk": "401810170",
+          "gameDate": "2025-12-02T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 131
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 121
             }
           }
         },
