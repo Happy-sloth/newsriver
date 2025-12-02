@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-02T04:36:42.076863Z",
+  "generated_utc": "2025-12-02T04:54:17.421094Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810171",
-          "gameDate": "2025-12-02T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 125
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 130
-            }
-          }
-        },
         {
           "gamePk": "401810172",
           "gameDate": "2025-12-02T03:00Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 79
+              "score": 96
             },
             "home": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 63
+              "score": 77
             }
           }
         },
@@ -78,6 +52,32 @@
                 "abbreviation": "DEN"
               },
               "score": 121
+            }
+          }
+        },
+        {
+          "gamePk": "401810171",
+          "gameDate": "2025-12-02T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 125
+            },
+            "home": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 133
             }
           }
         },
