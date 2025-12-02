@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-02T06:28:50.793841Z",
+  "generated_utc": "2025-12-02T06:55:44.434525Z",
   "dates": [
     {
       "games": [
@@ -236,84 +236,6 @@
               "score": 133
             }
           }
-        },
-        {
-          "gamePk": "401810167",
-          "gameDate": "2025-12-02T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 103
-            },
-            "home": {
-              "team": {
-                "abbreviation": "BKN"
-              },
-              "score": 116
-            }
-          }
-        },
-        {
-          "gamePk": "401810168",
-          "gameDate": "2025-12-02T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAC"
-              },
-              "score": 123
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIA"
-              },
-              "score": 140
-            }
-          }
-        },
-        {
-          "gamePk": "401810169",
-          "gameDate": "2025-12-02T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 120
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ORL"
-              },
-              "score": 125
-            }
-          }
         }
       ]
     }
@@ -324,7 +246,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251201",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251202"
     ],
-    "games_count": 12,
+    "games_count": 9,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
