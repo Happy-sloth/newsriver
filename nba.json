@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-03T01:21:52.788632Z",
+  "generated_utc": "2025-12-03T02:59:34.331122Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810173",
-          "gameDate": "2025-12-03T00:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 59
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 66
-            }
-          }
-        },
         {
           "gamePk": "401810174",
           "gameDate": "2025-12-03T00:30Z",
@@ -37,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 43
+              "score": 115
             },
             "home": {
               "team": {
                 "abbreviation": "TOR"
               },
-              "score": 53
+              "score": 119
             }
           }
         },
@@ -63,21 +37,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "NYK"
               },
-              "score": 17
+              "score": 76
             },
             "home": {
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 4
+              "score": 94
             }
           }
         },
@@ -89,21 +63,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 16
+              "score": 104
             },
             "home": {
               "team": {
                 "abbreviation": "NOP"
               },
-              "score": 12
+              "score": 105
             }
           }
         },
@@ -115,21 +89,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MEM"
               },
-              "score": 12
+              "score": 98
             },
             "home": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 11
+              "score": 97
             }
           }
         },
@@ -156,6 +130,32 @@
                 "abbreviation": "GSW"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810173",
+          "gameDate": "2025-12-03T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 102
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 121
             }
           }
         }
