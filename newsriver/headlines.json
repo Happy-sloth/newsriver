@@ -1,8 +1,34 @@
 {
-  "generated_utc": "2025-12-03T11:40:17.997Z",
-  "itemset_hash": "8f13ac1c6c90f1e3",
+  "generated_utc": "2025-12-03T11:51:32.095Z",
+  "itemset_hash": "bd31f6b80f721281",
   "count": 69,
   "items": [
+    {
+      "title": "Whistleblower accuses Foreign Office of ‘censoring’ warning of Sudan genocide",
+      "url": "https://www.theguardian.com/global-development/2025/dec/03/whistleblower-accuses-foreign-office-of-censoring-warning-of-sudan-genocide",
+      "source": "World news | The Guardian",
+      "published_utc": "2025-12-03T11:40:31.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "Meet the braider behind the Afro-textured hairstyles at PFW SS26",
+      "url": "https://www.dazeddigital.com/beauty/article/69201/1/braids-beauty-hair-paris-fashion-week-ss26-chanel-celine",
+      "source": "Dazed",
+      "published_utc": "2025-12-03T11:35:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "adidas Perfected (& Lux'd Up) Its Most Minimalist Sneaker",
       "url": "https://www.highsnobiety.com/p/adidas-stan-smith-lux",
@@ -136,11 +162,8 @@
       "published_utc": "2025-12-03T11:10:31.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -168,11 +191,8 @@
       "published_utc": "2025-12-03T11:06:32.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -606,12 +626,12 @@
       "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
       "published_utc": "2025-12-03T10:00:00.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
+        "lightsaber": false,
+        "glitch": true,
         "reasons": [
-          "score≥2.6"
+          "score≥2.1"
         ],
-        "style": "lightsaber"
+        "style": "glitch"
       },
       "category": "Business",
       "region": "World"
@@ -945,50 +965,21 @@
       },
       "category": "Labour",
       "region": "World"
-    },
-    {
-      "title": "Oil presses stand silent as West Bank has its worst olive harvest in years",
-      "url": "https://www.aljazeera.com/news/longform/2025/12/3/oil-presses-stand-silent-as-west-bank-has-its-worst-olive-harvest-in-years?traffic_source=rss",
-      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
-      "published_utc": "2025-12-03T08:30:20.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "China’s Petrochemicals Surge Raises Global Oversupply Fears",
-      "url": "https://oilprice.com/Latest-Energy-News/World-News/Chinas-Petrochemicals-Surge-Raises-Global-Oversupply-Fears.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-12-03T08:30:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
-      },
-      "category": "Energy",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 444,
-    "dedup_pass1": 437,
+    "collected": 514,
+    "dedup_pass1": 506,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
-      "canadianbeats.ca",
       "news.communitech.ca",
       "www.cbc.ca"
     ],
     "errors": [
+      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -1000,56 +991,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 2.02,
+        "sec": 1.304,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.72,
+        "sec": 0.821,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.719,
-        "kept": 14
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.697,
+        "sec": 0.557,
         "kept": 10
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.502,
+        "host": "www.blogto.com",
+        "sec": 0.492,
         "kept": 0
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.475,
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.304,
+        "kept": 14
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.297,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.276,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.336,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.316,
+        "sec": 0.186,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.224,
+        "sec": 0.136,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.205,
+        "sec": 0.102,
         "kept": 14
       }
     ],
-    "elapsed_sec": 366.52,
+    "elapsed_sec": 327.98,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1075,7 +1066,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 3,
+      "ps_fatal_hits": 6,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1101,16 +1092,16 @@
       "hype_sports": 0,
       "hype_ceasefire": 0,
       "reject_hits": 1,
-      "obit_hits": 1,
+      "obit_hits": 2,
       "major_figure_hits": 1,
-      "business_am_hits": 48
+      "business_am_hits": 53
     },
     "sanity_stats": {
-      "link_verification_fail": 16,
-      "soft_404_drops": 17,
+      "link_verification_fail": 12,
+      "soft_404_drops": 29,
       "max_age_drops": 0,
-      "min_age_drops": 0,
-      "market_sanity_drops": 8,
+      "min_age_drops": 8,
+      "market_sanity_drops": 9,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
