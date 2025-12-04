@@ -1,8 +1,138 @@
 {
-  "generated_utc": "2025-12-04T04:54:03.510523Z",
+  "generated_utc": "2025-12-04T05:17:45.536136Z",
   "dates": [
     {
       "games": [
+        {
+          "gamePk": "401810188",
+          "gameDate": "2025-12-05T00:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810189",
+          "gameDate": "2025-12-05T00:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BOS"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810190",
+          "gameDate": "2025-12-05T00:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "BKN"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810191",
+          "gameDate": "2025-12-05T00:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAL"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "TOR"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810192",
+          "gameDate": "2025-12-05T01:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NOP"
+              },
+              "score": 0
+            }
+          }
+        },
         {
           "gamePk": "401810187",
           "gameDate": "2025-12-04T01:30Z",
@@ -243,10 +373,10 @@
   "_meta": {
     "source": "espn",
     "urls": [
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251202",
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251203"
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251203",
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251204"
     ],
-    "games_count": 9,
+    "games_count": 14,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
