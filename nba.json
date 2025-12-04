@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-04T06:55:03.894187Z",
+  "generated_utc": "2025-12-04T07:19:14.109606Z",
   "dates": [
     {
       "games": [
@@ -158,84 +158,6 @@
               "score": 118
             }
           }
-        },
-        {
-          "gamePk": "401810184",
-          "gameDate": "2025-12-04T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BKN"
-              },
-              "score": 113
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 103
-            }
-          }
-        },
-        {
-          "gamePk": "401810185",
-          "gameDate": "2025-12-04T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 95
-            },
-            "home": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 121
-            }
-          }
-        },
-        {
-          "gamePk": "401810186",
-          "gameDate": "2025-12-04T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DET"
-              },
-              "score": 109
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIL"
-              },
-              "score": 113
-            }
-          }
         }
       ]
     }
@@ -246,7 +168,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251203",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251204"
     ],
-    "games_count": 9,
+    "games_count": 6,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
