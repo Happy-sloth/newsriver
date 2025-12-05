@@ -1,112 +1,8 @@
 {
-  "generated_utc": "2025-12-05T01:24:36.229140Z",
+  "generated_utc": "2025-12-05T03:03:43.950542Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810188",
-          "gameDate": "2025-12-05T00:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 49
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 67
-            }
-          }
-        },
-        {
-          "gamePk": "401810189",
-          "gameDate": "2025-12-05T00:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BOS"
-              },
-              "score": 71
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 62
-            }
-          }
-        },
-        {
-          "gamePk": "401810190",
-          "gameDate": "2025-12-05T00:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 41
-            },
-            "home": {
-              "team": {
-                "abbreviation": "BKN"
-              },
-              "score": 45
-            }
-          }
-        },
-        {
-          "gamePk": "401810191",
-          "gameDate": "2025-12-05T00:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 51
-            },
-            "home": {
-              "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 49
-            }
-          }
-        },
         {
           "gamePk": "401810192",
           "gameDate": "2025-12-05T01:00Z",
@@ -115,21 +11,125 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 21
+              "score": 93
             },
             "home": {
               "team": {
                 "abbreviation": "NOP"
               },
-              "score": 19
+              "score": 91
+            }
+          }
+        },
+        {
+          "gamePk": "401810190",
+          "gameDate": "2025-12-05T00:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 123
+            },
+            "home": {
+              "team": {
+                "abbreviation": "BKN"
+              },
+              "score": 110
+            }
+          }
+        },
+        {
+          "gamePk": "401810191",
+          "gameDate": "2025-12-05T00:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAL"
+              },
+              "score": 123
+            },
+            "home": {
+              "team": {
+                "abbreviation": "TOR"
+              },
+              "score": 120
+            }
+          }
+        },
+        {
+          "gamePk": "401810188",
+          "gameDate": "2025-12-05T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 98
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 99
+            }
+          }
+        },
+        {
+          "gamePk": "401810189",
+          "gameDate": "2025-12-05T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BOS"
+              },
+              "score": 146
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 101
             }
           }
         }
