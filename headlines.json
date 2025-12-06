@@ -1,8 +1,24 @@
 {
-  "generated_utc": "2025-12-06T04:45:13.985Z",
-  "itemset_hash": "56c801f384477dab",
+  "generated_utc": "2025-12-06T04:57:55.039Z",
+  "itemset_hash": "a4ed7ff73baf3352",
   "count": 69,
   "items": [
+    {
+      "title": "Mariners Finalize Coaching Staff",
+      "url": "https://www.mlbtraderumors.com/2025/12/mariners-finalize-coaching-staff-2.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-12-06T04:41:04.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Sports",
+      "region": "Canada"
+    },
     {
       "title": "Sydney Sweeney Declares She’s “Against Hate” Following American Eagle Ad Fallout",
       "url": "https://deadline.com/2025/12/sydney-sweeney-against-hate-american-eagle-ad-fallout-1236638330",
@@ -191,7 +207,7 @@
       "region": "World"
     },
     {
-      "title": "First, fourth lines each score twice as Winnipeg Jets down Sabres 4-1",
+      "title": "1st & 4th lines each score twice as Winnipeg Jets down Sabres 4-1",
       "url": "https://globalnews.ca/news/11564519/first-fourth-lines-each-score-twice-as-winnipeg-jets-down-sabres-4-1",
       "source": "globalnews.ca",
       "published_utc": "2025-12-06T02:38:26.000Z",
@@ -692,22 +708,6 @@
       "region": "World"
     },
     {
-      "title": "British Columbia Court rules Indigenous rights legally enforceable in mineral claims staking",
-      "url": "https://www.mining.com/british-columbia-court-rules-indigenous-rights-legally-enforceable-in-mineral-claims-staking",
-      "source": "MINING.COM",
-      "published_utc": "2025-12-06T00:43:04.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
-      },
-      "category": "Energy",
-      "region": "Canada"
-    },
-    {
       "title": "Giants To Hire Jesse Chavez As Bullpen Coach",
       "url": "https://www.mlbtraderumors.com/2025/12/giants-to-hire-jesse-chavez-as-bullpen-coach.html",
       "source": "MLB Trade Rumors",
@@ -970,13 +970,14 @@
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 647,
-    "dedup_pass1": 637,
+    "collected": 679,
+    "dedup_pass1": 668,
     "dedup_final": 320,
     "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
-      "www.cbc.ca"
+      "www.cbc.ca",
+      "www.mining.com"
     ],
     "errors": [
       "alert.weather.gc.ca",
@@ -986,61 +987,64 @@
       "cultmtl.com",
       "financialpost.com",
       "globalnews.ca",
-      "toronto.citynews.ca"
+      "toronto.citynews.ca",
+      "www.marketwatch.com",
+      "www.npr.org",
+      "www.wsj.com"
     ],
     "feed_times_sample": [
       {
-        "host": "www.labourstart.org",
-        "sec": 1.958,
-        "kept": 0
-      },
-      {
         "host": "toronto.citynews.ca",
-        "sec": 1.76,
+        "sec": 1.757,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.65,
-        "kept": 14
-      },
-      {
-        "host": "globalnews.ca",
-        "sec": 0.59,
-        "kept": 10
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.497,
+        "host": "www.labourstart.org",
+        "sec": 1.471,
         "kept": 0
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.484,
+        "sec": 0.855,
         "kept": 14
       },
       {
+        "host": "globalnews.ca",
+        "sec": 0.798,
+        "kept": 10
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.418,
+        "sec": 0.628,
+        "kept": 0
+      },
+      {
+        "host": "www.mlb.com",
+        "sec": 0.62,
+        "kept": 14
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.59,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.298,
-        "kept": 14
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.17,
+        "sec": 0.282,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.1,
+        "sec": 0.233,
         "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.179,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 323.96,
+    "elapsed_sec": 328.11,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1066,7 +1070,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 20,
+      "ps_fatal_hits": 21,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1074,7 +1078,7 @@
       "market_single_hits": 0,
       "agg_penalties": 0,
       "press_penalties": 0,
-      "preferred_bonus": 121,
+      "preferred_bonus": 125,
       "substack_tagged": 0,
       "sports_team_hits": 9,
       "sports_player_hits": 3,
@@ -1082,7 +1086,7 @@
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 1,
+      "sports_focus_team_hits": 2,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -1092,16 +1096,16 @@
       "hype_sports": 0,
       "hype_ceasefire": 0,
       "reject_hits": 0,
-      "obit_hits": 9,
+      "obit_hits": 10,
       "major_figure_hits": 2,
       "business_am_hits": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 13,
+      "link_verification_fail": 30,
       "soft_404_drops": 29,
       "max_age_drops": 0,
       "min_age_drops": 8,
-      "market_sanity_drops": 10,
+      "market_sanity_drops": 9,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
