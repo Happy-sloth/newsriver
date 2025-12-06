@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-06T14:50:44.075Z",
+  "generated_utc": "2025-12-06T14:57:35.344Z",
   "itemset_hash": "19bf1f0ed6eb9707",
   "count": 69,
   "items": [
@@ -18,6 +18,19 @@
       },
       "category": "Sports",
       "region": "Canada"
+    },
+    {
+      "title": "Gunmen kill at least 11 people including three-year-old in hostel in South Africa",
+      "url": "https://www.theguardian.com/world/2025/dec/06/gunmen-kill-pretoria-south-african-hostel",
+      "source": "World news | The Guardian",
+      "published_utc": "2025-12-06T14:37:01.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
     },
     {
       "title": "Anthony Pompliano's Bitcoin Treasury Firm ProCap BTC Closes SPAC Merger Deal",
@@ -313,19 +326,6 @@
         "reasons": []
       },
       "category": "Business",
-      "region": "World"
-    },
-    {
-      "title": "Gunmen kill at least 11 people including three-year-old in hostel in South Africa",
-      "url": "https://www.theguardian.com/world/2025/dec/06/gunmen-kill-pretoria-south-african-hostel",
-      "source": "World news | The Guardian",
-      "published_utc": "2025-12-06T12:47:46.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
       "region": "World"
     },
     {
@@ -998,15 +998,15 @@
     "collected": 455,
     "dedup_pass1": 448,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.cp24.com",
+      "www.gorillavsbear.net"
+    ],
     "timeouts": [
       "news.communitech.ca",
-      "weather.gc.ca",
-      "www.cbc.ca",
-      "www150.statcan.gc.ca"
+      "www.cbc.ca"
     ],
     "errors": [
-      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -1017,57 +1017,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "www.cp24.com",
+        "sec": 3.964,
+        "kept": 14
+      },
+      {
         "host": "www.labourstart.org",
-        "sec": 2.035,
+        "sec": 1.986,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.478,
+        "sec": 1.098,
         "kept": 8
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.923,
-        "kept": 0
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.616,
+        "sec": 0.817,
         "kept": 10
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.497,
+        "kept": 0
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.438,
+        "sec": 0.393,
         "kept": 14
+      },
+      {
+        "host": "www.blogto.com",
+        "sec": 0.363,
+        "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.302,
+        "sec": 0.295,
         "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.214,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.166,
-        "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.144,
+        "sec": 0.153,
         "kept": 14
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.139,
-        "kept": 14
+        "host": "www.nhl.com",
+        "sec": 0.088,
+        "kept": 0
       }
     ],
-    "elapsed_sec": 381.46,
+    "elapsed_sec": 313.49,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
