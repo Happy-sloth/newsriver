@@ -1,60 +1,8 @@
 {
-  "generated_utc": "2025-12-09T01:48:00.306057Z",
+  "generated_utc": "2025-12-09T03:09:57.939909Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810219",
-          "gameDate": "2025-12-09T00:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 74
-            },
-            "home": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 85
-            }
-          }
-        },
-        {
-          "gamePk": "401810220",
-          "gameDate": "2025-12-09T00:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 61
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIN"
-              },
-              "score": 57
-            }
-          }
-        },
         {
           "gamePk": "401810221",
           "gameDate": "2025-12-09T01:00Z",
@@ -63,21 +11,73 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 53
+              "score": 115
             },
             "home": {
               "team": {
                 "abbreviation": "NOP"
               },
-              "score": 33
+              "score": 110
+            }
+          }
+        },
+        {
+          "gamePk": "401810220",
+          "gameDate": "2025-12-09T00:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHX"
+              },
+              "score": 108
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 105
+            }
+          }
+        },
+        {
+          "gamePk": "401810219",
+          "gameDate": "2025-12-09T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 105
+            },
+            "home": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 116
             }
           }
         }
