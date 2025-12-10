@@ -1,8 +1,24 @@
 {
-  "generated_utc": "2025-12-10T22:41:05.274Z",
-  "itemset_hash": "a00de4186eaec3f4",
+  "generated_utc": "2025-12-10T22:56:47.756Z",
+  "itemset_hash": "d36112642047c313",
   "count": 69,
   "items": [
+    {
+      "title": "Mariners “Not Active In” Pursuing Third Base Help",
+      "url": "https://www.mlbtraderumors.com/2025/12/mariners-not-active-in-pursuing-third-base-help.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-12-10T22:48:32.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Sports",
+      "region": "Canada"
+    },
     {
       "title": "Atmospheric river prompts evacuation order in Fraser Valley",
       "url": "https://globalnews.ca/news/11572536/atmospheric-river-prompts-evacuation-order-fraser-valley",
@@ -145,11 +161,8 @@
       "published_utc": "2025-12-10T22:16:58.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -209,11 +222,8 @@
       "published_utc": "2025-12-10T22:12:11.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -604,12 +614,12 @@
       "source": "MobileSyrup",
       "published_utc": "2025-12-10T21:26:27.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
+        "lightsaber": false,
+        "glitch": true,
         "reasons": [
-          "score≥2.6"
+          "score≥2.1"
         ],
-        "style": "lightsaber"
+        "style": "glitch"
       },
       "category": "Tech",
       "region": "Canada"
@@ -997,19 +1007,6 @@
       },
       "category": "Labour",
       "region": "World"
-    },
-    {
-      "title": "Rwanda-backed M23 militia storms DRC city, displacing 200,000",
-      "url": "https://www.aljazeera.com/video/newsfeed/2025/12/10/rwanda-backed-m23-militia-storms-drc-city-displacing-200000?traffic_source=rss",
-      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
-      "published_utc": "2025-12-10T20:26:37.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
@@ -1021,12 +1018,10 @@
     "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
-      "weather.gc.ca",
       "www.cbc.ca",
       "www150.statcan.gc.ca"
     ],
     "errors": [
-      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -1038,56 +1033,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 2.098,
+        "sec": 1.933,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.42,
+        "sec": 0.806,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.65,
+        "sec": 0.786,
         "kept": 10
       },
       {
+        "host": "www.mlb.com",
+        "sec": 0.53,
+        "kept": 14
+      },
+      {
         "host": "www.blogto.com",
-        "sec": 0.628,
+        "sec": 0.344,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.55,
+        "sec": 0.342,
         "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.525,
-        "kept": 14
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.518,
+        "sec": 0.154,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.392,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.263,
+        "sec": 0.138,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.155,
+        "sec": 0.103,
         "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.076,
+        "kept": 0
       }
     ],
-    "elapsed_sec": 364.78,
+    "elapsed_sec": 351.28,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1129,7 +1124,7 @@
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 3,
+      "sports_focus_team_hits": 4,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
