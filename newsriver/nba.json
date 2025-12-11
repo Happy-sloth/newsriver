@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-11T05:35:42.841879Z",
+  "generated_utc": "2025-12-11T05:50:53.426193Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401809836",
-          "gameDate": "2025-12-11T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAS"
-              },
-              "score": 130
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 116
-            }
-          }
-        },
         {
           "gamePk": "401836746",
           "gameDate": "2025-12-12T01:00Z",
@@ -130,6 +104,32 @@
                 "abbreviation": "SAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401809836",
+          "gameDate": "2025-12-11T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAS"
+              },
+              "score": 132
+            },
+            "home": {
+              "team": {
+                "abbreviation": "LAL"
+              },
+              "score": 119
             }
           }
         },
