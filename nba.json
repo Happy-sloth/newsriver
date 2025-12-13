@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-13T03:46:52.220532Z",
+  "generated_utc": "2025-12-13T04:14:07.353716Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401836795",
-          "gameDate": "2025-12-13T01:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BKN"
-              },
-              "score": 111
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 115
-            }
-          }
-        },
         {
           "gamePk": "401836796",
           "gameDate": "2025-12-13T03:00Z",
@@ -45,13 +19,39 @@
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 37
+              "score": 61
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 34
+              "score": 63
+            }
+          }
+        },
+        {
+          "gamePk": "401836795",
+          "gameDate": "2025-12-13T01:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BKN"
+              },
+              "score": 111
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 119
             }
           }
         },
