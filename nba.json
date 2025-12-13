@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-13T04:55:47.462515Z",
+  "generated_utc": "2025-12-13T05:19:12.837956Z",
   "dates": [
     {
       "games": [
@@ -19,13 +19,65 @@
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 90
+              "score": 110
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 91
+              "score": 106
+            }
+          }
+        },
+        {
+          "gamePk": "401809837",
+          "gameDate": "2025-12-13T22:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NYK"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ORL"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401809838",
+          "gameDate": "2025-12-14T02:00Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAS"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "OKC"
+              },
+              "score": 0
             }
           }
         },
@@ -191,10 +243,10 @@
   "_meta": {
     "source": "espn",
     "urls": [
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251211",
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251212"
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251212",
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251213"
     ],
-    "games_count": 7,
+    "games_count": 9,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
