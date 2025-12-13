@@ -1,8 +1,37 @@
 {
-  "generated_utc": "2025-12-13T05:35:21.864Z",
-  "itemset_hash": "1f66f9ebbec33182",
+  "generated_utc": "2025-12-13T05:53:39.838Z",
+  "itemset_hash": "3eac2a4e8c839bb7",
   "count": 69,
   "items": [
+    {
+      "title": "Crypto groups slam Citadel for urging tighter DeFi tokenization rules",
+      "url": "https://cointelegraph.com/news/crypto-slams-citadel-call-tighter-defi-tokenization-rules",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-12-13T05:37:24.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "Business",
+      "region": "World"
+    },
+    {
+      "title": "Venezuela oil exports fall steeply after US forces seize tanker off coast",
+      "url": "https://www.aljazeera.com/news/2025/12/13/venezuela-oil-exports-fall-steeply-after-us-forces-seize-tanker-off-coast?traffic_source=rss",
+      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
+      "published_utc": "2025-12-13T05:26:11.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Kim Jong-un admits North Korean troops clearing landmines for Russia",
       "url": "https://www.theguardian.com/world/2025/dec/13/north-korea-troops-cleared-landmines-russia-kim-jong-un",
@@ -969,50 +998,23 @@
       },
       "category": "Sports",
       "region": "Canada"
-    },
-    {
-      "title": "Latest Blue Jays injuries & transactions",
-      "url": "https://www.mlb.com/bluejays/news/blue-jays-injuries-and-roster-moves",
-      "source": "Blue Jays News",
-      "published_utc": "2025-12-12T22:33:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Sports",
-      "region": "Canada"
-    },
-    {
-      "title": "This $10,000 Record Player Is Like if James Turrell Made Turntables",
-      "url": "https://www.highsnobiety.com/p/audio-technica-hotaru",
-      "source": "Highsnobiety",
-      "published_utc": "2025-12-12T22:32:03.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 492,
-    "dedup_pass1": 484,
+    "collected": 440,
+    "dedup_pass1": 434,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.gorillavsbear.net"
+    ],
     "timeouts": [
       "news.communitech.ca",
+      "pitchfork.com",
       "www.cbc.ca"
     ],
     "errors": [
-      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -1024,56 +1026,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.927,
+        "sec": 1.343,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.91,
+        "sec": 0.688,
         "kept": 8
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.535,
+        "sec": 0.472,
         "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.532,
+        "sec": 0.335,
         "kept": 14
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.524,
+        "sec": 0.294,
         "kept": 10
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.484,
-        "kept": 14
-      },
-      {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.306,
+        "sec": 0.275,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.279,
+        "sec": 0.196,
         "kept": 0
       },
       {
-        "host": "www.federalreserve.gov",
-        "sec": 0.181,
+        "host": "www.cp24.com",
+        "sec": 0.178,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.112,
+        "sec": 0.172,
         "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.117,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 319.9,
+    "elapsed_sec": 325.94,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1099,7 +1101,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 5,
+      "ps_fatal_hits": 4,
       "ps_injury_hits": 1,
       "market_btc_hits": 1,
       "market_index_hits": 0,
@@ -1131,10 +1133,10 @@
     },
     "sanity_stats": {
       "link_verification_fail": 15,
-      "soft_404_drops": 30,
+      "soft_404_drops": 17,
       "max_age_drops": 0,
       "min_age_drops": 0,
-      "market_sanity_drops": 6,
+      "market_sanity_drops": 7,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
