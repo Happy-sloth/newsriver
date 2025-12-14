@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-14T20:37:53.109830Z",
+  "generated_utc": "2025-12-14T20:49:00.376638Z",
   "dates": [
     {
       "games": [
@@ -11,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 31
+              "score": 33
             },
             "home": {
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 32
+              "score": 35
             }
           }
         },
@@ -33,25 +33,25 @@
           "gamePk": "401836799",
           "gameDate": "2025-12-14T20:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 0
+              "score": 12
             },
             "home": {
               "team": {
                 "abbreviation": "CLE"
               },
-              "score": 0
+              "score": 9
             }
           }
         },
