@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-12-14T22:16:10.437310Z",
+  "generated_utc": "2025-12-14T22:35:29.969020Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401836797",
-          "gameDate": "2025-12-14T20:00Z",
+          "gamePk": "401836799",
+          "gameDate": "2025-12-14T20:30Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 92
-            },
-            "home": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 74
-            }
-          }
-        },
-        {
-          "gamePk": "401836799",
-          "gameDate": "2025-12-14T20:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "CHA"
               },
-              "score": 84
+              "score": 98
             },
             "home": {
               "team": {
                 "abbreviation": "CLE"
               },
-              "score": 72
+              "score": 94
             }
           }
         },
@@ -208,6 +182,32 @@
                 "abbreviation": "POR"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401836797",
+          "gameDate": "2025-12-14T20:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 108
+            },
+            "home": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 89
             }
           }
         }
