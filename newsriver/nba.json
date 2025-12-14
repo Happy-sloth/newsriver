@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-13T23:54:20.801038Z",
+  "generated_utc": "2025-12-14T01:26:52.333260Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401809837",
-          "gameDate": "2025-12-13T22:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 71
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ORL"
-              },
-              "score": 64
-            }
-          }
-        },
         {
           "gamePk": "401809838",
           "gameDate": "2025-12-14T02:00Z",
@@ -52,6 +26,32 @@
                 "abbreviation": "OKC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401809837",
+          "gameDate": "2025-12-13T22:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NYK"
+              },
+              "score": 132
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ORL"
+              },
+              "score": 120
             }
           }
         }
