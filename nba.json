@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-12-15T01:23:38.305860Z",
+  "generated_utc": "2025-12-15T03:14:30.458007Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401836798",
-          "gameDate": "2025-12-14T23:00Z",
+          "gamePk": "401839699",
+          "gameDate": "2025-12-15T01:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,93 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 112
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 116
-            }
-          }
-        },
-        {
-          "gamePk": "401836801",
-          "gameDate": "2025-12-15T00:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 54
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIN"
-              },
-              "score": 54
-            }
-          }
-        },
-        {
-          "gamePk": "401836804",
-          "gameDate": "2025-12-15T00:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "NOP"
-              },
-              "score": 58
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 50
-            }
-          }
-        },
-        {
-          "gamePk": "401839699",
-          "gameDate": "2025-12-15T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "LAL"
               },
-              "score": 18
+              "score": 90
             },
             "home": {
               "team": {
                 "abbreviation": "PHX"
               },
-              "score": 14
+              "score": 77
             }
           }
         },
@@ -111,25 +33,103 @@
           "gamePk": "401836802",
           "gameDate": "2025-12-15T02:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 0
+              "score": 62
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 0
+              "score": 61
+            }
+          }
+        },
+        {
+          "gamePk": "401836801",
+          "gameDate": "2025-12-15T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 103
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 117
+            }
+          }
+        },
+        {
+          "gamePk": "401836804",
+          "gameDate": "2025-12-15T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "NOP"
+              },
+              "score": 114
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CHI"
+              },
+              "score": 104
+            }
+          }
+        },
+        {
+          "gamePk": "401836798",
+          "gameDate": "2025-12-14T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 117
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ATL"
+              },
+              "score": 120
             }
           }
         },
@@ -158,58 +158,6 @@
               "score": 127
             }
           }
-        },
-        {
-          "gamePk": "401836799",
-          "gameDate": "2025-12-14T20:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 119
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 111
-            }
-          }
-        },
-        {
-          "gamePk": "401836797",
-          "gameDate": "2025-12-14T20:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 108
-            },
-            "home": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 89
-            }
-          }
         }
       ]
     }
@@ -220,7 +168,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251213",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251214"
     ],
-    "games_count": 8,
+    "games_count": 6,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
