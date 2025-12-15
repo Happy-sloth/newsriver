@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-12-15T03:14:30.458007Z",
+  "generated_utc": "2025-12-15T04:12:47.369341Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401839699",
-          "gameDate": "2025-12-15T01:00Z",
+          "gamePk": "401836802",
+          "gameDate": "2025-12-15T02:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,41 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 90
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 77
-            }
-          }
-        },
-        {
-          "gamePk": "401836802",
-          "gameDate": "2025-12-15T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "GSW"
               },
-              "score": 62
+              "score": 121
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 61
+              "score": 119
+            }
+          }
+        },
+        {
+          "gamePk": "401839699",
+          "gameDate": "2025-12-15T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAL"
+              },
+              "score": 116
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHX"
+              },
+              "score": 114
             }
           }
         },
