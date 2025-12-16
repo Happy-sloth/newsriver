@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-16T04:46:44.624011Z",
+  "generated_utc": "2025-12-16T05:01:52.516336Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401836805",
-          "gameDate": "2025-12-16T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "OT",
-            "currentQuarter": "OT"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 129
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 134
-            }
-          }
-        },
         {
           "gamePk": "401836806",
           "gameDate": "2025-12-16T02:30Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "HOU"
               },
-              "score": 95
+              "score": 109
             },
             "home": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 100
+              "score": 109
             }
           }
         },
@@ -63,21 +37,73 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MEM"
               },
-              "score": 56
+              "score": 63
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 48
+              "score": 61
+            }
+          }
+        },
+        {
+          "gamePk": "401809839",
+          "gameDate": "2025-12-17T01:30Z",
+          "status": {
+            "detailedState": "Preview",
+            "abstractGameState": "Preview"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": null,
+            "currentQuarter": null
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAS"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NYK"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401836805",
+          "gameDate": "2025-12-16T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 133
+            },
+            "home": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 140
             }
           }
         },
@@ -139,10 +165,10 @@
   "_meta": {
     "source": "espn",
     "urls": [
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251214",
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251215"
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251215",
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251216"
     ],
-    "games_count": 5,
+    "games_count": 6,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
