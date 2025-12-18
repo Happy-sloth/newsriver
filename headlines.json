@@ -1,8 +1,37 @@
 {
-  "generated_utc": "2025-12-18T07:54:23.753Z",
-  "itemset_hash": "2bf9dfc5c3d39817",
+  "generated_utc": "2025-12-18T08:07:05.181Z",
+  "itemset_hash": "948d0cfba04c9e3f",
   "count": 69,
   "items": [
+    {
+      "title": "EU leaders face crunch decision on loaning Russia's frozen cash to Ukraine",
+      "url": "https://www.bbc.com/news/articles/c9vjlj1ezpgo?at_campaign=rss&at_medium=RSS",
+      "source": "BBC News",
+      "published_utc": "2025-12-18T07:53:01.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
+    {
+      "title": "'Maybe she's an angel now' says aunt of Bondi victim, 10, at funeral",
+      "url": "https://www.bbc.com/news/articles/cd0krr3jrkjo?at_campaign=rss&at_medium=RSS",
+      "source": "BBC News",
+      "published_utc": "2025-12-18T07:52:21.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "General",
+      "region": "Canada"
+    },
     {
       "title": "Billboard Changes Chart Rules to Give Paid Streaming More Power",
       "url": "https://hypebeast.com/2025/12/billboard-changes-rules-paid-streaming-more-power-charts",
@@ -432,19 +461,6 @@
       },
       "category": "Labour",
       "region": "World"
-    },
-    {
-      "title": "'Maybe she's an angel now' says aunt of 10-year-old Bondi victim",
-      "url": "https://www.bbc.com/news/articles/cd0krr3jrkjo?at_campaign=rss&at_medium=RSS",
-      "source": "BBC News",
-      "published_utc": "2025-12-18T04:15:30.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "Canada"
     },
     {
       "title": "Crypto ETPs could see a flood of liquidations by 2027: Analyst",
@@ -958,19 +974,6 @@
       },
       "category": "General",
       "region": "Canada"
-    },
-    {
-      "title": "Perry Farrell Apologizes to Jane’s Addiction (Again)",
-      "url": "https://pitchfork.com/news/perry-farrell-apologizes-to-janes-addiction-again",
-      "source": "RSS: News",
-      "published_utc": "2025-12-18T01:28:32.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
@@ -1000,56 +1003,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.834,
+        "sec": 1.842,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.227,
+        "sec": 1.606,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 1.1,
+        "sec": 0.989,
         "kept": 5
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.521,
-        "kept": 14
+        "host": "www.blogto.com",
+        "sec": 0.632,
+        "kept": 0
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.501,
+        "sec": 0.616,
         "kept": 14
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.443,
-        "kept": 0
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.409,
-        "kept": 14
-      },
-      {
-        "host": "www.bls.gov",
-        "sec": 0.286,
-        "kept": 0
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.229,
+        "host": "www.cp24.com",
+        "sec": 0.475,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.147,
+        "sec": 0.307,
         "kept": 0
+      },
+      {
+        "host": "www.bls.gov",
+        "sec": 0.292,
+        "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.278,
+        "kept": 14
+      },
+      {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.243,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 360.33,
+    "elapsed_sec": 351.73,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1106,7 +1109,7 @@
       "business_am_hits": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 16,
+      "link_verification_fail": 17,
       "soft_404_drops": 17,
       "max_age_drops": 0,
       "min_age_drops": 0,
