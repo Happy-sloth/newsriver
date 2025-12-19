@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-19T07:56:06.884020Z",
+  "generated_utc": "2025-12-19T08:28:32.786553Z",
   "dates": [
     {
       "games": [
@@ -158,84 +158,6 @@
               "score": 134
             }
           }
-        },
-        {
-          "gamePk": "401810232",
-          "gameDate": "2025-12-19T02:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ORL"
-              },
-              "score": 115
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 126
-            }
-          }
-        },
-        {
-          "gamePk": "401810233",
-          "gameDate": "2025-12-19T02:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 98
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 99
-            }
-          }
-        },
-        {
-          "gamePk": "401810234",
-          "gameDate": "2025-12-19T02:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 143
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 135
-            }
-          }
         }
       ]
     }
@@ -246,7 +168,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251218",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251219"
     ],
-    "games_count": 9,
+    "games_count": 6,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
