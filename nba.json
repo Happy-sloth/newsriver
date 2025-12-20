@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-20T02:52:01.199401Z",
+  "generated_utc": "2025-12-20T03:47:01.921339Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810239",
-          "gameDate": "2025-12-20T00:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 136
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 125
-            }
-          }
-        },
         {
           "gamePk": "401810240",
           "gameDate": "2025-12-20T02:30Z",
@@ -37,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "OKC"
               },
-              "score": 12
+              "score": 51
             },
             "home": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 7
+              "score": 48
             }
           }
         },
@@ -78,6 +52,32 @@
                 "abbreviation": "ATL"
               },
               "score": 98
+            }
+          }
+        },
+        {
+          "gamePk": "401810239",
+          "gameDate": "2025-12-20T00:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CHI"
+              },
+              "score": 136
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 125
             }
           }
         },
