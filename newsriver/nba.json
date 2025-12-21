@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-21T20:37:32.030785Z",
+  "generated_utc": "2025-12-21T20:49:12.065205Z",
   "dates": [
     {
       "games": [
@@ -7,25 +7,25 @@
           "gamePk": "401810251",
           "gameDate": "2025-12-21T20:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "CHI"
               },
-              "score": 0
+              "score": 21
             },
             "home": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 0
+              "score": 10
             }
           }
         },
