@@ -1,57 +1,31 @@
 {
-  "generated_utc": "2025-12-20T23:54:34.416631Z",
+  "generated_utc": "2025-12-21T01:26:33.418662Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810241",
-          "gameDate": "2025-12-20T22:00Z",
+          "gamePk": "401810242",
+          "gameDate": "2025-12-21T00:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 87
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 72
-            }
-          }
-        },
-        {
-          "gamePk": "401810242",
-          "gameDate": "2025-12-21T00:00Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DAL"
               },
-              "score": 0
+              "score": 62
             },
             "home": {
               "team": {
                 "abbreviation": "PHI"
               },
-              "score": 0
+              "score": 68
             }
           }
         },
@@ -59,25 +33,25 @@
           "gamePk": "401810243",
           "gameDate": "2025-12-21T00:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 0
+              "score": 56
             },
             "home": {
               "team": {
                 "abbreviation": "TOR"
               },
-              "score": 0
+              "score": 57
             }
           }
         },
@@ -85,25 +59,25 @@
           "gamePk": "401810244",
           "gameDate": "2025-12-21T00:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 0
+              "score": 51
             },
             "home": {
               "team": {
                 "abbreviation": "NOP"
               },
-              "score": 0
+              "score": 64
             }
           }
         },
@@ -111,25 +85,25 @@
           "gamePk": "401810245",
           "gameDate": "2025-12-21T00:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 0
+              "score": 36
             },
             "home": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 0
+              "score": 40
             }
           }
         },
@@ -137,25 +111,25 @@
           "gamePk": "401810246",
           "gameDate": "2025-12-21T01:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 0
+              "score": 15
             },
             "home": {
               "team": {
                 "abbreviation": "MEM"
               },
-              "score": 0
+              "score": 24
             }
           }
         },
@@ -260,6 +234,32 @@
                 "abbreviation": "LAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810241",
+          "gameDate": "2025-12-20T22:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 115
+            },
+            "home": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 101
             }
           }
         }
