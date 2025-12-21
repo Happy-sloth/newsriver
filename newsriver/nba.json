@@ -1,37 +1,11 @@
 {
-  "generated_utc": "2025-12-21T03:14:50.199967Z",
+  "generated_utc": "2025-12-21T04:08:44.780356Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810246",
-          "gameDate": "2025-12-21T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 115
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MEM"
-              },
-              "score": 116
-            }
-          }
-        },
-        {
-          "gamePk": "401810247",
-          "gameDate": "2025-12-21T01:30Z",
+          "gamePk": "401810248",
+          "gameDate": "2025-12-21T02:30Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -43,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 76
-            },
-            "home": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 79
-            }
-          }
-        },
-        {
-          "gamePk": "401810248",
-          "gameDate": "2025-12-21T02:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "ORL"
               },
-              "score": 36
+              "score": 77
             },
             "home": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 38
+              "score": 73
             }
           }
         },
@@ -89,21 +37,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 10
+              "score": 47
             },
             "home": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 2
+              "score": 44
             }
           }
         },
@@ -111,25 +59,77 @@
           "gamePk": "401810250",
           "gameDate": "2025-12-21T03:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 0
+              "score": 15
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 0
+              "score": 28
+            }
+          }
+        },
+        {
+          "gamePk": "401810247",
+          "gameDate": "2025-12-21T01:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHX"
+              },
+              "score": 116
+            },
+            "home": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 119
+            }
+          }
+        },
+        {
+          "gamePk": "401810246",
+          "gameDate": "2025-12-21T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 130
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MEM"
+              },
+              "score": 122
             }
           }
         },
@@ -236,32 +236,6 @@
               "score": 128
             }
           }
-        },
-        {
-          "gamePk": "401810241",
-          "gameDate": "2025-12-20T22:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 115
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 101
-            }
-          }
         }
       ]
     }
@@ -272,7 +246,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251219",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251220"
     ],
-    "games_count": 10,
+    "games_count": 9,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
