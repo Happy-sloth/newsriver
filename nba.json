@@ -1,31 +1,57 @@
 {
-  "generated_utc": "2025-12-22T01:53:52.057437Z",
+  "generated_utc": "2025-12-22T03:40:02.256416Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810254",
-          "gameDate": "2025-12-22T00:00Z",
+          "gamePk": "401810256",
+          "gameDate": "2025-12-22T03:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 40
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 32
+            }
+          }
+        },
+        {
+          "gamePk": "401810254",
+          "gameDate": "2025-12-22T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 95
+              "score": 124
             },
             "home": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 80
+              "score": 113
             }
           }
         },
@@ -33,51 +59,25 @@
           "gamePk": "401810255",
           "gameDate": "2025-12-22T00:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIL"
               },
-              "score": 75
+              "score": 100
             },
             "home": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 75
-            }
-          }
-        },
-        {
-          "gamePk": "401810256",
-          "gameDate": "2025-12-22T03:00Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 0
+              "score": 103
             }
           }
         },
@@ -132,32 +132,6 @@
               "score": 132
             }
           }
-        },
-        {
-          "gamePk": "401810251",
-          "gameDate": "2025-12-21T20:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 152
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 150
-            }
-          }
         }
       ]
     }
@@ -168,7 +142,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251220",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251221"
     ],
-    "games_count": 6,
+    "games_count": 5,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
