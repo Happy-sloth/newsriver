@@ -1,8 +1,34 @@
 {
-  "generated_utc": "2025-12-21T23:51:28.681Z",
-  "itemset_hash": "0c2b50e9598a7242",
+  "generated_utc": "2025-12-22T00:03:13.930Z",
+  "itemset_hash": "bdab2cdcb691d488",
   "count": 69,
   "items": [
+    {
+      "title": "‘Bridgerton’ Showrunner Teases “Juicy Conflict” In Season 4: “The Easiest Book To Adapt”",
+      "url": "https://deadline.com/2025/12/bridgerton-season-4-preview-jess-brownell-1236654759",
+      "source": "Deadline",
+      "published_utc": "2025-12-21T23:57:52.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "The Flaming Lips Share Drummer’s Statement on Steven Drozd’s Departure",
+      "url": "https://pitchfork.com/news/the-flaming-lips-share-drummers-statement-on-steven-drozds-departure",
+      "source": "RSS: News",
+      "published_utc": "2025-12-21T23:52:15.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
     {
       "title": "’60 Minutes’ Pulls Segment on Trump Deportees Sent to El Salvador Megaprison 2 Hours Before Airtime",
       "url": "https://www.thewrap.com/media-platforms/politics/60-minutes-pulls-segment-trump-deportees-el-salvador-prison",
@@ -136,19 +162,6 @@
       "region": "Canada"
     },
     {
-      "title": "CBS News Pulls “60 Minutes” Story on Trump Sending Venezuelans to El Salvador Prison — and Torturing Them — Promoted, Then Erased",
-      "url": "https://www.showbiz411.com/2025/12/21/cbs-news-pulls-60-minutes-story-on-trump-sending-venezuelans-to-el-salvador-prison-and-torturing-them-promoted-then-erased",
-      "source": "Showbiz411",
-      "published_utc": "2025-12-21T23:25:43.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "‘Completely unacceptable’: Alberta mall Santa replaced after boy slapped",
       "url": "https://globalnews.ca/news/11587114/alberta-mall-santa-boy-slapped",
       "source": "globalnews.ca",
@@ -184,11 +197,8 @@
       "published_utc": "2025-12-21T23:18:58.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Labour",
       "region": "World"
@@ -387,19 +397,6 @@
       "region": "Canada"
     },
     {
-      "title": "Finn Wolfhard to Host First ‘SNL’ of 2026 With A$AP Rocky as Musical Guest",
-      "url": "https://www.rollingstone.com/tv-movies/tv-movie-news/finn-wolfhard-asap-rocky-saturday-night-live-2026-1235488556",
-      "source": "Rolling Stone",
-      "published_utc": "2025-12-21T22:35:43.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "Here’s what happened in crypto today",
       "url": "https://cointelegraph.com/news/what-happened-in-crypto-today",
       "source": "Cointelegraph.com News",
@@ -436,19 +433,6 @@
         "reasons": []
       },
       "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Rapper Nicki Minaj Gambles Career, Suggests JD Vance Was Charlie Kirk’s Assassin Onstage With Erika Kirk at Turning Point Event",
-      "url": "https://www.showbiz411.com/2025/12/21/rapper-nicki-minaj-gambles-career-suggests-jd-vance-was-charlie-kirks-assassin-onstage-with-erika-kirk-at-turning-point-event",
-      "source": "Showbiz411",
-      "published_utc": "2025-12-21T22:29:32.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
       "region": "World"
     },
     {
@@ -980,16 +964,30 @@
       },
       "category": "Labour",
       "region": "World"
+    },
+    {
+      "title": "Anti-Palestinian Billionaires Can Now Control What TikTok Users See",
+      "url": "https://theintercept.com/2025/12/21/tiktok-ellison-oracle-israel-gaza",
+      "source": "The Intercept",
+      "published_utc": "2025-12-21T21:14:04.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 766,
-    "dedup_pass1": 755,
+    "collected": 746,
+    "dedup_pass1": 735,
     "dedup_final": 320,
     "slow_domains": [
       "urbantoronto.ca",
+      "www.gorillavsbear.net",
       "www150.statcan.gc.ca"
     ],
     "timeouts": [
@@ -1012,57 +1010,57 @@
     ],
     "feed_times_sample": [
       {
+        "host": "www.labourstart.org",
+        "sec": 1.344,
+        "kept": 0
+      },
+      {
         "host": "toronto.citynews.ca",
-        "sec": 2.975,
+        "sec": 0.915,
         "kept": 8
       },
       {
-        "host": "www.labourstart.org",
-        "sec": 1.496,
-        "kept": 0
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.901,
+        "sec": 0.912,
         "kept": 1
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.62,
-        "kept": 14
-      },
-      {
         "host": "www.blogto.com",
-        "sec": 0.483,
+        "sec": 0.411,
         "kept": 0
       },
       {
+        "host": "www.mlb.com",
+        "sec": 0.391,
+        "kept": 14
+      },
+      {
         "host": "www.cp24.com",
-        "sec": 0.459,
+        "sec": 0.385,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.277,
+        "sec": 0.339,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.219,
+        "sec": 0.27,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.194,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.193,
+        "sec": 0.166,
         "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.168,
-        "kept": 0
       }
     ],
-    "elapsed_sec": 320.82,
+    "elapsed_sec": 296.42,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1099,8 +1097,8 @@
       "preferred_bonus": 122,
       "substack_tagged": 0,
       "sports_team_hits": 8,
-      "sports_player_hits": 13,
-      "sports_result_win_hits": 19,
+      "sports_player_hits": 10,
+      "sports_result_win_hits": 18,
       "sports_result_loss_hits": 1,
       "sports_evening_hits": 20,
       "sports_playoff_hits": 0,
@@ -1120,7 +1118,7 @@
     },
     "sanity_stats": {
       "link_verification_fail": 35,
-      "soft_404_drops": 84,
+      "soft_404_drops": 85,
       "max_age_drops": 0,
       "min_age_drops": 8,
       "market_sanity_drops": 2,
