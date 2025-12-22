@@ -1,83 +1,31 @@
 {
-  "generated_utc": "2025-12-21T23:57:12.995682Z",
+  "generated_utc": "2025-12-22T01:53:52.057437Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810252",
-          "gameDate": "2025-12-21T23:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 34
-            },
-            "home": {
-              "team": {
-                "abbreviation": "BKN"
-              },
-              "score": 34
-            }
-          }
-        },
-        {
-          "gamePk": "401810253",
-          "gameDate": "2025-12-21T23:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIA"
-              },
-              "score": 57
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 56
-            }
-          }
-        },
-        {
           "gamePk": "401810254",
           "gameDate": "2025-12-22T00:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 0
+              "score": 95
             },
             "home": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 0
+              "score": 80
             }
           }
         },
@@ -85,25 +33,25 @@
           "gamePk": "401810255",
           "gameDate": "2025-12-22T00:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIL"
               },
-              "score": 0
+              "score": 75
             },
             "home": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 0
+              "score": 75
             }
           }
         },
@@ -130,6 +78,58 @@
                 "abbreviation": "SAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810252",
+          "gameDate": "2025-12-21T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TOR"
+              },
+              "score": 81
+            },
+            "home": {
+              "team": {
+                "abbreviation": "BKN"
+              },
+              "score": 96
+            }
+          }
+        },
+        {
+          "gamePk": "401810253",
+          "gameDate": "2025-12-21T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIA"
+              },
+              "score": 125
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NYK"
+              },
+              "score": 132
             }
           }
         },
