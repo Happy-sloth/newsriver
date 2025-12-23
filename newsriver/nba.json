@@ -1,60 +1,8 @@
 {
-  "generated_utc": "2025-12-23T05:13:10.717771Z",
+  "generated_utc": "2025-12-23T05:42:38.724008Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810262",
-          "gameDate": "2025-12-23T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ORL"
-              },
-              "score": 89
-            },
-            "home": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 107
-            }
-          }
-        },
-        {
-          "gamePk": "401810263",
-          "gameDate": "2025-12-23T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DET"
-              },
-              "score": 97
-            },
-            "home": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 91
-            }
-          }
-        },
         {
           "gamePk": "401810264",
           "gameDate": "2025-12-24T00:00Z",
@@ -416,6 +364,58 @@
                 "abbreviation": "LAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810262",
+          "gameDate": "2025-12-23T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "ORL"
+              },
+              "score": 97
+            },
+            "home": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 120
+            }
+          }
+        },
+        {
+          "gamePk": "401810263",
+          "gameDate": "2025-12-23T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DET"
+              },
+              "score": 110
+            },
+            "home": {
+              "team": {
+                "abbreviation": "POR"
+              },
+              "score": 102
             }
           }
         },
