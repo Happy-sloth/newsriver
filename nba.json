@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-23T05:56:17.514256Z",
+  "generated_utc": "2025-12-23T06:33:25.016203Z",
   "dates": [
     {
       "games": [
@@ -496,58 +496,6 @@
               "score": 119
             }
           }
-        },
-        {
-          "gamePk": "401810258",
-          "gameDate": "2025-12-23T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 95
-            },
-            "home": {
-              "team": {
-                "abbreviation": "BOS"
-              },
-              "score": 103
-            }
-          }
-        },
-        {
-          "gamePk": "401810257",
-          "gameDate": "2025-12-23T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 132
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 139
-            }
-          }
         }
       ]
     }
@@ -558,7 +506,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251222",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251223"
     ],
-    "games_count": 21,
+    "games_count": 19,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
