@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-12-23T03:14:20.779698Z",
+  "generated_utc": "2025-12-23T04:08:46.780986Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810259",
-          "gameDate": "2025-12-23T01:00Z",
+          "gamePk": "401810260",
+          "gameDate": "2025-12-23T02:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 103
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NOP"
-              },
-              "score": 111
-            }
-          }
-        },
-        {
-          "gamePk": "401810260",
-          "gameDate": "2025-12-23T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 46
+              "score": 100
             },
             "home": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 69
+              "score": 124
             }
           }
         },
@@ -63,21 +37,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MEM"
               },
-              "score": 28
+              "score": 60
             },
             "home": {
               "team": {
                 "abbreviation": "OKC"
               },
-              "score": 33
+              "score": 70
             }
           }
         },
@@ -89,21 +63,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 8
+              "score": 57
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 4
+              "score": 56
             }
           }
         },
@@ -115,21 +89,47 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 4
+              "score": 58
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 2
+              "score": 42
+            }
+          }
+        },
+        {
+          "gamePk": "401810259",
+          "gameDate": "2025-12-23T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 113
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NOP"
+              },
+              "score": 119
             }
           }
         },
