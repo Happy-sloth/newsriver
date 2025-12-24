@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-24T04:54:27.357675Z",
+  "generated_utc": "2025-12-24T05:21:16.964196Z",
   "dates": [
     {
       "games": [
@@ -19,13 +19,13 @@
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 89
+              "score": 107
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 84
+              "score": 106
             }
           }
         },
@@ -37,21 +37,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 104
+              "score": 125
             },
             "home": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 91
+              "score": 109
             }
           }
         },
@@ -71,13 +71,13 @@
               "team": {
                 "abbreviation": "HOU"
               },
-              "score": 58
+              "score": 80
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 65
+              "score": 95
             }
           }
         },
@@ -373,8 +373,8 @@
   "_meta": {
     "source": "espn",
     "urls": [
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251222",
-      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251223"
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251223",
+      "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251224"
     ],
     "games_count": 14,
     "http_timeout_sec": 12.0,
