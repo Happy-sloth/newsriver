@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-25T21:55:02.405301Z",
+  "generated_utc": "2025-12-25T22:16:46.604701Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401809239",
-          "gameDate": "2025-12-25T19:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAS"
-              },
-              "score": 110
-            },
-            "home": {
-              "team": {
-                "abbreviation": "OKC"
-              },
-              "score": 98
-            }
-          }
-        },
         {
           "gamePk": "401809240",
           "gameDate": "2025-12-25T22:17Z",
@@ -104,6 +78,32 @@
                 "abbreviation": "DEN"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401809239",
+          "gameDate": "2025-12-25T19:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAS"
+              },
+              "score": 117
+            },
+            "home": {
+              "team": {
+                "abbreviation": "OKC"
+              },
+              "score": 102
             }
           }
         },
