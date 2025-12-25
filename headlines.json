@@ -1,8 +1,53 @@
 {
-  "generated_utc": "2025-12-25T04:32:09.312Z",
-  "itemset_hash": "a36ad8f8d1841f4e",
+  "generated_utc": "2025-12-25T05:05:17.830Z",
+  "itemset_hash": "bede354652a921dd",
   "count": 69,
   "items": [
+    {
+      "title": "Bitcoin briefly trades at $24,000 on Binance’s USD1 pair in flash move",
+      "url": "https://www.coindesk.com/markets/2025/12/25/bitcoin-briefly-trades-at-usd24-000-on-binance-s-usd1-pair-in-flash-move",
+      "source": "CoinDesk: Bitcoin, Ethereum, Crypto News and Price Data",
+      "published_utc": "2025-12-25T04:48:53.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "Business",
+      "region": "World"
+    },
+    {
+      "title": "Wan’Dale Robinson can hit 1,000-yard milestone in truly unique way",
+      "url": "https://nypost.com/2025/12/24/sports/wandale-robinson-can-hit-1000-yard-milestone-in-truly-unique-way",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2025-12-25T04:34:38.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "Sports",
+      "region": "Canada"
+    },
+    {
+      "title": "Majority of Russians expect Ukraine war to end in 2026, state survey finds",
+      "url": "https://www.aljazeera.com/news/2025/12/25/majority-of-russians-expect-ukraine-war-to-end-in-2026-state-survey-finds?traffic_source=rss",
+      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
+      "published_utc": "2025-12-25T04:29:13.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "General",
+      "region": "World"
+    },
     {
       "title": "Kennedy Center Latest Embarrassment: Christmas Eve Jazz Concert Cancels After Performers Refuse to Play Post-Name Change",
       "url": "https://www.showbiz411.com/2025/12/24/kennedy-center-latest-embarrassment-christmas-eve-jazz-concert-cancels-after-performers-refuse-to-play-post-name-change",
@@ -621,11 +666,8 @@
       "published_utc": "2025-12-25T00:51:08.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Sports",
       "region": "Canada"
@@ -669,11 +711,8 @@
       "published_utc": "2025-12-25T00:41:28.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Sports",
       "region": "Canada"
@@ -929,63 +968,22 @@
       },
       "category": "Culture",
       "region": "World"
-    },
-    {
-      "title": "Two Natural Gas Stocks to Watch as Demand Surges",
-      "url": "https://oilprice.com/Energy/Energy-General/Two-Natural-Gas-Stocks-to-Watch-as-Demand-Surges.html",
-      "source": "Oilprice.com",
-      "published_utc": "2025-12-25T00:00:00.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Labour",
-      "region": "Canada"
-    },
-    {
-      "title": "Framed answer today – here’s the solution for December 25",
-      "url": "https://www.nme.com/guides/gaming-guides/framed-answer-today-3192186",
-      "source": "NME",
-      "published_utc": "2025-12-25T00:00:09.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
-      "title": "Local Calgary restaurant donates hundreds of burgers to those in need",
-      "url": "https://globalnews.ca/news/11590708/local-calgary-restaurant-donates-hundreds-of-burgers",
-      "source": "globalnews.ca",
-      "published_utc": "2025-12-24T23:59:44.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "General",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 805,
-    "dedup_pass1": 790,
+    "collected": 791,
+    "dedup_pass1": 776,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "feeds.npr.org"
+    ],
     "timeouts": [
       "news.communitech.ca",
-      "www.cbc.ca"
+      "www.cbc.ca",
+      "www.mining.com",
+      "www150.statcan.gc.ca"
     ],
     "errors": [
       "alert.weather.gc.ca",
@@ -1006,56 +1004,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.753,
+        "sec": 1.719,
         "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 1.218,
+        "sec": 1.567,
         "kept": 7
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.136,
+        "sec": 1.197,
         "kept": 8
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.79,
-        "kept": 0
+        "host": "www.cp24.com",
+        "sec": 0.818,
+        "kept": 14
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.67,
+        "sec": 0.586,
         "kept": 14
       },
       {
-        "host": "www.cp24.com",
-        "sec": 0.499,
-        "kept": 14
+        "host": "www.bls.gov",
+        "sec": 0.55,
+        "kept": 0
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.491,
+        "sec": 0.499,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.303,
+        "sec": 0.354,
         "kept": 14
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.176,
+        "sec": 0.189,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.118,
+        "sec": 0.182,
         "kept": 14
       }
     ],
-    "elapsed_sec": 335.75,
+    "elapsed_sec": 329.66,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
