@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-25T22:16:46.604701Z",
+  "generated_utc": "2025-12-25T22:38:39.054341Z",
   "dates": [
     {
       "games": [
@@ -7,31 +7,31 @@
           "gamePk": "401809240",
           "gameDate": "2025-12-25T22:17Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DAL"
               },
-              "score": 0
+              "score": 18
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 0
+              "score": 18
             }
           }
         },
         {
           "gamePk": "401809241",
-          "gameDate": "2025-12-26T01:00Z",
+          "gameDate": "2025-12-26T01:12Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
@@ -57,7 +57,7 @@
         },
         {
           "gamePk": "401809242",
-          "gameDate": "2025-12-26T03:30Z",
+          "gameDate": "2025-12-26T03:42Z",
           "status": {
             "detailedState": "Preview",
             "abstractGameState": "Preview"
