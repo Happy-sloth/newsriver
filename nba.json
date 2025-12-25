@@ -1,57 +1,31 @@
 {
-  "generated_utc": "2025-12-25T19:41:08.063183Z",
+  "generated_utc": "2025-12-25T19:54:19.769008Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401809238",
-          "gameDate": "2025-12-25T17:00Z",
+          "gamePk": "401809239",
+          "gameDate": "2025-12-25T19:30Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 121
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 125
-            }
-          }
-        },
-        {
-          "gamePk": "401809239",
-          "gameDate": "2025-12-25T19:30Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 0
+              "score": 12
             },
             "home": {
               "team": {
                 "abbreviation": "OKC"
               },
-              "score": 0
+              "score": 18
             }
           }
         },
@@ -130,6 +104,32 @@
                 "abbreviation": "DEN"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401809238",
+          "gameDate": "2025-12-25T17:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 124
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NYK"
+              },
+              "score": 126
             }
           }
         }
