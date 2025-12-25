@@ -1,8 +1,40 @@
 {
-  "generated_utc": "2025-12-25T22:54:07.969Z",
-  "itemset_hash": "203d6039e54ba991",
+  "generated_utc": "2025-12-25T23:05:56.536Z",
+  "itemset_hash": "b6411b3ff7dabb0e",
   "count": 69,
   "items": [
+    {
+      "title": "T.R. Sullivan: A Retrospective On The Frank Robinson-Milt Pappas Trade",
+      "url": "https://www.mlbtraderumors.com/2025/12/t-r-sullivan-a-retrospective-on-the-frank-robinson-milt-pappas-trade.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-12-25T23:00:47.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Sports",
+      "region": "Canada"
+    },
+    {
+      "title": "From gym memberships to competition fees: Cost remains the biggest barrier to fitness in Canada",
+      "url": "https://toronto.citynews.ca/2025/12/25/from-gym-memberships-to-competition-fees-cost-remains-the-biggest-barrier-to-fitness-in-canada",
+      "source": "CityNews Toronto",
+      "published_utc": "2025-12-25T22:50:12.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Local",
+      "region": "Canada"
+    },
     {
       "title": "Male wanted for stabbing in Mississauga",
       "url": "https://toronto.citynews.ca/2025/12/25/male-wanted-for-stabbing-in-mississauga",
@@ -30,6 +62,23 @@
         "reasons": []
       },
       "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Heavy rain storms in California leave three dead as of Christmas night",
+      "url": "https://www.bbc.com/news/articles/c1lr3p7n87yo?at_campaign=rss&at_medium=RSS",
+      "source": "BBC News",
+      "published_utc": "2025-12-25T22:39:57.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6",
+          "body_count≥3"
+        ],
+        "style": "breaker"
+      },
+      "category": "General",
       "region": "World"
     },
     {
@@ -513,12 +562,12 @@
       "source": "globalnews.ca",
       "published_utc": "2025-12-25T17:42:24.000Z",
       "effects": {
-        "lightsaber": true,
-        "glitch": false,
+        "lightsaber": false,
+        "glitch": true,
         "reasons": [
-          "score≥2.6"
+          "score≥2.1"
         ],
-        "style": "lightsaber"
+        "style": "glitch"
       },
       "category": "General",
       "region": "Canada"
@@ -786,19 +835,6 @@
       "region": "World"
     },
     {
-      "title": "Waterskiing Santas and giant cuts of meat: Christmas around the world",
-      "url": "https://www.bbc.com/news/articles/ce8nep787pyo?at_campaign=rss&at_medium=RSS",
-      "source": "BBC News",
-      "published_utc": "2025-12-25T15:01:32.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
       "title": "‘They’re scared of us now’: how co-investment in a tropical forest saw off loggers",
       "url": "https://www.theguardian.com/environment/2025/dec/25/they-are-scared-of-us-now-how-one-tropical-forest-turned-the-tide-on-loggers",
       "source": "World news | The Guardian",
@@ -936,32 +972,6 @@
       },
       "category": "Business",
       "region": "World"
-    },
-    {
-      "title": "Quantum computing in 2026: No crypto doomsday, but time to prepare",
-      "url": "https://cointelegraph.com/news/quantum-computing-in-2026-no-crypto-doomsday-time-to-prepare",
-      "source": "Cointelegraph.com News",
-      "published_utc": "2025-12-25T14:00:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Business",
-      "region": "World"
-    },
-    {
-      "title": "The Ashes: Cricket’s Longest Argument",
-      "url": "https://www.aljazeera.com/video/game-theory/2025/12/25/aje-onl-gt-ashes_v7-251225?traffic_source=rss",
-      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
-      "published_utc": "2025-12-25T13:58:46.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
     }
   ],
   "_debug": {
@@ -973,12 +983,10 @@
     "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
-      "weather.gc.ca",
       "www.cbc.ca",
       "www150.statcan.gc.ca"
     ],
     "errors": [
-      "alert.weather.gc.ca",
       "feeds.reuters.com"
     ],
     "caps_hit": [
@@ -990,56 +998,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 2.203,
+        "sec": 1.46,
         "kept": 0
       },
       {
         "host": "globalnews.ca",
-        "sec": 1.148,
+        "sec": 1.138,
         "kept": 7
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 0.918,
+        "sec": 1.026,
         "kept": 8
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.396,
-        "kept": 0
-      },
-      {
         "host": "www.cp24.com",
-        "sec": 0.389,
+        "sec": 0.501,
         "kept": 14
       },
       {
+        "host": "www.blogto.com",
+        "sec": 0.444,
+        "kept": 0
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.38,
+        "sec": 0.436,
         "kept": 14
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.309,
+        "sec": 0.391,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.276,
+        "sec": 0.338,
         "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.153,
+        "sec": 0.219,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.108,
+        "sec": 0.17,
         "kept": 14
       }
     ],
-    "elapsed_sec": 330.77,
+    "elapsed_sec": 317.74,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1065,7 +1073,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 13,
+      "ps_fatal_hits": 14,
       "ps_injury_hits": 1,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1081,7 +1089,7 @@
       "sports_result_loss_hits": 0,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
-      "sports_focus_team_hits": 1,
+      "sports_focus_team_hits": 0,
       "sports_final_hits": 0,
       "sports_final_score_hits": 0,
       "hype_politics": 0,
@@ -1098,7 +1106,7 @@
     "sanity_stats": {
       "link_verification_fail": 12,
       "soft_404_drops": 14,
-      "max_age_drops": 38,
+      "max_age_drops": 40,
       "min_age_drops": 0,
       "market_sanity_drops": 8,
       "backfill_steps_used": 0
