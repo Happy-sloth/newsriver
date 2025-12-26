@@ -1,57 +1,57 @@
 {
-  "generated_utc": "2025-12-26T03:12:11.734461Z",
+  "generated_utc": "2025-12-26T04:06:21.281550Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401809241",
-          "gameDate": "2025-12-26T01:00Z",
+          "gamePk": "401809242",
+          "gameDate": "2025-12-26T03:30Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 102
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 87
-            }
-          }
-        },
-        {
-          "gamePk": "401809242",
-          "gameDate": "2025-12-26T03:30Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 0
+              "score": 22
             },
             "home": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 0
+              "score": 22
+            }
+          }
+        },
+        {
+          "gamePk": "401809241",
+          "gameDate": "2025-12-26T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 119
+            },
+            "home": {
+              "team": {
+                "abbreviation": "LAL"
+              },
+              "score": 96
             }
           }
         },
