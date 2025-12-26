@@ -1,8 +1,37 @@
 {
-  "generated_utc": "2025-12-26T04:29:57.400Z",
-  "itemset_hash": "0a30b751d8d97cc7",
+  "generated_utc": "2025-12-26T04:59:12.569Z",
+  "itemset_hash": "aac83c63c471f01e",
   "count": 69,
   "items": [
+    {
+      "title": "Jamie Campbell Bower Unpacks Vecna’s Reign Of Terror In ‘Stranger Things 5’ Vol. 2: “There Are Times Where I Feel Wildly Inhuman”",
+      "url": "https://deadline.com/2025/12/jamie-campbell-bower-stranger-things-5-vol-2-vecna-interview-1236656089",
+      "source": "Deadline",
+      "published_utc": "2025-12-26T04:30:00.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Crypto sentiment holds ‘extreme fear’ for 14th straight day",
+      "url": "https://cointelegraph.com/news/crypto-sentiment-holds-extreme-fear-14th-straight-day",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2025-12-26T04:25:10.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "Business",
+      "region": "World"
+    },
     {
       "title": "‘Stranger Things 5′ Creators & Star Noah Schnapp Unpack Will Byers’ Leap Of Faith In Volume 2: “It Was So Freeing”",
       "url": "https://deadline.com/2025/12/stranger-things-5-will-byers-coming-out-scene-interviews-1236656044",
@@ -17,17 +46,27 @@
       "region": "World"
     },
     {
+      "title": "It's Predator vs. Prey When Taron Egerton Hunts Charlize Theron in the Brutal First Trailer for Netflix's 'Apex'",
+      "url": "https://hypebeast.com/2025/12/netflix-apex-charlize-theron-taron-egerton-teaser-trailer-release-info",
+      "source": "Hypebeast",
+      "published_utc": "2025-12-26T03:59:35.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Labour",
+      "region": "World"
+    },
+    {
       "title": "Ethereum unlikely to reach new highs in 2026: Ben Cowen",
       "url": "https://cointelegraph.com/news/ether-price-new-highs-2026-unlikely-ben-cowen-crypto-analyst",
       "source": "Cointelegraph.com News",
       "published_utc": "2025-12-26T03:53:13.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Business",
       "region": "World"
@@ -718,19 +757,6 @@
       "region": "World"
     },
     {
-      "title": "Serial wealth creator Lassonde still having fun",
-      "url": "https://www.mining.com/serial-wealth-creator-lassonde-still-having-fun",
-      "source": "MINING.COM",
-      "published_utc": "2025-12-25T19:00:51.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Energy",
-      "region": "Canada"
-    },
-    {
       "title": "Photos: A Venezuelan family Christmas – from the US dream to poverty",
       "url": "https://www.aljazeera.com/gallery/2025/12/25/photos-a-venezuelan-family-christmas-from-the-us-dream-to-poverty?traffic_source=rss",
       "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
@@ -864,19 +890,6 @@
       "region": "Canada"
     },
     {
-      "title": "Jimmy Kimmel Uses Christmas TV Speech To Declare Victory Over “King Donny” Trump: “We Won, The President Lost”",
-      "url": "https://deadline.com/2025/12/jimmy-kimmel-christmas-tv-speech-victory-donald-trump-1236655733",
-      "source": "Deadline",
-      "published_utc": "2025-12-25T17:50:00.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
-    },
-    {
       "title": "Brazil’s jailed ex-President Bolsonaro undergoes ‘successful’ surgery",
       "url": "https://www.aljazeera.com/news/2025/12/25/brazils-jailed-ex-president-bolsonaro-undergoes-successful-surgery?traffic_source=rss",
       "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
@@ -946,37 +959,19 @@
       },
       "category": "General",
       "region": "Canada"
-    },
-    {
-      "title": "Largest Contract In Franchise History For Each MLB Team",
-      "url": "https://www.mlbtraderumors.com/2025/12/largest-contract-in-franchise-history-for-each-mlb-team-2.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2025-12-25T17:00:52.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
-      },
-      "category": "Sports",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 446,
-    "dedup_pass1": 441,
+    "collected": 432,
+    "dedup_pass1": 427,
     "dedup_final": 320,
-    "slow_domains": [
-      "www.fyimusicnews.ca",
-      "www.gorillavsbear.net"
-    ],
+    "slow_domains": [],
     "timeouts": [
       "news.communitech.ca",
-      "www.cbc.ca"
+      "www.cbc.ca",
+      "www.mining.com"
     ],
     "errors": [
       "feeds.reuters.com"
@@ -990,56 +985,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.278,
+        "sec": 2.037,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.209,
+        "sec": 1.064,
         "kept": 8
       },
       {
-        "host": "www.mlb.com",
-        "sec": 0.933,
-        "kept": 14
-      },
-      {
         "host": "globalnews.ca",
-        "sec": 0.929,
+        "sec": 1.038,
         "kept": 7
       },
       {
-        "host": "www.blogto.com",
-        "sec": 0.52,
-        "kept": 0
+        "host": "www.mlb.com",
+        "sec": 0.549,
+        "kept": 14
       },
       {
         "host": "www.cp24.com",
-        "sec": 0.378,
+        "sec": 0.448,
         "kept": 14
+      },
+      {
+        "host": "www.blogto.com",
+        "sec": 0.42,
+        "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.356,
-        "kept": 14
-      },
-      {
-        "host": "www.federalreserve.gov",
-        "sec": 0.324,
+        "sec": 0.302,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.143,
+        "sec": 0.215,
         "kept": 0
       },
       {
         "host": "www.nhl.com",
-        "sec": 0.118,
+        "sec": 0.103,
         "kept": 0
+      },
+      {
+        "host": "www.federalreserve.gov",
+        "sec": 0.081,
+        "kept": 14
       }
     ],
-    "elapsed_sec": 383.4,
+    "elapsed_sec": 317.85,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1065,7 +1060,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 15,
+      "ps_fatal_hits": 14,
       "ps_injury_hits": 1,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1091,16 +1086,16 @@
       "hype_sports": 0,
       "hype_ceasefire": 0,
       "reject_hits": 0,
-      "obit_hits": 6,
+      "obit_hits": 5,
       "major_figure_hits": 1,
       "business_am_hits": 0
     },
     "sanity_stats": {
       "link_verification_fail": 12,
-      "soft_404_drops": 15,
-      "max_age_drops": 39,
+      "soft_404_drops": 17,
+      "max_age_drops": 49,
       "min_age_drops": 0,
-      "market_sanity_drops": 10,
+      "market_sanity_drops": 9,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
