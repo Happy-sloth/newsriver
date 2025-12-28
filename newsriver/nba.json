@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-28T23:16:44.842089Z",
+  "generated_utc": "2025-12-28T23:33:30.979163Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810296",
-          "gameDate": "2025-12-28T20:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "OT",
-            "currentQuarter": "OT"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 127
-            },
-            "home": {
-              "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 141
-            }
-          }
-        },
         {
           "gamePk": "401810298",
           "gameDate": "2025-12-28T23:00Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "MEM"
               },
-              "score": 11
+              "score": 27
             },
             "home": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 13
+              "score": 19
             }
           }
         },
@@ -71,13 +45,13 @@
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 9
+              "score": 25
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 1
+              "score": 24
             }
           }
         },
@@ -130,6 +104,32 @@
                 "abbreviation": "LAL"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810296",
+          "gameDate": "2025-12-28T20:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 127
+            },
+            "home": {
+              "team": {
+                "abbreviation": "TOR"
+              },
+              "score": 141
             }
           }
         },
