@@ -1,8 +1,50 @@
 {
-  "generated_utc": "2025-12-28T04:05:38.236Z",
-  "itemset_hash": "418cffb20eb699b1",
+  "generated_utc": "2025-12-28T04:59:22.990Z",
+  "itemset_hash": "37569aa498a6baef",
   "count": 69,
   "items": [
+    {
+      "title": "Reds Designate Lyon Richardson For Assignment",
+      "url": "https://www.mlbtraderumors.com/2025/12/reds-designate-lyon-richardson-for-assignment.html",
+      "source": "MLB Trade Rumors",
+      "published_utc": "2025-12-28T04:47:08.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Sports",
+      "region": "Canada"
+    },
+    {
+      "title": "TwoJeys Lands on Regent Street With 10th Flagship Store in London",
+      "url": "https://hypebeast.com/2025/12/twojeys-london-regent-street-10th-flagship-store-opening-exclusive-interview-biel-juste-joan-margarit-announcement",
+      "source": "Hypebeast",
+      "published_utc": "2025-12-28T04:18:43.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Labour",
+      "region": "World"
+    },
+    {
+      "title": "FaZe Clan just lost most of its creator roster",
+      "url": "https://www.tubefilter.com/2025/12/27/faze-clan-creators-quit-contract-terms",
+      "source": "Tubefilter",
+      "published_utc": "2025-12-28T04:03:42.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Labour",
+      "region": "World"
+    },
     {
       "title": "Shai Gilgeous-Alexander named CP Male Athlete of the Year for second time",
       "url": "https://toronto.citynews.ca/2025/12/27/shai-gilgeous-alexander-named-cp-male-athlete-of-the-year-for-second-time",
@@ -942,57 +984,22 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "US air strikes won’t fix Nigeria’s security crisis but could make it worse",
-      "url": "https://www.aljazeera.com/opinions/2025/12/27/us-air-strikes-wont-fix-nigerias-security-crisis-but-could-make-it-worse?traffic_source=rss",
-      "source": "Al Jazeera – Breaking News, World News and Video from Al Jazeera",
-      "published_utc": "2025-12-27T17:31:30.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Labour",
-      "region": "World"
-    },
-    {
-      "title": "TwoJeys Lands on Regent Street With 10th Flagship Store in London",
-      "url": "https://hypebeast.com/2025/12/twojeys-london-regent-street-10th-flagship-store-opening-exclusive-interview-biel-juste-joan-margarit-announcement",
-      "source": "Hypebeast",
-      "published_utc": "2025-12-27T17:22:58.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Labour",
-      "region": "World"
-    },
-    {
-      "title": "Howie Klein, legendary executive with Sire and Reprise Records, dies aged 77",
-      "url": "https://www.nme.com/news/music/howie-klein-legendary-executive-with-sire-and-reprise-records-dies-aged-77-3920182",
-      "source": "NME",
-      "published_utc": "2025-12-27T17:10:03.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Culture",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 440,
-    "dedup_pass1": 433,
+    "collected": 426,
+    "dedup_pass1": 419,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.gorillavsbear.net",
+      "www150.statcan.gc.ca"
+    ],
     "timeouts": [
       "news.communitech.ca",
-      "www.cbc.ca"
+      "www.cbc.ca",
+      "www.mining.com"
     ],
     "errors": [
       "feeds.reuters.com"
@@ -1005,56 +1012,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.36,
+        "sec": 1.6,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.352,
+        "sec": 1.498,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.92,
+        "sec": 0.683,
         "kept": 1
       },
       {
+        "host": "www.cp24.com",
+        "sec": 0.511,
+        "kept": 14
+      },
+      {
         "host": "www.mlb.com",
-        "sec": 0.523,
+        "sec": 0.482,
         "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.485,
+        "sec": 0.43,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.342,
-        "kept": 14
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.289,
+        "sec": 0.401,
         "kept": 14
       },
       {
         "host": "www.bls.gov",
-        "sec": 0.26,
-        "kept": 0
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.135,
+        "sec": 0.24,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.092,
+        "sec": 0.203,
         "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.182,
+        "kept": 0
       }
     ],
-    "elapsed_sec": 280.85,
+    "elapsed_sec": 291.44,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1113,9 +1120,9 @@
     "sanity_stats": {
       "link_verification_fail": 15,
       "soft_404_drops": 60,
-      "max_age_drops": 125,
+      "max_age_drops": 130,
       "min_age_drops": 0,
-      "market_sanity_drops": 8,
+      "market_sanity_drops": 7,
       "backfill_steps_used": 0
     },
     "require_exact_count": 69,
