@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-28T22:50:44.664306Z",
+  "generated_utc": "2025-12-28T23:16:44.842089Z",
   "dates": [
     {
       "games": [
@@ -11,47 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
+            "currentPeriodOrdinal": "OT",
+            "currentQuarter": "OT"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 113
+              "score": 127
             },
             "home": {
               "team": {
                 "abbreviation": "TOR"
               },
-              "score": 107
-            }
-          }
-        },
-        {
-          "gamePk": "401810297",
-          "gameDate": "2025-12-28T20:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 97
-            },
-            "home": {
-              "team": {
-                "abbreviation": "OKC"
-              },
-              "score": 120
+              "score": 141
             }
           }
         },
@@ -59,25 +33,25 @@
           "gamePk": "401810298",
           "gameDate": "2025-12-28T23:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MEM"
               },
-              "score": 0
+              "score": 11
             },
             "home": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 0
+              "score": 13
             }
           }
         },
@@ -85,25 +59,25 @@
           "gamePk": "401810299",
           "gameDate": "2025-12-28T23:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 0
+              "score": 9
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 0
+              "score": 1
             }
           }
         },
@@ -156,6 +130,32 @@
                 "abbreviation": "LAL"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810297",
+          "gameDate": "2025-12-28T20:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 104
+            },
+            "home": {
+              "team": {
+                "abbreviation": "OKC"
+              },
+              "score": 129
             }
           }
         }
