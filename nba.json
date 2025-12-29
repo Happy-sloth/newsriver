@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-29T03:27:53.791286Z",
+  "generated_utc": "2025-12-29T04:35:02.505383Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810300",
-          "gameDate": "2025-12-29T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DET"
-              },
-              "score": 52
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LAC"
-              },
-              "score": 65
-            }
-          }
-        },
         {
           "gamePk": "401810301",
           "gameDate": "2025-12-29T02:30Z",
@@ -37,21 +11,47 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 47
+              "score": 88
             },
             "home": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 53
+              "score": 110
+            }
+          }
+        },
+        {
+          "gamePk": "401810300",
+          "gameDate": "2025-12-29T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DET"
+              },
+              "score": 99
+            },
+            "home": {
+              "team": {
+                "abbreviation": "LAC"
+              },
+              "score": 112
             }
           }
         },
