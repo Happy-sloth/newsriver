@@ -1,60 +1,8 @@
 {
-  "generated_utc": "2025-12-28T23:55:59.447496Z",
+  "generated_utc": "2025-12-29T01:44:54.632189Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810298",
-          "gameDate": "2025-12-28T23:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MEM"
-              },
-              "score": 42
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 45
-            }
-          }
-        },
-        {
-          "gamePk": "401810299",
-          "gameDate": "2025-12-28T23:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BOS"
-              },
-              "score": 39
-            },
-            "home": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 41
-            }
-          }
-        },
         {
           "gamePk": "401810300",
           "gameDate": "2025-12-29T02:00Z",
@@ -104,6 +52,58 @@
                 "abbreviation": "LAL"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810298",
+          "gameDate": "2025-12-28T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MEM"
+              },
+              "score": 112
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 116
+            }
+          }
+        },
+        {
+          "gamePk": "401810299",
+          "gameDate": "2025-12-28T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "BOS"
+              },
+              "score": 108
+            },
+            "home": {
+              "team": {
+                "abbreviation": "POR"
+              },
+              "score": 114
             }
           }
         },
