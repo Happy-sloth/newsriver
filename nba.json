@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-29T08:27:32.072145Z",
+  "generated_utc": "2025-12-29T08:55:20.546431Z",
   "dates": [
     {
       "games": [
@@ -288,32 +288,6 @@
               "score": 0
             }
           }
-        },
-        {
-          "gamePk": "401810301",
-          "gameDate": "2025-12-29T02:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 101
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 125
-            }
-          }
         }
       ]
     }
@@ -324,7 +298,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251228",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251229"
     ],
-    "games_count": 12,
+    "games_count": 11,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
