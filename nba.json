@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-30T06:58:17.216089Z",
+  "generated_utc": "2025-12-30T07:26:57.378330Z",
   "dates": [
     {
       "games": [
@@ -132,136 +132,6 @@
               "score": 125
             }
           }
-        },
-        {
-          "gamePk": "401810307",
-          "gameDate": "2025-12-30T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIN"
-              },
-              "score": 136
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 101
-            }
-          }
-        },
-        {
-          "gamePk": "401810308",
-          "gameDate": "2025-12-30T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 119
-            },
-            "home": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 126
-            }
-          }
-        },
-        {
-          "gamePk": "401810309",
-          "gameDate": "2025-12-30T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 130
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NOP"
-              },
-              "score": 125
-            }
-          }
-        },
-        {
-          "gamePk": "401810310",
-          "gameDate": "2025-12-30T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 129
-            },
-            "home": {
-              "team": {
-                "abbreviation": "OKC"
-              },
-              "score": 140
-            }
-          }
-        },
-        {
-          "gamePk": "401810311",
-          "gameDate": "2025-12-30T01:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 113
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SAS"
-              },
-              "score": 101
-            }
-          }
         }
       ]
     }
@@ -272,7 +142,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251229",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20251230"
     ],
-    "games_count": 10,
+    "games_count": 5,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
