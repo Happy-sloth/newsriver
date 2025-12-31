@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2025-12-31T20:19:04.054108Z",
+  "generated_utc": "2025-12-31T20:39:46.396074Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810317",
-          "gameDate": "2025-12-31T18:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 120
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 115
-            }
-          }
-        },
         {
           "gamePk": "401810318",
           "gameDate": "2025-12-31T20:00Z",
@@ -37,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 17
+              "score": 28
             },
             "home": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 22
+              "score": 41
             }
           }
         },
@@ -71,13 +45,13 @@
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 11
+              "score": 25
             },
             "home": {
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 6
+              "score": 22
             }
           }
         },
@@ -234,6 +208,32 @@
                 "abbreviation": "OKC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810317",
+          "gameDate": "2025-12-31T18:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 132
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CHA"
+              },
+              "score": 125
             }
           }
         }
