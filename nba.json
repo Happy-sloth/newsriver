@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2025-12-31T03:11:47.251550Z",
+  "generated_utc": "2025-12-31T04:09:31.620949Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810313",
-          "gameDate": "2025-12-31T01:00Z",
+          "gamePk": "401810314",
+          "gameDate": "2025-12-31T02:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 113
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MEM"
-              },
-              "score": 113
-            }
-          }
-        },
-        {
-          "gamePk": "401810314",
-          "gameDate": "2025-12-31T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "BOS"
               },
-              "score": 59
+              "score": 120
             },
             "home": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 64
+              "score": 112
             }
           }
         },
@@ -59,25 +33,25 @@
           "gamePk": "401810315",
           "gameDate": "2025-12-31T03:30Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 0
+              "score": 29
             },
             "home": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 0
+              "score": 27
             }
           }
         },
@@ -104,6 +78,32 @@
                 "abbreviation": "LAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810313",
+          "gameDate": "2025-12-31T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 139
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MEM"
+              },
+              "score": 136
             }
           }
         }
