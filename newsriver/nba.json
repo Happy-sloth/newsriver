@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-12-31T01:23:01.985867Z",
+  "generated_utc": "2025-12-31T03:11:47.251550Z",
   "dates": [
     {
       "games": [
@@ -11,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "PHI"
               },
-              "score": 15
+              "score": 113
             },
             "home": {
               "team": {
                 "abbreviation": "MEM"
               },
-              "score": 20
+              "score": 113
             }
           }
         },
@@ -33,25 +33,25 @@
           "gamePk": "401810314",
           "gameDate": "2025-12-31T02:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "BOS"
               },
-              "score": 0
+              "score": 59
             },
             "home": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 0
+              "score": 64
             }
           }
         },
