@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-01-01T23:55:48.448957Z",
+  "generated_utc": "2026-01-02T01:27:58.503504Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810326",
-          "gameDate": "2026-01-01T23:00Z",
+          "gamePk": "401810327",
+          "gameDate": "2026-01-02T00:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 37
-            },
-            "home": {
-              "team": {
-                "abbreviation": "BKN"
-              },
-              "score": 28
-            }
-          }
-        },
-        {
-          "gamePk": "401810327",
-          "gameDate": "2026-01-02T00:00Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "MIA"
               },
-              "score": 0
+              "score": 63
             },
             "home": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 0
+              "score": 54
             }
           }
         },
@@ -130,6 +104,32 @@
                 "abbreviation": "LAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810326",
+          "gameDate": "2026-01-01T23:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 120
+            },
+            "home": {
+              "team": {
+                "abbreviation": "BKN"
+              },
+              "score": 96
             }
           }
         }
