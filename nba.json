@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-04T21:32:36.508535Z",
+  "generated_utc": "2026-01-04T21:45:59.147444Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810349",
-          "gameDate": "2026-01-04T19:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DET"
-              },
-              "score": 114
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 110
-            }
-          }
-        },
         {
           "gamePk": "401810350",
           "gameDate": "2026-01-04T20:00Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 58
+              "score": 83
             },
             "home": {
               "team": {
                 "abbreviation": "ORL"
               },
-              "score": 69
+              "score": 90
             }
           }
         },
@@ -71,13 +45,13 @@
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 45
+              "score": 52
             },
             "home": {
               "team": {
                 "abbreviation": "BKN"
               },
-              "score": 53
+              "score": 59
             }
           }
         },
@@ -208,6 +182,32 @@
                 "abbreviation": "LAL"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810349",
+          "gameDate": "2026-01-04T19:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DET"
+              },
+              "score": 114
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 110
             }
           }
         }
