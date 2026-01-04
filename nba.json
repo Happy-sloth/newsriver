@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-01-04T05:04:08.244713Z",
+  "generated_utc": "2026-01-04T05:37:59.732020Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810347",
-          "gameDate": "2026-01-04T03:00Z",
+          "gamePk": "401810348",
+          "gameDate": "2026-01-04T03:30Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 99
-            },
-            "home": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 109
-            }
-          }
-        },
-        {
-          "gamePk": "401810348",
-          "gameDate": "2026-01-04T03:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "BOS"
               },
-              "score": 84
+              "score": 131
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 79
+              "score": 109
             }
           }
         },
@@ -260,6 +234,32 @@
                 "abbreviation": "LAL"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810347",
+          "gameDate": "2026-01-04T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 114
+            },
+            "home": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 123
             }
           }
         },
