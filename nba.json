@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-04T06:27:06.543800Z",
+  "generated_utc": "2026-01-04T06:54:34.762913Z",
   "dates": [
     {
       "games": [
@@ -340,58 +340,6 @@
               "score": 110
             }
           }
-        },
-        {
-          "gamePk": "401810342",
-          "gameDate": "2026-01-04T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 130
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 119
-            }
-          }
-        },
-        {
-          "gamePk": "401810343",
-          "gameDate": "2026-01-04T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 117
-            },
-            "home": {
-              "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 134
-            }
-          }
         }
       ]
     }
@@ -402,7 +350,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260103",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260104"
     ],
-    "games_count": 15,
+    "games_count": 13,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
