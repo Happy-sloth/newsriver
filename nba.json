@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-06T05:22:12.989850Z",
+  "generated_utc": "2026-01-06T05:47:46.238798Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810363",
-          "gameDate": "2026-01-06T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 90
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LAC"
-              },
-              "score": 97
-            }
-          }
-        },
         {
           "gamePk": "401810365",
           "gameDate": "2026-01-07T00:00Z",
@@ -182,6 +156,32 @@
                 "abbreviation": "SAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810363",
+          "gameDate": "2026-01-06T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 102
+            },
+            "home": {
+              "team": {
+                "abbreviation": "LAC"
+              },
+              "score": 103
             }
           }
         },
