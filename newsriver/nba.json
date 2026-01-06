@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-06T04:10:32.934402Z",
+  "generated_utc": "2026-01-06T04:53:46.940461Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810362",
-          "gameDate": "2026-01-06T01:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "OT",
-            "currentQuarter": "OT"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 123
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 124
-            }
-          }
-        },
         {
           "gamePk": "401810363",
           "gameDate": "2026-01-06T03:00Z",
@@ -37,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 51
+              "score": 68
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 55
+              "score": 76
             }
           }
         },
@@ -63,21 +37,47 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 57
+              "score": 91
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 78
+              "score": 118
+            }
+          }
+        },
+        {
+          "gamePk": "401810362",
+          "gameDate": "2026-01-06T01:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 125
+            },
+            "home": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 124
             }
           }
         },
