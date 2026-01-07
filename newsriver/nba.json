@@ -1,86 +1,8 @@
 {
-  "generated_utc": "2026-01-07T03:13:28.259254Z",
+  "generated_utc": "2026-01-07T04:11:07.195853Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810367",
-          "gameDate": "2026-01-07T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAS"
-              },
-              "score": 98
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MEM"
-              },
-              "score": 97
-            }
-          }
-        },
-        {
-          "gamePk": "401810368",
-          "gameDate": "2026-01-07T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIA"
-              },
-              "score": 82
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIN"
-              },
-              "score": 106
-            }
-          }
-        },
-        {
-          "gamePk": "401810369",
-          "gameDate": "2026-01-07T01:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 100
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NOP"
-              },
-              "score": 96
-            }
-          }
-        },
         {
           "gamePk": "401810370",
           "gameDate": "2026-01-07T04:00Z",
@@ -104,6 +26,84 @@
                 "abbreviation": "SAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810367",
+          "gameDate": "2026-01-07T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAS"
+              },
+              "score": 105
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MEM"
+              },
+              "score": 106
+            }
+          }
+        },
+        {
+          "gamePk": "401810368",
+          "gameDate": "2026-01-07T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIA"
+              },
+              "score": 94
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 122
+            }
+          }
+        },
+        {
+          "gamePk": "401810369",
+          "gameDate": "2026-01-07T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAL"
+              },
+              "score": 111
+            },
+            "home": {
+              "team": {
+                "abbreviation": "NOP"
+              },
+              "score": 103
             }
           }
         },
