@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-07T05:57:44.760277Z",
+  "generated_utc": "2026-01-07T06:38:52.170825Z",
   "dates": [
     {
       "games": [
@@ -11,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "DAL"
               },
-              "score": 64
+              "score": 100
             },
             "home": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 74
+              "score": 98
             }
           }
         },
@@ -418,58 +418,6 @@
               "score": 103
             }
           }
-        },
-        {
-          "gamePk": "401810365",
-          "gameDate": "2026-01-07T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 120
-            },
-            "home": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 116
-            }
-          }
-        },
-        {
-          "gamePk": "401810366",
-          "gameDate": "2026-01-07T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ORL"
-              },
-              "score": 112
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 120
-            }
-          }
         }
       ]
     }
@@ -480,7 +428,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260106",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260107"
     ],
-    "games_count": 18,
+    "games_count": 16,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
