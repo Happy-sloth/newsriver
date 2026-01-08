@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-08T07:58:28.762082Z",
+  "generated_utc": "2026-01-08T08:37:28.882182Z",
   "dates": [
     {
       "games": [
@@ -158,32 +158,6 @@
               "score": 103
             }
           }
-        },
-        {
-          "gamePk": "401810378",
-          "gameDate": "2026-01-08T02:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 91
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SAS"
-              },
-              "score": 107
-            }
-          }
         }
       ]
     }
@@ -194,7 +168,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260107",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260108"
     ],
-    "games_count": 7,
+    "games_count": 6,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
