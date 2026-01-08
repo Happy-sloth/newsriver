@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-08T05:29:36.280173Z",
+  "generated_utc": "2026-01-08T05:50:22.030947Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810382",
-          "gameDate": "2026-01-08T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 99
-            },
-            "home": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 103
-            }
-          }
-        },
         {
           "gamePk": "401810383",
           "gameDate": "2026-01-09T00:00Z",
@@ -156,6 +130,32 @@
                 "abbreviation": "GSW"
               },
               "score": 120
+            }
+          }
+        },
+        {
+          "gamePk": "401810382",
+          "gameDate": "2026-01-08T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 102
+            },
+            "home": {
+              "team": {
+                "abbreviation": "POR"
+              },
+              "score": 103
             }
           }
         },
