@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-08T23:55:50.271868Z",
+  "generated_utc": "2026-01-09T01:39:08.717924Z",
   "dates": [
     {
       "games": [
@@ -7,25 +7,25 @@
           "gamePk": "401810383",
           "gameDate": "2026-01-09T00:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "IND"
               },
-              "score": 0
+              "score": 75
             },
             "home": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 0
+              "score": 65
             }
           }
         },
@@ -33,8 +33,8 @@
           "gamePk": "401810384",
           "gameDate": "2026-01-09T01:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
             "currentPeriodOrdinal": null,
@@ -59,25 +59,25 @@
           "gamePk": "401810385",
           "gameDate": "2026-01-09T01:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "1st",
+            "currentQuarter": "1st"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "CLE"
               },
-              "score": 0
+              "score": 24
             },
             "home": {
               "team": {
                 "abbreviation": "MIN"
               },
-              "score": 0
+              "score": 27
             }
           }
         },
