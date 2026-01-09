@@ -1,11 +1,37 @@
 {
-  "generated_utc": "2026-01-09T01:39:08.717924Z",
+  "generated_utc": "2026-01-09T03:20:03.757125Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810383",
-          "gameDate": "2026-01-09T00:00Z",
+          "gamePk": "401810385",
+          "gameDate": "2026-01-09T01:00Z",
+          "status": {
+            "detailedState": "Live",
+            "abstractGameState": "Live"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "4th",
+            "currentQuarter": "4th"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 113
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 121
+            }
+          }
+        },
+        {
+          "gamePk": "401810386",
+          "gameDate": "2026-01-09T02:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,15 +43,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "IND"
+                "abbreviation": "DAL"
               },
-              "score": 75
+              "score": 55
             },
             "home": {
               "team": {
-                "abbreviation": "CHA"
+                "abbreviation": "UTAH"
               },
-              "score": 65
+              "score": 60
             }
           }
         },
@@ -33,12 +59,12 @@
           "gamePk": "401810384",
           "gameDate": "2026-01-09T01:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
@@ -56,54 +82,28 @@
           }
         },
         {
-          "gamePk": "401810385",
-          "gameDate": "2026-01-09T01:00Z",
+          "gamePk": "401810383",
+          "gameDate": "2026-01-09T00:00Z",
           "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "CLE"
+                "abbreviation": "IND"
               },
-              "score": 24
+              "score": 114
             },
             "home": {
               "team": {
-                "abbreviation": "MIN"
+                "abbreviation": "CHA"
               },
-              "score": 27
-            }
-          }
-        },
-        {
-          "gamePk": "401810386",
-          "gameDate": "2026-01-09T02:00Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 0
+              "score": 112
             }
           }
         }
