@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-10T20:18:43.669359Z",
+  "generated_utc": "2026-01-10T20:38:40.896620Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810397",
-          "gameDate": "2026-01-10T18:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIN"
-              },
-              "score": 119
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 136
-            }
-          }
-        },
         {
           "gamePk": "401810398",
           "gameDate": "2026-01-11T00:00Z",
@@ -156,6 +130,32 @@
                 "abbreviation": "UTAH"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810397",
+          "gameDate": "2026-01-10T18:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIN"
+              },
+              "score": 134
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CLE"
+              },
+              "score": 146
             }
           }
         }
