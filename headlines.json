@@ -1,8 +1,40 @@
 {
-  "generated_utc": "2026-01-11T19:38:23.722Z",
-  "itemset_hash": "2d803d8b0abd995b",
+  "generated_utc": "2026-01-11T19:49:53.252Z",
+  "itemset_hash": "c6906e1d4a422612",
   "count": 69,
   "items": [
+    {
+      "title": "Brampton man seeking damages against Boeing for 2019 crash that killed 6 family members",
+      "url": "https://toronto.citynews.ca/2026/01/11/brampton-man-boeing-2019-ethopian-crash",
+      "source": "CityNews Toronto",
+      "published_utc": "2026-01-11T19:36:56.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "breaker"
+      },
+      "category": "Local",
+      "region": "Canada"
+    },
+    {
+      "title": "India tightens KYC requirements for crypto user onboarding",
+      "url": "https://cointelegraph.com/news/india-tighten-kyc-crypto-user-onboarding",
+      "source": "Cointelegraph.com News",
+      "published_utc": "2026-01-11T19:35:31.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": true,
+        "reasons": [
+          "score≥2.1"
+        ],
+        "style": "glitch"
+      },
+      "category": "Business",
+      "region": "World"
+    },
     {
       "title": "After Maduro: Is the US driving global instability?",
       "url": "https://www.aljazeera.com/video/the-bottom-line/2026/1/11/after-maduro-is-the-us-driving-global-instability?traffic_source=rss",
@@ -508,7 +540,7 @@
         "reasons": [
           "score≥2.6"
         ],
-        "style": "breaker"
+        "style": "lightsaber"
       },
       "category": "General",
       "region": "Canada"
@@ -910,22 +942,6 @@
       "region": "World"
     },
     {
-      "title": "Iran warns against US strikes as activists say protest death toll tops 500",
-      "url": "https://toronto.citynews.ca/2026/01/11/iran-warns-it-will-target-us-troops-and-israel-if-america-strikes-over-protests",
-      "source": "CityNews Toronto",
-      "published_utc": "2026-01-11T12:49:29.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Labour",
-      "region": "Canada"
-    },
-    {
       "title": "Family seeks answers after ICE deported man to Costa Rica in vegetative state",
       "url": "https://www.theguardian.com/us-news/2026/jan/11/ice-death-costa-rica-randall-gamboa-esquivel",
       "source": "World news | The Guardian",
@@ -976,31 +992,23 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Russians ask government hotlines whether pensions are paid in crypto",
-      "url": "https://cointelegraph.com/news/russians-ask-pensions-paid-in-crypto-social-fund",
-      "source": "Cointelegraph.com News",
-      "published_utc": "2026-01-11T12:13:48.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Business",
-      "region": "World"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 471,
-    "dedup_pass1": 465,
+    "collected": 457,
+    "dedup_pass1": 451,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.gorillavsbear.net"
+    ],
     "timeouts": [
       "news.communitech.ca",
-      "www.cbc.ca"
+      "weather.gc.ca",
+      "www.cbc.ca",
+      "www.publicsafety.gc.ca",
+      "www150.statcan.gc.ca"
     ],
     "errors": [
       "alert.weather.gc.ca",
@@ -1014,56 +1022,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.637,
+        "sec": 1.87,
         "kept": 0
       },
       {
         "host": "toronto.citynews.ca",
-        "sec": 1.058,
+        "sec": 0.98,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.953,
+        "sec": 0.879,
         "kept": 1
       },
       {
-        "host": "www.bls.gov",
-        "sec": 0.522,
-        "kept": 0
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.472,
+        "host": "www.mlb.com",
+        "sec": 0.481,
         "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.457,
-        "kept": 0
-      },
-      {
-        "host": "www.mlb.com",
-        "sec": 0.448,
-        "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.335,
+        "sec": 0.418,
         "kept": 0
       },
       {
         "host": "www.mlbtraderumors.com",
-        "sec": 0.31,
+        "sec": 0.35,
         "kept": 14
       },
       {
+        "host": "www.bls.gov",
+        "sec": 0.33,
+        "kept": 0
+      },
+      {
+        "host": "www.cp24.com",
+        "sec": 0.318,
+        "kept": 14
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.087,
+        "kept": 0
+      },
+      {
         "host": "www.federalreserve.gov",
-        "sec": 0.188,
+        "sec": 0.082,
         "kept": 14
       }
     ],
-    "elapsed_sec": 339.45,
+    "elapsed_sec": 308.85,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1089,7 +1097,7 @@
     "score_stats": {
       "effects_lightsaber": 0,
       "effects_glitch": 0,
-      "ps_fatal_hits": 13,
+      "ps_fatal_hits": 14,
       "ps_injury_hits": 0,
       "market_btc_hits": 0,
       "market_index_hits": 0,
@@ -1115,14 +1123,14 @@
       "hype_sports": 0,
       "hype_ceasefire": 0,
       "reject_hits": 0,
-      "obit_hits": 6,
+      "obit_hits": 7,
       "major_figure_hits": 0,
       "business_am_hits": 0
     },
     "sanity_stats": {
-      "link_verification_fail": 13,
-      "soft_404_drops": 49,
-      "max_age_drops": 13,
+      "link_verification_fail": 12,
+      "soft_404_drops": 35,
+      "max_age_drops": 29,
       "min_age_drops": 0,
       "market_sanity_drops": 5,
       "backfill_steps_used": 0
