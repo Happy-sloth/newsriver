@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-13T05:57:50.339296Z",
+  "generated_utc": "2026-01-13T06:39:36.206558Z",
   "dates": [
     {
       "games": [
@@ -262,84 +262,6 @@
               "score": 113
             }
           }
-        },
-        {
-          "gamePk": "401810414",
-          "gameDate": "2026-01-13T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BOS"
-              },
-              "score": 96
-            },
-            "home": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 98
-            }
-          }
-        },
-        {
-          "gamePk": "401810415",
-          "gameDate": "2026-01-13T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 115
-            },
-            "home": {
-              "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 102
-            }
-          }
-        },
-        {
-          "gamePk": "401810413",
-          "gameDate": "2026-01-13T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 123
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 112
-            }
-          }
         }
       ]
     }
@@ -350,7 +272,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260112",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260113"
     ],
-    "games_count": 13,
+    "games_count": 10,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
