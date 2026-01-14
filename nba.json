@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-14T03:57:34.025638Z",
+  "generated_utc": "2026-01-14T04:49:22.569188Z",
   "dates": [
     {
       "games": [
@@ -11,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "ATL"
               },
-              "score": 24
+              "score": 60
             },
             "home": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 22
+              "score": 81
             }
           }
         },
@@ -33,25 +33,25 @@
           "gamePk": "401810425",
           "gameDate": "2026-01-14T04:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Live",
+            "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 0
+              "score": 28
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 0
+              "score": 44
             }
           }
         },
