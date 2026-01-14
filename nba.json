@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-14T05:43:23.926912Z",
+  "generated_utc": "2026-01-14T05:56:58.677493Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810424",
-          "gameDate": "2026-01-14T03:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 99
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 120
-            }
-          }
-        },
         {
           "gamePk": "401810425",
           "gameDate": "2026-01-14T04:00Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 53
+              "score": 71
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 69
+              "score": 95
             }
           }
         },
@@ -234,6 +208,32 @@
                 "abbreviation": "LAC"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810424",
+          "gameDate": "2026-01-14T03:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "ATL"
+              },
+              "score": 116
+            },
+            "home": {
+              "team": {
+                "abbreviation": "LAL"
+              },
+              "score": 141
             }
           }
         },
