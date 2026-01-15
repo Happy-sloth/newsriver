@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-15T21:29:32.338087Z",
+  "generated_utc": "2026-01-15T21:45:23.664929Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810433",
-          "gameDate": "2026-01-15T19:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MEM"
-              },
-              "score": 107
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ORL"
-              },
-              "score": 107
-            }
-          }
-        },
         {
           "gamePk": "401810434",
           "gameDate": "2026-01-16T00:00Z",
@@ -234,6 +208,32 @@
                 "abbreviation": "LAL"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810433",
+          "gameDate": "2026-01-15T19:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MEM"
+              },
+              "score": 111
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ORL"
+              },
+              "score": 118
             }
           }
         }
