@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-16T08:57:53.942991Z",
+  "generated_utc": "2026-01-16T09:30:53.008008Z",
   "dates": [
     {
       "games": [
@@ -158,84 +158,6 @@
               "score": 0
             }
           }
-        },
-        {
-          "gamePk": "401810441",
-          "gameDate": "2026-01-16T03:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 135
-            },
-            "home": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 117
-            }
-          }
-        },
-        {
-          "gamePk": "401810439",
-          "gameDate": "2026-01-16T03:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 113
-            },
-            "home": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 126
-            }
-          }
-        },
-        {
-          "gamePk": "401810440",
-          "gameDate": "2026-01-16T03:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 101
-            },
-            "home": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 117
-            }
-          }
         }
       ]
     }
@@ -246,7 +168,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260115",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260116"
     ],
-    "games_count": 9,
+    "games_count": 6,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
