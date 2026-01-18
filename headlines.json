@@ -1,8 +1,50 @@
 {
-  "generated_utc": "2026-01-18T08:41:38.636Z",
-  "itemset_hash": "7eb551bb884876fa",
+  "generated_utc": "2026-01-18T09:00:17.453Z",
+  "itemset_hash": "fe8f2431d6bdb22b",
   "count": 69,
   "items": [
+    {
+      "title": "Watch John Mayer give emotional performance of ‘Ripple’ at Bob Weir’s public memorial",
+      "url": "https://www.nme.com/news/music/watch-john-mayer-give-emotional-performance-of-ripple-at-bob-weirs-public-memorial-3923834",
+      "source": "NME",
+      "published_utc": "2026-01-18T08:50:43.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Roger Waters stands by insensitive Ozzy Osbourne comments in new interview",
+      "url": "https://www.nme.com/news/music/roger-waters-stands-by-insensitive-ozzy-osbourne-comments-in-new-interview-3923840",
+      "source": "NME",
+      "published_utc": "2026-01-18T08:42:06.000Z",
+      "effects": {
+        "lightsaber": false,
+        "glitch": false,
+        "reasons": []
+      },
+      "category": "Culture",
+      "region": "World"
+    },
+    {
+      "title": "Beat-up 49ers run out of luck after year of defying odds",
+      "url": "https://nypost.com/2026/01/18/sports/beat-up-49ers-run-out-of-luck-after-year-of-defying-odds",
+      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
+      "published_utc": "2026-01-18T08:41:06.000Z",
+      "effects": {
+        "lightsaber": true,
+        "glitch": false,
+        "reasons": [
+          "score≥2.6"
+        ],
+        "style": "lightsaber"
+      },
+      "category": "Labour",
+      "region": "Canada"
+    },
     {
       "title": "Tennis star Zeynep Sonmez comes to aid of ball girl who collapsed on court during Australian Open match",
       "url": "https://nypost.com/2026/01/18/sports/tennis-star-zeynep-sonmez-comes-to-aid-of-ball-girl-who-collapsed-on-court-during-australian-open-match",
@@ -481,11 +523,8 @@
       "published_utc": "2026-01-18T04:49:47.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Business",
       "region": "World"
@@ -497,11 +536,8 @@
       "published_utc": "2026-01-18T04:47:35.000Z",
       "effects": {
         "lightsaber": false,
-        "glitch": true,
-        "reasons": [
-          "score≥2.1"
-        ],
-        "style": "glitch"
+        "glitch": false,
+        "reasons": []
       },
       "category": "Sports",
       "region": "Canada"
@@ -657,19 +693,6 @@
       },
       "category": "General",
       "region": "World"
-    },
-    {
-      "title": "Islanders’ Patrick Roy not concerned over Cal Ritchie hitting rookie wall",
-      "url": "https://nypost.com/2026/01/17/sports/patrick-roy-not-concern-over-cal-ritchie-hitting-rookie-wall",
-      "source": "NY Post Sports – Latest News, Scores, Stats & Videos",
-      "published_utc": "2026-01-18T03:26:59.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "Sports",
-      "region": "Canada"
     },
     {
       "title": "Broncos’ Bo Nix Out For Rest Of Playoffs After Suffering Season-Ending Fractured Ankle Against Bills",
@@ -939,44 +962,17 @@
       },
       "category": "Labour",
       "region": "World"
-    },
-    {
-      "title": "Nasa's mega Moon rocket arrives at launch pad for Artemis II mission",
-      "url": "https://www.bbc.com/news/articles/cly148lvyevo?at_campaign=rss&at_medium=RSS",
-      "source": "BBC News",
-      "published_utc": "2026-01-18T01:22:46.000Z",
-      "effects": {
-        "lightsaber": false,
-        "glitch": false,
-        "reasons": []
-      },
-      "category": "General",
-      "region": "World"
-    },
-    {
-      "title": "Blue Jays Met With Framber Valdez In November",
-      "url": "https://www.mlbtraderumors.com/2026/01/blue-jays-met-with-framber-valdez-in-november.html",
-      "source": "MLB Trade Rumors",
-      "published_utc": "2026-01-18T01:16:08.000Z",
-      "effects": {
-        "lightsaber": true,
-        "glitch": false,
-        "reasons": [
-          "score≥2.6"
-        ],
-        "style": "lightsaber"
-      },
-      "category": "Sports",
-      "region": "Canada"
     }
   ],
   "_debug": {
     "feeds_total": 154,
     "cap_items": 320,
-    "collected": 701,
-    "dedup_pass1": 692,
+    "collected": 705,
+    "dedup_pass1": 696,
     "dedup_final": 320,
-    "slow_domains": [],
+    "slow_domains": [
+      "www.marketwatch.com"
+    ],
     "timeouts": [
       "news.communitech.ca",
       "www.cbc.ca"
@@ -990,6 +986,7 @@
       "financialpost.com",
       "globalnews.ca",
       "toronto.citynews.ca",
+      "www.boston.com",
       "www.marketwatch.com",
       "www.npr.org",
       "www.wsj.com"
@@ -997,56 +994,56 @@
     "feed_times_sample": [
       {
         "host": "www.labourstart.org",
-        "sec": 1.866,
+        "sec": 1.981,
         "kept": 0
       },
       {
+        "host": "www.cp24.com",
+        "sec": 1.098,
+        "kept": 14
+      },
+      {
         "host": "toronto.citynews.ca",
-        "sec": 1.193,
+        "sec": 1.081,
         "kept": 8
       },
       {
         "host": "globalnews.ca",
-        "sec": 0.818,
+        "sec": 0.697,
         "kept": 10
       },
       {
         "host": "www.mlb.com",
-        "sec": 0.569,
-        "kept": 14
-      },
-      {
-        "host": "www.cp24.com",
-        "sec": 0.539,
-        "kept": 14
-      },
-      {
-        "host": "www.mlbtraderumors.com",
-        "sec": 0.432,
+        "sec": 0.571,
         "kept": 14
       },
       {
         "host": "www.blogto.com",
-        "sec": 0.32,
+        "sec": 0.394,
         "kept": 0
       },
       {
+        "host": "www.mlbtraderumors.com",
+        "sec": 0.302,
+        "kept": 14
+      },
+      {
         "host": "www.bls.gov",
-        "sec": 0.288,
+        "sec": 0.277,
+        "kept": 0
+      },
+      {
+        "host": "www.nhl.com",
+        "sec": 0.152,
         "kept": 0
       },
       {
         "host": "www.federalreserve.gov",
-        "sec": 0.145,
+        "sec": 0.104,
         "kept": 14
-      },
-      {
-        "host": "www.nhl.com",
-        "sec": 0.1,
-        "kept": 0
       }
     ],
-    "elapsed_sec": 310.02,
+    "elapsed_sec": 312.49,
     "http_timeout_sec": 10,
     "slow_feed_warn_sec": 3.5,
     "global_budget_sec": 210,
@@ -1084,7 +1081,7 @@
       "substack_tagged": 0,
       "sports_team_hits": 7,
       "sports_player_hits": 4,
-      "sports_result_win_hits": 19,
+      "sports_result_win_hits": 21,
       "sports_result_loss_hits": 1,
       "sports_evening_hits": 0,
       "sports_playoff_hits": 0,
