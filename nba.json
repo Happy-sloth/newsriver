@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-18T05:56:17.741412Z",
+  "generated_utc": "2026-01-18T06:30:56.267064Z",
   "dates": [
     {
       "games": [
@@ -288,84 +288,6 @@
               "score": 126
             }
           }
-        },
-        {
-          "gamePk": "401810449",
-          "gameDate": "2026-01-18T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "BOS"
-              },
-              "score": 132
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 106
-            }
-          }
-        },
-        {
-          "gamePk": "401810450",
-          "gameDate": "2026-01-18T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 78
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DET"
-              },
-              "score": 121
-            }
-          }
-        },
-        {
-          "gamePk": "401810451",
-          "gameDate": "2026-01-18T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHX"
-              },
-              "score": 106
-            },
-            "home": {
-              "team": {
-                "abbreviation": "NYK"
-              },
-              "score": 99
-            }
-          }
         }
       ]
     }
@@ -376,7 +298,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260117",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260118"
     ],
-    "games_count": 14,
+    "games_count": 11,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
