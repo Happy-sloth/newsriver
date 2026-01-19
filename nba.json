@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-19T22:27:25.532423Z",
+  "generated_utc": "2026-01-19T22:47:02.904862Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810463",
-          "gameDate": "2026-01-19T20:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAC"
-              },
-              "score": 106
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 103
-            }
-          }
-        },
         {
           "gamePk": "401809249",
           "gameDate": "2026-01-19T22:00Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "DAL"
               },
-              "score": 13
+              "score": 31
             },
             "home": {
               "team": {
                 "abbreviation": "NYK"
               },
-              "score": 4
+              "score": 22
             }
           }
         },
@@ -63,21 +37,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 18
+              "score": 41
             },
             "home": {
               "team": {
                 "abbreviation": "SAS"
               },
-              "score": 25
+              "score": 38
             }
           }
         },
@@ -182,6 +156,32 @@
                 "abbreviation": "GSW"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810463",
+          "gameDate": "2026-01-19T20:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "LAC"
+              },
+              "score": 110
+            },
+            "home": {
+              "team": {
+                "abbreviation": "WSH"
+              },
+              "score": 106
             }
           }
         },
