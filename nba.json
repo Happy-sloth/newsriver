@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-19T20:21:37.569092Z",
+  "generated_utc": "2026-01-19T20:44:29.569389Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401809247",
-          "gameDate": "2026-01-19T18:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "MIL"
-              },
-              "score": 99
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 95
-            }
-          }
-        },
         {
           "gamePk": "401809248",
           "gameDate": "2026-01-19T19:30Z",
@@ -45,13 +19,13 @@
               "team": {
                 "abbreviation": "OKC"
               },
-              "score": 44
+              "score": 62
             },
             "home": {
               "team": {
                 "abbreviation": "CLE"
               },
-              "score": 35
+              "score": 49
             }
           }
         },
@@ -63,21 +37,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 13
+              "score": 26
             },
             "home": {
               "team": {
                 "abbreviation": "WSH"
               },
-              "score": 14
+              "score": 28
             }
           }
         },
@@ -234,6 +208,32 @@
                 "abbreviation": "GSW"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401809247",
+          "gameDate": "2026-01-19T18:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "MIL"
+              },
+              "score": 112
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ATL"
+              },
+              "score": 110
             }
           }
         }
