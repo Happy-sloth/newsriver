@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-01-21T03:22:52.545250Z",
+  "generated_utc": "2026-01-21T04:30:02.098516Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810470",
-          "gameDate": "2026-01-21T01:00Z",
+          "gamePk": "401810471",
+          "gameDate": "2026-01-21T02:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,41 +17,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "SAS"
-              },
-              "score": 92
-            },
-            "home": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 82
-            }
-          }
-        },
-        {
-          "gamePk": "401810471",
-          "gameDate": "2026-01-21T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
                 "abbreviation": "MIN"
               },
-              "score": 62
+              "score": 122
             },
             "home": {
               "team": {
                 "abbreviation": "UTAH"
               },
-              "score": 59
+              "score": 126
             }
           }
         },
@@ -63,21 +37,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 14
+              "score": 59
             },
             "home": {
               "team": {
                 "abbreviation": "DEN"
               },
-              "score": 21
+              "score": 71
             }
           }
         },
@@ -89,21 +63,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "TOR"
               },
-              "score": 23
+              "score": 75
             },
             "home": {
               "team": {
                 "abbreviation": "GSW"
               },
-              "score": 10
+              "score": 53
             }
           }
         },
@@ -115,21 +89,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 19
+              "score": 77
             },
             "home": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 11
+              "score": 64
             }
           }
         },
@@ -156,6 +130,32 @@
                 "abbreviation": "CHI"
               },
               "score": 138
+            }
+          }
+        },
+        {
+          "gamePk": "401810470",
+          "gameDate": "2026-01-21T01:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAS"
+              },
+              "score": 106
+            },
+            "home": {
+              "team": {
+                "abbreviation": "HOU"
+              },
+              "score": 111
             }
           }
         },
