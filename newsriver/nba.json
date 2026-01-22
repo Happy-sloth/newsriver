@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-22T05:25:38.789619Z",
+  "generated_utc": "2026-01-22T05:52:10.423800Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810481",
-          "gameDate": "2026-01-22T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 119
-            },
-            "home": {
-              "team": {
-                "abbreviation": "SAC"
-              },
-              "score": 109
-            }
-          }
-        },
         {
           "gamePk": "401810482",
           "gameDate": "2026-01-23T00:00Z",
@@ -234,6 +208,32 @@
                 "abbreviation": "POR"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810481",
+          "gameDate": "2026-01-22T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TOR"
+              },
+              "score": 122
+            },
+            "home": {
+              "team": {
+                "abbreviation": "SAC"
+              },
+              "score": 109
             }
           }
         },
