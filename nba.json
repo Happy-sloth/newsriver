@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-23T05:51:00.427577Z",
+  "generated_utc": "2026-01-23T06:30:08.909163Z",
   "dates": [
     {
       "games": [
@@ -314,110 +314,6 @@
               "score": 115
             }
           }
-        },
-        {
-          "gamePk": "401810485",
-          "gameDate": "2026-01-23T00:30Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 115
-            },
-            "home": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 123
-            }
-          }
-        },
-        {
-          "gamePk": "401810482",
-          "gameDate": "2026-01-23T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 124
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ORL"
-              },
-              "score": 97
-            }
-          }
-        },
-        {
-          "gamePk": "401810483",
-          "gameDate": "2026-01-23T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "HOU"
-              },
-              "score": 122
-            },
-            "home": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 128
-            }
-          }
-        },
-        {
-          "gamePk": "401810484",
-          "gameDate": "2026-01-23T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 107
-            },
-            "home": {
-              "team": {
-                "abbreviation": "WSH"
-              },
-              "score": 97
-            }
-          }
         }
       ]
     }
@@ -428,7 +324,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260122",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260123"
     ],
-    "games_count": 16,
+    "games_count": 12,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
