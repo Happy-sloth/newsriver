@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-01-23T03:17:01.622198Z",
+  "generated_utc": "2026-01-23T04:13:49.931955Z",
   "dates": [
     {
       "games": [
         {
-          "gamePk": "401810486",
-          "gameDate": "2026-01-23T01:00Z",
+          "gamePk": "401810487",
+          "gameDate": "2026-01-23T02:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -17,21 +17,21 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "CHI"
+                "abbreviation": "SAS"
               },
-              "score": 109
+              "score": 106
             },
             "home": {
               "team": {
-                "abbreviation": "MIN"
+                "abbreviation": "UTAH"
               },
-              "score": 110
+              "score": 99
             }
           }
         },
         {
-          "gamePk": "401810487",
-          "gameDate": "2026-01-23T02:00Z",
+          "gamePk": "401810488",
+          "gameDate": "2026-01-23T03:00Z",
           "status": {
             "detailedState": "Live",
             "abstractGameState": "Live"
@@ -43,15 +43,15 @@
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "SAS"
+                "abbreviation": "LAL"
               },
-              "score": 65
+              "score": 47
             },
             "home": {
               "team": {
-                "abbreviation": "UTAH"
+                "abbreviation": "LAC"
               },
-              "score": 53
+              "score": 64
             }
           }
         },
@@ -63,47 +63,47 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 9
+              "score": 63
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 6
+              "score": 64
             }
           }
         },
         {
-          "gamePk": "401810488",
-          "gameDate": "2026-01-23T03:00Z",
+          "gamePk": "401810486",
+          "gameDate": "2026-01-23T01:00Z",
           "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
+            "detailedState": "Final",
+            "abstractGameState": "Final"
           },
           "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
           },
           "teams": {
             "away": {
               "team": {
-                "abbreviation": "LAL"
+                "abbreviation": "CHI"
               },
-              "score": 0
+              "score": 120
             },
             "home": {
               "team": {
-                "abbreviation": "LAC"
+                "abbreviation": "MIN"
               },
-              "score": 0
+              "score": 115
             }
           }
         },
