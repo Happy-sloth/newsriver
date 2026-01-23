@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-23T04:13:49.931955Z",
+  "generated_utc": "2026-01-23T04:56:18.185383Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810487",
-          "gameDate": "2026-01-23T02:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "SAS"
-              },
-              "score": 106
-            },
-            "home": {
-              "team": {
-                "abbreviation": "UTAH"
-              },
-              "score": 99
-            }
-          }
-        },
         {
           "gamePk": "401810488",
           "gameDate": "2026-01-23T03:00Z",
@@ -37,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "LAL"
               },
-              "score": 47
+              "score": 72
             },
             "home": {
               "team": {
                 "abbreviation": "LAC"
               },
-              "score": 64
+              "score": 86
             }
           }
         },
@@ -63,21 +37,47 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "2nd",
-            "currentQuarter": "2nd"
+            "currentPeriodOrdinal": "3rd",
+            "currentQuarter": "3rd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "MIA"
               },
-              "score": 63
+              "score": 92
             },
             "home": {
               "team": {
                 "abbreviation": "POR"
               },
-              "score": 64
+              "score": 103
+            }
+          }
+        },
+        {
+          "gamePk": "401810487",
+          "gameDate": "2026-01-23T02:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "SAS"
+              },
+              "score": 126
+            },
+            "home": {
+              "team": {
+                "abbreviation": "UTAH"
+              },
+              "score": 109
             }
           }
         },
