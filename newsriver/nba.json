@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-24T19:40:53.123563Z",
+  "generated_utc": "2026-01-24T19:54:27.198682Z",
   "dates": [
     {
       "games": [
@@ -24,32 +24,6 @@
             "home": {
               "team": {
                 "abbreviation": "PHI"
-              },
-              "score": 0
-            }
-          }
-        },
-        {
-          "gamePk": "401810499",
-          "gameDate": "2026-01-24T22:30Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "GSW"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIN"
               },
               "score": 0
             }
@@ -154,6 +128,32 @@
             "home": {
               "team": {
                 "abbreviation": "UTAH"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810499",
+          "gameDate": "2026-01-24T22:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "GSW"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIN"
               },
               "score": 0
             }
