@@ -1,60 +1,8 @@
 {
-  "generated_utc": "2026-01-24T05:01:10.160565Z",
+  "generated_utc": "2026-01-24T05:34:01.799427Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810495",
-          "gameDate": "2026-01-24T02:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DEN"
-              },
-              "score": 99
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIL"
-              },
-              "score": 94
-            }
-          }
-        },
-        {
-          "gamePk": "401810497",
-          "gameDate": "2026-01-24T03:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "TOR"
-              },
-              "score": 93
-            },
-            "home": {
-              "team": {
-                "abbreviation": "POR"
-              },
-              "score": 87
-            }
-          }
-        },
         {
           "gamePk": "401810500",
           "gameDate": "2026-01-24T17:00Z",
@@ -234,6 +182,58 @@
                 "abbreviation": "UTAH"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810497",
+          "gameDate": "2026-01-24T03:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "TOR"
+              },
+              "score": 110
+            },
+            "home": {
+              "team": {
+                "abbreviation": "POR"
+              },
+              "score": 98
+            }
+          }
+        },
+        {
+          "gamePk": "401810495",
+          "gameDate": "2026-01-24T02:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DEN"
+              },
+              "score": 102
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIL"
+              },
+              "score": 100
             }
           }
         },
