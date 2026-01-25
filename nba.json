@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-25T20:41:42.699557Z",
+  "generated_utc": "2026-01-25T20:56:07.065714Z",
   "dates": [
     {
       "games": [
@@ -11,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "SAC"
               },
-              "score": 35
+              "score": 37
             },
             "home": {
               "team": {
                 "abbreviation": "DET"
               },
-              "score": 35
+              "score": 43
             }
           }
         },
@@ -50,32 +50,6 @@
             "home": {
               "team": {
                 "abbreviation": "MIN"
-              },
-              "score": 0
-            }
-          }
-        },
-        {
-          "gamePk": "401810507",
-          "gameDate": "2026-01-26T00:00Z",
-          "status": {
-            "detailedState": "Preview",
-            "abstractGameState": "Preview"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": null,
-            "currentQuarter": null
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "DAL"
-              },
-              "score": 0
-            },
-            "home": {
-              "team": {
-                "abbreviation": "MIL"
               },
               "score": 0
             }
@@ -180,6 +154,32 @@
             "home": {
               "team": {
                 "abbreviation": "LAC"
+              },
+              "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810507",
+          "gameDate": "2026-01-26T00:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "DAL"
+              },
+              "score": 0
+            },
+            "home": {
+              "team": {
+                "abbreviation": "MIL"
               },
               "score": 0
             }
