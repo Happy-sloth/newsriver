@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-26T21:58:21.620475Z",
+  "generated_utc": "2026-01-26T22:27:54.850992Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810512",
-          "gameDate": "2026-01-26T20:00Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "3rd",
-            "currentQuarter": "3rd"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "PHI"
-              },
-              "score": 59
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CHA"
-              },
-              "score": 109
-            }
-          }
-        },
         {
           "gamePk": "401810513",
           "gameDate": "2026-01-27T00:00Z",
@@ -156,6 +130,32 @@
                 "abbreviation": "MIN"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810512",
+          "gameDate": "2026-01-26T20:00Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "PHI"
+              },
+              "score": 93
+            },
+            "home": {
+              "team": {
+                "abbreviation": "CHA"
+              },
+              "score": 130
             }
           }
         },
