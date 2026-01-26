@@ -1,34 +1,8 @@
 {
-  "generated_utc": "2026-01-26T20:35:33.970311Z",
+  "generated_utc": "2026-01-26T20:54:59.290712Z",
   "dates": [
     {
       "games": [
-        {
-          "gamePk": "401810514",
-          "gameDate": "2026-01-26T18:30Z",
-          "status": {
-            "detailedState": "Live",
-            "abstractGameState": "Live"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "4th",
-            "currentQuarter": "4th"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 102
-            },
-            "home": {
-              "team": {
-                "abbreviation": "ATL"
-              },
-              "score": 112
-            }
-          }
-        },
         {
           "gamePk": "401810512",
           "gameDate": "2026-01-26T20:00Z",
@@ -37,21 +11,21 @@
             "abstractGameState": "Live"
           },
           "linescore": {
-            "currentPeriodOrdinal": "1st",
-            "currentQuarter": "1st"
+            "currentPeriodOrdinal": "2nd",
+            "currentQuarter": "2nd"
           },
           "teams": {
             "away": {
               "team": {
                 "abbreviation": "PHI"
               },
-              "score": 19
+              "score": 29
             },
             "home": {
               "team": {
                 "abbreviation": "CHA"
               },
-              "score": 28
+              "score": 49
             }
           }
         },
@@ -182,6 +156,32 @@
                 "abbreviation": "MIN"
               },
               "score": 0
+            }
+          }
+        },
+        {
+          "gamePk": "401810514",
+          "gameDate": "2026-01-26T18:30Z",
+          "status": {
+            "detailedState": "Final",
+            "abstractGameState": "Final"
+          },
+          "linescore": {
+            "currentPeriodOrdinal": "Final",
+            "currentQuarter": "Final"
+          },
+          "teams": {
+            "away": {
+              "team": {
+                "abbreviation": "IND"
+              },
+              "score": 116
+            },
+            "home": {
+              "team": {
+                "abbreviation": "ATL"
+              },
+              "score": 132
             }
           }
         }
