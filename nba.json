@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-01-29T05:27:22.238772Z",
+  "generated_utc": "2026-01-29T06:05:13.543718Z",
   "dates": [
     {
       "games": [
@@ -392,58 +392,6 @@
               "score": 92
             }
           }
-        },
-        {
-          "gamePk": "401810526",
-          "gameDate": "2026-01-29T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "LAL"
-              },
-              "score": 99
-            },
-            "home": {
-              "team": {
-                "abbreviation": "CLE"
-              },
-              "score": 129
-            }
-          }
-        },
-        {
-          "gamePk": "401810527",
-          "gameDate": "2026-01-29T00:00Z",
-          "status": {
-            "detailedState": "Final",
-            "abstractGameState": "Final"
-          },
-          "linescore": {
-            "currentPeriodOrdinal": "Final",
-            "currentQuarter": "Final"
-          },
-          "teams": {
-            "away": {
-              "team": {
-                "abbreviation": "CHI"
-              },
-              "score": 110
-            },
-            "home": {
-              "team": {
-                "abbreviation": "IND"
-              },
-              "score": 113
-            }
-          }
         }
       ]
     }
@@ -454,7 +402,7 @@
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260128",
       "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20260129"
     ],
-    "games_count": 17,
+    "games_count": 15,
     "http_timeout_sec": 12.0,
     "version": "nba-relay-1.1",
     "preview_hours": 36,
